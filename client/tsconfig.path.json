@@ -7,13 +7,14 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
-      "@hooks/*": [ "src/hooks/*"],
-      "@mocks/*": [ "src/mocks/*"],
-      "@pages/*": [ "src/pages/*"],
-      "@router/*": [ "src/router/*"],
-      "@styles/*": [ "src/styles/*"],
-      "@type/*": [ "src/types/*"],
-      "@utils/*": [ "src/utils/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@mocks/*": ["src/mocks/*"],
+      "@pages/*": ["src/pages/*"],
+      "@router/*": ["src/router/*"],
+      "@styles/*": ["src/styles/*"],
+      "@type/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+      "@story/*": ["src/stories/*"]
     }
   }
 }
