@@ -9,7 +9,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint:fix": "eslint --fix --cache \"src/**/*.{ts,tsx}\"",
+    "formatter": "prettier --write --cache \"src/**/*.{ts,tsx}\"",
+    "chromatic": "npx chromatic --project-token=chpt_fa538125e6b2f04"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -29,9 +32,13 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "chromatic": "^6.24.1",
     "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "prettier": "^3.0.2",
     "storybook": "^7.3.2",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
@@ -39,5 +46,7 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "sealing@0.0.0"
 }
