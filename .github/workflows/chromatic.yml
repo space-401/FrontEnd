@@ -10,9 +10,9 @@ jobs:
       - name: Change to client directory
         run: cd client
       - name: Install dependencies
-        run: yarn
+        run: npm install
       - name: Install Chromatic
-        run: yarn add chromatic@6.24.1
+        run: npm i chromatic@6.24.1
       - name: Run Chromatic
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         env:
