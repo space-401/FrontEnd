@@ -11,6 +11,8 @@ jobs:
         run: yarn --cwd client
       - name: Install Chromatic
         run: yarn --cwd client add chromatic@6.24.1
+      - name: Install cli-table module
+        run: yarn --cwd client add cli-table
       - name: Run Chromatic
         run: bash -c 'cd client && npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}'
         env:
