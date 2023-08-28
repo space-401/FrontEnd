@@ -12,7 +12,6 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Run Chromatic
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          token: ${{ secrets.PRIVATE_TOKEN }}
+        run: npx chromatic --project-token=${{ secrets.CHROMATIC_TOKEN }}
+        env:
+          PRIVATE_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
