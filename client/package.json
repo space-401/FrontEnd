@@ -11,7 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint:fix": "eslint --fix --cache \"src/**/*.{ts,tsx}\"",
-    "formatter": "prettier --write --cache \"src/**/*.{ts,tsx}\""
+    "formatter": "prettier --write --cache \"src/**/*.{ts,tsx}\"",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "chromatic": "^6.24.1",
