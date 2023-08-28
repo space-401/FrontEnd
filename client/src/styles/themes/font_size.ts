@@ -5,4 +5,4 @@ export const FONT_SIZE = {
   large: '2.4rem',
   big: '3.2rem',
   huge: '4.8rem',
-} as const
+} as const;

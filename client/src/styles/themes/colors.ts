@@ -11,4 +11,4 @@ export const COLOR = {
     40: '#660000',
     20: '#2C0608',
   },
-} as const
+} as const;
