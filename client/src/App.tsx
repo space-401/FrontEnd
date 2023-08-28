@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { ReactComponent as ReactLogo } from "@assets/svg/react.svg";
-import { ReactComponent as ViteLogo } from "@assets/svg/vite.svg";
-import "./App.css";
+import { useState } from 'react';
+import { ReactComponent as ReactLogo } from '@assets/svg/react.svg';
+import { ReactComponent as ViteLogo } from '@assets/svg/vite.svg';
+import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
