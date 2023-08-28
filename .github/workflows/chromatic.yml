@@ -6,11 +6,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Change to client directory
-        run: cd client  # 루트에서 client 폴더로 이동
+        run: cd client
       - name: Install dependencies
-        run: npm install  # npm을 사용하여 종속성 설치
+        run: npm install
       - name: Run Chromatic
         uses: chromaui/action@v1
         with:
