@@ -15,5 +15,5 @@ export const omitText = css`
 `;
 
 export const Shadow = css`
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
 `;

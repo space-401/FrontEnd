@@ -1,20 +1,20 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const variants = {
   primary: {
-    color: "#ffffff",
-    backgroundColor: "#1D3461",
-    border: "none",
+    color: '#ffffff',
+    backgroundColor: '#1D3461',
+    border: 'none',
   },
   success: {
-    color: "ffffff",
-    backgroundColor: "#5AB 203",
-    border: "none",
+    color: 'ffffff',
+    backgroundColor: '#5AB 203',
+    border: 'none',
   },
   transparant: {
-    color: "111111",
-    backgroundColor: "transparent",
-    border: "1px solid black",
+    color: '111111',
+    backgroundColor: 'transparent',
+    border: '1px solid black',
   },
 } as const;
 
