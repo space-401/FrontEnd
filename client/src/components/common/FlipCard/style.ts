@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface Flip {
+interface IFlip {
   size: number;
 }
 
-const Flip = styled.div<Flip>`
+const Flip = styled.div<IFlip>`
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   position: relative;
@@ -37,11 +37,11 @@ const CardInput = styled.div`
   cursor: pointer;
 `;
 
-interface ImageUrl {
+interface IImageUrl {
   img_url: string;
 }
 
-const Front = styled(CardInput)<ImageUrl>`
+const Front = styled(CardInput)<IImageUrl>`
   background-image: url(${(props) => props.img_url});
   background-size: contain;
 `;
