@@ -4,7 +4,7 @@ import GlobalStyles from '@styles/global';
 import { theme } from '@styles/themes';
 import { ThemeProvider } from 'styled-components';
 
-const KirriProvider = ({ children }: { children: ReactNode }) => {
+const KkliriProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
@@ -14,4 +14,4 @@ const KirriProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default KirriProvider;
+export default KkliriProvider;
