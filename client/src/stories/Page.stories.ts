@@ -15,8 +15,6 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LoggedOut: Story = {};
-
 // More on interaction testing: https://storybook.js.org/docs/react/writing-tests/interaction-testing
 export const LoggedIn: Story = {
   play: async ({ canvasElement }) => {

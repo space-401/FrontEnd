@@ -1,8 +1,9 @@
-import { styled } from 'styled-components';
-
+import Header from './Header/Header';
 const MainLayout = () => {
-  return <Wrapper>main</Wrapper>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 export default MainLayout;
-
-const Wrapper = styled.div``;
