@@ -1,17 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
 import router from '@router/Router';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '@styles/themes';
-import GlobalStyles from '@styles/global';
+import KkliriProvider from '@router/KkliriProvider';
 
 function App() {
   return (
-    <>
-      <GlobalStyles />
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </>
+    <KkliriProvider>
+      <RouterProvider router={router} />
+    </KkliriProvider>
   );
 }
 
