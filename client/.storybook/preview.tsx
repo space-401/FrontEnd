@@ -1,6 +1,6 @@
 import type {Preview} from "@storybook/react";
 import {BrowserRouter} from "react-router-dom";
-import KirriProvider from "../src/router/KirriProvider";
+import KKiriProvider from "../src/router/KkliriProvider";
 
 const preview: Preview = {
     parameters: {
@@ -16,11 +16,11 @@ const preview: Preview = {
 
 export const decorators = [
     (Story) => (
-        <KirriProvider>
+        <KKiriProvider>
             <BrowserRouter>
                 <Story/>
             </BrowserRouter>
-        </KirriProvider>
+        </KKiriProvider>
     ),
 ]
 
