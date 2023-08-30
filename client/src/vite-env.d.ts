@@ -1,3 +1,3 @@
-// vite-env.d.ts
+//vite-env.d.ts
 
-/// <reference types="vite-plugin-svgr/client" />
+//<reference types="vite-plugin-svgr/client" />
