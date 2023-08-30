@@ -1,24 +1,25 @@
 {
   "extends": "./tsconfig.path.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "esnext",
+    // "useDefineForClassFields": true,
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["vite/client"],
-    "moduleResolution": "node",
-    // "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "moduleResolution": "Bundler",
     "jsx": "react-jsx",
+    // "resolveJsonModule": true,
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "noEmit": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
-    "composite": true
+    "composite": true,
+    "typeRoots": ["node_modules/@types", "src/types"] // 타입 정의를 찾을 경로 설정
   },
-  "include": ["src", "d.ts"]
+  "include": ["src", "*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }
