@@ -1,14 +1,29 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+`;
+
+const GridWrapper = styled.div`
   width: 50%;
+  margin-left: 4rem;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
+  font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
-  grid-template-rows: 160px 60px 160px 60px 44px;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 60px 60px 60px 60px 60px 212px 60px;
   grid-gap: 32px;
-  grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'empty button';
+  grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6';
+`;
+
+const PhotoText = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 type gridRowNum = {
@@ -18,7 +33,6 @@ type gridRowNum = {
 const TitleContainer = styled.div<gridRowNum>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
-  font-size: ${({ theme }) => theme.FONT_SIZE.medium};
   display: flex;
   flex-direction: column;
 
@@ -34,24 +48,21 @@ const InputContainer = styled.div<gridRowNum>`
   display: flex;
 `;
 
-const ButtonContainer = styled.div`
-  grid-area: button;
-  margin-left: auto;
-`;
-
-const EditButton = styled.div`
-  font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-  color: ${({ theme }) => theme.PALETTE.blue};
-  padding-top: 140px;
-  padding-left: 10px;
+const SpaceInfoContainer = styled.div`
+  grid-area: spacename;
+  display: flex;
+  align-items: center;
+  div {
+    padding-left: 20px;
+  }
 `;
 
 const S = {
   Wrapper,
+  GridWrapper,
+  PhotoText,
   TitleContainer,
   InputContainer,
-  ButtonContainer,
-  EditButton,
+  SpaceInfoContainer,
 };
-
 export default S;

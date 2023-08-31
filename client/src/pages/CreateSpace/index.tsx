@@ -11,7 +11,7 @@ const CreateSpace = () => {
   return (
     <FullScreenModal
       title="스페이스 설정하기"
-      detail="스페이스를 새로 만들어 봅시다."
+      detail="우리만을 위한 스페이스를 새로 만들어요."
     >
       <S.Wrapper>
         {/*아이콘 지정 인풋*/}
@@ -27,6 +27,7 @@ const CreateSpace = () => {
           </BasicBox>
           <S.EditButton>편집하기</S.EditButton>
         </S.InputContainer>
+
         {/*이름 지정 인풋*/}
         <S.TitleContainer number={2}>
           <div>
@@ -36,6 +37,7 @@ const CreateSpace = () => {
         <S.InputContainer number={2}>
           <InputBox height={60} placeholder="스페이스 명 입력" />
         </S.InputContainer>
+
         {/*설명 지정 인풋*/}
         <S.TitleContainer number={3}>
           <div>스페이스 설명</div>
@@ -43,6 +45,7 @@ const CreateSpace = () => {
         <S.InputContainer number={3}>
           <TextAreaBox height={160} placeholder="스페이스 설명 입력" />
         </S.InputContainer>
+
         {/*비밀번호 지정 인풋*/}
         <S.TitleContainer number={4}>
           <div>
@@ -58,6 +61,7 @@ const CreateSpace = () => {
             placeholder="숫자 5자리를 입력해주세요"
           />
         </S.InputContainer>
+
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer>
           <BasicButton children="스페이스 생성하기" />

@@ -6,9 +6,9 @@ const Wrapper = styled.div`
   padding-bottom: 2.5rem;
   display: grid;
   grid-template-columns: 1fr 2.5fr;
-  grid-template-rows: 160px 60px 160px 60px 44px;
+  grid-template-rows: 60px 60px 60px;
   grid-gap: 32px;
-  grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'empty button';
+  grid-template-areas: 'title1 input1' 'title2 input2' 'button button';
 `;
 
 type gridRowNum = {
@@ -39,19 +39,11 @@ const ButtonContainer = styled.div`
   margin-left: auto;
 `;
 
-const EditButton = styled.div`
-  font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
-  color: ${({ theme }) => theme.PALETTE.blue};
-  padding-top: 140px;
-  padding-left: 10px;
-`;
-
 const S = {
   Wrapper,
   TitleContainer,
   InputContainer,
   ButtonContainer,
-  EditButton,
 };
 
 export default S;
