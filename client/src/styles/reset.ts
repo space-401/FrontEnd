@@ -8,6 +8,19 @@ const resetStyle = css`
     color: inherit;
   }
 
+  input {
+    box-shadow: none;
+    outline: none;
+    border: none;
+  }
+
+  textarea {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    resize: none;
+  }
+
   *,
   :after,
   :before {
