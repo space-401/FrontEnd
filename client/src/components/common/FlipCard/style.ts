@@ -33,7 +33,7 @@ const CardInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: ${({ theme }) => theme.COLOR.common['white']};
   cursor: pointer;
 `;
 
