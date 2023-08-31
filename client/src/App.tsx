@@ -1,12 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
 import router from '@router/Router';
-import KkliriProvider from '@router/KkliriProvider';
+import KkiriProvider from './utils/KkiriProvider';
 
 function App() {
   return (
-    <KkliriProvider>
+    <KkiriProvider>
       <RouterProvider router={router} />
-    </KkliriProvider>
+    </KkiriProvider>
   );
 }
 
