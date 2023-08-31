@@ -1,12 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
 import router from '@router/Router';
-import KkiriProvider from './utils/KkiriProvider';
+import CombinedProvider from './utils/CombinedProvider';
 
 function App() {
   return (
-    <KkiriProvider>
+    <CombinedProvider>
       <RouterProvider router={router} />
-    </KkiriProvider>
+    </CombinedProvider>
   );
 }
 

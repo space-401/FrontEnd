@@ -1,15 +1,15 @@
-import LoginLayout from '@components/layout/LoginLayout';
-import MainLayout from '@components/layout/MainLayout';
+import CreateSpace from '@/pages/CreateSpace';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
-  },
-  {
-    path: '/login',
-    element: <LoginLayout />,
+    children: [
+      {
+        path: '/createSpace',
+        element: <CreateSpace />,
+      },
+    ],
   },
 ]);
 

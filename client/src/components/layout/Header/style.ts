@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 type IconBoxProps = {
-  paddingLeft?: number;
+  padding?: number;
 };
 
 const IconBox = styled.div<IconBoxProps>`
@@ -23,7 +23,7 @@ const IconBox = styled.div<IconBoxProps>`
   justify-content: space-evenly;
   align-items: center;
   svg {
-    padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : 0)}px;
+    padding-left: ${(props) => (props.padding ? props.padding : 0)}px;
   }
 `;
 
