@@ -10,6 +10,9 @@ ${resetStyle}
     box-sizing: border-box;
     font-family: 'IBM Plex Sans KR', sans-serif;
   }
+  body{
+    background-color: #1a1b1e; 
+  }
 `;
 
 export default GlobalStyles;
