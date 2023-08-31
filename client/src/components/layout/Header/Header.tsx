@@ -7,7 +7,7 @@ import { ReactComponent as PersonIcon } from '@assets/svg/personIcon.svg';
 const Header = () => {
   return (
     <S.Wrapper>
-      <S.IconBox paddingLeft={30}>
+      <S.IconBox padding={30}>
         <Logo />
       </S.IconBox>
       <S.SpaceBox>
@@ -16,7 +16,7 @@ const Header = () => {
             <BasicBox
               key={Math.random() * 1000}
               borderradius={10}
-              length={40}
+              width={40}
             ></BasicBox>
           );
         })}

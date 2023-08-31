@@ -1,8 +1,9 @@
+//16px 기준
 export const FONT_SIZE = {
-  tiny: '1.4rem',
-  small: '1.8rem',
-  medium: '2.0rem',
-  large: '2.4rem',
-  big: '3.2rem',
-  huge: '4.8rem',
+  tiny: '0.8rem', //14px
+  small: '1rem', //16px
+  medium: '1.13rem', //18px
+  large: '1.5em', //24px
+  big: '2rem', //제목 크기 : 32px
+  huge: '2.5rem', //40px
 } as const;

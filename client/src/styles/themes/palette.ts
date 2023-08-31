@@ -27,4 +27,6 @@ export const PALETTE = {
   orange: '#FF5E34',
   mint: '#3CBB80',
   skyblue: '#56C9CC',
+  blue: '#9EB8FF;',
+  red: '#ec6a5e',
 } as const;
