@@ -1,4 +1,4 @@
-import FullScreenModal from '@/components/layout/FullScreenModal';
+import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
 import S from './style';
 import InputBox from '@/components/common/InputBox/InputBox';
 import BasicButton from '@/components/common/BasicButton';

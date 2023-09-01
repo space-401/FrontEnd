@@ -1,18 +1,32 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
-//비활성화시 색상
-const ButtonWrapper = styled.button`
-  padding: 16px;
-  height: 44px;
+export interface IBasicButton {
+  color?: string;
+  backgroundColor?: string;
+  padding?: number;
+  fontSize?: number;
+}
 
+//비활성화시 색상
+const ButtonWrapper = styled.button<IBasicButton>`
+  height: 44px;
   ${flexCenter}
   border-radius: 10px;
-  font-size: ${({ theme }) => theme.FONT_SIZE.small};
-  background-color: ${({ theme }) => theme.PALETTE.blue};
-  color: black;
+  //스토리 적용
+  padding: ${({ padding }) => padding || 16}px;
+  //스토리 적용
+  font-size: ${({ fontSize, theme }) =>
+    `${fontSize}px` || theme.TEXT_SIZE['text-16']};
+  //스토리 적용
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor || theme.COLOR.blue};
+  //스토리 적용
+  color: ${({ color, theme }) => color || theme.COLOR.black};
+
+  /*token required*/
   :disabled {
-    background-color: #555;
+    background-color: #292929;
   }
 `;
 

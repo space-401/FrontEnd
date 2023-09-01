@@ -1,4 +1,4 @@
-import HeaderLayout from '@/components/layout/HeaderLayout';
+import HeaderLayout from '@/components/layout/HeaderLayout/HeaderLayout';
 import S from './style';
 import BasicBox from '@/components/common/BasicBox';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
@@ -12,7 +12,7 @@ const CreatePost = () => {
   return (
     <HeaderLayout>
       <S.Wrapper>
-        <BasicBox width={360} borderradius={20}>
+        <BasicBox color="grey" width={360} borderradius={20}>
           <S.PhotoText>
             <PhotoIcon />
             <div>사진 선택</div>
@@ -22,7 +22,7 @@ const CreatePost = () => {
         <S.GridWrapper>
           {/*스페이스 정보*/}
           <S.SpaceInfoContainer>
-            <CircleIcon src={Cat}></CircleIcon>
+            <CircleIcon img_url={Cat}></CircleIcon>
             <div>스페이스 이름</div>
           </S.SpaceInfoContainer>
 

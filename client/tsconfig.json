@@ -2,13 +2,11 @@
   "extends": "./tsconfig.path.json",
   "compilerOptions": {
     "target": "esnext",
-    // "useDefineForClassFields": true,
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
-    // "resolveJsonModule": true,
     "isolatedModules": true,
     "outDir": "./dist",
     "noEmit": true,
