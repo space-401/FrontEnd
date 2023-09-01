@@ -11,12 +11,12 @@ const GridWrapper = styled.div`
   margin-left: 4rem;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
-  font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
 
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: 60px 60px 60px 60px 60px 212px 60px;
-  grid-gap: 32px;
+  grid-gap: ${({ theme }) => theme.SPACING['gap-32']};
   grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6';
 `;
 
@@ -37,9 +37,9 @@ const TitleContainer = styled.div<gridRowNum>`
   flex-direction: column;
 
   span {
-    color: ${({ theme }) => theme.PALETTE.red};
+    color: ${({ theme }) => theme.COLOR.red};
     padding-left: 0.5rem;
-    font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   }
 `;
 

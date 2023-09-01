@@ -33,7 +33,7 @@ const CardInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({ theme }) => theme.COLOR.common['white']};
+  color: ${({ theme }) => theme.COLOR.white};
   cursor: pointer;
 `;
 
@@ -47,7 +47,7 @@ const Front = styled(CardInput)<IImageUrl>`
 `;
 
 const Back = styled(CardInput)`
-  background: skyblue;
+  background: ${({ theme }) => theme.COLOR.skyblue};
   transform: rotateY(180deg);
 `;
 

@@ -18,14 +18,14 @@ type gridRowNum = {
 const TitleContainer = styled.div<gridRowNum>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
-  font-size: ${({ theme }) => theme.FONT_SIZE.medium};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   display: flex;
   flex-direction: column;
 
   span {
-    color: ${({ theme }) => theme.PALETTE.red};
+    color: ${({ theme }) => theme.COLOR.red};
     padding-left: 0.5rem;
-    font-size: ${({ theme }) => theme.FONT_SIZE.tiny};
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   }
 `;
 

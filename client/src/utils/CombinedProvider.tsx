@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import GlobalStyles from '@styles/global';
-import { theme } from '@styles/themes';
+import { theme } from '@/styles/theme/theme';
 import { ThemeProvider } from 'styled-components';
 
 const CombinedProvider = ({ children }: { children: ReactNode }) => {
