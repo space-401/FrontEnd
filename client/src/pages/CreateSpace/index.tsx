@@ -1,4 +1,4 @@
-import FullScreenModal from '@/components/layout/FullScreenModal';
+import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
 import S from './style';
 import InputBox from '@/components/common/InputBox/InputBox';
 import BasicButton from '@/components/common/BasicButton';
@@ -22,7 +22,7 @@ const CreateSpace = () => {
           </div>
         </S.TitleContainer>
         <S.InputContainer number={1}>
-          <BasicBox width={160} borderradius={10} color={'#323339'}>
+          <BasicBox width={160} borderradius={10} color="grey">
             <PhotoIcon />
           </BasicBox>
           <S.EditButton>편집하기</S.EditButton>

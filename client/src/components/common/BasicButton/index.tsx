@@ -1,12 +1,18 @@
 import S from './style';
+import { PropsWithChildren } from 'react';
 
 type BasicButtonProps = {
-  children: string;
+  color?: string;
+  backgroundColor?: string;
+  padding?: number;
+  fontSize?: number;
 };
 
-const BasicButton = (props: BasicButtonProps) => {
-  const { children } = props;
-  return <S.ButtonWrapper>{children}</S.ButtonWrapper>;
+const BasicButton = ({
+  children,
+  ...props
+}: PropsWithChildren<BasicButtonProps>) => {
+  return <S.ButtonWrapper {...props}>{children}</S.ButtonWrapper>;
 };
 
 export default BasicButton;
