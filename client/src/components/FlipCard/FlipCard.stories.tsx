@@ -1,6 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import styled from 'styled-components';
-import FlipCard from '@components/common/FlipCard/index';
+import FlipCard from '@components/common/FlipCard/FlipCard';
 
 export default {
   title: 'common/FlipCard',
