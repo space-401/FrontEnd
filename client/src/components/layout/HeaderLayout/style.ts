@@ -10,11 +10,11 @@ const Wrapper = styled.div`
   }
 `;
 
-type IconBoxProps = {
+interface IIconBoxProps {
   padding?: number;
-};
+}
 
-const IconBox = styled.div<IconBoxProps>`
+const IconBox = styled.div<IIconBoxProps>`
   background-color: #292a2f;
   height: inherit;
   width: 160px;

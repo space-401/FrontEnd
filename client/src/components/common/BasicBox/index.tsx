@@ -1,14 +1,15 @@
 import S from './style';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 export type BasicBoxProp = {
   width: number;
-  color?: string;
-  children?: ReactNode;
+  color: ColorType;
   borderradius: number;
 };
 
-const BasicBox = (props: BasicBoxProp) => {
+type ColorType = 'lightgrey' | 'grey';
+
+const BasicBox = (props: PropsWithChildren<BasicBoxProp>) => {
   const { width, color, children, borderradius } = props;
   return (
     <S.Wrapper width={width} color={color} borderradius={borderradius}>
