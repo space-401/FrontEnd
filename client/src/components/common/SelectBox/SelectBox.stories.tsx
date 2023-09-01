@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
-import SelectBox from '@components/common/SelectBox/index';
+import SelectBox from '@components/common/SelectBox/SelectBox';
 
 export default {
   title: 'common/SelectBox',
