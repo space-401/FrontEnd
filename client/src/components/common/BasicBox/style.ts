@@ -5,7 +5,8 @@ import { flexCenter } from '@/styles/common';
 const Wrapper = styled.div<BasicBoxProp>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.width}px;
-  background-color: ${(props) => (props.color ? props.color : '#3A3B41')};
+  background-color: ${(props) =>
+    props.color == 'lightgrey' ? ' #3A3B41' : '#323339'}px;
   border-radius: ${(props) => props.borderradius}px;
   ${flexCenter}
 `;
