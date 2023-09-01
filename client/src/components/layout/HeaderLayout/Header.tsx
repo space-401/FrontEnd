@@ -14,6 +14,7 @@ const Header = () => {
         {Array.from({ length: 4 }).map(() => {
           return (
             <BasicBox
+              color="lightgrey"
               key={Math.random() * 1000}
               borderradius={10}
               width={40}
