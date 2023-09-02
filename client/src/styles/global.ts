@@ -19,6 +19,10 @@ ${resetStyle}
     background-color: #1a1b1e; 
     color:white;
     line-height: 1.5; /* 비율로 설정 (1.5배 글꼴 크기만큼의 줄 간격) */
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
   }
 `;
 

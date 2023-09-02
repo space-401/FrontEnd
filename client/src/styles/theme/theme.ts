@@ -31,6 +31,10 @@ export const theme = {
     'gray-4': '#413F3F',
     'gray-5': '#232120',
     'gray-6': '#171717',
+    'gray-7': '#292A2F',
+    'gray-8': '#777777',
+    'gray-9': '#323339',
+    'gray-10': '#45464C',
   },
   TEXT_SIZE: {
     'text-80': '5rem',
@@ -102,6 +106,14 @@ export const theme = {
     'WEIGHT-600': 600,
     'WEIGHT-700': 700,
     'WEIGHT-800': 800,
+  },
+  Z_INDEX: {
+    'LEVEL-1': 10,
+    'LEVEL-2': 20,
+    'LEVEL-3': 30,
+    'LEVEL-4': 40,
+    'LEVEL-5': 50,
+    'LEVEL-6': 60,
   },
 };
 
