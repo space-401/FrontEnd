@@ -3,7 +3,7 @@ import type { SpacePostType } from '@type/space.type';
 import { IFlipCard } from '@components/FlipCard/FlipCard';
 import S from '@components/FlipCard/SpaceInfoBack/style';
 import { getFormatDate } from '@utils/formatter';
-import { ReactComponent as MapIcon } from '@assets/svg/mapIcon.svg';
+import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
 
 export interface ISpaceInfoBack extends IFlipCard {}
@@ -31,7 +31,7 @@ const SpaceInfoBack = (props: SpacePostType) => {
           <MapIcon width={18} height={18} />
           <span>{place_title}</span>
         </S.PlaceTitle>
-        <Avatars size={45} users={users} />
+        <Avatars max={4} size={45} users={users} />
       </S.InfoBottom>
     </S.Wrapper>
   );
