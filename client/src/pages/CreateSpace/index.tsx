@@ -1,8 +1,8 @@
 import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
 import S from './style';
-import InputBox from '@/components/common/InputBox/InputBox';
+import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
-import TextAreaBox from '@/components/common/TextAreaBox/TextAreaBox';
+import TextAreaBox from '@/components/common/TextAreaBox';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import BasicBox from '@/components/common/BasicBox';

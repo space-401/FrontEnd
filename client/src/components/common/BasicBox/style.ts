@@ -6,7 +6,7 @@ const Wrapper = styled.div<BasicBoxProp>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.width}px;
   background-color: ${(props) =>
-    props.color == 'lightgrey' ? ' #3A3B41' : '#323339'}px;
+    props.color == 'lightgrey' ? ' #3A3B41' : '#323339'};
   border-radius: ${(props) => props.borderradius}px;
   ${flexCenter}
 `;

@@ -1,6 +1,6 @@
 import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
 import S from './style';
-import InputBox from '@/components/common/InputBox/InputBox';
+import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
 
 const InviteCode = () => {
