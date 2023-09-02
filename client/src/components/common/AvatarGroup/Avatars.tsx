@@ -1,7 +1,7 @@
-import { UserImageType } from '@type/user.type';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import S from '@components/common/AvatarGroup/style';
+import { UserType } from '@type/user.type';
 
 type PropType = {
   /**
@@ -11,7 +11,7 @@ type PropType = {
   /**
    * 사용자들에 대한 정보를 받습니다.
    */
-  users: UserImageType[];
+  users: UserType[];
   /**
    * 최대 몇 개의 사진을 보여줄지 결정합니다.
    */
