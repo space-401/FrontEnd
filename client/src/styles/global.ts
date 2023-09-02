@@ -20,6 +20,9 @@ ${resetStyle}
     color:white;
     line-height: 1.5; /* 비율로 설정 (1.5배 글꼴 크기만큼의 줄 간격) */
   }
+  div{
+    background-color: inherit;
+  }
 `;
 
 export default GlobalStyles;
