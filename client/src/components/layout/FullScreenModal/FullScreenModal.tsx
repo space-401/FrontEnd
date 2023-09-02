@@ -19,7 +19,7 @@ const FullScreenModal = (props: FullScreenModalProps) => {
         <div>{title}</div>
         <p>{detail}</p>
       </S.TitleSection>
-      {props.children} {/* 자식 요소를 여기에 표시합니다 */}
+      {props.children}
     </S.Wrapper>
   );
 };

@@ -4,12 +4,13 @@ const Wrapper = styled.div`
   margin-top: 4rem;
   display: flex;
   justify-content: center;
+  position: relative;
 `;
 
 const GridWrapper = styled.div`
   width: 50%;
   margin-left: 4rem;
-  padding-top: 2.5rem;
+  /* padding-top: 2.5rem; */
   padding-bottom: 2.5rem;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
 
@@ -67,6 +68,11 @@ const SpaceInfoContainer = styled.div`
   }
 `;
 
+const PostButtonWrapper = styled.div`
+  position: absolute;
+  right: 0;
+`;
+
 const S = {
   Wrapper,
   GridWrapper,
@@ -74,5 +80,6 @@ const S = {
   TitleContainer,
   InputContainer,
   SpaceInfoContainer,
+  PostButtonWrapper,
 };
 export default S;
