@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   margin-top: 4rem;
@@ -26,24 +26,34 @@ const PhotoText = styled.div`
   flex-direction: column;
 `;
 
-type gridRowNum = {
+interface ITitle {
   number: number;
-};
+  required: boolean;
+}
 
-const TitleContainer = styled.div<gridRowNum>`
+interface IInput {
+  number: number;
+}
+
+const TitleContainer = styled.div<ITitle>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
   display: flex;
-  flex-direction: column;
-
-  span {
-    color: ${({ theme }) => theme.COLOR.red};
-    padding-left: 0.5rem;
-    font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  }
+  /* flex-direction: column; */
+  ${({ required }) =>
+    required &&
+    css`
+      &::after {
+        content: '필수';
+        color: ${({ theme }) => theme.COLOR.red};
+        padding-left: 0.5rem;
+        padding-top: 0.2rem;
+        font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+      }
+    `}
 `;
 
-const InputContainer = styled.div<gridRowNum>`
+const InputContainer = styled.div<IInput>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
 `;
