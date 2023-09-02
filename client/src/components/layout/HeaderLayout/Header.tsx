@@ -6,7 +6,7 @@ import { ReactComponent as PersonIcon } from '@assets/svg/personIcon.svg';
 
 const Header = () => {
   return (
-    <S.Wrapper>
+    <S.HeaderWrapper>
       <S.IconBox padding={30}>
         <Logo />
       </S.IconBox>
@@ -26,7 +26,7 @@ const Header = () => {
         <AlarmIcon />
         <PersonIcon />
       </S.IconBox>
-    </S.Wrapper>
+    </S.HeaderWrapper>
   );
 };
 
