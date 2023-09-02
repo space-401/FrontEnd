@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   width: 50%;
@@ -11,25 +11,39 @@ const Wrapper = styled.div`
   grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'empty button';
 `;
 
-type gridRowNum = {
-  number: number;
-};
-
-const TitleContainer = styled.div<gridRowNum>`
-  padding: 5px;
-  grid-area: ${({ number }) => `title${number}`};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-
-  span {
-    color: ${({ theme }) => theme.COLOR.red};
-    padding-left: 0.5rem;
-    font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  }
 `;
 
-const InputContainer = styled.div<gridRowNum>`
+interface ITitle {
+  number: number;
+  required: boolean;
+}
+
+interface IInput {
+  number: number;
+}
+
+const TitleContainer = styled.div<ITitle>`
+  padding: 5px;
+  grid-area: ${({ number }) => `title${number}`};
+  display: flex;
+  /* flex-direction: column; */
+  ${({ required }) =>
+    required &&
+    css`
+      &::after {
+        content: '필수';
+        color: ${({ theme }) => theme.COLOR.red};
+        padding-left: 0.5rem;
+        padding-top: 0.2rem;
+        font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+      }
+    `}
+`;
+
+const InputContainer = styled.div<IInput>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
 `;
@@ -52,6 +66,7 @@ const S = {
   InputContainer,
   ButtonContainer,
   EditButton,
+  FlexContainer,
 };
 
 export default S;
