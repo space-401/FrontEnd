@@ -29,7 +29,6 @@ const TitleContainer = styled.div<ITitle>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
   display: flex;
-  /* flex-direction: column; */
   ${({ required }) =>
     required &&
     css`

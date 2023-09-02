@@ -10,7 +10,7 @@ import BasicButton from '@/components/common/BasicButton';
 
 const CreatePost = () => {
   return (
-    <HeaderLayout>
+    <HeaderLayout $isContentBox={false}>
       <S.Wrapper>
         <BasicBox color="grey" width={360} borderradius={20}>
           <S.PhotoText>
@@ -94,7 +94,9 @@ const CreatePost = () => {
         </S.GridWrapper>
 
         {/*게시 버튼*/}
-        <BasicButton children="게시" />
+        <S.PostButtonWrapper>
+          <BasicButton children="게시" />
+        </S.PostButtonWrapper>
       </S.Wrapper>
     </HeaderLayout>
   );

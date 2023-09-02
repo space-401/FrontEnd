@@ -8,20 +8,9 @@ type InputBoxProps = {
   backgroundColor?: string;
 };
 
-const InputBox = (props: InputBoxProps) => {
-  const {
-    type,
-    placeholder,
-    width,
-    height,
-    backgroundColor = '#323339',
-  } = props;
+const InputBox = ({ type, placeholder, ...props }: InputBoxProps) => {
   return (
-    <S.InputWrapper
-      width={width}
-      height={height}
-      backgroundColor={backgroundColor}
-    >
+    <S.InputWrapper {...props}>
       <S.Input type={type || 'text'} placeholder={placeholder} />
     </S.InputWrapper>
   );
