@@ -1,16 +1,19 @@
 import { TagType } from '@type/tag.type';
-import { UserImageType } from '@type/user.type';
+import { UserType } from '@type/user.type';
 
 export type SpacePostType = {
+  post_id: number;
   post_title: string;
   place_title: string;
   place_tag: TagType[];
   place_create_at: Date;
-  users: UserImageType[];
+  users: UserType[];
+  main_img_url: string;
 };
 
 export type SelectSpacePropType = {
+  space_id: number;
   space_title: string;
   isLike: boolean;
-  user: UserImageType[];
+  user: UserType[];
 };
