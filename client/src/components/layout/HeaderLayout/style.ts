@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
-const Wrapper = styled.div`
+const HeaderWrapper = styled.div`
   height: 64px;
-  margin: 32px;
   ${flexCenter}
   div {
     margin: 3.5px;
@@ -28,7 +27,7 @@ const IconBox = styled.div<IIconBoxProps>`
 `;
 
 const SpaceBox = styled.div`
-  width: calc(100% - 320px - 64px);
+  width: calc(100% - 320px);
   min-width: 200px;
   height: inherit;
   background-color: #292a2f;
@@ -36,10 +35,26 @@ const SpaceBox = styled.div`
   border-radius: 15px;
 `;
 
+const Wrapper = styled.div`
+  margin: 32px;
+  display: flex;
+  flex-direction: column;
+`;
+
+interface IContentWrapper {
+  $isContentBox: boolean;
+}
+const ContentWrapper = styled.div<IContentWrapper>`
+  background-color: ${({ $isContentBox }) =>
+    $isContentBox ? '#292a2f' : 'none'};
+`;
+
 const S = {
+  HeaderWrapper,
   Wrapper,
   IconBox,
   SpaceBox,
+  ContentWrapper,
 };
 
 export default S;
