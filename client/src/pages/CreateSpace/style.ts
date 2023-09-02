@@ -34,7 +34,7 @@ const TitleContainer = styled.div<ITitle>`
     css`
       &::after {
         content: '필수';
-        color: ${({ theme }) => theme.COLOR.red};
+        color: ${({ theme }) => theme.COLOR.orange};
         padding-left: 0.5rem;
         padding-top: 0.2rem;
         font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
@@ -54,7 +54,7 @@ const ButtonContainer = styled.div`
 
 const EditButton = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  color: ${({ theme }) => theme.COLOR.blue};
+  color: ${({ theme }) => theme.COLOR.skyblue};
   padding-top: 140px;
   padding-left: 10px;
 `;

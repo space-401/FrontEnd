@@ -29,7 +29,7 @@ export const theme = {
     'gray-2': '#B0B0B0', //circleIcon 배경
     'gray-3': '#5F5F5F',
     'gray-4': '#413F3F',
-    'gray-5': '#232120',  //게시물 설명란
+    'gray-5': '#232120', //게시물 설명란
     'gray-6': '#171717',
     'background': '#1A1B1E', //배경
   },

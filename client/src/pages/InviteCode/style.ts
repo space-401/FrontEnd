@@ -23,7 +23,7 @@ const TitleContainer = styled.div<gridRowNum>`
   flex-direction: column;
 
   span {
-    color: ${({ theme }) => theme.COLOR.red};
+    color: ${({ theme }) => theme.COLOR.orange};
     padding-left: 0.5rem;
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   }
