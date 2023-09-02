@@ -5,13 +5,14 @@ export type TextAreaBoxProps = {
   height: number;
   placeholder?: string;
   backgroundColor?: string;
+  maxLength: number;
 };
 
 const TextAreaBox = (props: TextAreaBoxProps) => {
-  const { placeholder, ...rest } = props;
+  const { placeholder, maxLength, ...rest } = props;
   return (
-    <S.Wrapper {...rest} placeholder={placeholder}>
-      <S.TextArea placeholder={placeholder} />
+    <S.Wrapper {...rest}>
+      <S.TextArea placeholder={placeholder} maxLength={maxLength} />
     </S.Wrapper>
   );
 };

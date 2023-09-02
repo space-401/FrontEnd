@@ -1,6 +1,5 @@
 import { StoryFn } from '@storybook/react';
 import InputBox from './index';
-import React from 'react';
 
 export default {
   title: 'common/InputBox',

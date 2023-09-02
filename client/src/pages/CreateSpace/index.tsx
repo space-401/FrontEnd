@@ -6,6 +6,13 @@ import TextAreaBox from '@/components/common/TextAreaBox';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import BasicBox from '@/components/common/BasicBox';
+// import { useForm } from 'react-hook-form';
+// import { z } from 'zod';
+
+// const schema = z.object({
+//   title: z.string().min(16, '16자 이내의 제목을 입력해주세요'),
+//   content: z.string().min(500,'내용은 500자 이내로 인력'),
+// });
 
 const CreateSpace = () => {
   return (
@@ -30,7 +37,12 @@ const CreateSpace = () => {
           <div>스페이스 명 </div>
         </S.TitleContainer>
         <S.InputContainer number={2}>
-          <InputBox height={60} placeholder="스페이스 명 입력" />
+          <InputBox
+            type="text"
+            height={60}
+            placeholder="스페이스 명 입력"
+            maxLength={20}
+          />
         </S.InputContainer>
 
         {/*설명 지정 인풋*/}
@@ -38,7 +50,11 @@ const CreateSpace = () => {
           <div>스페이스 설명</div>
         </S.TitleContainer>
         <S.InputContainer number={3}>
-          <TextAreaBox height={160} placeholder="스페이스 설명 입력" />
+          <TextAreaBox
+            height={160}
+            placeholder="스페이스 설명 입력"
+            maxLength={100}
+          />
         </S.InputContainer>
 
         {/*비밀번호 지정 인풋*/}
@@ -53,6 +69,7 @@ const CreateSpace = () => {
             height={60}
             type={'password'}
             placeholder="숫자 5자리를 입력해주세요"
+            maxLength={5}
           />
         </S.InputContainer>
 

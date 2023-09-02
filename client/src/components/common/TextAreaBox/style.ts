@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { TextAreaBoxProps } from './';
 
-const Wrapper = styled.div<TextAreaBoxProps>`
+const Wrapper = styled.div<{
+  backgroundColor?: string;
+  width?: number;
+  height: number;
+}>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : '#323339'};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
