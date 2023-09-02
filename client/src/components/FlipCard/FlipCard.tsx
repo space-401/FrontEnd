@@ -1,36 +1,44 @@
-import S from "@components/FlipCard/style";
+import S from '@components/FlipCard/style';
+import { ReactElement } from 'react';
+import { ISpaceSelectBack } from '@components/FlipCard/SpaceSelectBack/SpaceSelectBack';
+import { ISpaceInfoBack } from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
 
-export type CardSizeType = {
-    /**
-     * 정사각형 카드의 크기를 정해주세요
-     */
-    size: number;
-    /**
-     * 해당 이미지의 주소를 넣어주세요
-     */
-    img_url: string;
+export interface IFlipCard extends ReactElement {}
+
+export type FlipType = {
+  /**
+   * 정사각형 카드의 크기를 정해주세요
+   */
+  size: number;
+  /**
+   * 해당 이미지의 주소를 넣어주세요
+   */
+  img_url: string;
+  /**
+   * Hover시에 보일 컴포넌트를 넣어주세요
+   */
+  hoverCard: ISpaceSelectBack | ISpaceInfoBack;
+  /**
+   *
+   */
+  isFlip: boolean;
 };
 
-export type PropType = CardSizeType
+const FlipCard = (props: FlipType) => {
+  const { size, img_url, hoverCard, isFlip } = props;
 
-const FlipCard = (props: PropType) => {
-    const {size, img_url} = props;
-    return (
-        <>
-            <S.Flip size={size}>
-                <S.Card>
-                    {/* 처음 화면 */}
-                    <S.Front img_url={img_url}></S.Front>
-                    {/* 마우스를 올려 두었을시에 화면 */}
-                    <S.Back></S.Back>
-                </S.Card>
-            </S.Flip>
-        </>
-    );
+  return (
+    <>
+      <S.Flip $isFlip={isFlip} size={size}>
+        <S.Card img_url={img_url} />
+        <S.Hover $isFlip={isFlip}>{hoverCard}</S.Hover>
+      </S.Flip>
+    </>
+  );
 };
 
 export default FlipCard;
 
 FlipCard.defaultProps = {
-    size: 450,
+  size: 450,
 };

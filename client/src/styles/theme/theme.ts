@@ -56,8 +56,11 @@ export const theme = {
     'text-80': '5rem',
     'text-50': '3.125rem',
     'text-40': '2.5rem',
+    'text-36': '2.25rem',
     'text-32': '2rem',
+    'text-28': '1.75rem',
     'text-24': '1.5rem',
+    'text-20': '1.25rem',
     'text-18': '1.125rem',
     'text-16': '1rem',
     'text-14': '0.875rem',
@@ -113,9 +116,12 @@ export const theme = {
     'opacity-100': 1,
   },
   FONT_WEIGHT: {
-    light: 300,
-    medium: 500,
-    bold: 700,
+    'WEIGHT-300': 300,
+    'WEIGHT-400': 400,
+    'WEIGHT-500': 500,
+    'WEIGHT-600': 600,
+    'WEIGHT-700': 700,
+    'WEIGHT-800': 800,
   },
 };
 

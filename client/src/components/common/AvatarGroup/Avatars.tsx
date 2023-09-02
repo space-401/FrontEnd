@@ -1,18 +1,25 @@
-import {UserImageType} from "@type/user.type";
+import { UserImageType } from '@type/user.type';
 import Avatar from '@mui/material/Avatar';
-import Avatars from '@mui/material/AvatarGroup';
-import {PropsWithChildren} from "react";
+import AvatarGroup from '@mui/material/AvatarGroup';
+import S from '@components/common/AvatarGroup/style';
 
 type PropType = {
-    users: UserImageType[]
-}
+  size: number;
+  users: UserImageType[];
+};
 
-const Avatars = (props: PropsWithChildren<PropType>) => {
-        const {users} = props;
-        return <Avatars max={users.length}>{
-            users?.map(user => <Avatar key={user.user_id} alt={user.user_name} src={user.user_profile_img}/>)}
-        </Avatars>
-    }
-;
-
+const Avatars = ({ users, size }: PropType) => (
+  <S.Wrapper>
+    <AvatarGroup max={users.length}>
+      {users.map((user) => (
+        <Avatar
+          sx={{ width: size, height: size }}
+          key={user.user_id}
+          alt={user.user_name}
+          src={user.user_profile_img}
+        />
+      ))}
+    </AvatarGroup>
+  </S.Wrapper>
+);
 export default Avatars;

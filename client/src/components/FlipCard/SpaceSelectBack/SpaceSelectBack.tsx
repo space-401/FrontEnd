@@ -1,23 +1,19 @@
-import {UserImageType} from "@type/user.type";
+import { SelectSpacePropType } from '@type/space.type';
+import Avatars from '@components/common/AvatarGroup/Avatars';
+import S from '@components/FlipCard/SpaceSelectBack/style';
+import { IFlipCard } from '@components/FlipCard/FlipCard';
 
-type SpacePropType = {
-    space_title : string
-    isLike: boolean
-    user: UserImageType[]
-}
+export interface ISpaceSelectBack extends IFlipCard {}
 
-const SpaceSelectBack = (props: SpacePropType) => {
-    const {space_title, isLike, user} = props
-    return (
-        <>
-            <AvatarGroup total={24}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
-            <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
-        </AvatarGroup>
-        </>
-    )
+const SpaceSelectBack = (props: SelectSpacePropType): ISpaceSelectBack => {
+  const { space_title, isLike, user } = props;
+  return (
+    <S.Wrapper>
+      <S.Title>{space_title}</S.Title>
+      <Avatars size={32} users={user} />
+      <S.LikeIcon>{isLike}</S.LikeIcon>
+    </S.Wrapper>
+  );
 };
 
 export default SpaceSelectBack;
