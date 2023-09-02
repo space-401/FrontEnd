@@ -56,7 +56,6 @@ const Label = styled.label<ITitle>`
 
 const InputContainer = styled.div<IInput>`
   grid-area: ${({ number }) => `input${number}`};
-  display: flex;
 `;
 
 const SpaceInfoContainer = styled.div`
