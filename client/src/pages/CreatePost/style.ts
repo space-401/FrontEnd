@@ -36,7 +36,7 @@ interface IInput {
   number: number;
 }
 
-const TitleContainer = styled.div<ITitle>`
+const Label = styled.label<ITitle>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
   display: flex;
@@ -77,7 +77,7 @@ const S = {
   Wrapper,
   GridWrapper,
   PhotoText,
-  TitleContainer,
+  Label,
   InputContainer,
   SpaceInfoContainer,
   PostButtonWrapper,

@@ -4,14 +4,15 @@ type InputBoxProps = {
   width?: number;
   height: number;
   placeholder?: string;
-  type?: string;
+  type: 'text' | 'button' | 'password';
   backgroundColor?: string;
+  maxLength?: number;
 };
 
-const InputBox = ({ type, placeholder, ...props }: InputBoxProps) => {
+const InputBox = ({ type, placeholder, maxLength, ...rest }: InputBoxProps) => {
   return (
-    <S.InputWrapper {...props}>
-      <S.Input type={type || 'text'} placeholder={placeholder} />
+    <S.InputWrapper {...rest}>
+      <S.Input type={type} placeholder={placeholder} maxLength={maxLength} />
     </S.InputWrapper>
   );
 };

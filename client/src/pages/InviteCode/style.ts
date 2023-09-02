@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Form = styled.form`
   width: 50%;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -40,7 +40,7 @@ const ButtonContainer = styled.div`
 `;
 
 const S = {
-  Wrapper,
+  Form,
   TitleContainer,
   InputContainer,
   ButtonContainer,

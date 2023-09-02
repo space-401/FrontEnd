@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
-interface IInputWrapper {
-  backgroundColor?: string;
+const InputWrapper = styled.div<{
   width?: number;
   height: number;
-}
-
-const InputWrapper = styled.div<IInputWrapper>`
+  placeholder?: string;
+  backgroundColor?: string;
+}>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : '#323339'};
-  width: ${({ width }) => (width ? `${width}px` : '100%')};
+  width: ${(props) => (props.width ? `${props.width}px` : '100%')};
   height: ${({ height }) => height}px;
   border-radius: 10px;
   padding: 1rem;
