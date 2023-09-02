@@ -1,17 +1,13 @@
 import styled from 'styled-components';
 
-const Flip = styled.div<{ $isFlip: boolean; size: number }>`
+const Flip = styled.div<{ size: number }>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   position: relative;
   perspective: 1100px;
-
-  &:hover > div {
-    transform: ${(props) => (props.$isFlip ? 'rotateY(180deg)' : 'none')};
-  }
 `;
 
-const Card = styled.div<{ img_url: string }>`
+const Card = styled.div<{ img: string | undefined }>`
   width: inherit;
   height: inherit;
   position: relative;
@@ -20,12 +16,14 @@ const Card = styled.div<{ img_url: string }>`
   border-radius: 5px;
   overflow: hidden;
 
-  background-image: url(${({ img_url }) => img_url});
+  background: url(${({ img }) => (img ? img : '#43444A')});
+  border: 1px solid #4E4f55;
   background-size: cover;
-  background-position: center;
+}
+
 `;
 
-const Hover = styled.div<{ $isFlip: boolean }>`
+const Hover = styled.div`
   top: 0;
   left: 0;
   position: absolute;
@@ -37,10 +35,10 @@ const Hover = styled.div<{ $isFlip: boolean }>`
   align-items: center;
   color: ${({ theme }) => theme.COLOR.white};
   cursor: pointer;
-  transform: ${({ $isFlip }) => ($isFlip ? 'rotateY(180deg)' : 'none')};
   transition: opacity 0.5s;
   pointer-events: none;
-  opacity: ${({ $isFlip }) => ($isFlip ? '1' : '0')};
+  opacity: 0;
+
   ${Flip}:hover & {
     opacity: 1;
   }

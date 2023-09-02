@@ -13,25 +13,21 @@ export type FlipType = {
   /**
    * 해당 이미지의 주소를 넣어주세요
    */
-  img_url: string;
+  img_url?: string;
   /**
    * Hover시에 보일 컴포넌트를 넣어주세요
    */
   hoverCard: ISpaceSelectBack | ISpaceInfoBack;
-  /**
-   *
-   */
-  isFlip: boolean;
 };
 
 const FlipCard = (props: FlipType) => {
-  const { size, img_url, hoverCard, isFlip } = props;
+  const { size, img_url, hoverCard } = props;
 
   return (
     <>
-      <S.Flip $isFlip={isFlip} size={size}>
-        <S.Card img_url={img_url} />
-        <S.Hover $isFlip={isFlip}>{hoverCard}</S.Hover>
+      <S.Flip size={size}>
+        <S.Card img={img_url} />
+        <S.Hover>{hoverCard}</S.Hover>
       </S.Flip>
     </>
   );

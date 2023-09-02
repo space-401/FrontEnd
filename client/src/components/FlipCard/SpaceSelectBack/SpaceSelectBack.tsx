@@ -10,7 +10,7 @@ const SpaceSelectBack = (props: SelectSpacePropType): ISpaceSelectBack => {
   return (
     <S.Wrapper>
       <S.Title>{space_title}</S.Title>
-      <Avatars size={32} users={user} />
+      <Avatars max={user.length} size={32} users={user} />
       <S.LikeIcon>{isLike}</S.LikeIcon>
     </S.Wrapper>
   );
