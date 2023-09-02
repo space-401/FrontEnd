@@ -19,23 +19,18 @@ export const theme = {
     'bottomsheet-header': '2rem',
   },
   COLOR: {
-    'success': '#1DCB63',
-    'error': '#DA1E28',
     'black': '#000',
     'white': '#fff',
     'beige': '#E9E7DF',
-    'orange': '#FE5E34',
+    'orange': '#FF5E34',
+    'green': '#3CBB80',
     'skyblue': '#56C9CC',
-    'blue': '#9EB8FF',
-    'red': '#ec6a5e',
-    'green': '3CBB80',
     'gray-1': '#E9E7DF',
     'gray-2': '#B0B0B0', //circleIcon 배경
     'gray-3': '#5F5F5F',
     'gray-4': '#413F3F',
-    'gray-5': '#323339 ',
-    'gray-6': '#232120', //게시물 설명란
-    'gray-7': '#171717',
+    'gray-5': '#232120',  //게시물 설명란
+    'gray-6': '#171717',
     'background': '#1A1B1E', //배경
   },
   TEXT_SIZE: {
