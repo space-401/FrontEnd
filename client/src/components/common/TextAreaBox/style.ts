@@ -17,6 +17,8 @@ const TextArea = styled.textarea`
   width: 100%;
   height: 100%;
   background-color: inherit;
+  color: white;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
 `;
 
 const S = {
