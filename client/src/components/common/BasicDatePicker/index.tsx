@@ -1,11 +1,14 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
-import { ko } from 'date-fns/esm/locale'; // 한국어 변환
-import S from './DatePicker.style';
-import { YEARS, MONTHS } from './day';
+import { ko } from 'date-fns/esm/locale';
+import DatePicker from 'react-datepicker';
+import { YEARS, MONTHS } from './util';
 import getMonth from 'date-fns/getMonth';
 import getYear from 'date-fns/getYear';
-import styles from './DatePicker.module.css';
+// import styles from './DatePicker.module.css';
+import styled from 'styled-components';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -19,11 +22,10 @@ const Calendar = () => {
 
   return (
     <div className="custom-react-datepicker__wrapper">
-      <S.StyledDatePicker
+      <StyledDatePicker
         dateFormat="yyyy.MM.dd"
         showYearDropdown
         scrollableYearDropdown
-        // shouldCloseOnSelect
         yearDropdownItemNumber={10}
         minDate={new Date('2000-01-01')}
         maxDate={new Date()}
@@ -33,21 +35,34 @@ const Calendar = () => {
         endDate={endDate}
         locale={ko}
         selectsRange
-        calendarClassName={styles.calenderWrapper}
+        calendarClassName="calenderWrapper"
         renderCustomHeader={({
           date,
           changeYear,
+          changeMonth,
           decreaseMonth,
           increaseMonth,
-          prevMonthButtonDisabled,
-          nextMonthButtonDisabled,
+          // prevMonthButtonDisabled,
+          // nextMonthButtonDisabled,
         }) => (
-          <div className={styles.customHeaderContainer}>
+          <div className="customHeaderContainer">
             <div>
-              <span className={styles.month}>{MONTHS[getMonth(date)]}</span>
+              <select
+                value={MONTHS[getMonth(date)]}
+                onChange={({ target: { value } }) =>
+                  changeMonth(MONTHS.indexOf(value))
+                }
+                className="month"
+              >
+                {MONTHS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
               <select
                 value={getYear(date)}
-                className={styles.year}
+                className="year"
                 onChange={({ target: { value } }) => changeYear(+value)}
               >
                 {YEARS.map((option) => (
@@ -58,18 +73,14 @@ const Calendar = () => {
               </select>
             </div>
             <div>
-              <button
-                type="button"
+              <ArrowBackIosIcon
                 onClick={decreaseMonth}
-                className={styles.monthButton}
-                disabled={prevMonthButtonDisabled}
-              ></button>
-              <button
-                type="button"
+                // disabled={prevMonthButtonDisabled}
+              />
+              <ArrowForwardIosIcon
                 onClick={increaseMonth}
-                className={styles.monthButton}
-                disabled={nextMonthButtonDisabled}
-              ></button>
+                // disabled={nextMonthButtonDisabled}
+              />
             </div>
           </div>
         )}
@@ -79,3 +90,13 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+const StyledDatePicker = styled(DatePicker)`
+  background-color: rgb(50, 51, 57);
+  color: white;
+  height: 60px;
+  border-radius: 10px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  width: 250px;
+  padding-left: 1.5rem;
+`;

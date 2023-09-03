@@ -1,8 +1,11 @@
+/*캘린더 css*/
 body {
   .react-datepicker {
     font-family: 'Noto Sans KR', serif;
     border: none;
     border-radius: 0;
+
+    color: white;
 
     .react-datepicker__header {
       background-color: #292a2f;
@@ -28,9 +31,10 @@ body {
   }
 
   .react-datepicker__day {
+    color: white !important;
     &--in-range:not(&--in-selecting-range) {
       background-color: transparent;
-      color: #000;
+      color: white !important;
     }
   }
   .react-datepicker__day--in-selecting-range,
@@ -41,5 +45,70 @@ body {
   .react-datepicker__day--selecting-range-start,
   .react-datepicker__day--selecting-range-end {
     background-color: rgb(74, 74, 74) !important;
+  }
+  .react-datepicker__day--disabled {
+    color: rgb(100, 100, 100) !important;
+  }
+  .react-datepicker__day--outside-month {
+    color: rgb(100, 100, 100) !important;
+  }
+  .react-datepicker__day--selected {
+    color: white !important;
+    background-color: rgb(100, 100, 100) !important;
+  }
+  .react-datepicker__day--keyboard-selected {
+    background-color: transparent;
+  }
+  .customHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #292a2f;
+    color: white;
+    height: 100%;
+    margin-top: 8px;
+    padding: 0 12px 0 24px;
+
+    .month {
+      /* background-color: 'transparent' !important; */
+      color: 'transparent' !important;
+      border: 'none';
+      font-size: 16px;
+      border: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding-right: 5px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .year {
+      background-color: 'transparent' !important;
+      color: 'white' !important;
+      border: 'none';
+      font-size: 16px;
+      border: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding-right: 5px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .monthButton {
+      width: 34px;
+      height: 34px;
+      padding: 5px;
+      border-radius: 50%;
+      color: white !important;
+
+      + .monthButton {
+        margin-left: 24px;
+        background-color: black;
+      }
+    }
+  }
+  .calenderWrapper {
+    background-color: #292a2f;
   }
 }
