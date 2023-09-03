@@ -5,9 +5,10 @@ import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import BasicButton from '@/components/common/BasicButton';
-import BasicDatePicker from '@/components/common/BasicDatePicker';
+import Calendar from '@/components/common/BasicDatePicker';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import Cat from '@assets/cat.jpg';
+
 // import { useForm } from 'react-hook-form';
 
 // type Inputs = {
@@ -83,7 +84,7 @@ const CreatePost = () => {
             날짜
           </S.Label>
           <S.InputContainer number={4}>
-            <BasicDatePicker />
+            <Calendar />
           </S.InputContainer>
 
           {/*내용*/}
