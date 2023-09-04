@@ -32,6 +32,10 @@ export const theme = {
     'gray-5': '#413F3F',
     'gray-6': '#232120', //게시물 설명란
     'gray-7': '#171717',
+    'gray-8': '#292A2F',
+    'gray-9': '#777777',
+    'gray-10': '#323339',
+    'gray-11': '#45464C',
     'background': '#1A1B1E', //배경
   },
   TEXT_SIZE: {

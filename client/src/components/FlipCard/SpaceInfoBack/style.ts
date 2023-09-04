@@ -1,22 +1,43 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: 5px;
+  background-size: cover;
+  backdrop-filter: blur(2px);
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
+
+  div {
+    z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
   padding: 24px;
-  width: inherit;
-  height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
   background-size: cover;
-  backdrop-filter: blur(2px) !important;
-  background: rgba(0, 0, 0, 50%);
+  backdrop-filter: blur(2px);
+`;
+
+const Shadow = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']} !important;
+  background: black;
+  opacity: 0.5;
 `;
 
 const PostTitle = styled.div`
   margin-top: 16px;
 
-  font-family: 'IBM Plex Sans KR', sans-serif;
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-28']};
   font-style: normal;
@@ -43,6 +64,7 @@ const PlaceTitle = styled.div`
   gap: 4.2px;
 `;
 const InfoTop = styled.div``;
+
 const ChipBox = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
@@ -72,6 +94,8 @@ const S = {
   ChipBox,
   InfoTop,
   InfoBottom,
+  Shadow,
+  Container,
 };
 
 export default S;
