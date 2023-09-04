@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import { YEARS, MONTHS } from './util';
-import getMonth from 'date-fns/getMonth';
+// import getMonth from 'date-fns/getMonth';
 import getYear from 'date-fns/getYear';
-// import styles from './DatePicker.module.css';
 import styled from 'styled-components';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -39,27 +38,15 @@ const Calendar = () => {
         renderCustomHeader={({
           date,
           changeYear,
-          changeMonth,
+          // changeMonth,
           decreaseMonth,
           increaseMonth,
           // prevMonthButtonDisabled,
           // nextMonthButtonDisabled,
         }) => (
           <div className="customHeaderContainer">
-            <div>
-              <select
-                value={MONTHS[getMonth(date)]}
-                onChange={({ target: { value } }) =>
-                  changeMonth(MONTHS.indexOf(value))
-                }
-                className="month"
-              >
-                {MONTHS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+            <div className="selectContainer">
+              <div className="month">{MONTHS[date.getMonth()]}</div>
               <select
                 value={getYear(date)}
                 className="year"
@@ -72,12 +59,12 @@ const Calendar = () => {
                 ))}
               </select>
             </div>
-            <div>
-              <ArrowBackIosIcon
+            <div className="monthIconContainer">
+              <KeyboardArrowLeftIcon
                 onClick={decreaseMonth}
                 // disabled={prevMonthButtonDisabled}
               />
-              <ArrowForwardIosIcon
+              <KeyboardArrowRightIcon
                 onClick={increaseMonth}
                 // disabled={nextMonthButtonDisabled}
               />
