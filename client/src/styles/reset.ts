@@ -6,7 +6,6 @@ const resetStyle = css`
     padding: 0;
   
     box-sizing: border-box;
-    color: white;
   }
 
   input {
