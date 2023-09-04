@@ -3,14 +3,36 @@ import { flexColumCenter } from '@styles/common';
 import { theme } from '@styles/theme/theme';
 
 const Wrapper = styled.div`
-  width: inherit;
-  height: inherit;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
+  width: 100%;
+  height: 100%;
+  display: flex;
   border-radius: 5px;
-  gap: 22px;
+  background-size: cover;
+  backdrop-filter: blur(2px);
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
+
+  div {
+    z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 24px;
   ${flexColumCenter};
+  justify-content: center;
+  border-radius: 5px;
+  backdrop-filter: blur(2px);
+`;
+
+const Shadow = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']} !important;
+  background: black;
+  opacity: 0.5;
 `;
 
 const Title = styled.div`
@@ -28,6 +50,8 @@ const S = {
   Wrapper,
   Title,
   LikeIcon,
+  Container,
+  Shadow,
 };
 
 export default S;
