@@ -51,8 +51,8 @@ const MainInfo = styled.div`
 `;
 const MainTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
+  font-family: Pretendard sans-serif;
   font-size: 88px;
-  line-height: 60px;
   font-weight: 600;
 `;
 const Description = styled.div`
