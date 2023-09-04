@@ -27,10 +27,11 @@ export const theme = {
     'skyblue': '#56C9CC',
     'gray-1': '#E9E7DF',
     'gray-2': '#B0B0B0', //circleIcon 배경
-    'gray-3': '#5F5F5F',
-    'gray-4': '#413F3F',
-    'gray-5': '#232120', //게시물 설명란
-    'gray-6': '#171717',
+    'gray-3': '868585',
+    'gray-4': '#5F5F5F',
+    'gray-5': '#413F3F',
+    'gray-6': '#232120', //게시물 설명란
+    'gray-7': '#171717',
     'background': '#1A1B1E', //배경
   },
   TEXT_SIZE: {
