@@ -34,14 +34,14 @@ body {
     height: 301px;
   }
   .react-datepicker__day-name {
-    width: 32px;
-    font-size: large !important;
+    width: 35px;
+    font-size: medium !important;
     color: rgba(255, 255, 255, 0.7) !important;
   }
   .react-datepicker__day {
     color: rgb(255, 255, 255) !important;
-    font-size: large !important;
-    width: 32px;
+    font-size: medium !important;
+    width: 35px;
     &--in-range:not(&--in-selecting-range) {
       background-color: transparent;
       color: white !important;
@@ -58,6 +58,7 @@ body {
     background-color: #56c9cc !important;
     color: black !important;
   }
+
   .react-datepicker__day--disabled {
     color: #5f5f5f !important;
   }
@@ -71,6 +72,7 @@ body {
   .react-datepicker__day--keyboard-selected {
     background-color: transparent;
   }
+
   .customHeaderContainer {
     display: flex;
     justify-content: space-between !important;
@@ -79,21 +81,16 @@ body {
     padding-left: 8%;
     width: 100% !important;
     height: 100%;
-    margin-top: 10px;
 
     .month {
-      /* background-color: 'transparent' !important; */
       color: 'transparent' !important;
-      border: 'none';
-      font-size: 16px;
       border: none;
       font-size: 18px !important;
-      font-weight: 500;
+      font-weight: 600;
       margin-left: 5px;
       cursor: pointer;
       background: transparent;
       color: white;
-      margin-top: 1px;
     }
 
     .year {
@@ -101,15 +98,14 @@ body {
       color: 'white' !important;
       border: 'none';
       font-size: 16px;
-      border: none;
-      font-size: 18px !important;
-      font-weight: 500;
       padding-right: 5px;
-      margin-left: 5px;
+
       cursor: pointer;
       background: transparent;
       color: white;
       max-height: '200px';
+      font-size: 18px !important;
+      font-weight: 600;
     }
 
     .monthButton {
@@ -135,5 +131,8 @@ body {
   .selectContainer {
     display: flex;
     align-items: center;
+  }
+  .custom-react-datepicker__wrapper {
+    position: relative;
   }
 }

@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import { YEARS, MONTHS } from './util';
-// import getMonth from 'date-fns/getMonth';
 import getYear from 'date-fns/getYear';
 import styled from 'styled-components';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -38,11 +38,8 @@ const Calendar = () => {
         renderCustomHeader={({
           date,
           changeYear,
-          // changeMonth,
           decreaseMonth,
           increaseMonth,
-          // prevMonthButtonDisabled,
-          // nextMonthButtonDisabled,
         }) => (
           <div className="customHeaderContainer">
             <div className="selectContainer">
@@ -66,6 +63,9 @@ const Calendar = () => {
           </div>
         )}
       />
+      <div style={{ position: 'absolute', left: 270, bottom: 20 }}>
+        <CalenderIcon />
+      </div>
     </div>
   );
 };
@@ -80,5 +80,5 @@ const StyledDatePicker = styled(DatePicker)`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   width: 312px;
   display: flex;
-  padding-left: 3.5rem;
+  padding-left: 2.6rem;
 `;

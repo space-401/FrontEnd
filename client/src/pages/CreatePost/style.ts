@@ -40,7 +40,6 @@ const Label = styled.label<ITitle>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
   display: flex;
-  /* flex-direction: column; */
   ${({ required }) =>
     required &&
     css`
@@ -70,6 +69,9 @@ const SpaceInfoContainer = styled.div`
 const PostButtonWrapper = styled.div`
   position: absolute;
   right: 0;
+  background-color: ${({ theme }) => theme.COLOR.skyblue};
+  border-radius: 10px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
 `;
 
 const S = {
