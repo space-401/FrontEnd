@@ -20,7 +20,7 @@ const ButtonWrapper = styled.button<IBasicButton>`
     `${fontSize}px` || theme.TEXT_SIZE['text-16']};
   //스토리 적용
   background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor || theme.COLOR.blue};
+    backgroundColor || theme.COLOR.skyblue};
   //스토리 적용
   color: ${({ color, theme }) => color || theme.COLOR.black};
 

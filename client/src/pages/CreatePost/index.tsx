@@ -9,21 +9,7 @@ import Calendar from '@/components/common/BasicDatePicker';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import Cat from '@assets/cat.jpg';
 
-// import { useForm } from 'react-hook-form';
-
-// type Inputs = {
-//   title: string;
-//   place: string;
-//   content: string;
-//   space: string;
-// };
-
 const CreatePost = () => {
-  // const {
-  // register,
-  // formState: { errors },
-  // } = useForm<Inputs>();
-
   return (
     <HeaderLayout $isContentBox={false}>
       <S.Wrapper>

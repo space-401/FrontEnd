@@ -89,19 +89,6 @@ const GlobalStyles = createGlobalStyle`
     font-style: normal;
   }
 
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('./fonts/Pretendard-Bold.ttf') format('truetype'), url('./fonts/Pretendard-Bold.woff') format('woff');
-    font-weight: ${theme.FONT_WEIGHT["WEIGHT-700"]};
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('/src/styles/fonts/Pretendard-Thin.ttf') format('truetype'), url('/src/styles/fonts/Pretendard-Thin.woff') format('woff');
-    font-weight: ${theme.FONT_WEIGHT["WEIGHT-100"]};
-    font-style: normal;
-  }
 `;
 
 export default GlobalStyles;
