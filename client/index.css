@@ -32,11 +32,16 @@ body {
   .react-datepicker__month-container {
     width: 312px;
     height: 301px;
-    border-radius: 10px !important;
+  }
+  .react-datepicker__day-name {
+    width: 32px;
+    font-size: large !important;
+    color: rgba(255, 255, 255, 0.7) !important;
   }
   .react-datepicker__day {
     color: rgb(255, 255, 255) !important;
-    font-size: medium !important;
+    font-size: large !important;
+    width: 32px;
     &--in-range:not(&--in-selecting-range) {
       background-color: transparent;
       color: white !important;
@@ -71,7 +76,7 @@ body {
     justify-content: space-between !important;
     align-items: center !important;
     background-color: #292a2f;
-    padding-left: 12%;
+    padding-left: 8%;
     width: 100% !important;
     height: 100%;
     margin-top: 10px;
@@ -82,7 +87,7 @@ body {
       border: 'none';
       font-size: 16px;
       border: none;
-      font-size: 16px;
+      font-size: 18px !important;
       font-weight: 500;
       margin-left: 5px;
       cursor: pointer;
@@ -97,13 +102,14 @@ body {
       border: 'none';
       font-size: 16px;
       border: none;
-      font-size: 16px;
+      font-size: 18px !important;
       font-weight: 500;
       padding-right: 5px;
       margin-left: 5px;
       cursor: pointer;
       background: transparent;
       color: white;
+      max-height: '200px';
     }
 
     .monthButton {
@@ -114,8 +120,9 @@ body {
       color: white !important;
     }
     .monthIconContainer {
-      width: 100px;
+      width: 130px;
       display: flex;
+      justify-content: space-evenly;
       margin-left: 30px !important;
     }
   }

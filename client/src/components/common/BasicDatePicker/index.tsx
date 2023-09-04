@@ -25,7 +25,7 @@ const Calendar = () => {
         dateFormat="yyyy.MM.dd"
         showYearDropdown
         scrollableYearDropdown
-        yearDropdownItemNumber={10}
+        yearDropdownItemNumber={3}
         minDate={new Date('2000-01-01')}
         maxDate={new Date()}
         selected={startDate}
@@ -46,7 +46,6 @@ const Calendar = () => {
         }) => (
           <div className="customHeaderContainer">
             <div className="selectContainer">
-              <div className="month">{MONTHS[date.getMonth()]}</div>
               <select
                 value={getYear(date)}
                 className="year"
@@ -58,16 +57,11 @@ const Calendar = () => {
                   </option>
                 ))}
               </select>
+              <div className="month">{MONTHS[date.getMonth()]}</div>
             </div>
             <div className="monthIconContainer">
-              <KeyboardArrowLeftIcon
-                onClick={decreaseMonth}
-                // disabled={prevMonthButtonDisabled}
-              />
-              <KeyboardArrowRightIcon
-                onClick={increaseMonth}
-                // disabled={nextMonthButtonDisabled}
-              />
+              <KeyboardArrowLeftIcon onClick={decreaseMonth} />
+              <KeyboardArrowRightIcon onClick={increaseMonth} />
             </div>
           </div>
         )}
@@ -84,6 +78,7 @@ const StyledDatePicker = styled(DatePicker)`
   height: 60px;
   border-radius: 10px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-  width: 250px;
-  padding-left: 1.5rem;
+  width: 312px;
+  display: flex;
+  padding-left: 3.5rem;
 `;
