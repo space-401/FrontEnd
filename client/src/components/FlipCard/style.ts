@@ -17,10 +17,8 @@ const Card = styled.div<{ img: string | undefined }>`
   overflow: hidden;
 
   background: url(${({ img }) => (img ? img : '#43444A')});
-  border: 1px solid #4E4f55;
+  border: 1px solid #4e4f55;
   background-size: cover;
-}
-
 `;
 
 const Hover = styled.div`

@@ -23,6 +23,7 @@ const InviteCode = () => {
 
   return (
     <FullScreenModal
+      isTitle={true}
       title="초대 코드 입력"
       detail="친구에게 초대받은 초대코드와 비밀번호를 입력해주세요."
     >
