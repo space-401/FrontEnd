@@ -23,7 +23,7 @@ const Avatars = ({ users, size, max }: PropType) => (
     <AvatarGroup max={max}>
       {users.map((user) => (
         <Avatar
-          sx={{ width: size, height: size , backgroundColor: 'white'}}
+          sx={{ width: size, height: size, backgroundColor: 'white' }}
           key={user.user_id}
           alt={user.user_name}
           src={user.user_profile_img}

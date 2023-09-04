@@ -1,4 +1,3 @@
-import HeaderLayout from '@/components/layout/HeaderLayout/HeaderLayout';
 import S from './style';
 import BasicBox from '@/components/common/BasicBox';
 import InputBox from '@/components/common/InputBox';
@@ -7,17 +6,49 @@ import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import BasicButton from '@/components/common/BasicButton';
 import Calendar from '@/components/common/BasicDatePicker';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
+import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
+import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
 import Cat from '@assets/cat.jpg';
+import useSelectPhoto from '@/hooks/common/useSelectPhoto';
+import { useEffect } from 'react';
 
 const CreatePost = () => {
+  const { fileInputRef, handleFileChange, handleBoxClick, imgFile } =
+    useSelectPhoto();
+  useEffect(() => {
+    console.log('asdfsd', imgFile);
+  }, [imgFile]);
+  console.log(imgFile);
+
   return (
-    <HeaderLayout $isContentBox={false}>
+    <FullScreenModal isTitle={false}>
       <S.Wrapper>
-        <BasicBox color="grey" width={360} borderradius={20}>
-          <S.PhotoText>
-            <PhotoIcon />
-            <div>사진 선택</div>
-          </S.PhotoText>
+        <BasicBox
+          color="grey"
+          width={348}
+          borderradius={20}
+          onClick={handleBoxClick}
+        >
+          {/*이미지 파일 있을 때, 없을 때*/}
+          {imgFile ? (
+            <S.SelectedImgContainer src={imgFile} />
+          ) : (
+            <>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
+              <S.PhotoContainer>
+                <PhotoIcon />
+                <S.PhotoText>
+                  <div>사진 선택</div>
+                </S.PhotoText>
+              </S.PhotoContainer>
+            </>
+          )}
         </BasicBox>
 
         <S.GridWrapper>
@@ -48,7 +79,8 @@ const CreatePost = () => {
             <InputBox
               height={60}
               placeholder="함께한 친구들을 추가해주세요"
-              type="button"
+              type="text"
+              disabled={true}
             />
           </S.InputContainer>
 
@@ -86,24 +118,25 @@ const CreatePost = () => {
           </S.InputContainer>
 
           {/*태그*/}
-          <S.Label number={6} required={false}>
-            스페이스 명
-          </S.Label>
-          <S.InputContainer number={6}>
-            <InputBox
-              type="button"
-              height={60}
-              placeholder="스페이스 명 입력"
-            />
-          </S.InputContainer>
-        </S.GridWrapper>
+          <S.FlexContainer>
+            <S.Label number={6} required={false}>
+              태그
+            </S.Label>
+            <S.IconContainer>
+              <QuestionIcon />
+            </S.IconContainer>
+          </S.FlexContainer>
 
-        {/*게시 버튼*/}
-        <S.PostButtonWrapper>
-          <BasicButton children="게시" />
-        </S.PostButtonWrapper>
+          <S.InputContainer number={6}>
+            <InputBox type="button" height={60} />
+          </S.InputContainer>
+          <S.EmptyContainer />
+          <S.ButtonContainer>
+            <BasicButton children="게시글 올리기" fontSize={14} />
+          </S.ButtonContainer>
+        </S.GridWrapper>
       </S.Wrapper>
-    </HeaderLayout>
+    </FullScreenModal>
   );
 };
 export default CreatePost;

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
-  z-index: ${({theme}) => theme.Z_INDEX['LEVEL-1']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
   height: 920px;
   border-radius: 30px 30px 0 0;
-  background: ${({theme}) => theme.COLOR['gray-7']};
+  background: ${({ theme }) => theme.COLOR['gray-7']};
   padding: 26px 40px 0 40px;
 `;
 
@@ -18,7 +18,7 @@ const HeaderHeader = styled.section`
 
 const UserCount = styled.span`
   margin: 0 26px 0 18.6px;
-  color: ${({theme})=>theme.COLOR.white};
+  color: ${({ theme }) => theme.COLOR.white};
 `;
 const HeaderMain = styled.section`
   margin-top: 15.57px;
@@ -39,38 +39,37 @@ const ButtonGroup = styled.div`
   gap: 9px;
 `;
 const Image = styled.div<{ img_url: string }>`
-  background-image: url(${({img_url}) => img_url});
+  background-image: url(${({ img_url }) => img_url});
   background-position: center;
   background-size: cover;
   width: 160px;
   height: 160px;
   border-radius: 25px;
 `;
-const MainInfo = styled.div`
-`;
+const MainInfo = styled.div``;
 const MainTitle = styled.div`
-  color: ${({theme}) => theme.COLOR.white};
-  font-family: 'Pretendard';
+  color: ${({ theme }) => theme.COLOR.white};
+  font-family: ${({theme})=>theme.FONT_FAMILY["IBM Plex Sans KR"]};
   line-height: 0.8;
   font-size: 88px;
-  font-weight: ${({theme}) => theme.FONT_WEIGHT["WEIGHT-600"]};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
 `;
 const Description = styled.div`
   margin-top: 24px;
-  font-family: 'Pretendard';
+  font-family: ${({theme})=>theme.FONT_FAMILY["IBM Plex Sans KR"]};
   width: 37.625rem;
   line-height: 1.6rem;
-  font-size: ${({theme}) => theme.TEXT_SIZE['text-16']};
-  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   overflow: auto;
-  color: ${({theme})=>theme.COLOR.white};
+  color: ${({ theme }) => theme.COLOR.white};
 `;
 
 const FilterState = styled.div`
   position: absolute;
   top: 380px;
   left: 50%;
-  transform: translate(-50%,50%);
+  transform: translate(-50%, 50%);
   display: flex;
   gap: 24px;
   margin-top: 37px;
@@ -84,31 +83,32 @@ const FilterGroup = styled.div``;
 
 const SelectButton = styled.div<{ $state: boolean }>`
   display: flex;
-  color: ${({$state, theme}) =>
-          $state ? theme.COLOR.white : theme.COLOR['gray-8']};
+  color: ${({ $state, theme }) =>
+    $state ? theme.COLOR.white : theme.COLOR['gray-8']};
 
-  padding-bottom: ${({$state}) => (!$state ? '11px' : '8px')};
-  border-bottom: 3px solid ${({$state, theme}) => ($state ? theme.COLOR.white : 'none')};
+  padding-bottom: ${({ $state }) => (!$state ? '11px' : '8px')};
+  border-bottom: 3px solid
+    ${({ $state, theme }) => ($state ? theme.COLOR.white : 'none')};
   cursor: pointer;
 `;
 
-const LeftEmpty = styled.div``
+const LeftEmpty = styled.div``;
 
 const S = {
-    Wrapper,
-    HeaderHeader,
-    HeaderMain,
-    HeaderFooter,
-    ButtonGroup,
-    UserCount,
-    Image,
-    MainInfo,
-    MainTitle,
-    Description,
-    FilterGroup,
-    FilterState,
-    SelectButton,
-    LeftEmpty
+  Wrapper,
+  HeaderHeader,
+  HeaderMain,
+  HeaderFooter,
+  ButtonGroup,
+  UserCount,
+  Image,
+  MainInfo,
+  MainTitle,
+  Description,
+  FilterGroup,
+  FilterState,
+  SelectButton,
+  LeftEmpty,
 };
 
 export default S;

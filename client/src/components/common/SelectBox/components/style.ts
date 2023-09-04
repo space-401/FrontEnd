@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import {omitText} from "@styles/common";
+import styled from 'styled-components';
+import { omitText } from '@styles/common';
 
-const Wrapper = styled.div`
-`
+const Wrapper = styled.div``;
 
 const List = styled.li`
   line-height: 14px;
@@ -10,42 +9,40 @@ const List = styled.li`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({theme}) => theme.COLOR["gray-5"]};
+    background-color: ${({ theme }) => theme.COLOR['gray-5']};
   }
 
-  [class*="MuiChip-label"] {
+  [class*='MuiChip-label'] {
     overflow: hidden;
     text-overflow: ellipsis;
     padding-left: 8px;
     padding-right: 8px;
     white-space: nowrap;
   }
-`
+`;
 
-const UserList = styled.div<{ $select: boolean }>`
-`
+const UserList = styled.div<{ $select: boolean }>``;
 
 const FlexUser = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   overflow: hidden;
-`
+`;
 
-const UserProfile = styled.div`
-`
+const UserProfile = styled.div``;
 
 const UserTiTle = styled.div`
   ${omitText};
-`
+`;
 
 const S = {
-    Wrapper,
-    UserProfile,
-    UserList,
-    UserTiTle,
-    FlexUser,
-    List
-}
+  Wrapper,
+  UserProfile,
+  UserList,
+  UserTiTle,
+  FlexUser,
+  List,
+};
 
-export default S
+export default S;
