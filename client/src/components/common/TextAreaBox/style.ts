@@ -5,8 +5,8 @@ const Wrapper = styled.div<{
   width?: number;
   height: number;
 }>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : '#323339'};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor ? backgroundColor : theme.COLOR['gray-5']};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
   height: ${({ height }) => height}px;
   border-radius: 10px;

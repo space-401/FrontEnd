@@ -4,8 +4,9 @@ import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import BasicBox from '@/components/common/BasicBox';
+import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
+import useSelectPhoto from '@/hooks/common/useSelectPhoto';
 // import { useForm } from 'react-hook-form';
 // import { z } from 'zod';
 
@@ -15,8 +16,11 @@ import BasicBox from '@/components/common/BasicBox';
 // });
 
 const CreateSpace = () => {
+  const { fileInputRef, handleFileChange, handleBoxClick } = useSelectPhoto();
+
   return (
     <FullScreenModal
+      isTitle={true}
       title="스페이스 설정하기"
       detail="우리만을 위한 스페이스를 새로 만들어요."
     >
@@ -26,7 +30,19 @@ const CreateSpace = () => {
           <div>스페이스 아이콘</div>
         </S.TitleContainer>
         <S.InputContainer number={1}>
-          <BasicBox width={160} borderradius={10} color="grey">
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            ref={fileInputRef}
+            onChange={handleFileChange}
+          />
+          <BasicBox
+            width={160}
+            borderradius={10}
+            color="grey"
+            onClick={handleBoxClick}
+          >
             <PhotoIcon />
           </BasicBox>
           <S.EditButton>편집하기</S.EditButton>
@@ -72,7 +88,6 @@ const CreateSpace = () => {
             maxLength={5}
           />
         </S.InputContainer>
-
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer>
           <BasicButton children="스페이스 생성하기" />

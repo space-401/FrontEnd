@@ -5,9 +5,9 @@ import DatePicker from 'react-datepicker';
 import { YEARS, MONTHS } from './util';
 import getYear from 'date-fns/getYear';
 import styled from 'styled-components';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+import { ReactComponent as RightArrow } from '@assets/svg/rightArrow.svg';
+import { ReactComponent as LeftArrow } from '@assets/svg/leftArrow.svg';
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -57,8 +57,8 @@ const Calendar = () => {
               <div className="month">{MONTHS[date.getMonth()]}</div>
             </div>
             <div className="monthIconContainer">
-              <KeyboardArrowLeftIcon onClick={decreaseMonth} />
-              <KeyboardArrowRightIcon onClick={increaseMonth} />
+              <LeftArrow onClick={decreaseMonth} />
+              <RightArrow onClick={increaseMonth} />
             </div>
           </div>
         )}
@@ -73,10 +73,11 @@ const Calendar = () => {
 export default Calendar;
 
 const StyledDatePicker = styled(DatePicker)`
-  background-color: rgb(50, 51, 57);
-  color: white;
+  background-color: ${({ theme }) => theme.COLOR['gray-5']};
+  color: ${({ theme }) => theme.COLOR.white};
   height: 60px;
   border-radius: 10px;
+
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   width: 312px;
   display: flex;
