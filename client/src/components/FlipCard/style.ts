@@ -7,7 +7,7 @@ const Flip = styled.div<{ size: number }>`
   perspective: 1100px;
 `;
 
-const Card = styled.div<{ img: string | undefined }>`
+const Card = styled.div<{ img: string }>`
   width: inherit;
   height: inherit;
   position: relative;
@@ -16,17 +16,18 @@ const Card = styled.div<{ img: string | undefined }>`
   border-radius: 5px;
   overflow: hidden;
 
-  background: url(${({ img }) => (img ? img : '#43444A')});
-  border: 1px solid #4E4f55;
+  background: url(${({ img }) => img});
   background-size: cover;
 }
 
 `;
 
-const Hover = styled.div`
+const Hover = styled.div<{ img: string }>`
   top: 0;
   left: 0;
   position: absolute;
+  overflow: hidden;
+  border-radius: 5px;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -38,9 +39,13 @@ const Hover = styled.div`
   transition: opacity 0.5s;
   pointer-events: none;
   opacity: 0;
-
   ${Flip}:hover & {
     opacity: 1;
+  }
+
+  > div {
+    background: url(${({ img }) => img});
+    background-size: cover;
   }
 `;
 
