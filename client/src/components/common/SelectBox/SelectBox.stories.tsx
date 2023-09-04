@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
 import SelectBox from '@components/common/SelectBox/SelectBox';
-import {users_mock} from "@mocks/data/user/users.mock";
-import {spacePostMock} from "@mocks/data/FlipCard/spaceInfo.mock";
+import { users_mock } from '@mocks/data/user/users.mock';
+import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 
 export default {
   title: 'common/SelectBox',
@@ -32,15 +32,13 @@ const Container = styled.div`
 export const 작성자 = {
   args: {
     labelName: '작성자',
-    ListItem: users_mock
-
+    ListItem: users_mock,
   },
 };
 
 export const 태그 = {
   args: {
     labelName: '태그',
-    ListItem: spacePostMock.place_tag
+    ListItem: spacePostMock.place_tag,
   },
 };
-

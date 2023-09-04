@@ -44,7 +44,7 @@ const PostList = styled.div`
   flex-wrap: wrap;
 `;
 
-const FilterGroup = styled.div``
+const FilterGroup = styled.div``;
 
 const S = {
   Wrapper,
@@ -53,7 +53,7 @@ const S = {
   UndefinedPostText,
   UndefinedShareText,
   PostList,
-  FilterGroup
+  FilterGroup,
 };
 
 export default S;

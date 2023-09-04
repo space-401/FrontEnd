@@ -14,7 +14,9 @@ const ButtonWrapper = styled.button<IBasicButton>`
   ${flexCenter}
   border-radius: 10px;
   //스토리 적용
-  padding: ${({ padding }) => padding || 16}px;
+  padding: 12px;
+  padding-left: ${({ padding }) => padding || 16}px;
+  padding-right: ${({ padding }) => padding || 16}px;
   //스토리 적용
   font-size: ${({ fontSize, theme }) =>
     `${fontSize}px` || theme.TEXT_SIZE['text-16']};

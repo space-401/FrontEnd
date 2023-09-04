@@ -6,8 +6,8 @@ const InputWrapper = styled.div<{
   placeholder?: string;
   backgroundColor?: string;
 }>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : '#323339'};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor ? backgroundColor : theme.COLOR['gray-5']};
   width: ${(props) => (props.width ? `${props.width}px` : '100%')};
   height: ${({ height }) => height}px;
   border-radius: 10px;

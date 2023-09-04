@@ -16,10 +16,9 @@ const Card = styled.div<{ img: string }>`
   border-radius: 5px;
   overflow: hidden;
 
-  background: url(${({ img }) => img});
+  background: url(${({ img }) => (img ? img : '#43444A')});
+  border: 1px solid #4e4f55;
   background-size: cover;
-}
-
 `;
 
 const Hover = styled.div<{ img: string }>`
