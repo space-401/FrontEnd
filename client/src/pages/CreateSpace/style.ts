@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   width: 50%;
-  padding-top: 2.5rem;
+  padding-top: 2rem;
   padding-bottom: 2.5rem;
   display: grid;
   grid-template-columns: 1fr 2.5fr;

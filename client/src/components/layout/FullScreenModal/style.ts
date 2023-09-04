@@ -6,13 +6,14 @@ const Wrapper = styled.div`
   height: 100%;
   position: relative;
   border-radius: 10px;
-  padding-top: 150px;
+  padding-top: 60px;
 
   ${flexCenter}
   flex-direction: column;
 `;
 
-const TitleSection = styled.div`
+const TitleSection = styled.div<{ isTitle: boolean }>`
+  padding-top: 2rem;
   width: 50%;
   div {
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
@@ -23,7 +24,8 @@ const TitleSection = styled.div`
     color: rgba(255, 255, 255, 0.6);
   }
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: ${({ isTitle }) =>
+    isTitle ? '1px solid rgba(255, 255, 255, 0.15)' : 'none'};
 `;
 
 const DeleteIconContainer = styled.div`
