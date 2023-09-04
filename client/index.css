@@ -17,7 +17,6 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 40px;
 
         .react-datepicker__day-name {
           color: white;
@@ -30,8 +29,14 @@ body {
     }
   }
 
+  .react-datepicker__month-container {
+    width: 312px;
+    height: 301px;
+    border-radius: 10px !important;
+  }
   .react-datepicker__day {
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
+    font-size: medium !important;
     &--in-range:not(&--in-selecting-range) {
       background-color: transparent;
       color: white !important;
@@ -39,35 +44,37 @@ body {
   }
   .react-datepicker__day--in-selecting-range,
   .react-datepicker__day--in-range {
-    background-color: rgb(128, 128, 128) !important;
+    background-color: rgba(86, 201, 204, 0.4) !important;
+    color: black;
   }
 
   .react-datepicker__day--selecting-range-start,
   .react-datepicker__day--selecting-range-end {
-    background-color: rgb(74, 74, 74) !important;
+    background-color: #56c9cc !important;
+    color: black !important;
   }
   .react-datepicker__day--disabled {
-    color: rgb(100, 100, 100) !important;
+    color: #5f5f5f !important;
   }
   .react-datepicker__day--outside-month {
-    color: rgb(100, 100, 100) !important;
+    color: #5f5f5f !important;
   }
   .react-datepicker__day--selected {
-    color: white !important;
-    background-color: rgb(100, 100, 100) !important;
+    color: black !important;
+    background-color: #56c9cc !important;
   }
   .react-datepicker__day--keyboard-selected {
     background-color: transparent;
   }
   .customHeaderContainer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between !important;
+    align-items: center !important;
     background-color: #292a2f;
-    color: white;
+    padding-left: 12%;
+    width: 100% !important;
     height: 100%;
-    margin-top: 8px;
-    padding: 0 12px 0 24px;
+    margin-top: 10px;
 
     .month {
       /* background-color: 'transparent' !important; */
@@ -77,9 +84,11 @@ body {
       border: none;
       font-size: 16px;
       font-weight: 500;
-      padding-right: 5px;
       margin-left: 5px;
       cursor: pointer;
+      background: transparent;
+      color: white;
+      margin-top: 1px;
     }
 
     .year {
@@ -93,6 +102,8 @@ body {
       padding-right: 5px;
       margin-left: 5px;
       cursor: pointer;
+      background: transparent;
+      color: white;
     }
 
     .monthButton {
@@ -101,14 +112,21 @@ body {
       padding: 5px;
       border-radius: 50%;
       color: white !important;
-
-      + .monthButton {
-        margin-left: 24px;
-        background-color: black;
-      }
+    }
+    .monthIconContainer {
+      width: 100px;
+      display: flex;
+      margin-left: 30px !important;
     }
   }
   .calenderWrapper {
     background-color: #292a2f;
+  }
+  .customHeaderContainer {
+    height: 50px;
+  }
+  .selectContainer {
+    display: flex;
+    align-items: center;
   }
 }
