@@ -13,7 +13,7 @@ export type FlipType = {
   /**
    * 해당 이미지의 주소를 넣어주세요
    */
-  img_url?: string;
+  img_url: string;
   /**
    * Hover시에 보일 컴포넌트를 넣어주세요
    */
@@ -22,12 +22,12 @@ export type FlipType = {
 
 const FlipCard = (props: FlipType) => {
   const { size, img_url, hoverCard } = props;
-
+  console.log(img_url);
   return (
     <>
       <S.Flip size={size}>
         <S.Card img={img_url} />
-        <S.Hover>{hoverCard}</S.Hover>
+        <S.Hover img={img_url}>{hoverCard}</S.Hover>
       </S.Flip>
     </>
   );
