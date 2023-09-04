@@ -32,11 +32,6 @@ const resetStyle = css`
     cursor: default;
   }
 
-  html,
-  body {
-    height: 100%;
-  }
-
   img,
   picture,
   video,
