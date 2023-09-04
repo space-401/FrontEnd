@@ -36,6 +36,7 @@ export const theme = {
         'gray-9': '#323339',
         'gray-10': '#45464C',
         'background': '#1A1B1E',
+        'inputColor': '#EEEDED'
     },
     TEXT_SIZE: {
         'text-88': '5.5rem',
@@ -118,6 +119,9 @@ export const theme = {
         'LEVEL-5': 50,
         'LEVEL-6': 60,
     },
+    FONT_FAMILY:{
+        'Pretendard': 'Pretendard',
+    }
 };
 
 export type ThemeType = typeof theme;
