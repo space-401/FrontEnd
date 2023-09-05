@@ -1,4 +1,3 @@
-import S from '@pages/MainPage/components/MainHeader/style';
 import { UserType } from '@type/user.type';
 import BasicButton from '@components/common/BasicButton';
 import { theme } from '@styles/theme/theme';
@@ -8,7 +7,7 @@ import { ReactComponent as SelectMapIcon } from '@assets/svg/filter/selectmapIco
 import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIcon.svg';
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
 import { useState } from 'react';
-import { TagType } from '@type/tag.type';
+import S from "@pages/mainPage/components/MainHeader/style";
 
 export type MainHeaderPropType = {
   spaceInfo: {
@@ -17,7 +16,6 @@ export type MainHeaderPropType = {
     img_url: string;
     users: UserType[];
   };
-  tagList: TagType[];
 };
 
 const MainHeader = (prop: MainHeaderPropType) => {

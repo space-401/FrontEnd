@@ -4,8 +4,8 @@ const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
-  height: 920px;
-  border-radius: 30px 30px 0 0;
+  height: 474px;
+  border-radius: 40px;
 
   padding: 26px 40px 0 40px;
 `;

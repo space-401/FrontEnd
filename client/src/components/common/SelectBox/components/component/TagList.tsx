@@ -4,7 +4,6 @@ import { theme } from '@styles/theme/theme';
 
 type TagListProps = {
   Item: TagType;
-  select: boolean;
 };
 
 const TagList = (props: TagListProps) => {
