@@ -1,4 +1,4 @@
-import S from '@pages/mainPage/components/MainHeader/style';
+import S from '@pages/MainPage/components/MainHeader/style';
 import { UserType } from '@type/user.type';
 import BasicButton from '@components/common/BasicButton';
 import { theme } from '@styles/theme/theme';

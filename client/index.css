@@ -1,10 +1,10 @@
 /*캘린더 css*/
+
 body {
   .react-datepicker {
     font-family: 'Noto Sans KR', serif;
     border: none;
     border-radius: 0;
-
     color: white;
 
     .react-datepicker__header {

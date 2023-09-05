@@ -102,12 +102,21 @@ export const theme = {
     'opacity-100': 1,
   },
   FONT_WEIGHT: {
+    'WEIGHT-200': 200,
     'WEIGHT-300': 300,
     'WEIGHT-400': 400,
     'WEIGHT-500': 500,
     'WEIGHT-600': 600,
     'WEIGHT-700': 700,
     'WEIGHT-800': 800,
+  },
+  Z_INDEX: {
+    'LEVEL-1': 10,
+    'LEVEL-2': 20,
+    'LEVEL-3': 30,
+    'LEVEL-4': 40,
+    'LEVEL-5': 50,
+    'LEVEL-6': 60,
   },
 };
 

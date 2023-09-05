@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Form = styled.form`
+  background-color: #171717;
   width: 50%;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
