@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   position: relative;
-  border-radius: 10px;
   padding-top: 60px;
-
-  ${flexCenter}
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
   flex-direction: column;
+  background-color: #171717;
 `;
 
 const TitleSection = styled.div<{ isTitle: boolean }>`

@@ -48,13 +48,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'IBM Plex Sans KR';
-    src: url('/src/styles/fonts/IBMPlexSansKR-Thin.woff') format('woff');
-    font-weight: ${theme.FONT_WEIGHT['WEIGHT-100']};
-    font-style: normal;
-  }
-
-  @font-face {
     font-family: 'Pretendard';
     src: url('./fonts/Pretendard-ExtraLight.ttf') format('truetype'), url('./fonts/Pretendard-ExtraLight.woff') format('woff');
     font-weight: ${theme.FONT_WEIGHT['WEIGHT-200']};

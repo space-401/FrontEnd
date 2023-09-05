@@ -1,5 +1,5 @@
 import { SpacePostType } from '@type/space.type';
-import S from '@pages/mainPage/components/MainBody/style';
+import S from '@pages/MainPage/components/MainBody/style';
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/FlipCard/FlipCard';
 import SpaceInfoBack from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
