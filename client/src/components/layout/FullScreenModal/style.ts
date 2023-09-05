@@ -3,13 +3,12 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   position: relative;
-  border-radius: 10px;
   padding-top: 60px;
-
+  min-height: 100vh;
   ${flexCenter}
   flex-direction: column;
+  background-color: #171717;
 `;
 
 const TitleSection = styled.div<{ isTitle: boolean }>`

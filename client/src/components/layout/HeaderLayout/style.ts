@@ -1,7 +1,18 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #171717;
+  min-height: 100vh;
+  width: 100%;
+  flex-grow: 1; /* 자식 요소에 맞게 늘어나도록 설정 */
+  margin-bottom: 100px;
+`;
+
 const HeaderWrapper = styled.div`
+  margin: 32px 32px 0 32px;
   height: 64px;
   ${flexCenter}
   div {
@@ -9,11 +20,7 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-interface IIconBoxProps {
-  padding?: number;
-}
-
-const IconBox = styled.div<IIconBoxProps>`
+const IconBox = styled.div<{ padding?: number }>`
   background-color: #292a2f;
   height: inherit;
   width: 160px;
@@ -35,18 +42,12 @@ const SpaceBox = styled.div`
   border-radius: 15px;
 `;
 
-const Wrapper = styled.div`
-  margin: 32px;
-  display: flex;
-  flex-direction: column;
-`;
-
-interface IContentWrapper {
-  $isContentBox: boolean;
-}
-const ContentWrapper = styled.div<IContentWrapper>`
-  background-color: ${({ $isContentBox }) =>
-    $isContentBox ? '#292a2f' : 'none'};
+const ContentWrapper = styled.div<{ $isContentBox: boolean }>`
+  background-color: '#292a2f'
+    ${({ $isContentBox }) => ($isContentBox ? '#292a2f' : 'none')};
+  margin: 10px 32px 32px 32px;
+  border-radius: 30px;
+  min-height: 100vh;
 `;
 
 const S = {

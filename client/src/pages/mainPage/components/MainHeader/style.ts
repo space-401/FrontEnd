@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 920px;
   border-radius: 30px 30px 0 0;
-  background: ${({ theme }) => theme.COLOR['gray-7']};
+
   padding: 26px 40px 0 40px;
 `;
 

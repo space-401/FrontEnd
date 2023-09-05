@@ -1,5 +1,5 @@
 import { StoryFn } from '@storybook/react';
-import MainPage, { MainPageType } from '@pages/mainPage/index';
+import MainPage, { MainPageType } from '@pages/MainPage/index';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 
 export default {

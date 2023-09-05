@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   position: absolute;
   width: 100%;
   top: 500px;
   left: 0;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
   border-radius: 40px;
-  background: ${({ theme }) => theme.COLOR['gray-9']};
   min-height: 800px;
+  background-color: ${({ theme }) => theme.COLOR['gray-7']};
 `;
 
 const UndefinedList = styled.div`
@@ -36,10 +38,11 @@ const UndefinedShareText = styled.div`
 `;
 
 const PostList = styled.div`
-  margin: 48px;
+  margin: 48px 0 48px 0;
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const S = {
