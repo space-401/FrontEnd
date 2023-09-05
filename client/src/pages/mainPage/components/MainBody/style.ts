@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  padding: 30px 48px;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: relative;
   width: 100%;
-  top: 500px;
   left: 0;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
   border-radius: 40px;
   min-height: 800px;
-  background-color: ${({ theme }) => theme.COLOR['gray-7']};
+  background-color: ${({ theme }) => theme.COLOR.black};
 `;
 
 const UndefinedList = styled.div`
@@ -48,7 +48,11 @@ const PostList = styled.div`
   justify-content: center;
 `;
 
-const FilterGroup = styled.div``;
+const FilterGroup = styled.div`
+  display: flex;
+  gap: 8px;
+  z-index: ${({theme})=> theme.Z_INDEX["LEVEL-2"]}
+`;
 
 const S = {
   Wrapper,
