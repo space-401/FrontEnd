@@ -8,7 +8,7 @@ export default {
   tags: ['autodocs'],
   decorators: [
     (Story: StoryFn) => {
-      return <Story args={MainPageMock} />;
+      return <Story />;
     },
   ],
   argTypes: {},

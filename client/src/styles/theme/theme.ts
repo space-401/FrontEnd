@@ -27,18 +27,20 @@ export const theme = {
     'skyblue': '#56C9CC',
     'gray-1': '#E9E7DF',
     'gray-2': '#B0B0B0', //circleIcon 배경
-    'gray-3': '868585',
-    'gray-4': '#5F5F5F',
-    'gray-5': '#413F3F',
-    'gray-6': '#232120', //게시물 설명란
-    'gray-7': '#171717',
-    'gray-8': '#292A2F',
-    'gray-9': '#777777',
-    'gray-10': '#323339',
-    'gray-11': '#45464C',
-    'background': '#1A1B1E', //배경
+    'gray-3': '#5F5F5F',
+    'gray-4': '#413F3F',
+    'gray-5': '#232120', //게시물 설명란
+    'gray-6': '#171717',
+    'gray-7': '#292A2F',
+    'gray-8': '#777777',
+    'gray-9': '#323339',
+    'gray-10': '#45464C',
+    'gray-11': '#868585',
+    'background': '#1A1B1E',
+    'inputColor': '#EEEDED',
   },
   TEXT_SIZE: {
+    'text-88': '5.5rem',
     'text-80': '5rem',
     'text-50': '3.125rem',
     'text-40': '2.5rem',
@@ -102,12 +104,25 @@ export const theme = {
     'opacity-100': 1,
   },
   FONT_WEIGHT: {
+    'WEIGHT-100': 100,
+    'WEIGHT-200': 200,
     'WEIGHT-300': 300,
     'WEIGHT-400': 400,
     'WEIGHT-500': 500,
     'WEIGHT-600': 600,
     'WEIGHT-700': 700,
-    'WEIGHT-800': 800,
+  },
+  Z_INDEX: {
+    'LEVEL-1': 10,
+    'LEVEL-2': 20,
+    'LEVEL-3': 30,
+    'LEVEL-4': 40,
+    'LEVEL-5': 50,
+    'LEVEL-6': 60,
+  },
+  FONT_FAMILY: {
+    'Pretendard': 'Pretendard',
+    'IBM Plex Sans KR': 'IBM Plex Sans KR',
   },
 };
 
