@@ -25,7 +25,6 @@ const router = createBrowserRouter([
         element: <InviteCode />,
       },
       {
-        //모달이라 나중에 지울것
         path: '/main',
         element: <MainPage {...MainPageMock} />,
       },

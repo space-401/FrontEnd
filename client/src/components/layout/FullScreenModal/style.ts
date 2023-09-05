@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
   padding-top: 60px;
   min-height: 100vh;
-  ${flexCenter}
+  display: flex;
+  align-items: center;
   flex-direction: column;
   background-color: #171717;
 `;
