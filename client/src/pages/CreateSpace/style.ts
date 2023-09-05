@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
-  background-color: #171717;
   width: 50%;
   padding-top: 2rem;
   padding-bottom: 2.5rem;
