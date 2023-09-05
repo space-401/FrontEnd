@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
 import SelectBox from '@components/common/SelectBox/SelectBox';
+import { users_mock } from '@mocks/data/user/users.mock';
+import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 
 export default {
   title: 'common/SelectBox',
@@ -24,80 +26,19 @@ export default {
 
 const Container = styled.div`
   width: 150px;
+  height: 400px;
 `;
 
-export const Controller = {
+export const 작성자 = {
   args: {
-    labelName: '정렬',
-    MenuItems: [
-      {
-        id: 1,
-        value: '멋있게 정렬',
-      },
-      {
-        id: 2,
-        value: '멋없게 정렬',
-      },
-    ],
+    labelName: '작성자',
+    ListItem: users_mock,
   },
 };
 
-export const SmallSizeController = {
+export const 태그 = {
   args: {
-    labelName: '목록갯수설정',
-    size: 'small',
-    minWidth: 150,
-    MenuItems: [
-      {
-        id: 1,
-        value: '10',
-      },
-      {
-        id: 2,
-        value: '20',
-      },
-      {
-        id: 3,
-        value: '30',
-      },
-    ],
-  },
-};
-
-export const ListSortControl = {
-  args: {
-    labelName: '순차정렬',
-    minWidth: 120,
-    MenuItems: [
-      {
-        id: 1,
-        value: '오름차순',
-      },
-      {
-        id: 2,
-        value: '내림차순',
-      },
-    ],
-  },
-};
-
-export const ListLengthControl = {
-  args: {
-    labelName: '목록갯수설정',
-    minWidth: 150,
-    MenuItems: [
-      {
-        id: 1,
-        value: '10',
-      },
-      {
-        id: 2,
-        value: '20',
-      },
-      {
-        id: 3,
-        value: '30',
-      },
-    ],
+    labelName: '태그',
+    ListItem: spacePostMock.place_tag,
   },
 };

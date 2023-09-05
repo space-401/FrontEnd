@@ -18,6 +18,7 @@ const HeaderHeader = styled.section`
 
 const UserCount = styled.span`
   margin: 0 26px 0 18.6px;
+  color: ${({ theme }) => theme.COLOR.white};
 `;
 const HeaderMain = styled.section`
   margin-top: 15.57px;
@@ -29,7 +30,7 @@ const HeaderMain = styled.section`
 const HeaderFooter = styled.section`
   display: flex;
   justify-content: space-between;
-  margin-top: 136px;
+  margin-top: 151px;
   align-items: center;
 `;
 
@@ -45,28 +46,34 @@ const Image = styled.div<{ img_url: string }>`
   height: 160px;
   border-radius: 25px;
 `;
-const MainInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const MainInfo = styled.div``;
 const MainTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: Pretendard sans-serif;
+  font-family: ${({theme})=>theme.FONT_FAMILY["IBM Plex Sans KR"]};
+  line-height: 0.8;
   font-size: 88px;
-  font-weight: 600;
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
 `;
 const Description = styled.div`
-  margin-top: 32px;
-  width: 395px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  margin-top: 24px;
+  font-family: ${({theme})=>theme.FONT_FAMILY["IBM Plex Sans KR"]};
+  width: 37.625rem;
+  line-height: 1.6rem;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   overflow: auto;
+  color: ${({ theme }) => theme.COLOR.white};
 `;
 
 const FilterState = styled.div`
+  position: absolute;
+  top: 380px;
+  left: 50%;
+  transform: translate(-50%, 50%);
   display: flex;
   gap: 24px;
   margin-top: 37px;
+
   svg {
     margin: 3px 2px;
   }
@@ -85,6 +92,8 @@ const SelectButton = styled.div<{ $state: boolean }>`
   cursor: pointer;
 `;
 
+const LeftEmpty = styled.div``;
+
 const S = {
   Wrapper,
   HeaderHeader,
@@ -99,6 +108,7 @@ const S = {
   FilterGroup,
   FilterState,
   SelectButton,
+  LeftEmpty,
 };
 
 export default S;

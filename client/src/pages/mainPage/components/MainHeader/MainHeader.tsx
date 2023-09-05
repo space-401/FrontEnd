@@ -51,7 +51,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         </S.MainInfo>
       </S.HeaderMain>
       <S.HeaderFooter>
-        <S.FilterGroup>필터버튼</S.FilterGroup>
+        <S.LeftEmpty></S.LeftEmpty>
         <S.FilterState>
           <S.SelectButton
             onClick={() => setSelectState(false)}
@@ -66,7 +66,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <BasicButton color={theme.COLOR.black} backgroundColor={'#9EB8FF'}>
+        <BasicButton color={'#292929'} backgroundColor={theme.COLOR.beige}>
           게시물 작성
         </BasicButton>
       </S.HeaderFooter>
