@@ -14,6 +14,7 @@ const MainBody = (props: MainBodyPropType) => {
   const { postList } = props;
   return (
     <S.Wrapper>
+      <S.FilterGroup>필터버튼</S.FilterGroup>
       {postList.length === 0 ? (
         <S.UndefinedList>
           <S.UndefinedDefaultImage img_url={DefaultImage} />

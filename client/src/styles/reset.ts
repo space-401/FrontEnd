@@ -4,8 +4,6 @@ const resetStyle = css`
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    color: white;
   }
 
   input {

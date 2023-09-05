@@ -15,6 +15,8 @@ const Wrapper = styled.div`
 
 const UndefinedList = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   text-align: center;
 `;
@@ -39,11 +41,14 @@ const UndefinedShareText = styled.div`
 
 const PostList = styled.div`
   margin: 48px 0 48px 0;
+
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
   justify-content: center;
 `;
+
+const FilterGroup = styled.div``;
 
 const S = {
   Wrapper,
@@ -52,6 +57,7 @@ const S = {
   UndefinedPostText,
   UndefinedShareText,
   PostList,
+  FilterGroup,
 };
 
 export default S;
