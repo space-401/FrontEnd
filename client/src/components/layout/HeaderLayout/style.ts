@@ -15,9 +15,6 @@ const HeaderWrapper = styled.div`
   margin: 32px 32px 0 32px;
   height: 64px;
   ${flexCenter}
-  div {
-    margin: 3.5px;
-  }
 `;
 
 const IconBox = styled.div<{ padding?: number }>`
