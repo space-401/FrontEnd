@@ -124,6 +124,14 @@ export const theme = {
     'Pretendard': 'Pretendard',
     'IBM Plex Sans KR': 'IBM Plex Sans KR',
   },
+  Z_INDEX: {
+    'LEVEL-1': 10,
+    'LEVEL-2': 20,
+    'LEVEL-3': 30,
+    'LEVEL-4': 40,
+    'LEVEL-5': 50,
+    'LEVEL-6': 60,
+  },
 };
 
 export type ThemeType = typeof theme;

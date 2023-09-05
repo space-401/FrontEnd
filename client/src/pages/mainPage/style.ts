@@ -7,8 +7,7 @@ const Wrapper = styled.div`
   max-width: 1856px;
   height: 920px;
   border-radius: 30px 30px 0 0;
-  background: ${({ theme }) => theme.COLOR['gray-7']};
-  padding: 26px 40px 0 40px;
+  background: ${({ theme }) => theme.COLOR['gray-8']};
 `;
 
 const S = {

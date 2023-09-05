@@ -4,7 +4,7 @@ import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import BasicButton from '@/components/common/BasicButton';
-import Calendar from '@/components/common/BasicDatePicker';
+import Calendar from '@/components/common/Calender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
