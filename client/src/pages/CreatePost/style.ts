@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div<{ width?: string }>`
-  padding-top: 10px;
   display: flex;
   justify-content: center;
   width: 100%;

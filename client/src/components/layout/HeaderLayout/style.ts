@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   flex-grow: 1; /* 자식 요소에 맞게 늘어나도록 설정 */
-  margin-bottom: 100px;
 `;
 
 const HeaderWrapper = styled.div`
