@@ -1,4 +1,4 @@
 export type selectType = {
-    id: number;
-    title: string;
+  id: number;
+  title: string;
 };

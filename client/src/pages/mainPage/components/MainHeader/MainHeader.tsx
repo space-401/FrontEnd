@@ -7,7 +7,7 @@ import { ReactComponent as SelectMapIcon } from '@assets/svg/filter/selectmapIco
 import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIcon.svg';
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
 import { useState } from 'react';
-import S from "@pages/mainPage/components/MainHeader/style";
+import S from '@pages/mainPage/components/MainHeader/style';
 
 export type MainHeaderPropType = {
   spaceInfo: {
