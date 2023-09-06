@@ -1,25 +1,10 @@
-import { UserType } from '@type/user.type';
-import { TagType } from '@type/tag.type';
-import TagList from '@components/common/SelectBox/components/component/TagList';
-import UserList from '@components/common/SelectBox/components/component/UserList';
-import S from '@components/common/SelectBox/components/style';
-import { Dispatch, SetStateAction } from 'react';
-import type { selectType } from '@type/main.type';
-
-type MenuListProps = {
-  searchValue: string;
-  ItemList: UserType[] | TagType[];
-  select: selectType[];
-  changeSelect: Dispatch<SetStateAction<selectType[]>>;
-};
-
-const isUserTypeArray = (items: UserType[] | TagType[]): items is TagType[] => {
-  return items.every((item) => 'tag_id' in item);
-};
-
-const isUserType = (items: UserType | TagType): items is TagType => {
-  return 'tag_id' in items;
-};
+import type { UserType } from '@type/user.type';
+import type { TagType } from '@type/tag.type';
+import type { MenuListProps, selectType } from '@type/main.type';
+import UserList from '@pages/CreatePost/components/SelectBox/components/component/UserList';
+import TagList from '@pages/CreatePost/components/SelectBox/components/component/TagList';
+import S from '@pages/CreatePost/components/SelectBox/components/style';
+import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 
 const MenuList = (props: MenuListProps) => {
   const { ItemList, searchValue, select, changeSelect } = props;
@@ -28,13 +13,21 @@ const MenuList = (props: MenuListProps) => {
     return select.filter((i) => i.id === thisValue).length !== 0;
   };
 
-  const ListItem = !isUserTypeArray(ItemList)
+  const ListItem: UserType[] | TagType[] = !isUserTypeArray(ItemList)
     ? [
-        ...ItemList.filter((prev) => checkSelectItem(prev.user_id)),
+        ...select.map((prev) => {
+          return {
+            user_id: prev.id,
+            user_name: prev.title,
+            user_profile_img: prev.img_url,
+          };
+        }),
         ...ItemList.filter((prev) => !checkSelectItem(prev.user_id)),
       ]
     : [
-        ...ItemList.filter((prev) => checkSelectItem(prev.tag_id)),
+        ...select.map((prev) => {
+          return { tag_id: prev.id, tag_title: prev.title };
+        }),
         ...ItemList.filter((prev) => !checkSelectItem(prev.tag_id)),
       ];
 
@@ -58,6 +51,7 @@ const MenuList = (props: MenuListProps) => {
         const newItem: selectType = {
           id: ListItem.user_id,
           title: ListItem.user_name,
+          img_url: ListItem.user_profile_img,
         };
         changeSelect((prev) => [...prev, newItem]);
       } else {
