@@ -22,7 +22,6 @@ export type FlipType = {
 
 const FlipCard = (props: FlipType) => {
   const { size, img_url, hoverCard } = props;
-  console.log(img_url);
   return (
     <>
       <S.Flip size={size}>

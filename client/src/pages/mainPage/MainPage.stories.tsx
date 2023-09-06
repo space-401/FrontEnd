@@ -1,6 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import MainPage, { MainPageType } from '@pages/MainPage/index';
-import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
+import MainPageMock from "@mocks/data/MainPage/mainPage.mock";
 
 export default {
   title: 'page/MainPage',

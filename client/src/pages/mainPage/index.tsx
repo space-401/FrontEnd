@@ -1,24 +1,17 @@
-import MainBody, {
-  MainBodyPropType,
-} from '@pages/MainPage/components/MainBody/MainBody';
-import MainHeader, {
-  MainHeaderPropType,
-} from '@pages/MainPage/components/MainHeader/MainHeader';
-import S from '@pages/MainPage/style';
-import HeaderLayout from '@/components/layout/HeaderLayout/HeaderLayout';
+import MainHeader, {MainHeaderPropType} from "@pages/mainPage/components/MainHeader/MainHeader";
+import MainBody, {MainBodyPropType} from "@pages/mainPage/components/MainBody/MainBody";
+import S from "@pages/mainPage/style";
 
-export type MainPageType = MainHeaderPropType & MainBodyPropType;
+export type MainPageType = (MainHeaderPropType & MainBodyPropType);
 
 const MainPage = (props: MainPageType) => {
-  const { spaceInfo, tagList, postList, total, page } = props;
-  return (
-    <HeaderLayout $isContentBox={true}>
-      <S.Wrapper>
-        <MainHeader spaceInfo={spaceInfo} tagList={tagList} />
-        <MainBody total={total} postList={postList} page={page} />
-      </S.Wrapper>
-    </HeaderLayout>
-  );
+    const {spaceInfo, userList, tagList, postList, total, page} = props;
+    return (
+        <S.Wrapper>
+            <MainHeader spaceInfo={spaceInfo}/>
+            <MainBody userList={userList} tagList={tagList} total={total} postList={postList} page={page}/>
+        </S.Wrapper>
+    );
 };
 
 export default MainPage;
