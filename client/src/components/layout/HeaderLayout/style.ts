@@ -18,7 +18,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const IconBox = styled.div<{ padding?: number }>`
-  background-color: ${({ theme }) => theme.COLOR['gray-8']};
+  background-color: ${({ theme }) => theme.COLOR['gray-5']};
   height: inherit;
   width: 160px;
   border-radius: 15px;
@@ -34,14 +34,12 @@ const SpaceBox = styled.div`
   width: calc(100% - 320px);
   min-width: 200px;
   height: inherit;
-  background-color: ${({ theme }) => theme.COLOR['gray-8']};
+  background-color: ${({ theme }) => theme.COLOR['gray-5']};
   ${flexCenter};
   border-radius: 15px;
 `;
 
-const ContentWrapper = styled.div<{ $isContentBox: boolean }>`
-  background-color: ${({ theme, $isContentBox }) =>
-    $isContentBox ? theme.COLOR['gray-8'] : 'none'};
+const ContentWrapper = styled.div`
   margin: 10px 32px 32px 32px;
   border-radius: 30px;
   min-height: 100vh;

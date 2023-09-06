@@ -8,7 +8,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #171717;
+  background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  color: ${({ theme }) => theme.COLOR['white']};
 `;
 
 const TitleSection = styled.div<{ isTitle: boolean }>`

@@ -7,6 +7,7 @@ const Wrapper = styled.div<{ width?: string }>`
   justify-content: center;
   width: 100%;
   height: 100%;
+  color: ${({ theme }) => theme.COLOR.white};
 `;
 
 const GridWrapper = styled.div`
