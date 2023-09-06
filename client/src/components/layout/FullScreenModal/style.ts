@@ -3,12 +3,14 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
-  padding-top: 60px;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
   min-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #171717;
+  background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  color: ${({ theme }) => theme.COLOR['white']};
 `;
 
 const TitleSection = styled.div<{ isTitle: boolean }>`

@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div<{ width?: string }>`
-  padding-top: 10px;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
+  color: ${({ theme }) => theme.COLOR.white};
 `;
 
 const GridWrapper = styled.div`

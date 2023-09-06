@@ -4,6 +4,8 @@ const Wrapper = styled.div`
   width: 50%;
   padding-top: 2rem;
   padding-bottom: 2.5rem;
+  color: white;
+
   display: grid;
   grid-template-columns: 1fr 2.5fr;
   grid-template-rows: 160px 60px 160px 60px 44px;
