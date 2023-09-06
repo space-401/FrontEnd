@@ -36,6 +36,8 @@ export const theme = {
     'gray-9': '#323339',
     'gray-10': '#45464C',
     'gray-11': '#868585',
+    'gray-12': '#767676',
+    'gray-13': '#575757',
     'background': '#1A1B1E',
     'inputColor': '#EEEDED',
   },
@@ -123,14 +125,6 @@ export const theme = {
   FONT_FAMILY: {
     'Pretendard': 'Pretendard',
     'IBM Plex Sans KR': 'IBM Plex Sans KR',
-  },
-  Z_INDEX: {
-    'LEVEL-1': 10,
-    'LEVEL-2': 20,
-    'LEVEL-3': 30,
-    'LEVEL-4': 40,
-    'LEVEL-5': 50,
-    'LEVEL-6': 60,
   },
 };
 
