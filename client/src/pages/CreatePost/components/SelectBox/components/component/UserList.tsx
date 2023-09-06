@@ -9,8 +9,8 @@ const UserList = (prop: UserListProps) => {
       <S.FlexUser>
         <Avatar
           sx={{
-            width: '20px',
-            height: '20px',
+            width: '24px',
+            height: '24px',
             background: 'white',
             padding: '2px',
           }}

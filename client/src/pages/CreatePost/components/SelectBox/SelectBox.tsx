@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDimensions } from '@hooks/common/use-dimensions';
 import type { SelectBoxProps, selectType } from '@type/main.type';
 import S from '@pages/CreatePost/components/SelectBox/style';
 import { MenuToggle } from '@pages/CreatePost/components/SelectBox/components/Toggle';
 import MenuList from '@pages/CreatePost/components/SelectBox/components/MenuList';
+import SelectList from '@pages/CreatePost/components/SelectBox/components/component/SelectList';
 
 const CSelectBox = (props: SelectBoxProps) => {
   const {
     BoxWidth = 168,
     menuHeight = 200,
-    placeHolder,
     menuWidth = 168,
     ListItem,
     labelName,
@@ -29,12 +29,35 @@ const CSelectBox = (props: SelectBoxProps) => {
     setSearchValue('');
   };
 
+  const EnterCheck = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Enter') {
+      if (searchValue.trim().length === 0)
+        return alert('아무것도 입력하지 않았습니다.');
+      if (
+        select.filter((prevState) => prevState.title === searchValue).length !==
+        0
+      )
+        return;
+      setSelect((prevState) => [
+        ...prevState,
+        { id: Math.floor(Math.random() * 10000), title: searchValue },
+      ]);
+      return setSearchValue('');
+    }
+  };
+
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
     <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
       <S.LabelTitle>
-        {select.map((prev) => prev.title).join(', ') || labelName}
+        {!isOpen ? (
+          select.map((prev) => prev.title).join(', ') || labelName
+        ) : labelName !== '태그' ? (
+          <SelectList setState={setSelect} Items={select} />
+        ) : (
+          select.map((prev) => prev.title).join(', ')
+        )}
       </S.LabelTitle>
       <motion.nav
         initial={false}
@@ -53,12 +76,10 @@ const CSelectBox = (props: SelectBoxProps) => {
           >
             {labelName === '태그' && (
               <S.InputContainer isOpen={isOpen}>
+                <SelectList setState={setSelect} Items={select} />
                 <S.SearchInput
-                  placeholder={
-                    select.map((prev) => prev.title).join(', ') ??
-                    placeHolder ??
-                    labelName
-                  }
+                  value={searchValue}
+                  onKeyDown={EnterCheck}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
               </S.InputContainer>

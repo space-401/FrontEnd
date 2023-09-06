@@ -6,6 +6,7 @@ import { SpacePostType } from '@type/space.type';
 export type selectType = {
   id: number;
   title: string;
+  img_url?: string;
 };
 
 export type MenuListProps = {
