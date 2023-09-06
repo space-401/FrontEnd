@@ -1,10 +1,6 @@
-import { UserType } from '@type/user.type';
-import S from '@components/common/SelectBox/components/style';
 import Avatar from '@mui/material/Avatar';
-
-type UserListProps = {
-  Item: UserType;
-};
+import S from '@pages/MainPage/components/SelectBox/components/style';
+import type { UserListProps } from '@type/main.type';
 
 const UserList = (prop: UserListProps) => {
   const { Item } = prop;
