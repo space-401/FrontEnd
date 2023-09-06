@@ -51,7 +51,7 @@ const PostList = styled.div`
 const FilterGroup = styled.div`
   display: flex;
   gap: 8px;
-  z-index: ${({theme})=> theme.Z_INDEX["LEVEL-2"]}
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
 `;
 
 const S = {

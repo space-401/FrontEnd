@@ -1,5 +1,5 @@
 import { users_mock } from '@mocks/data/user/users.mock';
-import {spacePostMock} from "@mocks/data/FlipCard/spaceInfo.mock";
+import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 
 const MainPageMock = {
   spaceInfo: {

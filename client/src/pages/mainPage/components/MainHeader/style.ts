@@ -49,14 +49,14 @@ const Image = styled.div<{ img_url: string }>`
 const MainInfo = styled.div``;
 const MainTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({theme})=>theme.FONT_FAMILY["IBM Plex Sans KR"]};
+  font-family: ${({ theme }) => theme.FONT_FAMILY['IBM Plex Sans KR']};
   line-height: 0.8;
   font-size: 88px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
 `;
 const Description = styled.div`
   margin-top: 24px;
-  font-family: ${({theme})=>theme.FONT_FAMILY["IBM Plex Sans KR"]};
+  font-family: ${({ theme }) => theme.FONT_FAMILY['IBM Plex Sans KR']};
   width: 37.625rem;
   line-height: 1.6rem;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};

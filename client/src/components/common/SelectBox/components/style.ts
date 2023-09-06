@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import {omitText} from '@styles/common';
+import { omitText } from '@styles/common';
 
 const Wrapper = styled.div``;
 
-const List = styled.li<{ select: boolean, grid:boolean }>`
-  border-radius: ${({select}) => select ? 3 : 5}px;
-  background: ${({select, theme}) => select ? theme.COLOR["gray-5"] : 'done'};
+const List = styled.li<{ select: boolean; grid: boolean }>`
+  border-radius: ${({ select }) => (select ? 3 : 5)}px;
+  background: ${({ select, theme }) =>
+    select ? theme.COLOR['gray-5'] : 'done'};
   line-height: 14px;
   padding: 6px 8px;
   cursor: pointer;
@@ -13,8 +14,8 @@ const List = styled.li<{ select: boolean, grid:boolean }>`
   width: 100%;
 
   &:hover {
-    background-color: ${({theme}) => theme.COLOR['gray-5']};
-    border-radius: ${({grid}) => grid ? 3 : 5}px;
+    background-color: ${({ theme }) => theme.COLOR['gray-5']};
+    border-radius: ${({ grid }) => (grid ? 3 : 5)}px;
   }
 
   [class*='MuiChip-label'] {
@@ -26,8 +27,7 @@ const List = styled.li<{ select: boolean, grid:boolean }>`
   }
 `;
 
-const UserList = styled.div`
-`;
+const UserList = styled.div``;
 
 const FlexUser = styled.div`
   display: flex;
@@ -40,16 +40,16 @@ const UserProfile = styled.div``;
 
 const UserTiTle = styled.div`
   ${omitText};
-  font-size: ${({theme})=>theme.TEXT_SIZE["text-14"]};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
 `;
 
 const S = {
-    Wrapper,
-    UserProfile,
-    UserList,
-    UserTiTle,
-    FlexUser,
-    List,
+  Wrapper,
+  UserProfile,
+  UserList,
+  UserTiTle,
+  FlexUser,
+  List,
 };
 
 export default S;
