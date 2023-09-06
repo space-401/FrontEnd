@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
-import SelectBox from '@components/common/SelectBox/SelectBox';
 import { users_mock } from '@mocks/data/user/users.mock';
 import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 import { selectType } from '@type/main.type';
+import CSelectBox from '@pages/CreatePost/components/SelectBox/SelectBox';
 
 export default {
-  title: 'common/SelectBox',
-  component: SelectBox,
+  title: 'post/CSelectBox',
+  component: CSelectBox,
   tags: ['autodocs'],
   decorators: [
     (Story: StoryFn) => {
@@ -36,11 +36,11 @@ const setState = (state: selectType[]) => {
 
 export const 사용자 = {
   args: {
-    labelName: '사용자',
+    labelName: '함께한 친구들을 추가해 주세요',
     ListItem: users_mock,
-    menuWidth: 320,
-    menuHeight: 150,
-    BoxWidth: 168,
+    menuWidth: 628,
+    menuHeight: 280,
+    BoxWidth: 628,
     setState: setState,
   },
 };
@@ -49,10 +49,10 @@ export const 태그 = {
   args: {
     labelName: '태그',
     ListItem: spacePostMock.place_tag,
-    placeHolder: '태그명을 검색해주세요.',
+    placeHolder: '태그를 지정해주세요.',
     setState: setState,
-    menuWidth: 200,
+    menuWidth: 628,
     menuHeight: 188,
-    BoxWidth: 168,
+    BoxWidth: 628,
   },
 };

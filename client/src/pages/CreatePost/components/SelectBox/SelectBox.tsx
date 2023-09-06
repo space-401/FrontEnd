@@ -1,49 +1,16 @@
-import { UserType } from '@type/user.type';
-import { TagType } from '@type/tag.type';
-import { useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import S from '@components/common/SelectBox/style';
 import { useDimensions } from '@hooks/common/use-dimensions';
-import { MenuToggle } from '@components/common/SelectBox/components/Toggle';
-import MenuList from '@components/common/SelectBox/components/MenuList';
-import { selectType } from '@type/main.type';
+import type { SelectBoxProps, selectType } from '@type/main.type';
+import S from '@pages/CreatePost/components/SelectBox/style';
+import { MenuToggle } from '@pages/CreatePost/components/SelectBox/components/Toggle';
+import MenuList from '@pages/CreatePost/components/SelectBox/components/MenuList';
+import SelectList from '@pages/CreatePost/components/SelectBox/components/component/SelectList';
 
-export type SelectBoxProps = {
-  /**
-   * 해당 박스의 라벨을 입력해주세요
-   */
-  labelName: '사용자' | '태그';
-  /**
-   * 해당 박스를 이루는 목록을 넣어주세요
-   */
-  ListItem: UserType[] | TagType[];
-  /**
-   * 해당 박스의 길이를 선택해주세요
-   */
-  BoxWidth?: number;
-  /**
-   * 해당 박스의 place holder를 입력해주세요
-   */
-  placeHolder?: string;
-  /**
-   * 메뉴리스트의 세로 길이를 적어주세요.
-   */
-  menuHeight?: number;
-  /**
-   * 메뉴리스트의 가로 길이를 적어주세요.
-   */
-  menuWidth?: number;
-  /**
-   * State를 받을 함수를 넣어주세요
-   */
-  setState: (select: selectType[]) => void;
-};
-
-const SelectBox = (props: SelectBoxProps) => {
+const CSelectBox = (props: SelectBoxProps) => {
   const {
     BoxWidth = 168,
     menuHeight = 200,
-    placeHolder,
     menuWidth = 168,
     ListItem,
     labelName,
@@ -62,12 +29,35 @@ const SelectBox = (props: SelectBoxProps) => {
     setSearchValue('');
   };
 
+  const EnterCheck = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Enter') {
+      if (searchValue.trim().length === 0)
+        return alert('아무것도 입력하지 않았습니다.');
+      if (
+        select.filter((prevState) => prevState.title === searchValue).length !==
+        0
+      )
+        return;
+      setSelect((prevState) => [
+        ...prevState,
+        { id: Math.floor(Math.random() * 10000), title: searchValue },
+      ]);
+      return setSearchValue('');
+    }
+  };
+
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
     <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
       <S.LabelTitle>
-        {select.map((prev) => prev.title).join(', ') || labelName}
+        {!isOpen ? (
+          select.map((prev) => prev.title).join(', ') || labelName
+        ) : labelName !== '태그' ? (
+          <SelectList setState={setSelect} Items={select} />
+        ) : (
+          select.map((prev) => prev.title).join(', ')
+        )}
       </S.LabelTitle>
       <motion.nav
         initial={false}
@@ -86,12 +76,10 @@ const SelectBox = (props: SelectBoxProps) => {
           >
             {labelName === '태그' && (
               <S.InputContainer isOpen={isOpen}>
+                <SelectList setState={setSelect} Items={select} />
                 <S.SearchInput
-                  placeholder={
-                    select.map((prev) => prev.title).join(', ') ||
-                    placeHolder ||
-                    labelName
-                  }
+                  value={searchValue}
+                  onKeyDown={EnterCheck}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
               </S.InputContainer>
@@ -109,4 +97,4 @@ const SelectBox = (props: SelectBoxProps) => {
   );
 };
 
-export default SelectBox;
+export default CSelectBox;

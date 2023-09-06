@@ -1,4 +1,3 @@
-import { UserType } from '@type/user.type';
 import BasicButton from '@components/common/BasicButton';
 import { theme } from '@styles/theme/theme';
 import Avatars from '@components/common/AvatarGroup/Avatars';
@@ -7,16 +6,8 @@ import { ReactComponent as SelectMapIcon } from '@assets/svg/filter/selectmapIco
 import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIcon.svg';
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
 import { useState } from 'react';
-import S from '@pages/mainPage/components/MainHeader/style';
-
-export type MainHeaderPropType = {
-  spaceInfo: {
-    title: string;
-    description: string;
-    img_url: string;
-    users: UserType[];
-  };
-};
+import S from '@pages/MainPage/components/MainHeader/style';
+import type { MainHeaderPropType } from '@type/main.type';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { description, img_url, users, title } = prop.spaceInfo;

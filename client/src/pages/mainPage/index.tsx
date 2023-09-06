@@ -1,11 +1,9 @@
-import MainHeader, {
-  MainHeaderPropType,
-} from '@pages/MainPage/components/MainHeader/MainHeader';
-import MainBody, {
-  MainBodyPropType,
-} from '@pages/MainPage/components/MainBody/MainBody';
 import S from '@pages/MainPage/style';
 import HeaderLayout from '@/components/layout/HeaderLayout/HeaderLayout';
+import type { MainBodyPropType, MainHeaderPropType } from '@type/main.type';
+import MainHeader from '@pages/MainPage/components/MainHeader/MainHeader';
+import MainBody from '@pages/MainPage/components/MainBody/MainBody';
+
 export type MainPageType = MainHeaderPropType & MainBodyPropType;
 
 const MainPage = (props: MainPageType) => {
