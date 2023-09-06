@@ -1,27 +1,17 @@
-import { SpacePostType } from '@type/space.type';
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/FlipCard/FlipCard';
 import SpaceInfoBack from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
-import S from '@pages/mainPage/components/MainBody/style';
-import SelectBox from '@components/common/SelectBox/SelectBox';
-import { TagType } from '@type/tag.type';
-import { UserType } from '@type/user.type';
+import S from '@pages/MainPage/components/MainBody/style';
 import { useState } from 'react';
-import { selectType } from '@type/main.type';
-
-export type MainBodyPropType = {
-  postList: SpacePostType[];
-  page: number;
-  total: number;
-  tagList: TagType[];
-  userList: UserType[];
-};
+import { MainBodyPropType, selectType } from '@type/main.type';
+import SelectBox from '@pages/MainPage/components/SelectBox/SelectBox';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
 
+  console.log(_1,_2)
   return (
     <S.Wrapper>
       <S.FilterGroup>
