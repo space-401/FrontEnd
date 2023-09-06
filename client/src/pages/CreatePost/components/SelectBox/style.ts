@@ -4,7 +4,8 @@ const Wrapper = styled.div<{ isOpen: boolean; minWidth: number }>`
   position: relative;
   display: flex;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.COLOR['gray-4']};
+  background-color: ${({ theme, isOpen }) =>
+    isOpen ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
   color: ${({ theme }) => theme.COLOR.inputColor};
   width: ${({ minWidth }) => minWidth}px;
   height: 50px;
@@ -15,6 +16,14 @@ const Wrapper = styled.div<{ isOpen: boolean; minWidth: number }>`
 
   .user-title {
     max-width: ${({ minWidth }) => minWidth / 2 + 20}px;
+  }
+
+  [class*='MuiChip-label'] {
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 8px;
+    white-space: nowrap;
   }
 `;
 
@@ -29,12 +38,10 @@ const ModalButton = styled.div``;
 
 const SearchInput = styled.input`
   width: 100%;
-  color: ${({ theme }) => theme.COLOR.white};
-  color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
+  color: ${({ theme }) => theme.COLOR.black};
   background-color: inherit;
   padding: 5px 8px;
-
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
   &::placeholder {
     color: ${({ theme }) => theme.COLOR['gray-2']};
   }
@@ -48,15 +55,16 @@ const MenuList = styled.ul<{
 }>`
   position: relative;
   width: ${({ menuWidth }) => menuWidth}px;
-  padding: 10px;
-  background: ${({ theme }) => theme.COLOR['gray-4']};
+  padding: 16px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  border: 1px solid ${({ theme }) => theme.COLOR['gray-4']};
   border-radius: 5px;
   transition: height 0.5s;
   ${({ grid, menuWidth }) =>
     grid
       ? `display: grid; grid-template-columns: ${
-          Math.floor(menuWidth / 2) - 10
-        }px ${Math.floor(menuWidth / 2) - 10}px;`
+          Math.floor(menuWidth / 2) - 24
+        }px ${Math.floor(menuWidth / 2) - 24}px; gap: 8px 16px;`
       : 'display:flex; gap: 2px;'}
   height: ${({ $isOpen, maxHeight }) => ($isOpen ? maxHeight : '0')}px;
   flex-direction: column;
@@ -95,6 +103,7 @@ const Container = styled.div<{ $isOpen: boolean }>`
 `;
 
 const InputContainer = styled.div<{ isOpen: boolean }>`
+  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -103,6 +112,7 @@ const InputContainer = styled.div<{ isOpen: boolean }>`
   background: ${({ theme }) => theme.COLOR['gray-13']};
   border: 1px solid ${({ theme }) => theme.COLOR['gray-12']};
   margin-bottom: 12px;
+  flex-direction: column;
 `;
 
 const BackClickBlock = styled.div<{ isOpen: boolean }>`
