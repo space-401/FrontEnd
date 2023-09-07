@@ -5,13 +5,14 @@ import S from '@pages/MainPage/components/MainBody/style';
 import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@pages/MainPage/components/SelectBox/SelectBox';
+import { Grid } from '@mui/material';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
 
-  console.log(_1,_2)
+  console.log(_1, _2);
   return (
     <S.Wrapper>
       <S.FilterGroup>
@@ -43,25 +44,29 @@ const MainBody = (props: MainBodyPropType) => {
         </S.UndefinedList>
       ) : (
         <S.PostList>
-          {postList.map((item) => (
-            <FlipCard
-              key={item.post_id}
-              size={437}
-              img_url={item.main_img_url}
-              hoverCard={
-                <SpaceInfoBack
-                  users={item.users}
-                  post_id={item.post_id}
-                  post_title={item.place_title}
-                  main_img_url={item.main_img_url}
-                  place_title={item.place_title}
-                  place_create_at={item.place_create_at}
-                  place_tag={item.place_tag}
+          <Grid container spacing={0.5}>
+            {postList.map((item) => (
+              <Grid item xs={3}>
+                <FlipCard
                   key={item.post_id}
+                  size={437}
+                  img_url={item.main_img_url}
+                  hoverCard={
+                    <SpaceInfoBack
+                      users={item.users}
+                      post_id={item.post_id}
+                      post_title={item.place_title}
+                      main_img_url={item.main_img_url}
+                      place_title={item.place_title}
+                      place_create_at={item.place_create_at}
+                      place_tag={item.place_tag}
+                      key={item.post_id}
+                    />
+                  }
                 />
-              }
-            />
-          ))}
+              </Grid>
+            ))}
+          </Grid>
         </S.PostList>
       )}
     </S.Wrapper>
