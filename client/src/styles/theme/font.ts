@@ -47,8 +47,8 @@ const fontStyle = css`
   @font-face {
     font-family: 'Pretendard';
     src:
-      url('./fonts/Pretendard-ExtraLight.ttf') format('truetype'),
-      url('./fonts/Pretendard-ExtraLight.woff') format('woff');
+      url('/src/styles/fonts/Pretendard-ExtraLight.ttf') format('truetype'),
+      url('/src/styles/fonts/Pretendard-ExtraLight.woff') format('woff');
     font-weight: ${theme.FONT_WEIGHT['WEIGHT-200']};
     font-style: normal;
   }
