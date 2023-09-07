@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import CreateSpace from '@/pages/CreateSpace';
-import CreatePost from '@/pages/CreatePost';
-import InviteCode from '@/pages/InviteCode/InviteCode';
-import MainPage from '@/pages/MainPage';
-import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
-
+import CreateSpace from '@/pages/createSpace';
+import CreatePost from '@/pages/createPost';
+import MainPage from '@/pages/main';
+import MainPageMock from '@/mocks/data/MainPage/mainPage.mock';
+import InviteCode from '@/pages/inviteCode';
+import ImgEditModal from '@/components/common/ImageEditModal';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/main',
         element: <MainPage {...MainPageMock} />,
+      },
+      {
+        path: '/img',
+        element: <ImgEditModal />,
       },
     ],
   },

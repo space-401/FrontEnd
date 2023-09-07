@@ -11,7 +11,8 @@ const List = styled.li<{ select: boolean; grid: boolean }>`
   padding: 16px;
   cursor: pointer;
   transition: 0.2s background;
-
+  display: flex;
+  align-items: center;
   &:hover {
     background-color: ${({ theme }) => theme.COLOR['gray-6']};
     border-radius: ${({ grid }) => (grid ? 3 : 5)}px;

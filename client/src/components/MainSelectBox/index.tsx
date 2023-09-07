@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDimensions } from '@hooks/common/use-dimensions';
 import type { SelectBoxProps, selectType } from '@type/main.type';
-import S from '@pages/MainPage/components/SelectBox/style';
-import { MenuToggle } from '@pages/MainPage/components/SelectBox/components/Toggle';
-import MenuList from '@pages/MainPage/components/SelectBox/components/MenuList';
+import S from './style';
+import { MenuToggle } from './components/Toggle';
+import MenuList from './components/MenuList';
 
 const CSelectBox = (props: SelectBoxProps) => {
   const {
