@@ -41,8 +41,8 @@ const UndefinedShareText = styled.div`
 
 const PostList = styled.div`
   margin: 48px 0 48px 0;
-
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 4px;
   flex-wrap: wrap;
   justify-content: center;

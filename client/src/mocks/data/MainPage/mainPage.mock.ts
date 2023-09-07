@@ -10,7 +10,6 @@ const MainPageMock = {
     img_url:
       'https://s3-alpha-sig.figma.com/img/69e5/7cd2/f6e082e1aa8e1ca7431590dfbdc116d0?Expires=1694390400&Signature=MYc2CXpsj4~59Y0mHRfwcGD-5qi-xOJuOVVJlzNzVORLqdG8Y1w-zaXVQ4k1~uN6jpy2UsAzX9BNaeGoDkBwdMo8c3KHVWYHbqMbAjmZ3eYhbrFCAxBleRQpWTSSw2sTbk~jRYViGNKBUflaxeXe2Wx316fczzy7XypApZ6kQC3deWhCUGpeJqBuDNEGe-fmQVAc4ge49pP~S74mBeydVlwss~jv3-MtgdjFxP5yNKPx533leCf5UdP8wjND7ipTfiUUE~CpULED7mdO3NQzcdui55piKmE8rfBCgCtSzLMFb6390k6Kl8fTslCvy9k22Zn0RHNEHSwvXMLdn3avpA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
   },
-  userList: users_mock,
   postList: [
     {
       post_id: 1,

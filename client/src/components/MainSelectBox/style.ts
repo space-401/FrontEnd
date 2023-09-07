@@ -45,39 +45,44 @@ const MenuList = styled.ul<{
   menuWidth: number;
   $isOpen: boolean;
   maxHeight: number;
+  row: number;
 }>`
   position: relative;
-  width: ${({ menuWidth }) => menuWidth + 8}px;
-  padding: 10px;
-  background: ${({ theme }) => theme.COLOR['gray-4']};
+  width: ${({menuWidth}) => menuWidth + 4}px;
+  padding: 8px;
+  background: ${({theme}) => theme.COLOR['gray-4']};
   border-radius: 5px;
   transition: height 0.5s;
-  ${({ grid, menuWidth }) =>
-    grid
-      ? `display: grid; grid-template-columns: ${
-          Math.floor(menuWidth / 2) - 10
-        }px ${Math.floor(menuWidth / 2) - 10}px; gap : 8px;`
-      : 'display:flex; gap: 2px;'}
-  height: ${({ $isOpen, maxHeight, grid }) =>
-    $isOpen ? (grid ? maxHeight + 20 : maxHeight - 8) : '0'}px;
+  ${({grid, menuWidth}) =>
+          grid
+                  ? `display: grid; grid-template-columns: ${
+                          Math.floor(menuWidth / 2) - 10
+                  }px ${Math.floor(menuWidth / 2) - 10}px; gap : 2px 8px;`
+                  : 'display:flex; gap: 2px;'}
+  height: ${({$isOpen, maxHeight, grid, row}) =>
+          $isOpen ? grid ? maxHeight - 3 - row : maxHeight - 8 : 0}px;
   flex-direction: column;
   overflow-y: scroll;
 
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  li {
+    height: 32px;
+  }
 
-  ${({ grid }) => grid && '&::-webkit-scrollbar {display: none;}'}
+  z-index: ${({theme}) => theme.Z_INDEX['LEVEL-4']};
+
+  ${({grid}) => grid && '&::-webkit-scrollbar {display: none;}'}
   &::-webkit-scrollbar {
     width: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
     height: 10%;
-    background: ${({ theme }) => theme.COLOR['gray-3']};
+    background: ${({theme}) => theme.COLOR['gray-3']};
     border-radius: 5px;
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.COLOR['gray-4']};
+    background: ${({theme}) => theme.COLOR['gray-4']};
     border-radius: 5px;
   }
 `;
