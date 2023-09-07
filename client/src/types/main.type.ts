@@ -9,6 +9,19 @@ export type selectType = {
   img_url?: string;
 };
 
+export type MainPageType = {
+  spaceInfo: {
+    title: string;
+    description: string;
+    img_url: string;
+    users: UserType[];
+  };
+  postList: SpacePostType[];
+  tagList: TagType[];
+  page: number;
+  total: number;
+};
+
 export type MenuListProps = {
   searchValue: string;
   ItemList: UserType[] | TagType[];
@@ -70,4 +83,9 @@ export type TagListProps = {
 
 export type UserListProps = {
   Item: UserType;
+};
+
+export type SearchProps = {
+  setState: (searchValue: string) => void;
+  placeholder: string;
 };

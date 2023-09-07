@@ -7,10 +7,6 @@ export interface IFlipCard extends ReactElement {}
 
 export type FlipType = {
   /**
-   * 정사각형 카드의 크기를 정해주세요
-   */
-  size: number;
-  /**
    * 해당 이미지의 주소를 넣어주세요
    */
   img_url: string;
@@ -21,10 +17,10 @@ export type FlipType = {
 };
 
 const FlipCard = (props: FlipType) => {
-  const { size, img_url, hoverCard } = props;
+  const { img_url, hoverCard } = props;
   return (
     <>
-      <S.Flip size={size}>
+      <S.Flip>
         <S.Card img={img_url} />
         <S.Hover img={img_url}>{hoverCard}</S.Hover>
       </S.Flip>

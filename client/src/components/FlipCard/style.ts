@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
-const Flip = styled.div<{ size: number }>`
-  width: ${({ size }) => size}px;
-  height: ${({ size }) => size}px;
+const Flip = styled.div`
   position: relative;
   perspective: 1100px;
 `;
 
 const Card = styled.div<{ img: string }>`
-  width: inherit;
-  height: inherit;
+  aspect-ratio: 1/1;
   position: relative;
   transition: 1.5s;
   transform-style: preserve-3d;
@@ -38,6 +35,7 @@ const Hover = styled.div<{ img: string }>`
   transition: opacity 0.5s;
   pointer-events: none;
   opacity: 0;
+
   ${Flip}:hover & {
     opacity: 1;
   }

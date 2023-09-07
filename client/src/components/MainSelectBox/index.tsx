@@ -32,7 +32,11 @@ const CSelectBox = (props: SelectBoxProps) => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
-    <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
+    <S.Wrapper
+      isSelect={select.length === 0}
+      isOpen={isOpen}
+      minWidth={Math.max(150, BoxWidth)}
+    >
       <S.LabelTitle>
         {select.map((prev) => prev.title).join(', ') || labelName}
       </S.LabelTitle>
@@ -46,9 +50,10 @@ const CSelectBox = (props: SelectBoxProps) => {
         <S.Container $isOpen={isOpen}>
           <S.BackClickBlock isOpen={isOpen} onClick={toggleOpen} />
           <S.MenuList
+            row={Math.floor(ListItem.length / 2)}
             grid={labelName !== '태그'}
             menuWidth={menuWidth}
-            maxHeight={menuHeight}
+            maxHeight={menuHeight + 2}
             $isOpen={isOpen}
           >
             {labelName === '태그' && (

@@ -39,6 +39,8 @@ const SpaceBox = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   margin: 10px 32px 32px 32px;
   border-radius: 30px;
   min-height: 100vh;

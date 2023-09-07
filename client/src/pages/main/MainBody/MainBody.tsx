@@ -5,20 +5,22 @@ import S from './style';
 import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/MainSelectBox';
+import MainSearchBox from '@components/MainSearchBox';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
+  const [_3, setSearchState] = useState<string>('');
 
-  console.log(_1, _2);
+  console.log(_1, _2, _3);
   return (
     <S.Wrapper>
       <S.FilterGroup>
         <SelectBox
           setState={setUserState}
-          menuWidth={320}
-          menuHeight={150}
+          menuWidth={316}
+          menuHeight={20 + 32 * Math.ceil(userList.length / 2)}
           BoxWidth={168}
           labelName={'사용자'}
           ListItem={userList}
@@ -26,12 +28,13 @@ const MainBody = (props: MainBodyPropType) => {
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}
           setState={setTagState}
-          menuWidth={200}
-          menuHeight={188}
+          menuWidth={192}
+          menuHeight={49 * Math.floor(tagList.length / 2)}
           BoxWidth={168}
           labelName={'태그'}
           ListItem={tagList}
         />
+        <MainSearchBox placeholder={'제목'} setState={setSearchState} />
       </S.FilterGroup>
       {postList.length === 0 ? (
         <S.UndefinedList>
@@ -46,7 +49,6 @@ const MainBody = (props: MainBodyPropType) => {
           {postList.map((item) => (
             <FlipCard
               key={item.post_id}
-              size={437}
               img_url={item.main_img_url}
               hoverCard={
                 <SpaceInfoBack
