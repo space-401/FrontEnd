@@ -1,9 +1,9 @@
 import type { UserType } from '@type/user.type';
 import type { TagType } from '@type/tag.type';
 import type { MenuListProps, selectType } from '@type/main.type';
-import UserList from '@pages/CreatePost/components/SelectBox/components/component/UserList';
-import TagList from '@pages/CreatePost/components/SelectBox/components/component/TagList';
-import S from '@pages/CreatePost/components/SelectBox/components/style';
+import UserList from './component/UserList';
+import TagList from './component/TagList';
+import S from './style';
 import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 
 const MenuList = (props: MenuListProps) => {

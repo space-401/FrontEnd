@@ -100,6 +100,7 @@ const Container = styled.div<{ $isOpen: boolean }>`
   transition:
     height,
     opacity 0.5s;
+  z-index: 100;
 `;
 
 const InputContainer = styled.div<{ isOpen: boolean }>`

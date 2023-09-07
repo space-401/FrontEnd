@@ -20,6 +20,11 @@ export const omitText = css`
   white-space: nowrap;
 `;
 
-export const Shadow = css`
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+export const modalBackGround = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
 `;

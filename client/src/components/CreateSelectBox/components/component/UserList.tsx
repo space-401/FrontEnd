@@ -1,5 +1,5 @@
 import Avatar from '@mui/material/Avatar';
-import S from '@pages/MainPage/components/SelectBox/components/style';
+import S from '../style';
 import type { UserListProps } from '@type/main.type';
 
 const UserList = (prop: UserListProps) => {
@@ -9,8 +9,8 @@ const UserList = (prop: UserListProps) => {
       <S.FlexUser>
         <Avatar
           sx={{
-            width: '20px',
-            height: '20px',
+            width: '24px',
+            height: '24px',
             background: 'white',
             padding: '2px',
           }}

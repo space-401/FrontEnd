@@ -7,12 +7,18 @@ import BasicButton from '@/components/common/BasicButton';
 import Calendar from '@/components/common/Calender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
-import FullScreenModal from '@/components/layout/FullScreenModal/FullScreenModal';
+import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
 import Cat from '@assets/cat.jpg';
 import useSelectPhoto from '@/hooks/common/useSelectPhoto';
 import { useEffect } from 'react';
+import { selectType } from '@/types/main.type';
+import SelectBox from '@/components/CreateSelectBox';
+import { useState } from 'react';
+import { users_mock } from '@/mocks/data/user/users.mock';
 
 const CreatePost = () => {
+  const [userList, setUserList] = useState<selectType[]>([]);
+  console.log(userList);
   const { fileInputRef, handleFileChange, handleBoxClick, imgFile } =
     useSelectPhoto();
   useEffect(() => {
@@ -76,11 +82,14 @@ const CreatePost = () => {
             함께한 친구들
           </S.Label>
           <S.InputContainer number={2}>
-            <InputBox
-              height={60}
-              placeholder="함께한 친구들을 추가해주세요"
-              type="text"
-              disabled={true}
+            <SelectBox
+              labelName={'사용자'}
+              ListItem={users_mock}
+              BoxWidth={628}
+              setState={setUserList}
+              placeHolder="함께한 친구들을 추가해주세요"
+              menuHeight={89 * Math.floor(users_mock.length / 2)}
+              menuWidth={628}
             />
           </S.InputContainer>
 
