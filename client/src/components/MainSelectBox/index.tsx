@@ -46,9 +46,10 @@ const CSelectBox = (props: SelectBoxProps) => {
         <S.Container $isOpen={isOpen}>
           <S.BackClickBlock isOpen={isOpen} onClick={toggleOpen} />
           <S.MenuList
+            row={Math.floor(ListItem.length / 2)}
             grid={labelName !== '태그'}
             menuWidth={menuWidth}
-            maxHeight={menuHeight}
+            maxHeight={menuHeight + 2}
             $isOpen={isOpen}
           >
             {labelName === '태그' && (

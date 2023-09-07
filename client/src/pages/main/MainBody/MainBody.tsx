@@ -17,8 +17,8 @@ const MainBody = (props: MainBodyPropType) => {
       <S.FilterGroup>
         <SelectBox
           setState={setUserState}
-          menuWidth={320}
-          menuHeight={150}
+          menuWidth={316}
+          menuHeight={20 + 32 * Math.ceil(userList.length / 2)}
           BoxWidth={168}
           labelName={'사용자'}
           ListItem={userList}
@@ -26,8 +26,8 @@ const MainBody = (props: MainBodyPropType) => {
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}
           setState={setTagState}
-          menuWidth={200}
-          menuHeight={188}
+          menuWidth={192}
+          menuHeight={49 * Math.floor(tagList.length / 2)}
           BoxWidth={168}
           labelName={'태그'}
           ListItem={tagList}
@@ -46,7 +46,6 @@ const MainBody = (props: MainBodyPropType) => {
           {postList.map((item) => (
             <FlipCard
               key={item.post_id}
-              size={437}
               img_url={item.main_img_url}
               hoverCard={
                 <SpaceInfoBack
