@@ -1,8 +1,8 @@
-import S from '@pages/MainPage/style';
-import HeaderLayout from '@/components/layout/HeaderLayout/HeaderLayout';
+import S from '@pages/main/style';
+import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
 import type { MainBodyPropType, MainHeaderPropType } from '@type/main.type';
-import MainHeader from '@pages/MainPage/components/MainHeader/MainHeader';
-import MainBody from '@pages/MainPage/components/MainBody/MainBody';
+import MainHeader from './MainHeader/MainHeader';
+import MainBody from './MainBody/MainBody';
 
 export type MainPageType = MainHeaderPropType & MainBodyPropType;
 
