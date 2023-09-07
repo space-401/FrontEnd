@@ -84,3 +84,8 @@ export type TagListProps = {
 export type UserListProps = {
   Item: UserType;
 };
+
+export type SearchProps = {
+  setState: (searchValue: string) => void;
+  placeholder: string;
+};

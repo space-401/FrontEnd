@@ -5,13 +5,15 @@ import S from './style';
 import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/MainSelectBox';
+import MainSearchBox from '@components/MainSearchBox';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
+  const [_3, setSearchState] = useState<string>('');
 
-  console.log(_1, _2);
+  console.log(_1, _2, _3);
   return (
     <S.Wrapper>
       <S.FilterGroup>
@@ -32,6 +34,7 @@ const MainBody = (props: MainBodyPropType) => {
           labelName={'태그'}
           ListItem={tagList}
         />
+        <MainSearchBox placeholder={'제목'} setState={setSearchState} />
       </S.FilterGroup>
       {postList.length === 0 ? (
         <S.UndefinedList>
