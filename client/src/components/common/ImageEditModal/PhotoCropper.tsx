@@ -9,8 +9,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 const PhotoCropper = ({ onCropComplete }: any) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedImage, setCroppedImage] = useState(null);
-
   return (
     <S.CropperWrapper>
       <Cropper
