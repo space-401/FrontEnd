@@ -1,17 +1,17 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/FlipCard/FlipCard';
 import SpaceInfoBack from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
-import S from '@pages/MainPage/components/MainBody/style';
+import S from './style';
 import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
-import SelectBox from '@pages/MainPage/components/SelectBox/SelectBox';
+import SelectBox from '@components/MainSelectBox';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
 
-  console.log(_1,_2)
+  console.log(_1, _2);
   return (
     <S.Wrapper>
       <S.FilterGroup>

@@ -2,12 +2,12 @@ import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDimensions } from '@hooks/common/use-dimensions';
 import type { SelectBoxProps, selectType } from '@type/main.type';
-import S from '@pages/CreatePost/components/SelectBox/style';
-import { MenuToggle } from '@pages/CreatePost/components/SelectBox/components/Toggle';
-import MenuList from '@pages/CreatePost/components/SelectBox/components/MenuList';
-import SelectList from '@pages/CreatePost/components/SelectBox/components/component/SelectList';
+import S from './style';
+import { MenuToggle } from './components/Toggle';
+import MenuList from './components/MenuList';
+import SelectList from './components/component/SelectList';
 
-const CSelectBox = (props: SelectBoxProps) => {
+const SelectBox = (props: SelectBoxProps) => {
   const {
     BoxWidth = 168,
     menuHeight = 200,
@@ -97,4 +97,4 @@ const CSelectBox = (props: SelectBoxProps) => {
   );
 };
 
-export default CSelectBox;
+export default SelectBox;

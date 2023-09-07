@@ -1,0 +1,26 @@
+body {
+  .reactEasyCrop_CropArea {
+    border: 2px solid #56c9cc;
+    border-radius: 20px;
+  }
+  .reactEasyCrop_CropAreaGrid::after,
+  .reactEasyCrop_CropAreaGrid::before {
+    border: none;
+  }
+  .css-187mznn-MuiSlider-root {
+    color: white !important;
+    border: 5px !important;
+    width: 100px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+  .css-1gv0vcd-MuiSlider-track {
+    color: #56c9cc;
+  }
+  .gIIbKb {
+    display: flex;
+  }
+  & .css-187mznn-MuiSlider-root {
+    height: 2px;
+  }
+}
