@@ -1,5 +1,5 @@
 import S from '@components/common/ImageEditModal/style';
-import PhotoCropper from './photoCropper';
+import PhotoCropper from './PhotoCropper';
 import { useCallback } from 'react';
 import { Area } from 'react-easy-crop';
 
