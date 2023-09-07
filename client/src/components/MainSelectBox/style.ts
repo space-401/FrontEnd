@@ -1,10 +1,15 @@
 import { omitText } from '@styles/common';
 
-const Wrapper = styled.div<{ isOpen: boolean; minWidth: number }>`
+const Wrapper = styled.div<{
+  isOpen: boolean;
+  minWidth: number;
+  isSelect: boolean;
+}>`
   position: relative;
   display: flex;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.COLOR['gray-4']};
+  background-color: ${({ theme, isSelect }) =>
+    isSelect ? theme.COLOR['gray-4'] : theme.COLOR['gray-3']};
   color: ${({ theme }) => theme.COLOR.inputColor};
   width: ${({ minWidth }) => minWidth}px;
   height: 50px;
@@ -45,10 +50,11 @@ const MenuList = styled.ul<{
   menuWidth: number;
   $isOpen: boolean;
   maxHeight: number;
+  row: number;
 }>`
   position: relative;
-  width: ${({ menuWidth }) => menuWidth + 8}px;
-  padding: 10px;
+  width: ${({ menuWidth }) => menuWidth + 4}px;
+  padding: 8px;
   background: ${({ theme }) => theme.COLOR['gray-4']};
   border-radius: 5px;
   transition: height 0.5s;
@@ -56,12 +62,29 @@ const MenuList = styled.ul<{
     grid
       ? `display: grid; grid-template-columns: ${
           Math.floor(menuWidth / 2) - 10
-        }px ${Math.floor(menuWidth / 2) - 10}px; gap : 8px;`
+        }px ${Math.floor(menuWidth / 2) - 10}px; gap : 2px 8px;`
       : 'display:flex; gap: 2px;'}
-  height: ${({ $isOpen, maxHeight, grid }) =>
-    $isOpen ? (grid ? maxHeight + 20 : maxHeight - 8) : '0'}px;
+  height: ${({ $isOpen, maxHeight, grid, row }) => {
+    let height;
+
+    if ($isOpen) {
+      if (grid) {
+        height = maxHeight - 3 - row;
+      } else {
+        height = maxHeight - 8;
+      }
+    } else {
+      height = 0;
+    }
+    return `${height}px;`;
+  }};
+  
   flex-direction: column;
   overflow-y: scroll;
+
+  li {
+    height: 32px;
+  }
 
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 

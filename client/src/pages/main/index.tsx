@@ -1,19 +1,17 @@
 import S from '@pages/main/style';
 import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
-import type { MainBodyPropType, MainHeaderPropType } from '@type/main.type';
 import MainHeader from './MainHeader/MainHeader';
 import MainBody from './MainBody/MainBody';
-
-export type MainPageType = MainHeaderPropType & MainBodyPropType;
+import { MainPageType } from '@type/main.type';
 
 const MainPage = (props: MainPageType) => {
-  const { spaceInfo, userList, tagList, postList, total, page } = props;
+  const { spaceInfo, tagList, postList, total, page } = props;
   return (
     <HeaderLayout>
       <S.Wrapper>
         <MainHeader spaceInfo={spaceInfo} />
         <MainBody
-          userList={userList}
+          userList={spaceInfo.users}
           tagList={tagList}
           total={total}
           postList={postList}
