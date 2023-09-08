@@ -10,24 +10,30 @@ import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
 import Cat from '@assets/cat.jpg';
 import useSelectPhoto from '@/hooks/common/useSelectPhoto';
-import { useEffect } from 'react';
 import { selectType } from '@/types/main.type';
-import SelectBox from '@/components/CreateSelectBox';
+import CreateSelectBox from '@/components/CreateSelectBox';
 import { useState } from 'react';
 import { users_mock } from '@/mocks/data/user/users.mock';
+import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
+import ImgEditModal from '@/components/common/ImageEditModal';
 
 const CreatePost = () => {
   const [userList, setUserList] = useState<selectType[]>([]);
   console.log(userList);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { fileInputRef, handleFileChange, handleBoxClick, imgFile } =
     useSelectPhoto();
-  useEffect(() => {
-    console.log('asdfsd', imgFile);
-  }, [imgFile]);
-  console.log(imgFile);
+
+  const onClickImgEditModal = () => {
+    setIsEditModalOpen((prev) => !prev);
+  };
 
   return (
     <FullScreenModal isTitle={false}>
+      {/*사진 편집 모달*/}
+      {isEditModalOpen ? (
+        <ImgEditModal image={imgFile} setIsEditModalOpen={setIsEditModalOpen} />
+      ) : null}
       <S.Wrapper>
         <BasicBox
           color="grey"
@@ -46,6 +52,7 @@ const CreatePost = () => {
                 style={{ display: 'none' }}
                 ref={fileInputRef}
                 onChange={handleFileChange}
+                onClick={onClickImgEditModal}
               />
               <S.PhotoContainer>
                 <PhotoIcon />
@@ -71,6 +78,7 @@ const CreatePost = () => {
           <S.InputContainer number={1}>
             <InputBox
               height={60}
+              width={628}
               placeholder="16자 이내의 제목을 입력해 주세요."
               type="text"
               maxLength={16}
@@ -82,12 +90,11 @@ const CreatePost = () => {
             함께한 친구들
           </S.Label>
           <S.InputContainer number={2}>
-            <SelectBox
+            <CreateSelectBox
               labelName={'사용자'}
               ListItem={users_mock}
               BoxWidth={628}
               setState={setUserList}
-              placeHolder="함께한 친구들을 추가해주세요"
               menuHeight={89 * Math.floor(users_mock.length / 2)}
               menuWidth={628}
             />
@@ -103,6 +110,7 @@ const CreatePost = () => {
               placeholder="등록할 장소를 입력해주세요."
               type="text"
               maxLength={20}
+              width={628}
             />
           </S.InputContainer>
 
@@ -123,6 +131,7 @@ const CreatePost = () => {
               height={212}
               placeholder="500자 이내의 내용을 입력해 주세요."
               maxLength={500}
+              width={628}
             />
           </S.InputContainer>
 
@@ -137,11 +146,23 @@ const CreatePost = () => {
           </S.FlexContainer>
 
           <S.InputContainer number={6}>
-            <InputBox type="button" height={60} />
+            <CreateSelectBox
+              labelName={'태그'}
+              ListItem={createPostMock}
+              BoxWidth={628}
+              setState={setUserList}
+              menuHeight={89 * Math.floor(users_mock.length / 2)}
+              menuWidth={628}
+            />
           </S.InputContainer>
           <S.EmptyContainer />
           <S.ButtonContainer>
-            <BasicButton children="게시글 올리기" fontSize={14} />
+            <BasicButton
+              width={160}
+              height={44}
+              children="게시글 올리기"
+              fontSize={14}
+            />
           </S.ButtonContainer>
         </S.GridWrapper>
       </S.Wrapper>

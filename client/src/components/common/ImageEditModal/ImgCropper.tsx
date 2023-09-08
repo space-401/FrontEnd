@@ -5,14 +5,30 @@ import { Slider } from '@mui/material';
 import S from './style';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useCallback } from 'react';
 
-const PhotoCropper = ({ onCropComplete }: any) => {
+const ImgCropper = ({
+  // onCropComplete,
+  setCroppedAreaPixels,
+  image,
+} // onChangeInputImage,
+: {
+  onCropComplete: any;
+  image: string;
+  setCroppedAreaPixels: any;
+  onChangeInputImage: React.ChangeEvent<HTMLInputElement>;
+}) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+
+  const onCropComplete = useCallback((croppedAreaPixel: any) => {
+    setCroppedAreaPixels(croppedAreaPixel);
+  }, []);
+
   return (
     <S.CropperWrapper>
       <Cropper
-        image="https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000"
+        image={image}
         crop={crop}
         zoom={zoom}
         aspect={1}
@@ -36,4 +52,4 @@ const PhotoCropper = ({ onCropComplete }: any) => {
     </S.CropperWrapper>
   );
 };
-export default PhotoCropper;
+export default ImgCropper;

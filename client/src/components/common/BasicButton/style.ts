@@ -1,16 +1,11 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
-
-export interface IBasicButton {
-  color?: string;
-  backgroundColor?: string;
-  padding?: number;
-  fontSize?: number;
-}
+import type { BasicButtonProps } from './index';
 
 //비활성화시 색상
-const ButtonWrapper = styled.button<IBasicButton>`
-  height: 44px;
+const ButtonWrapper = styled.button<BasicButtonProps>`
+  height: ${({ height }) => height}px;
+  width: ${({ width }) => width}px;
   ${flexCenter}
   border-radius: 10px;
   //스토리 적용

@@ -1,29 +1,64 @@
 import S from '@components/common/ImageEditModal/style';
-import PhotoCropper from './PhotoCropper';
-import { useCallback } from 'react';
-import { Area } from 'react-easy-crop';
+import ImgCropper from './ImgCropper';
+// import { useCallback } from 'react';
+// import { Area } from 'react-easy-crop';
+// import { useState } from 'react';
 
-const ImgEditModal = () => {
-  // const [croppedImage, setCroppedImage] = useState(null);
+const ImgEditModal = ({
+  image,
+  setIsEditModalOpen,
+}: {
+  image: string;
+  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  // const [croppedImage, setCroppedImage] = useState<string | ArrayBuffer | null>(
+  //   null
+  // );
   // const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  const onCropComplete = useCallback(
-    (croppedArea: Area, croppedAreaPixels: Area) => {
-      console.log(croppedArea, croppedAreaPixels);
-      // setCroppedAreaPixels(croppedAreaPixels);
-    },
-    []
-  );
+  const onChangeInputImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+    if (e.target?.files?.[0]) {
+      setIsEditModalOpen(true);
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        // setCroppedImage(reader.result);
+      };
+    }
+  };
+
+  const onCropImage = async () => {
+    // try {
+    //   const cropped = await getCroppedImg(croppedImage, croppedAreaPixels);
+    //   const data = new FormData();
+    //   data.append('background', dataURLtoFile(cropped, 'background.png'));
+    //   await api.put('/mypage/background', data);
+    //   setIsEditModalOpen(false);
+    //   setCroppedImage(null);
+    // } catch (e) {
+    //   console.error(e);
+    // }
+  };
 
   return (
     <S.Wrapper>
       <S.Form>
         <S.Header>
-          <button>건너뛰기</button>
+          <button
+            onClick={() => {
+              setIsEditModalOpen(false);
+            }}
+          >
+            취소
+          </button>
           <button>이미지 업로드</button>
           <button>완료</button>
         </S.Header>
-        <PhotoCropper onCropComplete={onCropComplete} />
+        {/* <ImgCropper
+          onChangeInputImage={onChangeInputImage}
+          onCropComplete={onCropImage}
+          image={image}
+        /> */}
         <S.Footer></S.Footer>
       </S.Form>
     </S.Wrapper>

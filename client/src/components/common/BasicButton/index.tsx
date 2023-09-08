@@ -1,11 +1,13 @@
 import S from './style';
 import { PropsWithChildren } from 'react';
 
-type BasicButtonProps = {
+export type BasicButtonProps = {
   color?: string;
   backgroundColor?: string;
   padding?: number;
   fontSize?: number;
+  width: number;
+  height: number;
 };
 
 const BasicButton = ({
