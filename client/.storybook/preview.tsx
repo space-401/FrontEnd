@@ -1,7 +1,6 @@
 import type { Preview } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import KkiriProvider from '../src/utils/KkiriProvider';
-import React from 'react';
 
 const preview: Preview = {
   parameters: {

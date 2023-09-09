@@ -78,7 +78,7 @@ const MenuList = styled.ul<{
     }
     return `${height}px;`;
   }};
-  
+
   flex-direction: column;
   overflow-y: scroll;
 
