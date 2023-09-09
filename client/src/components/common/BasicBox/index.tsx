@@ -6,22 +6,14 @@ export type BasicBoxProp = {
   color: ColorType;
   borderradius: number;
   onClick?: React.MouseEventHandler<HTMLElement>;
+  backgroundImage?: string;
 };
 
 type ColorType = 'lightgrey' | 'grey';
 
 const BasicBox = (props: PropsWithChildren<BasicBoxProp>) => {
-  const { width, color, children, borderradius, onClick } = props;
-  return (
-    <S.Wrapper
-      width={width}
-      color={color}
-      borderradius={borderradius}
-      onClick={onClick}
-    >
-      {children}
-    </S.Wrapper>
-  );
+  const { children, ...Wrapperprops } = props;
+  return <S.Wrapper {...Wrapperprops}>{children}</S.Wrapper>;
 };
 
 export default BasicBox;
