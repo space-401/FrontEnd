@@ -6,12 +6,12 @@ const useSelectPhoto = () => {
   //이미지 파일을 저장하는 곳
   const [imgFile, setImgFile] = useState('');
 
-  const handleBoxClick = () => {
-    // 클릭 이벤트가 발생했을 때 파일 입력 요소를 클릭
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+  // const handleBoxClick = () => {
+  //   // 클릭 이벤트가 발생했을 때 파일 입력 요소를 클릭
+  //   if (fileInputRef.current) {
+  //     fileInputRef.current.click();
+  //   }
+  // };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target?.files?.[0];
@@ -29,10 +29,11 @@ const useSelectPhoto = () => {
   };
 
   return {
-    handleBoxClick,
+    // handleBoxClick,
     handleFileChange,
     fileInputRef,
     imgFile,
+    setImgFile,
   };
 };
 

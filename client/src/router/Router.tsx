@@ -4,7 +4,7 @@ import CreatePost from '@/pages/createPost';
 import MainPage from '@/pages/main';
 import MainPageMock from '@/mocks/data/MainPage/mainPage.mock';
 import InviteCode from '@/pages/inviteCode';
-import ImgEditModal from '@/components/common/ImageEditModal';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -27,10 +27,6 @@ const router = createBrowserRouter([
       {
         path: '/main',
         element: <MainPage {...MainPageMock} />,
-      },
-      {
-        path: '/img',
-        element: <ImgEditModal />,
       },
     ],
   },

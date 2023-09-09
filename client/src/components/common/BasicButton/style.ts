@@ -20,7 +20,6 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
     backgroundColor || theme.COLOR.skyblue};
   //스토리 적용
   color: ${({ color, theme }) => color || theme.COLOR.black};
-
   /*token required*/
   :disabled {
     background-color: #292929;

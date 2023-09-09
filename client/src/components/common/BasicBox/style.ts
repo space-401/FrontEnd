@@ -9,6 +9,7 @@ const Wrapper = styled.div<BasicBoxProp>`
     props.color == 'lightgrey' ? ' #3A3B41' : '#413F3F'};
   border-radius: ${(props) => props.borderradius}px;
   ${flexCenter}
+  background-image: url(${(props) => props.backgroundImage});
 `;
 
 const S = {
