@@ -12,7 +12,6 @@ const MainBody = (props: MainBodyPropType) => {
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
   const [_3, setSearchState] = useState<string>('');
-
   console.log(_1, _2, _3);
   return (
     <S.Wrapper>
