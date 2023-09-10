@@ -5,13 +5,12 @@ import { ReactComponent as SelectTableIcon } from '@assets/svg/filter/selecttabl
 import { ReactComponent as SelectMapIcon } from '@assets/svg/filter/selectmapIcon.svg';
 import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIcon.svg';
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
-import { useState } from 'react';
 import S from './style';
 import type { MainHeaderPropType } from '@type/main.type';
 
 const MainHeader = (prop: MainHeaderPropType) => {
-  const { description, img_url, users, title } = prop.spaceInfo;
-  const [selectState, setSelectState] = useState(false);
+  const { setSelectState, spaceInfo, selectState } = prop;
+  const { description, img_url, users, title } = spaceInfo;
   return (
     <S.Wrapper>
       <S.HeaderHeader>
