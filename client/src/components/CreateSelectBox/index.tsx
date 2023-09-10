@@ -7,7 +7,7 @@ import { MenuToggle } from './components/Toggle';
 import MenuList from './components/MenuList';
 import SelectList from './components/component/SelectList';
 
-const SelectBox = (props: SelectBoxProps) => {
+const CreateSelectBox = (props: SelectBoxProps) => {
   const {
     BoxWidth = 168,
     menuHeight = 200,
@@ -46,13 +46,20 @@ const SelectBox = (props: SelectBoxProps) => {
     }
   };
 
+  const placeholder =
+    labelName == '사용자'
+      ? '함께한 친구들을 추가해주세요'
+      : '태그를 지정해주세요';
+
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
     <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
       <S.LabelTitle>
         {!isOpen ? (
-          select.map((prev) => prev.title).join(', ') || labelName
+          select.map((prev) => prev.title).join(', ') || (
+            <div style={{ color: '#767676' }}>{placeholder}</div>
+          )
         ) : labelName !== '태그' ? (
           <SelectList setState={setSelect} Items={select} />
         ) : (
@@ -97,4 +104,4 @@ const SelectBox = (props: SelectBoxProps) => {
   );
 };
 
-export default SelectBox;
+export default CreateSelectBox;
