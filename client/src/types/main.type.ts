@@ -35,6 +35,7 @@ export type MainBodyPropType = {
   total: number;
   tagList: TagType[];
   userList: UserType[];
+  selectState: boolean;
 };
 
 export type MainHeaderPropType = {
@@ -44,6 +45,8 @@ export type MainHeaderPropType = {
     img_url: string;
     users: UserType[];
   };
+  selectState: boolean;
+  setSelectState: Dispatch<SetStateAction<boolean>>;
 };
 
 export type SelectBoxProps = {
@@ -88,4 +91,8 @@ export type UserListProps = {
 export type SearchProps = {
   setState: (searchValue: string) => void;
   placeholder: string;
+};
+
+export type MapComponentProps = {
+  postList: SpacePostType[];
 };

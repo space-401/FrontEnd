@@ -69,7 +69,11 @@ const MenuList = styled.ul<{
 
     if ($isOpen) {
       if (grid) {
-        height = maxHeight - 3 - row;
+        /**
+         * @Todo
+         * 사용자 인원수에 따라서 길이 다르게 보이게 수정
+         */
+        height = maxHeight + row;
       } else {
         height = maxHeight - 8;
       }
