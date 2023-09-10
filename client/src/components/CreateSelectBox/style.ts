@@ -3,12 +3,12 @@ import { omitText } from '@styles/common';
 const Wrapper = styled.div<{ isOpen: boolean; minWidth: number }>`
   position: relative;
   display: flex;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: ${({ theme, isOpen }) =>
     isOpen ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
   color: ${({ theme }) => theme.COLOR.inputColor};
   width: ${({ minWidth }) => minWidth}px;
-  height: 50px;
+  height: 60px;
   transition: background-color 0.5s;
   align-items: center;
   justify-content: space-between;
