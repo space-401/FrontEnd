@@ -11,11 +11,10 @@ import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
 import Cat from '@assets/cat.jpg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/CreateSelectBox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { users_mock } from '@/mocks/data/user/users.mock';
 import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
-import ImageCropper from '@/components/common/ImageEditModal/Cropper';
-
+import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
 const CreatePost = () => {
   const [userList, setUserList] = useState<selectType[]>([]);
   console.log(userList);
@@ -26,19 +25,44 @@ const CreatePost = () => {
   };
 
   const [image, setImage] = useState('');
+  const [cropImage, setCropImage] = useState('');
+
+  useEffect(() => {
+    console.log(cropImage);
+  }, [cropImage]);
 
   return (
     <FullScreenModal isTitle={false}>
       {/*사진 편집 모달*/}
       {isEditModalOpen ? (
-        <ImageCropper
+        <ImgEditModal
+          setIsEditModalOpen={setIsEditModalOpen}
+          setCropImage={setCropImage}
           image={image}
           setImage={setImage}
-          setIsEditModalOpen={setIsEditModalOpen}
+          cropImage={cropImage}
         />
       ) : (
         <S.Wrapper>
-          {image == '' ? (
+          {cropImage !== '' ? (
+            <BasicBox
+              color="grey"
+              width={348}
+              borderradius={20}
+              onClick={onClickImgEditModal}
+            >
+              <img src={cropImage} />
+            </BasicBox>
+          ) : image !== '' ? (
+            <BasicBox
+              color="grey"
+              width={348}
+              borderradius={20}
+              onClick={onClickImgEditModal}
+            >
+              <img src={image} />
+            </BasicBox>
+          ) : (
             <BasicBox
               color="grey"
               width={348}
@@ -51,15 +75,6 @@ const CreatePost = () => {
                   <div>사진 선택</div>
                 </S.PhotoText>
               </S.PhotoContainer>
-            </BasicBox>
-          ) : (
-            <BasicBox
-              color="grey"
-              width={348}
-              borderradius={20}
-              onClick={onClickImgEditModal}
-            >
-              <img src={image} />
             </BasicBox>
           )}
 
