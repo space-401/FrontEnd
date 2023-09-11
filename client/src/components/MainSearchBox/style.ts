@@ -10,7 +10,7 @@ const SearchInput = styled.input<{ isValue: boolean }>`
   border-radius: 5px;
   padding: 12px 30px 12px 16px;
   background: ${({ theme, isValue }) =>
-    !isValue ? theme.COLOR['gray-3'] : theme.COLOR['gray-4']};
+    !isValue ? theme.COLOR['gray-4'] : theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
@@ -18,7 +18,7 @@ const SearchInput = styled.input<{ isValue: boolean }>`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 
   &:focus {
-    background: ${({ theme }) => theme.COLOR['gray-6']};
+    background: ${({ theme }) => theme.COLOR['gray-7']};
   }
 
   &::placeholder {

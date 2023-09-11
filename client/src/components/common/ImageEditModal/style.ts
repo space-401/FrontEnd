@@ -21,7 +21,7 @@ const Form = styled.form`
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.COLOR['gray-4']};
+  background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 15px;
 `;
 
