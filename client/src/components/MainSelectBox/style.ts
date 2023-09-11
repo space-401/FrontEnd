@@ -9,8 +9,8 @@ const Wrapper = styled.div<{
   display: flex;
   border-radius: 5px;
   background-color: ${({ theme, isSelect }) =>
-    isSelect ? theme.COLOR['gray-4'] : theme.COLOR['gray-3']};
-  color: ${({ theme }) => theme.COLOR.inputColor};
+    isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
+  color: ${({ theme }) => theme.COLOR['gray-1']};
   width: ${({ minWidth }) => minWidth}px;
   height: 50px;
   transition: background-color 0.5s;
@@ -55,7 +55,7 @@ const MenuList = styled.ul<{
   position: relative;
   width: ${({ menuWidth }) => menuWidth + 4}px;
   padding: 8px;
-  background: ${({ theme }) => theme.COLOR['gray-4']};
+  background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 5px;
   transition: height 0.5s;
   ${({ grid, menuWidth }) =>
@@ -99,12 +99,12 @@ const MenuList = styled.ul<{
 
   &::-webkit-scrollbar-thumb {
     height: 10%;
-    background: ${({ theme }) => theme.COLOR['gray-3']};
+    background: ${({ theme }) => theme.COLOR['gray-4']};
     border-radius: 5px;
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.COLOR['gray-4']};
+    background: ${({ theme }) => theme.COLOR['gray-5']};
     border-radius: 5px;
   }
 `;
@@ -128,8 +128,8 @@ const InputContainer = styled.div<{ isOpen: boolean }>`
   align-items: center;
   border-radius: 5px;
   overflow: hidden;
-  background: ${({ theme }) => theme.COLOR['gray-13']};
-  border: 1px solid ${({ theme }) => theme.COLOR['gray-12']};
+  background: ${({ theme }) => theme.COLOR['gray-4']};
+  border: 1px solid ${({ theme }) => theme.COLOR['gray-3']};
   margin-bottom: 12px;
 `;
 
