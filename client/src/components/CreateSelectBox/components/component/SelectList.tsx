@@ -18,11 +18,12 @@ const SelectList = (props: {
     >
       {Items.map((item) => (
         <Chip
+          key={item.id}
           className={'tag-title'}
           sx={{
             position: 'relative',
             height: '29px',
-            background: theme.COLOR['gray-13'],
+            background: theme.COLOR['gray-4'],
             color: theme.COLOR.white,
             fontSize: theme.TEXT_SIZE['text-16'],
             fontFamily: theme.FONT_FAMILY['Pretendard'],

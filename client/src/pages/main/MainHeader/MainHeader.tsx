@@ -19,13 +19,13 @@ const MainHeader = (prop: MainHeaderPropType) => {
         <S.ButtonGroup>
           <BasicButton
             color={theme.COLOR.white}
-            backgroundColor={theme.COLOR['gray-6']}
+            backgroundColor={theme.COLOR['gray-7']}
           >
             인원관리
           </BasicButton>
           <BasicButton
             color={theme.COLOR.white}
-            backgroundColor={theme.COLOR['gray-4']}
+            backgroundColor={theme.COLOR['gray-5']}
           >
             스페이스 관리
           </BasicButton>
@@ -54,7 +54,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <BasicButton color={'#292929'} backgroundColor={theme.COLOR.beige}>
+        <BasicButton color={'#292929'} backgroundColor={theme.COLOR['gray-1']}>
           게시물 작성
         </BasicButton>
       </S.HeaderFooter>

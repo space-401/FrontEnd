@@ -26,7 +26,7 @@ const UndefinedDefaultImage = styled.div<{ img_url: string }>`
   width: 438px;
   height: 438px;
   background: url(${({ img_url }) => img_url}) no-repeat center;
-  background-color: ${({ theme }) => theme.COLOR['gray-10']};
+  background-color: ${({ theme }) => theme.COLOR['gray-4']};
   border-radius: 40px;
 `;
 

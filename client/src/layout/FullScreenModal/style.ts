@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  background-color: ${({ theme }) => theme.COLOR['gray-7']};
   color: ${({ theme }) => theme.COLOR['white']};
 `;
 

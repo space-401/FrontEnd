@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  background: ${({ theme }) => theme.COLOR['gray-6']};
+  background: ${({ theme }) => theme.COLOR['gray-7']};
   padding: 24px 5px 24px 24px;
   display: flex;
   gap: 8px;
@@ -19,12 +19,12 @@ const Wrapper = styled.div`
 
   &::-webkit-scrollbar-thumb {
     height: 10%;
-    background: ${({ theme }) => theme.COLOR['gray-3']};
+    background: ${({ theme }) => theme.COLOR['gray-4']};
     border-radius: 5px;
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.COLOR['gray-4']};
+    background: ${({ theme }) => theme.COLOR['gray-5']};
     border-radius: 5px;
   }
 `;
@@ -43,7 +43,7 @@ const ContentPlace = styled.div`
   justify-content: flex-start;
   gap: 8px;
   align-items: center;
-  background: ${({ theme }) => theme.COLOR['gray-5']};
+  background: ${({ theme }) => theme.COLOR['gray-6']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
@@ -68,7 +68,7 @@ const ContentCreateAt = styled.div`
 const AvatarBox = styled.div``;
 
 const MarkerContainer = styled.div`
-  background: ${({ theme }) => theme.COLOR['gray-4']};
+  background: ${({ theme }) => theme.COLOR['gray-5']};
   display: flex;
   padding: 8px 16px;
   flex-direction: column;
@@ -98,11 +98,11 @@ const OneWrapper = styled.div<{ isSelect: boolean }>`
   height: 219px;
   border-radius: 15px;
   background: ${({ theme, isSelect }) =>
-    !isSelect ? theme.COLOR['gray-4'] : theme.COLOR['gray-3']};
+    !isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
   border: ${({ isSelect, theme }) =>
     !isSelect
-      ? `2px solid ${theme.COLOR['gray-4']}`
-      : `2px solid ${theme.COLOR['gray-11']}`};
+      ? `2px solid ${theme.COLOR['gray-5']}`
+      : `2px solid ${theme.COLOR['gray-3']}`};
   display: flex;
   padding: 26px;
   gap: 24px;
@@ -169,7 +169,7 @@ const TagGroup = styled.div`
   gap: 4px;
 
   div {
-    color: ${({ theme }) => theme.COLOR['gray-5']};
+    color: ${({ theme }) => theme.COLOR['gray-6']};
     font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
     font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};

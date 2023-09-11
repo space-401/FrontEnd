@@ -81,10 +81,14 @@ const FilterState = styled.div`
 
 const FilterGroup = styled.div``;
 
+/**
+ * @TODO
+ * 해당 theme.COLOR['gray-6']은 임시로 넣어둔 색입니다 올바른 색상으로 변경해야합니다.
+ */
 const SelectButton = styled.div<{ $state: boolean }>`
   display: flex;
   color: ${({ $state, theme }) =>
-    $state ? theme.COLOR.white : theme.COLOR['gray-8']};
+    $state ? theme.COLOR.white : theme.COLOR['gray-6']};
 
   padding-bottom: ${({ $state }) => (!$state ? '11px' : '8px')};
   border-bottom: 3px solid

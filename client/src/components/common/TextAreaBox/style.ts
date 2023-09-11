@@ -6,7 +6,7 @@ const Wrapper = styled.div<{
   height: number;
 }>`
   background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ? backgroundColor : theme.COLOR['gray-5']};
+    backgroundColor ? backgroundColor : theme.COLOR['gray-6']};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
   height: ${({ height }) => height}px;
   border-radius: 10px;
