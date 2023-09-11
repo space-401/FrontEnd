@@ -15,13 +15,13 @@ const preview: Preview = {
 };
 
 export const decorators = [
-  (Story) => (
-    <KkiriProvider>
+  (Story) => {
+   return <KkiriProvider>
       <BrowserRouter>
-        <Story />
+        <Story/>
       </BrowserRouter>
     </KkiriProvider>
-  ),
+  },
 ];
 
 export default preview;

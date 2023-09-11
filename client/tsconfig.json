@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.path.json",
   "compilerOptions": {
-    "types": [ "kakao.maps.d.ts"],
     "target": "esnext",
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
