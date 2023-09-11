@@ -8,7 +8,7 @@ body {
     color: white;
 
     .react-datepicker__header {
-      background-color: #292a2f;
+      background-color: #232120;
       color: white;
       border-bottom: none;
       border-radius: 0;
@@ -84,7 +84,7 @@ body {
     display: flex;
     justify-content: space-between !important;
     align-items: center !important;
-    background-color: #292a2f;
+    background-color: #232120;
     padding-left: 8%;
     width: 100% !important;
     height: 100%;
@@ -138,7 +138,7 @@ body {
     }
   }
   .calenderWrapper {
-    background-color: #292a2f;
+    background-color: #232120;
   }
   .customHeaderContainer {
     height: 50px;
@@ -150,8 +150,4 @@ body {
   .custom-react-datepicker__wrapper {
     position: relative;
   }
-  /* .react-datepicker__input-container input::placeholder {
-    content: '등록할 날짜를 선택해 주세요.';
-    color: white;
-  } */
 }
