@@ -25,11 +25,11 @@ const SubmitButtonBox = styled.div``;
 const SubmitButton = styled.input``;
 
 const StyleResetContainer = styled.div`
-  div{
-    border: none!important;
+  div {
+    border: none !important;
     background: inherit;
   }
-`
+`;
 
 const S = {
   Wrapper,
@@ -39,7 +39,7 @@ const S = {
   SearchInput,
   SubmitButtonBox,
   SubmitButton,
-  StyleResetContainer
+  StyleResetContainer,
 };
 
 export default S;
