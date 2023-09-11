@@ -1,4 +1,4 @@
-import S from '@components/PostMap/components/style';
+import {S} from '@components/PostMap/components/style';
 
 const LeftSection = () => <S.Wrapper>:)</S.Wrapper>;
 
