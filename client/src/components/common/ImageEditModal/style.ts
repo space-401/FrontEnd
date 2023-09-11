@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 `;
 
 const Form = styled.form`

@@ -43,6 +43,7 @@ const TagTitle = styled.div`
 const TagGroup = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 50%;
 `;
 
 const DeleteButton = styled.div``;
