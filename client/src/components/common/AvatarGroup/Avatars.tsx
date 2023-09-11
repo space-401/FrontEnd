@@ -20,7 +20,12 @@ type PropType = {
 
 const Avatars = ({ users, size, max }: PropType) => (
   <S.Wrapper>
-    <AvatarGroup max={max}>
+    <AvatarGroup
+      max={max}
+      sx={{
+        '& .MuiAvatar-root': { width: size, height: size, fontSize: 15 },
+      }}
+    >
       {users.map((user) => (
         <Avatar
           sx={{ width: size, height: size, backgroundColor: 'white' }}

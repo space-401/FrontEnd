@@ -73,7 +73,7 @@ const Calendar = () => {
 export default Calendar;
 
 const StyledDatePicker = styled(DatePicker)`
-  background-color: ${({ theme }) => theme.COLOR['gray-4']};
+  background-color: ${({ theme }) => theme.COLOR['gray-6']};
   color: ${({ theme }) => theme.COLOR.white};
   height: 60px;
   border-radius: 10px;

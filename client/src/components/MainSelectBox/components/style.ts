@@ -6,7 +6,7 @@ const Wrapper = styled.div``;
 const List = styled.li<{ select: boolean; grid: boolean }>`
   border-radius: ${({ select }) => (select ? 3 : 5)}px;
   background: ${({ select, theme }) =>
-    select ? theme.COLOR['gray-5'] : 'done'};
+    select ? theme.COLOR['gray-6'] : 'done'};
   line-height: 14px;
   padding: 6px 8px;
   cursor: pointer;
@@ -14,7 +14,7 @@ const List = styled.li<{ select: boolean; grid: boolean }>`
   width: 100%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.COLOR['gray-5']};
+    background-color: ${({ theme }) => theme.COLOR['gray-6']};
     border-radius: ${({ grid }) => (grid ? 3 : 5)}px;
   }
 
