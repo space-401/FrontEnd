@@ -9,7 +9,7 @@ import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 import { getFormatDate } from '@utils/formatter';
 import { useState } from 'react';
 
-const MapComponent = (props: MapComponentProps) => {
+const Index = (props: MapComponentProps) => {
   const [_1, _2] = useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_KEY,
   });
@@ -62,4 +62,4 @@ const MapComponent = (props: MapComponentProps) => {
   );
 };
 
-export default MapComponent;
+export default Index;
