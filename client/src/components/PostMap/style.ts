@@ -12,7 +12,7 @@ const WrapperInner = styled.div``;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 3fr 7fr;
   grid-template-rows: 1016px;
 `;
 

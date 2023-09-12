@@ -94,6 +94,7 @@ export const M = {
 };
 
 const OneWrapper = styled.div<{ isSelect: boolean }>`
+  cursor: pointer;
   width: 480px;
   height: 219px;
   border-radius: 15px;
