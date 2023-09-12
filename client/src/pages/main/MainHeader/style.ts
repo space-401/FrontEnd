@@ -88,8 +88,8 @@ const FilterGroup = styled.div``;
 const SelectButton = styled.div<{ $state: boolean }>`
   display: flex;
   color: ${({ $state, theme }) =>
-    $state ? theme.COLOR.white : theme.COLOR['gray-6']};
-
+    $state ? theme.COLOR.white : theme.COLOR['gray-4']};
+  gap: 8px;
   padding-bottom: ${({ $state }) => (!$state ? '11px' : '8px')};
   border-bottom: 3px solid
     ${({ $state, theme }) => ($state ? theme.COLOR.white : 'none')};
