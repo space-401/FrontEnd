@@ -6,6 +6,7 @@ export type BasicButtonProps = {
   backgroundColor?: string;
   padding?: number;
   fontSize?: number;
+  borderRadius?: number;
   width?: number;
   height?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;

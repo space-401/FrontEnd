@@ -1,31 +1,34 @@
 import S from '@components/common/ImageEditModal/style';
 import ImageCropper from './Cropper';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ReactCropperElement } from 'react-cropper';
-
+import { ReactComponent as SizeChangeIcon } from '@assets/svg/photo/sizeChangeIcon.svg';
+import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
+import MultipleView from './MultipleView';
 const ImgEditModal = ({
   setIsEditModalOpen,
-  setCropImage,
-  image,
-  setImage,
+  images,
+  setImages,
+  setCropImages, // handleFileChange,
 }: {
   setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setCropImage: React.Dispatch<React.SetStateAction<string>>;
-  image: string;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
-  cropImage: string;
+  images: string[];
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
+  handleFileChange: any;
 }) => {
-  const handleChildrenClick = () => {
-    if (inputRef.current) inputRef.current.click();
-  };
-  const inputRef = useRef<HTMLInputElement>(null);
   const cropperRef = useRef<ReactCropperElement>(null);
-
+  //현재 선택한 이미지의 index
+  const [currentIdx, setCurrentIdx] = useState(0);
+  //이미지를 크롭해서 저장함.
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
-      setCropImage(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+      const newImage = cropperRef.current?.cropper
+        .getCroppedCanvas()
+        .toDataURL();
+      setCropImages([newImage]);
+      // setCropImage((prev: string[]) => [...prev, newImage]);
       setIsEditModalOpen(false);
-      // setImage('');
     }
   };
 
@@ -43,14 +46,16 @@ const ImgEditModal = ({
           <button>이미지 업로드</button>
           <button onClick={getCropData}>완료</button>
         </S.Header>
-        <ImageCropper
-          image={image}
-          setImage={setImage}
-          inputRef={inputRef}
-          cropperRef={cropperRef}
-          handleChildrenClick={handleChildrenClick}
-        />
-        <S.Footer />
+        <ImageCropper image={images[currentIdx]} cropperRef={cropperRef} />
+        <S.Footer>
+          <SizeChangeIcon />
+          <MultipleIcon />
+          <MultipleView
+            images={images}
+            setImages={setImages}
+            setCurrentIdx={setCurrentIdx}
+          />
+        </S.Footer>
       </S.Form>
     </S.Wrapper>
   );
