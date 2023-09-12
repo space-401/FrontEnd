@@ -16,23 +16,24 @@ const MapComponent = (props: MapComponentProps) => {
   const { postList = MainPageMock.postList } = props;
   const [isSelect, setIsSelect] = useState<number>(postList[0].post_id);
 
+  const [state, setState] = useState({
+    center: postList[0].position || APP.DEFAULT_POSITION,
+    isPanto: false,
+  })
   console.log(_1);
   console.log(_2);
-  /**
-   * @TODO
-   * 카드를 클릭할 시 해당 마커가 클릭되도록 만들어야합니다.
-   */
   return (
     <S.Wrapper>
       {/* 여기에 Kakao 지도를 표시할 요소를 추가합니다 */}
       <S.Container>
         <LeftSection
+            setState={setState}
           setIsSelect={setIsSelect}
           isSelect={isSelect}
           postList={postList}
         />
         <Map // 지도를 표시할 Container
-          center={postList[0].position || APP.DEFAULT_POSITION}
+          center={state.center}
           style={{
             // 지도의 크기
             width: '100%',
