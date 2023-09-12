@@ -66,6 +66,11 @@ const Footer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  :nth-child(1),
+  :nth-child(3) {
+    padding: 0 2rem 0 2rem;
+  }
 `;
 
 const SizeController = styled.div`
@@ -81,7 +86,21 @@ const SizeController = styled.div`
   margin-bottom: 8px;
   display: flex;
 `;
-
+const MultiViewWrapper = styled.div`
+  display: flex;
+  div {
+    margin: 4px;
+  }
+`;
+const SmallPhotoBox = styled.div<{ image?: string }>`
+  width: 64px;
+  height: 64px;
+  border-radius: 5px;
+  background-image: url(${({ image }) => image});
+  background-size: cover;
+  ${flexCenter}
+  border:1px solid white;
+`;
 const S = {
   Wrapper,
   Form,
@@ -90,6 +109,8 @@ const S = {
   Footer,
   SizeController,
   CropperWrapper,
+  MultiViewWrapper,
+  SmallPhotoBox,
 };
 
 export default S;
