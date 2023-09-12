@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/MainSelectBox';
 import MainSearchBox from '@components/MainSearchBox';
-import MapComponent from '@components/PostMap/MapComponent';
+import KaKaoMap from '@components/PostMap';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList, selectState } = props;
@@ -72,7 +72,7 @@ const MainBody = (props: MainBodyPropType) => {
           </S.PostList>
         )
       ) : (
-        <MapComponent postList={postList} />
+        <KaKaoMap postList={postList} />
       )}
     </S.Wrapper>
   );
