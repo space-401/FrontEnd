@@ -19,7 +19,7 @@ const Index = (props: MapComponentProps) => {
   const [state, setState] = useState({
     center: postList[0].position || APP.DEFAULT_POSITION,
     isPanto: false,
-  })
+  });
   console.log(_1);
   console.log(_2);
   return (
@@ -27,7 +27,7 @@ const Index = (props: MapComponentProps) => {
       {/* 여기에 Kakao 지도를 표시할 요소를 추가합니다 */}
       <S.Container>
         <LeftSection
-            setState={setState}
+          setState={setState}
           setIsSelect={setIsSelect}
           isSelect={isSelect}
           postList={postList}

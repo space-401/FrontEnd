@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   background-size: cover;
   backdrop-filter: blur(2px);
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
-
   div {
     z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   }
