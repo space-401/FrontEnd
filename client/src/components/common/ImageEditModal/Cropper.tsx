@@ -2,37 +2,12 @@ import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 
 interface PropsType {
-  setImage: React.Dispatch<React.SetStateAction<string>>;
   image: string;
-  handleChildrenClick: any;
-  inputRef: any;
   cropperRef: any;
 }
 
-const ImageCropper = ({
-  setImage,
-  image,
-  //handleChildrenClick,
-  inputRef,
-  cropperRef,
-}: PropsType) => {
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const files = e.target.files;
-
-    if (!files) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result as string);
-    };
-    reader.readAsDataURL(files[0]);
-  };
-
-  return image == '' ? (
-    <input type="file" ref={inputRef} onChange={handleFileChange} />
-  ) : (
+const ImageCropper = ({ image, cropperRef }: PropsType) => {
+  return (
     <>
       <Cropper
         ref={cropperRef}

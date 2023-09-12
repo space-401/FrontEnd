@@ -29,7 +29,13 @@ const PhotoContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-const PhotoText = styled.div`
+const PhotoBox = styled.img`
+  width: 348px;
+  height: 348px;
+  border-radius: 20px;
+`;
+
+const PhotoText = styled.button`
   background-color: ${({ theme }) => theme.COLOR['gray-2']};
   color: ${({ theme }) => theme.COLOR.black};
 
@@ -106,5 +112,6 @@ const S = {
   IconContainer,
   EmptyContainer,
   SelectedImgContainer,
+  PhotoBox,
 };
 export default S;

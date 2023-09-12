@@ -6,7 +6,6 @@ import TextAreaBox from '@/components/common/TextAreaBox';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import BasicBox from '@/components/common/BasicBox';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
-import useSelectPhoto from '@/hooks/common/useSelectPhoto';
 // import { useForm } from 'react-hook-form';
 // import { z } from 'zod';
 
