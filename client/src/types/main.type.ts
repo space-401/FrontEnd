@@ -96,3 +96,8 @@ export type SearchProps = {
 export type MapComponentProps = {
   postList: SpacePostType[];
 };
+
+export type DetailPageType = SpacePostType & {
+  isMyPost: boolean;
+  commentCount: number;
+};

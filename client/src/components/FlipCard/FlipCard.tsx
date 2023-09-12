@@ -14,13 +14,15 @@ export type FlipType = {
    * Hover시에 보일 컴포넌트를 넣어주세요
    */
   hoverCard: ISpaceSelectBack | ISpaceInfoBack;
+
+  onClick: () => void;
 };
 
 const FlipCard = (props: FlipType) => {
-  const { img_url, hoverCard } = props;
+  const { img_url, onClick, hoverCard } = props;
   return (
     <>
-      <S.Flip>
+      <S.Flip onClick={onClick}>
         <S.Card img={img_url} />
         <S.Hover img={img_url}>{hoverCard}</S.Hover>
       </S.Flip>
