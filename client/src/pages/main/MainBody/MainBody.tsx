@@ -56,6 +56,7 @@ const MainBody = (props: MainBodyPropType) => {
                 img_url={item.main_img_url}
                 hoverCard={
                   <SpaceInfoBack
+                    position={item.position}
                     users={item.users}
                     post_id={item.post_id}
                     post_title={item.place_title}
