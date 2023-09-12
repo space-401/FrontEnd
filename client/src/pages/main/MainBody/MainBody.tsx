@@ -6,14 +6,15 @@ import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/MainSelectBox';
 import MainSearchBox from '@components/MainSearchBox';
-import MapComponent from '@components/PostMap/MapComponent';
+import KaKaoMap from '@components/PostMap';
+import { useModalStore } from '@store/modal';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList, selectState } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
   const [_3, setSearchState] = useState<string>('');
-
+  const modalOpen = useModalStore((state) => state.ModalOpen);
   console.log(_1);
   console.log(_2);
   console.log(_3);
@@ -52,6 +53,7 @@ const MainBody = (props: MainBodyPropType) => {
           <S.PostList>
             {postList.map((item) => (
               <FlipCard
+                onClick={modalOpen}
                 key={item.post_id}
                 img_url={item.main_img_url}
                 hoverCard={
@@ -72,7 +74,7 @@ const MainBody = (props: MainBodyPropType) => {
           </S.PostList>
         )
       ) : (
-        <MapComponent postList={postList} />
+        <KaKaoMap postList={postList} />
       )}
     </S.Wrapper>
   );

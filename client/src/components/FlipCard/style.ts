@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Flip = styled.div`
   position: relative;
   perspective: 1100px;
+  cursor: pointer;
 `;
 
 const Card = styled.div<{ img: string }>`
