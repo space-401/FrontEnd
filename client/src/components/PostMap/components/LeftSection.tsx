@@ -7,10 +7,16 @@ type LeftSectionPropType = {
   postList: SpacePostType[];
   isSelect: number;
   setIsSelect: Dispatch<SetStateAction<number>>;
+  setState: Dispatch<
+    SetStateAction<{
+      center: { lat: number; lng: number };
+      isPanto: boolean;
+    }>
+  >;
 };
 
 const LeftSection = (props: LeftSectionPropType) => {
-  const { setIsSelect, isSelect, postList } = props;
+  const { setIsSelect, setState, isSelect, postList } = props;
   return (
     <S.Wrapper>
       {postList.map((item) => (
@@ -22,9 +28,9 @@ const LeftSection = (props: LeftSectionPropType) => {
           post_tags={item.place_tag}
           main_img_url={item.main_img_url}
           create_at={item.place_create_at}
-          position={item.position}
           onClick={() => {
             setIsSelect(item.post_id);
+            setState({ center: item.position, isPanto: false });
           }}
           isSelect={isSelect === item.post_id}
         />

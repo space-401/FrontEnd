@@ -12,7 +12,6 @@ type OnePostPropType = {
   main_img_url: string;
   create_at: string;
   isSelect: boolean;
-  position: { lat: number; lng: number };
   onClick: () => void;
 };
 const OnePostMapCard = (props: OnePostPropType) => {
@@ -26,6 +25,7 @@ const OnePostMapCard = (props: OnePostPropType) => {
     main_img_url,
     create_at,
   } = props;
+
   return (
     <O.OneWrapper onClick={onClick} isSelect={isSelect}>
       <O.CardImg img_url={main_img_url} />
