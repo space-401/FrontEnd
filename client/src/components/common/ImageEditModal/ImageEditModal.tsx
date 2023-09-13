@@ -5,13 +5,14 @@ import { ReactCropperElement } from 'react-cropper';
 import { ReactComponent as SizeChangeIcon } from '@assets/svg/photo/sizeChangeIcon.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import MultipleView from './MultipleView';
+import { usePhotoModalStore } from '@/store/modal';
+import { useEditModeStore } from '@/store/modal';
+
 const ImgEditModal = ({
-  setIsEditModalOpen,
   images,
   setImages,
   setCropImages, // handleFileChange,
 }: {
-  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
   setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
@@ -20,6 +21,10 @@ const ImgEditModal = ({
   const cropperRef = useRef<ReactCropperElement>(null);
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
+  // const [isEditMode, setIsEditMode] = useState(false);
+  const { isMode, ModeOn, ModeClose } = useEditModeStore();
+  const { ModalClose, ModalOpen } = usePhotoModalStore();
+
   //이미지를 크롭해서 저장함.
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
@@ -28,7 +33,7 @@ const ImgEditModal = ({
         .toDataURL();
       setCropImages([newImage]);
       // setCropImage((prev: string[]) => [...prev, newImage]);
-      setIsEditModalOpen(false);
+      ModalClose();
     }
   };
 
@@ -36,17 +41,18 @@ const ImgEditModal = ({
     <S.Wrapper>
       <S.Form>
         <S.Header>
-          <button
-            onClick={() => {
-              setIsEditModalOpen(false);
-            }}
-          >
-            취소
-          </button>
-          <button>이미지 업로드</button>
+          <button onClick={ModalOpen}>취소</button>
+          {isMode ? (
+            <button onClick={ModeClose}>편집완료</button>
+          ) : (
+            <button onClick={ModeOn}>편집</button>
+          )}
+
           <button onClick={getCropData}>완료</button>
         </S.Header>
+
         <ImageCropper image={images[currentIdx]} cropperRef={cropperRef} />
+
         <S.Footer>
           <SizeChangeIcon />
           <MultipleIcon />
