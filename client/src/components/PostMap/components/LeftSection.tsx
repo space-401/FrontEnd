@@ -2,6 +2,7 @@ import { S } from '@components/PostMap/components/style';
 import OnePostMapCard from '@components/PostMap/components/One-PostMapCard';
 import { SpacePostType } from '@type/space.type';
 import { Dispatch, SetStateAction } from 'react';
+import { getFormatUser } from '@utils/formatter';
 
 type LeftSectionPropType = {
   postList: SpacePostType[];
@@ -23,11 +24,11 @@ const LeftSection = (props: LeftSectionPropType) => {
         <OnePostMapCard
           key={item.post_id}
           post_title={item.post_title}
-          post_description={item.users.map((item) => item.user_name).join(', ')}
+          post_description={getFormatUser(item.users)}
           post_place={item.place_title}
           post_tags={item.place_tag}
           main_img_url={item.main_img_url}
-          create_at={item.place_create_at}
+          create_at={item.post_updated_at}
           onClick={() => {
             setIsSelect(item.post_id);
             setState({ center: item.position, isPanto: false });
