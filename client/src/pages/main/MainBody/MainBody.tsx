@@ -7,14 +7,14 @@ import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/MainSelectBox';
 import MainSearchBox from '@components/MainSearchBox';
 import KaKaoMap from '@components/PostMap';
-import { useModalStore } from '@store/modal';
+import { useDetailModalStore } from '@store/modal';
 
 const MainBody = (props: MainBodyPropType) => {
   const { postList, userList, tagList, selectState } = props;
   const [_1, setUserState] = useState<selectType[]>([]);
   const [_2, setTagState] = useState<selectType[]>([]);
   const [_3, setSearchState] = useState<string>('');
-  const modalOpen = useModalStore((state) => state.ModalOpen);
+  const modalOpen = useDetailModalStore((state) => state.ModalOpen);
   console.log(_1);
   console.log(_2);
   console.log(_3);
@@ -64,7 +64,8 @@ const MainBody = (props: MainBodyPropType) => {
                     post_title={item.place_title}
                     main_img_url={item.main_img_url}
                     place_title={item.place_title}
-                    place_create_at={item.place_create_at}
+                    post_updated_at={item.post_updated_at}
+                    post_created_at={item.post_created_at}
                     place_tag={item.place_tag}
                     key={item.post_id}
                   />

@@ -9,14 +9,15 @@ import { Chip } from '@mui/material';
 export interface ISpaceInfoBack extends IFlipCard {}
 
 const SpaceInfoBack = (props: SpacePostType) => {
-  const { place_create_at, place_title, place_tag, post_title, users } = props;
+  const { post_updated_at, place_title, place_tag, post_title, users } = props;
+  console.log(post_updated_at);
   return (
     <S.Wrapper>
       <S.Shadow />
       <S.Container>
         <S.InfoTop>
           <S.PostTitle>{post_title}</S.PostTitle>
-          <S.PlaceCreateAt>{getFormatDate(place_create_at)}</S.PlaceCreateAt>
+          <S.PlaceCreateAt>{getFormatDate(post_updated_at)}</S.PlaceCreateAt>
           <S.ChipBox>
             {place_tag.map((place) => (
               <Chip

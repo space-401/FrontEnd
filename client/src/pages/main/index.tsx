@@ -6,18 +6,18 @@ import { MainPageType } from '@type/main.type';
 import { useState } from 'react';
 import { Modal as DetailModal } from '@mui/material';
 import DetailPage from '@pages/Detail';
-import { useModalStore } from '@store/modal';
+import { useDetailModalStore } from '@store/modal';
 
 const MainPage = (props: MainPageType) => {
   const { spaceInfo, tagList, postList, total, page } = props;
   const [selectState, setSelectState] = useState(false);
 
-  const isOpen = useModalStore((state) => state.isOpen);
-  const modalClose = useModalStore((state) => state.ModalClose);
+  const isOpen = useDetailModalStore((state) => state.isOpen);
+  const modalClose = useDetailModalStore((state) => state.ModalClose);
   return (
     <HeaderLayout>
       <DetailModal open={isOpen} onClose={modalClose}>
-        <DetailPage />
+        <DetailPage onClose={modalClose} />
       </DetailModal>
       <S.Wrapper>
         <MainHeader

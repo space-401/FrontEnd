@@ -34,6 +34,6 @@ export const MarkerTest: { args: MarkerPropTypes } = {
     post_place: MainPageMock.postList[0].place_title,
     users: MainPageMock.postList[0].users,
     post_title: MainPageMock.postList[0].post_title,
-    create_at: getFormatDate(MainPageMock.postList[0].place_create_at),
+    create_at: getFormatDate(MainPageMock.postList[0].post_updated_at),
   },
 };

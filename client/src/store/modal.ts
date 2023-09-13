@@ -12,7 +12,7 @@ type ModeType = {
   ModeClose: () => void;
 };
 
-export const useModalStore = create<ModalType>((setState) => ({
+export const useDetailModalStore = create<ModalType>((setState) => ({
   isOpen: false,
   ModalOpen: () => setState(() => ({ isOpen: true })),
   ModalClose: () => setState(() => ({ isOpen: false })),
