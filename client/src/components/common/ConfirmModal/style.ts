@@ -15,7 +15,7 @@ const Container = styled.div`
   gap: 24px;
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 `;
 
 const ApproveButton = styled.div<{ isPositiveModal: boolean }>`
@@ -68,7 +68,7 @@ const CloseButton = styled.div`
 `;
 
 const TitleMessage = styled.div`
-  whitespace: 'pre-wrap';
+  white-space: pre-wrap;
   color: ${({ theme }) => theme.COLOR.white};
   text-align: center;
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
@@ -79,7 +79,7 @@ const TitleMessage = styled.div`
 `;
 
 const DescriptionMessage = styled.div`
-  whitespace: 'pre-wrap';
+  white-space: pre-wrap;
   color: ${({ theme }) => theme.COLOR.white};
   text-align: center;
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
