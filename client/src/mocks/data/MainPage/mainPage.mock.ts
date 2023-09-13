@@ -23,7 +23,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 37.27943075229118,
         lng: 127.01763998406159,
@@ -40,7 +41,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 37.55915668706214,
         lng: 126.92536526611102,
@@ -57,7 +59,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 35.13854258261161,
         lng: 129.1014781294671,
@@ -74,7 +77,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 37.55518388656961,
         lng: 126.92926237742505,
@@ -91,7 +95,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 35.20618517638034,
         lng: 129.07944301057026,
@@ -108,7 +113,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 37.561110808242056,
         lng: 126.9831268386891,
@@ -125,7 +131,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 37.86187129655063,
         lng: 127.7410250820423,
@@ -142,7 +149,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 37.47160156778542,
         lng: 126.62818064142286,
@@ -159,7 +167,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 35.10233410927457,
         lng: 129.02611815856181,
@@ -176,7 +185,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 35.93282824693927,
         lng: 126.95307628834287,
@@ -193,7 +203,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 35.10215562270429,
         lng: 129.02579793018205,
@@ -210,7 +221,8 @@ const MainPageMock: MainPageType = {
         { tag_id: 1, tag_title: '일상속 하루' },
         { tag_id: 2, tag_title: '커피 한잔의 여유' },
       ],
-      place_create_at: String(new Date()),
+      post_created_at: String(new Date()),
+      post_updated_at: String(new Date()),
       position: {
         lat: 35.475423012251106,
         lng: 128.76666923366042,

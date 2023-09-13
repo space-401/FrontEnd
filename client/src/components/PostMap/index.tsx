@@ -10,7 +10,7 @@ import { getFormatDate } from '@utils/formatter';
 import { useState } from 'react';
 
 const Index = (props: MapComponentProps) => {
-  const [_1, _2] = useKakaoLoader({
+  useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_KEY,
   });
   const { postList = MainPageMock.postList } = props;
@@ -20,11 +20,8 @@ const Index = (props: MapComponentProps) => {
     center: postList[0].position || APP.DEFAULT_POSITION,
     isPanto: false,
   });
-  console.log(_1);
-  console.log(_2);
   return (
     <S.Wrapper>
-      {/* 여기에 Kakao 지도를 표시할 요소를 추가합니다 */}
       <S.Container>
         <LeftSection
           setState={setState}
@@ -32,14 +29,14 @@ const Index = (props: MapComponentProps) => {
           isSelect={isSelect}
           postList={postList}
         />
-        <Map // 지도를 표시할 Container
+        <Map
           center={state.center}
           style={{
             // 지도의 크기
             width: '100%',
             height: '100%',
           }}
-          level={3} // 지도의 확대 레벨
+          level={3}
         >
           {postList.map((value) => (
             <EventMarkerContainer
@@ -48,7 +45,7 @@ const Index = (props: MapComponentProps) => {
               setIsSelect={() => setIsSelect(value.post_id)}
               content={
                 <MarkerContents
-                  create_at={getFormatDate(value.place_create_at)}
+                  create_at={getFormatDate(value.post_updated_at)}
                   post_place={value.place_title}
                   post_title={value.post_title}
                   users={value.users}
