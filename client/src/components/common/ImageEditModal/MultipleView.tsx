@@ -3,16 +3,14 @@ import { ReactComponent as PlusPhotoIcon } from '@assets/svg/photo/plusIcon.svg'
 import { useRef } from 'react';
 
 const MultipleView = ({
-  images, // handleFileChange,
+  images,
   setImages,
   setCurrentIdx,
 }: {
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
   setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
-  // handleFileChange: any;
 }) => {
-  console.log('images', images);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const onAddImage = () => {
     inputRef.current && inputRef.current.click();
@@ -57,6 +55,7 @@ const MultipleView = ({
       {images &&
         images.map((image, idx) => (
           <S.SmallPhotoBox
+            key={Math.random() * 1000}
             image={image}
             onClick={() => {
               onClickChangePhoto(idx);

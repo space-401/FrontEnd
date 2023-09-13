@@ -16,6 +16,7 @@ import { users_mock } from '@/mocks/data/user/users.mock';
 import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
 import { theme } from '@/styles/theme/theme';
+import { usePhotoModalStore } from '@/store/modal';
 
 const CreatePost = () => {
   const [userList, setUserList] = useState<selectType[]>([]);
@@ -23,16 +24,18 @@ const CreatePost = () => {
   const [images, setImages] = useState<string[]>([]);
   //이미지 파일을 저장하는 곳
   const [cropImages, setCropImages] = useState<string[]>([]);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   console.log(userList);
+  const { ModalOpen, isOpen } = usePhotoModalStore();
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && images.length == 0) inputRef.current.click();
-    setIsEditModalOpen(true);
+    // setIsEditModalOpen(true);
+    ModalOpen();
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,25 +45,29 @@ const CreatePost = () => {
 
     if (!files) return;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result;
-      if (typeof result === 'string') {
-        setImages((prev) => [...prev, result]);
-      }
-    };
-    reader.readAsDataURL(files[0]);
+    //여러개의 파일을 하나씩 순회하여 읽어오기
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const result = reader.result;
+        if (typeof result === 'string') {
+          setImages((prev) => [...prev, result]);
+        }
+      };
+      reader.readAsDataURL(files[i]);
+    }
   };
 
   return (
     <FullScreenModal isTitle={false}>
       {/*사진 편집 모달*/}
       <S.Wrapper>
-        {cropImages.length > 0 && !isEditModalOpen ? (
+        {cropImages.length > 0 && !isOpen ? (
           <S.PhotoBox src={cropImages[0]} onClick={onClickImgEditModal} />
-        ) : isEditModalOpen && images.length ? (
+        ) : isOpen && images.length > 0 ? (
           <ImgEditModal
-            setIsEditModalOpen={setIsEditModalOpen}
+            // setIsEditModalOpen={setIsEditModalOpen}
             images={images}
             setImages={setImages}
             setCropImages={setCropImages}
@@ -70,6 +77,7 @@ const CreatePost = () => {
           <BasicBox color="grey" width={348} borderradius={20}>
             <S.PhotoContainer>
               <PhotoIcon />
+
               <BasicButton
                 onClick={onClickImgEditModal}
                 width={55}
@@ -77,14 +85,17 @@ const CreatePost = () => {
                 borderRadius={5}
                 backgroundColor={theme.COLOR['gray-2']}
               >
-                <input
-                  type="file"
-                  ref={inputRef}
-                  onChange={(e) => {
-                    handleFileChange(e);
-                  }}
-                  style={{ display: 'none' }}
-                />
+                <form method="post" encType="multipart/form-data">
+                  <input
+                    type="file"
+                    ref={inputRef}
+                    onChange={(e) => {
+                      handleFileChange(e);
+                    }}
+                    style={{ display: 'none' }}
+                    multiple
+                  />
+                </form>
                 <div>사진 선택</div>
               </BasicButton>
             </S.PhotoContainer>
