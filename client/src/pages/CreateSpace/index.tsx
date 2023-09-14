@@ -1,21 +1,17 @@
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
-import S from './style';
+import S from '@pages/createSpace/style';
 import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import BasicBox from '@/components/common/BasicBox';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
-// import { useForm } from 'react-hook-form';
-// import { z } from 'zod';
-
-// const schema = z.object({
-//   title: z.string().min(16, '16자 이내의 제목을 입력해주세요'),
-//   content: z.string().min(500,'내용은 500자 이내로 인력'),
-// });
+import { useState } from 'react';
+import { handleFileChange } from '@/utils/handleFiles';
 
 const CreateSpace = () => {
-  const { fileInputRef, handleFileChange, handleBoxClick } = useSelectPhoto();
+  // const { fileInputRef, handleFileChange, handleBoxClick } = useSelectPhoto();
+  const [image, setImage] = useState<string>();
 
   return (
     <FullScreenModal
@@ -33,14 +29,16 @@ const CreateSpace = () => {
             type="file"
             accept="image/*"
             style={{ display: 'none' }}
-            ref={fileInputRef}
-            onChange={handleFileChange}
+            // ref={fileInputRef}
+            onChange={(e) => {
+              handleFileChange(e, setImage);
+            }}
           />
           <BasicBox
             width={160}
             borderradius={10}
             color="grey"
-            onClick={handleBoxClick}
+            // onClick={handleBoxClick}
           >
             <PhotoIcon />
           </BasicBox>

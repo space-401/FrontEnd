@@ -1,4 +1,4 @@
-import S from './style';
+import S from '@/components/common/BasicBox/style';
 import { PropsWithChildren } from 'react';
 
 export type BasicBoxProp = {

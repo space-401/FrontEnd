@@ -1,27 +1,18 @@
 import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-// import { useEditModeStore } from '@/store/editMode';
-
-import useFindLocation from '@/hooks/common/use-location';
-
 interface PropsType {
   image: string;
   cropperRef: any;
 }
 
 const ImageCropper = ({ image, cropperRef }: PropsType) => {
-  // const { isEditMode } = useEditModeStore();
-  // .cropper-crop-box 요소를 선택합니다
-  // const EditBox = document.querySelector('.cropper-crop-box');
-
-  const [width, height, transform] = useFindLocation();
-
-  console.log(width, height, transform);
+  // const cropperRef = useRef<ReactCropperElement>(null);
 
   return (
-    <>
+    <div>
       <Cropper
         ref={cropperRef}
+        // ref={cropperRef}
         aspectRatio={1}
         src={image}
         viewMode={1}
@@ -35,7 +26,7 @@ const ImageCropper = ({ image, cropperRef }: PropsType) => {
         minCropBoxWidth={200}
         minCropBoxHeight={200}
       />
-    </>
+    </div>
   );
   // : (
   //   <BasicBox width={720} borderradius={0} color={'grey'}>

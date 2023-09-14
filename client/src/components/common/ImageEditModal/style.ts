@@ -14,8 +14,9 @@ const Wrapper = styled.div`
 const Form = styled.form`
   ${flexCenter}
   flex-direction: column;
+  /* overflow: hidden; */
 
-  width: 45rem;
+  width: 760px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -23,12 +24,6 @@ const Form = styled.form`
   border-radius: 8px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 15px;
-`;
-
-const PhotoContainer = styled.div`
-  width: 45rem;
-  height: 45rem;
-  background-color: ${({ theme }) => theme.COLOR.black};
 `;
 
 const CropperWrapper = styled.div`
@@ -101,16 +96,44 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   ${flexCenter}
   border:1px solid white;
 `;
+
+const ImgContainer = styled.div<{ image?: string }>`
+  max-width: 720px;
+  max-height: 720px;
+  background-color: black;
+  background-image: url(${({ image }) => image});
+  background-size: cover;
+`;
+
+const SlideShow = styled.div`
+  width: 760px;
+  height: 760px;
+  position: relative;
+  /* overflow: hidden; */
+`;
+const Sliders = styled.div<{
+  width: number;
+}>`
+  position: absolute;
+
+  top: 0;
+
+  background-color: pink;
+  width: ${({ width }) => width}px;
+`;
+
 const S = {
   Wrapper,
   Form,
-  PhotoContainer,
+  ImgContainer,
   Header,
   Footer,
   SizeController,
   CropperWrapper,
+  SlideShow,
   MultiViewWrapper,
   SmallPhotoBox,
+  Sliders,
 };
 
 export default S;
