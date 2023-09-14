@@ -1,4 +1,4 @@
-import S from './style';
+import S from '@/components/common/InputBox/style';
 
 type InputBoxProps = {
   width?: number;
