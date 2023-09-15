@@ -1,7 +1,7 @@
 import { SelectSpacePropType } from '@type/space.type';
 import Avatars from '@components/common/AvatarGroup/Avatars';
-import S from '@components/FlipCard/SpaceSelectBack/style';
-import { IFlipCard } from '@components/FlipCard/FlipCard';
+import S from '@components/Main/FlipCard/SpaceSelectBack/style';
+import { IFlipCard } from '@components/Main/FlipCard/FlipCard';
 
 export interface ISpaceSelectBack extends IFlipCard {}
 

@@ -1,5 +1,5 @@
-import { S } from '@components/PostMap/components/style';
-import OnePostMapCard from '@components/PostMap/components/One-PostMapCard';
+import { S } from '@components/Main/PostMap/components/style';
+import OnePostMapCard from '@components/Main/PostMap/components/One-PostMapCard';
 import { SpacePostType } from '@type/space.type';
 import { Dispatch, SetStateAction } from 'react';
 import { getFormatUser } from '@utils/formatter';

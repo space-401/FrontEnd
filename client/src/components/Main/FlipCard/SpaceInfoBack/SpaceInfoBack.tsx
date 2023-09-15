@@ -1,7 +1,7 @@
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import type { SpacePostType } from '@type/space.type';
-import { IFlipCard } from '@components/FlipCard/FlipCard';
-import S from '@components/FlipCard/SpaceInfoBack/style';
+import { IFlipCard } from '@components/Main/FlipCard/FlipCard';
+import S from '@components/Main/FlipCard/SpaceInfoBack/style';
 import { getFormatDate } from '@utils/formatter';
 import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
@@ -10,7 +10,6 @@ export interface ISpaceInfoBack extends IFlipCard {}
 
 const SpaceInfoBack = (props: SpacePostType) => {
   const { post_updated_at, place_title, place_tag, post_title, users } = props;
-  console.log(post_updated_at);
   return (
     <S.Wrapper>
       <S.Shadow />

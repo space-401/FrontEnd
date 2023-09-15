@@ -1,7 +1,7 @@
-import S from '@components/FlipCard/style';
+import S from '@components/Main/FlipCard/style';
 import { ReactElement } from 'react';
-import { ISpaceSelectBack } from '@components/FlipCard/SpaceSelectBack/SpaceSelectBack';
-import { ISpaceInfoBack } from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
+import { ISpaceSelectBack } from '@components/Main/FlipCard/SpaceSelectBack/SpaceSelectBack';
+import { ISpaceInfoBack } from '@components/Main/FlipCard/SpaceInfoBack/SpaceInfoBack';
 
 export interface IFlipCard extends ReactElement {}
 

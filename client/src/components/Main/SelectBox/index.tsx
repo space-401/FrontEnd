@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { useDimensions } from '@hooks/common/use-dimensions';
 import type { SelectBoxProps, selectType } from '@type/main.type';
 import S from './style';
-import { MenuToggle } from './components/Toggle';
-import MenuList from './components/MenuList';
+import { MenuToggle } from '@components/Main/SelectBox/components/Toggle';
+import MenuList from '@components/Main/SelectBox/components/MenuList';
 
 const CSelectBox = (props: SelectBoxProps) => {
   const {
