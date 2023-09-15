@@ -12,6 +12,7 @@ export type MarkerPropTypes = {
 
 const MarkerContents = (props: MarkerPropTypes) => {
   const { create_at, users, post_place, post_title } = props;
+
   return (
     <M.ContentBox>
       <M.ContentPlace>

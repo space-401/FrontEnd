@@ -53,8 +53,8 @@ const DetailPage = React.forwardRef(
     const { height: commentHeight } = useDimensions(commentContainerRef);
 
     const DeleteAction = () => {
+      console.log('삭제하였습니다.');
       onClose();
-      console.log('삭제되었습니다.');
     };
 
     return (
