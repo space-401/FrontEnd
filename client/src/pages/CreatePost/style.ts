@@ -99,10 +99,16 @@ const IconContainer = styled.div`
 const SelectedImgContainer = styled.img`
   border-radius: 10px;
 `;
+
+const PhotoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const S = {
   Wrapper,
   GridWrapper,
   PhotoContainer,
+  PhotoWrapper,
   PhotoText,
   Label,
   InputContainer,
