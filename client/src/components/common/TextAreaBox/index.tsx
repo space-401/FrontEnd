@@ -1,4 +1,4 @@
-import S from './style';
+import S from '@/components/common/TextAreaBox/style';
 
 export type TextAreaBoxProps = {
   width?: number;

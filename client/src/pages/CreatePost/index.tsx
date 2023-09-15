@@ -1,4 +1,4 @@
-import S from './style';
+import S from '@pages/createPost/style';
 import BasicBox from '@/components/common/BasicBox';
 import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
@@ -17,34 +17,36 @@ import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
+import MultipleImgBox from '@/components/common/MultipleImgBox';
 
 const CreatePost = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [userList, setUserList] = useState<selectType[]>([]);
   //이미지 파일을 저장하는 곳
   const [images, setImages] = useState<string[]>([]);
-  //이미지 파일을 저장하는 곳
+  //편집된 이미지 파일을 저장하는 곳
   const [cropImages, setCropImages] = useState<string[]>([]);
-  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
   console.log(userList);
+  //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
+  //현재 선택한 이미지의 index
+  const [currentIdx, setCurrentIdx] = useState(0);
 
-  //자식 inputRef 요소를 클릭하는 함수
+  // //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && images.length == 0) inputRef.current.click();
-    // setIsEditModalOpen(true);
+    if (cropImages.length > 0) {
+      if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
+        ModalOpen();
+      }
+    }
     ModalOpen();
   };
-
+  //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     const files = e.target.files;
-
     if (!files) return;
-
     //여러개의 파일을 하나씩 순회하여 읽어오기
     for (let i = 0; i < files.length; i++) {
       const reader = new FileReader();
@@ -52,7 +54,7 @@ const CreatePost = () => {
       reader.onload = () => {
         const result = reader.result;
         if (typeof result === 'string') {
-          setImages((prev) => [...prev, result]);
+          setImages((images) => [...images, result]);
         }
       };
       reader.readAsDataURL(files[i]);
@@ -63,17 +65,18 @@ const CreatePost = () => {
     <FullScreenModal isTitle={false}>
       {/*사진 편집 모달*/}
       <S.Wrapper>
-        {cropImages.length > 0 && !isOpen ? (
-          <S.PhotoBox src={cropImages[0]} onClick={onClickImgEditModal} />
-        ) : isOpen && images.length > 0 ? (
+        {isOpen && (
           <ImgEditModal
-            // setIsEditModalOpen={setIsEditModalOpen}
+            cropImages={cropImages}
+            currentIdx={currentIdx}
+            setCurrentIdx={setCurrentIdx}
             images={images}
             setImages={setImages}
             setCropImages={setCropImages}
             handleFileChange={handleFileChange}
           />
-        ) : (
+        )}
+        {images.length == 0 ? (
           <BasicBox color="grey" width={348} borderradius={20}>
             <S.PhotoContainer>
               <PhotoIcon />
@@ -100,7 +103,21 @@ const CreatePost = () => {
               </BasicButton>
             </S.PhotoContainer>
           </BasicBox>
+        ) : images.length > 1 ? (
+          <S.PhotoWrapper>
+            <S.PhotoBox src={cropImages[0]} onClick={onClickImgEditModal} />
+            <MultipleImgBox
+              isBackground={false}
+              isAddPhoto={false}
+              setImages={setImages}
+              images={cropImages}
+            />
+          </S.PhotoWrapper>
+        ) : (
+          <S.PhotoBox src={images[0]} onClick={onClickImgEditModal} />
         )}
+
+        {/* )} */}
 
         <S.GridWrapper>
           {/*스페이스 정보*/}
