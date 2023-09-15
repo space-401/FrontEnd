@@ -5,7 +5,7 @@ import S from '@components/common/ConfirmModal/style';
 export type ConfirmModalType = {
   isPositiveModal: boolean;
   titleMessage: string;
-  descriptionMessage: string;
+  descriptionMessage?: string;
   ApproveMessage: string;
   closeMessage: string;
   AsyncAction: () => void;
@@ -36,7 +36,9 @@ const ConfirmModal = React.forwardRef(
         <Box tabIndex={-1} ref={forwardRef}>
           <S.Container>
             <S.TitleMessage>{titleMessage}</S.TitleMessage>
-            <S.DescriptionMessage>{descriptionMessage}</S.DescriptionMessage>
+            {descriptionMessage && (
+              <S.DescriptionMessage>{descriptionMessage}</S.DescriptionMessage>
+            )}
             <S.ButtonGroup>
               <S.ApproveButton
                 isPositiveModal={isPositiveModal}

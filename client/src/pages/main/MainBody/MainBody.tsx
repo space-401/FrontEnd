@@ -1,12 +1,12 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
-import FlipCard from '@components/FlipCard/FlipCard';
-import SpaceInfoBack from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
+import FlipCard from '@components/Main/FlipCard/FlipCard';
+import SpaceInfoBack from '@components/Main/FlipCard/SpaceInfoBack/SpaceInfoBack';
 import S from './style';
 import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
-import SelectBox from '@components/MainSelectBox';
-import MainSearchBox from '@components/MainSearchBox';
-import KaKaoMap from '@components/PostMap';
+import SelectBox from '@components/Main/SelectBox';
+import MainSearchBox from '@components/Main/SearchBox';
+import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
 
 const MainBody = (props: MainBodyPropType) => {
