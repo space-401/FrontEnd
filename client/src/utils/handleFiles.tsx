@@ -52,34 +52,3 @@ export const handleFileChange = ({
     reader.readAsDataURL(files[0]);
   }
 };
-
-//이미지를 더 추가 (기존 이미지 o)
-// } else {
-//   const reader = new FileReader();
-
-//   reader.onload = () => {
-//     const result = reader.result;
-//     if (typeof result === 'string') {
-//       setImages((prev) => [...prev, result]);
-//     }
-//   };
-//   reader.readAsDataURL(files[images.length - 1]);
-// }
-
-// const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//   e.preventDefault();
-//   const files = e.target.files;
-//   if (!files) return;
-//   //여러개의 파일을 하나씩 순회하여 읽어오기
-//   for (let i = 0; i < files.length; i++) {
-//     const reader = new FileReader();
-
-//     reader.onload = () => {
-//       const result = reader.result;
-//       if (typeof result === 'string') {
-//         setImages((prev) => [...prev, result]);
-//       }
-//     };
-//     reader.readAsDataURL(files[i]);
-//   }
-// };

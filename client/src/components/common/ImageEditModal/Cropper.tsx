@@ -1,13 +1,13 @@
 import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 
-interface PropsType {
+type PropsType = {
   image: string;
   index: number;
   setCropImages: any;
   cropImages: string[];
   myRef: any;
-}
+};
 
 const ImageCropper = ({ image, myRef }: PropsType) => {
   return (

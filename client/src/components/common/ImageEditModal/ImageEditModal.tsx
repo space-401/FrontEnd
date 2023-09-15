@@ -1,9 +1,9 @@
 import S from '@components/common/ImageEditModal/style';
-import ImageCropper from './Cropper';
+import ImageCropper from '@components/common/ImageEditModal/Cropper';
 import { useEffect, useRef, useState } from 'react';
 import { ReactComponent as SizeChangeIcon } from '@assets/svg/photo/sizeChangeIcon.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
-import MultipleImgBox from '../MultipleImgBox';
+import MultipleImgBox from '@components/common/MultipleImgBox/index';
 import { usePhotoModalStore } from '@/store/modal';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
