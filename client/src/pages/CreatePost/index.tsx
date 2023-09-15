@@ -35,7 +35,11 @@ const CreatePost = () => {
   // //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && images.length == 0) inputRef.current.click();
-    // setIsEditModalOpen(true);
+    if (cropImages.length > 0) {
+      if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
+        ModalOpen();
+      }
+    }
     ModalOpen();
   };
   //파일 변경 함수
@@ -50,7 +54,7 @@ const CreatePost = () => {
       reader.onload = () => {
         const result = reader.result;
         if (typeof result === 'string') {
-          setImages((prev) => [...prev, result]);
+          setImages((images) => [...images, result]);
         }
       };
       reader.readAsDataURL(files[i]);
@@ -63,6 +67,7 @@ const CreatePost = () => {
       <S.Wrapper>
         {isOpen && (
           <ImgEditModal
+            cropImages={cropImages}
             currentIdx={currentIdx}
             setCurrentIdx={setCurrentIdx}
             images={images}
@@ -102,10 +107,10 @@ const CreatePost = () => {
           <S.PhotoWrapper>
             <S.PhotoBox src={cropImages[0]} onClick={onClickImgEditModal} />
             <MultipleImgBox
+              isBackground={false}
               isAddPhoto={false}
               setImages={setImages}
-              setCurrentIdx={setCurrentIdx}
-              images={images}
+              images={cropImages}
             />
           </S.PhotoWrapper>
         ) : (

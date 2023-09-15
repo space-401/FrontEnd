@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isBackground: boolean }>`
   display: flex;
-  gap: 7px;
+  gap: 8px;
   margin-top: 7px;
+  padding: ${({ isBackground }) => isBackground && '8px'};
+  background-color: ${({ theme, isBackground }) =>
+    isBackground ? theme.COLOR['gray-5'] : 'none'};
+  border-radius: 10px;
 `;
 const SmallPhotoBox = styled.div<{ image?: string }>`
   width: 64px;

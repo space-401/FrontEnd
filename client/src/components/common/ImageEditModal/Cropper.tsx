@@ -1,18 +1,19 @@
 import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+
 interface PropsType {
   image: string;
-  cropperRef: any;
+  index: number;
+  setCropImages: any;
+  cropImages: string[];
+  myRef: any;
 }
 
-const ImageCropper = ({ image, cropperRef }: PropsType) => {
-  // const cropperRef = useRef<ReactCropperElement>(null);
-
+const ImageCropper = ({ image, myRef }: PropsType) => {
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Cropper
-        ref={cropperRef}
-        // ref={cropperRef}
+        ref={myRef}
         aspectRatio={1}
         src={image}
         viewMode={1}
@@ -28,11 +29,6 @@ const ImageCropper = ({ image, cropperRef }: PropsType) => {
       />
     </div>
   );
-  // : (
-  //   <BasicBox width={720} borderradius={0} color={'grey'}>
-  //     <img src={image} />
-  //   </BasicBox>
-  // );
 };
 
 export default ImageCropper;
