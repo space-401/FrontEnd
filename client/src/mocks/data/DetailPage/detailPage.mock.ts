@@ -2,7 +2,7 @@ import { PostDetailType } from '@type/space.type';
 import { users_mock } from '@mocks/data/user/users.mock';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 
-const DetailPageMock: PostDetailType = {
+const DetailPostMock: PostDetailType = {
   isMine: true,
   post_id: 1,
   position: {
@@ -28,4 +28,4 @@ const DetailPageMock: PostDetailType = {
   commentCount: 13,
 };
 
-export default DetailPageMock;
+export default DetailPostMock;

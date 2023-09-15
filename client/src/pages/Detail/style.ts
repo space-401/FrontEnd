@@ -3,12 +3,22 @@ import { omitText } from '@styles/common';
 
 const RightWrapper = styled.div`
   position: absolute;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 452px;
   min-height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
+
+  scrollbar-width: none; /* Firefox 지원 */
+  -ms-overflow-style: none; /* IE 지원 */
+  &::-webkit-scrollbar {
+    /* Webkit 브라우저 (예: Chrome, Safari)에 대한 스크롤바 스타일 지정 */
+    display: none; /* 스크롤바 숨기기 */
+  }
 `;
 
 const DeleteIconBox = styled.div`
@@ -140,7 +150,77 @@ const CommentTitle = styled.div`
   width: 100%;
 `;
 
-const CommentBox = styled.div<{ isOpen: boolean }>``;
+const ManagementList = styled.div`
+  position: relative;
+`;
+
+const BackClickBlock = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+  cursor: default;
+  content: ' ';
+  background: transparent;
+`;
+
+const MenuGroup = styled.div`
+  top: 16px;
+  right: -15px;
+  position: absolute;
+  width: 114px;
+  display: inline-flex;
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+`;
+const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
+  width: 100%;
+  height: ${({ isOpen, isReply }) => (isOpen ? (isReply ? 520 : 460) : 0)}px;
+  transition: height 0.5s;
+  overflow: hidden;
+`;
+
+const MenuButton = styled.div`
+  position: relative;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  cursor: pointer;
+  display: flex;
+  padding: 4px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.COLOR.white};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+
+  border-radius: 5px;
+
+  &:hover {
+    background: ${({ theme }) => theme.COLOR['gray-6']};
+  }
+
+  transition: background 0.2s;
+`;
+
+const CommentInput = styled.div`
+  position: absolute;
+  bottom: 0;
+  height: 48px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  color: ${({ theme }) => theme.COLOR['gray-1']};
+`;
 
 const S = {
   MapBox,
@@ -161,6 +241,11 @@ const S = {
   FlexBox,
   CommentTitle,
   CommentBox,
+  ManagementList,
+  BackClickBlock,
+  MenuGroup,
+  MenuButton,
+  CommentInput,
 };
 
 export default S;
