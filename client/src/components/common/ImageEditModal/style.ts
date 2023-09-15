@@ -27,8 +27,8 @@ const Form = styled.form`
 `;
 
 const CropperWrapper = styled.div`
-  width: 45rem;
-  height: 45rem;
+  width: 760px;
+  height: 760px;
   background-color: black;
   position: relative;
 `;
@@ -98,28 +98,11 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
 `;
 
 const ImgContainer = styled.div<{ image?: string }>`
-  max-width: 720px;
-  max-height: 720px;
+  max-width: 760px;
+  max-height: 760px;
   background-color: black;
   background-image: url(${({ image }) => image});
   background-size: cover;
-`;
-
-const SlideShow = styled.div`
-  width: 760px;
-  height: 760px;
-  position: relative;
-  /* overflow: hidden; */
-`;
-const Sliders = styled.div<{
-  width: number;
-}>`
-  position: absolute;
-
-  top: 0;
-
-  background-color: pink;
-  width: ${({ width }) => width}px;
 `;
 
 const S = {
@@ -130,10 +113,8 @@ const S = {
   Footer,
   SizeController,
   CropperWrapper,
-  SlideShow,
   MultiViewWrapper,
   SmallPhotoBox,
-  Sliders,
 };
 
 export default S;
