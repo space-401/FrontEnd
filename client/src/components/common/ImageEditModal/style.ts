@@ -97,18 +97,9 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   border:1px solid white;
 `;
 
-const ImgContainer = styled.div<{ image?: string }>`
-  max-width: 760px;
-  max-height: 760px;
-  background-color: black;
-  background-image: url(${({ image }) => image});
-  background-size: cover;
-`;
-
 const S = {
   Wrapper,
   Form,
-  ImgContainer,
   Header,
   Footer,
   SizeController,
