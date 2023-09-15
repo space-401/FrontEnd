@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-  margin-top: 16px;
 `;
 const PaginationButton = styled.div<{ select: boolean }>`
   display: flex;
@@ -20,10 +19,9 @@ const PaginationButton = styled.div<{ select: boolean }>`
   align-items: center;
   justify-content: center;
 `;
-const CommentList = styled.div<{ isOpen: boolean; height: number }>`
-  height: ${({ isOpen, height }) => (isOpen ? height : 0)}px;
+const CommentList = styled.div<{ isOpen: boolean }>`
+  height: ${({ isOpen }) => (isOpen ? 'fit-content' : 0)};
   overflow: hidden;
-  transition: height 0.5s;
   display: flex;
   flex-direction: column;
   gap: 12px;

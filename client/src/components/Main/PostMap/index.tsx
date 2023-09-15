@@ -8,6 +8,7 @@ import { APP } from '@constants/APPKEY';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 import { getFormatDate } from '@utils/formatter';
 import { useState } from 'react';
+import { useDetailModalStore } from '@store/modal';
 
 const Index = (props: MapComponentProps) => {
   useKakaoLoader({
@@ -20,6 +21,13 @@ const Index = (props: MapComponentProps) => {
     center: postList[0].position || APP.DEFAULT_POSITION,
     isPanto: false,
   });
+  const modalOpen = useDetailModalStore((state) => state.ModalOpen);
+
+  const onClick = (number: number) => {
+    console.log(number, '아이디의 정보를 가져옵니다.');
+    setTimeout(() => modalOpen(), 1000);
+  };
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -40,6 +48,7 @@ const Index = (props: MapComponentProps) => {
         >
           {postList.map((value) => (
             <EventMarkerContainer
+              onClick={() => onClick(value.post_id)}
               key={`EventMarkerContainer-${value.position.lat}-${value.position.lng}`}
               position={value.position}
               setIsSelect={() => setIsSelect(value.post_id)}

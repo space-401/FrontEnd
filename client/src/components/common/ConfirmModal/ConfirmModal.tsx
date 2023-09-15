@@ -8,7 +8,7 @@ export type ConfirmModalType = {
   descriptionMessage?: string;
   ApproveMessage: string;
   closeMessage: string;
-  AsyncAction: () => void;
+  AsyncAction: (message: string) => void;
   ModalClose: () => void;
   isOpen: boolean;
 };
@@ -27,7 +27,7 @@ const ConfirmModal = React.forwardRef(
     } = prop;
 
     const ApproveAction = () => {
-      AsyncAction();
+      AsyncAction('삭제 되었습니다.');
       ModalClose();
     };
 

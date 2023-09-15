@@ -185,8 +185,6 @@ const MenuGroup = styled.div`
 `;
 const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
   width: 100%;
-  height: ${({ isOpen, isReply }) => (isOpen ? (isReply ? 520 : 460) : 0)}px;
-  transition: height 0.5s;
   overflow: hidden;
 `;
 
