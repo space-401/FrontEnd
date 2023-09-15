@@ -1,4 +1,4 @@
-import { O } from '@components/PostMap/components/style';
+import { O } from '@components/Main/PostMap/components/style';
 import { TagType } from '@type/tag.type';
 import { getFormatDate } from '@utils/formatter';
 import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';

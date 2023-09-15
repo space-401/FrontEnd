@@ -1,9 +1,9 @@
 import { MapComponentProps } from '@type/main.type';
-import S from '@components/PostMap/style';
+import S from '@components/Main/PostMap/style';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
-import EventMarkerContainer from '@components/PostMap/components/EventMarkerContainer';
-import LeftSection from '@components/PostMap/components/LeftSection';
-import MarkerContents from '@components/PostMap/components/MarkerContents';
+import EventMarkerContainer from '@components/Main/PostMap/components/EventMarkerContainer';
+import LeftSection from '@components/Main/PostMap/components/LeftSection';
+import MarkerContents from '@components/Main/PostMap/components/MarkerContents';
 import { APP } from '@constants/APPKEY';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 import { getFormatDate } from '@utils/formatter';

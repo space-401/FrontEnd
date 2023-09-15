@@ -2,7 +2,7 @@ import { StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import MarkerContents, {
   MarkerPropTypes,
-} from '@components/PostMap/components/MarkerContents';
+} from '@components/Main/PostMap/components/MarkerContents';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 import { getFormatDate } from '@utils/formatter';
 
