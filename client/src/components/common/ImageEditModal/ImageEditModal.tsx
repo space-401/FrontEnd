@@ -40,7 +40,7 @@ const ImgEditModal = ({
   ];
 
   const sliderRef = useRef<any>();
-  const { ModalOpen, ModalClose } = usePhotoModalStore();
+  const { ModalClose } = usePhotoModalStore();
   const [isMultipleBoxShow, setIsMultipleBoxShow] = useState(true);
   const [currentX, setCurrentX] = useState<number>(0);
 
