@@ -1,5 +1,5 @@
 import type { SearchProps } from '@type/main.type';
-import S from '@components/MainSearchBox/style';
+import S from '@components/Main/SearchBox/style';
 import { useEffect, useState } from 'react';
 import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
 

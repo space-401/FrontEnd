@@ -1,5 +1,5 @@
 import { UserType } from '@type/user.type';
-import { M } from '@components/PostMap/components/style';
+import { M } from '@components/Main/PostMap/components/style';
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
 
