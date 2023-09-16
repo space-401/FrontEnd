@@ -1,6 +1,6 @@
 import S from '@components/common/ImageEditModal/style';
 import ImageCropper from '@components/common/ImageEditModal/Cropper';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
 import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
@@ -117,6 +117,10 @@ const ImgEditModal = ({
     }
   };
 
+  useEffect(() => {
+    console.log('images', images);
+  }, [images]);
+
   return (
     <S.Wrapper>
       <S.Form>
@@ -124,7 +128,7 @@ const ImgEditModal = ({
           style={{
             position: 'absolute',
             top: '50%',
-            left: '0px',
+            left: '30px',
             zIndex: 10000,
           }}
           onClick={onClickMoveLeft}
@@ -133,7 +137,7 @@ const ImgEditModal = ({
           style={{
             position: 'absolute',
             top: '50%',
-            right: '0px',
+            right: '30px',
             zIndex: 1000,
           }}
           onClick={onClickMoveRight}
