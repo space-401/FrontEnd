@@ -16,7 +16,6 @@ const RightWrapper = styled.div`
   scrollbar-width: none; /* Firefox 지원 */
   -ms-overflow-style: none; /* IE 지원 */
   &::-webkit-scrollbar {
-    /* Webkit 브라우저 (예: Chrome, Safari)에 대한 스크롤바 스타일 지정 */
     display: none; /* 스크롤바 숨기기 */
   }
 `;
