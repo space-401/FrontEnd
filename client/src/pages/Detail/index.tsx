@@ -13,6 +13,7 @@ import {motion} from 'framer-motion';
 import {Map, MapMarker, useKakaoLoader} from 'react-kakao-maps-sdk';
 import DetailComments from '@components/Main/Comments';
 import ConfirmModal from '@components/common/ConfirmModal/ConfirmModal';
+import toast from "react-hot-toast";
 
 type DetailPageProps = {
     onClose: () => void;
@@ -61,6 +62,10 @@ const DetailPage = React.forwardRef(
 
         const DeleteAction = () => {
             onClose();
+            toast("삭제되었습니다.", {
+                style: {background: "black", color: "white"},
+                position: "top-center",
+            })
         };
 
         const setIsReply = (newReply: { open: boolean; id: number | undefined } | undefined) => {

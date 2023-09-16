@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
-import CreateSpace from '@/pages/createSpace';
-import CreatePost from '@/pages/createPost';
+import CreateSpace from '@/pages/CreateSpace';
+import CreatePost from '@/pages/CreatePost';
 import MainPage from '@/pages/main';
 import MainPageMock from '@/mocks/data/MainPage/mainPage.mock';
-import InviteCode from '@/pages/inviteCode';
+import InviteCode from '@pages/InviteCode';
 
 const router = createBrowserRouter([
   {
