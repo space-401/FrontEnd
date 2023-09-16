@@ -17,11 +17,16 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
     <div style={{ width: '348px', height: '348px', position: 'relative' }}>
       <LeftIcon
         className="prevBtn"
-        style={{ position: 'absolute', top: '50%', zIndex: 100 }}
+        style={{ position: 'absolute', top: '50%', zIndex: 100, left: '10px' }}
       />
       <RightIcon
         className="nextBtn"
-        style={{ position: 'absolute', top: '50%', right: 0, zIndex: 100 }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          zIndex: 100,
+          right: '10px',
+        }}
       />
       <Swiper
         modules={[Pagination, Navigation]}
