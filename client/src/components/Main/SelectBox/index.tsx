@@ -22,7 +22,7 @@ const CSelectBox = (props: SelectBoxProps) => {
 
   useEffect(() => {
     setState(select);
-  }, [setState, select]);
+  }, [select]);
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
