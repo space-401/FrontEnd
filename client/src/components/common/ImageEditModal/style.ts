@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
+  z-index: 10000;
 `;
 
 const Form = styled.form`
@@ -57,6 +57,7 @@ const Header = styled.div`
 `;
 
 const Footer = styled.div`
+  position: 'relative';
   height: 4rem;
   width: 100%;
   display: flex;
