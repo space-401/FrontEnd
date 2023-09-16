@@ -17,7 +17,7 @@ import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
-import MultipleImgBox from '@/components/common/MultipleImgBox';
+import ImgSlider from '@/components/common/ImgSlider';
 
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +32,7 @@ const CreatePost = () => {
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
 
-  // //자식 inputRef 요소를 클릭하는 함수
+  //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && images.length == 0) inputRef.current.click();
     if (cropImages.length > 0) {
@@ -42,6 +42,7 @@ const CreatePost = () => {
     }
     ModalOpen();
   };
+
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -49,6 +50,10 @@ const CreatePost = () => {
     if (!files) return;
     //여러개의 파일을 하나씩 순회하여 읽어오기
     for (let i = 0; i < files.length; i++) {
+      if (images.length > 10) {
+        return alert('이미지는 10개 이상 추가할 수 없습니다!');
+      }
+
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -76,8 +81,8 @@ const CreatePost = () => {
             handleFileChange={handleFileChange}
           />
         )}
-        {images.length == 0 ? (
-          <BasicBox color="grey" width={348} borderradius={20}>
+        {cropImages.length == 0 ? (
+          <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
             <S.PhotoContainer>
               <PhotoIcon />
 
@@ -103,21 +108,14 @@ const CreatePost = () => {
               </BasicButton>
             </S.PhotoContainer>
           </BasicBox>
-        ) : images.length > 1 ? (
-          <S.PhotoWrapper>
-            <S.PhotoBox src={cropImages[0]} onClick={onClickImgEditModal} />
-            <MultipleImgBox
-              isBackground={false}
-              isAddPhoto={false}
-              setImages={setImages}
-              images={cropImages}
-            />
-          </S.PhotoWrapper>
         ) : (
-          <S.PhotoBox src={images[0]} onClick={onClickImgEditModal} />
+          <div style={{ zIndex: 1000, width: '348px' }}>
+            <ImgSlider
+              images={cropImages}
+              onClickImgEditModal={onClickImgEditModal}
+            />
+          </div>
         )}
-
-        {/* )} */}
 
         <S.GridWrapper>
           {/*스페이스 정보*/}
