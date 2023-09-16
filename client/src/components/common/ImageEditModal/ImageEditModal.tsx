@@ -1,12 +1,11 @@
 import S from '@components/common/ImageEditModal/style';
 import ImageCropper from '@components/common/ImageEditModal/Cropper';
-import { useEffect, useRef, useState } from 'react';
-import { ReactComponent as SizeChangeIcon } from '@assets/svg/photo/sizeChangeIcon.svg';
+import { useRef, useState } from 'react';
+import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
+import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import MultipleImgBox from '@components/common/MultipleImgBox/index';
 import { usePhotoModalStore } from '@/store/modal';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { ReactCropperElement } from 'react-cropper';
 
 const ImgEditModal = ({
@@ -30,6 +29,11 @@ const ImgEditModal = ({
   const cropperRef3 = useRef<ReactCropperElement>(null);
   const cropperRef4 = useRef<ReactCropperElement>(null);
   const cropperRef5 = useRef<ReactCropperElement>(null);
+  const cropperRef6 = useRef<ReactCropperElement>(null);
+  const cropperRef7 = useRef<ReactCropperElement>(null);
+  const cropperRef8 = useRef<ReactCropperElement>(null);
+  const cropperRef9 = useRef<ReactCropperElement>(null);
+  const cropperRef10 = useRef<ReactCropperElement>(null);
 
   const myRefs = [
     cropperRef1,
@@ -37,6 +41,11 @@ const ImgEditModal = ({
     cropperRef3,
     cropperRef4,
     cropperRef5,
+    cropperRef6,
+    cropperRef7,
+    cropperRef8,
+    cropperRef9,
+    cropperRef10,
   ];
 
   const sliderRef = useRef<any>();
@@ -45,13 +54,6 @@ const ImgEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
 
   const imageNum = images.length;
-
-  //추가된 이미지가 5개 초과이면 경고 모달을 띄워줌
-  useEffect(() => {
-    if (images.length > 5) {
-      alert('이미지는 5개 이상 추가할 수 없습니다!');
-    }
-  }, [images]);
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any) => {
@@ -92,6 +94,11 @@ const ImgEditModal = ({
       setCurrentX(newPosition);
       sliderRef.current.style.transform = `translateX(${newPosition}px)`;
       setCurrentIdx((currentIdx) => currentIdx - 1);
+    } else {
+      const newPosition = -760 * (imageNum - 1);
+      setCurrentX(newPosition);
+      sliderRef.current.style.transform = `translateX(${newPosition}px)`;
+      setCurrentIdx(images.length - 1);
     }
   };
 
@@ -100,22 +107,37 @@ const ImgEditModal = ({
     if (currentIdx < imageNum - 1) {
       const newPosition = currentX - 760;
       setCurrentX(newPosition);
-      sliderRef.current.style.transform = `translateX(${newPosition}px)`; // 스타일 직접 변경
+      sliderRef.current.style.transform = `translateX(${newPosition}px)`;
       setCurrentIdx((currentIdx) => currentIdx + 1);
+    } else {
+      const newPosition = 0;
+      setCurrentX(newPosition);
+      sliderRef.current.style.transform = `translateX(${newPosition}px)`;
+      setCurrentIdx(0);
     }
   };
 
   return (
     <S.Wrapper>
-      <ArrowBackIosIcon
-        sx={{ position: 'absolute', top: '50%', left: '13rem', zIndex: 10000 }}
-        onClick={onClickMoveLeft}
-      />
-      <ArrowForwardIosIcon
-        sx={{ position: 'absolute', top: '50%', right: '13rem', zIndex: 10000 }}
-        onClick={onClickMoveRight}
-      />
       <S.Form>
+        <PrevBtn
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '0px',
+            zIndex: 10000,
+          }}
+          onClick={onClickMoveLeft}
+        />
+        <NextBtn
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '0px',
+            zIndex: 1000,
+          }}
+          onClick={onClickMoveRight}
+        />
         <S.Header>
           <button onClick={ModalClose}>취소</button>
           <button
@@ -142,6 +164,7 @@ const ImgEditModal = ({
             {images.map((img, index) => {
               return (
                 <ImageCropper
+                  key={index}
                   setCropImages={setCropImages}
                   image={img}
                   index={index}
@@ -154,30 +177,25 @@ const ImgEditModal = ({
         </div>
 
         <S.Footer>
-          <SizeChangeIcon />
           <MultipleIcon
+            style={{
+              zIndex: 1000,
+              position: 'absolute',
+              right: '20px',
+            }}
             onClick={() => {
               setIsMultipleBoxShow((prev) => !prev);
             }}
           />
-          <div
-            style={{
-              zIndex: 1000,
-              position: 'absolute',
-              right: '10px',
-              bottom: '70px',
-            }}
-          >
-            {isMultipleBoxShow && (
-              <MultipleImgBox
-                isBackground={true}
-                isAddPhoto={true}
-                images={images}
-                setImages={setImages}
-                onClickCurrentImg={onClickCurrentImg}
-              />
-            )}
-          </div>
+          {isMultipleBoxShow && (
+            <MultipleImgBox
+              isBackground={true}
+              isAddPhoto={true}
+              images={images}
+              setImages={setImages}
+              onClickCurrentImg={onClickCurrentImg}
+            />
+          )}
         </S.Footer>
       </S.Form>
     </S.Wrapper>
