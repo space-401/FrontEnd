@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  background: ${({ theme }) => theme.COLOR['gray-6']};
-  padding: 4px 6px;
+  border-radius: 5px;
+  background: transparent;
+  padding: 5px 10px;
   display: flex;
   gap: 8px;
 `;

@@ -1,6 +1,26 @@
 import { TagType } from '@type/tag.type';
 import { UserType } from '@type/user.type';
 
+export type HeaderType ={
+  spaceInfo : SpaceType[];
+  alarmMessages : AlarmType[];
+}
+
+export type SpaceType ={
+  space_id: number,
+  space_title:string,
+  space_url:string,
+}
+
+export type AlarmType = {
+  space_id:string,
+  isNew:boolean,
+  user:UserType,
+  post_img_url:string,
+  create_at:string,
+  alarmMessage : string
+}
+
 export type SpacePostType = {
   post_id: number;
   post_title: string;

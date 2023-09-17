@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
+import {omitText} from '@styles/common';
+import {theme} from "@styles/theme/theme";
 
 const Container = styled.div`
   position: absolute;
@@ -17,7 +18,7 @@ const RightWrapper = styled.div`
   overflow-y: scroll;
   width: 452px;
   min-height: 100%;
-  background: ${({ theme }) => theme.COLOR['gray-6']};
+  background: ${({theme}) => theme.COLOR['gray-6']};
 
   scrollbar-width: none; /* Firefox 지원 */
   -ms-overflow-style: none; /* IE 지원 */
@@ -28,6 +29,7 @@ const RightWrapper = styled.div`
 `;
 
 const DeleteIconBox = styled.div`
+  z-index: ${({theme})=>theme.Z_INDEX["LEVEL-5"]};
   position: absolute;
   top: 32px;
   right: 42px;
@@ -35,6 +37,7 @@ const DeleteIconBox = styled.div`
 `;
 
 const LikeIconBox = styled.div`
+  z-index: ${({theme})=>theme.Z_INDEX["LEVEL-5"]};
   height: 48px;
   width: 48px;
   position: absolute;
@@ -48,8 +51,8 @@ const LikeIconBox = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 150px;
-  background: ${({ theme }) => theme.COLOR['gray-5']};
-  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+  background: ${({theme}) => theme.COLOR['gray-5']};
+  box-shadow: ${({theme}) => theme.SHADOW['shadow-sm']};
 `;
 
 const LeftImgBox = styled.div<{ isArray: boolean }>`
@@ -57,12 +60,12 @@ const LeftImgBox = styled.div<{ isArray: boolean }>`
   position: relative;
   width: 728px;
   min-height: 100vh;
-  background: ${({ theme }) => theme.COLOR.black};
+  background: ${({theme}) => theme.COLOR.black};
   display: flex;
   gap: 23px;
   flex-direction: column;
-  overflow-y: ${({ isArray }) => (isArray ? 'scroll' : 'hidden')};
-  justify-content: ${({ isArray }) => (isArray ? '' : 'center')};
+  overflow-y: ${({isArray}) => (isArray ? 'scroll' : 'hidden')};
+  justify-content: ${({isArray}) => (isArray ? '' : 'center')};
   overflow-x: hidden;
 
   &::-webkit-scrollbar {
@@ -71,7 +74,7 @@ const LeftImgBox = styled.div<{ isArray: boolean }>`
 
   &::-webkit-scrollbar-thumb {
     height: 10%;
-    background: ${({ theme }) => theme.COLOR['gray-4']};
+    background: ${({theme}) => theme.COLOR['gray-4']};
     border-radius: 5px;
   }
 
@@ -85,10 +88,10 @@ const DetailInfo = styled.div`
 `;
 
 const DateBox = styled.div`
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 
 const UserBox = styled.div`
@@ -101,10 +104,10 @@ const UserBox = styled.div`
 
 const UserNameList = styled.div`
   width: 260px;
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-16']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
   ${omitText}
 `;
 
@@ -113,16 +116,16 @@ const MapInfo = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 16px;
-  border-top: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
-  border-bottom: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
+  border-top: 1px solid ${({theme}) => theme.COLOR['gray-5']};
+  border-bottom: 1px solid ${({theme}) => theme.COLOR['gray-5']};
 `;
 
 const MapTitle = styled.div`
   display: flex;
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -133,8 +136,8 @@ const CommentInfo = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 16px;
-  border-top: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
-  border-bottom: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
+  border-top: 1px solid ${({theme}) => theme.COLOR['gray-5']};
+  border-bottom: 1px solid ${({theme}) => theme.COLOR['gray-5']};
 `;
 
 const ManagementButton = styled.div`
@@ -144,17 +147,17 @@ const ManagementButton = styled.div`
 `;
 const PostTitle = styled.div`
   margin-top: 40px;
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-700']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-20']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-700']};
 `;
 const PostDescription = styled.div`
   margin-top: 16px;
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-16']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
   white-space: pre;
   line-height: 140%;
 `;
@@ -179,21 +182,20 @@ const FlexBox = styled.div`
 
 const MapBox = styled.div<{ isOpen: boolean }>`
   width: 100%;
-  height: ${({ isOpen }) => (isOpen ? '200px' : 0)};
+  height: ${({isOpen}) => (isOpen ? '200px' : 0)};
   border-radius: 10px;
   overflow: hidden;
-  margin-top: ${({ isOpen }) => (isOpen ? '8px' : 0)};
-  transition:
-    height 1s,
-    margin-top 1s;
+  margin-top: ${({isOpen}) => (isOpen ? '8px' : 0)};
+  transition: height 1s,
+  margin-top 1s;
 `;
 
 const CommentTitle = styled.div`
   display: flex;
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -207,12 +209,12 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
   position: fixed;
   width: 100%;
   height: 100%;
-  display: ${({ isOpen }) => (isOpen ? 'none' : 'block')};
+  display: ${({isOpen}) => (isOpen ? 'none' : 'block')};
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+  z-index: ${({theme}) => theme.Z_INDEX['LEVEL-3']};
   cursor: default;
   content: ' ';
   background: transparent;
@@ -229,8 +231,8 @@ const MenuGroup = styled.div`
   align-items: flex-start;
   gap: 2px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.COLOR['gray-5']};
-  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+  background: ${({theme}) => theme.COLOR['gray-5']};
+  box-shadow: ${({theme}) => theme.SHADOW['shadow-sm']};
 `;
 const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
   width: 100%;
@@ -239,7 +241,7 @@ const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
 
 const MenuButton = styled.div`
   position: relative;
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  z-index: ${({theme}) => theme.Z_INDEX['LEVEL-4']};
   cursor: pointer;
   display: flex;
   padding: 4px 16px;
@@ -247,15 +249,15 @@ const MenuButton = styled.div`
   align-items: center;
   gap: 8px;
 
-  color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.white};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
 
   border-radius: 5px;
 
   &:hover {
-    background: ${({ theme }) => theme.COLOR['gray-6']};
+    background: ${({theme}) => theme.COLOR['gray-6']};
   }
 
   transition: background 0.2s;
@@ -272,62 +274,83 @@ const CommentInput = styled.div`
   align-items: center;
   bottom: 0;
   gap: 16px;
-  background: ${({ theme }) => theme.COLOR['gray-5']};
-  color: ${({ theme }) => theme.COLOR['gray-1']};
+  background: ${({theme}) => theme.COLOR['gray-5']};
+  color: ${({theme}) => theme.COLOR['gray-1']};
 
   textarea {
-    color: ${({ theme }) => theme.COLOR['gray-1']};
+    color: ${({theme}) => theme.COLOR['gray-1']};
   }
 
-  .mention-suggestions {
-    border: 1px solid black;
-  }
 `;
+
+export const mentionStyle = {
+    width: '90%',
+    suggestions: {
+        background: theme.COLOR["gray-6"],
+        border: `1px solid ${theme.COLOR["gray-5"]}`,
+        borderRadius: '10px',
+        overflow:'hidden',
+        padding:'5px',
+        boxSizing:'border-box',
+        list: {
+            borderRadius: '10px',
+            fontSize: 16,
+            background: theme.COLOR["gray-6"],
+        },
+        item: {
+            background: theme.COLOR["gray-6"],
+            borderRadius: "8px",
+            '&focused': {
+                background: theme.COLOR["gray-5"],
+            },
+        },
+    },
+}
 
 const ImgBox = styled.div<{ img_url: string }>`
   width: 680px;
   aspect-ratio: 1/1;
-  background: url(${({ img_url }) => img_url});
+  background: url(${({img_url}) => img_url});
 
   background-size: cover;
 `;
 
 const ReplyComment = styled.button`
-  color: ${({ theme }) => theme.COLOR.skyblue};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  color: ${({theme}) => theme.COLOR.skyblue};
+  font-family: ${({theme}) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({theme}) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({theme}) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%; /* 22.4px */
 `;
 
 const S = {
-  MapBox,
-  RightWrapper,
-  DeleteIconBox,
-  LeftImgBox,
-  UserBox,
-  DetailInfo,
-  UserNameList,
-  DateBox,
-  Container,
-  MapInfo,
-  CommentInfo,
-  ManagementButton,
-  PostTitle,
-  PostDescription,
-  TagGroup,
-  MapTitle,
-  FlexBox,
-  CommentTitle,
-  CommentBox,
-  ManagementList,
-  BackClickBlock,
-  MenuGroup,
-  MenuButton,
-  CommentInput,
-  ImgBox,
-  ReplyComment,
-  LikeIconBox,
+    MapBox,
+    RightWrapper,
+    DeleteIconBox,
+    LeftImgBox,
+    UserBox,
+    DetailInfo,
+    UserNameList,
+    DateBox,
+    Container,
+    MapInfo,
+    CommentInfo,
+    ManagementButton,
+    PostTitle,
+    PostDescription,
+    TagGroup,
+    MapTitle,
+    FlexBox,
+    CommentTitle,
+    CommentBox,
+    ManagementList,
+    BackClickBlock,
+    MenuGroup,
+    MenuButton,
+    CommentInput,
+    ImgBox,
+    ReplyComment,
+    LikeIconBox,
 };
 
 export default S;
