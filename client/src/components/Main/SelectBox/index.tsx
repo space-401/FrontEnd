@@ -22,6 +22,7 @@ const CSelectBox = (props: SelectBoxProps) => {
 
   useEffect(() => {
     setState(select);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select]);
 
   const toggleOpen = () => {

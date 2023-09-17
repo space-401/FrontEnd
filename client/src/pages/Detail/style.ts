@@ -1,20 +1,27 @@
 import styled from 'styled-components';
 import { omitText } from '@styles/common';
 
-const RightWrapper = styled.div`
+const Container = styled.div`
   position: absolute;
+  display: flex;
   height: 100vh;
-  overflow: hidden;
-  overflow-y: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const RightWrapper = styled.div`
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
   width: 452px;
   min-height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
 
   scrollbar-width: none; /* Firefox 지원 */
   -ms-overflow-style: none; /* IE 지원 */
+
   &::-webkit-scrollbar {
     display: none; /* 스크롤바 숨기기 */
   }
@@ -27,8 +34,50 @@ const DeleteIconBox = styled.div`
   cursor: pointer;
 `;
 
-const LeftImgBox = styled.div`
+const LikeIconBox = styled.div`
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  top: 23px;
+  left: -63px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 150px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+`;
+
+const LeftImgBox = styled.div<{ isArray: boolean }>`
+  padding: 24px;
   position: relative;
+  width: 728px;
+  min-height: 100vh;
+  background: ${({ theme }) => theme.COLOR.black};
+  display: flex;
+  gap: 23px;
+  flex-direction: column;
+  overflow-y: ${({ isArray }) => (isArray ? 'scroll' : 'hidden')};
+  justify-content: ${({ isArray }) => (isArray ? '' : 'center')};
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 10%;
+    background: ${({ theme }) => theme.COLOR['gray-4']};
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
 `;
 
 const DetailInfo = styled.div`
@@ -43,6 +92,7 @@ const DateBox = styled.div`
 `;
 
 const UserBox = styled.div`
+  position: relative;
   margin-top: 8px;
   display: flex;
   gap: 8px;
@@ -90,7 +140,7 @@ const CommentInfo = styled.div`
 const ManagementButton = styled.div`
   cursor: pointer;
   position: absolute;
-  right: 16px;
+  right: 0;
 `;
 const PostTitle = styled.div`
   margin-top: 40px;
@@ -157,7 +207,7 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
   position: fixed;
   width: 100%;
   height: 100%;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  display: ${({ isOpen }) => (isOpen ? 'none' : 'block')};
   top: 0;
   right: 0;
   bottom: 0;
@@ -212,11 +262,42 @@ const MenuButton = styled.div`
 `;
 
 const CommentInput = styled.div`
-  position: absolute;
+  position: fixed;
+  height: fit-content;
+  width: inherit;
+  min-height: 48px;
+  padding: 13px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   bottom: 0;
-  height: 48px;
+  gap: 16px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR['gray-1']};
+
+  textarea {
+    color: ${({ theme }) => theme.COLOR['gray-1']};
+  }
+
+  .mention-suggestions {
+    border: 1px solid black;
+  }
+`;
+
+const ImgBox = styled.div<{ img_url: string }>`
+  width: 680px;
+  aspect-ratio: 1/1;
+  background: url(${({ img_url }) => img_url});
+
+  background-size: cover;
+`;
+
+const ReplyComment = styled.button`
+  color: ${({ theme }) => theme.COLOR.skyblue};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  line-height: 140%; /* 22.4px */
 `;
 
 const S = {
@@ -228,6 +309,7 @@ const S = {
   DetailInfo,
   UserNameList,
   DateBox,
+  Container,
   MapInfo,
   CommentInfo,
   ManagementButton,
@@ -243,6 +325,9 @@ const S = {
   MenuGroup,
   MenuButton,
   CommentInput,
+  ImgBox,
+  ReplyComment,
+  LikeIconBox,
 };
 
 export default S;
