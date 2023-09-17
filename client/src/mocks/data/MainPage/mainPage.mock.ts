@@ -3,6 +3,7 @@ import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 import { MainPageType } from '@type/main.type';
 
 const MainPageMock: MainPageType = {
+  isAdmin: true,
   spaceInfo: {
     title: 'SPACE 401',
     description:

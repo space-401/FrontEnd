@@ -19,6 +19,12 @@ export const useDetailModalStore = create<ModalType>((setState) => ({
   ModalClose: () => setState(() => ({ isOpen: false })),
 }));
 
+export const useSpaceUserModalStore = create<ModalType>((setState) => ({
+  isOpen: false,
+  ModalOpen: () => setState(() => ({ isOpen: true })),
+  ModalClose: () => setState(() => ({ isOpen: false })),
+}));
+
 export const useAlertModalStore = create<
   ModalType & {
     info: AlertModalType | undefined;
