@@ -161,7 +161,7 @@ const OneComment = (props: OneCommentType) => {
             <S.ReplyTextBox>
               <TextareaAutosize
                 value={state.reply}
-                style={{ paddingRight: '50px', zIndex: 20 }}
+                style={{ paddingRight: '50px'}}
                 minRows={2}
                 maxRows={4}
                 onChange={handleChange}
