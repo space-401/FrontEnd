@@ -40,7 +40,7 @@ const SpaceBox = styled.div`
 `;
 
 const Container = styled.div`
-  margin: 10px 32px 32px;
+  margin: 10px 32px 8px 32px;
   width: 100%;
   height: 64px;
   max-width: 1856px;
