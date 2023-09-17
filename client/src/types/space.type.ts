@@ -1,6 +1,26 @@
 import { TagType } from '@type/tag.type';
 import { UserType } from '@type/user.type';
 
+export type HeaderType = {
+  spaceInfo: SpaceType[];
+  alarmMessages: AlarmType[];
+};
+
+export type SpaceType = {
+  space_id: number;
+  space_title: string;
+  space_url: string;
+};
+
+export type AlarmType = {
+  space_id: string;
+  isNew: boolean;
+  user: UserType;
+  post_img_url: string;
+  create_at: string;
+  alarmMessage: string;
+};
+
 export type SpacePostType = {
   post_id: number;
   post_title: string;
@@ -23,11 +43,15 @@ export type PostDetailType = {
   place_tag: TagType[];
   post_created_at: string;
   post_updated_at: string;
+  // 해당 포스트의 태그된 유저 정보
   users: UserType[];
+  // 자동완성을 하기 위한 유저 리스트
+  user_List: UserType[];
   main_img_url: string;
-  sub_img_url?: string[];
+  sub_img_url: string[];
   position: { lat: number; lng: number };
   commentCount: number;
+  isBookMark: boolean;
 };
 
 export type SelectSpacePropType = {
