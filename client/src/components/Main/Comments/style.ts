@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isOpen: boolean }>`
+  margin-top: ${({ isOpen }) => (isOpen ? '16px' : 0)};
+  margin-bottom: ${({ isOpen }) => (isOpen ? '30px' : 0)};
   width: 100%;
-  overflow: hidden;
+  transition: 0.5s;
 `;
 const PaginationButton = styled.div<{ select: boolean }>`
   display: flex;
@@ -19,12 +21,11 @@ const PaginationButton = styled.div<{ select: boolean }>`
   align-items: center;
   justify-content: center;
 `;
-const CommentList = styled.div<{ isOpen: boolean }>`
+const CommentList = styled.ul<{ isOpen: boolean }>`
   height: ${({ isOpen }) => (isOpen ? 'fit-content' : 0)};
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  margin-bottom: ${({ isOpen }) => (isOpen ? 50 : 0)}px;
 `;
 
 const PaginationGroup = styled.div`
