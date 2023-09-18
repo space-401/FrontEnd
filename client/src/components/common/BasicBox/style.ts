@@ -9,6 +9,7 @@ const Wrapper = styled.div<BasicBoxProp>`
   border-radius: ${(props) => props.borderradius}px;
   ${flexCenter}
   background-image: url(${(props) => props.backgroundImage});
+  background-size: cover;
 `;
 
 const S = {

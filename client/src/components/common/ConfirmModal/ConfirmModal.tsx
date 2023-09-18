@@ -32,7 +32,17 @@ const ConfirmModal = React.forwardRef(
     };
 
     return (
-      <Modal open={isOpen} onClose={ModalClose}>
+      <Modal
+        open={isOpen}
+        onClose={ModalClose}
+        slotProps={{
+          backdrop: {
+            sx: {
+              backgroundColor: 'rgba(0,0,0,0.6)',
+            },
+          },
+        }}
+      >
         <Box tabIndex={-1} ref={forwardRef}>
           <S.Container>
             <S.TitleMessage>{titleMessage}</S.TitleMessage>

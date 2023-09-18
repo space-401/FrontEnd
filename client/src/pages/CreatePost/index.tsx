@@ -8,13 +8,12 @@ import Calendar from '@/components/common/Calender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
-import Cat from '@assets/cat.jpg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/CreateSelectBox';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { users_mock } from '@/mocks/data/user/users.mock';
 import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
-import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
+import ImagesEditModal from '@/components/common/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgSlider from '@/components/common/ImgSlider';
@@ -26,11 +25,17 @@ const CreatePost = () => {
   const [images, setImages] = useState<string[]>([]);
   //편집된 이미지 파일을 저장하는 곳
   const [cropImages, setCropImages] = useState<string[]>([]);
+  //file형태의 이미지로 저장하는 곳
+  const [convertedImages, setConvertedImages] = useState<File[]>([]);
   console.log(userList);
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
+
+  useEffect(() => {
+    console.log('변환이미지', convertedImages);
+  }, [convertedImages]);
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
@@ -48,18 +53,21 @@ const CreatePost = () => {
     e.preventDefault();
     const files = e.target.files;
     if (!files) return;
-    //여러개의 파일을 하나씩 순회하여 읽어오기
+
+    let currentImgNum = images.length;
+    console.log('현재이미지길이', currentImgNum);
+    let hasAlert = false;
     for (let i = 0; i < files.length; i++) {
-      if (images.length > 10) {
-        return alert('이미지는 10개 이상 추가할 수 없습니다!');
-      }
-
       const reader = new FileReader();
-
       reader.onload = () => {
         const result = reader.result;
-        if (typeof result === 'string') {
-          setImages((images) => [...images, result]);
+        if (typeof result === 'string' && currentImgNum < 10) {
+          setImages((prev) => [...prev, result]);
+          currentImgNum++;
+        }
+        if (currentImgNum >= 10 && !hasAlert) {
+          alert('이미지는 10개까지만 추가됩니다');
+          hasAlert = true;
         }
       };
       reader.readAsDataURL(files[i]);
@@ -71,7 +79,7 @@ const CreatePost = () => {
       {/*사진 편집 모달*/}
       <S.Wrapper>
         {isOpen && (
-          <ImgEditModal
+          <ImagesEditModal
             cropImages={cropImages}
             currentIdx={currentIdx}
             setCurrentIdx={setCurrentIdx}
@@ -79,13 +87,13 @@ const CreatePost = () => {
             setImages={setImages}
             setCropImages={setCropImages}
             handleFileChange={handleFileChange}
+            setConvertedImages={setConvertedImages}
           />
         )}
         {cropImages.length == 0 ? (
           <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
             <S.PhotoContainer>
               <PhotoIcon />
-
               <BasicButton
                 onClick={onClickImgEditModal}
                 width={55}
@@ -93,7 +101,7 @@ const CreatePost = () => {
                 borderRadius={5}
                 backgroundColor={theme.COLOR['gray-2']}
               >
-                <form method="post" encType="multipart/form-data">
+                <form method="post" encType="form-data">
                   <input
                     type="file"
                     ref={inputRef}
@@ -120,7 +128,7 @@ const CreatePost = () => {
         <S.GridWrapper>
           {/*스페이스 정보*/}
           <S.SpaceInfoContainer>
-            <CircleIcon img_url={Cat}></CircleIcon>
+            <CircleIcon img_url=""></CircleIcon>
             <div>스페이스 이름</div>
           </S.SpaceInfoContainer>
 
@@ -218,6 +226,7 @@ const CreatePost = () => {
             />
           </S.ButtonContainer>
         </S.GridWrapper>
+        <div style={{ height: 2000 }}></div>
       </S.Wrapper>
     </FullScreenModal>
   );
