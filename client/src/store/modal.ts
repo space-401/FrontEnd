@@ -25,21 +25,15 @@ export const useSpaceUserModalStore = create<ModalType>((setState) => ({
   ModalClose: () => setState(() => ({ isOpen: false })),
 }));
 
-export const useAlertModalStore = create<
-  ModalType & {
-    info: AlertModalType | undefined;
-    setInfo: (newInfo: AlertModalType) => void;
-  }
->((setState) => ({
-  isOpen: false,
+export const useAlertModalStore = create<{
+  info: AlertModalType | undefined;
+  setInfo: (newInfo: AlertModalType) => void;
+}>((setState) => ({
   info: undefined,
   setInfo: (newInfo: AlertModalType) =>
     setState(() => ({
-      isOpen: false,
       info: newInfo,
     })),
-  ModalOpen: () => setState((prev) => ({ ...prev, isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false, info: undefined })),
 }));
 
 export const usePhotoModalStore = create<ModalType>((setState) => ({
