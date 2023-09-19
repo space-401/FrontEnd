@@ -98,10 +98,21 @@ const UserList = (props: UserListPropsType) => {
           isOpen={state.isChangeAdminModal}
         />
       </Modal>
-      <Modal open={state.isUserModal} onClose={() => ChangeUserModal(false)}>
+      <Modal
+        open={state.isUserModal}
+        onClose={() => ChangeUserModal(false)}
+        slotProps={{
+          backdrop: {
+            sx: {
+              backgroundColor: 'transparent',
+            },
+          },
+        }}
+      >
         <ProfileAndUserNameChangeModal
-          ModalClose={() => ChangeUserModal(false)}
-          isOpen={state.isUserModal}
+          ModalClose={() => {
+            ChangeUserModal(false);
+          }}
         />
       </Modal>
       <S.UserProfile>
@@ -120,11 +131,7 @@ const UserList = (props: UserListPropsType) => {
       {isAdmin ||
         (index === 0 && (
           <S.SettingIconBox className={'hoverIcon'}>
-            <MoreSvg
-              onClick={() => {
-                ChangeSettingMode(true);
-              }}
-            />
+            <MoreSvg onClick={() => ChangeSettingMode(true)} />
           </S.SettingIconBox>
         ))}
       <S.BackClickBlock
