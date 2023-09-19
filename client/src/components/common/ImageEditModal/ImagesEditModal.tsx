@@ -10,6 +10,8 @@ import { dataURLtoFile } from '@/utils/fileConvertor';
 import ImgCounter from './ImgCounter';
 import { ImageType } from '@/types/image.type';
 import MultipleImgBox from '../MultipleImgBox';
+import { Box, Modal } from '@mui/material';
+
 const ImagesEditModal = ({
   images,
   setImages,
@@ -53,10 +55,8 @@ const ImagesEditModal = ({
   ];
   const [isMultipleBoxShow, setIsMultipleBoxShow] = useState(true);
   const sliderRef = useRef<any>();
-  const { ModalClose } = usePhotoModalStore();
-  // const [isMultipleBoxShow, setIsMultipleBoxShow] = useState(true);
+  const { ModalClose, isOpen } = usePhotoModalStore();
   const [currentX, setCurrentX] = useState<number>(0);
-
   const imageNum = images.length;
 
   //하나의 이미지를 크롭해서 저장함.
@@ -89,7 +89,6 @@ const ImagesEditModal = ({
 
   //왼쪽 이미지 보기
   const onClickMoveLeft = () => {
-    // setIsMultipleBoxShow(false);
     if (currentIdx > 0) {
       const newPosition = currentX + 760;
       setCurrentX(newPosition);
@@ -105,7 +104,6 @@ const ImagesEditModal = ({
 
   //오른쪽 이미지 보기
   const onClickMoveRight = () => {
-    // setIsMultipleBoxShow(false);
     if (currentIdx < imageNum - 1) {
       const newPosition = currentX - 760;
       setCurrentX(newPosition);
@@ -125,90 +123,109 @@ const ImagesEditModal = ({
     setImages([]);
   };
 
+  //선택한 이미지를 보기
+  const onClickCurrentImg = (idx: number) => {
+    setCurrentIdx(idx);
+    const newPosition = idx * 760;
+    sliderRef.current.style.transform = `translateX(-${newPosition}px)`;
+  };
+
   return (
-    <S.Wrapper>
-      {isMultipleBoxShow && (
-        <MultipleImgBox
-          isBackground={true}
-          isAddPhoto={true}
-          images={images}
-          setImages={setImages}
-          setCurrentIdx={setCurrentIdx}
-          currentIdx={currentIdx}
-        />
-      )}
-      <S.Form>
-        <PrevBtn
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '30px',
-            zIndex: 10000,
-          }}
-          onClick={onClickMoveLeft}
-        />
-        <NextBtn
-          style={{
-            position: 'absolute',
-            top: '50%',
-            right: '30px',
-            zIndex: 1000,
-          }}
-          onClick={onClickMoveRight}
-        />
-        <S.Header>
-          <button onClick={onClickCancelModal}>취소</button>
-          <button
-            onClick={(e) => {
-              onSaveAllEditImg(e);
-            }}
-          >
-            완료
-          </button>
-        </S.Header>
-
-        <div
-          style={{
-            position: 'relative',
-            height: '760px',
-            width: '760px',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{ display: 'flex', position: 'absolute', left: 0 }}
-            ref={sliderRef}
-          >
-            {images.map((img, index) => {
-              return (
-                <ImageCropper
-                  key={index}
-                  setCropImages={setCropImages}
-                  image={img.img}
-                  index={index}
-                  cropImages={cropImages}
-                  myRef={myRefs[index]}
-                />
-              );
-            })}
-          </div>
-        </div>
-
-        <S.Footer>
-          <ImgCounter currentNum={images.length} maxNum={10} />
-          <MultipleIcon
-            style={{
-              zIndex: 1000,
-              position: 'absolute',
-              right: '20px',
-            }}
-            onClick={() => {
-              setIsMultipleBoxShow((prev) => !prev);
-            }}
+    <Modal
+      open={isOpen}
+      slotProps={{
+        backdrop: {
+          sx: {
+            backgroundColor: 'rgba(0,0,0,0.6)',
+          },
+        },
+      }}
+    >
+      <Box tabIndex={-1}>
+        {isMultipleBoxShow && (
+          <MultipleImgBox
+            isBackground={true}
+            isAddPhoto={true}
+            images={images}
+            setImages={setImages}
+            setCurrentIdx={setCurrentIdx}
+            currentIdx={currentIdx}
+            onClickCurrentImg={onClickCurrentImg}
           />
-        </S.Footer>
-      </S.Form>
-    </S.Wrapper>
+        )}
+        <S.Form>
+          <PrevBtn
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '30px',
+              zIndex: 10000,
+            }}
+            onClick={onClickMoveLeft}
+          />
+          <NextBtn
+            style={{
+              position: 'absolute',
+              top: '50%',
+              right: '30px',
+              zIndex: 1000,
+            }}
+            onClick={onClickMoveRight}
+          />
+          <S.Header>
+            <button onClick={onClickCancelModal}>취소</button>
+            <button
+              onClick={(e) => {
+                onSaveAllEditImg(e);
+              }}
+            >
+              완료
+            </button>
+          </S.Header>
+
+          <div
+            style={{
+              position: 'relative',
+              height: '760px',
+              width: '760px',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{ display: 'flex', position: 'absolute', left: 0 }}
+              ref={sliderRef}
+            >
+              {images.map((img, index) => {
+                return (
+                  <ImageCropper
+                    key={index}
+                    setCropImages={setCropImages}
+                    image={img.img}
+                    index={index}
+                    cropImages={cropImages}
+                    myRef={myRefs[index]}
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          <S.Footer>
+            <ImgCounter currentNum={images.length} maxNum={10} />
+            <MultipleIcon
+              style={{
+                zIndex: 1000,
+                position: 'absolute',
+                right: '20px',
+              }}
+              onClick={() => {
+                setIsMultipleBoxShow((prev) => !prev);
+              }}
+            />
+          </S.Footer>
+        </S.Form>
+      </Box>
+    </Modal>
   );
 };
 export default ImagesEditModal;
