@@ -54,6 +54,7 @@ const CreatePost = () => {
 
     let currentImgNum = images.length;
     let hasAlert = false;
+
     for (let i = 0; i < files.length; i++) {
       const reader = new FileReader();
       reader.onload = () => {
