@@ -9,14 +9,16 @@ import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import { useState, useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
+import { ImageType } from '@/types/image.type';
 
 const CreateSpace = () => {
   //이미지 파일을 저장하는 곳
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<ImageType[]>([]);
   //편집된 이미지 파일을 저장하는 곳
   const [cropImages, setCropImages] = useState<string[]>([]);
   //file형태의 이미지로 저장하는 곳
   const [convertedImages, setConvertedImages] = useState<File[]>([]);
+  console.log(convertedImages);
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +33,11 @@ const CreateSpace = () => {
     reader.onload = () => {
       const result = reader.result;
       if (typeof result === 'string') {
-        setImages([result]);
+        const newObj: ImageType = {
+          id: 1,
+          img: result,
+        };
+        setImages([newObj]);
       }
     };
     reader.readAsDataURL(files[0]);
@@ -80,12 +86,7 @@ const CreateSpace = () => {
               }}
               ref={inputRef}
             />
-            <BasicBox
-              width={160}
-              borderradius={10}
-              color="grey"
-              // onClick={handleBoxClick}
-            >
+            <BasicBox width={160} borderradius={10}>
               <PhotoIcon />
             </BasicBox>
           </S.InputContainer>
@@ -95,6 +96,7 @@ const CreateSpace = () => {
             width={160}
             borderradius={10}
             color="grey"
+            onClick={ModalOpen}
           />
         )}
         <S.EditButton>편집하기</S.EditButton>
@@ -140,7 +142,12 @@ const CreateSpace = () => {
         </S.InputContainer>
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer>
-          <BasicButton children="스페이스 생성하기" />
+          <BasicButton
+            children="스페이스 생성하기"
+            onClick={() => {}}
+            width={100}
+            height={10}
+          />
         </S.ButtonContainer>
       </S.Wrapper>
     </FullScreenModal>

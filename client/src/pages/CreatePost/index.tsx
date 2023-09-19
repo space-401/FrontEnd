@@ -53,7 +53,6 @@ const CreatePost = () => {
     if (!files) return;
 
     let currentImgNum = images.length;
-    console.log('현재이미지길이', currentImgNum);
     let hasAlert = false;
     for (let i = 0; i < files.length; i++) {
       const reader = new FileReader();
@@ -221,6 +220,7 @@ const CreatePost = () => {
           <S.EmptyContainer />
           <S.ButtonContainer>
             <BasicButton
+              onClick={() => {}}
               width={160}
               height={44}
               children="게시글 올리기"

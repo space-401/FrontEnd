@@ -1,16 +1,27 @@
 import S from '@components/common/ImageEditModal/style';
 import ImageCropper from '@components/common/ImageEditModal/Cropper';
-import { useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
 import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
-import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
 import ImgCounter from './ImgCounter';
 import { ImageType } from '@/types/image.type';
 import MultipleImgBox from '../MultipleImgBox';
 import { Box, Modal } from '@mui/material';
+import { usePhotoModalStore } from '@/store/modal';
+
+type ModalType = {
+  images: ImageType[];
+  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
+  cropImages: string[];
+  setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
+  handleFileChange: any;
+  currentIdx: number;
+  setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
+  setConvertedImages: React.Dispatch<React.SetStateAction<File[]>>;
+};
 
 const ImagesEditModal = ({
   images,
@@ -20,16 +31,7 @@ const ImagesEditModal = ({
   currentIdx,
   setCurrentIdx,
   setConvertedImages,
-}: {
-  images: ImageType[];
-  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
-  cropImages: string[];
-  setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
-  handleFileChange: any;
-  currentIdx: number;
-  setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
-  setConvertedImages: React.Dispatch<React.SetStateAction<File[]>>;
-}) => {
+}: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
   const cropperRef2 = useRef<ReactCropperElement>(null);
   const cropperRef3 = useRef<ReactCropperElement>(null);
@@ -144,8 +146,8 @@ const ImagesEditModal = ({
       <Box tabIndex={-1}>
         {isMultipleBoxShow && (
           <MultipleImgBox
+            imgCount={10}
             isBackground={true}
-            isAddPhoto={true}
             images={images}
             setImages={setImages}
             setCurrentIdx={setCurrentIdx}
@@ -153,6 +155,7 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
+
         <S.Form>
           <PrevBtn
             style={{
@@ -183,6 +186,11 @@ const ImagesEditModal = ({
             </button>
           </S.Header>
 
+          {images.length == 0 && (
+            <S.FlexContainer>
+              <div>이미지가 없습니다</div>
+            </S.FlexContainer>
+          )}
           <div
             style={{
               position: 'relative',
