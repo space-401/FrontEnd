@@ -1,25 +1,86 @@
 import styled from 'styled-components';
 import { omitText } from '@styles/common';
+import { theme } from '@styles/theme/theme';
 
-const RightWrapper = styled.div`
+const Container = styled.div`
   position: absolute;
+  display: flex;
+  height: 100vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const RightWrapper = styled.div`
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
   width: 452px;
   min-height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
+
+  scrollbar-width: none; /* Firefox 지원 */
+  -ms-overflow-style: none; /* IE 지원 */
+
+  &::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+  }
 `;
 
 const DeleteIconBox = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
   position: absolute;
   top: 32px;
   right: 42px;
   cursor: pointer;
 `;
 
-const LeftImgBox = styled.div`
+const LikeIconBox = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  top: 23px;
+  left: -63px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 150px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+`;
+
+const LeftImgBox = styled.div<{ isArray: boolean }>`
+  padding: 24px;
   position: relative;
+  width: 728px;
+  min-height: 100vh;
+  background: ${({ theme }) => theme.COLOR.black};
+  display: flex;
+  gap: 23px;
+  flex-direction: column;
+  overflow-y: ${({ isArray }) => (isArray ? 'scroll' : 'hidden')};
+  justify-content: ${({ isArray }) => (isArray ? '' : 'center')};
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 10%;
+    background: ${({ theme }) => theme.COLOR['gray-4']};
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
 `;
 
 const DetailInfo = styled.div`
@@ -34,6 +95,7 @@ const DateBox = styled.div`
 `;
 
 const UserBox = styled.div`
+  position: relative;
   margin-top: 8px;
   display: flex;
   gap: 8px;
@@ -81,7 +143,7 @@ const CommentInfo = styled.div`
 const ManagementButton = styled.div`
   cursor: pointer;
   position: absolute;
-  right: 16px;
+  right: 0;
 `;
 const PostTitle = styled.div`
   margin-top: 40px;
@@ -140,7 +202,126 @@ const CommentTitle = styled.div`
   width: 100%;
 `;
 
-const CommentBox = styled.div<{ isOpen: boolean }>``;
+const ManagementList = styled.div`
+  position: relative;
+`;
+
+const BackClickBlock = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: ${({ isOpen }) => (isOpen ? 'none' : 'block')};
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+  cursor: default;
+  content: ' ';
+  background: transparent;
+`;
+
+const MenuGroup = styled.div`
+  top: 16px;
+  right: -15px;
+  position: absolute;
+  width: 114px;
+  display: inline-flex;
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+`;
+const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
+  width: 100%;
+  overflow: hidden;
+`;
+
+const MenuButton = styled.div`
+  position: relative;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  cursor: pointer;
+  display: flex;
+  padding: 4px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.COLOR.white};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+
+  border-radius: 5px;
+
+  &:hover {
+    background: ${({ theme }) => theme.COLOR['gray-6']};
+  }
+
+  transition: background 0.2s;
+`;
+
+const CommentInput = styled.div`
+  position: fixed;
+  height: fit-content;
+  width: inherit;
+  min-height: 48px;
+  padding: 13px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 0;
+  gap: 16px;
+  background: ${({ theme }) => theme.COLOR['gray-5']};
+  color: ${({ theme }) => theme.COLOR['gray-1']};
+
+  textarea {
+    color: ${({ theme }) => theme.COLOR['gray-1']};
+  }
+`;
+
+export const mentionStyle = {
+  width: '90%',
+  suggestions: {
+    background: theme.COLOR['gray-6'],
+    border: `1px solid ${theme.COLOR['gray-5']}`,
+    borderRadius: '10px',
+    overflow: 'hidden',
+    padding: '5px',
+    boxSizing: 'border-box',
+    list: {
+      borderRadius: '10px',
+      fontSize: 16,
+      background: theme.COLOR['gray-6'],
+    },
+    item: {
+      'background': theme.COLOR['gray-6'],
+      'borderRadius': '8px',
+      '&focused': {
+        background: theme.COLOR['gray-5'],
+      },
+    },
+  },
+};
+
+const ImgBox = styled.div<{ img_url: string }>`
+  width: 680px;
+  aspect-ratio: 1/1;
+  background: url(${({ img_url }) => img_url});
+
+  background-size: cover;
+`;
+
+const ReplyComment = styled.button`
+  color: ${({ theme }) => theme.COLOR.skyblue};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  line-height: 140%; /* 22.4px */
+`;
 
 const S = {
   MapBox,
@@ -151,6 +332,7 @@ const S = {
   DetailInfo,
   UserNameList,
   DateBox,
+  Container,
   MapInfo,
   CommentInfo,
   ManagementButton,
@@ -161,6 +343,14 @@ const S = {
   FlexBox,
   CommentTitle,
   CommentBox,
+  ManagementList,
+  BackClickBlock,
+  MenuGroup,
+  MenuButton,
+  CommentInput,
+  ImgBox,
+  ReplyComment,
+  LikeIconBox,
 };
 
 export default S;

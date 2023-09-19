@@ -1,5 +1,5 @@
 import { UserType } from '@type/user.type';
-import { M } from '@components/PostMap/components/style';
+import { M } from '@components/Main/PostMap/components/style';
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
 
@@ -12,6 +12,7 @@ export type MarkerPropTypes = {
 
 const MarkerContents = (props: MarkerPropTypes) => {
   const { create_at, users, post_place, post_title } = props;
+
   return (
     <M.ContentBox>
       <M.ContentPlace>

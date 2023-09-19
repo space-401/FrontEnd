@@ -2,13 +2,13 @@ import { UserType } from '@type/user.type';
 
 export const users_mock: UserType[] = [
   {
-    user_id: 1,
+    user_id: 147394546,
     user_name: '짱구',
     user_profile_img:
       'https://i.namu.wiki/i/O_ySsnetZJl_AbRLxgT0Y21A6-UUuhk9-fI4kCHAyuxjvnTlAxM8DdMLCo2LNdOY0EjDP0WNUz8pAEIH8eXT53YcHI2Z-oxvqVeqp9VOCzrMX8Zq48UHh6XxQymLH5H8Jmy-ziOpmHKhH5uoPQl7Yw.webp',
   },
   {
-    user_id: 2,
+    user_id: 148263681,
     user_name: '짱아',
     user_profile_img:
       'https://i.namu.wiki/i/9H8iVzGgYgnUlDZer5h6PluEDVMB8Uy4RQxj2fR_Fr7aULTsvugOnFrw6FEG9YfkvmfsYHb3wXpRwIhU-1QZ7jMkn9gID85AnmYm2loamOJMTCy9VKOEa2PoZcqziehSqtxMr7SNKBZEjy4HslGKWw.webp',

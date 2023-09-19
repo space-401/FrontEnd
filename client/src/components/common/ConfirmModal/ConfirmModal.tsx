@@ -5,10 +5,10 @@ import S from '@components/common/ConfirmModal/style';
 export type ConfirmModalType = {
   isPositiveModal: boolean;
   titleMessage: string;
-  descriptionMessage: string;
+  descriptionMessage?: string;
   ApproveMessage: string;
   closeMessage: string;
-  AsyncAction: () => void;
+  AsyncAction: (message: string) => void;
   ModalClose: () => void;
   isOpen: boolean;
 };
@@ -27,7 +27,7 @@ const ConfirmModal = React.forwardRef(
     } = prop;
 
     const ApproveAction = () => {
-      AsyncAction();
+      AsyncAction('삭제 되었습니다.');
       ModalClose();
     };
 
@@ -46,7 +46,9 @@ const ConfirmModal = React.forwardRef(
         <Box tabIndex={-1} ref={forwardRef}>
           <S.Container>
             <S.TitleMessage>{titleMessage}</S.TitleMessage>
-            <S.DescriptionMessage>{descriptionMessage}</S.DescriptionMessage>
+            {descriptionMessage && (
+              <S.DescriptionMessage>{descriptionMessage}</S.DescriptionMessage>
+            )}
             <S.ButtonGroup>
               <S.ApproveButton
                 isPositiveModal={isPositiveModal}
