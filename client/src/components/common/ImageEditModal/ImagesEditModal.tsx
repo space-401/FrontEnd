@@ -4,12 +4,12 @@ import { useRef, useState } from 'react';
 import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
 import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
-import MultipleImgBox from '@components/common/MultipleImgBox/index';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
 import ImgCounter from './ImgCounter';
-
+import { ImageType } from '@/types/image.type';
+import MultipleImgBox from '../MultipleImgBox';
 const ImagesEditModal = ({
   images,
   setImages,
@@ -19,8 +19,8 @@ const ImagesEditModal = ({
   setCurrentIdx,
   setConvertedImages,
 }: {
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  images: ImageType[];
+  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
   cropImages: string[];
   setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
   handleFileChange: any;
@@ -51,10 +51,10 @@ const ImagesEditModal = ({
     cropperRef9,
     cropperRef10,
   ];
-
+  const [isMultipleBoxShow, setIsMultipleBoxShow] = useState(true);
   const sliderRef = useRef<any>();
   const { ModalClose } = usePhotoModalStore();
-  const [isMultipleBoxShow, setIsMultipleBoxShow] = useState(true);
+  // const [isMultipleBoxShow, setIsMultipleBoxShow] = useState(true);
   const [currentX, setCurrentX] = useState<number>(0);
 
   const imageNum = images.length;
@@ -87,15 +87,9 @@ const ImagesEditModal = ({
     });
   };
 
-  //선택한 이미지가 보기
-  const onClickCurrentImg = (idx: number) => {
-    setCurrentIdx(idx);
-    const newPosition = idx * 760;
-    sliderRef.current.style.transform = `translateX(-${newPosition}px)`;
-  };
-
   //왼쪽 이미지 보기
   const onClickMoveLeft = () => {
+    // setIsMultipleBoxShow(false);
     if (currentIdx > 0) {
       const newPosition = currentX + 760;
       setCurrentX(newPosition);
@@ -111,6 +105,7 @@ const ImagesEditModal = ({
 
   //오른쪽 이미지 보기
   const onClickMoveRight = () => {
+    // setIsMultipleBoxShow(false);
     if (currentIdx < imageNum - 1) {
       const newPosition = currentX - 760;
       setCurrentX(newPosition);
@@ -132,6 +127,16 @@ const ImagesEditModal = ({
 
   return (
     <S.Wrapper>
+      {isMultipleBoxShow && (
+        <MultipleImgBox
+          isBackground={true}
+          isAddPhoto={true}
+          images={images}
+          setImages={setImages}
+          setCurrentIdx={setCurrentIdx}
+          currentIdx={currentIdx}
+        />
+      )}
       <S.Form>
         <PrevBtn
           style={{
@@ -179,7 +184,7 @@ const ImagesEditModal = ({
                 <ImageCropper
                   key={index}
                   setCropImages={setCropImages}
-                  image={img}
+                  image={img.img}
                   index={index}
                   cropImages={cropImages}
                   myRef={myRefs[index]}
@@ -201,15 +206,6 @@ const ImagesEditModal = ({
               setIsMultipleBoxShow((prev) => !prev);
             }}
           />
-          {isMultipleBoxShow && (
-            <MultipleImgBox
-              isBackground={true}
-              isAddPhoto={true}
-              images={images}
-              setImages={setImages}
-              onClickCurrentImg={onClickCurrentImg}
-            />
-          )}
         </S.Footer>
       </S.Form>
     </S.Wrapper>
