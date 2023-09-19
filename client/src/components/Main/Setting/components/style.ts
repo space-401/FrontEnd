@@ -108,9 +108,9 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 16px 0;
   display: inline-flex;
   width: 526px;
-  padding: 24px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -120,6 +120,104 @@ const Container = styled.div`
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 `;
 
+const ModalTop = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding: 0px 16px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.COLOR['gray-3']};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
+
+const ModalMain = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 24px;
+  align-items: center;
+  gap: 68px;
+  border-bottom: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
+`;
+
+const ModalFooter = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 8px 16px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+`;
+const DeleteIconBox = styled.div`
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+`;
+const SubmitButton = styled.div`
+  display: flex;
+  width: 160px;
+  height: 48px;
+  padding: 14px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  border-radius: 10px;
+  background: ${({ theme }) => theme.COLOR.skyblue};
+
+  color: ${({ theme }) => theme.COLOR.black};
+  text-align: right;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
+const LeftImgSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+`;
+
+const RightUserNameSection = styled.div``;
+
+const ProfileImg = styled.div<{ img: string }>`
+  aspect-ratio: 1/1;
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  background-size: cover;
+  background-image: url(${({ img }) => img});
+  border-radius: 100%;
+`;
+const ImgBox = styled.div`
+  width: 160px;
+  height: 160px;
+`;
+
+const ImgButton = styled.div`
+  cursor: pointer;
+  color: ${({ theme }) => theme.COLOR.skyblue};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
+
 export const M = {
   Container,
+  ModalTop,
+  ModalMain,
+  ModalFooter,
+  DeleteIconBox,
+  SubmitButton,
+  LeftImgSection,
+  RightUserNameSection,
+  ProfileImg,
+  ImgButton,
+  ImgBox,
 };
