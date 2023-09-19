@@ -5,24 +5,31 @@ import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
 import ImgCounter from './ImgCounter';
+import MultipleImgBox from '../MultipleImgBox';
+import { Box, Modal } from '@mui/material';
+import { ImageType } from '@/types/image.type';
 
-const ImgEditModal = ({
-  images,
-  cropImages,
-  setCropImages,
-  setConvertedImages,
-}: {
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+type ModalType = {
+  images: ImageType[];
+  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
   cropImages: string[];
   setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
   handleFileChange: any;
   setConvertedImages: React.Dispatch<React.SetStateAction<File[]>>;
-}) => {
+};
+
+const ImgEditModal = ({
+  images,
+  setImages,
+  cropImages,
+  setCropImages,
+  setConvertedImages,
+}: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
 
+  const myRefs = [cropperRef1];
   const sliderRef = useRef<any>();
-  const { ModalClose } = usePhotoModalStore();
+  const { ModalClose, isOpen } = usePhotoModalStore();
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any) => {
@@ -50,52 +57,80 @@ const ImgEditModal = ({
     getCropData(cropperRef1);
   };
 
+  //모달 취소
+  const onClickCancelModal = () => {
+    ModalClose();
+  };
+
   return (
-    <S.Wrapper>
-      <S.Form>
-        <S.Header>
-          <button onClick={ModalClose}>취소</button>
-          <button
-            onClick={(e) => {
-              onSaveAllEditImg(e);
+    <Modal
+      open={isOpen}
+      slotProps={{
+        backdrop: {
+          sx: {
+            backgroundColor: 'rgba(0,0,0,0.6)',
+          },
+        },
+      }}
+    >
+      <Box tabIndex={-1}>
+        <MultipleImgBox
+          imgCount={1}
+          isBackground={true}
+          images={images}
+          setImages={setImages}
+        />
+
+        <S.Form>
+          <S.Header>
+            <button onClick={onClickCancelModal}>취소</button>
+            <button
+              onClick={(e) => {
+                onSaveAllEditImg(e);
+              }}
+            >
+              완료
+            </button>
+          </S.Header>
+
+          {images.length == 0 && (
+            <S.FlexContainer>
+              <div>이미지가 없습니다</div>
+            </S.FlexContainer>
+          )}
+          <div
+            style={{
+              position: 'relative',
+              height: '760px',
+              width: '760px',
+              overflow: 'hidden',
             }}
           >
-            완료
-          </button>
-        </S.Header>
-
-        <div
-          style={{
-            position: 'relative',
-            height: '760px',
-            width: '760px',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{ display: 'flex', position: 'absolute', left: 0 }}
-            ref={sliderRef}
-          >
-            {images.map((img, index) => {
-              return (
-                <ImageCropper
-                  key={index}
-                  setCropImages={setCropImages}
-                  image={img}
-                  index={index}
-                  cropImages={cropImages}
-                  myRef={cropperRef1}
-                />
-              );
-            })}
+            <div
+              style={{ display: 'flex', position: 'absolute', left: 0 }}
+              ref={sliderRef}
+            >
+              {images.map((img, index) => {
+                return (
+                  <ImageCropper
+                    key={index}
+                    setCropImages={setCropImages}
+                    image={img.img}
+                    index={index}
+                    cropImages={cropImages}
+                    myRef={myRefs[index]}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        <S.Footer>
-          <ImgCounter currentNum={images.length} maxNum={10} />
-        </S.Footer>
-      </S.Form>
-    </S.Wrapper>
+          <S.Footer>
+            <ImgCounter currentNum={images.length} maxNum={10} />
+          </S.Footer>
+        </S.Form>
+      </Box>
+    </Modal>
   );
 };
 export default ImgEditModal;

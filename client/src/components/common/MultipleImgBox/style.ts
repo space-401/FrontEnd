@@ -13,7 +13,7 @@ const Container = styled.div`
   width: fit-content;
   gap: 8px;
   position: absolute;
-  bottom: 100px;
+  bottom: 15%;
   padding: '8px';
   ${flexCenter}
   background-color: ${({ theme }) => theme.COLOR['gray-5']};

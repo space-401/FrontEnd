@@ -111,6 +111,19 @@ const CountWrapper = styled.div`
   }
   gap: 5px;
 `;
+const PhotoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 60px;
+  justify-content: space-evenly;
+`;
+
+const FlexContainer = styled.div`
+  position: absolute;
+  z-index: 100000;
+  color: white;
+`;
 
 const S = {
   Wrapper,
@@ -122,6 +135,8 @@ const S = {
   MultiViewWrapper,
   SmallPhotoBox,
   CountWrapper,
+  PhotoContainer,
+  FlexContainer,
 };
 
 export default S;

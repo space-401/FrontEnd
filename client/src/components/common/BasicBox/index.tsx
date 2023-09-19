@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 
 export type BasicBoxProp = {
   width: number;
-  color: string;
+  color?: string;
   borderradius: number;
   onClick?: React.MouseEventHandler<HTMLElement>;
   backgroundImage?: string;
