@@ -7,28 +7,46 @@ import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIco
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
 import S from './style';
 import type { MainHeaderPropType } from '@type/main.type';
+import SettingComponent from '@components/Main/Setting/SettingComponent';
+import { Modal as SettingModal } from '@mui/material';
+import { useState } from 'react';
 
 const MainHeader = (prop: MainHeaderPropType) => {
-  const { setSelectState, spaceInfo, selectState } = prop;
+  const { setSelectState, isAdmin, spaceInfo, selectState } = prop;
   const { description, img_url, users, title } = spaceInfo;
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => {
+    setIsOpen(false);
+  };
   return (
     <S.Wrapper>
+      <SettingModal disableScrollLock open={isOpen} onClose={onClose}>
+        <SettingComponent
+          spaceTitle={spaceInfo.title}
+          isAdmin={isAdmin}
+          isOpen={isOpen}
+          userList={users}
+          onClose={onClose}
+        />
+      </SettingModal>
       <S.HeaderHeader>
         <Avatars size={42.857} users={users} max={4} />
-        <S.UserCount>인원 {users.length}/8</S.UserCount>
         <S.ButtonGroup>
-          <BasicButton
+          <S.ControlButton
+            onClick={() => setIsOpen(true)}
             color={theme.COLOR.white}
-            backgroundColor={theme.COLOR['gray-7']}
+            hoverColor={theme.COLOR['gray-7']}
           >
-            인원관리
-          </BasicButton>
-          <BasicButton
-            color={theme.COLOR.white}
-            backgroundColor={theme.COLOR['gray-5']}
-          >
-            스페이스 관리
-          </BasicButton>
+            인원 {users.length}/8
+          </S.ControlButton>
+          {isAdmin && (
+            <S.ControlButton
+              color={theme.COLOR.white}
+              backgroundColor={theme.COLOR['gray-5']}
+            >
+              스페이스 관리
+            </S.ControlButton>
+          )}
         </S.ButtonGroup>
       </S.HeaderHeader>
       <S.HeaderMain>

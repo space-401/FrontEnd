@@ -16,6 +16,7 @@ export type MainPageType = {
     img_url: string;
     users: UserType[];
   };
+  isAdmin: boolean;
   postList: SpacePostType[];
   tagList: TagType[];
   page: number;
@@ -45,6 +46,7 @@ export type MainHeaderPropType = {
     img_url: string;
     users: UserType[];
   };
+  isAdmin: boolean;
   selectState: boolean;
   setSelectState: Dispatch<SetStateAction<boolean>>;
 };

@@ -74,6 +74,7 @@ export const theme = {
     basic: '0.3s ease-in-out',
   },
   SHADOW: {
+    'shadow-sm': '0 5px 10px 0 rgba(0, 0, 0, 0.25)',
     'shadow-lg':
       '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
     'shadow-2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
