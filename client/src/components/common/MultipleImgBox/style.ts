@@ -3,13 +3,19 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  height: 100vh; /* 화면 높이를 100%로 설정하여 전체 화면으로 확장 */
+`;
+const Container = styled.div`
+  display: flex;
   flex-wrap: wrap;
   width: fit-content;
   gap: 8px;
   position: absolute;
-  bottom: 16%;
-  left: 30%;
+  bottom: 100px;
   padding: '8px';
+  ${flexCenter}
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
   z-index: 100000;
@@ -33,10 +39,22 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   ${flexCenter}
 `;
 
+const DeleteIcon = styled.div`
+  z-index: 1000000;
+  position: 'absolute';
+  top: 0;
+  right: 0;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
 const S = {
   Wrapper,
+  Container,
   SmallPhotoBox,
   Modal,
+  DeleteIcon,
 };
 
 export default S;

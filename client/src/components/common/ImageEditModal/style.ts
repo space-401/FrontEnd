@@ -16,12 +16,15 @@ const Form = styled.form`
   flex-direction: column;
   /* overflow: hidden; */
   width: 760px;
+  ${flexCenter}
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 760px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.COLOR['gray-5']};
+  background: ${({ theme }) => theme.COLOR['gray-6']};
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 `;
 

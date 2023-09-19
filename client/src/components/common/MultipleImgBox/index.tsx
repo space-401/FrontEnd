@@ -12,13 +12,14 @@ type MultiBoxType = {
   isBackground: boolean;
   setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
   currentIdx: number;
+  onClickCurrentImg: any;
 };
 
 const MultipleImgBox = ({
   images,
   setImages,
   isAddPhoto, //사진 추가 기능이 들어가 있는지
-  // currentIdx,
+  onClickCurrentImg,
   setCurrentIdx,
 }: MultiBoxType) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -26,7 +27,8 @@ const MultipleImgBox = ({
   const onAddImage = () => {
     inputRef.current && inputRef.current.click();
   };
-
+  // const [isConfirmModal, setIsConfirmModal] = useState(false);
+  // const [selectImgId, setSelectImgId] = useState<number>(0);
   //이미지는 10개까지만 추가 설정
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -60,15 +62,22 @@ const MultipleImgBox = ({
   //이미지 삭제
   const onClickDelete = (event: any) => {
     const draggableContextId =
-      event.target.parentElement.parentElement?.getAttribute(
+      event.target.parentNode.parentNode.parentNode.parentNode.getAttribute(
         'data-rbd-draggable-id'
       );
+    // onOpenDeleteConfirmModal(draggableContextId);
     const newImages = images.filter(
       (element) => element.id !== draggableContextId / 1
     );
     setImages(newImages);
     setCurrentIdx(0);
   };
+
+  //삭제 모달 열기
+  // const onOpenDeleteConfirmModal = (id: number) => {
+  //   setIsConfirmModal(true);
+  //   setSelectImgId(id);
+  // };
 
   //dnd
   const onDragEnd = (result: any) => {
@@ -79,82 +88,86 @@ const MultipleImgBox = ({
     setImages(items);
   };
 
-  //선택한 이미지를 보기
-  // const onClickCurrentImg = (sliderRef: any, idx: number) => {
-  //   setCurrentIdx(idx);
-  //   const newPosition = idx * 760;
-  //   sliderRef.current.style.transform = `translateX(-${newPosition}px)`;
-  // };
-
   return (
     <S.Wrapper>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="imgList" direction="horizontal">
-          {(provided) => (
-            <div
-              className="imgList"
-              ref={provided.innerRef}
-              style={{ display: 'flex' }}
-              {...provided.droppableProps}
-            >
-              {images.map((image: any, idx: number) => (
-                <Draggable
-                  draggableId={`${image.id}`}
-                  index={idx}
-                  key={`${image.id}`}
-                >
-                  {(provided) => {
-                    return (
-                      <div
-                        ref={provided.innerRef}
-                        style={{ position: 'relative' }}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <S.SmallPhotoBox
-                          image={image.img}
-                          // onClick={() => {
-                          //   onClickCurrentImg(idx);
-                          // }}
+      {/* <ConfirmModal
+        isPositiveModal={false}
+        titleMessage="이미지 삭제"
+        descriptionMessage="이미지를 삭제하시겠습니까? "
+        ApproveMessage="네"
+        closeMessage="아니오"
+        ModalClose={() => {
+          setIsConfirmModal(false);
+        }}
+        isOpen={isConfirmModal}
+        AsyncAction={onClickDelete}
+      /> */}
+      <S.Container>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="imgList" direction="horizontal">
+            {(provided) => (
+              <div
+                className="imgList"
+                ref={provided.innerRef}
+                style={{ display: 'flex' }}
+                {...provided.droppableProps}
+              >
+                {images.map((image: any, idx: number) => (
+                  <Draggable
+                    draggableId={`${image.id}`}
+                    index={idx}
+                    key={`${image.id}`}
+                  >
+                    {(provided) => {
+                      return (
+                        <div
+                          ref={provided.innerRef}
                           style={{ position: 'relative' }}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
                         >
-                          <DeleteIcon
-                            onClick={(event: any) => {
-                              onClickDelete(event);
+                          <S.SmallPhotoBox
+                            image={image.img}
+                            onClick={() => {
+                              onClickCurrentImg(idx);
                             }}
-                            style={{
-                              position: 'absolute',
-                              top: 0,
-                              right: 0,
-                            }}
-                          />
-                        </S.SmallPhotoBox>
-                      </div>
-                    );
-                  }}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      {isAddPhoto && images.length < 10 && (
-        <S.SmallPhotoBox onClick={onAddImage}>
-          <PlusPhotoIcon />
-          <form method="post">
-            <input
-              type="file"
-              ref={inputRef}
-              onChange={(e) => {
-                handleFileChange(e);
-              }}
-              style={{ display: 'none' }}
-              multiple
-            />
-          </form>
-        </S.SmallPhotoBox>
-      )}
+                            style={{ position: 'relative' }}
+                          >
+                            <S.DeleteIcon
+                              onClick={(event: any) => {
+                                onClickDelete(event);
+                              }}
+                            >
+                              <DeleteIcon />
+                            </S.DeleteIcon>
+                          </S.SmallPhotoBox>
+                        </div>
+                      );
+                    }}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        {isAddPhoto && 0 < images.length && images.length < 10 && (
+          <S.SmallPhotoBox onClick={onAddImage}>
+            <PlusPhotoIcon />
+            <form method="post">
+              <input
+                type="file"
+                ref={inputRef}
+                onChange={(e) => {
+                  handleFileChange(e);
+                }}
+                style={{ display: 'none' }}
+                multiple
+              />
+            </form>
+          </S.SmallPhotoBox>
+        )}
+      </S.Container>
     </S.Wrapper>
   );
 };
