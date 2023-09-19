@@ -2,8 +2,8 @@ import { PostDetailType } from '@type/space.type';
 import { users_mock } from '@mocks/data/user/users.mock';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 
-const DetailPageMock: PostDetailType = {
-  isMine: true,
+const DetailPostMock: PostDetailType = {
+  isMine: false,
   post_id: 1,
   position: {
     lat: 37.27943075229118,
@@ -26,6 +26,8 @@ const DetailPageMock: PostDetailType = {
   place_tag: MainPageMock.tagList,
   place_title: '둔촌동 커피맛집',
   commentCount: 13,
+  user_List: users_mock,
+  isBookMark: true,
 };
 
-export default DetailPageMock;
+export default DetailPostMock;

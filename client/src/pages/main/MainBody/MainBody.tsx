@@ -1,23 +1,63 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
-import FlipCard from '@components/FlipCard/FlipCard';
-import SpaceInfoBack from '@components/FlipCard/SpaceInfoBack/SpaceInfoBack';
+import FlipCard from '@components/Main/FlipCard/FlipCard';
+import SpaceInfoBack from '@components/Main/FlipCard/SpaceInfoBack/SpaceInfoBack';
 import S from './style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
-import SelectBox from '@components/MainSelectBox';
-import MainSearchBox from '@components/MainSearchBox';
-import KaKaoMap from '@components/PostMap';
+import SelectBox from '@components/Main/SelectBox';
+import MainSearchBox from '@components/Main/SearchBox';
+import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
+import { useSearchParams } from 'react-router-dom';
 
 const MainBody = (props: MainBodyPropType) => {
-  const { postList, userList, tagList, selectState } = props;
-  const [_1, setUserState] = useState<selectType[]>([]);
-  const [_2, setTagState] = useState<selectType[]>([]);
-  const [_3, setSearchState] = useState<string>('');
+  const [state, setState] = useState<{
+    user: selectType[];
+    tag: selectType[];
+    search: string;
+  }>({
+    user: [],
+    tag: [],
+    search: '',
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const modalOpen = useDetailModalStore((state) => state.ModalOpen);
-  console.log(_1);
-  console.log(_2);
-  console.log(_3);
+  const { postList, userList, tagList, selectState } = props;
+
+  const setUserState = (newUserState: selectType[]) => {
+    setState((prev) => ({ ...prev, user: newUserState }));
+  };
+
+  const setTagState = (newTagState: selectType[]) => {
+    setState((prev) => ({ ...prev, tag: newTagState }));
+  };
+
+  const setSearchState = (newSearch: string) => {
+    setState((prev) => ({ ...prev, search: newSearch }));
+  };
+
+  useEffect(() => {
+    const userKeywords = state.user.map((user) => user.id);
+    const tagKeywords = state.tag.map((tag) => tag.id);
+
+    const users = searchParams.get('users');
+    const tags = searchParams.get('tags');
+    const search = searchParams.get('search');
+    const page = searchParams.get('page');
+
+    const params = new URLSearchParams();
+    params.set('users', userKeywords.join(','));
+    params.set('tags', tagKeywords.join(','));
+    params.set('search', state.search);
+
+    setSearchParams(params.toString());
+
+    console.log(users, tags, search, page, '로 데이터를 조회합니다.');
+  }, [state]);
+
   return (
     <S.Wrapper>
       <S.FilterGroup>

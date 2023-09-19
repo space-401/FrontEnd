@@ -14,12 +14,9 @@ const HeaderHeader = styled.section`
   line-height: 43px;
   display: flex;
   justify-content: flex-end;
+  gap: 9px;
 `;
 
-const UserCount = styled.span`
-  margin: 0 26px 0 18.6px;
-  color: ${({ theme }) => theme.COLOR.white};
-`;
 const HeaderMain = styled.section`
   margin-top: 15.57px;
   display: flex;
@@ -81,10 +78,6 @@ const FilterState = styled.div`
 
 const FilterGroup = styled.div``;
 
-/**
- * @TODO
- * 해당 theme.COLOR['gray-6']은 임시로 넣어둔 색입니다 올바른 색상으로 변경해야합니다.
- */
 const SelectButton = styled.div<{ $state: boolean }>`
   display: flex;
   color: ${({ $state, theme }) =>
@@ -98,13 +91,37 @@ const SelectButton = styled.div<{ $state: boolean }>`
 
 const LeftEmpty = styled.div``;
 
+const ControlButton = styled.div<{
+  color: string;
+  backgroundColor?: string;
+  hoverColor?: string;
+}>`
+  display: inline-flex;
+  height: 44px;
+  padding: 12px 16px;
+  color: ${({ color }) => color};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : ''};
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ hoverColor }) => (hoverColor ? hoverColor : '')};
+  }
+
+  transition: 0.5s;
+`;
+
 const S = {
   Wrapper,
   HeaderHeader,
   HeaderMain,
   HeaderFooter,
   ButtonGroup,
-  UserCount,
   Image,
   MainInfo,
   MainTitle,
@@ -113,6 +130,7 @@ const S = {
   FilterState,
   SelectButton,
   LeftEmpty,
+  ControlButton,
 };
 
 export default S;
