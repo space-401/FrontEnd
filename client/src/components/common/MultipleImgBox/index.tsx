@@ -1,32 +1,28 @@
 import S from '@components/common/MultipleImgBox/style';
 import { ReactComponent as PlusPhotoIcon } from '@assets/svg/photo/plusIcon.svg';
 import { ReactComponent as DeleteIcon } from '@assets/svg/photo/deleteIcon.svg';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { ImageType } from '@/types/image.type';
 
 type MultiBoxType = {
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  images: ImageType[];
+  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
   isAddPhoto: boolean;
-  onClickCurrentImg?: any;
   isBackground: boolean;
-};
-
-type makeImgIdType = {
-  id: number;
-  img: string;
+  setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
+  currentIdx: number;
 };
 
 const MultipleImgBox = ({
   images,
   setImages,
   isAddPhoto, //사진 추가 기능이 들어가 있는지
-
-  onClickCurrentImg,
+  // currentIdx,
+  setCurrentIdx,
 }: MultiBoxType) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  //아이디 포함 이미지 객체를 가진 배열
-  const [imgListWidthId, setImgListWidthId] = useState<makeImgIdType[]>([]);
+
   const onAddImage = () => {
     inputRef.current && inputRef.current.click();
   };
@@ -38,14 +34,18 @@ const MultipleImgBox = ({
     if (!files) return;
 
     let currentImgNum = images.length;
-    console.log('현재이미지길이', currentImgNum);
+
     let hasAlert = false;
     for (let i = 0; i < files.length; i++) {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result;
         if (typeof result === 'string' && currentImgNum < 10) {
-          setImages((prev) => [...prev, result]);
+          const newObj: ImageType = {
+            id: currentImgNum,
+            img: result,
+          };
+          setImages((prev) => [...prev, newObj]);
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {
@@ -58,69 +58,50 @@ const MultipleImgBox = ({
   };
 
   //이미지 삭제
-  const onClickDelete = (index: number) => {
-    const images_copy = images.slice();
-    setImages([
-      ...images_copy.slice(0, index),
-      ...images_copy.slice(index + 1, images_copy.length),
-    ]);
+  const onClickDelete = (event: any) => {
+    const draggableContextId =
+      event.target.parentElement.parentElement?.getAttribute(
+        'data-rbd-draggable-id'
+      );
+    const newImages = images.filter(
+      (element) => element.id !== draggableContextId / 1
+    );
+    setImages(newImages);
+    setCurrentIdx(0);
   };
-
-  const makeImgId = (images: string[]) => {
-    const ImgListwithId: makeImgIdType[] = [];
-    images.map((image, index) => {
-      ImgListwithId.push({
-        id: index,
-        img: image,
-      });
-    });
-    return ImgListwithId;
-  };
-
-  //아이디 포함 이미지 객체 생성
-  useEffect(() => {
-    const copy_images = [...images];
-    setImgListWidthId(makeImgId(copy_images));
-  }, []);
 
   //dnd
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
-    const items = [...imgListWidthId];
+    const items = [...images];
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    setImgListWidthId(items);
-    // if (type === 'column') {
-    //   // column Drag 처리 부분 추가됨
-    //   const newColumnOrder = Array.from(data.columnOrder);
-    //   newColumnOrder.splice(source.index, 1);
-    //   newColumnOrder.splice(destination.index, 0, draggableId);
-
-    //   const newData = {
-    //     ...data,
-    //     columnOrder: newColumnOrder,
-    //   };
-    //   setData(newData);
-    //   return;
-    // }
+    setImages(items);
   };
+
+  //선택한 이미지를 보기
+  // const onClickCurrentImg = (sliderRef: any, idx: number) => {
+  //   setCurrentIdx(idx);
+  //   const newPosition = idx * 760;
+  //   sliderRef.current.style.transform = `translateX(-${newPosition}px)`;
+  // };
 
   return (
     <S.Wrapper>
-      <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+      <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="imgList" direction="horizontal">
           {(provided) => (
             <div
               className="imgList"
-              {...provided.droppableProps}
               ref={provided.innerRef}
               style={{ display: 'flex' }}
+              {...provided.droppableProps}
             >
-              {imgListWidthId.map((image: any, idx: number) => (
+              {images.map((image: any, idx: number) => (
                 <Draggable
-                  draggableId={`img-${image.id}`}
+                  draggableId={`${image.id}`}
                   index={idx}
-                  key={image.id}
+                  key={`${image.id}`}
                 >
                   {(provided) => {
                     return (
@@ -132,16 +113,22 @@ const MultipleImgBox = ({
                       >
                         <S.SmallPhotoBox
                           image={image.img}
-                          onClick={() => {
-                            onClickCurrentImg(idx);
-                          }}
-                        />
-                        <DeleteIcon
-                          onClick={() => {
-                            onClickDelete(idx);
-                          }}
-                          style={{ position: 'absolute', top: 0, right: 0 }}
-                        />
+                          // onClick={() => {
+                          //   onClickCurrentImg(idx);
+                          // }}
+                          style={{ position: 'relative' }}
+                        >
+                          <DeleteIcon
+                            onClick={(event: any) => {
+                              onClickDelete(event);
+                            }}
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              right: 0,
+                            }}
+                          />
+                        </S.SmallPhotoBox>
                       </div>
                     );
                   }}
@@ -152,24 +139,23 @@ const MultipleImgBox = ({
           )}
         </Droppable>
       </DragDropContext>
+      {isAddPhoto && images.length < 10 && (
+        <S.SmallPhotoBox onClick={onAddImage}>
+          <PlusPhotoIcon />
+          <form method="post">
+            <input
+              type="file"
+              ref={inputRef}
+              onChange={(e) => {
+                handleFileChange(e);
+              }}
+              style={{ display: 'none' }}
+              multiple
+            />
+          </form>
+        </S.SmallPhotoBox>
+      )}
     </S.Wrapper>
   );
 };
 export default MultipleImgBox;
-
-// {isAddPhoto && images.length < 10 && (
-//   <S.SmallPhotoBox onClick={onAddImage}>
-//     <PlusPhotoIcon />
-//     <form method="post">
-//       <input
-//         type="file"
-//         ref={inputRef}
-//         onChange={(e) => {
-//           handleFileChange(e);
-//         }}
-//         style={{ display: 'none' }}
-//         multiple
-//       />
-//     </form>
-//   </S.SmallPhotoBox>
-// )}

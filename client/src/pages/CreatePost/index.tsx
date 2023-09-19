@@ -10,32 +10,30 @@ import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/CreateSelectBox';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { users_mock } from '@/mocks/data/user/users.mock';
 import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImagesEditModal from '@/components/common/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgSlider from '@/components/common/ImgSlider';
+import { ImageType } from '@/types/image.type';
 
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [userList, setUserList] = useState<selectType[]>([]);
   //이미지 파일을 저장하는 곳
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<ImageType[]>([]);
   //편집된 이미지 파일을 저장하는 곳
   const [cropImages, setCropImages] = useState<string[]>([]);
   //file형태의 이미지로 저장하는 곳
   const [convertedImages, setConvertedImages] = useState<File[]>([]);
   console.log(userList);
+  console.log(convertedImages);
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
-
-  useEffect(() => {
-    console.log('변환이미지', convertedImages);
-  }, [convertedImages]);
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
@@ -62,7 +60,11 @@ const CreatePost = () => {
       reader.onload = () => {
         const result = reader.result;
         if (typeof result === 'string' && currentImgNum < 10) {
-          setImages((prev) => [...prev, result]);
+          const newObj: ImageType = {
+            id: currentImgNum + 1,
+            img: result,
+          };
+          setImages((prev) => [...prev, newObj]);
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {
