@@ -8,9 +8,9 @@ import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
+import { useSearchParams } from 'react-router-dom';
 
 const MainBody = (props: MainBodyPropType) => {
-  const { postList, userList, tagList, selectState } = props;
   const [state, setState] = useState<{
     user: selectType[];
     tag: selectType[];
@@ -20,7 +20,12 @@ const MainBody = (props: MainBodyPropType) => {
     tag: [],
     search: '',
   });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const modalOpen = useDetailModalStore((state) => state.ModalOpen);
+  const { postList, userList, tagList, selectState } = props;
 
   const setUserState = (newUserState: selectType[]) => {
     setState((prev) => ({ ...prev, user: newUserState }));
@@ -33,8 +38,24 @@ const MainBody = (props: MainBodyPropType) => {
   const setSearchState = (newSearch: string) => {
     setState((prev) => ({ ...prev, search: newSearch }));
   };
+
   useEffect(() => {
-    console.log(state);
+    const userKeywords = state.user.map((user) => user.id);
+    const tagKeywords = state.tag.map((tag) => tag.id);
+
+    const users = searchParams.get('users');
+    const tags = searchParams.get('tags');
+    const search = searchParams.get('search');
+    const page = searchParams.get('page');
+
+    const params = new URLSearchParams();
+    params.set('users', userKeywords.join(','));
+    params.set('tags', tagKeywords.join(','));
+    params.set('search', state.search);
+
+    setSearchParams(params.toString());
+
+    console.log(users, tags, search, page, '로 데이터를 조회합니다.');
   }, [state]);
 
   return (
