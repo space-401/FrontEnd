@@ -5,9 +5,15 @@ import DatePicker from 'react-datepicker';
 import { YEARS, MONTHS } from './util';
 import getYear from 'date-fns/getYear';
 import styled from 'styled-components';
-import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
 import { ReactComponent as RightArrow } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as LeftArrow } from '@assets/svg/leftArrow.svg';
+import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+
+export type ExampleCustomInputProps = {
+  value: string;
+  onClick: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -62,10 +68,16 @@ const Calendar = () => {
             </div>
           </div>
         )}
-      />
-      <div style={{ position: 'absolute', left: 270, bottom: 20 }}>
-        <CalenderIcon />
-      </div>
+      >
+        <CalenderIcon
+          style={{
+            position: 'absolute',
+            top: '-50px',
+            right: '10px',
+            zIndex: 1000,
+          }}
+        />
+      </StyledDatePicker>
     </div>
   );
 };

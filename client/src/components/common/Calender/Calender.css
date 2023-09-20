@@ -55,6 +55,13 @@ body {
       color: white !important;
     }
   }
+  .react-datepicker__month {
+    background-color: #232120 !important;
+  }
+  .react-datepicker__month-container {
+    background-color: #232120 !important;
+  }
+
   .react-datepicker__day--in-selecting-range,
   .react-datepicker__day--in-range {
     background-color: rgba(86, 201, 204, 0.4) !important;
@@ -139,7 +146,7 @@ body {
     }
   }
   .calenderWrapper {
-    background-color: #232120;
+    background-color: #413f3f !important;
   }
   .customHeaderContainer {
     height: 50px;
@@ -152,6 +159,11 @@ body {
     position: relative;
   }
   .hbMOSB {
-    background-color: #413f3f;
+    background-color: #232120;
+  }
+  .react-datepicker__input-container {
+    > input {
+      background-color: #413f3f !important;
+    }
   }
 }
