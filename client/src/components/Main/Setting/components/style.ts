@@ -13,6 +13,10 @@ const UserContainer = styled.div`
 
   &:hover {
     background: ${({ theme }) => theme.COLOR['gray-5']};
+
+    .hoverIcon {
+      display: block;
+    }
   }
 `;
 

@@ -9,19 +9,18 @@ import { ReactComponent as MoreLogOutSvg } from '@assets/svg/mainSetting/logout.
 import ConfirmModal from '@components/common/ConfirmModal/ConfirmModal';
 import { useState } from 'react';
 import { Modal } from '@mui/material';
-import { AlertModalType } from '@type/modal.type';
 import ProfileAndUserNameChangeModal from '@components/Main/Setting/components/ProfileAndUserNameChangeModal';
+import toast from 'react-hot-toast';
 
 type UserListPropsType = {
   userInfo: UserType;
   index: number;
   isAdmin: boolean;
-  AlertOpen: (info: AlertModalType) => void;
   myInfo: UserType;
 };
 
 const UserList = (props: UserListPropsType) => {
-  const { isAdmin, userInfo, AlertOpen, myInfo, index } = props;
+  const { isAdmin, userInfo, myInfo, index } = props;
   const { user_id, user_name, user_profile_img } = userInfo;
   const [state, setState] = useState({
     isMemberOutModal: false,
@@ -49,14 +48,14 @@ const UserList = (props: UserListPropsType) => {
     setState((prev) => ({ ...prev, isUserModal: newState }));
   };
 
-  const MemberOutAction = (user_name: string, user_id: number) => {
-    AlertOpen({
-      alertMessage: '확인',
-      alertTitle: user_name + '님을 내보냈습니다.',
-      width: 368,
+  const MemberOutAction = () => {
+    toast(user_name + '님을 추방 하였습니다', {
+      style: {
+        borderRadius: '10px',
+        background: '#000',
+        color: '#fff',
+      },
     });
-    console.log(user_id, '추방 하였습니다');
-    ChangeMemberModal(false);
     ChangeSettingMode(false);
   };
 
@@ -78,7 +77,7 @@ const UserList = (props: UserListPropsType) => {
           descriptionMessage={'작성된 게시글과 댓글들이 모두 삭제됩니다.'}
           ApproveMessage={'내보내기'}
           closeMessage={'취소'}
-          AsyncAction={() => MemberOutAction(user_name, user_id)}
+          AsyncAction={MemberOutAction}
           ModalClose={() => ChangeMemberModal(false)}
           isOpen={state.isMemberOutModal}
         />
@@ -127,13 +126,17 @@ const UserList = (props: UserListPropsType) => {
         {isAdmin && index === 0 ? <CrownSvg /> : null}
         {!isAdmin && index === 1 ? <CrownSvg /> : null}
       </S.UserName>
-
-      {isAdmin ||
-        (index === 0 && (
+      {isAdmin ? (
+        <S.SettingIconBox className={'hoverIcon'}>
+          <MoreSvg onClick={() => ChangeSettingMode(true)} />
+        </S.SettingIconBox>
+      ) : (
+        index === 0 && (
           <S.SettingIconBox className={'hoverIcon'}>
             <MoreSvg onClick={() => ChangeSettingMode(true)} />
           </S.SettingIconBox>
-        ))}
+        )
+      )}
       <S.BackClickBlock
         isOpen={state.isSettingMode}
         onClick={() => {

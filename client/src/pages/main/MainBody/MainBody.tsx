@@ -9,6 +9,7 @@ import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
 import { useSearchParams } from 'react-router-dom';
+import Pagination from '@components/common/Pagination';
 
 const MainBody = (props: MainBodyPropType) => {
   const [state, setState] = useState<{
@@ -25,7 +26,7 @@ const MainBody = (props: MainBodyPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const modalOpen = useDetailModalStore((state) => state.ModalOpen);
-  const { postList, userList, tagList, selectState } = props;
+  const { postList, userList, tagList, page, total, selectState } = props;
 
   const setUserState = (newUserState: selectType[]) => {
     setState((prev) => ({ ...prev, user: newUserState }));
@@ -41,12 +42,11 @@ const MainBody = (props: MainBodyPropType) => {
 
   useEffect(() => {
     const userKeywords = state.user.map((user) => user.id);
-    const tagKeywords = state.tag.map((tag) => tag.id);
 
+    const tagKeywords = state.tag.map((tag) => tag.id);
     const users = searchParams.get('users');
     const tags = searchParams.get('tags');
     const search = searchParams.get('search');
-    const page = searchParams.get('page');
 
     const params = new URLSearchParams();
     params.set('users', userKeywords.join(','));
@@ -55,8 +55,12 @@ const MainBody = (props: MainBodyPropType) => {
 
     setSearchParams(params.toString());
 
-    console.log(users, tags, search, page, '로 데이터를 조회합니다.');
+    console.log(users, tags, search, '로 데이터를 조회합니다.');
   }, [state]);
+
+  const lowList = Math.ceil(userList.length / 2);
+
+  const ItemLength = 12;
 
   return (
     <S.Wrapper>
@@ -64,7 +68,7 @@ const MainBody = (props: MainBodyPropType) => {
         <SelectBox
           setState={setUserState}
           menuWidth={316}
-          menuHeight={20 + 32 * Math.ceil(userList.length / 2)}
+          menuHeight={lowList * 16 + (lowList - 1) * 8 + 32}
           BoxWidth={168}
           labelName={'사용자'}
           ListItem={userList}
@@ -90,32 +94,40 @@ const MainBody = (props: MainBodyPropType) => {
             <S.UndefinedShareText>게시글 공유하기</S.UndefinedShareText>
           </S.UndefinedList>
         ) : (
-          <S.PostList>
-            {postList.map((item) => (
-              <FlipCard
-                onClick={modalOpen}
-                key={item.post_id}
-                img_url={item.main_img_url}
-                hoverCard={
-                  <SpaceInfoBack
-                    position={item.position}
-                    users={item.users}
-                    post_id={item.post_id}
-                    post_title={item.place_title}
-                    main_img_url={item.main_img_url}
-                    place_title={item.place_title}
-                    post_updated_at={item.post_updated_at}
-                    post_created_at={item.post_created_at}
-                    place_tag={item.place_tag}
-                    key={item.post_id}
-                  />
-                }
-              />
-            ))}
-          </S.PostList>
+          <>
+            <S.PostList>
+              {postList.map((item) => (
+                <FlipCard
+                  onClick={modalOpen}
+                  key={item.post_id}
+                  img_url={item.main_img_url}
+                  hoverCard={
+                    <SpaceInfoBack
+                      position={item.position}
+                      users={item.users}
+                      post_id={item.post_id}
+                      post_title={item.place_title}
+                      main_img_url={item.main_img_url}
+                      place_title={item.place_title}
+                      post_updated_at={item.post_updated_at}
+                      post_created_at={item.post_created_at}
+                      place_tag={item.place_tag}
+                      key={item.post_id}
+                    />
+                  }
+                />
+              ))}
+            </S.PostList>
+            <Pagination page={page} total={total} item_length={ItemLength} />
+          </>
         )
       ) : (
-        <KaKaoMap postList={postList} />
+        <KaKaoMap
+          page={page}
+          total={total}
+          item_length={ItemLength}
+          postList={postList}
+        />
       )}
     </S.Wrapper>
   );

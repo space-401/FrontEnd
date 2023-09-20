@@ -14,7 +14,7 @@ const Index = (props: MapComponentProps) => {
   useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_KEY,
   });
-  const { postList = MainPageMock.postList } = props;
+  const { postList = MainPageMock.postList, page, total, item_length } = props;
   const [isSelect, setIsSelect] = useState<number>(postList[0].post_id);
 
   const [state, setState] = useState({
@@ -36,6 +36,9 @@ const Index = (props: MapComponentProps) => {
           setIsSelect={setIsSelect}
           isSelect={isSelect}
           postList={postList}
+          page={page}
+          total={total}
+          item_length={item_length}
         />
         <Map
           center={state.center}
