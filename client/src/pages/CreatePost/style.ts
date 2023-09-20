@@ -55,7 +55,7 @@ const Label = styled.label<{ number: number; required: boolean }>`
     required &&
     css`
       &::after {
-        content: '필수';
+        content: '(필수)';
         color: ${({ theme }) => theme.COLOR.orange};
         padding-left: 0.5rem;
         padding-top: 0.2rem;

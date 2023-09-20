@@ -1,4 +1,4 @@
-import S from '@components/common/ImageEditModal/style';
+import S from '@components/Create/ImageEditModal/style';
 
 type ImgCountType = {
   currentNum: number;

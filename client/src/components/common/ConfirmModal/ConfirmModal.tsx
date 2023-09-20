@@ -13,6 +13,7 @@ export type ConfirmModalType = {
   isOpen: boolean;
 };
 
+//사용할 때 Modal 태그로 감싸기
 const ConfirmModal = React.forwardRef(
   (prop: ConfirmModalType, forwardRef: React.ForwardedRef<any>) => {
     const {
@@ -31,19 +32,6 @@ const ConfirmModal = React.forwardRef(
     };
 
     return (
-
-      <Modal
-        open={isOpen}
-        onClose={ModalClose}
-        slotProps={{
-          backdrop: {
-            sx: {
-              backgroundColor: 'rgba(0,0,0,0.6)',
-            },
-          },
-        }}
-      >
-
       <Box tabIndex={-1} ref={forwardRef}>
         <S.Container>
           <S.TitleMessage>{titleMessage}</S.TitleMessage>
