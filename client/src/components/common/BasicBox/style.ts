@@ -5,10 +5,12 @@ import { flexCenter } from '@/styles/common';
 const Wrapper = styled.div<BasicBoxProp>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.width}px;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color, theme }) =>
+    color ? color : theme.COLOR['gray-5']};
   border-radius: ${(props) => props.borderradius}px;
   ${flexCenter}
   background-image: url(${(props) => props.backgroundImage});
+  background-size: cover;
 `;
 
 const S = {
