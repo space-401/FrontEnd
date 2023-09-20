@@ -97,6 +97,9 @@ export type SearchProps = {
 
 export type MapComponentProps = {
   postList: SpacePostType[];
+  page: number;
+  total: number;
+  item_length: number;
 };
 
 export type DetailPageType = SpacePostType & {

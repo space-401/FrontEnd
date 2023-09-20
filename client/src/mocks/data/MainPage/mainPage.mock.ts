@@ -231,7 +231,7 @@ const MainPageMock: MainPageType = {
     },
   ],
   tagList: spacePostMock.place_tag,
-  total: 16,
+  total: 140,
   page: 1,
 };
 
