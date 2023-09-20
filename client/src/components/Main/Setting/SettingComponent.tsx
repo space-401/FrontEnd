@@ -5,9 +5,10 @@ import S from '@components/Main/Setting/style';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
 import UserList from '@components/Main/Setting/components/UserList';
 import ConfirmModal from '@components/common/ConfirmModal/ConfirmModal';
-import AlertModal from '@components/common/AlertModal/AlertModal';
-import { useAlertModalStore } from '@store/modal';
-import { AlertModalType } from '@type/modal.type';
+import SelfErrorModal from '@components/common/AlertModal/AlertModal';
+import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
+import toast from 'react-hot-toast';
+import { theme } from '@styles/theme/theme';
 
 const SettingComponent = React.forwardRef(
   (
@@ -23,19 +24,21 @@ const SettingComponent = React.forwardRef(
     const { isOpen, isAdmin, userList, spaceTitle, onClose } = props;
 
     const [state, setState] = useState({
+      dropUserName: '',
+      // 본인이 나갈때 뜨는 모달창
       isSelfOutModal: false,
+      // 다른 사람을 추방하였을 때 뜨는 모달창
       isAlertModal: false,
+      // 본인이 나갈때 뜨는 경고 모달창
+      isErrorOutModal: false,
     });
-
-    const setInfo = useAlertModalStore((prev) => prev.setInfo);
 
     const ChangeAlertModal = (newState: boolean) => {
       setState((prev) => ({ ...prev, isAlertModal: newState }));
     };
 
-    const AlertOpen = (info: AlertModalType) => {
-      setInfo(info);
-      ChangeAlertModal(true);
+    const ChangeErrorModal = (newState: boolean) => {
+      setState((prev) => ({ ...prev, isErrorOutModal: newState }));
     };
 
     const ChangeSelfOutModal = (newState: boolean) => {
@@ -44,24 +47,78 @@ const SettingComponent = React.forwardRef(
 
     const ChangeSelfAction = (user_id: number) => {
       if (isAdmin) {
-        AlertOpen({
-          alertMessage: `확인`,
-          width: 348,
-          alertTitle: `${userList[0].user_name} 방장님,\n 방장은 주고 나가주세요`,
-        });
+        ChangeErrorModal(true);
         return;
       }
       console.log(user_id + '님이 나갔습니다.');
+      // 스페이스 선택 페이지 이동 url
       ChangeSelfOutModal(false);
+    };
+
+    const InviteLinkCopyAction = async () => {
+      try {
+        await navigator.clipboard.writeText('www.KKIRI.com');
+        toast('초대링크를 복사하였습니다.', {
+          style: {
+            fontFamily: theme.FONT_FAMILY.Pretendard,
+            fontSize: theme.TEXT_SIZE['text-14'],
+            fontWeight: theme.FONT_WEIGHT['WEIGHT-400'],
+            display: 'flex',
+            width: '326px',
+            height: '48px',
+            gap: '16px',
+            justifyContent: 'center',
+            borderRadius: '5px',
+            background: theme.COLOR.black,
+            color: theme.COLOR.white,
+          },
+        });
+      } catch (e) {
+        toast('초대링크를 복사를 실패하였습니다.', {
+          style: {
+            fontFamily: theme.FONT_FAMILY.Pretendard,
+            fontSize: theme.TEXT_SIZE['text-14'],
+            fontWeight: theme.FONT_WEIGHT['WEIGHT-400'],
+            display: 'flex',
+            width: '326px',
+            height: '48px',
+            gap: '16px',
+            justifyContent: 'center',
+            borderRadius: '5px',
+            background: theme.COLOR.black,
+            color: theme.COLOR.white,
+          },
+        });
+      }
     };
 
     return (
       <Box tabIndex={-1} ref={forwardRef}>
         <S.Container isOpen={isOpen}>
-          <AlertModal
-            ModalClose={() => ChangeAlertModal(false)}
-            isOpen={state.isAlertModal}
-          />
+          <Modal
+            open={state.isErrorOutModal}
+            onClose={() => ChangeSelfOutModal(false)}
+          >
+            <SelfErrorModal
+              width={368}
+              alertTitle={`${userList[0].user_name} 방장님,\n 방장은 주고 나가주세요`}
+              alertMessage={`확인`}
+              ModalClose={() => ChangeErrorModal(false)}
+              isOpen={state.isErrorOutModal}
+            />
+          </Modal>
+          <Modal
+            open={state.isAlertModal}
+            onClose={() => ChangeAlertModal(false)}
+          >
+            <SelfErrorModal
+              width={368}
+              alertTitle={`${userList[0].user_name} 방장님,\n 방장은 주고 나가주세요`}
+              alertMessage={`확인`}
+              ModalClose={() => ChangeAlertModal(false)}
+              isOpen={state.isAlertModal}
+            />
+          </Modal>
           <Modal
             open={state.isSelfOutModal}
             onClose={() => ChangeSelfOutModal(false)}
@@ -89,7 +146,6 @@ const SettingComponent = React.forwardRef(
           <S.SettingCenter>
             {userList.map((user, i) => (
               <UserList
-                AlertOpen={AlertOpen}
                 myInfo={userList[0]}
                 key={user.user_id}
                 index={i}
@@ -98,7 +154,14 @@ const SettingComponent = React.forwardRef(
               />
             ))}
           </S.SettingCenter>
-          <S.SettingBottom></S.SettingBottom>
+          <S.SettingBottom>
+            <S.SpaceOutBox onClick={() => ChangeSelfOutModal(true)}>
+              <LogoutSvg width={24} height={24} />
+            </S.SpaceOutBox>
+            <S.InviteUserBox onClick={InviteLinkCopyAction}>
+              친구 초대하기
+            </S.InviteUserBox>
+          </S.SettingBottom>
         </S.Container>
       </Box>
     );
