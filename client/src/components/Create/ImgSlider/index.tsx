@@ -4,7 +4,6 @@ import { ReactComponent as LeftIcon } from '@assets/svg/leftArrow.svg';
 import { ReactComponent as RightIcon } from '@assets/svg/rightArrow.svg';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import '@components/common/ImgSlider/style.css';
 import { Pagination, Navigation } from 'swiper/modules';
 
 type SliderProps = {

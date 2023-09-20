@@ -11,7 +11,6 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: fit-content;
-  gap: 8px;
   position: absolute;
   bottom: 15%;
   padding: '8px';
@@ -36,7 +35,7 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   border-radius: 5px;
   background-image: url(${({ image }) => image});
   background-size: cover;
-  ${flexCenter}
+  ${flexCenter};
 `;
 
 const DeleteIcon = styled.div`

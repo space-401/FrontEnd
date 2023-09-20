@@ -35,7 +35,7 @@ const TitleContainer = styled.div<ITitle>`
     required &&
     css`
       &::after {
-        content: '필수';
+        content: '(필수)';
         color: ${({ theme }) => theme.COLOR.orange};
         padding-left: 0.5rem;
         padding-top: 0.2rem;
@@ -47,6 +47,7 @@ const TitleContainer = styled.div<ITitle>`
 const InputContainer = styled.div<IInput>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
+  position: relative;
 `;
 
 const ButtonContainer = styled.div`
@@ -59,6 +60,8 @@ const EditButton = styled.div`
   color: ${({ theme }) => theme.COLOR.skyblue};
   padding-top: 140px;
   padding-left: 10px;
+  position: absolute;
+  left: 170px;
 `;
 
 const S = {

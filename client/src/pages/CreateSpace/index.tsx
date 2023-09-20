@@ -8,8 +8,11 @@ import BasicBox from '@/components/common/BasicBox';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import { useState, useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
-import ImgEditModal from '@/components/common/ImageEditModal/ImageEditModal';
+import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType } from '@/types/image.type';
+import CharacterCounter from '@/components/Create/CharacterCounter';
+import { theme } from '@/styles/theme/theme';
+import useInputs from '@/hooks/common/useInputs';
 
 const CreateSpace = () => {
   //이미지 파일을 저장하는 곳
@@ -22,6 +25,14 @@ const CreateSpace = () => {
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  //인풋 관리
+  const { values, onChange } = useInputs({
+    title: '',
+    content: '',
+    password: '',
+  });
+  const { title, content, password } = values;
 
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,27 +100,42 @@ const CreateSpace = () => {
             <BasicBox width={160} borderradius={10}>
               <PhotoIcon />
             </BasicBox>
+            <S.EditButton>편집하기</S.EditButton>
           </S.InputContainer>
         ) : (
-          <BasicBox
-            backgroundImage={cropImages[0]}
-            width={160}
-            borderradius={10}
-            color="grey"
-            onClick={ModalOpen}
-          />
+          <S.InputContainer number={1} onClick={onClickImgEditModal}>
+            <BasicBox
+              backgroundImage={cropImages[0]}
+              width={160}
+              borderradius={10}
+              color="grey"
+              onClick={ModalOpen}
+            />
+            <S.EditButton>편집하기</S.EditButton>
+          </S.InputContainer>
         )}
-        <S.EditButton>편집하기</S.EditButton>
+
         {/*이름 지정 인풋*/}
         <S.TitleContainer number={2} required={true}>
           <div>스페이스 명 </div>
         </S.TitleContainer>
         <S.InputContainer number={2}>
           <InputBox
-            type="text"
             height={60}
-            placeholder="스페이스 명 입력"
-            maxLength={20}
+            width={628}
+            placeholder="16자 이내의 제목을 입력해 주세요."
+            type="text"
+            maxLength={16}
+            children={
+              <CharacterCounter
+                color={theme.COLOR['gray-3']}
+                currentNum={title.length}
+                maxNum={16}
+              />
+            }
+            paddingLeft={65}
+            onChange={onChange}
+            name="title"
           />
         </S.InputContainer>
 
@@ -122,6 +148,15 @@ const CreateSpace = () => {
             height={160}
             placeholder="스페이스 설명 입력"
             maxLength={100}
+            onChange={onChange}
+            name="content"
+            children={
+              <CharacterCounter
+                color={theme.COLOR['gray-3']}
+                currentNum={content.length}
+                maxNum={100}
+              />
+            }
           />
         </S.InputContainer>
 
@@ -138,6 +173,8 @@ const CreateSpace = () => {
             type={'password'}
             placeholder="숫자 5자리를 입력해주세요"
             maxLength={5}
+            onChange={onChange}
+            name={password}
           />
         </S.InputContainer>
         {/*스페이스 생성 버튼*/}
@@ -145,8 +182,8 @@ const CreateSpace = () => {
           <BasicButton
             children="스페이스 생성하기"
             onClick={() => {}}
-            width={100}
-            height={10}
+            width={160}
+            height={47}
           />
         </S.ButtonContainer>
       </S.Wrapper>

@@ -1,21 +1,32 @@
 import styled from 'styled-components';
 
-const InputWrapper = styled.div<{
+interface IInputWrapper {
   width?: number;
   height: number;
   placeholder?: string;
   backgroundColor?: string;
-}>`
+}
+const InputWrapper = styled.div<IInputWrapper>`
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ? backgroundColor : theme.COLOR['gray-5']};
   width: ${(props) => (props.width ? `${props.width}px` : '100%')};
   height: ${({ height }) => height}px;
   border-radius: 10px;
   padding: 1rem;
+  display: flex;
 `;
 
-const Input = styled.input`
-  width: 100%;
+interface IInput {
+  paddingLeft?: number;
+  hasIcon: boolean;
+}
+const Input = styled.input<IInput>`
+  width: ${({ hasIcon, paddingLeft }) =>
+    hasIcon && !paddingLeft
+      ? `calc(100% - 24px)`
+      : hasIcon && paddingLeft
+      ? `calc(100% - ${paddingLeft}px)`
+      : '100%'};
   height: 100%;
   background-color: inherit;
   color: white;

@@ -1,5 +1,5 @@
 import type { TagListProps } from '@type/main.type';
-import S from '@components/CreateSelectBox/components/style';
+import S from '@components/Create/CreateSelectBox/components/style';
 import { ReactComponent } from '@assets/svg/trash.svg';
 
 const TagList = (props: TagListProps) => {
