@@ -64,24 +64,7 @@ const MenuList = styled.ul<{
           Math.floor(menuWidth / 2) - 10
         }px ${Math.floor(menuWidth / 2) - 10}px; gap : 2px 8px;`
       : 'display:flex; gap: 2px;'}
-  height: ${({ $isOpen, maxHeight, grid, row }) => {
-    let height;
-
-    if ($isOpen) {
-      if (grid) {
-        /**
-         * @Todo
-         * 사용자 인원수에 따라서 길이 다르게 보이게 수정
-         */
-        height = maxHeight + row;
-      } else {
-        height = maxHeight - 8;
-      }
-    } else {
-      height = 0;
-    }
-    return `${height}px;`;
-  }};
+  height: ${({ maxHeight }) => maxHeight};
 
   flex-direction: column;
   overflow-y: scroll;

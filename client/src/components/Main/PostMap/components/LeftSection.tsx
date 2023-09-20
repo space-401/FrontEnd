@@ -3,6 +3,7 @@ import OnePostMapCard from '@components/Main/PostMap/components/One-PostMapCard'
 import { SpacePostType } from '@type/space.type';
 import { Dispatch, SetStateAction } from 'react';
 import { getFormatUser } from '@utils/formatter';
+import Pagination from '@components/common/Pagination';
 
 type LeftSectionPropType = {
   postList: SpacePostType[];
@@ -14,10 +15,21 @@ type LeftSectionPropType = {
       isPanto: boolean;
     }>
   >;
+  page: number;
+  total: number;
+  item_length: number;
 };
 
 const LeftSection = (props: LeftSectionPropType) => {
-  const { setIsSelect, setState, isSelect, postList } = props;
+  const {
+    setIsSelect,
+    setState,
+    isSelect,
+    postList,
+    total,
+    page,
+    item_length,
+  } = props;
   return (
     <S.Wrapper>
       {postList.map((item) => (
@@ -36,6 +48,7 @@ const LeftSection = (props: LeftSectionPropType) => {
           isSelect={isSelect === item.post_id}
         />
       ))}
+      <Pagination total={total} page={page} item_length={item_length} />
     </S.Wrapper>
   );
 };
