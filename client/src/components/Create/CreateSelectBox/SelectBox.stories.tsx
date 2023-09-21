@@ -4,7 +4,7 @@ import { StoryFn } from '@storybook/react';
 import { users_mock } from '@mocks/data/user/users.mock';
 import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 import { selectType } from '@type/main.type';
-import CSelectBox from '../MainSelectBox';
+import CSelectBox from '@/components/Main/SelectBox';
 
 export default {
   title: 'post/CSelectBox',
