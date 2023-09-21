@@ -14,8 +14,6 @@ const Wrapper = styled.div`
 const Form = styled.form`
   ${flexCenter}
   flex-direction: column;
-  /* overflow: hidden; */
-  width: 760px;
   ${flexCenter}
   position: absolute;
   top: 50%;
@@ -64,7 +62,6 @@ const Footer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
 const SizeController = styled.div`
   width: 160px;
   z-index: 100;
@@ -105,9 +102,13 @@ const PhotoContainer = styled.div`
 `;
 
 const FlexContainer = styled.div`
-  position: absolute;
+  /* position: absolute;
   z-index: 100000;
-  color: white;
+  color: white; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 const S = {

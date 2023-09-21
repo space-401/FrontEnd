@@ -7,12 +7,13 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import BasicBox from '@/components/common/BasicBox';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import { useState, useRef } from 'react';
-import { usePhotoModalStore } from '@/store/modal';
+import { usePhotoModalStore, useSelectIconModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import { theme } from '@/styles/theme/theme';
 import useInputs from '@/hooks/common/useInputs';
+import SelectIconModal from '@/components/Create/SelectIconModal';
 
 const CreateSpace = () => {
   //이미지 파일을 저장하는 곳
@@ -23,7 +24,14 @@ const CreateSpace = () => {
   const [convertedImages, setConvertedImages] = useState<File[]>([]);
   console.log(convertedImages);
   //현재 편집 모달이 열려있는지
-  const { ModalOpen, isOpen } = usePhotoModalStore();
+  const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
+    usePhotoModalStore();
+  const {
+    ModalOpen: IconModalOpen,
+    ModalClose: IconModalClose,
+    isOpen: isIconModalOpen,
+  } = useSelectIconModalStore();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   //인풋 관리
@@ -56,13 +64,11 @@ const CreateSpace = () => {
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current && images.length == 0) inputRef.current.click();
-    if (cropImages.length > 0) {
-      if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
-        ModalOpen();
-      }
+    if (inputRef.current) {
+      inputRef.current.click();
     }
-    ModalOpen();
+    PhotoModalOpen();
+    IconModalClose();
   };
 
   return (
@@ -71,7 +77,8 @@ const CreateSpace = () => {
       title="스페이스 설정하기"
       detail="우리만을 위한 스페이스를 새로 만들어요."
     >
-      {isOpen && (
+      {/*사진 편집 모달*/}
+      {isPhotoModalOpen && (
         <ImgEditModal
           setConvertedImages={setConvertedImages}
           cropImages={cropImages}
@@ -81,13 +88,20 @@ const CreateSpace = () => {
           handleFileChange={handleFileChange}
         />
       )}
+      {/*아이콘 선택 모달*/}
+      {isIconModalOpen && (
+        <SelectIconModal
+          isOpen={isIconModalOpen}
+          onClickImgEditModal={onClickImgEditModal}
+        />
+      )}
       <S.Wrapper>
         {/*아이콘 지정 인풋*/}
         <S.TitleContainer number={1} required={true}>
           <div>스페이스 아이콘</div>
         </S.TitleContainer>
         {images.length == 0 ? (
-          <S.InputContainer number={1} onClick={onClickImgEditModal}>
+          <S.InputContainer number={1} onClick={IconModalOpen}>
             <input
               type="file"
               accept="image/*"
@@ -109,7 +123,7 @@ const CreateSpace = () => {
               width={160}
               borderradius={10}
               color="grey"
-              onClick={ModalOpen}
+              onClick={PhotoModalOpen}
             />
             <S.EditButton>편집하기</S.EditButton>
           </S.InputContainer>
@@ -121,6 +135,7 @@ const CreateSpace = () => {
         </S.TitleContainer>
         <S.InputContainer number={2}>
           <InputBox
+            readonly={false}
             height={60}
             width={628}
             placeholder="16자 이내의 제목을 입력해 주세요."
@@ -169,6 +184,7 @@ const CreateSpace = () => {
         </S.FlexContainer>
         <S.InputContainer number={4}>
           <InputBox
+            readonly={false}
             height={60}
             type={'password'}
             placeholder="숫자 5자리를 입력해주세요"

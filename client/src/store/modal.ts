@@ -35,3 +35,9 @@ export const useEditModeStore = create<ModeType>((setState) => ({
   ModeOn: () => setState(() => ({ isMode: true })),
   ModeClose: () => setState(() => ({ isMode: false })),
 }));
+
+export const useSelectIconModalStore = create<ModalType>((setState) => ({
+  isOpen: false,
+  ModalOpen: () => setState(() => ({ isOpen: true })),
+  ModalClose: () => setState(() => ({ isOpen: false })),
+}));

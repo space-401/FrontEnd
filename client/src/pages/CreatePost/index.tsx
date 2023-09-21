@@ -4,7 +4,7 @@ import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import BasicButton from '@/components/common/BasicButton';
-import Calendar from '@/components/common/Calender';
+import Calendar from '@/components/common/Calender/CreateCalender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
@@ -152,6 +152,7 @@ const CreatePost = () => {
           <S.InputContainer number={1}>
             <InputBox
               height={60}
+              readonly={false}
               width={628}
               placeholder="16자 이내의 제목을 입력해 주세요."
               type="text"
@@ -190,6 +191,7 @@ const CreatePost = () => {
           </S.Label>
           <S.InputContainer number={3}>
             <InputBox
+              readonly={false}
               height={60}
               placeholder="등록할 장소를 입력해주세요."
               type="text"

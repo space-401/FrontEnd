@@ -13,6 +13,7 @@ type InputBoxProps = {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   name: string;
   paddingLeft?: number;
+  readonly: boolean;
 };
 
 const InputBox = ({
@@ -24,6 +25,7 @@ const InputBox = ({
   onChange,
   name,
   paddingLeft,
+  readonly,
   ...rest
 }: InputBoxProps) => {
   const hasIcon = children ? true : false;
@@ -39,6 +41,7 @@ const InputBox = ({
         onChange={onChange}
         hasIcon={hasIcon}
         name={name}
+        readOnly={readonly}
       />
       {children}
     </S.InputWrapper>
