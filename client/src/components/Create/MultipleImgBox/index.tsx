@@ -1,4 +1,4 @@
-import S from '@components/common/MultipleImgBox/style';
+import S from '@/components/Create/MultipleImgBox/style';
 import { ReactComponent as PlusPhotoIcon } from '@assets/svg/photo/plusIcon.svg';
 import { ReactComponent as DeleteIcon } from '@assets/svg/photo/deleteIcon.svg';
 import { useRef } from 'react';

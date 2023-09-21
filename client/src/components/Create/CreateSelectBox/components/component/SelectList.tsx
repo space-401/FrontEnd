@@ -13,7 +13,12 @@ const SelectList = (props: {
   };
   return (
     <Stack
-      sx={{ width: '100%', overflow: 'clip', flexWrap: 'wrap', gap: '5px' }}
+      sx={{
+        width: '100%',
+        overflow: 'clip',
+        flexWrap: 'wrap',
+        gap: '5px',
+      }}
       direction={'row'}
     >
       {Items.map((item) => (
@@ -31,7 +36,7 @@ const SelectList = (props: {
             overflow: 'hidden',
             maxWidth: '138px',
             textOverflow: 'ellipsis',
-            zIndex: '100',
+            zIndex: 1000,
           }}
           variant="outlined"
           onDelete={() => handleDelete(item.id)}

@@ -1,6 +1,6 @@
 import { SuggestionDataItem } from 'react-mentions';
 import { UserType } from '@type/user.type';
-import S from '@components/Detail/style';
+import S from '@components/Detail/Mention/style';
 import Avatar from '@mui/material/Avatar';
 import { ReactNode } from 'react';
 

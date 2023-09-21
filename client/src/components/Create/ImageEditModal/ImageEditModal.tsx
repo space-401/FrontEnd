@@ -1,11 +1,10 @@
-import S from '@components/common/ImageEditModal/style';
-import ImageCropper from '@components/common/ImageEditModal/Cropper';
+import S from '@components/Create/ImageEditModal/style';
+import ImageCropper from '@components/Create/ImageEditModal/Cropper';
 import { useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
-import ImgCounter from './ImgCounter';
-import MultipleImgBox from '../MultipleImgBox';
+import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { ImageType } from '@/types/image.type';
 
@@ -125,9 +124,7 @@ const ImgEditModal = ({
             </div>
           </div>
 
-          <S.Footer>
-            <ImgCounter currentNum={images.length} maxNum={10} />
-          </S.Footer>
+          <S.Footer></S.Footer>
         </S.Form>
       </Box>
     </Modal>

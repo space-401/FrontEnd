@@ -130,7 +130,9 @@ body {
       max-height: '200px';
       font-size: 18px !important;
     }
-
+    /* .selectContainer {
+      height: 100px !important;
+    } */
     .monthButton {
       width: 34px;
       height: 34px;
@@ -165,5 +167,11 @@ body {
     > input {
       background-color: #413f3f !important;
     }
+  }
+  .custom-react-datepicker__wrapper {
+    width: 312px;
+  }
+  .react-datepicker__month-container {
+    border-radius: 10px;
   }
 }
