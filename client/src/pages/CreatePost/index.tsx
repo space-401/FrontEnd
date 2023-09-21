@@ -7,17 +7,20 @@ import BasicButton from '@/components/common/BasicButton';
 import Calendar from '@/components/common/Calender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
+import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
 import { selectType } from '@/types/main.type';
-import CreateSelectBox from '@/components/CreateSelectBox';
+import CreateSelectBox from '@/components/Create/CreateSelectBox';
 import { useState, useRef } from 'react';
 import { users_mock } from '@/mocks/data/user/users.mock';
 import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
-import ImagesEditModal from '@/components/common/ImageEditModal/ImagesEditModal';
+import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
-import ImgSlider from '@/components/common/ImgSlider';
+import ImgSlider from '@/components/Create/ImgSlider';
 import { ImageType } from '@/types/image.type';
+import CharacterCounter from '@/components/Create/CharacterCounter';
+import useInputs from '@/hooks/common/useInputs';
 
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,16 +37,24 @@ const CreatePost = () => {
   const { ModalOpen, isOpen } = usePhotoModalStore();
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
+  //현재 글자개수 세기
+  const { values, onChange } = useInputs({
+    title: '',
+    content: '',
+  });
+
+  const { title, content } = values;
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && images.length == 0) inputRef.current.click();
     if (cropImages.length > 0) {
       if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
-        ModalOpen();
+        return ModalOpen();
       }
+    } else {
+      ModalOpen();
     }
-    ModalOpen();
   };
 
   //파일 변경 함수
@@ -145,6 +156,16 @@ const CreatePost = () => {
               placeholder="16자 이내의 제목을 입력해 주세요."
               type="text"
               maxLength={16}
+              children={
+                <CharacterCounter
+                  color={theme.COLOR['gray-3']}
+                  currentNum={title.length}
+                  maxNum={16}
+                />
+              }
+              paddingLeft={65}
+              onChange={onChange}
+              name="title"
             />
           </S.InputContainer>
 
@@ -174,6 +195,9 @@ const CreatePost = () => {
               type="text"
               maxLength={20}
               width={628}
+              children={<SearchIcon />}
+              onChange={() => {}}
+              name=""
             />
           </S.InputContainer>
 
@@ -195,6 +219,15 @@ const CreatePost = () => {
               placeholder="500자 이내의 내용을 입력해 주세요."
               maxLength={500}
               width={628}
+              onChange={onChange}
+              name="content"
+              children={
+                <CharacterCounter
+                  color={theme.COLOR['gray-3']}
+                  currentNum={content.length}
+                  maxNum={500}
+                />
+              }
             />
           </S.InputContainer>
 

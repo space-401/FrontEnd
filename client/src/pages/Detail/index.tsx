@@ -22,7 +22,7 @@ import {
   OnChangeHandlerFunc,
   SuggestionDataItem,
 } from 'react-mentions';
-import OneMention from '@components/Detail/OneMention';
+import OneMention from '@/components/Detail/Mention/OneMention';
 
 type DetailPageProps = {
   onClose: () => void;

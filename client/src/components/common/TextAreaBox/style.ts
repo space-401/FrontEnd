@@ -11,6 +11,7 @@ const Wrapper = styled.div<{
   height: ${({ height }) => height}px;
   border-radius: 10px;
   padding: 1rem;
+  position: relative;
 `;
 
 const TextArea = styled.textarea`
@@ -21,9 +22,16 @@ const TextArea = styled.textarea`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
 `;
 
+const ChildrenWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+`;
+
 const S = {
   Wrapper,
   TextArea,
+  ChildrenWrapper,
 };
 
 export default S;

@@ -96,21 +96,6 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   border:1px solid white;
 `;
 
-const CountWrapper = styled.div`
-  ${flexCenter}
-  font-size:15px;
-  background-color: ${({ theme }) => theme.COLOR['gray-3']};
-  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
-  width: 80px;
-  height: 30px;
-  margin-left: 10px;
-  border-radius: 10px;
-  z-index: 10000;
-  span {
-    color: ${({ theme }) => theme.COLOR['white']};
-  }
-  gap: 5px;
-`;
 const PhotoContainer = styled.div`
   display: flex;
   align-items: center;
@@ -134,7 +119,6 @@ const S = {
   CropperWrapper,
   MultiViewWrapper,
   SmallPhotoBox,
-  CountWrapper,
   PhotoContainer,
   FlexContainer,
 };

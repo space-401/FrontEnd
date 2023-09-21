@@ -1,16 +1,17 @@
-import S from '@components/common/ImageEditModal/style';
-import ImageCropper from '@components/common/ImageEditModal/Cropper';
-import { useState, useRef } from 'react';
+import S from '@components/Create/ImageEditModal/style';
+import ImageCropper from '@/components/Create/ImageEditModal/Cropper';
+import { useState, useRef, useEffect } from 'react';
 import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
 import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
-import ImgCounter from './ImgCounter';
+import CharacterCounter from '@/components/Create/CharacterCounter';
 import { ImageType } from '@/types/image.type';
-import MultipleImgBox from '../MultipleImgBox';
+import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { usePhotoModalStore } from '@/store/modal';
+import { theme } from '@/styles/theme/theme';
 
 type ModalType = {
   images: ImageType[];
@@ -60,6 +61,10 @@ const ImagesEditModal = ({
   const { ModalClose, isOpen } = usePhotoModalStore();
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = images.length;
+
+  useEffect(() => {
+    console.log('모달 열림');
+  }, []);
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any, index: number) => {
@@ -219,7 +224,12 @@ const ImagesEditModal = ({
           </div>
 
           <S.Footer>
-            <ImgCounter currentNum={images.length} maxNum={10} />
+            <CharacterCounter
+              currentNum={images.length}
+              maxNum={10}
+              color={'white'}
+              backgroundColor={theme.COLOR['gray-3']}
+            />
             <MultipleIcon
               style={{
                 zIndex: 1000,
