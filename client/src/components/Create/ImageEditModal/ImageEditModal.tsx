@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
-import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { ImageType } from '@/types/image.type';
 
@@ -59,6 +58,7 @@ const ImgEditModal = ({
   //모달 취소
   const onClickCancelModal = () => {
     ModalClose();
+    setImages([]);
   };
 
   return (
@@ -73,13 +73,6 @@ const ImgEditModal = ({
       }}
     >
       <Box tabIndex={-1}>
-        <MultipleImgBox
-          imgCount={1}
-          isBackground={true}
-          images={images}
-          setImages={setImages}
-        />
-
         <S.Form>
           <S.Header>
             <button onClick={onClickCancelModal}>취소</button>

@@ -10,6 +10,7 @@ import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
 import { useSearchParams } from 'react-router-dom';
 import Pagination from '@components/common/Pagination';
+import MainCalender from '@/components/common/Calender/MainCalender';
 
 const MainBody = (props: MainBodyPropType) => {
   const [state, setState] = useState<{
@@ -82,6 +83,7 @@ const MainBody = (props: MainBodyPropType) => {
           labelName={'태그'}
           ListItem={tagList}
         />
+        <MainCalender />
         <MainSearchBox placeholder={'제목'} setState={setSearchState} />
       </S.FilterGroup>
       {!selectState ? (

@@ -48,7 +48,7 @@ const MultipleImgBox = ({
         const reader = new FileReader();
         reader.onload = () => {
           const result = reader.result;
-          if (typeof result === 'string' && currentImgNum < 10) {
+          if (typeof result === 'string' && currentImgNum <= 10) {
             const newObj: ImageType = {
               id: currentImgNum,
               img: result,

@@ -2,23 +2,25 @@ import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  height: 100vh; /* 화면 높이를 100%로 설정하여 전체 화면으로 확장 */
+  position: absolute;
+  right: 30%;
+  bottom: 15%;
 `;
 const Container = styled.div`
   display: flex;
-  flex-wrap: wrap;
   width: fit-content;
   position: absolute;
-  bottom: 15%;
-  padding: '8px';
+  bottom: 100%;
+  right: 0;
   ${flexCenter}
+  margin:8px;
+  padding: 8px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
   z-index: 100000;
+  position: absolute;
 `;
+
 const Modal = styled.div`
   position: fixed;
   top: 0;
@@ -49,11 +51,11 @@ const DeleteIcon = styled.div`
 `;
 
 const S = {
-  Wrapper,
   Container,
   SmallPhotoBox,
   Modal,
   DeleteIcon,
+  Wrapper,
 };
 
 export default S;

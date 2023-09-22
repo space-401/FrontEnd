@@ -1,5 +1,6 @@
 import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import '@components/Create/ImageEditModal/Cropper.css';
 
 type PropsType = {
   image: string;
@@ -17,8 +18,8 @@ const ImageCropper = ({ image, myRef }: PropsType) => {
         aspectRatio={1}
         src={image}
         viewMode={1}
-        width={760}
-        height={760}
+        width={740}
+        height={740}
         background={false}
         responsive
         autoCropArea={1}

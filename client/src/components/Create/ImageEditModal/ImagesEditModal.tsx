@@ -64,7 +64,8 @@ const ImagesEditModal = ({
 
   useEffect(() => {
     console.log('모달 열림');
-  }, []);
+    console.log('이미지', images);
+  }, [images]);
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any, index: number) => {
@@ -149,6 +150,7 @@ const ImagesEditModal = ({
       }}
     >
       <Box tabIndex={-1}>
+        {/*모든 이미지 보이는 UI*/}
         {isMultipleBoxShow && (
           <MultipleImgBox
             imgCount={10}
@@ -160,7 +162,6 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
-
         <S.Form>
           <PrevBtn
             style={{
@@ -210,14 +211,16 @@ const ImagesEditModal = ({
             >
               {images.map((img, index) => {
                 return (
-                  <ImageCropper
-                    key={index}
-                    setCropImages={setCropImages}
-                    image={img.img}
-                    index={index}
-                    cropImages={cropImages}
-                    myRef={myRefs[index]}
-                  />
+                  <div style={{ margin: '10px' }}>
+                    <ImageCropper
+                      key={index}
+                      setCropImages={setCropImages}
+                      image={img.img}
+                      index={index}
+                      cropImages={cropImages}
+                      myRef={myRefs[index]}
+                    />
+                  </div>
                 );
               })}
             </div>
