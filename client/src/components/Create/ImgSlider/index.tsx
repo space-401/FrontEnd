@@ -5,6 +5,7 @@ import { ReactComponent as RightIcon } from '@assets/svg/rightArrow.svg';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
+import '@components/Create/ImgSlider/style.css';
 
 type SliderProps = {
   images: string[];
@@ -35,8 +36,8 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
           prevEl: '.prevBtn',
         }}
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
         loop={true}
       >
         {images.map((img) => {

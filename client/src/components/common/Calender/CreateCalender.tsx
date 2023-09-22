@@ -7,15 +7,10 @@ import getYear from 'date-fns/getYear';
 import styled from 'styled-components';
 import { ReactComponent as RightArrow } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as LeftArrow } from '@assets/svg/leftArrow.svg';
-import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+// import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+import '@components/common/Calender/CreateCalender.css';
 
-export type ExampleCustomInputProps = {
-  value: string;
-  onClick: () => void;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const Calendar = () => {
+const CreateCalender = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
 
@@ -27,7 +22,7 @@ const Calendar = () => {
 
   return (
     <div className="custom-react-datepicker__wrapper">
-      <label style={{ position: 'relative' }}>
+      <label>
         <StyledDatePicker
           dateFormat="yyyy.MM.dd"
           showYearDropdown
@@ -70,19 +65,19 @@ const Calendar = () => {
             </div>
           )}
         ></StyledDatePicker>
-        <CalenderIcon
-          style={{
-            position: 'absolute',
-            right: 20,
-            top: 0,
-          }}
-        />
+        {/* <CalenderIcon
+          // style={
+          //   {
+          //     // paddingTop: '10px',
+          //   }
+          // }
+        /> */}
       </label>
     </div>
   );
 };
 
-export default Calendar;
+export default CreateCalender;
 
 const StyledDatePicker = styled(DatePicker)`
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
