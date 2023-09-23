@@ -104,6 +104,17 @@ const PhotoWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const MapInputContainer = styled.div``;
+
+const SearchIconBox = styled.div`
+  position: absolute;
+`;
+
+const MapContainer = styled.div`
+  cursor: pointer !important;
+`;
+
 const S = {
   Wrapper,
   GridWrapper,
@@ -119,5 +130,8 @@ const S = {
   EmptyContainer,
   SelectedImgContainer,
   PhotoBox,
+  MapInputContainer,
+  SearchIconBox,
+  MapContainer,
 };
 export default S;
