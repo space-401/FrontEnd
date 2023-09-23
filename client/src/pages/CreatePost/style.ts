@@ -5,7 +5,7 @@ const Wrapper = styled.div<{ width?: string }>`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 150px);
   color: ${({ theme }) => theme.COLOR.white};
 `;
 
@@ -16,9 +16,9 @@ const GridWrapper = styled.div`
 
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: 60px 60px 60px 60px 60px 212px 60px 60px;
+  grid-template-rows: 60px 60px 60px 60px 60px 60px 220px 60px;
   grid-gap: ${({ theme }) => theme.SPACING['gap-24']};
-  grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6' 'button1 button2';
+  grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6' 'empty button';
 `;
 
 const PhotoContainer = styled.div`
@@ -69,12 +69,12 @@ const InputContainer = styled.div<{ number: number }>`
 `;
 
 const EmptyContainer = styled.div`
-  grid-area: 'button1';
+  grid-area: 'empty';
 `;
 
 const ButtonContainer = styled.div`
-  grid-area: 'button2';
-  margin-left: auto;
+  grid-area: 'button';
+  margin-left: 470px;
 `;
 
 const SpaceInfoContainer = styled.div`

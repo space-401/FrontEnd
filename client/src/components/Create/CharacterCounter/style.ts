@@ -14,7 +14,7 @@ const CountWrapper = styled.div<ICountWrapper>`
   height: 30px;
   margin-left: 10px;
   border-radius: 10px;
-  z-index: 10000;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   span {
     color: ${({ color }) => color};
   }

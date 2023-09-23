@@ -17,7 +17,7 @@ const Container = styled.div`
   padding: 8px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
-  z-index: 100000;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
   position: absolute;
 `;
 
@@ -28,7 +28,7 @@ const Modal = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 10000;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 
 const SmallPhotoBox = styled.div<{ image?: string }>`
@@ -41,7 +41,7 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
 `;
 
 const DeleteIcon = styled.div`
-  z-index: 1000000;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
   position: 'absolute';
   top: 0;
   right: 0;
