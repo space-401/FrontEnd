@@ -1,4 +1,4 @@
-import S from '@pages/createPost/style';
+import S from '@pages/CreatePost/style';
 import BasicBox from '@/components/common/BasicBox';
 import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
@@ -21,6 +21,7 @@ import ImgSlider from '@/components/Create/ImgSlider';
 import { ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
+import SearchModal from '@components/Create/SearchMapModal';
 
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,9 +43,16 @@ const CreatePost = () => {
     title: '',
     content: '',
   });
+  const [mapInfo, setMapInfo] = useState<{
+    title: string;
+    position: { lat: number; lag: number };
+  }>({
+    title: '',
+    position: { lag: 0, lat: 0 },
+  });
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
   const { title, content } = values;
-
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && images.length == 0) inputRef.current.click();
@@ -103,6 +111,12 @@ const CreatePost = () => {
             setConvertedImages={setConvertedImages}
           />
         )}
+        <SearchModal
+          isOpen={isMapModalOpen}
+          onClose={() => setIsMapModalOpen(false)}
+          mapInfo={mapInfo}
+          setMapInfo={setMapInfo}
+        />
         {cropImages.length == 0 ? (
           <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
             <S.PhotoContainer>
@@ -190,17 +204,19 @@ const CreatePost = () => {
             장소
           </S.Label>
           <S.InputContainer number={3}>
-            <InputBox
-              readonly={false}
-              height={60}
-              placeholder="등록할 장소를 입력해주세요."
-              type="text"
-              maxLength={20}
-              width={628}
-              children={<SearchIcon />}
-              onChange={() => {}}
-              name=""
-            />
+            <S.MapContainer onClick={() => setIsMapModalOpen(true)}>
+              <InputBox
+                readonly={true}
+                height={60}
+                placeholder="등록할 장소를 입력해주세요."
+                type="text"
+                maxLength={20}
+                width={628}
+                children={<SearchIcon />}
+                onChange={() => {}}
+                name=""
+              />
+            </S.MapContainer>
           </S.InputContainer>
 
           {/*날짜*/}
