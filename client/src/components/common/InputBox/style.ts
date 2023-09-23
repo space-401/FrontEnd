@@ -19,6 +19,7 @@ const InputWrapper = styled.div<IInputWrapper>`
 interface IInput {
   paddingLeft?: number;
   hasIcon: boolean;
+  readOnly: boolean;
 }
 const Input = styled.input<IInput>`
   width: ${({ hasIcon, paddingLeft }) =>
@@ -31,6 +32,10 @@ const Input = styled.input<IInput>`
   background-color: inherit;
   color: white;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
+  &:hover {
+    cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
+  }
 `;
 
 const S = {
