@@ -1,10 +1,10 @@
-import S from '@pages/CreatePost/style';
+import S from '@pages/createPost/style';
 import BasicBox from '@/components/common/BasicBox';
 import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import BasicButton from '@/components/common/BasicButton';
-import Calendar from '@/components/common/Calender/CreateCalender';
+import Calender from '@/components/common/Calender/Calender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
@@ -22,6 +22,7 @@ import { ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
+import { MarkerType } from '@/components/Create/SearchMapModal/component/MapBox';
 
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -43,12 +44,11 @@ const CreatePost = () => {
     title: '',
     content: '',
   });
-  const [mapInfo, setMapInfo] = useState<{
-    title: string;
-    position: { lat: number; lag: number };
-  }>({
-    title: '',
-    position: { lag: 0, lat: 0 },
+
+  const [mapInfo, setMapInfo] = useState<MarkerType>({
+    content: '',
+    position: { lng: '0', lat: '0' },
+    markerId: '',
   });
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
@@ -111,12 +111,7 @@ const CreatePost = () => {
             setConvertedImages={setConvertedImages}
           />
         )}
-        <SearchModal
-          isOpen={isMapModalOpen}
-          onClose={() => setIsMapModalOpen(false)}
-          mapInfo={mapInfo}
-          setMapInfo={setMapInfo}
-        />
+
         {cropImages.length == 0 ? (
           <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
             <S.PhotoContainer>
@@ -151,6 +146,13 @@ const CreatePost = () => {
             />
           </div>
         )}
+
+        <SearchModal
+          isOpen={isMapModalOpen}
+          onClose={() => setIsMapModalOpen(false)}
+          mapInfo={mapInfo}
+          setMapInfo={setMapInfo}
+        />
 
         <S.GridWrapper>
           {/*스페이스 정보*/}
@@ -199,11 +201,32 @@ const CreatePost = () => {
             />
           </S.InputContainer>
 
+          {/*태그*/}
+          <S.FlexContainer>
+            <S.Label number={3} required={false}>
+              태그
+            </S.Label>
+            <S.IconContainer>
+              <QuestionIcon />
+            </S.IconContainer>
+          </S.FlexContainer>
+
+          <S.InputContainer number={3}>
+            <CreateSelectBox
+              labelName={'태그'}
+              ListItem={createPostMock}
+              BoxWidth={628}
+              setState={setUserList}
+              menuHeight={80 * Math.floor(users_mock.length / 2)}
+              menuWidth={628}
+            />
+          </S.InputContainer>
+
           {/*장소*/}
-          <S.Label number={3} required={true}>
+          <S.Label number={4} required={true}>
             장소
           </S.Label>
-          <S.InputContainer number={3}>
+          <S.InputContainer number={4}>
             <S.MapContainer onClick={() => setIsMapModalOpen(true)}>
               <InputBox
                 readonly={true}
@@ -220,18 +243,18 @@ const CreatePost = () => {
           </S.InputContainer>
 
           {/*날짜*/}
-          <S.Label number={4} required={true}>
+          <S.Label number={5} required={true}>
             날짜
           </S.Label>
-          <S.InputContainer number={4}>
-            <Calendar />
+          <S.InputContainer number={5}>
+            <Calender isMain={false} />
           </S.InputContainer>
 
           {/*내용*/}
-          <S.Label number={5} required={true}>
+          <S.Label number={6} required={true}>
             내용
           </S.Label>
-          <S.InputContainer number={5}>
+          <S.InputContainer number={6}>
             <TextAreaBox
               height={212}
               placeholder="500자 이내의 내용을 입력해 주세요."
@@ -249,26 +272,6 @@ const CreatePost = () => {
             />
           </S.InputContainer>
 
-          {/*태그*/}
-          <S.FlexContainer>
-            <S.Label number={6} required={false}>
-              태그
-            </S.Label>
-            <S.IconContainer>
-              <QuestionIcon />
-            </S.IconContainer>
-          </S.FlexContainer>
-
-          <S.InputContainer number={6}>
-            <CreateSelectBox
-              labelName={'태그'}
-              ListItem={createPostMock}
-              BoxWidth={628}
-              setState={setUserList}
-              menuHeight={89 * Math.floor(users_mock.length / 2)}
-              menuWidth={628}
-            />
-          </S.InputContainer>
           <S.EmptyContainer />
           <S.ButtonContainer>
             <BasicButton
