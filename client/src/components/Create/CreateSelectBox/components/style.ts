@@ -7,7 +7,6 @@ const List = styled.li<{ select: boolean; grid: boolean }>`
   border-radius: ${({ select }) => (select ? 3 : 5)}px;
   background: ${({ select, theme }) =>
     select ? theme.COLOR['gray-5'] : 'done'};
-  line-height: 14px;
   padding: 16px;
   cursor: pointer;
   transition: 0.2s background;
@@ -43,7 +42,7 @@ const TagTitle = styled.div`
 const TagGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 100%;
 `;
 
 const DeleteButton = styled.div``;
