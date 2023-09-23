@@ -7,10 +7,11 @@ import React, {
   useState,
 } from 'react';
 import { Box, Modal } from '@mui/material';
-import S from '@components/Create/SearchMapModal/style';
+import { S } from '@components/Create/SearchMapModal/style';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { APP } from '@constants/APPKEY';
 import EventMarkerContainer from '@components/Create/SearchMapModal/component/EventMarkerContainer';
+import Pagination from '@components/Create/SearchMapModal/component/Pagination';
 
 export type MarkerType = {
   markerId: string;
@@ -140,6 +141,14 @@ const SearchModal = React.forwardRef(
                     </S.OneList>
                   );
                 })}
+                {pagination && (
+                  <Pagination
+                    total={pagination.totalCount}
+                    page={pagination.current}
+                    item_length={15}
+                    setPage={pagination.gotoPage}
+                  />
+                )}
               </S.SearchList>
             </S.LeftContainer>
             <S.RightContainer>
