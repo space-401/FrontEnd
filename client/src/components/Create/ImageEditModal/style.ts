@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 10000;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 
 const Form = styled.form`
@@ -64,7 +64,7 @@ const Footer = styled.div`
 `;
 const SizeController = styled.div`
   width: 160px;
-  z-index: 100;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
   position: absolute;
   left: 10px;
   bottom: 0;
@@ -102,9 +102,6 @@ const PhotoContainer = styled.div`
 `;
 
 const FlexContainer = styled.div`
-  /* position: absolute;
-  z-index: 100000;
-  color: white; */
   display: flex;
   justify-content: space-between;
   align-items: center;
