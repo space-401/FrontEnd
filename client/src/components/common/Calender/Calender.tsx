@@ -1,5 +1,5 @@
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import { YEARS, MONTHS } from './util';
@@ -7,14 +7,18 @@ import getYear from 'date-fns/getYear';
 import styled from 'styled-components';
 import { ReactComponent as RightArrow } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as LeftArrow } from '@assets/svg/leftArrow.svg';
-//import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+import { postTimeChangeHelper } from '@/utils/time-helper';
 import '@components/common/Calender/calender.css';
+import { PostType } from '@/types/post.type';
 
 type CalenderPropsType = {
   isMain: boolean;
+  setPostData: React.Dispatch<React.SetStateAction<PostType>>;
 };
-const Calender = (props: CalenderPropsType) => {
-  const [startDate, setStartDate] = useState(new Date());
+
+const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   const onChange = (dates: any) => {
@@ -23,10 +27,34 @@ const Calender = (props: CalenderPropsType) => {
     setEndDate(end);
   };
 
+  //날짜 형식 변환해서 보내줌
+  useEffect(() => {
+    if (startDate) {
+      let newDateStr = {};
+      if (endDate) {
+        newDateStr = {
+          startDate: postTimeChangeHelper(startDate),
+          endDate: postTimeChangeHelper(endDate),
+        };
+      } else {
+        newDateStr = {
+          startDate: postTimeChangeHelper(startDate),
+          endDate: postTimeChangeHelper(startDate),
+        };
+      }
+      setPostData((prev: any) => {
+        return {
+          ...prev,
+          date: newDateStr,
+        };
+      });
+    }
+  }, [startDate, endDate]);
+
   return (
     <div className="custom-react-datepicker__wrapper">
       <label>
-        {props.isMain ? (
+        {isMain ? (
           <MStyledDatePicker
             dateFormat="yyyy.MM.dd"
             showYearDropdown
@@ -113,6 +141,19 @@ const Calender = (props: CalenderPropsType) => {
             )}
           ></DStyledDatePicker>
         )}
+        <CalenderIcon style={{ position: 'absolute', bottom: 27, right: 15 }} />
+        {!startDate && !endDate && (
+          <S.DateText
+            style={{
+              position: 'absolute',
+              bottom: 27,
+              left: 15,
+              fontWeight: 350,
+            }}
+          >
+            등록할 날짜를 입력해 주세요
+          </S.DateText>
+        )}
       </label>
     </div>
   );
@@ -141,3 +182,15 @@ const MStyledDatePicker = styled(DatePicker)`
   display: flex;
   padding-left: 2.6rem;
 `;
+
+const DateText = styled.div`
+  color: ${({ theme }) => theme.COLOR['gray-3']};
+  position: absolute;
+  bottom: 27;
+  left: 15;
+  font-weight: 400;
+`;
+
+export const S = {
+  DateText,
+};

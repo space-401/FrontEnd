@@ -106,10 +106,10 @@ const ImgEditModal = ({
                 return (
                   <ImageCropper
                     key={index}
-                    setCropImages={setCropImages}
+                    // setCropImages={setCropImages}
                     image={img.img}
                     index={index}
-                    cropImages={cropImages}
+                    // cropImages={cropImages}
                     myRef={myRefs[index]}
                   />
                 );
