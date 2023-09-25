@@ -1,37 +1,31 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@/components/Create/ImageEditModal/Cropper';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
 import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
 import CharacterCounter from '@/components/Create/CharacterCounter';
-import { ImageType } from '@/types/image.type';
 import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { usePhotoModalStore } from '@/store/modal';
 import { theme } from '@/styles/theme/theme';
+import { ImageArrType } from '@/types/image.type';
 
 type ModalType = {
-  images: ImageType[];
-  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
-  cropImages: string[];
-  setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
   handleFileChange: any;
   currentIdx: number;
   setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
-  setConvertedImages: React.Dispatch<React.SetStateAction<File[]>>;
+  imageArr: ImageArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
 };
 
 const ImagesEditModal = ({
-  images,
-  setImages,
-  cropImages,
-  setCropImages,
+  imageArr,
+  setImageArr,
   currentIdx,
   setCurrentIdx,
-  setConvertedImages,
 }: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
   const cropperRef2 = useRef<ReactCropperElement>(null);
@@ -60,12 +54,7 @@ const ImagesEditModal = ({
   const sliderRef = useRef<any>();
   const { ModalClose, isOpen } = usePhotoModalStore();
   const [currentX, setCurrentX] = useState<number>(0);
-  const imageNum = images.length;
-
-  useEffect(() => {
-    console.log('모달 열림');
-    console.log('이미지', images);
-  }, [images]);
+  const imageNum = imageArr.images.length;
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any, index: number) => {
@@ -74,25 +63,33 @@ const ImagesEditModal = ({
         .getCroppedCanvas()
         .toDataURL();
 
-      setCropImages((pre) => [...pre, newImage]);
+      setImageArr((prev) => ({
+        ...prev,
+        cropImages: [...prev.cropImages, newImage],
+      }));
+
       const filename = `${index}postImg`;
       const convertedImg = dataURLtoFile(newImage, filename);
-      convertedImg && setConvertedImages((prev) => [...prev, convertedImg]);
-      ModalClose();
+      convertedImg &&
+        // setConvertedImages((prev: File[]) => [...prev, convertedImg]);
+        setImageArr((prev) => ({
+          ...prev,
+          convertedImages: [...prev.convertedImages, convertedImg],
+        }));
     }
   };
-
   //크롭한 이미지를 모두 저장함.
   const onSaveAllEditImg = (e: any) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    if (cropImages.length > 0) {
-      setCropImages([]);
+    if (imageArr.cropImages.length > 0) {
+      setImageArr((prev: ImageArrType) => ({ ...prev, cropImages: [] }));
     }
     myRefs.map((ref, index) => {
       getCropData(ref, index);
     });
+    ModalClose();
   };
 
   //왼쪽 이미지 보기
@@ -106,7 +103,7 @@ const ImagesEditModal = ({
       const newPosition = -760 * (imageNum - 1);
       setCurrentX(newPosition);
       sliderRef.current.style.transform = `translateX(${newPosition}px)`;
-      setCurrentIdx(images.length - 1);
+      setCurrentIdx(imageArr.images.length - 1);
     }
   };
 
@@ -128,7 +125,7 @@ const ImagesEditModal = ({
   //취소
   const onClickCancelModal = () => {
     ModalClose();
-    setImages([]);
+    setImageArr((prev: ImageArrType) => ({ ...prev, images: [] }));
   };
 
   //선택한 이미지를 보기
@@ -155,8 +152,8 @@ const ImagesEditModal = ({
           <MultipleImgBox
             imgCount={10}
             isBackground={true}
-            images={images}
-            setImages={setImages}
+            imageArr={imageArr}
+            setImageArr={setImageArr}
             setCurrentIdx={setCurrentIdx}
             currentIdx={currentIdx}
             onClickCurrentImg={onClickCurrentImg}
@@ -192,7 +189,7 @@ const ImagesEditModal = ({
             </button>
           </S.Header>
 
-          {images.length == 0 && (
+          {imageArr.images.length == 0 && (
             <S.FlexContainer>
               <div>이미지가 없습니다</div>
             </S.FlexContainer>
@@ -209,26 +206,26 @@ const ImagesEditModal = ({
               style={{ display: 'flex', position: 'absolute', left: 0 }}
               ref={sliderRef}
             >
-              {images.map((img, index) => {
-                return (
-                  <div style={{ margin: '10px' }}>
-                    <ImageCropper
-                      key={index}
-                      setCropImages={setCropImages}
-                      image={img.img}
-                      index={index}
-                      cropImages={cropImages}
-                      myRef={myRefs[index]}
-                    />
-                  </div>
-                );
-              })}
+              {imageArr.images.map(
+                (image: { id: number; img: string }, index: number) => {
+                  return (
+                    <div style={{ margin: '10px' }}>
+                      <ImageCropper
+                        key={index}
+                        image={image.img}
+                        index={index}
+                        myRef={myRefs[index]}
+                      />
+                    </div>
+                  );
+                }
+              )}
             </div>
           </div>
 
           <S.Footer>
             <CharacterCounter
-              currentNum={images.length}
+              currentNum={imageArr.images.length}
               maxNum={10}
               color={'white'}
               backgroundColor={theme.COLOR['gray-3']}

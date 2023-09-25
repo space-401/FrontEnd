@@ -5,7 +5,9 @@ const Wrapper = styled.div<{ width?: string }>`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: calc(100vh - 150px);
+  height: 100vh;
+  padding-top: 100px;
+  background-color: ${({ theme }) => theme.COLOR['black']};
   color: ${({ theme }) => theme.COLOR.white};
 `;
 
