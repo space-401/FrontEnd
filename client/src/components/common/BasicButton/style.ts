@@ -22,7 +22,8 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
   color: ${({ color, theme }) => color || theme.COLOR.black};
   /*token required*/
   :disabled {
-    background-color: #292929;
+    background-color: #005e61;
+    color: ${({ color, theme }) => color || theme.COLOR['gray-6']};
   }
 `;
 

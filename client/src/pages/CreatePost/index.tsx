@@ -24,6 +24,7 @@ import SearchModal from '@components/Create/SearchMapModal';
 import { MarkerType } from '@/components/Create/SearchMapModal/component/MapBox';
 import { PostType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
+// import { useForm } from 'react-hook-form';
 
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -55,8 +56,8 @@ const CreatePost = () => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   //현재 포스트 객체 데이터
   const [postData, setPostData] = useState<PostType>({
-    title,
-    content,
+    title: '',
+    content: '',
     people: [],
     tag: [],
     place: {
@@ -68,10 +69,11 @@ const CreatePost = () => {
     },
     imgs: [],
     date: {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: null,
+      endDate: null,
     },
   });
+
   //친구들 상태 바꾸는 함수
   const setPeopleState = (newPeopleState: selectType[]) => {
     setPostData((prev) => ({ ...prev, people: newPeopleState }));
@@ -128,7 +130,7 @@ const CreatePost = () => {
       reader.readAsDataURL(files[i]);
     }
   };
-
+  //이미지를 데이터 객체에 추가
   useEffect(() => {
     setPostData({
       ...postData,
@@ -322,6 +324,10 @@ const CreatePost = () => {
         <S.EmptyContainer />
         <S.ButtonContainer>
           <BasicButton
+            disabled={
+              !title.length || !content.length || !postData.date.startDate
+              // !postData.place.content
+            }
             onClick={onSubmit}
             width={160}
             height={44}
