@@ -6,8 +6,9 @@ const Flip = styled.div`
   cursor: pointer;
 `;
 
-const Card = styled.div<{ img: string }>`
+const Card = styled.div<{ img: string; size: 'small' | 'big' }>`
   aspect-ratio: 1/1;
+  width: ${({ size }) => (size === 'big' ? 437 : 296.75)}px;
   position: relative;
   transition: 1.5s;
   transform-style: preserve-3d;
@@ -19,13 +20,13 @@ const Card = styled.div<{ img: string }>`
   background-size: cover;
 `;
 
-const Hover = styled.div<{ img: string }>`
+const Hover = styled.div<{ img: string; size: 'small' | 'big' }>`
   top: 0;
   left: 0;
   position: absolute;
   overflow: hidden;
   border-radius: 5px;
-  width: 100%;
+  width: ${({ size }) => (size === 'big' ? 437 : 296.75)}px;
   height: 100%;
   backface-visibility: hidden;
   display: flex;

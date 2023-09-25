@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { omitText } from '@styles/common';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ size: 'big' | 'small' }>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -8,12 +9,54 @@ const Wrapper = styled.div`
   background-size: cover;
   backdrop-filter: blur(2px);
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
-  div {
-    z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+
+  ${({ size, theme }) =>
+    size !== 'big' &&
+    `div {
+    z-index: ${theme.Z_INDEX['LEVEL-3']} !important;
   }
+
+  .container {
+    padding: 24px !important;
+  }
+
+  .title {
+    font-size: ${theme.TEXT_SIZE['text-28']} !important;
+    font-weight: ${theme.FONT_WEIGHT['WEIGHT-500']} !important;
+    line-height: 140%;
+    margin-top: 8px !important;
+  }
+
+  .create-time {
+    font-size: ${theme.TEXT_SIZE['text-12']} !important;
+    margin-bottom: 16px !important;
+  }
+
+  .chip {
+    font-size: ${theme.TEXT_SIZE['text-14']} !important;
+    font-weight: ${theme.FONT_WEIGHT['WEIGHT-400']} !important;
+    height: 24px !important;
+  }
+
+  .place-span {
+    font-size: ${theme.TEXT_SIZE['text-18']} !important;
+    font-weight: ${theme.FONT_WEIGHT['WEIGHT-400']} !important;
+  }
+
+  .info-bottom {
+    line-height: ${theme.TEXT_SIZE['text-28']} !important;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis !important;
+      max-width: 98px !important;
+    }
+  }`}
 `;
 
 const Container = styled.div`
+  position: relative;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   width: 100%;
   height: 100%;
   padding: 24px;
@@ -55,14 +98,19 @@ const PlaceCreateAt = styled.div`
 
 const PlaceTitle = styled.div`
   display: flex;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  align-items: center;
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
   font-style: normal;
-  margin-bottom: 24px;
   gap: 4.2px;
+
+  span {
+    max-width: 170px;
+    text-wrap: none;
+    ${omitText}
+  }
 `;
-const InfoTop = styled.div``;
 
 const ChipBox = styled.div`
   display: inline-flex;
@@ -71,13 +119,20 @@ const ChipBox = styled.div`
   gap: 8px;
   overflow: auto;
 
-  div {
+  .chip {
     color: ${({ theme }) => theme.COLOR.white};
+    border: 1px solid ${({ theme }) => theme.COLOR.white};
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
     font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
     line-height: 130%;
+    padding: 10px;
+
+    span {
+      padding: 0;
+    }
   }
 `;
+
 const InfoBottom = styled.div`
   display: flex;
   align-items: center;
@@ -91,7 +146,6 @@ const S = {
   PlaceCreateAt,
   PlaceTitle,
   ChipBox,
-  InfoTop,
   InfoBottom,
   Shadow,
   Container,
