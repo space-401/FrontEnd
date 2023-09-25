@@ -1,6 +1,5 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
-import FlipCard from '@components/Main/FlipCard/FlipCard';
-import SpaceInfoBack from '@components/Main/FlipCard/SpaceInfoBack/SpaceInfoBack';
+import FlipCard from '@components/common/FlipCard/FlipCard';
 import S from './style';
 import { useEffect, useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
@@ -100,23 +99,11 @@ const MainBody = (props: MainBodyPropType) => {
             <S.PostList>
               {postList.map((item) => (
                 <FlipCard
+                  size={'big'}
                   onClick={modalOpen}
                   key={item.post_id}
                   img_url={item.main_img_url}
-                  hoverCard={
-                    <SpaceInfoBack
-                      position={item.position}
-                      users={item.users}
-                      post_id={item.post_id}
-                      post_title={item.place_title}
-                      main_img_url={item.main_img_url}
-                      place_title={item.place_title}
-                      post_updated_at={item.post_updated_at}
-                      post_created_at={item.post_created_at}
-                      place_tag={item.place_tag}
-                      key={item.post_id}
-                    />
-                  }
+                  item={item}
                 />
               ))}
             </S.PostList>
