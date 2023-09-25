@@ -5,24 +5,13 @@ import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
 import { Box, Modal } from '@mui/material';
-import { ImageType } from '@/types/image.type';
-
+import { ImageArrType } from '@/types/image.type';
 type ModalType = {
-  images: ImageType[];
-  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
-  cropImages: string[];
-  setCropImages: React.Dispatch<React.SetStateAction<string[]>>;
-  handleFileChange: any;
-  setConvertedImages: React.Dispatch<React.SetStateAction<File[]>>;
+  imageArr: ImageArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
 };
 
-const ImgEditModal = ({
-  images,
-  setImages,
-  cropImages,
-  setCropImages,
-  setConvertedImages,
-}: ModalType) => {
+const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
 
   const myRefs = [cropperRef1];
@@ -36,10 +25,11 @@ const ImgEditModal = ({
         .getCroppedCanvas()
         .toDataURL();
 
-      setCropImages([newImage]);
+      setImageArr((prev) => ({ ...prev, cropImages: [newImage] }));
       const filename = `SpaceImg`;
       const convertedImg = dataURLtoFile(newImage, filename);
-      convertedImg && setConvertedImages([convertedImg]);
+      convertedImg &&
+        setImageArr((prev) => ({ ...prev, convertedImages: [convertedImg] }));
       ModalClose();
     }
   };
@@ -49,8 +39,8 @@ const ImgEditModal = ({
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    if (cropImages.length > 0) {
-      setCropImages([]);
+    if (imageArr.cropImages.length > 0) {
+      setImageArr((prev) => ({ ...prev, cropImages: [] }));
     }
     getCropData(cropperRef1);
   };
@@ -58,7 +48,7 @@ const ImgEditModal = ({
   //모달 취소
   const onClickCancelModal = () => {
     ModalClose();
-    setImages([]);
+    setImageArr((prev) => ({ ...prev, images: [] }));
   };
 
   return (
@@ -85,7 +75,7 @@ const ImgEditModal = ({
             </button>
           </S.Header>
 
-          {images.length == 0 && (
+          {imageArr.images.length == 0 && (
             <S.FlexContainer>
               <div>이미지가 없습니다</div>
             </S.FlexContainer>
@@ -102,14 +92,12 @@ const ImgEditModal = ({
               style={{ display: 'flex', position: 'absolute', left: 0 }}
               ref={sliderRef}
             >
-              {images.map((img, index) => {
+              {imageArr.images.map((img, index) => {
                 return (
                   <ImageCropper
                     key={index}
-                    // setCropImages={setCropImages}
                     image={img.img}
                     index={index}
-                    // cropImages={cropImages}
                     myRef={myRefs[index]}
                   />
                 );

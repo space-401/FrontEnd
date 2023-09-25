@@ -14,7 +14,7 @@ export type PostType = {
   };
   imgs: File[];
   date: {
-    startDate: Date;
-    endDate: Date;
+    startDate: Date | null;
+    endDate: Date | null;
   };
 };
