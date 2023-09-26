@@ -25,9 +25,9 @@ const FlipCard = (props: FlipType) => {
   const { img_url, onClick, size, item } = props;
   return (
     <>
-      <S.Flip onClick={onClick}>
-        <S.Card size={size} img={img_url} />
-        <S.Hover size={size} img={img_url}>
+      <S.Flip size={size} onClick={onClick}>
+        <S.Card img={img_url} />
+        <S.Hover img={img_url}>
           <SpaceInfoBack size={size} item={item} />
         </S.Hover>
       </S.Flip>

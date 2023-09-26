@@ -1,11 +1,12 @@
-import { A, B } from '@pages/MyPage/MyBody/components/style';
-import React, { useState } from 'react';
 import FlipCard from '@components/common/FlipCard/FlipCard';
+import { B } from '@pages/MyPage/MyBody/components/style';
+import React, { useState } from 'react';
+import { myPostListMock } from '@mocks/data/MyPage/MyPageMock';
 import Pagination from '@components/common/Pagination';
-import { bookMarkListMock } from '@mocks/data/MyPage/MyPageMock';
 
-const BookMarkList = () => {
-  const { bookMarkList, total, page, ItemLength } = bookMarkListMock;
+const MyPostList = () => {
+  const { myPostList, total, page, ItemLength } = myPostListMock;
+
   const [curPage, setCurPage] = useState(page);
   const modalOpen = () => {};
 
@@ -14,14 +15,9 @@ const BookMarkList = () => {
   };
 
   return (
-    <B.BWrapper>
-      <A.Title>북마크</A.Title>
-      <A.Description margin_top={16}>
-        {'회원님이 저장한 게시글입니다.'}
-      </A.Description>
-      <A.Bar margin_top={16} />
+    <>
       <B.FlipCardList>
-        {bookMarkList.map((item) => (
+        {myPostList.map((item) => (
           <FlipCard
             size={'small'}
             onClick={modalOpen}
@@ -37,8 +33,8 @@ const BookMarkList = () => {
         total={total}
         item_length={ItemLength}
       />
-    </B.BWrapper>
+    </>
   );
 };
 
-export default BookMarkList;
+export default MyPostList;
