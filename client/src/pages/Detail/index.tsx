@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import S, { mentionStyle } from '@pages/Detail/style';
+import S, { mentionStyle } from '@pages/detail/style';
 import { Box, Chip, IconButton } from '@mui/material';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
 import DetailPageMock from '@mocks/data/DetailPage/detailPage.mock';

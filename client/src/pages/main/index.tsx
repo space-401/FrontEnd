@@ -4,7 +4,7 @@ import MainHeader from './MainHeader/MainHeader';
 import MainBody from './MainBody/MainBody';
 import { useState } from 'react';
 import { Modal as DetailModal } from '@mui/material';
-import DetailPage from '@pages/Detail';
+import DetailPage from '@pages/detail';
 import { useDetailModalStore } from '@store/modal';
 import { Toaster } from 'react-hot-toast';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';

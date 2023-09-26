@@ -7,9 +7,10 @@ export type BasicButtonProps = {
   padding?: number;
   fontSize?: number;
   borderRadius?: number;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 };
 
 const BasicButton = ({
