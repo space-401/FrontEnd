@@ -34,11 +34,6 @@ const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
     }
   };
 
-  // const changeYear = (year: number) => {
-  //   setSelectedYear(year);
-  //   setIsDropdownOpen(false); // 연도가 선택되면 드롭다운을 닫습니다.
-  // };
-
   const onChange = (dates: any) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -76,240 +71,121 @@ const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
   return (
     <div className="custom-react-datepicker__wrapper">
       <label>
-        {isMain ? (
-          <MStyledDatePicker
-            dateFormat="yyyy.MM.dd"
-            showYearDropdown
-            scrollableYearDropdown
-            shouldCloseOnSelect
-            yearDropdownItemNumber={15}
-            selected={startDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            locale={ko}
-            selectsRange
-            dateFormatCalendar="MMMM"
-            calendarClassName="calenderWrapper"
-            renderCustomHeader={({ date, changeYear, changeMonth }) => (
-              <div className="customHeaderContainer">
-                <div className="selectContainer">
+        <MStyledDatePicker
+          dateFormat="yyyy.MM.dd"
+          showYearDropdown
+          scrollableYearDropdown
+          shouldCloseOnSelect
+          yearDropdownItemNumber={15}
+          selected={startDate}
+          onChange={onChange}
+          startDate={startDate}
+          endDate={endDate}
+          locale={ko}
+          selectsRange
+          dateFormatCalendar="MMMM"
+          calendarClassName="calenderWrapper"
+          renderCustomHeader={({ date, changeYear, changeMonth }) => (
+            <div className="customHeaderContainer">
+              <div className="selectContainer">
+                <div
+                  style={{
+                    display: 'flex',
+                    position: 'relative',
+                  }}
+                >
                   <div
                     style={{
                       display: 'flex',
-                      position: 'relative',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      fontFamily: 'IBM Plex Sans KR',
+                      backgroundColor: '#232120',
+                    }}
+                    onClick={() => {
+                      toggleDropdown(0);
                     }}
                   >
-                    <div
-                      style={{
-                        display: 'flex',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        fontFamily: 'IBM Plex Sans KR',
-                        backgroundColor: '#232120',
-                      }}
-                      onClick={() => {
-                        toggleDropdown(0);
-                      }}
-                    >
-                      {getYear(date)}
-                      {isDropdownOpen[0] ? <UpIcon /> : <DownIcon />}
-                    </div>
-                    {isDropdownOpen[0] && (
-                      <select
-                        style={{
-                          position: 'absolute',
-                          top: 30,
-                          backgroundColor: '#232120',
-                        }}
-                        value={getYear(date)}
-                        className="year"
-                        size={3}
-                        onChange={({ target: { value } }) => changeYear(+value)}
-                      >
-                        {YEARS.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            style={{ margin: '4px' }}
-                          >
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    )}
+                    {getYear(date)}
+                    {isDropdownOpen[0] ? <UpIcon /> : <DownIcon />}
                   </div>
+                  {isDropdownOpen[0] && (
+                    <select
+                      style={{
+                        position: 'absolute',
+                        top: 30,
+                        backgroundColor: '#232120',
+                      }}
+                      value={getYear(date)}
+                      className="year"
+                      size={3}
+                      onChange={({ target: { value } }) => changeYear(+value)}
+                    >
+                      {YEARS.map((option) => (
+                        <option
+                          key={option}
+                          value={option}
+                          style={{ margin: '4px' }}
+                        >
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    position: 'relative',
+                  }}
+                >
                   <div
                     style={{
                       display: 'flex',
-                      position: 'relative',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      fontFamily: 'IBM Plex Sans KR',
+                      backgroundColor: '#232120',
+                    }}
+                    onClick={() => {
+                      toggleDropdown(1);
                     }}
                   >
-                    <div
-                      style={{
-                        display: 'flex',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        fontFamily: 'IBM Plex Sans KR',
-                        backgroundColor: '#232120',
-                      }}
-                      onClick={() => {
-                        toggleDropdown(1);
-                      }}
-                    >
-                      {getMonth(date) + 1}
-                      {isDropdownOpen[1] ? <UpIcon /> : <DownIcon />}
-                    </div>
+                    {getMonth(date) + 1}
+                    {isDropdownOpen[1] ? <UpIcon /> : <DownIcon />}
+                  </div>
 
-                    {isDropdownOpen[1] && (
-                      <select
-                        style={{
-                          position: 'absolute',
-                          top: '25px',
-                          backgroundColor: '#232120',
-                        }}
-                        value={getMonth(date)}
-                        className="month"
-                        size={3}
-                        onChange={({ target: { value } }) =>
-                          changeMonth(+value)
-                        }
-                      >
-                        {MONTHS.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            style={{ margin: '4px' }}
-                          >
-                            {option + 1}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </div>
+                  {isDropdownOpen[1] && (
+                    <select
+                      style={{
+                        position: 'absolute',
+                        top: '25px',
+                        backgroundColor: '#232120',
+                      }}
+                      value={getMonth(date)}
+                      className="month"
+                      size={3}
+                      onChange={({ target: { value } }) => changeMonth(+value)}
+                    >
+                      {MONTHS.map((option) => (
+                        <option
+                          key={option}
+                          value={option}
+                          style={{ margin: '4px' }}
+                        >
+                          {option + 1}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 </div>
               </div>
-            )}
-          ></MStyledDatePicker>
-        ) : (
-          <DStyledDatePicker
-            dateFormat="yyyy.MM.dd"
-            showYearDropdown
-            scrollableYearDropdown
-            shouldCloseOnSelect
-            yearDropdownItemNumber={15}
-            selected={startDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            locale={ko}
-            selectsRange
-            dateFormatCalendar="MMMM"
-            calendarClassName="calenderWrapper"
-            renderCustomHeader={({ date, changeYear, changeMonth }) => (
-              <div className="customHeaderContainer">
-                <div className="selectContainer">
-                  <div
-                    style={{
-                      display: 'flex',
-                      position: 'relative',
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        fontFamily: 'IBM Plex Sans KR',
-                        backgroundColor: '#232120',
-                      }}
-                      onClick={() => {
-                        toggleDropdown(0);
-                      }}
-                    >
-                      {getYear(date)}
-                      {isDropdownOpen[0] ? <UpIcon /> : <DownIcon />}
-                    </div>
-                    {isDropdownOpen[0] && (
-                      <select
-                        style={{
-                          position: 'absolute',
-                          top: 30,
-                          left: -10,
-                          backgroundColor: '#232120',
-                        }}
-                        value={getYear(date)}
-                        className="year"
-                        size={3}
-                        onChange={({ target: { value } }) => changeYear(+value)}
-                      >
-                        {YEARS.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            style={{ margin: '4px' }}
-                          >
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      position: 'relative',
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        fontFamily: 'IBM Plex Sans KR',
-                        backgroundColor: '#232120',
-                      }}
-                      onClick={() => {
-                        toggleDropdown(1);
-                      }}
-                    >
-                      {getMonth(date) + 1}
-                      {isDropdownOpen[1] ? <UpIcon /> : <DownIcon />}
-                    </div>
-
-                    {isDropdownOpen[1] && (
-                      <select
-                        style={{
-                          position: 'absolute',
-                          top: '25px',
-                          left: '-10px',
-                          backgroundColor: '#232120',
-                        }}
-                        value={getMonth(date)}
-                        className="month"
-                        size={3}
-                        onChange={({ target: { value } }) =>
-                          changeMonth(+value)
-                        }
-                      >
-                        {MONTHS.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            style={{ margin: '4px' }}
-                          >
-                            {option + 1}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-          ></DStyledDatePicker>
-        )}
-        <CalenderIcon style={{ position: 'absolute', bottom: 25, left: 280 }} />
+            </div>
+          )}
+        ></MStyledDatePicker>
+        <CalenderIcon
+          style={{ position: 'absolute', bottom: '28', left: 280 }}
+        />
         {!startDate && !isMain && (
           <S.DateText
             style={{
@@ -342,25 +218,13 @@ const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
 
 export default Calender;
 
-const DStyledDatePicker = styled(DatePicker)`
-  background-color: ${({ theme }) => theme.COLOR['gray-5']};
-  color: ${({ theme }) => theme.COLOR.white};
-  height: 60px;
-  border-radius: 10px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-  width: 322px !important;
-
-  display: flex;
-  padding-left: 2.6rem;
-`;
-
 const MStyledDatePicker = styled(DatePicker)`
-  height: 50px;
-  border-radius: 5px !important;
+  height: ${({ isMain }) =>
+    isMain ? '50px' : '60px'}; /* 조건에 따라 height 설정 */
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-
+  border-radius: ${({ isMain }) => (isMain ? '5px' : '10px')};
   width: 322px !important;
   display: flex;
   padding-left: 2.6rem;
