@@ -92,12 +92,8 @@ body {
 
   .customHeaderContainer {
     display: flex;
-    justify-content: space-between !important;
-    align-items: center !important;
     background-color: #232120;
     padding-left: 8%;
-    width: 100% !important;
-    height: 100%;
 
     .month {
       color: 'transparent' !important;
@@ -129,7 +125,7 @@ body {
       background: transparent;
       border: transparent;
       color: white;
-      max-height: '200px';
+      height: '50px' !important;
       font-size: 18px !important;
     }
     .monthButton {
@@ -149,10 +145,6 @@ body {
   .calenderWrapper {
     background-color: transparent !important;
   }
-  .selectContainer {
-    display: flex;
-    align-items: center;
-  }
   .custom-react-datepicker__wrapper {
     position: relative;
     padding-bottom: 10px;
@@ -160,13 +152,17 @@ body {
   .hbMOSB {
     background-color: #232120;
   }
-  .custom-react-datepicker__wrapper {
-    width: 312px;
-    border-radius: 10px;
-  }
+
   .react-datepicker__month-container {
     border-radius: 10px !important;
-    background-color: #232120 !important
-    ;
+    background-color: #232120 !important;
+    height: 300px;
+  }
+  .selectContainer {
+    display: flex;
+  }
+  .select_OneContainer {
+    display: 'flex';
+    position: 'relative';
   }
 }

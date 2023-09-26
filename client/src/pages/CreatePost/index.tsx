@@ -6,7 +6,6 @@ import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import BasicButton from '@/components/common/BasicButton';
 import Calender from '@/components/common/Calender/Calender';
 import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import { ReactComponent as QuestionIcon } from '@assets/svg/QuestionIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
@@ -148,6 +147,7 @@ const CreatePost = () => {
     // console.log('place', mapInfo);
     // console.log('setDateInfo', dateInfo);
   };
+  const inputWidth = Number('calc(100% - 60px)');
 
   return (
     <S.Wrapper>
@@ -212,14 +212,14 @@ const CreatePost = () => {
 
         {/*게시글 제목*/}
         <S.Label number={1} required={true}>
-          게시글 제목
+          <span>게시글 제목</span>
         </S.Label>
         <S.InputContainer number={1}>
           <InputBox
             height={60}
             readonly={false}
-            width={628}
-            placeholder="16자 이내의 제목을 입력해 주세요."
+            // width={628}
+            placeholder="16자 이내의 제목을 입력해 주세요"
             type="text"
             maxLength={16}
             children={
@@ -237,16 +237,16 @@ const CreatePost = () => {
 
         {/*함께한 친구들*/}
         <S.Label number={2} required={false}>
-          함께한 친구들
+          <span>함께한 친구들</span>
         </S.Label>
         <S.InputContainer number={2}>
           <CreateSelectBox
             labelName={'사용자'}
             ListItem={users_mock}
-            BoxWidth={628}
+            BoxWidth={inputWidth}
             setState={setPeopleState}
             menuHeight={89 * Math.floor(users_mock.length / 2)}
-            menuWidth={628}
+            menuWidth={inputWidth}
           />
         </S.InputContainer>
 
@@ -255,35 +255,32 @@ const CreatePost = () => {
           <S.Label number={3} required={false}>
             태그
           </S.Label>
-          <S.IconContainer>
-            <QuestionIcon />
-          </S.IconContainer>
         </S.FlexContainer>
 
         <S.InputContainer number={3}>
           <CreateSelectBox
             labelName={'태그'}
             ListItem={createPostMock}
-            BoxWidth={628}
+            BoxWidth={inputWidth}
             setState={setTagState}
             menuHeight={100 * Math.floor(users_mock.length / 2)}
-            menuWidth={628}
+            menuWidth={inputWidth}
           />
         </S.InputContainer>
 
         {/*장소*/}
         <S.Label number={4} required={true}>
-          장소
+          <span>장소</span>
         </S.Label>
         <S.InputContainer number={4}>
           <S.MapContainer onClick={() => setIsMapModalOpen(true)}>
             <InputBox
               readonly={true}
               height={60}
-              placeholder="등록할 장소를 입력해주세요."
+              placeholder="등록할 장소를 입력해 주세요"
               type="text"
               maxLength={20}
-              width={628}
+              width={inputWidth}
               children={<SearchIcon />}
               onChange={() => {}}
               name=""
@@ -293,22 +290,26 @@ const CreatePost = () => {
 
         {/*날짜*/}
         <S.Label number={5} required={true}>
-          날짜
+          <span>날짜</span>
         </S.Label>
         <S.InputContainer number={5}>
-          <Calender isMain={false} setPostData={setPostData} />
+          <Calender
+            width={inputWidth}
+            isMain={false}
+            setPostData={setPostData}
+          />
         </S.InputContainer>
 
         {/*내용*/}
         <S.Label number={6} required={true}>
-          내용
+          <span>내용</span>
         </S.Label>
         <S.InputContainer number={6}>
           <TextAreaBox
+            width={inputWidth}
             height={212}
-            placeholder="500자 이내의 내용을 입력해 주세요."
+            placeholder="500자 이내의 내용을 입력해 주세요"
             maxLength={500}
-            width={628}
             onChange={onChange}
             name="content"
             children={

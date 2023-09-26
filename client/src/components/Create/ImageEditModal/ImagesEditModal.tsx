@@ -1,8 +1,8 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@/components/Create/ImageEditModal/Cropper';
 import { useState, useRef } from 'react';
-import { ReactComponent as PrevBtn } from '@assets/svg/leftArrow.svg';
-import { ReactComponent as NextBtn } from '@assets/svg/rightArrow.svg';
+import { ReactComponent as PrevBtn } from '@assets/svg/chevron/chevron_left.svg';
+import { ReactComponent as NextBtn } from '@assets/svg/chevron/chevron_right.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';

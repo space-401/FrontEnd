@@ -119,6 +119,11 @@ export const theme = {
     'Pretendard': 'Pretendard',
     'IBM Plex Sans KR': 'IBM Plex Sans KR',
   },
+  DEVICE: {
+    mobile: `screen and (max-width: 580px)`,
+    tablet: `screen and (max-width: 768px)`,
+    pc: `screen and (max-width: 1024px)`,
+  },
 };
 
 export type ThemeType = typeof theme;

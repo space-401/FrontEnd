@@ -192,10 +192,6 @@ const CreateSpace = () => {
             maxLength={5}
             onChange={onChange}
             name="password"
-            // {...register('test', {
-            //   valueAsNumber: true,
-            //   validate: (value) => value > 0,
-            // })}
           />
         </S.InputContainer>
         {/*스페이스 생성 버튼*/}
