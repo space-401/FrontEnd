@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { ImageType } from '@/types/image.type';
 import React from 'react';
-import { ImageArrType } from '@/pages/CreatePost';
+import { ImageArrType } from '@/types/image.type';
 
 type MultiBoxType = {
   imageArr: ImageArrType;

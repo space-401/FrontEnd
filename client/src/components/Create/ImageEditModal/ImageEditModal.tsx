@@ -1,6 +1,6 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@components/Create/ImageEditModal/Cropper';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
@@ -51,6 +51,9 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
     setImageArr((prev) => ({ ...prev, images: [] }));
   };
 
+  useEffect(() => {
+    console.log(imageArr.images);
+  }, [imageArr]);
   return (
     <Modal
       open={isOpen}
@@ -89,19 +92,17 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
             }}
           >
             <div
-              style={{ display: 'flex', position: 'absolute', left: 0 }}
+              style={{ display: 'flex', position: 'absolute', left: 10 }}
               ref={sliderRef}
             >
-              {imageArr.images.map((img, index) => {
-                return (
-                  <ImageCropper
-                    key={index}
-                    image={img.img}
-                    index={index}
-                    myRef={myRefs[index]}
-                  />
-                );
-              })}
+              {imageArr.images.length && (
+                <ImageCropper
+                  key={1}
+                  image={imageArr.images[0].img}
+                  index={1}
+                  myRef={myRefs[1]}
+                />
+              )}
             </div>
           </div>
 

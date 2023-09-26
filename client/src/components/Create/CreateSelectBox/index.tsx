@@ -80,8 +80,8 @@ const CreateSelectBox = (props: SelectBoxProps) => {
 
   const placeholder =
     labelName == '사용자'
-      ? '함께한 친구들을 추가해주세요'
-      : '태그를 지정해주세요';
+      ? '함께한 친구들을 추가해 주세요'
+      : '태그를 지정해 주세요';
 
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
