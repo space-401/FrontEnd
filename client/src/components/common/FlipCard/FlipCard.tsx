@@ -1,7 +1,7 @@
-import S from '@components/Main/FlipCard/style';
+import S from '@components/common/FlipCard/style';
 import { ReactElement } from 'react';
-import { ISpaceSelectBack } from '@components/Main/FlipCard/SpaceSelectBack/SpaceSelectBack';
-import { ISpaceInfoBack } from '@components/Main/FlipCard/SpaceInfoBack/SpaceInfoBack';
+import SpaceInfoBack from '@components/common/FlipCard/SpaceInfoBack/SpaceInfoBack';
+import { SpacePostType } from '@type/space.type';
 
 export interface IFlipCard extends ReactElement {}
 
@@ -13,18 +13,23 @@ export type FlipType = {
   /**
    * Hover시에 보일 컴포넌트를 넣어주세요
    */
-  hoverCard: ISpaceSelectBack | ISpaceInfoBack;
+
+  size: 'small' | 'big';
+
+  item: SpacePostType;
 
   onClick: () => void;
 };
 
 const FlipCard = (props: FlipType) => {
-  const { img_url, onClick, hoverCard } = props;
+  const { img_url, onClick, size, item } = props;
   return (
     <>
       <S.Flip onClick={onClick}>
-        <S.Card img={img_url} />
-        <S.Hover img={img_url}>{hoverCard}</S.Hover>
+        <S.Card size={size} img={img_url} />
+        <S.Hover size={size} img={img_url}>
+          <SpaceInfoBack size={size} item={item} />
+        </S.Hover>
       </S.Flip>
     </>
   );

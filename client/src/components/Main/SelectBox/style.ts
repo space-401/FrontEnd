@@ -64,7 +64,6 @@ const MenuList = styled.ul<{
           Math.floor(menuWidth / 2) - 10
         }px ${Math.floor(menuWidth / 2) - 10}px; gap : 2px 8px;`
       : 'display:flex; gap: 2px;'}
-  height: ${({ maxHeight }) => maxHeight};
 
   flex-direction: column;
   overflow-y: scroll;
@@ -98,6 +97,7 @@ const Container = styled.div<{ $isOpen: boolean }>`
   top: 60px;
   width: 100%;
   height: 0;
+  overflow: ${({ $isOpen }) => ($isOpen ? '' : 'hidden')};
   opacity: ${({ $isOpen }) => (!$isOpen ? 0 : 1)};
   border-radius: 5px;
   transition:
