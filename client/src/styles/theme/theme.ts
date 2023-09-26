@@ -25,7 +25,7 @@ export const theme = {
     'green': '#3CBB80',
     'skyblue': '#56C9CC',
     'gray-1': '#E9E7DF',
-    'gray-2': '#B0B0B0', //circleIcon 배경
+    'gray-2': '#B0B0B0',
     'gray-3': '#868585',
     'gray-4': '#5F5F5F',
     'gray-5': '#413F3F',
