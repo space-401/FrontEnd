@@ -50,7 +50,6 @@ const InviteCode = () => {
             type="password"
             height={60}
             placeholder="숫자 5자리를 입력해주세요"
-            // {...(register('password'), { required: true })}
           />
         </S.InputContainer>
 

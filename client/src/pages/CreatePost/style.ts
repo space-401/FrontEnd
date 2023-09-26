@@ -5,8 +5,14 @@ const Wrapper = styled.div<{ width?: string }>`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: calc(100vh - 150px);
+  padding-top: 100px;
+  background-color: ${({ theme }) => theme.COLOR['black']};
   color: ${({ theme }) => theme.COLOR.white};
+  min-height: 100vh;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    flex-direction: column;
+    ${flexCenter}
+  }
 `;
 
 const GridWrapper = styled.div`
@@ -19,6 +25,10 @@ const GridWrapper = styled.div`
   grid-template-rows: 60px 60px 60px 60px 60px 60px 220px 60px;
   grid-gap: ${({ theme }) => theme.SPACING['gap-24']};
   grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6' 'empty button';
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 100%;
+  }
 `;
 
 const PhotoContainer = styled.div`
@@ -49,8 +59,12 @@ const PhotoText = styled.button`
 const Label = styled.label<{ number: number; required: boolean }>`
   padding: 5px;
   grid-area: ${({ number }) => `title${number}`};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   display: flex;
+  align-items: column;
+  width: 84px;
+  flex-wrap: wrap;
+
   ${({ required }) =>
     required &&
     css`
@@ -66,6 +80,7 @@ const Label = styled.label<{ number: number; required: boolean }>`
 
 const InputContainer = styled.div<{ number: number }>`
   grid-area: ${({ number }) => `input${number}`};
+  width: calc(100% - 60px);
 `;
 
 const EmptyContainer = styled.div`

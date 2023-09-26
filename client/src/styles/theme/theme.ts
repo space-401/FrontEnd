@@ -24,6 +24,7 @@ export const theme = {
     'orange': '#FF5E34',
     'green': '#3CBB80',
     'skyblue': '#56C9CC',
+    'disabled': '#005E61',
     'gray-1': '#E9E7DF',
     'gray-2': '#B0B0B0',
     'gray-3': '#868585',
@@ -117,6 +118,11 @@ export const theme = {
   FONT_FAMILY: {
     'Pretendard': 'Pretendard',
     'IBM Plex Sans KR': 'IBM Plex Sans KR',
+  },
+  DEVICE: {
+    mobile: `screen and (max-width: 580px)`,
+    tablet: `screen and (max-width: 768px)`,
+    pc: `screen and (max-width: 1024px)`,
   },
 };
 

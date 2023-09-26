@@ -1,7 +1,7 @@
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ReactComponent as LeftIcon } from '@assets/svg/leftArrow.svg';
-import { ReactComponent as RightIcon } from '@assets/svg/rightArrow.svg';
+import { ReactComponent as LeftIcon } from '@assets/svg/chevron/chevron_left.svg';
+import { ReactComponent as RightIcon } from '@assets/svg/chevron/chevron_right.svg';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
