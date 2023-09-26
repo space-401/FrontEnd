@@ -2,8 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import CreateSpace from '@/pages/CreateSpace';
 import CreatePost from '@/pages/CreatePost';
 import MainPage from '@/pages/main';
-import MainPageMock from '@/mocks/data/MainPage/mainPage.mock';
 import InviteCode from '@pages/InviteCode';
+import MyPage from '@pages/MyPage';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/main',
-        element: <MainPage {...MainPageMock} />,
+        element: <MainPage />,
+      },
+      {
+        path: '/myPage',
+        element: <MyPage />,
       },
     ],
   },

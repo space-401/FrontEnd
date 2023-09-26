@@ -53,7 +53,6 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   border-radius: 30px;
-  min-height: 100vh;
 `;
 const SpaceIconBox = styled.div`
   display: flex;
