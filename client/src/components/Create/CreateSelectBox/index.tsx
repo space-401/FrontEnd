@@ -8,6 +8,9 @@ import MenuList from './components/MenuList';
 import SelectList from './components/component/SelectList';
 import { UserType } from '@/types/user.type';
 import { TagType } from '@/types/tag.type';
+import AlertModal from '@/modal/Alert/AlertModal';
+import { useAlertModalStore } from '@/store/modal';
+
 export type SelectBoxProps = {
   /**
    * 해당 박스의 라벨을 입력해주세요
@@ -52,6 +55,12 @@ const CreateSelectBox = (props: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState('');
 
+  const {
+    isOpen: isAlertModalOpen,
+    ModalClose: AlertModalClose,
+    ModalOpen: AlertModalOpen,
+  } = useAlertModalStore();
+
   useEffect(() => {
     setState(select);
   }, [select]);
@@ -63,8 +72,8 @@ const CreateSelectBox = (props: SelectBoxProps) => {
 
   const EnterCheck = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'Enter') {
-      if (searchValue.trim().length === 0)
-        return alert('아무것도 입력하지 않았습니다.');
+      if (searchValue.trim().length === 0) return AlertModalOpen();
+
       if (
         select.filter((prevState) => prevState.title === searchValue).length !==
         0
@@ -87,6 +96,15 @@ const CreateSelectBox = (props: SelectBoxProps) => {
   const { height } = useDimensions(containerRef);
   return (
     <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
+      {isAlertModalOpen && (
+        <AlertModal
+          ModalClose={AlertModalClose}
+          isOpen={isAlertModalOpen}
+          width={300}
+          alertMessage="확인"
+          alertTitle="아무것도 입력하지 않았습니다."
+        />
+      )}
       <S.LabelTitle>
         {!isOpen ? (
           select.map((prev) => prev.title).join(', ') || (

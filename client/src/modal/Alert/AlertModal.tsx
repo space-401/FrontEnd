@@ -13,9 +13,15 @@ type AlertModalProps = {
 const AlertModal = React.forwardRef((props: AlertModalProps, ref) => {
   const { ModalClose, width, isOpen, alertTitle, alertMessage } = props;
 
+  const onEnterClose = (e: any) => {
+    if (e.keyCode === 13) {
+      ModalClose();
+    }
+  };
+
   return (
     <Modal open={isOpen} onClose={ModalClose}>
-      <Box tabIndex={-1} ref={ref}>
+      <Box tabIndex={-1} ref={ref} onKeyDown={onEnterClose}>
         <S.Container width={width}>
           <S.AlertMessage>{alertTitle}</S.AlertMessage>
           <S.ButtonGroup>
@@ -26,5 +32,4 @@ const AlertModal = React.forwardRef((props: AlertModalProps, ref) => {
     </Modal>
   );
 });
-
 export default AlertModal;
