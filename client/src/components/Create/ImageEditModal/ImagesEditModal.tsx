@@ -56,6 +56,14 @@ const ImagesEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = imageArr.images.length;
 
+  //현재 화면 크기
+  const screenWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  const cropperWidth = Math.floor(screenWidth / 2) + 20;
+
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any, index: number) => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
@@ -71,7 +79,6 @@ const ImagesEditModal = ({
       const filename = `${index}postImg`;
       const convertedImg = dataURLtoFile(newImage, filename);
       convertedImg &&
-        // setConvertedImages((prev: File[]) => [...prev, convertedImg]);
         setImageArr((prev) => ({
           ...prev,
           convertedImages: [...prev.convertedImages, convertedImg],
@@ -83,8 +90,12 @@ const ImagesEditModal = ({
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    if (imageArr.cropImages.length > 0) {
-      setImageArr((prev: ImageArrType) => ({ ...prev, cropImages: [] }));
+    if (imageArr.convertedImages.length > 0) {
+      setImageArr((prev: ImageArrType) => ({
+        ...prev,
+        cropImages: [],
+        convertedImages: [],
+      }));
     }
     myRefs.map((ref, index) => {
       getCropData(ref, index);
@@ -95,14 +106,14 @@ const ImagesEditModal = ({
   //왼쪽 이미지 보기
   const onClickMoveLeft = () => {
     if (currentIdx > 0) {
-      const newPosition = currentX + 760;
+      const newPosition = currentX + cropperWidth;
       setCurrentX(newPosition);
       sliderRef.current.style.transform = `translateX(${newPosition}px)`;
       setCurrentIdx((currentIdx) => currentIdx - 1);
     } else {
-      const newPosition = -760 * (imageNum - 1);
-      setCurrentX(newPosition);
-      sliderRef.current.style.transform = `translateX(${newPosition}px)`;
+      const newPosition = cropperWidth * (imageNum - 1);
+      setCurrentX(-newPosition);
+      sliderRef.current.style.transform = `translateX(-${newPosition}px)`;
       setCurrentIdx(imageArr.images.length - 1);
     }
   };
@@ -110,7 +121,7 @@ const ImagesEditModal = ({
   //오른쪽 이미지 보기
   const onClickMoveRight = () => {
     if (currentIdx < imageNum - 1) {
-      const newPosition = currentX - 760;
+      const newPosition = currentX - cropperWidth;
       setCurrentX(newPosition);
       sliderRef.current.style.transform = `translateX(${newPosition}px)`;
       setCurrentIdx((currentIdx) => currentIdx + 1);
@@ -125,14 +136,16 @@ const ImagesEditModal = ({
   //취소
   const onClickCancelModal = () => {
     ModalClose();
-    setImageArr((prev: ImageArrType) => ({ ...prev, images: [] }));
+    // setImageArr((prev: ImageArrType) => ({ ...prev, images: [] }));
   };
 
   //선택한 이미지를 보기
   const onClickCurrentImg = (idx: number) => {
     setCurrentIdx(idx);
-    const newPosition = idx * 760;
-    sliderRef.current.style.transform = `translateX(-${newPosition}px)`;
+    const newPosition = -(idx * cropperWidth);
+    sliderRef.current.style.transform = `translateX(${newPosition}px)`;
+    setCurrentX(newPosition);
+    console.log('현재x축', newPosition);
   };
 
   return (
@@ -159,13 +172,14 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
-        <S.Form>
+        <S.Form width={cropperWidth}>
           <PrevBtn
             style={{
               position: 'absolute',
               top: '50%',
               left: '30px',
               zIndex: 10000,
+              cursor: 'pointer',
             }}
             onClick={onClickMoveLeft}
           />
@@ -175,6 +189,7 @@ const ImagesEditModal = ({
               top: '50%',
               right: '30px',
               zIndex: 1000,
+              cursor: 'pointer',
             }}
             onClick={onClickMoveRight}
           />
@@ -197,20 +212,33 @@ const ImagesEditModal = ({
           <div
             style={{
               position: 'relative',
-              height: '760px',
-              width: '760px',
+              height: cropperWidth,
+              width: cropperWidth,
               overflow: 'hidden',
+              padding: 10,
             }}
           >
             <div
-              style={{ display: 'flex', position: 'absolute', left: 0 }}
+              style={{
+                display: 'flex',
+                position: 'absolute',
+                gap: 20,
+              }}
               ref={sliderRef}
             >
               {imageArr.images.map(
                 (image: { id: number; img: string }, index: number) => {
                   return (
-                    <div style={{ margin: '10px' }}>
+                    <div
+                      style={{
+                        height: cropperWidth - 20,
+                        width: cropperWidth - 20,
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
                       <ImageCropper
+                        width={cropperWidth - 20}
                         key={index}
                         image={image.img}
                         index={index}

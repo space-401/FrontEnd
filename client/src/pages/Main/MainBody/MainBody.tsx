@@ -64,7 +64,7 @@ const MainBody = (props: MainBodyPropType) => {
           labelName={'태그'}
           ListItem={tagList}
         />
-        <Calender isMain={true} width={300} />
+        <Calender isMain={true} height={50} borderRadius={5} />
         <MainSearchBox placeholder={'제목'} setState={setSearchState} />
       </S.FilterGroup>
       {!selectState ? (

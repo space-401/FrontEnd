@@ -6,9 +6,10 @@ type PropsType = {
   image: string;
   index: number;
   myRef: any;
+  width: number;
 };
 
-const ImageCropper = ({ image, myRef }: PropsType) => {
+const ImageCropper = ({ image, myRef, width }: PropsType) => {
   return (
     <div style={{ position: 'relative' }}>
       <Cropper
@@ -16,8 +17,8 @@ const ImageCropper = ({ image, myRef }: PropsType) => {
         aspectRatio={1}
         src={image}
         viewMode={1}
-        width={740}
-        height={740}
+        width={width}
+        height={width}
         background={false}
         responsive
         autoCropArea={1}
