@@ -61,7 +61,6 @@ const MultipleImgBox = ({
             currentImgNum++;
           }
           if (currentImgNum >= 10 && !hasAlert) {
-            alert('이미지는 10개까지만 추가됩니다');
             hasAlert = true;
           }
         };

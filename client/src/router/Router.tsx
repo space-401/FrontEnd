@@ -5,6 +5,7 @@ import MainPage from '@/pages/Main';
 import InviteCode from '@pages/InviteCode';
 import MyPage from '@pages/MyPage';
 import PrivateRoute from '@router/Private';
+
 import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
 import { PATH } from '@constants/path';
 
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       {
         element: <HeaderLayout />,
         children: [
+          /*스페이스*/
           {
             path: PATH.SPACE + '/:spaceId',
             element: <MainPage />,
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
             path: PATH.SPACE_CREATE,
             element: <CreateSpace />,
           },
+          /*포스트*/
           {
             path: PATH.POST_CREATE,
             element: <CreatePost />,

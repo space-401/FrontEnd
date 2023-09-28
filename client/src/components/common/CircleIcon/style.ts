@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const CircleImg = styled.img<{ size?: number }>`
-  width: ${({ size }) => size || 48}px;
-  height: ${({ size }) => size || 48}px;
+const CircleImg = styled.img<{ size: number }>`
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
 `;

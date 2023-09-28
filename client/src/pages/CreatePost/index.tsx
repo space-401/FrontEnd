@@ -23,8 +23,9 @@ import SearchModal from '@components/Create/SearchMapModal';
 import { MarkerType } from '@/components/Create/SearchMapModal/component/MapBox';
 import { PostType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
-// import { useForm } from 'react-hook-form';
-
+import AlertModal from '@/modal/Alert/AlertModal';
+import { useAlertModalStore } from '@/store/modal';
+// import { useUserStore } from '@/store/user';
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -73,6 +74,13 @@ const CreatePost = () => {
     },
   });
 
+  //경고 모달
+  const {
+    isOpen: isAlertModalOpen,
+    ModalClose: AlertModalClose,
+    ModalOpen: AlertModalOpen,
+  } = useAlertModalStore();
+
   //친구들 상태 바꾸는 함수
   const setPeopleState = (newPeopleState: selectType[]) => {
     setPostData((prev) => ({ ...prev, people: newPeopleState }));
@@ -103,7 +111,7 @@ const CreatePost = () => {
     if (!files) return;
 
     let currentImgNum = imageArr.images.length;
-    let hasAlert = false;
+    const hasAlert = false;
 
     for (let i = 0; i < files.length; i++) {
       const reader = new FileReader();
@@ -122,8 +130,7 @@ const CreatePost = () => {
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {
-          alert('이미지는 10개까지만 추가됩니다');
-          hasAlert = true;
+          return AlertModalOpen();
         }
       };
       reader.readAsDataURL(files[i]);
@@ -151,6 +158,15 @@ const CreatePost = () => {
 
   return (
     <S.Wrapper>
+      {isAlertModalOpen && (
+        <AlertModal
+          ModalClose={AlertModalClose}
+          isOpen={isOpen}
+          width={300}
+          alertMessage="확인"
+          alertTitle="이미지는 10개까지만 추가됩니다."
+        />
+      )}
       {isOpen && (
         <ImagesEditModal
           imageArr={imageArr}
@@ -206,7 +222,7 @@ const CreatePost = () => {
       <S.GridWrapper>
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
-          <CircleIcon img_url=""></CircleIcon>
+          <CircleIcon size={48} img_url=""></CircleIcon>
           <div>스페이스 이름</div>
         </S.SpaceInfoContainer>
 
