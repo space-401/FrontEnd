@@ -50,6 +50,7 @@ const ButtonGroup = styled.div`
   justify-content: flex-end;
 `;
 const Button = styled.div`
+  cursor: pointer;
   display: flex;
   width: 160px;
   height: 48px;
@@ -79,4 +80,110 @@ export const A = {
   IConBox,
   ButtonGroup,
   Button,
+};
+const BWrapper = styled.div`
+  margin-bottom: 40px;
+`;
+const FlipCardList = styled.div`
+  margin: 40px 0 40px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-items: center;
+`;
+
+export const B = {
+  BWrapper,
+  FlipCardList,
+};
+
+const HeaderButtonGroup = styled.div`
+  position: absolute;
+  display: flex;
+  gap: 46px;
+`;
+
+const MButton = styled.div<{ select: boolean }>`
+  cursor: pointer;
+  color: ${({ theme }) => theme.COLOR.white};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
+  margin-top: ${({ margin_top }) => margin_top}px;
+  padding-bottom: 16px;
+
+  border-bottom: ${({ select, theme }) =>
+    select ? `2px solid ${theme.COLOR.skyblue}` : ''};
+`;
+
+export const M = {
+  HeaderButtonGroup,
+  MButton,
+};
+
+const CommentList = styled.div``;
+const MyCommentList = styled.div``;
+const OneCommentList = styled.div`
+  display: flex;
+  padding: 10px 0;
+  height: 160px;
+  justify-content: space-between;
+`;
+const LeftCard = styled.div``;
+const UserCard = styled.div`
+  display: flex;
+  gap: 8px;
+  height: 28px;
+  line-height: 28px;
+  align-items: center;
+  justify-content: flex-start;
+`;
+const UserNameSpan = styled.span`
+  color: ${({ theme }) => theme.COLOR.white};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
+const CardInfo = styled.div`
+  margin-left: 35px;
+`;
+const Comment = styled.div`
+  color: ${({ theme }) => theme.COLOR['gray-1']};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  line-height: 140%;
+`;
+const SpaceTitle = styled.span``;
+const RightCard = styled.div<{ img_url: string }>`
+  aspect-ratio: 1/1;
+  border-radius: 15px;
+  background: url(${({ img_url }) => img_url});
+  background-size: cover;
+`;
+const CreateAt = styled.span``;
+
+const CardBottom = styled.div`
+  display: flex;
+  gap: 21px;
+  color: ${({ theme }) => theme.COLOR['gray-2']};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
+export const CL = {
+  CommentList,
+  MyCommentList,
+  OneCommentList,
+  LeftCard,
+  UserCard,
+  UserNameSpan,
+  CardInfo,
+  Comment,
+  SpaceTitle,
+  RightCard,
+  CreateAt,
+  CardBottom,
 };

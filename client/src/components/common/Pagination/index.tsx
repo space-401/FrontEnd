@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import S from '@components/common/Pagination/style';
-import { useSearchParams } from 'react-router-dom';
 
 type PaginationType = {
   total: number;
   page: number;
   item_length: number;
+  movePage: (number) => void;
 };
 
-const Pagination = ({ total, page, item_length }: PaginationType) => {
+const Pagination = ({ total, page, item_length, movePage }: PaginationType) => {
   const [pageState, setPageState] = useState(page);
-  const [_, setSearchParam] = useSearchParams();
   const Buttons = new Array(Math.ceil(total / item_length))
     .fill('')
     .map((_, i) => i + 1);
@@ -35,7 +34,7 @@ const Pagination = ({ total, page, item_length }: PaginationType) => {
 
   const ChangePage = (newPage: number) => {
     setPageState(newPage);
-    setSearchParam({ page: String(newPage) });
+    movePage(newPage);
   };
 
   return (

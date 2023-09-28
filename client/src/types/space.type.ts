@@ -87,3 +87,16 @@ export type CommentType = {
   // 이 댓글의 작성자인가?
   isMyComment: boolean;
 };
+
+export type MyCommentType = {
+  id: number;
+  post_id: number;
+  space_title: string;
+  createDate: string;
+  writer: {
+    nick: string;
+    url: string;
+  };
+  content: string;
+  main_img_url: string;
+};
