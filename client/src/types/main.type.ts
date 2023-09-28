@@ -93,6 +93,11 @@ export type UserListProps = {
 export type SearchProps = {
   setState: (searchValue: string) => void;
   placeholder: string;
+  state: {
+    userId: selectType[];
+    tagId: selectType[];
+    search: string;
+  };
 };
 
 export type MapComponentProps = {
