@@ -17,7 +17,13 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
     <div style={{ width: '348px', height: '348px', position: 'relative' }}>
       <LeftIcon
         className="prevBtn"
-        style={{ position: 'absolute', top: '50%', zIndex: 100, left: '10px' }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          zIndex: 100,
+          left: '10px',
+          cursor: 'pointer',
+        }}
       />
       <RightIcon
         className="nextBtn"
@@ -26,6 +32,7 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
           top: '50%',
           zIndex: 100,
           right: '10px',
+          cursor: 'pointer',
         }}
       />
       <Swiper
@@ -36,8 +43,6 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
           prevEl: '.prevBtn',
         }}
         pagination={{ clickable: true }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log('slide change')}
         loop={true}
       >
         {images.map((img) => {
