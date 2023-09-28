@@ -1,6 +1,6 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/common/FlipCard/FlipCard';
-import S from './style';
+import S from '@pages/Main/MainBody/style';
 import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
