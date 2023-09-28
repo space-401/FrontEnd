@@ -1,11 +1,12 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@components/Create/ImageEditModal/Cropper';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
 import { Box, Modal } from '@mui/material';
 import { ImageArrType } from '@/types/image.type';
+
 type ModalType = {
   imageArr: ImageArrType;
   setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
@@ -13,7 +14,6 @@ type ModalType = {
 
 const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
-
   const myRefs = [cropperRef1];
   const sliderRef = useRef<any>();
   const { ModalClose, isOpen } = usePhotoModalStore();
@@ -24,12 +24,14 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
         .toDataURL();
-
+      console.log(imageArr);
       setImageArr((prev) => ({ ...prev, cropImages: [newImage] }));
       const filename = `SpaceImg`;
       const convertedImg = dataURLtoFile(newImage, filename);
+
       convertedImg &&
         setImageArr((prev) => ({ ...prev, convertedImages: [convertedImg] }));
+      console.log(imageArr);
       ModalClose();
     }
   };
@@ -37,12 +39,11 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
   //크롭한 이미지를 모두 저장함.
   const onSaveAllEditImg = (e: any) => {
     e.preventDefault();
-
-    //기존에 크롭한 이미지가 존재하면 없애줌
     if (imageArr.cropImages.length > 0) {
-      setImageArr((prev) => ({ ...prev, cropImages: [] }));
+      setImageArr((prev) => ({ ...prev, cropImages: [], convertedImages: [] }));
     }
     getCropData(cropperRef1);
+    //기존에 크롭한 이미지가 존재하면 없애줌
   };
 
   //모달 취소
@@ -51,9 +52,14 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
     setImageArr((prev) => ({ ...prev, images: [] }));
   };
 
-  useEffect(() => {
-    console.log(imageArr.images);
-  }, [imageArr]);
+  //현재 화면 크기
+  const screenWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  const cropperWidth = Math.floor(screenWidth / 2) + 20;
+
   return (
     <Modal
       open={isOpen}
@@ -66,7 +72,7 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
       }}
     >
       <Box tabIndex={-1}>
-        <S.Form>
+        <S.Form width={cropperWidth}>
           <S.Header>
             <button onClick={onClickCancelModal}>취소</button>
             <button
@@ -86,21 +92,22 @@ const ImgEditModal = ({ imageArr, setImageArr }: ModalType) => {
           <div
             style={{
               position: 'relative',
-              height: '760px',
-              width: '760px',
+              height: cropperWidth,
+              width: cropperWidth,
               overflow: 'hidden',
             }}
           >
             <div
-              style={{ display: 'flex', position: 'absolute', left: 10 }}
+              style={{ display: 'flex', position: 'absolute', left: 0 }}
               ref={sliderRef}
             >
               {imageArr.images.length && (
                 <ImageCropper
-                  key={1}
+                  width={cropperWidth}
+                  key={0}
                   image={imageArr.images[0].img}
-                  index={1}
-                  myRef={myRefs[1]}
+                  index={0}
+                  myRef={myRefs[0]}
                 />
               )}
             </div>

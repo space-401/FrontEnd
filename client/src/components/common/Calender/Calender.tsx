@@ -15,12 +15,18 @@ import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
 
 //메인일 때는 검색기능
 type CalenderPropsType = {
-  width: number;
-  isMain: boolean;
+  height: number;
+  borderRadius: number;
   setPostData?: React.Dispatch<React.SetStateAction<PostType>>;
+  isMain: boolean;
 };
 
-const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
+const Calender = ({
+  setPostData,
+  height,
+  borderRadius,
+  isMain,
+}: CalenderPropsType) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
@@ -72,6 +78,9 @@ const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
     <div className="custom-react-datepicker__wrapper">
       <label>
         <MStyledDatePicker
+          isMain={isMain}
+          borderRadius={borderRadius}
+          height={height}
           dateFormat="yyyy.MM.dd"
           showYearDropdown
           scrollableYearDropdown
@@ -219,12 +228,11 @@ const Calender = ({ isMain, setPostData }: CalenderPropsType) => {
 export default Calender;
 
 const MStyledDatePicker = styled(DatePicker)`
-  height: ${({ isMain }) =>
-    isMain ? '50px' : '60px'}; /* 조건에 따라 height 설정 */
+  height: ${({ height }) => height}px; /* 조건에 따라 height 설정 */
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-  border-radius: ${({ isMain }) => (isMain ? '5px' : '10px')};
+  border-radius: ${({ borderRadius }) => borderRadius}px;
   width: 322px !important;
   display: flex;
   padding-left: 2.6rem;
