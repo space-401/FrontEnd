@@ -1,5 +1,5 @@
 import { A } from '@pages/MyPage/MyBody/components/style';
-import { AccountMock } from '@mocks/data/Account/AccountMock';
+import { AccountInfoMock } from '@mocks/data/MyPage/MyPageMock';
 import React, { ReactElement } from 'react';
 import { ReactComponent as KaKaoSvg } from '@assets/svg/api/kakao.svg';
 import { ReactComponent as NaverSvg } from '@assets/svg/api/naver.svg';
@@ -12,7 +12,7 @@ export type AccountDataType = {
 };
 
 const AccountManagement = () => {
-  const { loginState, email, name } = AccountMock;
+  const { loginState, email, name } = AccountInfoMock;
 
   let StateIcon: ReactElement;
 
@@ -31,7 +31,7 @@ const AccountManagement = () => {
     <>
       <A.Title>회원정보</A.Title>
       <A.Description margin_top={16}>
-        {loginState + '간편가입 회원입니다.'}
+        {loginState + ' 간편가입 회원입니다.'}
       </A.Description>
       <A.Bar margin_top={16} />
       <A.Description margin_top={40}>이름</A.Description>

@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-const Flip = styled.div`
+const Flip = styled.div<{ size: 'small' | 'big' }>`
   position: relative;
-  perspective: 1100px;
+  width: ${({ size }) => (size === 'big' ? 437 : 296.75)}px;
   cursor: pointer;
 `;
 
-const Card = styled.div<{ img: string; size: 'small' | 'big' }>`
+const Card = styled.div<{ img: string }>`
   aspect-ratio: 1/1;
-  width: ${({ size }) => (size === 'big' ? 437 : 296.75)}px;
+  width: 100%;
   position: relative;
   transition: 1.5s;
   transform-style: preserve-3d;
@@ -20,14 +20,14 @@ const Card = styled.div<{ img: string; size: 'small' | 'big' }>`
   background-size: cover;
 `;
 
-const Hover = styled.div<{ img: string; size: 'small' | 'big' }>`
+const Hover = styled.div<{ img: string}>`
+  aspect-ratio: 1/1;
   top: 0;
   left: 0;
   position: absolute;
   overflow: hidden;
   border-radius: 5px;
-  width: ${({ size }) => (size === 'big' ? 437 : 296.75)}px;
-  height: 100%;
+  width: 100%;
   backface-visibility: hidden;
   display: flex;
   justify-content: center;

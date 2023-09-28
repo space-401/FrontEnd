@@ -1,7 +1,7 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import S from './style';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MainBodyPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
@@ -40,23 +40,9 @@ const MainBody = (props: MainBodyPropType) => {
     setState((prev) => ({ ...prev, search: newSearch }));
   };
 
-  useEffect(() => {
-    const userKeywords = state.user.map((user) => user.id);
-
-    const tagKeywords = state.tag.map((tag) => tag.id);
-    const users = searchParams.get('users');
-    const tags = searchParams.get('tags');
-    const search = searchParams.get('search');
-
-    const params = new URLSearchParams();
-    params.set('users', userKeywords.join(','));
-    params.set('tags', tagKeywords.join(','));
-    params.set('search', state.search);
-
-    setSearchParams(params.toString());
-
-    console.log(users, tags, search, '로 데이터를 조회합니다.');
-  }, [state]);
+  const movePage = (page: number) => {
+    console.log(page + '조회');
+  };
 
   const lowList = Math.ceil(userList.length / 2);
 
@@ -107,7 +93,12 @@ const MainBody = (props: MainBodyPropType) => {
                 />
               ))}
             </S.PostList>
-            <Pagination page={page} total={total} item_length={ItemLength} />
+            <Pagination
+              movePage={movePage}
+              page={page}
+              total={total}
+              item_length={ItemLength}
+            />
           </>
         )
       ) : (

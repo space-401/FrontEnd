@@ -19,6 +19,7 @@ const Button = styled.button<{
   opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
   position: relative;
   width: ${({ width }) => (width ? width : '')}px;
+  min-width: 16px;
   height: 20px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
