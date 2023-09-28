@@ -9,6 +9,8 @@ import type { MainHeaderPropType } from '@type/main.type';
 import SettingComponent from '@components/Main/Setting/SettingComponent';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, isAdmin, spaceInfo, selectState } = prop;
@@ -17,6 +19,8 @@ const MainHeader = (prop: MainHeaderPropType) => {
   const onClose = () => {
     setIsOpen(false);
   };
+  const navigate = useNavigate();
+
   return (
     <S.Wrapper>
       <SettingModal disableScrollLock open={isOpen} onClose={onClose}>
@@ -71,7 +75,9 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <S.CreateButton>게시물 작성</S.CreateButton>
+        <S.CreateButton onClick={() => navigate(PATH.POST_CREATE)}>
+          게시물 작성
+        </S.CreateButton>
       </S.HeaderFooter>
     </S.Wrapper>
   );

@@ -1,7 +1,7 @@
 import { CommentType } from '@type/space.type';
 import S from '@components/Main/Comments/OneComment/style';
 import Avatar from '@mui/material/Avatar';
-import timeHelper from '@utils/time-helper';
+import { timeHelper } from '@utils/time-helper';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { UserType } from '@type/user.type';
 import { TextareaAutosize } from '@mui/material';

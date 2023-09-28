@@ -5,10 +5,11 @@ import { useRef } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { ImageType } from '@/types/image.type';
 import React from 'react';
+import { ImageArrType } from '@/types/image.type';
 
 type MultiBoxType = {
-  images: ImageType[];
-  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>;
+  imageArr: ImageArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
   isBackground: boolean;
   setCurrentIdx?: React.Dispatch<React.SetStateAction<number>>;
   currentIdx?: number;
@@ -17,8 +18,8 @@ type MultiBoxType = {
 };
 
 const MultipleImgBox = ({
-  images,
-  setImages,
+  imageArr,
+  setImageArr,
   onClickCurrentImg,
   currentIdx,
   setCurrentIdx,
@@ -40,7 +41,7 @@ const MultipleImgBox = ({
     const files = e.target.files;
     if (!files) return;
 
-    let currentImgNum = images.length + 1;
+    let currentImgNum = imageArr.images.length + 1;
 
     let hasAlert = false;
     if (imgNum > 1) {
@@ -53,7 +54,10 @@ const MultipleImgBox = ({
               id: currentImgNum,
               img: result,
             };
-            setImages((prev) => [...prev, newObj]);
+            setImageArr((prev) => ({
+              ...prev,
+              images: [...prev.images, newObj],
+            }));
             currentImgNum++;
           }
           if (currentImgNum >= 10 && !hasAlert) {
@@ -72,7 +76,7 @@ const MultipleImgBox = ({
             id: 1,
             img: result,
           };
-          setImages([newObj]);
+          setImageArr((prev) => ({ ...prev, images: [newObj] }));
         }
       };
       reader.readAsDataURL(files[0]);
@@ -85,10 +89,10 @@ const MultipleImgBox = ({
       event.target.parentNode.parentNode.parentNode.parentNode.getAttribute(
         'data-rbd-draggable-id'
       );
-    const newImages = images.filter(
+    const newImages = imageArr.images.filter(
       (element) => element.id !== draggableContextId / 1
     );
-    setImages(newImages);
+    setImageArr((prev) => ({ ...prev, images: [...newImages] }));
     if (currentIdx) {
       setCurrentIdx!(0);
     }
@@ -97,10 +101,11 @@ const MultipleImgBox = ({
   //dnd
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
-    const items = [...images];
+    const items = [...imageArr.images];
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    setImages(items);
+    // setImages(items);
+    setImageArr((prev) => ({ ...prev, images: [...items] }));
   };
 
   return (
@@ -115,7 +120,7 @@ const MultipleImgBox = ({
                 style={{ display: 'flex' }}
                 {...provided.droppableProps}
               >
-                {images.map((image: any, idx: number) => (
+                {imageArr.images.map((image: any, idx: number) => (
                   <Draggable
                     draggableId={`${image.id}`}
                     index={idx}
@@ -155,7 +160,7 @@ const MultipleImgBox = ({
             )}
           </Droppable>
         </DragDropContext>
-        {images.length < imgCount && (
+        {imageArr.images.length < imgCount && (
           <S.SmallPhotoBox onClick={onAddImage}>
             <PlusPhotoIcon />
             <form method="post">

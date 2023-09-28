@@ -5,8 +5,6 @@ import '@components/Create/ImageEditModal/Cropper.css';
 type PropsType = {
   image: string;
   index: number;
-  setCropImages: any;
-  cropImages: string[];
   myRef: any;
 };
 

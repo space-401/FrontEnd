@@ -3,10 +3,12 @@ import S from '@/components/Create/SelectIconModal/style';
 
 const SelectIconModal = ({
   isOpen,
+  modalClose,
   onClickImgEditModal,
 }: {
   isOpen: boolean;
   onClickImgEditModal: any;
+  modalClose: () => void;
 }) => {
   return (
     <Modal
@@ -34,7 +36,7 @@ const SelectIconModal = ({
           <S.Content fontSize={18} lightgrey={false}>
             기본 아이콘 사용하기
           </S.Content>
-          <S.Content fontSize={18} lightgrey={true}>
+          <S.Content fontSize={18} lightgrey={true} onClick={modalClose}>
             닫기
           </S.Content>
         </S.Wrapper>

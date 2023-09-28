@@ -1,5 +1,5 @@
 import S from '@/components/common/BasicButton/style';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 export type BasicButtonProps = {
   color?: string;
@@ -7,9 +7,10 @@ export type BasicButtonProps = {
   padding?: number;
   fontSize?: number;
   borderRadius?: number;
-  width: number;
+  width?: number;
   height?: number;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 };
 
 const BasicButton = ({
