@@ -1,4 +1,3 @@
-import BasicButton from '@components/common/BasicButton';
 import { theme } from '@styles/theme/theme';
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as SelectTableIcon } from '@assets/svg/filter/selecttableIcon.svg';
@@ -11,6 +10,7 @@ import SettingComponent from '@components/Main/Setting/SettingComponent';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, isAdmin, spaceInfo, selectState } = prop;
@@ -75,15 +75,9 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <BasicButton
-          onClick={() => {
-            navigate('/createPost');
-          }}
-          color={'#292929'}
-          backgroundColor={theme.COLOR['gray-1']}
-        >
+        <S.CreateButton onClick={() => navigate(PATH.POST_CREATE)}>
           게시물 작성
-        </BasicButton>
+        </S.CreateButton>
       </S.HeaderFooter>
     </S.Wrapper>
   );

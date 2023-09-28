@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import S from '@components/common/ConfirmModal/style';
+import S from '@modal/Confirm/style';
 
 export type ConfirmModalType = {
   isPositiveModal: boolean;

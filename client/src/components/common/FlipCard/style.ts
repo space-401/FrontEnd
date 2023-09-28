@@ -20,7 +20,7 @@ const Card = styled.div<{ img: string }>`
   background-size: cover;
 `;
 
-const Hover = styled.div<{ img: string}>`
+const Hover = styled.div<{ img: string }>`
   aspect-ratio: 1/1;
   top: 0;
   left: 0;

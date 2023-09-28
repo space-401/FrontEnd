@@ -6,11 +6,11 @@ import { ReactComponent as MoreSvg } from '@assets/svg/moreIcon.svg';
 import { ReactComponent as MoreCrownSvg } from '@assets/svg/mainSetting/crown.svg';
 import { ReactComponent as MoreUserSvg } from '@assets/svg/mainSetting/user.svg';
 import { ReactComponent as MoreLogOutSvg } from '@assets/svg/mainSetting/logout.svg';
-import ConfirmModal from '@components/common/ConfirmModal/ConfirmModal';
 import { useState } from 'react';
 import { Modal } from '@mui/material';
 import ProfileAndUserNameChangeModal from '@components/Main/Setting/components/ProfileAndUserNameChangeModal';
 import toast from 'react-hot-toast';
+import ConfirmModal from '@modal/Confirm/ConfirmModal';
 
 type UserListPropsType = {
   userInfo: UserType;
