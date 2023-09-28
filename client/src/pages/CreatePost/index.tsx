@@ -1,4 +1,4 @@
-import S from '@pages/createPost/style';
+import S from '@pages/CreatePost/style';
 import BasicBox from '@/components/common/BasicBox';
 import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';

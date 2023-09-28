@@ -7,7 +7,6 @@ import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
-import { useSearchParams } from 'react-router-dom';
 import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
 
@@ -21,9 +20,6 @@ const MainBody = (props: MainBodyPropType) => {
     tag: [],
     search: '',
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const modalOpen = useDetailModalStore((state) => state.ModalOpen);
   const { postList, userList, tagList, page, total, selectState } = props;

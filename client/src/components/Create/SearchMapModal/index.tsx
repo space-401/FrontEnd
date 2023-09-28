@@ -9,9 +9,9 @@ import React, {
 import { Box, Modal } from '@mui/material';
 import { S } from '@components/Create/SearchMapModal/style';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
-import { APP } from '@constants/APPKEY';
 import EventMarkerContainer from '@components/Create/SearchMapModal/component/EventMarkerContainer';
 import Pagination from '@components/Create/SearchMapModal/component/Pagination';
+import { DEFAULT_POSITION } from '@constants/policy';
 
 export type MarkerType = {
   markerId: string;
@@ -48,7 +48,7 @@ const SearchModal = React.forwardRef(
       selectId: string | undefined;
       center: { lat: number; lng: number };
       isPanto: boolean;
-    }>({ selectId: undefined, center: APP.DEFAULT_POSITION, isPanto: false });
+    }>({ selectId: undefined, center: DEFAULT_POSITION, isPanto: false });
     const inputRef = useRef<HTMLInputElement>(null);
 
     const onSubmit = (e: KeyboardEvent<HTMLFormElement>) => {

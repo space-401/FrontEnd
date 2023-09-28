@@ -113,6 +113,32 @@ const ControlButton = styled.div<{
     background-color: ${({ hoverColor }) => (hoverColor ? hoverColor : '')};
   }
 
+  text-align: center;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
+  line-height: 150%;
+
+  transition: 0.5s;
+`;
+
+const CreateButton = styled.div`
+  display: inline-flex;
+  height: 44px;
+  padding: 10px 16px;
+  color: ${({ theme }) => theme.COLOR.black};
+  background-color: ${({ theme }) => theme.COLOR['gray-1']};
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.COLOR['gray-2']};
+  }
+
   transition: 0.5s;
 `;
 
@@ -131,6 +157,7 @@ const S = {
   SelectButton,
   LeftEmpty,
   ControlButton,
+  CreateButton,
 };
 
 export default S;
