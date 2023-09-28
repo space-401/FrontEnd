@@ -4,7 +4,7 @@ import { ReactComponent as SelectTableIcon } from '@assets/svg/filter/selecttabl
 import { ReactComponent as SelectMapIcon } from '@assets/svg/filter/selectmapIcon.svg';
 import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIcon.svg';
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
-import S from './style';
+import S from '@pages/Main/MainHeader/style';
 import type { MainHeaderPropType } from '@type/main.type';
 import SettingComponent from '@components/Main/Setting/SettingComponent';
 import { Modal as SettingModal } from '@mui/material';
