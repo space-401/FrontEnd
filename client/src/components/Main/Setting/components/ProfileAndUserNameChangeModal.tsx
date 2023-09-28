@@ -73,7 +73,6 @@ const ProfileAndUserNameChangeModal = React.forwardRef(
           setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
         }
       };
-      console.log('imageArr', imageArr);
       reader.readAsDataURL(files[0]);
     };
 
