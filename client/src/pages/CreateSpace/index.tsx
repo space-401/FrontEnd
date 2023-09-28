@@ -14,15 +14,16 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import { theme } from '@/styles/theme/theme';
 import useInputs from '@/hooks/common/useInputs';
 import SelectIconModal from '@/components/Create/SelectIconModal';
+import { ImageArrType } from '@/types/image.type';
+// import useValidate from '@/hooks/common/useValidate';
 
 const CreateSpace = () => {
-  //이미지 파일을 저장하는 곳
-  const [images, setImages] = useState<ImageType[]>([]);
-  //편집된 이미지 파일을 저장하는 곳
-  const [cropImages, setCropImages] = useState<string[]>([]);
-  //file형태의 이미지로 저장하는 곳
-  const [convertedImages, setConvertedImages] = useState<File[]>([]);
-  console.log(convertedImages);
+  //이미지 저장하는 곳
+  const [imageArr, setImageArr] = useState<ImageArrType>({
+    images: [],
+    cropImages: [],
+    convertedImages: [],
+  });
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
@@ -42,6 +43,8 @@ const CreateSpace = () => {
   });
   const { title, content, password } = values;
 
+  //유효성 검사
+  // const error = useValidate(password);
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -56,7 +59,7 @@ const CreateSpace = () => {
           id: 1,
           img: result,
         };
-        setImages([newObj]);
+        setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
       }
     };
     reader.readAsDataURL(files[0]);
@@ -71,6 +74,10 @@ const CreateSpace = () => {
     IconModalClose();
   };
 
+  //스페이스 생성하기
+  const onSubmit = () => {
+    // console.log('에러', error);
+  };
   return (
     <FullScreenModal
       isTitle={true}
@@ -79,18 +86,12 @@ const CreateSpace = () => {
     >
       {/*사진 편집 모달*/}
       {isPhotoModalOpen && (
-        <ImgEditModal
-          setConvertedImages={setConvertedImages}
-          cropImages={cropImages}
-          setCropImages={setCropImages}
-          images={images}
-          setImages={setImages}
-          handleFileChange={handleFileChange}
-        />
+        <ImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
       )}
       {/*아이콘 선택 모달*/}
       {isIconModalOpen && (
         <SelectIconModal
+          modalClose={IconModalClose}
           isOpen={isIconModalOpen}
           onClickImgEditModal={onClickImgEditModal}
         />
@@ -100,7 +101,7 @@ const CreateSpace = () => {
         <S.TitleContainer number={1} required={true}>
           <div>스페이스 아이콘</div>
         </S.TitleContainer>
-        {images.length == 0 ? (
+        {imageArr.images.length == 0 ? (
           <S.InputContainer number={1} onClick={IconModalOpen}>
             <input
               type="file"
@@ -119,7 +120,7 @@ const CreateSpace = () => {
         ) : (
           <S.InputContainer number={1} onClick={onClickImgEditModal}>
             <BasicBox
-              backgroundImage={cropImages[0]}
+              backgroundImage={imageArr.cropImages[0]}
               width={160}
               borderradius={10}
               color="grey"
@@ -190,16 +191,21 @@ const CreateSpace = () => {
             placeholder="숫자 5자리를 입력해주세요"
             maxLength={5}
             onChange={onChange}
-            name={password}
+            name="password"
           />
         </S.InputContainer>
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer>
           <BasicButton
             children="스페이스 생성하기"
-            onClick={() => {}}
+            onClick={onSubmit}
             width={160}
             height={47}
+            disabled={
+              !imageArr.convertedImages.length ||
+              !title.length ||
+              password.length < 5
+            }
           />
         </S.ButtonContainer>
       </S.Wrapper>

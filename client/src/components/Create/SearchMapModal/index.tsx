@@ -11,6 +11,7 @@ import { S } from '@components/Create/SearchMapModal/style';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import EventMarkerContainer from '@components/Create/SearchMapModal/component/EventMarkerContainer';
 import Pagination from '@components/Create/SearchMapModal/component/Pagination';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import { DEFAULT_POSITION } from '@constants/policy';
 
 export type MarkerType = {
@@ -104,6 +105,10 @@ const SearchModal = React.forwardRef(
         }}
       >
         <Box tabIndex={-1} ref={forwardRef}>
+          <DeleteIcon
+            style={{ position: 'absolute', top: '40px', right: '40px' }}
+            onClick={onClose}
+          />
           <S.Wrapper>
             <S.LeftContainer>
               <S.SearchBox onSubmit={onSubmit}>

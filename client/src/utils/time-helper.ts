@@ -1,4 +1,4 @@
-const timeHelper = (date: string) => {
+export const timeHelper = (date: string) => {
   let changeTime = '';
   const thisTime = new Date();
   const createTime = new Date(date);
@@ -17,4 +17,13 @@ const timeHelper = (date: string) => {
   return changeTime;
 };
 
-export default timeHelper;
+export const postTimeChangeHelper = (inputDateStr: string | undefined) => {
+  if (inputDateStr) {
+    const inputDate = new Date(inputDateStr);
+    const year = inputDate.getFullYear();
+    const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = inputDate.getDate().toString().padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+};
