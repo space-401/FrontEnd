@@ -5,15 +5,22 @@ export const NETWORK = {
   TIMEOUT: 10000,
 };
 
-export const BASE_URL = isProduct
-  ? `${window.location.protocol}//${process.env.PROD_BASE_URL}`
-  : 'http://localhost:3000';
-
 export const AXIOS_BASE_URL = isProduct
-  ? `${window.location.protocol}//${process.env.AXIOS_PROD_BASE_URL}`
+  ? `${window.location.protocol}//${import.meta.env.BASE_URL}`
   : '/';
 
-export const END_POINTS = {} as const;
+export const END_POINTS = {
+  Tag: '/tag',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  TOKEN: '/token',
+  POST: '/post',
+  COMMENT: '/comment',
+  SPACE: '/space',
+  USERINFO: '/mypage',
+  BOOKMARK: '/bookmark',
+  INVITATION: '/invitation',
+} as const;
 
 export const HTTP_STATUS_CODE = {
   SUCCESS: 200,
@@ -47,3 +54,5 @@ export const HTTP_ERROR_MESSAGE = {
 } as const;
 
 export const ERROR_MESSAGE = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+
+export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
