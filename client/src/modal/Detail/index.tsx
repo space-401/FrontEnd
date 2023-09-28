@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import S, { mentionStyle } from '@pages/detail/style';
+import S, { mentionStyle } from '@/modal/Detail/style';
 import { Box, Chip, IconButton } from '@mui/material';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
 import DetailPageMock from '@mocks/data/DetailPage/detailPage.mock';
@@ -12,7 +12,7 @@ import { useDimensions } from '@hooks/common/use-dimensions';
 import { motion } from 'framer-motion';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import DetailComments from '@components/Main/Comments';
-import ConfirmModal from '@components/common/ConfirmModal/ConfirmModal';
+import ConfirmModal from '@modal/Confirm/ConfirmModal';
 import toast from 'react-hot-toast';
 import { ReactComponent as BookMarkFillSvg } from '@assets/svg/bookmark/fill.svg';
 import { ReactComponent as BookMarkEmptySvg } from '@assets/svg/bookmark/empty.svg';

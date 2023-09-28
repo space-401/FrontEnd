@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Modal } from '@mui/material';
-import S from '@components/common/AlertModal/style';
+import S from '@modal/Alert/style';
 
 type AlertModalProps = {
   ModalClose: () => void;

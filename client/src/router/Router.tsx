@@ -4,35 +4,49 @@ import CreatePost from '@/pages/CreatePost';
 import MainPage from '@/pages/main';
 import InviteCode from '@pages/InviteCode';
 import MyPage from '@pages/MyPage';
+import PrivateRoute from '@router/Private';
+import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
+import { PATH } from '@constants/path';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-
+    path: PATH.HOME,
+    element: <PrivateRoute />,
     children: [
       {
-        //모달이라 나중에 지울것
-        path: '/createSpace',
-        element: <CreateSpace />,
-      },
-      {
-        path: '/createPost',
-        element: <CreatePost />,
-      },
-      {
-        //모달이라 나중에 지울것
-        path: '/inviteCode',
-        element: <InviteCode />,
-      },
-      {
-        path: '/main',
-        element: <MainPage />,
-      },
-      {
-        path: '/myPage',
-        element: <MyPage />,
+        element: <HeaderLayout />,
+        children: [
+          {
+            path: PATH.SPACE + '/:spaceId',
+            element: <MainPage />,
+          },
+          {
+            path: PATH.SPACE_UPDATE + '/:spaceId',
+            // element: 업데이트 스페이스
+          },
+          {
+            path: PATH.SPACE_CREATE,
+            element: <CreateSpace />,
+          },
+          {
+            path: PATH.POST_CREATE,
+            element: <CreatePost />,
+          },
+          {
+            path: PATH.POST_UPDATE,
+            // element: 업데이트 포스트
+          },
+          {
+            path: PATH.USER_INFO,
+            element: <MyPage />,
+          },
+        ],
       },
     ],
+  },
+  {
+    path: PATH.INVITE,
+    element: <InviteCode />,
   },
 ]);
 

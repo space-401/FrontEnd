@@ -1,5 +1,5 @@
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
-import S from '@pages/createSpace/style';
+import S from '@pages/CreateSpace/style';
 import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
 import TextAreaBox from '@/components/common/TextAreaBox';

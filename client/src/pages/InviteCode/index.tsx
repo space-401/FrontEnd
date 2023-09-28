@@ -1,5 +1,5 @@
 import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
-import S from '@pages/inviteCode/style';
+import S from '@pages/InviteCode/style';
 import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
 // import { z } from 'zod';
