@@ -8,7 +8,7 @@ import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';
 import { ReactComponent as MarkerSvg } from '@assets/svg/markerIcon.svg';
 import { MenuToggle } from '@components/Main/SelectBox/components/Toggle';
-import { useDimensions } from '@hooks/common/use-dimensions';
+import { useDimensions } from '@hooks/common/useDimensions';
 import { motion } from 'framer-motion';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import DetailComments from '@components/Main/Comments';
