@@ -1,14 +1,15 @@
-import S from '@pages/main/style';
-import MainHeader from './MainHeader/MainHeader';
-import MainBody from './MainBody/MainBody';
+import S from '@pages/Main/style';
+import MainHeader from '@pages/Main/MainHeader/MainHeader';
+import MainBody from '@pages/Main/MainBody/MainBody';
 import { useState } from 'react';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
+import * as process from 'process';
 
 const MainPage = () => {
   const { spaceInfo, isAdmin, tagList, postList, total, page } = MainPageMock;
 
   const [selectState, setSelectState] = useState(false);
-
+  console.log(process.env.NODE_ENV);
   return (
     <>
       <S.Wrapper>

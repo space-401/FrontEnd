@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import CreateSpace from '@/pages/CreateSpace';
 import CreatePost from '@/pages/CreatePost';
-import MainPage from '@/pages/main';
+import MainPage from '@/pages/Main';
 import InviteCode from '@pages/InviteCode';
 import MyPage from '@pages/MyPage';
 import PrivateRoute from '@router/Private';
