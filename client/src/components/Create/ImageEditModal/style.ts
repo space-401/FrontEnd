@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 
-const Form = styled.form`
+const Form = styled.form<{ width: number }>`
   ${flexCenter}
   flex-direction: column;
   ${flexCenter}
@@ -19,18 +19,11 @@ const Form = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 760px;
+  width: ${({ width }) => width};
   border-radius: 8px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-`;
-
-const CropperWrapper = styled.div`
-  width: 760px;
-  height: 760px;
-  background-color: black;
-  position: relative;
 `;
 
 const Header = styled.div`
@@ -114,7 +107,6 @@ const S = {
   Header,
   Footer,
   SizeController,
-  CropperWrapper,
   MultiViewWrapper,
   SmallPhotoBox,
   PhotoContainer,

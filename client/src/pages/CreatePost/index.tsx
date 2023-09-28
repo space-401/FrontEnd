@@ -218,7 +218,6 @@ const CreatePost = () => {
           <InputBox
             height={60}
             readonly={false}
-            // width={628}
             placeholder="16자 이내의 제목을 입력해 주세요"
             type="text"
             maxLength={16}
@@ -294,9 +293,10 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={5}>
           <Calender
-            width={inputWidth}
+            height={60}
             isMain={false}
             setPostData={setPostData}
+            borderRadius={10}
           />
         </S.InputContainer>
 

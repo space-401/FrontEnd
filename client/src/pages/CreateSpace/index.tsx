@@ -1,4 +1,3 @@
-import FullScreenModal from '@/layout/FullScreenModal/FullScreenModal';
 import S from '@pages/CreateSpace/style';
 import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
@@ -15,7 +14,6 @@ import { theme } from '@/styles/theme/theme';
 import useInputs from '@/hooks/common/useInputs';
 import SelectIconModal from '@/components/Create/SelectIconModal';
 import { ImageArrType } from '@/types/image.type';
-// import useValidate from '@/hooks/common/useValidate';
 
 const CreateSpace = () => {
   //이미지 저장하는 곳
@@ -43,8 +41,6 @@ const CreateSpace = () => {
   });
   const { title, content, password } = values;
 
-  //유효성 검사
-  // const error = useValidate(password);
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -78,12 +74,15 @@ const CreateSpace = () => {
   const onSubmit = () => {
     // console.log('에러', error);
   };
+
+  //현재 화면 크기
+
   return (
-    <FullScreenModal
-      isTitle={true}
-      title="스페이스 설정하기"
-      detail="우리만을 위한 스페이스를 새로 만들어요."
-    >
+    <S.Wrapper>
+      <S.TitleSection>
+        <div>스페이스 설정하기</div>
+        <p>우리만을 위한 스페이스를 새로 만들어요.</p>
+      </S.TitleSection>
       {/*사진 편집 모달*/}
       {isPhotoModalOpen && (
         <ImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
@@ -96,11 +95,12 @@ const CreateSpace = () => {
           onClickImgEditModal={onClickImgEditModal}
         />
       )}
-      <S.Wrapper>
+      <S.Form>
         {/*아이콘 지정 인풋*/}
         <S.TitleContainer number={1} required={true}>
           <div>스페이스 아이콘</div>
         </S.TitleContainer>
+
         {imageArr.images.length == 0 ? (
           <S.InputContainer number={1} onClick={IconModalOpen}>
             <input
@@ -115,18 +115,17 @@ const CreateSpace = () => {
             <BasicBox width={160} borderradius={10}>
               <PhotoIcon />
             </BasicBox>
-            <S.EditButton>편집하기</S.EditButton>
           </S.InputContainer>
         ) : (
-          <S.InputContainer number={1} onClick={onClickImgEditModal}>
+          <S.InputContainer number={1}>
             <BasicBox
+              onClick={IconModalOpen}
               backgroundImage={imageArr.cropImages[0]}
               width={160}
               borderradius={10}
               color="grey"
-              onClick={PhotoModalOpen}
             />
-            <S.EditButton>편집하기</S.EditButton>
+            <S.EditButton onClick={PhotoModalOpen}>편집하기</S.EditButton>
           </S.InputContainer>
         )}
 
@@ -138,7 +137,6 @@ const CreateSpace = () => {
           <InputBox
             readonly={false}
             height={60}
-            width={628}
             placeholder="16자 이내의 제목을 입력해 주세요."
             type="text"
             maxLength={16}
@@ -208,8 +206,8 @@ const CreateSpace = () => {
             }
           />
         </S.ButtonContainer>
-      </S.Wrapper>
-    </FullScreenModal>
+      </S.Form>
+    </S.Wrapper>
   );
 };
 export default CreateSpace;
