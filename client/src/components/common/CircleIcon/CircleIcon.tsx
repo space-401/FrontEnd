@@ -2,7 +2,7 @@ import S from './style';
 
 type CircleIconProps = {
   img_url: string;
-  size?: number;
+  size: number;
 };
 
 const CircleIcon = (props: CircleIconProps) => {
