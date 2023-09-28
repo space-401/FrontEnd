@@ -62,7 +62,7 @@ const ImagesEditModal = ({
     document.documentElement.clientWidth ||
     document.body.clientWidth;
 
-  const cropperWidth = Math.floor(screenWidth / 2) + 20;
+  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any, index: number) => {

@@ -77,7 +77,7 @@ const Calender = ({
   return (
     <div className="custom-react-datepicker__wrapper">
       <label>
-        <MStyledDatePicker
+        <StyledDatePicker
           isMain={isMain}
           borderRadius={borderRadius}
           height={height}
@@ -191,7 +191,7 @@ const Calender = ({
               </div>
             </div>
           )}
-        ></MStyledDatePicker>
+        ></StyledDatePicker>
         <CalenderIcon
           style={{ position: 'absolute', bottom: '28', left: 280 }}
         />
@@ -227,15 +227,15 @@ const Calender = ({
 
 export default Calender;
 
-const MStyledDatePicker = styled(DatePicker)`
+const StyledDatePicker = styled(DatePicker)`
   height: ${({ height }) => height}px; /* 조건에 따라 height 설정 */
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   border-radius: ${({ borderRadius }) => borderRadius}px;
-  width: 322px !important;
+  width: ${({ isMain }) => (isMain ? '230' : '322')}px;
   display: flex;
-  padding-left: 2.6rem;
+  padding-left: ${({ isMain }) => (isMain ? 1.2 : 2.6)}rem;
 `;
 
 const DateText = styled.div<{ isMain: boolean }>`

@@ -8,10 +8,10 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 
 const Form = styled.form<{ width: number }>`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-6']};
   ${flexCenter}
   flex-direction: column;
   ${flexCenter}

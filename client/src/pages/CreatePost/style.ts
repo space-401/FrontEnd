@@ -23,6 +23,7 @@ const GridWrapper = styled.div`
   width: 50%;
   margin-left: 4rem;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  padding-bottom: 50px;
 
   display: grid;
   grid-template-columns: 1fr 3fr;

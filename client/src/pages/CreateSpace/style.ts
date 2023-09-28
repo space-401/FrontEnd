@@ -2,11 +2,16 @@ import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    flex-direction: column;
+    display: flex;
+  }
 `;
+
 const Form = styled.div`
   width: 50%;
   padding-top: 2rem;

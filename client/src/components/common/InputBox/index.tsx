@@ -27,6 +27,7 @@ const InputBox = ({
   name,
   paddingLeft,
   readonly,
+
   ...rest
 }: InputBoxProps) => {
   const hasIcon = children ? true : false;
