@@ -1,6 +1,6 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useDimensions } from '@hooks/common/use-dimensions';
+import { useDimensions } from '@hooks/common/useDimensions';
 import type { selectType } from '@type/main.type';
 import S from './style';
 import { MenuToggle } from './components/Toggle';
