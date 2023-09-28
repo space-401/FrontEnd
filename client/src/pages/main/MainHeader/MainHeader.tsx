@@ -1,4 +1,3 @@
-import BasicButton from '@components/common/BasicButton';
 import { theme } from '@styles/theme/theme';
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as SelectTableIcon } from '@assets/svg/filter/selecttableIcon.svg';
@@ -72,9 +71,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <BasicButton color={'#292929'} backgroundColor={theme.COLOR['gray-1']}>
-          게시물 작성
-        </BasicButton>
+        <S.CreateButton>게시물 작성</S.CreateButton>
       </S.HeaderFooter>
     </S.Wrapper>
   );

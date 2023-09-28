@@ -1,14 +1,26 @@
 import Header from './Header';
 import S from './style';
-import { PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Modal as DetailModal } from '@mui/material';
+import { useDetailModalStore } from '@store/modal';
+import DetailInner from '@modal/Detail';
 
-const HeaderLayout = (props: PropsWithChildren) => {
-  const { children } = props;
-
+const HeaderLayout = () => {
+  const detailIsOpen = useDetailModalStore((state) => state.isOpen);
+  const detailModalClose = useDetailModalStore((state) => state.ModalClose);
   return (
     <S.Wrapper>
+      <DetailModal
+        disableScrollLock
+        open={detailIsOpen}
+        onClose={detailModalClose}
+      >
+        <DetailInner onClose={detailModalClose} />
+      </DetailModal>
       <Header />
-      <S.ContentWrapper>{children}</S.ContentWrapper>
+      <S.ContentWrapper>
+        <Outlet />
+      </S.ContentWrapper>
     </S.Wrapper>
   );
 };

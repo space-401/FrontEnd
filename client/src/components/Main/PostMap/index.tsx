@@ -4,11 +4,11 @@ import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import EventMarkerContainer from '@components/Main/PostMap/components/EventMarkerContainer';
 import LeftSection from '@components/Main/PostMap/components/LeftSection';
 import MarkerContents from '@components/Main/PostMap/components/MarkerContents';
-import { APP } from '@constants/APPKEY';
 import MainPageMock from '@mocks/data/MainPage/mainPage.mock';
 import { getFormatDate } from '@utils/formatter';
 import { useState } from 'react';
 import { useDetailModalStore } from '@store/modal';
+import { DEFAULT_POSITION } from '@constants/policy';
 
 const Index = (props: MapComponentProps) => {
   useKakaoLoader({
@@ -18,7 +18,7 @@ const Index = (props: MapComponentProps) => {
   const [isSelect, setIsSelect] = useState<number>(postList[0].post_id);
 
   const [state, setState] = useState({
-    center: postList[0].position || APP.DEFAULT_POSITION,
+    center: postList[0].position || DEFAULT_POSITION,
     isPanto: false,
   });
   const modalOpen = useDetailModalStore((state) => state.ModalOpen);
