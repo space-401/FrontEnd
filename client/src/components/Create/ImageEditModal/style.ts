@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Form = styled.form<{ width: number }>`
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-6']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
   ${flexCenter}
   flex-direction: column;
   ${flexCenter}

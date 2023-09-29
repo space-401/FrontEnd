@@ -33,6 +33,11 @@ export const theme = {
     'gray-6': '#232120',
     'gray-7': '#171717',
   },
+  LOGIN_COLOR: {
+    kakao: '#FEE500',
+    naver: '#03C75A',
+    google: '#ffffff',
+  },
   TEXT_SIZE: {
     'text-88': '5.5rem',
     'text-80': '5rem',

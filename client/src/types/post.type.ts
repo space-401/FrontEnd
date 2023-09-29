@@ -1,5 +1,6 @@
 import { selectType } from './main.type';
 import { SpacePostType } from '@type/space.type';
+import { OneSpaceType } from '@type/space.type';
 
 export type UserType = {
   userId: number;
@@ -31,10 +32,15 @@ export type PostType = {
   };
 };
 
-export type FlipCardSize = 'small' | 'big';
+export type FlipCardSize = 'small' | 'medium' | 'big';
+
+export type PostInfoBackPropsType = {
+  item: SpacePostType;
+  size: FlipCardSize;
+};
 
 export type SpaceInfoBackPropsType = {
-  item: SpacePostType;
+  item: OneSpaceType;
   size: FlipCardSize;
 };
 
@@ -44,4 +50,5 @@ export type FlipType = {
    */
   imgUrl: string;
   onClick: () => void;
+  borderRadius?: string;
 };
