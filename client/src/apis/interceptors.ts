@@ -12,7 +12,7 @@ export interface ErrorResponseData {
 }
 
 export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
-  if (!config.useAuth || !config.headers || config.headers.Authorization)
+  if (config.useAuth || !config.headers || config.headers.Authorization)
     return config;
 
   const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);

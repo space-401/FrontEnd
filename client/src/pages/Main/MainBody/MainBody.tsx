@@ -12,12 +12,12 @@ import Calender from '@/components/common/Calender/Calender';
 
 const MainBody = (props: MainBodyPropType) => {
   const [state, setState] = useState<{
-    user: selectType[];
-    tag: selectType[];
+    userId: selectType[];
+    tagId: selectType[];
     search: string;
   }>({
-    user: [],
-    tag: [],
+    userId: [],
+    tagId: [],
     search: '',
   });
 
@@ -65,7 +65,11 @@ const MainBody = (props: MainBodyPropType) => {
           ListItem={tagList}
         />
         <Calender isMain={true} height={50} borderRadius={5} />
-        <MainSearchBox placeholder={'제목'} setState={setSearchState} />
+        <MainSearchBox
+          placeholder={'제목'}
+          state={state}
+          setState={setSearchState}
+        />
       </S.FilterGroup>
       {!selectState ? (
         postList.length === 0 ? (
