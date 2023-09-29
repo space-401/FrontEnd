@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserType } from '@type/user.type';
+import { UserType } from '@type/post.type';
 import { Box, Modal } from '@mui/material';
 import S from '@components/Main/Setting/style';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';

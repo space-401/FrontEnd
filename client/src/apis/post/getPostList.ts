@@ -1,18 +1,21 @@
 import { END_POINTS } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
-import type { PostType } from '@type/post.type';
+import { SpacePostListProps } from '@type/main.type';
 
 export type FilterType = {
   userId?: string;
   tagId?: string;
   keyword?: string;
   data?: string;
-  page: string;
 };
 
-export const getPostList = async (spaceId: string, filter: FilterType) => {
-  const { data } = await axiosInstance.get<PostType[]>(
-    END_POINTS.POST_LIST(spaceId),
+export const getPostList = async (
+  spaceId: string,
+  page: string,
+  filter: FilterType
+) => {
+  const { data } = await axiosInstance.get<SpacePostListProps>(
+    END_POINTS.POST_SEARCH_LIST(spaceId, page),
     { params: { ...filter } }
   );
 

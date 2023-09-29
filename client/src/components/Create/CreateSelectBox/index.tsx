@@ -6,8 +6,7 @@ import S from './style';
 import { MenuToggle } from './components/Toggle';
 import MenuList from './components/MenuList';
 import SelectList from './components/component/SelectList';
-import { UserType } from '@/types/user.type';
-import { TagType } from '@/types/tag.type';
+import type { UserType, TagType } from '@type/post.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore } from '@/store/modal';
 
@@ -145,7 +144,7 @@ const CreateSelectBox = (props: SelectBoxProps) => {
               select={select}
               changeSelect={setSelect}
               searchValue={searchValue}
-              ItemList={ListItem}
+              itemList={ListItem}
             />
           </S.MenuList>
         </S.Container>

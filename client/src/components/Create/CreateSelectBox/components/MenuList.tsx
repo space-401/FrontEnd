@@ -1,5 +1,4 @@
-import type { UserType } from '@type/user.type';
-import type { TagType } from '@type/tag.type';
+import type { UserType, TagType } from '@type/post.type';
 import type { MenuListProps, selectType } from '@type/main.type';
 import UserList from './component/UserList';
 import TagList from './component/TagList';
@@ -7,56 +6,56 @@ import S from './style';
 import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 
 const MenuList = (props: MenuListProps) => {
-  const { ItemList, searchValue, select, changeSelect } = props;
+  const { itemList, searchValue, select, changeSelect } = props;
 
   const checkSelectItem = (thisValue: number) => {
     return select.filter((i) => i.id === thisValue).length !== 0;
   };
 
-  const ListItem: UserType[] | TagType[] = !isUserTypeArray(ItemList)
+  const ListItem = !isUserTypeArray(itemList)
     ? [
         ...select.map((prev) => {
           return {
-            user_id: prev.id,
-            user_name: prev.title,
-            user_profile_img: prev.img_url,
+            userId: prev.id,
+            userName: prev.title,
+            imgUrl: prev.imgUrl,
           };
         }),
-        ...ItemList.filter((prev) => !checkSelectItem(prev.user_id)),
+        ...itemList.filter((prev) => !checkSelectItem(prev.userId)),
       ]
     : [
         ...select.map((prev) => {
-          return { tag_id: prev.id, tag_title: prev.title };
+          return { tagId: prev.id, tagTitle: prev.title };
         }),
-        ...ItemList.filter((prev) => !checkSelectItem(prev.tag_id)),
+        ...itemList.filter((prev) => !checkSelectItem(prev.tagId)),
       ];
 
   const setChange = (ListItem: UserType | TagType) => {
     if (isUserType(ListItem)) {
-      const thisValue = ListItem.tag_id;
+      const thisValue = ListItem.tagId;
       if (!checkSelectItem(thisValue)) {
         const newItem: selectType = {
-          id: ListItem.tag_id,
-          title: ListItem.tag_title,
+          id: ListItem.tagId,
+          title: ListItem.tagTitle,
         };
         changeSelect((prev) => [...prev, newItem]);
       } else {
         changeSelect((prev) =>
-          prev.filter((prev) => prev.id !== ListItem.tag_id)
+          prev.filter((prev) => prev.id !== ListItem.tagId)
         );
       }
     } else if (!isUserType(ListItem)) {
-      const thisValue = ListItem.user_id;
+      const thisValue = ListItem.userId;
       if (!checkSelectItem(thisValue)) {
         const newItem: selectType = {
-          id: ListItem.user_id,
-          title: ListItem.user_name,
-          img_url: ListItem.user_profile_img,
+          id: ListItem.userId,
+          title: ListItem.userName,
+          imgUrl: ListItem.imgUrl,
         };
         changeSelect((prev) => [...prev, newItem]);
       } else {
         changeSelect((prev) =>
-          prev.filter((prev) => prev.id !== ListItem.user_id)
+          prev.filter((prev) => prev.id !== ListItem.userId)
         );
       }
     }
@@ -66,9 +65,9 @@ const MenuList = (props: MenuListProps) => {
     return ListItem.map((item) => (
       <S.List
         grid={isUserType(item)}
-        select={checkSelectItem(item.user_id)}
+        select={checkSelectItem(item.userId)}
         onClick={() => setChange(item)}
-        key={item.user_id}
+        key={item.userId}
       >
         <UserList Item={item} />
       </S.List>
@@ -76,7 +75,7 @@ const MenuList = (props: MenuListProps) => {
   } else {
     if (searchValue.length !== 0) {
       const selectArray = ListItem.filter((item) => {
-        const changeArray = item.tag_title.split('');
+        const changeArray = item.tagTitle.split('');
         return (
           changeArray.splice(0, searchValue.length).join('') === searchValue
         );
@@ -84,9 +83,9 @@ const MenuList = (props: MenuListProps) => {
       return selectArray.map((item) => (
         <S.List
           grid={isUserType(item)}
-          select={checkSelectItem(item.tag_id)}
+          select={checkSelectItem(item.tagId)}
           onClick={() => setChange(item)}
-          key={item.tag_id}
+          key={item.tagId}
         >
           <TagList Item={item} />
         </S.List>
@@ -95,9 +94,9 @@ const MenuList = (props: MenuListProps) => {
     return ListItem.map((item) => (
       <S.List
         grid={isUserType(item)}
-        select={checkSelectItem(item.tag_id)}
+        select={checkSelectItem(item.tagId)}
         onClick={() => setChange(item)}
-        key={item.tag_id}
+        key={item.tagId}
       >
         <TagList Item={item} />
       </S.List>

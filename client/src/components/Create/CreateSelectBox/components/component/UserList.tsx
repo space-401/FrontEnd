@@ -4,6 +4,7 @@ import type { UserListProps } from '@type/main.type';
 
 const UserList = (prop: UserListProps) => {
   const { Item } = prop;
+  const { userName, imgUrl } = Item;
   return (
     <S.UserList>
       <S.FlexUser>
@@ -14,10 +15,10 @@ const UserList = (prop: UserListProps) => {
             background: 'white',
             padding: '2px',
           }}
-          alt={Item.user_name}
-          src={Item.user_profile_img}
+          alt={userName}
+          src={imgUrl}
         />
-        <S.UserTiTle className={'user-title'}>{Item.user_name}</S.UserTiTle>
+        <S.UserTiTle className={'user-title'}>{userName}</S.UserTiTle>
       </S.FlexUser>
     </S.UserList>
   );

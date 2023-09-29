@@ -1,11 +1,13 @@
-const createPostMock = [
-  { tag_id: 1, tag_title: '흥미진진한' },
-  { tag_id: 2, tag_title: '긴장감이 넘치는' },
-  { tag_id: 3, tag_title: '인기가 많은' },
-  { tag_id: 4, tag_title: '한참 시간이 붐비는' },
-  { tag_id: 5, tag_title: '흥미진진한' },
-  { tag_id: 6, tag_title: '긴장감이 넘치는' },
-  { tag_id: 7, tag_title: '인기가 많은' },
-  { tag_id: 8, tag_title: '한참 시간이 붐비는' },
+import { TagType } from '@type/post.type';
+
+const createPostMock: TagType[] = [
+  { tagId: 1, tagTitle: '흥미진진한' },
+  { tagId: 2, tagTitle: '긴장감이 넘치는' },
+  { tagId: 3, tagTitle: '인기가 많은' },
+  { tagId: 4, tagTitle: '한참 시간이 붐비는' },
+  { tagId: 5, tagTitle: '흥미진진한' },
+  { tagId: 6, tagTitle: '긴장감이 넘치는' },
+  { tagId: 7, tagTitle: '인기가 많은' },
+  { tagId: 8, tagTitle: '한참 시간이 붐비는' },
 ];
 export default createPostMock;

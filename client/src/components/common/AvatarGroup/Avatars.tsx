@@ -1,7 +1,7 @@
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import S from '@components/common/AvatarGroup/style';
-import { UserType } from '@type/user.type';
+import type { UserType } from '@type/post.type';
 
 type PropType = {
   /**
@@ -26,14 +26,17 @@ const Avatars = ({ users, size, max }: PropType) => (
         '& .MuiAvatar-root': { width: size, height: size, fontSize: 15 },
       }}
     >
-      {users.map((user) => (
-        <Avatar
-          sx={{ width: size, height: size, backgroundColor: 'white' }}
-          key={user.user_id}
-          alt={user.user_name}
-          src={user.user_profile_img}
-        />
-      ))}
+      {users.map((user) => {
+        const { userId, userName, imgUrl } = user;
+        return (
+          <Avatar
+            sx={{ width: size, height: size, backgroundColor: 'white' }}
+            key={userId}
+            alt={userName}
+            src={imgUrl}
+          />
+        );
+      })}
     </AvatarGroup>
   </S.Wrapper>
 );

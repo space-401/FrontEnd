@@ -21,11 +21,13 @@ const Header = () => {
         <S.SpaceBox>
           <S.SpaceIconBox>
             {spaceInfo.map((space) => {
+              const { spaceId, spaceTitle, imgUrl } = space;
+
               return (
-                <Tooltip title={space.space_title} key={space.space_id}>
+                <Tooltip title={spaceTitle} key={spaceId}>
                   <S.SpaceIcon
-                    onClick={() => moveSpace(space.space_id)}
-                    img_url={space.space_url}
+                    onClick={() => moveSpace(spaceId)}
+                    img_url={imgUrl}
                   />
                 </Tooltip>
               );

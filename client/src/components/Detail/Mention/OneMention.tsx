@@ -1,27 +1,21 @@
-import { SuggestionDataItem } from 'react-mentions';
-import { UserType } from '@type/user.type';
 import S from '@components/Detail/Mention/style';
 import Avatar from '@mui/material/Avatar';
-import { ReactNode } from 'react';
+import { OneMentionType } from '@type/comment.type';
 
-type OneMentionType = {
-  suggestion: SuggestionDataItem;
-  userList: UserType[];
-  highlightedDisplay: ReactNode;
-};
 const OneMention = (props: OneMentionType) => {
   const { userList, suggestion } = props;
   const selectUser = userList.filter(
-    (value) => value.user_id === suggestion.id
+    (value) => value.userId === suggestion.id
   )[0];
+
   return (
     <S.Wrapper>
       <Avatar
-        src={selectUser.user_profile_img}
-        alt={selectUser.user_name}
+        src={selectUser.imgUrl}
+        alt={selectUser.userName}
         sx={{ width: '24px', height: '24px' }}
       />
-      <S.UserName>{selectUser.user_name}</S.UserName>
+      <S.UserName>{selectUser.userName}</S.UserName>
     </S.Wrapper>
   );
 };

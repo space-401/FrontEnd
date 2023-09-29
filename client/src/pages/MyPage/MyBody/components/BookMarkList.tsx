@@ -1,16 +1,20 @@
 import { A, B } from '@pages/MyPage/MyBody/components/style';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import Pagination from '@components/common/Pagination';
-import { bookMarkListMock } from '@mocks/data/MyPage/MyPageMock';
+import { useBookMarkListQuery } from '@hooks/api/user/useBookMarkListQuery';
 
 const BookMarkList = () => {
-  const { bookMarkList, total, page, ItemLength } = bookMarkListMock;
-  const [curPage, setCurPage] = useState(page);
+  const [curPage, setCurPage] = useState(0);
+
+  const { BookMarkListData } = useBookMarkListQuery(curPage);
+
+  const { total, page, bookMarkList, itemLength } = BookMarkListData!;
+
   const modalOpen = () => {};
 
-  const movePage = (number: number) => {
-    setCurPage(number);
+  const movePage = (page: number) => {
+    setCurPage(page);
   };
 
   return (
@@ -21,21 +25,24 @@ const BookMarkList = () => {
       </A.Description>
       <A.Bar margin_top={16} />
       <B.FlipCardList>
-        {bookMarkList.map((item) => (
-          <FlipCard
-            size={'small'}
-            onClick={modalOpen}
-            key={item.post_id}
-            img_url={item.main_img_url}
-            item={item}
-          />
-        ))}
+        {bookMarkList.map((item) => {
+          const { postId, mainImgUrl } = item;
+          return (
+            <FlipCard
+              size={'small'}
+              onClick={modalOpen}
+              key={postId}
+              imgUrl={mainImgUrl}
+              item={item}
+            />
+          );
+        })}
       </B.FlipCardList>
       <Pagination
         movePage={movePage}
-        page={curPage}
+        page={page}
         total={total}
-        item_length={ItemLength}
+        itemLength={itemLength}
       />
     </B.BWrapper>
   );

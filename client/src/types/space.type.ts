@@ -1,64 +1,70 @@
-import { TagType } from '@type/tag.type';
-import { UserType } from '@type/user.type';
+import { TagType, UserType } from '@type/post.type';
 
 export type HeaderType = {
-  spaceInfo: SpaceType[];
+  spaceInfo: OneSpaceType[];
   alarmMessages: AlarmType[];
 };
 
-export type SpaceType = {
-  space_id: number;
-  space_title: string;
-  space_url: string;
+export type OneSpaceType = {
+  spaceId: number;
+  spaceTitle: string;
+  imgUrl: string;
+};
+
+export type SpaceInfo = {
+  title: string;
+  description: string;
+  imgUrl: string;
+  userList: UserType[];
+  tagList: TagType[];
+  isAdmin: boolean;
 };
 
 export type AlarmType = {
-  space_id: string;
+  spaceId: string;
   isNew: boolean;
   user: UserType;
-  post_img_url: string;
+  imgUrl: string;
   create_at: string;
   alarmMessage: string;
 };
 
 export type SpacePostType = {
-  post_id: number;
-  post_title: string;
-  place_title: string;
-  place_tag: TagType[];
-  post_created_at: string;
-  post_updated_at: string;
-  users: UserType[];
-  main_img_url: string;
-  sub_img_url?: string[];
+  postId: number;
+  postTitle: string;
+  placeTitle: string;
+  placeTag: TagType[];
+  postCreatedAt: string;
+  postUpdatedAt: string;
+  usersList: UserType[];
+  mainImgUrl: string;
+  subImgUrl?: string[];
   position: { lat: number; lng: number };
 };
 
 export type PostDetailType = {
   isMine: boolean;
-  post_id: number;
-  post_title: string;
-  post_description: string;
-  place_title: string;
-  place_tag: TagType[];
-  post_created_at: string;
-  post_updated_at: string;
-  // 해당 포스트의 태그된 유저 정보
-  users: UserType[];
-  // 자동완성을 하기 위한 유저 리스트
-  user_List: UserType[];
-  main_img_url: string;
-  sub_img_url: string[];
+  postId: number;
+  postTitle: string;
+  postDescription: string;
+  placeTitle: string;
+  placeTag: TagType[];
+  postCreatedAt: string;
+  postUpdatedAt: string;
+  tagUsers: UserType[];
+  userList: UserType[];
+  mainImgUrl: string;
+  subImgUrl: string[];
   position: { lat: number; lng: number };
   commentCount: number;
-  isBookMark: boolean;
+  isBookmark: boolean;
 };
 
 export type SelectSpacePropType = {
-  space_id: number;
-  space_title: string;
+  spaceId: number;
+  spaceTitle: string;
   isLike: boolean;
-  user: UserType[];
+  userList: UserType[];
 };
 
 export type CommentType = {
@@ -90,13 +96,13 @@ export type CommentType = {
 
 export type MyCommentType = {
   id: number;
-  post_id: number;
-  space_title: string;
+  postId: number;
+  spaceTitle: string;
   createDate: string;
   writer: {
     nick: string;
     url: string;
   };
   content: string;
-  main_img_url: string;
+  mainImgUrl: string;
 };

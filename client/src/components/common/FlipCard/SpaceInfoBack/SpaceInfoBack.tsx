@@ -1,32 +1,30 @@
 import Avatars from '@components/common/AvatarGroup/Avatars';
-import type { SpacePostType } from '@type/space.type';
 import S from '@components/common/FlipCard/SpaceInfoBack/style';
 import { getFormatDate } from '@utils/formatter';
 import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
+import { SpaceInfoBackPropsType } from '@type/post.type';
 
-type SpaceInfoBackPropsType = {
-  item: SpacePostType;
-  size: 'small' | 'big';
-};
+const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
+  const { item, size } = props;
 
-const SpaceInfoBack = ({ item, size }: SpaceInfoBackPropsType) => {
-  const { post_updated_at, post_title, place_title, place_tag, users } = item;
+  const { placeTitle, placeTag, postUpdatedAt, usersList } = item;
+
   return (
     <S.Wrapper size={size}>
       <S.Shadow />
       <S.Container className={'container'}>
         <div>
-          <S.PostTitle className={'title'}>{post_title}</S.PostTitle>
+          <S.PostTitle className={'title'}>{placeTitle}</S.PostTitle>
           <S.PlaceCreateAt className={'create-time'}>
-            {getFormatDate(post_updated_at)}
+            {getFormatDate(postUpdatedAt)}
           </S.PlaceCreateAt>
           <S.ChipBox className={'chip-box'}>
-            {place_tag.map((place) => (
+            {placeTag.map((place) => (
               <Chip
                 className={'chip'}
-                key={place.tag_id}
-                label={'#' + place.tag_title}
+                key={place.tagId}
+                label={'#' + place.tagTitle}
                 variant="outlined"
               />
             ))}
@@ -35,12 +33,12 @@ const SpaceInfoBack = ({ item, size }: SpaceInfoBackPropsType) => {
         <S.InfoBottom className={'info-bottom'}>
           <S.PlaceTitle className={'place-name'}>
             <MapIcon width={18} height={18} />
-            <span className={'place-span'}>{place_title}</span>
+            <span className={'place-span'}>{placeTitle}</span>
           </S.PlaceTitle>
           <Avatars
-            max={size === 'big' ? 4 : 4}
+            max={size === 'big' ? 4 : 5}
             size={size === 'big' ? 45 : 28}
-            users={users}
+            users={usersList}
           />
         </S.InfoBottom>
       </S.Container>

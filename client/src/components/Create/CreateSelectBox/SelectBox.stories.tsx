@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
 import { users_mock } from '@mocks/data/user/users.mock';
-import { spacePostMock } from '@mocks/data/FlipCard/spaceInfo.mock';
 import { selectType } from '@type/main.type';
 import CSelectBox from '@/components/Main/SelectBox';
+import { tags_mock } from '@mocks/data/tag/tags.mock';
 
 export default {
   title: 'post/CSelectBox',
@@ -48,7 +48,7 @@ export const 사용자 = {
 export const 태그 = {
   args: {
     labelName: '태그',
-    ListItem: spacePostMock.place_tag,
+    ListItem: tags_mock,
     placeHolder: '태그를 지정해주세요.',
     setState: setState,
     menuWidth: 628,

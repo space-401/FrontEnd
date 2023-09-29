@@ -73,7 +73,7 @@ const CSelectBox = (props: SelectBoxProps) => {
               select={select}
               changeSelect={setSelect}
               searchValue={searchValue}
-              ItemList={ListItem}
+              itemList={ListItem}
             />
           </S.MenuList>
         </S.Container>
