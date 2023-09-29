@@ -1,4 +1,4 @@
-import { UserType } from '@type/user.type';
+import { UserType } from '@type/post.type';
 
 export const getFormatDate = (_: string) => {
   const date = new Date(_);
@@ -12,17 +12,17 @@ export const getFormatDate = (_: string) => {
 
 export const getFormatUser = (_: UserType[]) => {
   if (_.length < 3) {
-    return _.map((user) => user.user_name).join(', ');
+    return _.map((user) => user.userName).join(', ');
   }
 
   let userList = '';
   _.forEach((v, i) => {
     if (i === 0) {
-      userList += v.user_name + ' with ';
+      userList += v.userName + ' with ';
     } else if (i === 1) {
-      userList += v.user_name;
+      userList += v.userName;
     } else {
-      userList += ', ' + v.user_name;
+      userList += ', ' + v.userName;
     }
   });
   return userList;

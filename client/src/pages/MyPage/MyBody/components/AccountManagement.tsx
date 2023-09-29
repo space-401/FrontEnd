@@ -1,18 +1,14 @@
 import { A } from '@pages/MyPage/MyBody/components/style';
-import { AccountInfoMock } from '@mocks/data/MyPage/MyPageMock';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { ReactComponent as KaKaoSvg } from '@assets/svg/api/kakao.svg';
 import { ReactComponent as NaverSvg } from '@assets/svg/api/naver.svg';
 import { ReactComponent as GoogleSvg } from '@assets/svg/api/google.svg';
-
-export type AccountDataType = {
-  loginState: '카카오톡' | '네이버' | 'Google';
-  name: string;
-  email: string;
-};
+import { useUserInfoQuery } from '@hooks/api/user/useUserInfoQuery';
 
 const AccountManagement = () => {
-  const { loginState, email, name } = AccountInfoMock;
+  const { MyInfoData } = useUserInfoQuery();
+
+  const { loginState, email, name } = MyInfoData!;
 
   let StateIcon: ReactElement;
 

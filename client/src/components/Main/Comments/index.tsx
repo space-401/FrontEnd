@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { CommentType } from '@type/space.type';
 import commentMock from '@mocks/data/DetailPage/comment.mock';
 import OneComment from '@components/Main/Comments/OneComment/OneComment';
-import { UserType } from '@type/user.type';
+import type { UserType } from '@type/post.type';
 
 type DetailCommentType = {
   isOpen: boolean;

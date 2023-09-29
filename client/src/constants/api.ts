@@ -20,7 +20,12 @@ export const END_POINTS = {
   USERINFO: '/mypage',
   BOOKMARK: '/bookmark',
   INVITATION: '/invitation',
-  POST_LIST: (spaceId: string) => `/space/${spaceId}`,
+  SPACE_INFO: (spaceId: string) => `/space/${spaceId}`,
+  BOOK_MARK_LIST: (page: number) => `/mypage/bookmarkList?page=${page}`,
+  MY_POST_LIST: (page: number) => `/mypage/postList?page=${page}`,
+  MY_COMMENT_LIST: (page: number) => `/mypage/commentList?page=${page}`,
+  POST_SEARCH_LIST: (spaceId: string, page: string) =>
+    `/post/${spaceId}/search?page=${page}`,
 } as const;
 
 export const HTTP_STATUS_CODE = {

@@ -110,8 +110,8 @@ const OneWrapper = styled.div<{ isSelect: boolean }>`
   gap: 24px;
 `;
 
-const CardImg = styled.div<{ img_url: string }>`
-  background: url(${({ img_url }) => img_url});
+const CardImg = styled.div<{ imgUrl: string }>`
+  background: url(${({ imgUrl }) => imgUrl});
   background-size: cover;
   border-radius: 15px;
   width: 168px;

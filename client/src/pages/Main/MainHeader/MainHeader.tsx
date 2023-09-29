@@ -13,8 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
-  const { setSelectState, isAdmin, spaceInfo, selectState } = prop;
-  const { description, img_url, users, title } = spaceInfo;
+  const { setSelectState, selectState, spaceInfo } = prop;
+  const { isAdmin, title, imgUrl, userList, description } = spaceInfo;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
     setIsOpen(false);
@@ -25,22 +25,22 @@ const MainHeader = (prop: MainHeaderPropType) => {
     <S.Wrapper>
       <SettingModal disableScrollLock open={isOpen} onClose={onClose}>
         <SettingComponent
-          spaceTitle={spaceInfo.title}
+          spaceTitle={title}
           isAdmin={isAdmin}
           isOpen={isOpen}
-          userList={users}
+          userList={userList}
           onClose={onClose}
         />
       </SettingModal>
       <S.HeaderHeader>
-        <Avatars size={42.857} users={users} max={4} />
+        <Avatars size={42.857} users={userList} max={4} />
         <S.ButtonGroup>
           <S.ControlButton
             onClick={() => setIsOpen(true)}
             color={theme.COLOR.white}
             hoverColor={theme.COLOR['gray-7']}
           >
-            인원 {users.length}/8
+            인원 {userList.length}/8
           </S.ControlButton>
           {isAdmin && (
             <S.ControlButton
@@ -53,7 +53,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         </S.ButtonGroup>
       </S.HeaderHeader>
       <S.HeaderMain>
-        <S.Image img_url={img_url} />
+        <S.Image imgUrl={imgUrl} />
         <S.MainInfo>
           <S.MainTitle>{title}</S.MainTitle>
           <S.Description>{description}</S.Description>

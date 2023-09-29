@@ -6,7 +6,7 @@ const TagList = (props: TagListProps) => {
   const { Item } = props;
   return (
     <S.TagGroup>
-      <S.TagTitle>{Item.tag_title}</S.TagTitle>
+      <S.TagTitle>{Item.tagTitle}</S.TagTitle>
       <S.DeleteButton>
         <ReactComponent />
       </S.DeleteButton>

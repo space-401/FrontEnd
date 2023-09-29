@@ -1,13 +1,16 @@
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import { B } from '@pages/MyPage/MyBody/components/style';
-import React, { useState } from 'react';
-import { myPostListMock } from '@mocks/data/MyPage/MyPageMock';
+import { useState } from 'react';
 import Pagination from '@components/common/Pagination';
+import { useMyPostListQuery } from '@hooks/api/user/useMyPostListQuery';
 
 const MyPostList = () => {
-  const { myPostList, total, page, ItemLength } = myPostListMock;
+  const [curPage, setCurPage] = useState<number>(0);
 
-  const [curPage, setCurPage] = useState(page);
+  const { MyPostListData } = useMyPostListQuery(curPage);
+
+  const { myPostList, total, page, itemLength } = MyPostListData!;
+
   const modalOpen = () => {};
 
   const movePage = (number: number) => {
@@ -17,21 +20,24 @@ const MyPostList = () => {
   return (
     <>
       <B.FlipCardList>
-        {myPostList.map((item) => (
-          <FlipCard
-            size={'small'}
-            onClick={modalOpen}
-            key={item.post_id}
-            img_url={item.main_img_url}
-            item={item}
-          />
-        ))}
+        {myPostList.map((item) => {
+          const { postId, mainImgUrl } = item;
+          return (
+            <FlipCard
+              size={'small'}
+              onClick={modalOpen}
+              key={postId}
+              imgUrl={mainImgUrl}
+              item={item}
+            />
+          );
+        })}
       </B.FlipCardList>
       <Pagination
         movePage={movePage}
-        page={curPage}
+        page={page}
         total={total}
-        item_length={ItemLength}
+        itemLength={itemLength}
       />
     </>
   );
