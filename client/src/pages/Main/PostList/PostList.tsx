@@ -1,28 +1,46 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/common/FlipCard/FlipCard';
-import S from '@pages/Main/MainBody/style';
-import { useState } from 'react';
-import { MainBodyPropType, selectType } from '@type/main.type';
+import S from '@pages/Main/PostList/style';
+import { Suspense, useState } from 'react';
+import type { PostListPropType, selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import { useDetailModalStore } from '@store/modal';
 import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
+import { usePostListQuery } from '@hooks/api/post/usePostListQuery';
+import { useSearchParams } from 'react-router-dom';
 
-const MainBody = (props: MainBodyPropType) => {
+const PostList = (props: PostListPropType) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [state, setState] = useState<{
-    userId: selectType[];
-    tagId: selectType[];
+    selectUserList: selectType[];
+    selectTagList: selectType[];
     search: string;
   }>({
-    userId: [],
-    tagId: [],
+    selectUserList: [],
+    selectTagList: [],
     search: '',
   });
 
+  const { spaceId, selectState, userList, tagList } = props;
+
+  const page: string = searchParams.get('page') ?? '1';
+  const keyword: string = searchParams.get('keyword') ?? '';
+  const userId: string = searchParams.get('tagId') ?? '';
+  const tagId: string = searchParams.get('userId') ?? '';
+
+  const { myPostListData } = usePostListQuery(spaceId, page, {
+    userId,
+    tagId,
+    keyword,
+  });
+
+  const { postList, total, page: curPage, itemLength } = myPostListData!;
+
   const modalOpen = useDetailModalStore((state) => state.ModalOpen);
-  const { postList, userList, tagList, page, total, selectState } = props;
 
   const setUserState = (newUserState: selectType[]) => {
     setState((prev) => ({ ...prev, user: newUserState }));
@@ -36,13 +54,11 @@ const MainBody = (props: MainBodyPropType) => {
     setState((prev) => ({ ...prev, search: newSearch }));
   };
 
-  const movePage = (page: number) => {
+  const movePage = (page: number | string) => {
     console.log(page + '조회');
   };
 
   const lowList = Math.ceil(userList.length / 2);
-
-  const ItemLength = 12;
 
   return (
     <S.Wrapper>
@@ -83,34 +99,39 @@ const MainBody = (props: MainBodyPropType) => {
         ) : (
           <>
             <S.PostList>
-              {postList.map((item) => (
-                <FlipCard
-                  size={'big'}
-                  onClick={modalOpen}
-                  key={item.post_id}
-                  img_url={item.main_img_url}
-                  item={item}
-                />
-              ))}
+              {postList.map((item) => {
+                const { postId, mainImgUrl } = item;
+                return (
+                  <FlipCard
+                    size={'big'}
+                    onClick={modalOpen}
+                    key={postId}
+                    imgUrl={mainImgUrl}
+                    item={item}
+                  />
+                );
+              })}
             </S.PostList>
             <Pagination
               movePage={movePage}
-              page={page}
+              page={curPage}
               total={total}
-              item_length={ItemLength}
+              itemLength={itemLength}
             />
           </>
         )
       ) : (
-        <KaKaoMap
-          page={page}
-          total={total}
-          item_length={ItemLength}
-          postList={postList}
-        />
+        <Suspense fallback={<></>}>
+          <KaKaoMap
+            page={curPage}
+            total={total}
+            itemLength={itemLength}
+            postList={postList}
+          />
+        </Suspense>
       )}
     </S.Wrapper>
   );
 };
 
-export default MainBody;
+export default PostList;

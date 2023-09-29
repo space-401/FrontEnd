@@ -1,4 +1,4 @@
-import { UserType } from '@type/user.type';
+import { UserType } from '@type/post.type';
 import { S } from '@components/Main/Setting/components/style';
 import Avatar from '@mui/material/Avatar';
 import { ReactComponent as CrownSvg } from '@assets/svg/crown.svg';
@@ -21,7 +21,7 @@ type UserListPropsType = {
 
 const UserList = (props: UserListPropsType) => {
   const { isAdmin, userInfo, myInfo, index } = props;
-  const { user_id, user_name, user_profile_img } = userInfo;
+  const { userId, userName, imgUrl } = userInfo;
   const [state, setState] = useState({
     isMemberOutModal: false,
     isChangeAdminModal: false,
@@ -49,7 +49,7 @@ const UserList = (props: UserListPropsType) => {
   };
 
   const MemberOutAction = () => {
-    toast(user_name + '님을 추방 하였습니다', {
+    toast(userName + '님을 추방 하였습니다', {
       style: {
         borderRadius: '10px',
         background: '#000',
@@ -59,8 +59,8 @@ const UserList = (props: UserListPropsType) => {
     ChangeSettingMode(false);
   };
 
-  const ChangeAdminAction = (user_name: number) => {
-    console.log(user_name + '님이 방장이 되었습니다.');
+  const ChangeAdminAction = (userName: number) => {
+    console.log(userName + '님이 방장이 되었습니다.');
     ChangeAdminModal(false);
     ChangeSettingMode(false);
   };
@@ -73,7 +73,7 @@ const UserList = (props: UserListPropsType) => {
       >
         <ConfirmModal
           isPositiveModal={false}
-          titleMessage={user_name + '님을 스페이스에서 내보내시겠습니까?'}
+          titleMessage={userName + '님을 스페이스에서 내보내시겠습니까?'}
           descriptionMessage={'작성된 게시글과 댓글들이 모두 삭제됩니다.'}
           ApproveMessage={'내보내기'}
           closeMessage={'취소'}
@@ -88,11 +88,11 @@ const UserList = (props: UserListPropsType) => {
       >
         <ConfirmModal
           isPositiveModal={true}
-          titleMessage={user_name + ' 님에게 방장 권한을 주시겠습니까?'}
-          descriptionMessage={`방장 권한을 주면 ${myInfo.user_name}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`}
+          titleMessage={userName + ' 님에게 방장 권한을 주시겠습니까?'}
+          descriptionMessage={`방장 권한을 주면 ${myInfo.userName}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`}
           ApproveMessage={'확인'}
           closeMessage={'취소'}
-          AsyncAction={() => ChangeAdminAction(user_id)}
+          AsyncAction={() => ChangeAdminAction(userId)}
           ModalClose={() => ChangeAdminModal(false)}
           isOpen={state.isChangeAdminModal}
         />
@@ -116,13 +116,13 @@ const UserList = (props: UserListPropsType) => {
       </Modal>
       <S.UserProfile>
         <Avatar
-          src={user_profile_img}
-          alt={user_name}
+          src={imgUrl}
+          alt={userName}
           sx={{ width: '48px', height: '48px' }}
         />
       </S.UserProfile>
       <S.UserName>
-        {user_name}
+        {userName}
         {isAdmin && index === 0 ? <CrownSvg /> : null}
         {!isAdmin && index === 1 ? <CrownSvg /> : null}
       </S.UserName>

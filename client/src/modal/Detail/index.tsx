@@ -37,19 +37,17 @@ const DetailPage = React.forwardRef(
     const { onClose } = props;
     const postInfo = DetailPageMock;
     const {
-      main_img_url,
-      sub_img_url,
-      user_List,
-      post_title,
-      post_description,
-      place_title,
-      post_created_at,
-      post_updated_at,
-      place_tag,
-      users,
+      postDescription,
+      postTitle,
+      postUpdatedAt,
+      postCreatedAt,
+      mainImgUrl,
+      subImgUrl,
+      userList,
+      placeTitle,
+      placeTag,
       position,
       commentCount,
-      isBookMark,
       isMine,
     } = postInfo;
 
@@ -70,7 +68,7 @@ const DetailPage = React.forwardRef(
       commentIsOpen: true,
       mapIsOpen: false,
       value: '',
-      isBookMark: isBookMark,
+      isBookMark: false,
     });
 
     const mapContainerRef = useRef(null);
@@ -100,9 +98,9 @@ const DetailPage = React.forwardRef(
       setReply('');
     };
 
-    const renderList: SuggestionDataItem[] = user_List.map((user) => ({
-      id: user.user_id,
-      display: user.user_name,
+    const renderList: SuggestionDataItem[] = userList.map((user) => ({
+      id: user.userId,
+      display: user.userName,
     }));
 
     const setIsReply = (
@@ -140,21 +138,21 @@ const DetailPage = React.forwardRef(
               {state.isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
             </IconButton>
           </S.LikeIconBox>
-          <S.LeftImgBox isArray={sub_img_url.length !== 0}>
-            {[main_img_url, ...sub_img_url].map((img_url) => (
-              <S.ImgBox key={img_url} img_url={img_url} />
+          <S.LeftImgBox isArray={subImgUrl.length !== 0}>
+            {[mainImgUrl, ...subImgUrl].map((imgUrl) => (
+              <S.ImgBox key={imgUrl} imgUrl={imgUrl} />
             ))}
           </S.LeftImgBox>
           <S.RightWrapper>
             <S.DetailInfo>
               <S.DateBox>
-                {post_updated_at !== post_created_at
-                  ? getFormatDate(post_updated_at) + '- 수정됨'
-                  : getFormatDate(post_updated_at)}
+                {postUpdatedAt !== postCreatedAt
+                  ? getFormatDate(postUpdatedAt) + '- 수정됨'
+                  : getFormatDate(postUpdatedAt)}
               </S.DateBox>
               <S.UserBox>
-                <Avatars size={28.5} users={users} max={5} />
-                <S.UserNameList>{getFormatUser(users)}</S.UserNameList>
+                <Avatars size={28.5} users={userList} max={5} />
+                <S.UserNameList>{getFormatUser(userList)}</S.UserNameList>
                 {isMine && (
                   <S.ManagementButton
                     onClick={() =>
@@ -188,28 +186,31 @@ const DetailPage = React.forwardRef(
                   </S.ManagementList>
                 )}
               </S.UserBox>
-              <S.PostTitle>{post_title}</S.PostTitle>
-              <S.PostDescription>{post_description}</S.PostDescription>
+              <S.PostTitle>{postTitle}</S.PostTitle>
+              <S.PostDescription>{postDescription}</S.PostDescription>
               <S.TagGroup>
-                {place_tag.map((place) => (
-                  <Chip
-                    sx={{
-                      background: 'white',
-                      height: '21px',
-                      padding: '0 8px',
-                    }}
-                    key={place.tag_id}
-                    label={place.tag_title}
-                    variant="filled"
-                  />
-                ))}
+                {placeTag.map((place) => {
+                  const { tagId, tagTitle } = place;
+                  return (
+                    <Chip
+                      sx={{
+                        background: 'white',
+                        height: '21px',
+                        padding: '0 8px',
+                      }}
+                      key={tagId}
+                      label={tagTitle}
+                      variant="filled"
+                    />
+                  );
+                })}
               </S.TagGroup>
             </S.DetailInfo>
             <S.MapInfo>
               <S.MapTitle>
                 <S.FlexBox>
                   <MarkerSvg width={'24px'} height={'24px'} />
-                  {place_title}
+                  {placeTitle}
                 </S.FlexBox>
                 <motion.nav
                   initial={false}
@@ -268,7 +269,7 @@ const DetailPage = React.forwardRef(
                 isOpen={state.commentIsOpen}
               >
                 <DetailComments
-                  userList={user_List}
+                  userList={userList}
                   isReply={state.isReplyOpen}
                   setIsReply={setIsReply}
                   isOpen={state.commentIsOpen}
@@ -290,7 +291,7 @@ const DetailPage = React.forwardRef(
                   renderSuggestion={(suggestion, _, highlightedDisplay) => {
                     return (
                       <OneMention
-                        userList={user_List}
+                        userList={userList}
                         key={suggestion.id}
                         suggestion={suggestion}
                         highlightedDisplay={highlightedDisplay}

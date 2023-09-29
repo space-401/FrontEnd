@@ -14,10 +14,10 @@ const UserList = (prop: UserListProps) => {
             background: 'white',
             padding: '2px',
           }}
-          alt={Item.user_name}
-          src={Item.user_profile_img}
+          alt={Item.userName}
+          src={Item.imgUrl}
         />
-        <S.UserTiTle className={'user-title'}>{Item.user_name}</S.UserTiTle>
+        <S.UserTiTle className={'user-title'}>{Item.userName}</S.UserTiTle>
       </S.FlexUser>
     </S.UserList>
   );

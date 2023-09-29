@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import S from '@pages/MyPage/Navbar/style';
 import { ReactComponent as AccountSvg } from '@assets/svg/mainSetting/user.svg';
 import { ReactComponent as BookMarkSvg } from '@assets/svg/bookmark/empty.svg';

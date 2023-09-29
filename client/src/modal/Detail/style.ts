@@ -307,10 +307,10 @@ export const mentionStyle = {
   },
 };
 
-const ImgBox = styled.div<{ img_url: string }>`
+const ImgBox = styled.div<{ imgUrl: string }>`
   width: 680px;
   aspect-ratio: 1/1;
-  background: url(${({ img_url }) => img_url});
+  background: url(${({ imgUrl }) => imgUrl});
 
   background-size: cover;
 `;

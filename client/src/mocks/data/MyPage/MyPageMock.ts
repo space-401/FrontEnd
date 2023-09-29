@@ -1,30 +1,35 @@
-import { AccountDataType } from '@pages/MyPage/MyBody/components/AccountManagement';
 import postListMock from '@mocks/data/PostList/postList.mock';
 import commentListMock from '@mocks/data/MyPage/commentListMock';
+import {
+  AccountDataType,
+  BookMarkListType,
+  MyCommentListType,
+  MyPostListType,
+} from '@type/user.type';
 
-export const AccountInfoMock: AccountDataType = {
+export const accountInfoMock: AccountDataType = {
   loginState: '카카오톡',
   name: '김은주',
   email: 'qwer@kakao.com',
 };
 
-export const bookMarkListMock = {
+export const bookMarkListMock: BookMarkListType = {
   bookMarkList: postListMock,
   page: 2,
   total: 40,
-  ItemLength: 12,
+  itemLength: 12,
 };
 
-export const myPostListMock = {
+export const myPostListMock: MyPostListType = {
   myPostList: postListMock,
   page: 2,
   total: 40,
-  ItemLength: 12,
+  itemLength: 12,
 };
 
-export const myCommentListMock = {
+export const myCommentListMock: MyCommentListType = {
   myCommentList: commentListMock,
   page: 3,
   total: 30,
-  ItemLength: 10,
+  itemLength: 10,
 };

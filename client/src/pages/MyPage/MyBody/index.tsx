@@ -1,8 +1,8 @@
 import S from '@pages/MyPage/MyBody/style';
 import AccountManagement from '@pages/MyPage/MyBody/components/AccountManagement';
-import React from 'react';
 import BookMarkList from '@pages/MyPage/MyBody/components/BookMarkList';
 import MyPostOrCommentList from '@pages/MyPage/MyBody/components/MyPostOrCommentList';
+import React, { Suspense } from 'react';
 
 type MyPageBodyProps = {
   selectNumber: number;
@@ -10,7 +10,8 @@ type MyPageBodyProps = {
 
 const MyPageBody = (props: MyPageBodyProps) => {
   const { selectNumber } = props;
-  let BodyInner: React.FC;
+
+  let BodyInner: React.ReactNode;
 
   switch (selectNumber) {
     case 0:
@@ -24,7 +25,11 @@ const MyPageBody = (props: MyPageBodyProps) => {
       break;
   }
 
-  return <S.Container>{BodyInner}</S.Container>;
+  return (
+    <S.Container>
+      <Suspense fallback={<></>}>{BodyInner}</Suspense>
+    </S.Container>
+  );
 };
 
 export default MyPageBody;

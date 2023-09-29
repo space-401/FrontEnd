@@ -1,52 +1,29 @@
-import { UserType } from '@type/user.type';
-import { TagType } from '@type/tag.type';
+import type { UserType, TagType } from '@type/post.type';
 import { Dispatch, SetStateAction } from 'react';
-import { SpacePostType } from '@type/space.type';
+import type { SpaceInfo, SpacePostType } from '@type/space.type';
 
 export type selectType = {
   id: number;
   title: string;
-  img_url?: string;
-};
-
-export type MainPageType = {
-  spaceInfo: {
-    title: string;
-    description: string;
-    img_url: string;
-    users: UserType[];
-  };
-  isAdmin: boolean;
-  postList: SpacePostType[];
-  tagList: TagType[];
-  page: number;
-  total: number;
+  imgUrl?: string;
 };
 
 export type MenuListProps = {
   searchValue: string;
-  ItemList: UserType[] | TagType[];
+  itemList: UserType[] | TagType[];
   select: selectType[];
   changeSelect: Dispatch<SetStateAction<selectType[]>>;
 };
 
-export type MainBodyPropType = {
-  postList: SpacePostType[];
-  page: number;
-  total: number;
-  tagList: TagType[];
-  userList: UserType[];
+export type PostListPropType = {
+  spaceId: string;
   selectState: boolean;
+  userList: UserType[];
+  tagList: TagType[];
 };
 
 export type MainHeaderPropType = {
-  spaceInfo: {
-    title: string;
-    description: string;
-    img_url: string;
-    users: UserType[];
-  };
-  isAdmin: boolean;
+  spaceInfo: SpaceInfo;
   selectState: boolean;
   setSelectState: Dispatch<SetStateAction<boolean>>;
 };
@@ -94,20 +71,22 @@ export type SearchProps = {
   setState: (searchValue: string) => void;
   placeholder: string;
   state: {
-    userId: selectType[];
-    tagId: selectType[];
+    selectUserList: selectType[];
+    selectTagList: selectType[];
     search: string;
   };
 };
 
-export type MapComponentProps = {
+export type SpacePostListProps = {
   postList: SpacePostType[];
   page: number;
   total: number;
-  item_length: number;
+  itemLength: number;
 };
 
-export type DetailPageType = SpacePostType & {
-  isMyPost: boolean;
-  commentCount: number;
+export type PaginationType = {
+  total: number;
+  page: number;
+  itemLength: number;
+  movePage: (number: number) => void;
 };
