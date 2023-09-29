@@ -18,7 +18,7 @@ const TagList = (props: TagListProps) => {
         textOverflow: 'ellipsis',
       }}
       variant="outlined"
-      label={Item.tag_title}
+      label={Item.tagTitle}
     />
   );
 };

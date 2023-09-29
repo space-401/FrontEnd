@@ -1,5 +1,5 @@
 import { A, M } from '@pages/MyPage/MyBody/components/style';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import MyPostList from '@pages/MyPage/MyBody/components/MyPostList';
 import MyCommentList from '@pages/MyPage/MyBody/components/MyCommentList';
 
@@ -17,7 +17,17 @@ const MyPostOrCommentList = () => {
         </M.MButton>
       </M.HeaderButtonGroup>
       <A.Bar margin_top={55} />
-      <>{isMyPost ? <MyPostList /> : <MyCommentList />}</>
+      <>
+        {isMyPost ? (
+          <Suspense fallback={<></>}>
+            <MyPostList />
+          </Suspense>
+        ) : (
+          <Suspense fallback={<></>}>
+            <MyCommentList />
+          </Suspense>
+        )}
+      </>
     </>
   );
 };

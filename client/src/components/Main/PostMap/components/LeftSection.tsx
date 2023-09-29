@@ -17,38 +17,51 @@ type LeftSectionPropType = {
   >;
   page: number;
   total: number;
-  item_length: number;
+  itemLength: number;
+};
+
+const movePage = (page: number) => {
+  console.log(page);
 };
 
 const LeftSection = (props: LeftSectionPropType) => {
-  const {
-    setIsSelect,
-    setState,
-    isSelect,
-    postList,
-    total,
-    page,
-    item_length,
-  } = props;
+  const { setIsSelect, setState, isSelect, postList, total, page, itemLength } =
+    props;
   return (
     <S.Wrapper>
-      {postList.map((item) => (
-        <OnePostMapCard
-          key={item.post_id}
-          post_title={item.post_title}
-          post_description={getFormatUser(item.users)}
-          post_place={item.place_title}
-          post_tags={item.place_tag}
-          main_img_url={item.main_img_url}
-          create_at={item.post_updated_at}
-          onClick={() => {
-            setIsSelect(item.post_id);
-            setState({ center: item.position, isPanto: false });
-          }}
-          isSelect={isSelect === item.post_id}
-        />
-      ))}
-      <Pagination total={total} page={page} item_length={item_length} />
+      {postList.map((item) => {
+        const {
+          postId,
+          postTitle,
+          placeTitle,
+          usersList,
+          postUpdatedAt,
+          placeTag,
+          mainImgUrl,
+        } = item;
+        return (
+          <OnePostMapCard
+            key={postId}
+            postTitle={postTitle}
+            postDescription={getFormatUser(usersList)}
+            postPlace={placeTitle}
+            postTags={placeTag}
+            imgUrl={mainImgUrl}
+            createAt={postUpdatedAt}
+            onClick={() => {
+              setIsSelect(postId);
+              setState({ center: item.position, isPanto: false });
+            }}
+            isSelect={isSelect === item.postId}
+          />
+        );
+      })}
+      <Pagination
+        movePage={movePage}
+        total={total}
+        page={page}
+        itemLength={itemLength}
+      />
     </S.Wrapper>
   );
 };

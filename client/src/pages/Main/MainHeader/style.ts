@@ -35,8 +35,8 @@ const ButtonGroup = styled.div`
   display: flex;
   gap: 9px;
 `;
-const Image = styled.div<{ img_url: string }>`
-  background-image: url(${({ img_url }) => img_url});
+const Image = styled.div<{ imgUrl: string }>`
+  background-image: url(${({ imgUrl }) => imgUrl});
   background-position: center;
   background-size: cover;
   width: 160px;

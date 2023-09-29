@@ -37,8 +37,8 @@ const WhiteSpan = styled.span`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 `;
 
-const IConBox = styled.div`
-  margin-top: 17px;
+const IConBox = styled.div<{ margin_top: number }>`
+  margin-top: ${({ margin_top }) => margin_top}px;
   display: flex;
   gap: 17px;
 `;
@@ -111,7 +111,6 @@ const MButton = styled.div<{ select: boolean }>`
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
-  margin-top: ${({ margin_top }) => margin_top}px;
   padding-bottom: 16px;
 
   border-bottom: ${({ select, theme }) =>

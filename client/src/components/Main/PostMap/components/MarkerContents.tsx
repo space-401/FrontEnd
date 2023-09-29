@@ -1,29 +1,29 @@
-import { UserType } from '@type/user.type';
+import type { UserType } from '@type/post.type';
 import { M } from '@components/Main/PostMap/components/style';
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
 
 export type MarkerPropTypes = {
-  post_title: string;
-  post_place: string;
-  users: UserType[];
-  create_at: string;
+  postTitle: string;
+  postUpdatedAt: string;
+  placeTitle: string;
+  usersList: UserType[];
 };
 
 const MarkerContents = (props: MarkerPropTypes) => {
-  const { create_at, users, post_place, post_title } = props;
+  const { postTitle, postUpdatedAt, placeTitle, usersList } = props;
 
   return (
     <M.ContentBox>
       <M.ContentPlace>
         <PlaceIcon style={{ width: '16px', height: '16px' }} />
-        {post_place}
+        {postTitle}
       </M.ContentPlace>
       <M.MarkerContainer>
-        <M.ContentTitle>{post_title}</M.ContentTitle>
+        <M.ContentTitle>{placeTitle}</M.ContentTitle>
         <M.ContentInfo>
-          <M.ContentCreateAt>{create_at}</M.ContentCreateAt>
-          <Avatars size={24} users={users} max={4} />
+          <M.ContentCreateAt>{postUpdatedAt}</M.ContentCreateAt>
+          <Avatars size={24} users={usersList} max={4} />
         </M.ContentInfo>
       </M.MarkerContainer>
     </M.ContentBox>

@@ -3,7 +3,7 @@ import S from '@components/Main/Comments/OneComment/style';
 import Avatar from '@mui/material/Avatar';
 import { timeHelper } from '@utils/time-helper';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { UserType } from '@type/user.type';
+import type { UserType } from '@type/post.type';
 import { TextareaAutosize } from '@mui/material';
 import { ReactComponent as MyCommentSvg } from '@assets/svg/moreIcon.svg';
 import toast from 'react-hot-toast';
@@ -166,8 +166,8 @@ const OneComment = (props: OneCommentType) => {
                 maxRows={4}
                 onChange={handleChange}
                 placeholder={
-                  userList.filter((item) => item.user_id === isReply?.refId)[0]
-                    ?.user_name + '님에게 답글달기'
+                  userList.filter((item) => item.userId === isReply?.refId)[0]
+                    ?.userName + '님에게 답글달기'
                 }
               />
               <S.ReplyButton onClick={ReplySubmit}>게시</S.ReplyButton>

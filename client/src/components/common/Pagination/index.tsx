@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import S from '@components/common/Pagination/style';
+import { PaginationType } from '@type/main.type';
 
-type PaginationType = {
-  total: number;
-  page: number;
-  item_length: number;
-  movePage: (number) => void;
-};
-
-const Pagination = ({ total, page, item_length, movePage }: PaginationType) => {
+const Pagination = (props: PaginationType) => {
+  const { page, movePage, total, itemLength } = props;
   const [pageState, setPageState] = useState(page);
-  const Buttons = new Array(Math.ceil(total / item_length))
+  const Buttons = new Array(Math.ceil(total / itemLength))
     .fill('')
     .map((_, i) => i + 1);
 
