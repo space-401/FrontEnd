@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
-const Flip = styled.div<{ size: 'small' | 'big' }>`
+const Flip = styled.div<{ size: 'small' | 'medium' | 'big' }>`
   position: relative;
-  width: ${({ size }) => (size === 'big' ? 437 : 296.75)}px;
+  width: ${({ size }) =>
+    size === 'big' ? '437px' : size === 'medium' ? '20rem' : '296.75px'};
   cursor: pointer;
 `;
 
-const Card = styled.div<{ img: string }>`
+const Card = styled.div<{ img: string; borderRadius?: number }>`
   aspect-ratio: 1/1;
   width: 100%;
   position: relative;
   transition: 1.5s;
   transform-style: preserve-3d;
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
   overflow: hidden;
 
   background: url(${({ img }) => (img ? img : '#43444A')});

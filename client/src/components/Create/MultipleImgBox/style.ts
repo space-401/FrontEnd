@@ -3,8 +3,8 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: absolute;
-  right: 30%;
-  bottom: 15%;
+  right: 25%;
+  bottom: 5%;
 `;
 const Container = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const Container = styled.div`
   padding: 8px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-6']};
   position: absolute;
 `;
 
@@ -32,6 +32,7 @@ const Modal = styled.div`
 `;
 
 const SmallPhotoBox = styled.div<{ image?: string }>`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-6']};
   width: 64px;
   height: 64px;
   border-radius: 5px;

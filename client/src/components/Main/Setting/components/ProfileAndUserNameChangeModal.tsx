@@ -133,7 +133,7 @@ const ProfileAndUserNameChangeModal = React.forwardRef(
                 )}
               </M.LeftImgSection>
               <M.RightUserNameSection>
-                <div>닉네임</div>
+                <M.NickName>닉네임</M.NickName>
                 <InputBox
                   height={60}
                   width={250}

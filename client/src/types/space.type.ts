@@ -9,6 +9,7 @@ export type OneSpaceType = {
   spaceId: number;
   spaceTitle: string;
   imgUrl: string;
+  userList: UserType[];
 };
 
 export type SpaceInfo = {

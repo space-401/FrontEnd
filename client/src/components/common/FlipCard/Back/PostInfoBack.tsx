@@ -1,11 +1,11 @@
 import Avatars from '@components/common/AvatarGroup/Avatars';
-import S from '@components/common/FlipCard/SpaceInfoBack/style';
+import S from '@components/common/FlipCard/Back/style';
 import { getFormatDate } from '@utils/formatter';
 import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
-import { SpaceInfoBackPropsType } from '@type/post.type';
+import { PostInfoBackPropsType } from '@type/post.type';
 
-const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
+const PostInfoBack = (props: PostInfoBackPropsType) => {
   const { item, size } = props;
 
   const { placeTitle, placeTag, postUpdatedAt, usersList } = item;
@@ -46,4 +46,4 @@ const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
   );
 };
 
-export default SpaceInfoBack;
+export default PostInfoBack;

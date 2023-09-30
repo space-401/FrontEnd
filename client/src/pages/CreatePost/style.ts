@@ -69,7 +69,7 @@ const Label = styled.label<{ number: number; required: boolean }>`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   display: flex;
   align-items: column;
-  width: 84px;
+  min-width: 84px;
   flex-wrap: wrap;
 
   ${({ required }) =>
@@ -97,6 +97,9 @@ const EmptyContainer = styled.div`
 const ButtonContainer = styled.div`
   grid-area: 'button';
   margin-left: 470px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-left: 0;
+  }
 `;
 
 const SpaceInfoContainer = styled.div`
