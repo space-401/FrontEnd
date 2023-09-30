@@ -1,7 +1,7 @@
 import S from '@/components/Create/MultipleImgBox/style';
 import { ReactComponent as PlusPhotoIcon } from '@assets/svg/photo/plusIcon.svg';
 import { ReactComponent as DeleteIcon } from '@assets/svg/photo/deleteIcon.svg';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { ImageType } from '@/types/image.type';
 import React from 'react';
@@ -26,11 +26,23 @@ const MultipleImgBox = ({
   imgCount,
 }: MultiBoxType) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [currentLength, setCurrentLength] = useState(0);
+
+  //현재 화면 크기
+  const screenWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+  console.log('screenWidth', screenWidth);
 
   //이미지 추가하는 함수
   const onAddImage = () => {
     inputRef.current && inputRef.current.click();
   };
+
+  useEffect(() => {
+    setCurrentLength(imageArr.images.length);
+  }, [imageArr]);
 
   //이미지는 10개까지만 추가 설정
   const handleFileChange = (
@@ -41,7 +53,7 @@ const MultipleImgBox = ({
     const files = e.target.files;
     if (!files) return;
 
-    let currentImgNum = imageArr.images.length + 1;
+    let currentImgNum = currentLength + 1;
 
     let hasAlert = false;
     if (imgNum > 1) {

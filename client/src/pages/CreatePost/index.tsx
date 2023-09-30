@@ -25,6 +25,7 @@ import { PostType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore } from '@/store/modal';
+
 // import { useUserStore } from '@/store/user';
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -176,7 +177,6 @@ const CreatePost = () => {
           handleFileChange={handleFileChange}
         />
       )}
-
       {imageArr.cropImages.length == 0 ? (
         <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
           <S.PhotoContainer>

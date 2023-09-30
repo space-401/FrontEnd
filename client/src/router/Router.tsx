@@ -5,7 +5,8 @@ import MainPage from '@/pages/Main';
 import InviteCode from '@pages/InviteCode';
 import MyPage from '@pages/MyPage';
 import PrivateRoute from '@router/Private';
-
+import Landing from '@/pages/Landing';
+import SelectSpace from '@/pages/SelectSpace';
 import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
 import { PATH } from '@constants/path';
 
@@ -18,6 +19,14 @@ const router = createBrowserRouter([
         element: <HeaderLayout />,
         children: [
           /*스페이스*/
+          {
+            path: PATH.SPACE_SELECT,
+            element: <SelectSpace />,
+          },
+          {
+            path: PATH.SPACE_CREATE,
+            element: <CreateSpace />,
+          },
           {
             path: PATH.SPACE + '/:spaceId',
             element: <MainPage />,
@@ -46,6 +55,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: PATH.LANDING,
+    element: <Landing />,
   },
   {
     path: PATH.INVITE,
