@@ -6,7 +6,7 @@ export type FilterType = {
   userId?: string;
   tagId?: string;
   keyword?: string;
-  data?: string;
+  dataTime?: string;
 };
 
 export const getPostList = async (

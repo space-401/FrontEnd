@@ -1,6 +1,4 @@
-body {
-  .cropper-dashed.dashed-v,
-  .cropper-dashed.dashed-h {
+.cropper-dashed.dashed-v,
+.cropper-dashed.dashed-h {
     border: none;
-  }
 }

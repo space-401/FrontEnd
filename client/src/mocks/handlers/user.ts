@@ -1,4 +1,4 @@
-import { DefaultBodyType, MockedRequest, rest, RestHandler } from 'msw';
+import { rest, RestHandler } from 'msw';
 
 import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
 import {
@@ -8,7 +8,7 @@ import {
   myPostListMock,
 } from '@mocks/data/MyPage/MyPageMock';
 
-export const userHandlers: RestHandler<MockedRequest<DefaultBodyType>>[] = [
+export const userHandlers: RestHandler[] = [
   rest.get(END_POINTS.USERINFO, (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfoMock));
   }),
