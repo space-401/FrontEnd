@@ -60,7 +60,7 @@ const PhotoText = styled.button`
   width: 53px;
   height: 22px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
-  ${flexCenter}
+  ${flexCenter};
 `;
 
 const Label = styled.label<{ number: number; required: boolean }>`
@@ -91,11 +91,11 @@ const InputContainer = styled.div<{ number: number }>`
 `;
 
 const EmptyContainer = styled.div`
-  grid-area: 'empty';
+  grid-area: empty;
 `;
 
 const ButtonContainer = styled.div`
-  grid-area: 'button';
+  grid-area: button;
   margin-left: 470px;
 `;
 
