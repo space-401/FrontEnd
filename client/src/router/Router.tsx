@@ -8,6 +8,7 @@ import PrivateRoute from '@router/Private';
 import Landing from '@/pages/Landing';
 import SelectSpace from '@/pages/SelectSpace';
 import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
+import Auth from '@/pages/Auth';
 import { PATH } from '@constants/path';
 
 const router = createBrowserRouter([
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: PATH.INVITE,
     element: <InviteCode />,
+  },
+  {
+    path: PATH.AUTH,
+    element: <Auth />,
   },
 ]);
 

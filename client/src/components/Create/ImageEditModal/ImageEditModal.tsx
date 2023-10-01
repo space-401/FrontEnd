@@ -1,6 +1,6 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@components/Create/ImageEditModal/Cropper';
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { dataURLtoFile } from '@/utils/fileConvertor';
@@ -38,19 +38,23 @@ const ImgEditModal = ({
       const convertedImg = dataURLtoFile(newImage, filename);
 
       convertedImg &&
-        setImageArr((prev) => ({ ...prev, convertedImages: [convertedImg] }));
-      console.log(imageArr);
+        setImageArr((prev) => ({
+          ...prev,
+          convertedImages: [convertedImg],
+        }));
       ModalClose();
       if (isCircle) {
         setImageModalOpen!(false);
       }
     }
   };
+  useEffect(() => {
+    console.log(imageArr);
+  }, [imageArr]);
 
   //크롭한 이미지를 모두 저장함.
   const onSaveAllEditImg = (e: any) => {
     e.preventDefault();
-    console.log('model');
     if (imageArr.cropImages.length > 0) {
       setImageArr((prev) => ({ ...prev, cropImages: [], convertedImages: [] }));
     }
@@ -194,7 +198,7 @@ const ImgEditModal = ({
             </div>
           </div>
 
-          <S.Footer></S.Footer>
+          <S.Footer />
         </S.Form>
       </Box>
     </Modal>
