@@ -10,8 +10,8 @@ import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
 import {usePostListQuery} from '@hooks/api/post/usePostListQuery';
 import {useSearchParams} from 'react-router-dom';
-import {useDetailModalStore} from '@store/modal';
 import {PostListFilterProps} from '@type/main.type';
+import {useDetailModalOpen} from "@hooks/common/useDetailModalOpen";
 
 const PostList = (props: PostListPropType) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -54,7 +54,7 @@ const PostList = (props: PostListPropType) => {
         refetch();
     }, [refetch, page, keyword, userId, tagId, dataTime]);
 
-    const {setPostId, ModalOpen} = useDetailModalStore((state) => state);
+    const {DetailModalOpen} = useDetailModalOpen()
 
     const {postList, total, page: curPage, itemLength} = myPostListData!;
 
@@ -84,11 +84,6 @@ const PostList = (props: PostListPropType) => {
     };
 
     const lowList = Math.ceil(userList.length / 2);
-
-    const onClick = (id: number) => {
-        setPostId(id);
-        ModalOpen();
-    };
 
     return (
         <S.Wrapper>
@@ -158,7 +153,7 @@ const PostList = (props: PostListPropType) => {
                                 const {postId, mainImgUrl} = item;
                                 return (
                                     <FlipCard
-                                        onClick={() => onClick(postId)}
+                                        onClick={() => DetailModalOpen(postId)}
                                         size={'big'}
                                         key={postId}
                                         imgUrl={mainImgUrl}
