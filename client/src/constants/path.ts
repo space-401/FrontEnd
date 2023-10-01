@@ -6,6 +6,7 @@ export const BASE_PATH = {
   SPACE: '/space',
   USER: '/users',
   INVITE: '/invite',
+  AUTH: '/auth',
 };
 
 export const PATH = {

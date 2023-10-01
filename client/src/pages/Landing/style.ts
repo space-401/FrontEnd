@@ -42,6 +42,7 @@ const LoginBox = styled.div<ILoginBox>`
   width: 400px;
   height: 56px;
   border-radius: 10px;
+  font-weight: 500;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: ${({ color }) => (color === 'white' ? 'white' : 'black')};
   ${flexCenter}

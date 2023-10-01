@@ -104,6 +104,13 @@ const CreateSpace = () => {
 
   //스페이스 생성하기
   const onSubmit = () => {
+    const spaceData = {
+      img: imageArr.convertedImages[0],
+      title,
+      content,
+      password: pswd,
+    };
+    console.log('space', spaceData);
     // console.log('에러', error);
   };
 
