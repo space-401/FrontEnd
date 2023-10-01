@@ -10,6 +10,7 @@ import SelectSpace from '@/pages/SelectSpace';
 import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
 import Auth from '@/pages/Auth';
 import { PATH } from '@constants/path';
+import { Suspense } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
           },
           {
             path: PATH.SPACE + '/:spaceId',
-            element: <MainPage />,
+            element: (
+              <Suspense fallback={<></>}>
+                <MainPage />
+              </Suspense>
+            ),
           },
           {
             path: PATH.SPACE_UPDATE + '/:spaceId',
@@ -51,7 +56,11 @@ const router = createBrowserRouter([
           },
           {
             path: PATH.USER_INFO,
-            element: <MyPage />,
+            element: (
+              <Suspense fallback={<></>}>
+                <MyPage />
+              </Suspense>
+            ),
           },
         ],
       },

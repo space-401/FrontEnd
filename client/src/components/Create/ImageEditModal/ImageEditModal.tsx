@@ -3,7 +3,7 @@ import ImageCropper from '@components/Create/ImageEditModal/Cropper';
 import { useRef, useEffect } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
-import { dataURLtoFile } from '@/utils/fileConvertor';
+import { dataURLtoFile } from '@utils/fileConvertor';
 import { Box, Modal } from '@mui/material';
 import { ImageArrType } from '@/types/image.type';
 import CircleImageCropper from './CircleCropper';

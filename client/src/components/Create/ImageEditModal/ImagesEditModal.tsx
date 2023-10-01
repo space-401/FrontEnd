@@ -5,7 +5,7 @@ import { ReactComponent as PrevBtn } from '@assets/svg/chevron/chevron_left.svg'
 import { ReactComponent as NextBtn } from '@assets/svg/chevron/chevron_right.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import { ReactCropperElement } from 'react-cropper';
-import { dataURLtoFile } from '@/utils/fileConvertor';
+import { dataURLtoFile } from '@utils/fileConvertor';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
