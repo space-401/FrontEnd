@@ -88,6 +88,10 @@ const Label = styled.label<{ number: number; required: boolean }>`
 const InputContainer = styled.div<{ number: number }>`
   grid-area: ${({ number }) => `input${number}`};
   width: calc(100% - 60px);
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: calc(80% - 60px);
+  }
 `;
 
 const EmptyContainer = styled.div`

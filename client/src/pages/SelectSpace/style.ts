@@ -19,9 +19,8 @@ const SpaceContainer = styled.div`
   border-radius: 20px;
   gap: 8px;
   padding-top: 100px;
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
+  position: relative;
 `;
 
 const Container = styled.div`
@@ -29,7 +28,14 @@ const Container = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   padding-top: 100px;
-  height: calc(100vh - 90px);
+  margin-bottom: 30px;
+  min-height: calc(100vh - 120px);
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  right: 160px;
+  top: 30px;
 `;
 
 const AddBox = styled.div`
@@ -40,6 +46,6 @@ const AddBox = styled.div`
   border: 1px solid #4e4f55;
   background: var(--grey-4, #5f5f5f);
 `;
-const S = { Wrapper, Container, Img, SpaceContainer, AddBox };
+const S = { Wrapper, Container, Img, SpaceContainer, AddBox, ButtonContainer };
 
 export default S;
