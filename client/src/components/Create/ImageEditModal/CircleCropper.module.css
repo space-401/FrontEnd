@@ -7,15 +7,15 @@
   outline: 0;
 }
 .cropper-face {
-  background-color: inherit !important;
+  background-color: inherit;
 }
 
 .cropper-dashed,
 .cropper-line {
-  display: none !important;
+  display: none;
 }
 .cropper-view-box {
-  outline: inherit !important;
+  outline: inherit;
 }
 
 .cropper-point.point-se {

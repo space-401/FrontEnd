@@ -193,7 +193,7 @@ const Calender = ({
           )}
         ></StyledDatePicker>
         <CalenderIcon
-          style={{ position: 'absolute', bottom: '28', left: 280 }}
+          style={{ position: 'absolute', bottom: '25', left: 280 }}
         />
         {!startDate && !isMain && (
           <S.DateText

@@ -1,3 +1,4 @@
+import { flexCenter } from '@/styles/common';
 import styled from 'styled-components';
 
 const UserContainer = styled.div`
@@ -128,7 +129,7 @@ const ModalTop = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  padding: 0px 16px;
+  padding: 0 16px;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
@@ -141,10 +142,9 @@ const ModalTop = styled.div`
 
 const ModalMain = styled.div`
   width: 100%;
-  display: flex;
+  ${flexCenter};
   padding: 24px;
-  align-items: center;
-  gap: 68px;
+  gap: 50px;
   border-bottom: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
 `;
 
@@ -213,6 +213,11 @@ const ImgButton = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 
+const NickName = styled.div`
+  padding-bottom: 20px;
+  color: ${({ theme }) => theme.COLOR.white};
+`;
+
 export const M = {
   Container,
   ModalTop,
@@ -225,4 +230,5 @@ export const M = {
   ProfileImg,
   ImgButton,
   ImgBox,
+  NickName,
 };

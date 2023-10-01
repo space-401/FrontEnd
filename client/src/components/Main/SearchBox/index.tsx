@@ -1,40 +1,56 @@
-import type {SearchProps} from '@type/main.type';
+import type { SearchProps } from '@type/main.type';
 import S from '@components/Main/SearchBox/style';
-import React, {FormEvent, useRef} from 'react';
-import {ReactComponent as SearchIcon} from '@assets/svg/searchIcon.svg';
+import React, { FormEvent, useRef } from 'react';
+import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
+import { useSearchParams } from 'react-router-dom';
 
 const MainSearchBox = (props: SearchProps) => {
-    const {state, placeholder} = props;
+  const { state, placeholder } = props;
 
-    const keyword = useRef("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keyword = useRef('');
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>, type: React.MutableRefObject<string>) => {
-        const value = e.target.value;
-        type.current = value;
-    };
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: React.MutableRefObject<string>
+  ) => {
+    type.current = e.target.value;
+  };
 
-    for (const element in state) {
-        console.log(element.length ===0, element)
+  const page = searchParams.get('page');
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let select = {};
+    if (state.selectUserList.length !== 0) {
+      select = { ...select, userList: state.selectUserList.map((v) => v.id) };
     }
-
-    const onSubmit = (e: FormEvent<HTMLFormElement>) =>{
-        e.preventDefault();
-        console.log(state)
-        console.log(keyword.current)
+    if (state.selectTagList.length !== 0) {
+      select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
     }
+    if (state.dateTime.length !== 0) {
+      select = { ...select, dateTime: state.dateTime };
+    }
+    if (keyword.current.trim().length !== 0) {
+      select = { ...select, keyword: keyword.current };
+    }
+    if (page) {
+      select = { ...select, page };
+    }
+    setSearchParams(select);
+  };
 
-
-    return (
-        <S.Wrapper onSubmit={onSubmit}>
-            <S.IconBox>
-                <SearchIcon/>
-            </S.IconBox>
-            <S.SearchInput
-                placeholder={placeholder}
-                autoFocus={true}
-                onChange={(e) => onChange(e, keyword)}
-            ></S.SearchInput>
-        </S.Wrapper>
-    );
+  return (
+    <S.Wrapper onSubmit={onSubmit}>
+      <S.IconBox>
+        <SearchIcon />
+      </S.IconBox>
+      <S.SearchInput
+        placeholder={placeholder}
+        autoFocus={true}
+        onChange={(e) => onChange(e, keyword)}
+      ></S.SearchInput>
+    </S.Wrapper>
+  );
 };
 export default MainSearchBox;

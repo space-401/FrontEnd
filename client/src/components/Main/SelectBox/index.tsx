@@ -14,15 +14,15 @@ const CSelectBox = (props: SelectBoxProps) => {
     menuWidth = 168,
     ListItem,
     labelName,
+    selectState,
     setState,
   } = props;
-  const [select, setSelect] = useState<selectType[]>([]);
+  const [select, setSelect] = useState<selectType[]>(selectState);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     setState(select);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select]);
 
   const toggleOpen = () => {

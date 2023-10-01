@@ -1,8 +1,8 @@
-import {useQuery} from "@tanstack/react-query";
-import {getLogout} from "@apis/user/getLogout";
+import { useQuery } from '@tanstack/react-query';
+import { getLogout } from '@apis/user/getLogout';
 
 export const useLogOutQuery = () => {
-    const {data: isSuccess} = useQuery(["logout"], () => getLogout())
+  const { data: isSuccess } = useQuery(['logout'], () => getLogout());
 
-    return {isSuccess}
-}
+  return { isSuccess };
+};
