@@ -199,9 +199,7 @@ const ImagesEditModal = ({
               onClick={(e) => {
                 onSaveAllEditImg(e);
               }}
-            >
-              완료
-            </button>
+            ></button>
           </S.Header>
 
           {imageArr.images.length == 0 && (

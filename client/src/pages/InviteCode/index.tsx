@@ -42,6 +42,7 @@ const InviteCode = () => {
     // 정규 표현식을 사용하여 숫자가 아닌 값 검사
     if (!/^[0-9]*$/.test(value)) {
       // 숫자가 아닌 값이 있을 때 에러 처리
+      setPswd('');
       return AlertModalOpen();
     }
     setPswd(value);
