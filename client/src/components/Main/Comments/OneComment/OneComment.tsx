@@ -78,9 +78,7 @@ const OneComment = (props: OneCommentType) => {
     });
   };
 
-  useEffect(() => {
-    console.log(state.settingIsOpen, '상태가 변경이 됨');
-  }, [state.settingIsOpen]);
+  useEffect(() => {}, [state.settingIsOpen]);
 
   while ((match = regex.exec(content)) !== null) {
     const user_name = match[1];
@@ -142,17 +140,21 @@ const OneComment = (props: OneCommentType) => {
                   <MyCommentSvg />
                 </S.CommentDeleteIconBox>
               )}
-              <S.ManagementList>
-                <S.BackClickBlock
-                  isOpen={state.settingIsOpen}
-                  onClick={() => {
-                    setSettingToggle(false);
-                  }}
-                />
-                <S.MenuGroup isOpen={state.settingIsOpen}>
-                  <S.MenuButton onClick={DeleteComment}>댓글 삭제</S.MenuButton>
-                </S.MenuGroup>
-              </S.ManagementList>
+              {isMyComment && (
+                <S.ManagementList>
+                  <S.BackClickBlock
+                    isOpen={state.settingIsOpen}
+                    onClick={() => {
+                      setSettingToggle(false);
+                    }}
+                  />
+                  <S.MenuGroup isOpen={state.settingIsOpen}>
+                    <S.MenuButton onClick={DeleteComment}>
+                      댓글 삭제
+                    </S.MenuButton>
+                  </S.MenuGroup>
+                </S.ManagementList>
+              )}
             </S.CommentReply>
           </S.CommentInfo>
         </S.CommentBox>

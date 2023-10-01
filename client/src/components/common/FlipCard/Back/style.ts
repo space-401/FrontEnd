@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { omitText } from '@styles/common';
+import { FlipCardSize } from '@/types/post.type';
 
-const Wrapper = styled.div<{ size: 'big' | 'small' }>`
+const Wrapper = styled.div<{ size: FlipCardSize }>`
   width: 100%;
   height: 100%;
   display: flex;

@@ -101,7 +101,7 @@ const SettingComponent = React.forwardRef(
           >
             <SelfErrorModal
               width={368}
-              alertTitle={`${userList[0].user_name} 방장님,\n 방장은 주고 나가주세요`}
+              alertTitle={`${userList[0].userName} 방장님,\n 방장은 주고 나가주세요`}
               alertMessage={`확인`}
               ModalClose={() => ChangeErrorModal(false)}
               isOpen={state.isErrorOutModal}
@@ -113,7 +113,7 @@ const SettingComponent = React.forwardRef(
           >
             <SelfErrorModal
               width={368}
-              alertTitle={`${userList[0].user_name} 방장님,\n 방장은 주고 나가주세요`}
+              alertTitle={`${userList[0].userName} 방장님,\n 방장은 주고 나가주세요`}
               alertMessage={`확인`}
               ModalClose={() => ChangeAlertModal(false)}
               isOpen={state.isAlertModal}
@@ -131,7 +131,7 @@ const SettingComponent = React.forwardRef(
               descriptionMessage={'작성된 게시글과 댓글들은 삭제되지 않습니다.'}
               ApproveMessage={'나가기'}
               closeMessage={'취소'}
-              AsyncAction={() => ChangeSelfAction(userList[0].user_id)}
+              AsyncAction={() => ChangeSelfAction(userList[0].userId)}
               ModalClose={() => ChangeSelfOutModal(false)}
               isOpen={state.isSelfOutModal}
             />
@@ -147,7 +147,7 @@ const SettingComponent = React.forwardRef(
             {userList.map((user, i) => (
               <UserList
                 myInfo={userList[0]}
-                key={user.user_id}
+                key={user.userId}
                 index={i}
                 userInfo={user}
                 isAdmin={isAdmin}

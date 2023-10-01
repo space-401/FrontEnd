@@ -10,56 +10,85 @@ import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
 import {usePostListQuery} from '@hooks/api/post/usePostListQuery';
 import {useSearchParams} from 'react-router-dom';
-import {FilterType} from "@apis/post/getPostList";
-import {options} from "axios";
+import {useDetailModalStore} from '@store/modal';
+import {PostListFilterProps} from '@type/main.type';
 
 const PostList = (props: PostListPropType) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [state, setState] = useState<{
-        selectUserList: selectType[];
-        selectTagList: selectType[];
-        dataTime: string;
-    }>({
+    const [state, setState] = useState<PostListFilterProps>({
         selectUserList: [],
         selectTagList: [],
-        dataTime:'',
+        dateTime: '',
     });
 
     const {spaceId, selectState, userList, tagList} = props;
 
     const page: string = searchParams.get('page') ?? '0';
-    const keyword: string = searchParams.get('keyword') ?? '';
-    const userId: string = searchParams.get('tagId') ?? '';
-    const tagId: string = searchParams.get('userId') ?? '';
-    const dataTime: string = searchParams.get('dataTime') ?? '';
+    const keyword: string | null = searchParams.get('keyword');
+    const userId: string[] | null = searchParams.getAll('userList');
+    const tagId: string[] | null = searchParams.getAll('tagList');
+    const dataTime: string | null =
+        searchParams.get('dataTime') ?? '2020-134-302'; // 날짜값 가져오기
 
-    const {myPostListData,refetch} = usePostListQuery(spaceId, page, {
-        userId,
-        tagId,
-        keyword,
-        dataTime,
+    let query = {};
+
+    if (keyword?.trim().length !== 0) {
+        query = {...query, keyword};
+    }
+    if (userId.length !== 0) {
+        query = {...query, userId};
+    }
+    if (tagId.length !== 0) {
+        query = {...query, tagId};
+    }
+    if (dataTime.trim().length !== 0) {
+        query = {...query, dataTime};
+    }
+
+    const {myPostListData, refetch} = usePostListQuery(spaceId, page, {
+        ...query,
     });
 
-    useEffect(()=>{
+    useEffect(() => {
         refetch();
-    },[page,keyword,userId,tagId,dataTime])
+    }, [refetch, page, keyword, userId, tagId, dataTime]);
+
+    const {setPostId, ModalOpen} = useDetailModalStore((state) => state);
 
     const {postList, total, page: curPage, itemLength} = myPostListData!;
 
     const setUserState = (newUserState: selectType[]) => {
-        setState((prev) => ({...prev, user: newUserState}));
+        setState((prev) => ({...prev, selectUserList: newUserState}));
     };
-
     const setTagState = (newTagState: selectType[]) => {
-        setState((prev) => ({...prev, tag: newTagState}));
+        setState((prev) => ({...prev, selectTagList: newTagState}));
     };
 
-    const movePage = (page: number) => {
-        setSearchParams(new URLSearchParams(String(page)))
+    const movePage = (pageNumber: number) => {
+        let select = {};
+        if (state.selectUserList.length !== 0) {
+            select = {...select, userList: state.selectUserList.map((v) => v.id)};
+        }
+        if (state.selectTagList.length !== 0) {
+            select = {...select, tagList: state.selectTagList.map((v) => v.id)};
+        }
+        if (state.dateTime.length !== 0) {
+            select = {...select, dateTime: state.dateTime};
+        }
+        if (keyword) {
+            select = {...select, keyword: keyword};
+        }
+        setSearchParams(select);
+        setSearchParams({...select, page: String(pageNumber)});
     };
 
     const lowList = Math.ceil(userList.length / 2);
+
+    const onClick = (id: number) => {
+        setPostId(id);
+        ModalOpen();
+    };
 
     return (
         <S.Wrapper>
@@ -71,6 +100,21 @@ const PostList = (props: PostListPropType) => {
                     BoxWidth={168}
                     labelName={'사용자'}
                     ListItem={userList}
+                    selectState={
+                        userList.length !== 0
+                            ? userList
+                                .filter(
+                                    (prev) =>
+                                        userId?.filter((v) => v === String(prev.userId))
+                                            .length !== 0
+                                )
+                                .map((v) => ({
+                                    id: v.userId,
+                                    title: v.userName,
+                                    imgUrl: v.imgUrl,
+                                }))
+                            : []
+                    }
                 />
                 <SelectBox
                     placeHolder={'태그명을 검색해주세요.'}
@@ -80,12 +124,23 @@ const PostList = (props: PostListPropType) => {
                     BoxWidth={168}
                     labelName={'태그'}
                     ListItem={tagList}
+                    selectState={
+                        tagList.length !== 0
+                            ? tagList
+                                .filter(
+                                    (prev) =>
+                                        tagId?.filter((v) => v === String(prev.tagId)).length !==
+                                        0
+                                )
+                                .map((v) => ({
+                                    id: v.tagId,
+                                    title: v.tagTitle,
+                                }))
+                            : []
+                    }
                 />
                 <Calender isMain={true} height={50} borderRadius={5}/>
-                <MainSearchBox
-                    state={state}
-                    placeholder={'제목'}
-                />
+                <MainSearchBox state={state} placeholder={'제목'}/>
             </S.FilterGroup>
             {!selectState ? (
                 postList.length === 0 ? (
@@ -103,6 +158,7 @@ const PostList = (props: PostListPropType) => {
                                 const {postId, mainImgUrl} = item;
                                 return (
                                     <FlipCard
+                                        onClick={() => onClick(postId)}
                                         size={'big'}
                                         key={postId}
                                         imgUrl={mainImgUrl}

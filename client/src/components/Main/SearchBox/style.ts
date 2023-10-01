@@ -10,7 +10,7 @@ const SearchInput = styled.input`
   height: inherit;
   border-radius: 5px;
   padding: 12px 30px 12px 16px;
-  background: ${({ theme }) => theme.COLOR['gray-5'] };
+  background: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
