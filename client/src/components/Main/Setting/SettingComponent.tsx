@@ -7,8 +7,8 @@ import UserList from '@components/Main/Setting/components/UserList';
 import ConfirmModal from '@modal/Confirm/ConfirmModal';
 import SelfErrorModal from '@modal/Alert/AlertModal';
 import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
-import toast from 'react-hot-toast';
 import { theme } from '@styles/theme/theme';
+import { toastColorMessage } from '@utils/toastMessage';
 
 const SettingComponent = React.forwardRef(
   (
@@ -58,36 +58,16 @@ const SettingComponent = React.forwardRef(
     const InviteLinkCopyAction = async () => {
       try {
         await navigator.clipboard.writeText('www.KKIRI.com');
-        toast('초대링크를 복사하였습니다.', {
-          style: {
-            fontFamily: theme.FONT_FAMILY.Pretendard,
-            fontSize: theme.TEXT_SIZE['text-14'],
-            fontWeight: theme.FONT_WEIGHT['WEIGHT-400'],
-            display: 'flex',
-            width: '326px',
-            height: '48px',
-            gap: '16px',
-            justifyContent: 'center',
-            borderRadius: '5px',
-            background: theme.COLOR.black,
-            color: theme.COLOR.white,
-          },
+        toastColorMessage({
+          color: theme.COLOR.white,
+          message: '초대링크를 복사하였습니다.',
+          background: theme.COLOR['gray-5'],
         });
       } catch (e) {
-        toast('초대링크를 복사를 실패하였습니다.', {
-          style: {
-            fontFamily: theme.FONT_FAMILY.Pretendard,
-            fontSize: theme.TEXT_SIZE['text-14'],
-            fontWeight: theme.FONT_WEIGHT['WEIGHT-400'],
-            display: 'flex',
-            width: '326px',
-            height: '48px',
-            gap: '16px',
-            justifyContent: 'center',
-            borderRadius: '5px',
-            background: theme.COLOR.black,
-            color: theme.COLOR.white,
-          },
+        toastColorMessage({
+          color: theme.COLOR.white,
+          message: '초대링크를 복사를 실패하였습니다.',
+          background: theme.COLOR['gray-5'],
         });
       }
     };
