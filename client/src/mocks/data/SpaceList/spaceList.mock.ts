@@ -3,31 +3,23 @@ import { users_mock } from '../user/users.mock';
 
 const spaceListMock: OneSpaceType[] = [
   {
-    spaceId: 1,
-    spaceTitle: '카페좋아',
+    spaceId: 12301,
     imgUrl:
-      'https://www.google.com/search?q=%EC%B9%B4%ED%8E%98&tbm=isch&ved=2ahUKEwiGhej4rdCBAxUEdt4KHYvPDfkQ2-cCegQIABAA&oq=%EC%B9%B4%ED%8E%98&gs_lcp=CgNpbWcQAzIICAAQgAQQsQMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6BAgjECc6BwgjEOoCECc6BAgAEANQ2QRY2Qtg_AxoAnAAeACAAXqIAZsFkgEDMC42mAEAoAEBqgELZ3dzLXdpei1pbWewAQrAAQE&sclient=img&ei=OgsXZYaAMYTs-QaLn7fIDw&bih=566&biw=707&rlz=1C5CHFA_enKR1048KR1048#imgrc=F4bk37qV7BCk3M',
+      'https://www.10wallpaper.com/wallpaper/medium/1411/SpongeBob_Cartoon_Characters_Design_Desktop_Wallpaper_medium.jpg',
+    spaceTitle: '비키니시티 친목 동호회',
     userList: users_mock,
   },
   {
-    spaceId: 2,
-    spaceTitle: '고양이를 사랑하는 모임',
-    imgUrl:
-      'https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg',
+    spaceId: 31312,
+    spaceTitle: '슈슈룬 덕질방',
+    imgUrl: 'https://i.ytimg.com/vi/Z10UMD-0RbY/maxresdefault.jpg',
     userList: users_mock,
   },
   {
-    spaceId: 3,
-    spaceTitle: '404',
+    spaceId: 312345,
+    spaceTitle: '텔레토비 동산',
     imgUrl:
-      'https://img.freepik.com/premium-vector/big-red-heart-isolated-on-white-background-vector-illustration_260787-631.jpg',
-    userList: users_mock,
-  },
-  {
-    spaceId: 4,
-    spaceTitle: 'music lovers',
-    imgUrl:
-      'https://www.google.com/search?q=%EC%B9%B4%ED%8E%98&tbm=isch&ved=2ahUKEwiGhej4rdCBAxUEdt4KHYvPDfkQ2-cCegQIABAA&oq=%EC%B9%B4%ED%8E%98&gs_lcp=CgNpbWcQAzIICAAQgAQQsQMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6BAgjECc6BwgjEOoCECc6BAgAEANQ2QRY2Qtg_AxoAnAAeACAAXqIAZsFkgEDMC42mAEAoAEBqgELZ3dzLXdpei1pbWewAQrAAQE&sclient=img&ei=OgsXZYaAMYTs-QaLn7fIDw&bih=566&biw=707&rlz=1C5CHFA_enKR1048KR1048#imgrc=F4bk37qV7BCk3M',
+      'https://item.kakaocdn.net/do/98c5e593c3b9ae034da3f2087b3cf63e8f324a0b9c48f77dbce3a43bd11ce785',
     userList: users_mock,
   },
 ];

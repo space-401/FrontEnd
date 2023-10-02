@@ -55,7 +55,7 @@ const Wrapper = styled.div<{ size: FlipCardSize }>`
   }`}
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ info: 'space' | 'post' }>`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   width: 100%;
@@ -63,7 +63,10 @@ const Container = styled.div`
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: ${({ info }) => (info === 'space' ? 'center' : 'none')};
+  gap: ${({ info }) => (info === 'space' ? '20px' : 'none')};
+  justify-content: ${({ info }) =>
+    info === 'space' ? 'center' : 'space-between'};
   border-radius: 5px;
   background-size: cover;
   backdrop-filter: blur(2px);
@@ -80,10 +83,11 @@ const Shadow = styled.div`
 
 const PostTitle = styled.div`
   margin-top: 16px;
-
+  text-align: center;
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-28']};
   font-style: normal;
+  width: 80%;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   line-height: 130%;
   white-space: pre-line;
@@ -108,7 +112,7 @@ const PlaceTitle = styled.div`
 
   span {
     max-width: 170px;
-    text-wrap: none;
+    flex-wrap: none;
     ${omitText}
   }
 `;
@@ -134,10 +138,11 @@ const ChipBox = styled.div`
   }
 `;
 
-const InfoBottom = styled.div`
+const InfoBottom = styled.div<{ info: 'space' | 'post' }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ info }) =>
+    info === 'space' ? 'center' : 'space-between'};
   line-height: ${({ theme }) => theme.TEXT_SIZE['text-20']};
 `;
 

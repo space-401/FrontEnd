@@ -9,7 +9,7 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { users_mock } from '@/mocks/data/user/users.mock';
 import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
@@ -21,12 +21,12 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MarkerType } from '@/components/Create/SearchMapModal/component/MapBox';
-import { PostType } from '@/types/post.type';
+import { PostType, DateInfoType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore } from '@/store/modal';
+import { onConvertToFile } from '@/utils/fileConvertor';
 
-// import { useUserStore } from '@/store/user';
 const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -34,7 +34,6 @@ const CreatePost = () => {
   const [imageArr, setImageArr] = useState<ImageArrType>({
     images: [],
     cropImages: [],
-    convertedImages: [],
   });
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
@@ -53,27 +52,16 @@ const CreatePost = () => {
     position: { lng: '0', lat: '0' },
     markerId: '',
   });
+  //날짜
+  const [dateInfo, setDateInfo] = useState<DateInfoType>({
+    startDate: undefined,
+    endDate: undefined,
+  });
   //장소 선택 모달이 열렸는지
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
-  //현재 포스트 객체 데이터
-  const [postData, setPostData] = useState<PostType>({
-    title: '',
-    content: '',
-    people: [],
-    tag: [],
-    place: {
-      content: '',
-      position: {
-        lng: '',
-        lat: '',
-      },
-    },
-    imgs: [],
-    date: {
-      startDate: null,
-      endDate: null,
-    },
-  });
+  //사람
+  const [people, setPeople] = useState<selectType[]>([]);
+  const [tags, setTags] = useState<selectType[]>([]);
 
   //경고 모달
   const {
@@ -81,16 +69,6 @@ const CreatePost = () => {
     ModalClose: AlertModalClose,
     ModalOpen: AlertModalOpen,
   } = useAlertModalStore();
-
-  //친구들 상태 바꾸는 함수
-  const setPeopleState = (newPeopleState: selectType[]) => {
-    setPostData((prev) => ({ ...prev, people: newPeopleState }));
-  };
-
-  //태그 바꾸는 함수
-  const setTagState = (newTagState: selectType[]) => {
-    setPostData((prev) => ({ ...prev, tag: newTagState }));
-  };
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
@@ -137,23 +115,24 @@ const CreatePost = () => {
       reader.readAsDataURL(files[i]);
     }
   };
-  //이미지를 데이터 객체에 추가
-  useEffect(() => {
-    setPostData({
-      ...postData,
-      imgs: [...imageArr.convertedImages],
-    });
-  }, [imageArr.convertedImages]);
 
   const onSubmit = () => {
-    console.log(postData);
-    // console.log('imgs', convertedImages);
-    // console.log('title', title);
-    // console.log('content', content);
-    // console.log('userList', userList);
-    // console.log('tagList', tagList);
-    // console.log('place', mapInfo);
-    // console.log('setDateInfo', dateInfo);
+    const convertedImgs: File[] = [];
+    imageArr.cropImages.map((img) => {
+      convertedImgs.push(onConvertToFile(img, 'spaceImg')!);
+    });
+
+    const sendData: PostType = {
+      title,
+      content,
+      people,
+      tags,
+      place: mapInfo,
+      imgs: convertedImgs,
+      date: dateInfo,
+    };
+
+    console.log(sendData);
   };
   const inputWidth = Number('calc(100% - 60px)');
 
@@ -256,10 +235,11 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={2}>
           <CreateSelectBox
+            selectState={people}
             labelName={'사용자'}
             ListItem={users_mock}
             BoxWidth={inputWidth}
-            setState={setPeopleState}
+            setState={setPeople}
             menuHeight={89 * Math.floor(users_mock.length / 2)}
             menuWidth={inputWidth}
           />
@@ -274,10 +254,11 @@ const CreatePost = () => {
 
         <S.InputContainer number={3}>
           <CreateSelectBox
+            selectState={tags}
             labelName={'태그'}
             ListItem={createPostMock}
             BoxWidth={inputWidth}
-            setState={setTagState}
+            setState={setTags}
             menuHeight={100 * Math.floor(users_mock.length / 2)}
             menuWidth={inputWidth}
           />
@@ -311,7 +292,7 @@ const CreatePost = () => {
           <Calender
             height={60}
             isMain={false}
-            setPostData={setPostData}
+            setDateInfo={setDateInfo}
             borderRadius={10}
           />
         </S.InputContainer>
@@ -342,7 +323,7 @@ const CreatePost = () => {
         <S.ButtonContainer>
           <BasicButton
             disabled={
-              !title.length || !content.length || !postData.date.startDate
+              !title.length || !content.length || !dateInfo.startDate
               // !postData.place.content
             }
             onClick={onSubmit}
