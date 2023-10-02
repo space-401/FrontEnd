@@ -1,8 +1,9 @@
 import FlipCard from '@components/common/FlipCard/FlipCard';
-import { B } from '@pages/MyPage/MyBody/components/style';
+import { B } from '@pages/MyPage/components/style';
 import { useState } from 'react';
 import Pagination from '@components/common/Pagination';
 import { useMyPostListQuery } from '@hooks/api/user/useMyPostListQuery';
+import {useDetailModalOpen} from "@hooks/common/useDetailModalOpen";
 
 const MyPostList = () => {
   const [curPage, setCurPage] = useState<number>(0);
@@ -11,7 +12,7 @@ const MyPostList = () => {
 
   const { myPostList, total, page, itemLength } = MyPostListData!;
 
-  const modalOpen = () => {};
+    const {DetailModalOpen} = useDetailModalOpen()
 
   const movePage = (number: number) => {
     setCurPage(number);
@@ -25,7 +26,7 @@ const MyPostList = () => {
           return (
             <FlipCard
               size={'small'}
-              onClick={modalOpen}
+              onClick={()=>DetailModalOpen(postId)}
               key={postId}
               imgUrl={mainImgUrl}
               item={item}

@@ -11,7 +11,7 @@ export const BASE_PATH = {
 
 export const PATH = {
   ...BASE_PATH,
-  USER_INFO: `${BASE_PATH.USER}/myPage`,
+  USER_INFO: `${BASE_PATH.USER}/mypage`,
   POST_CREATE: `${BASE_PATH.POST}/create`,
   POST_UPDATE: `${BASE_PATH.POST}/update`,
   SPACE_CREATE: `${BASE_PATH.SPACE}/create`,
