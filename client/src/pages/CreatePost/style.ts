@@ -11,11 +11,9 @@ const Wrapper = styled.div<{ width?: string }>`
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
     padding-top: 2rem;
-    flex-direction: column;
     display: flex;
     align-items: center;
     height: 100%;
-    background-color: ${({ theme }) => theme.COLOR['black']};
   }
 `;
 
@@ -32,7 +30,6 @@ const GridWrapper = styled.div`
   grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6' 'empty button';
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-direction: column;
     display: flex;
     width: 80%;
   }
@@ -60,7 +57,7 @@ const PhotoText = styled.button`
   width: 53px;
   height: 22px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
-  ${flexCenter}
+  ${flexCenter};
 `;
 
 const Label = styled.label<{ number: number; required: boolean }>`
@@ -68,7 +65,6 @@ const Label = styled.label<{ number: number; required: boolean }>`
   grid-area: ${({ number }) => `title${number}`};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   display: flex;
-  align-items: column;
   min-width: 84px;
   flex-wrap: wrap;
 
@@ -95,11 +91,11 @@ const InputContainer = styled.div<{ number: number }>`
 `;
 
 const EmptyContainer = styled.div`
-  grid-area: 'empty';
+  grid-area: empty;
 `;
 
 const ButtonContainer = styled.div`
-  grid-area: 'button';
+  grid-area: button;
   margin-left: 470px;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     margin-left: 0;

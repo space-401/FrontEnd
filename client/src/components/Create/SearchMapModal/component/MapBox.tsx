@@ -53,7 +53,7 @@ const MapBox = (props: MapBoxProps) => {
         map.setBounds(bounds);
       }
     });
-  }, [map, keyword]);
+  }, [map, keyword, setData, setPagination]);
 
   console.log(center);
 

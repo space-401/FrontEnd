@@ -21,11 +21,11 @@ const UndefinedList = styled.div`
   text-align: center;
 `;
 
-const UndefinedDefaultImage = styled.div<{ img_url: string }>`
+const UndefinedDefaultImage = styled.div<{ imgUrl: string }>`
   margin-top: 165px;
   width: 438px;
   height: 438px;
-  background: url(${({ img_url }) => img_url}) no-repeat center;
+  background: url(${({ imgUrl }) => imgUrl}) no-repeat center;
   background-color: ${({ theme }) => theme.COLOR['gray-4']};
   border-radius: 40px;
 `;

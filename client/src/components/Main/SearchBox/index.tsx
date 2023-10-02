@@ -1,37 +1,54 @@
 import type { SearchProps } from '@type/main.type';
 import S from '@components/Main/SearchBox/style';
-import React, { useState } from 'react';
+import React, { FormEvent, useRef } from 'react';
 import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
+import { useSearchParams } from 'react-router-dom';
 
 const MainSearchBox = (props: SearchProps) => {
-  const { setState, placeholder } = props;
-  const [searchValue, setSearchValue] = useState('');
+  const { state, placeholder } = props;
 
-  const changeValue = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === 'Enter') {
-      if (searchValue.trim().length !== 0) {
-        setState(searchValue);
-      }
-    }
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keyword = useRef('');
+
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: React.MutableRefObject<string>
+  ) => {
+    type.current = e.target.value;
   };
 
-  const onClick = () => {
-    if (searchValue.trim().length !== 0) {
-      setState(searchValue);
+  const page = searchParams.get('page');
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let select = {};
+    if (state.selectUserList.length !== 0) {
+      select = { ...select, userList: state.selectUserList.map((v) => v.id) };
     }
+    if (state.selectTagList.length !== 0) {
+      select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
+    }
+    if (state.dateTime.length !== 0) {
+      select = { ...select, dateTime: state.dateTime };
+    }
+    if (keyword.current.trim().length !== 0) {
+      select = { ...select, keyword: keyword.current };
+    }
+    if (page) {
+      select = { ...select, page };
+    }
+    setSearchParams(select);
   };
 
   return (
-    <S.Wrapper>
-      <S.IconBox onClick={onClick}>
+    <S.Wrapper onSubmit={onSubmit}>
+      <S.IconBox>
         <SearchIcon />
       </S.IconBox>
       <S.SearchInput
         placeholder={placeholder}
-        isValue={searchValue.trim().length === 0}
         autoFocus={true}
-        onKeyDown={(e) => changeValue(e)}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => onChange(e, keyword)}
       ></S.SearchInput>
     </S.Wrapper>
   );

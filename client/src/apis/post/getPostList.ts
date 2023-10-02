@@ -3,10 +3,10 @@ import { axiosInstance } from '@apis/AxiosInstance';
 import { SpacePostListProps } from '@type/main.type';
 
 export type FilterType = {
-  userId?: string;
-  tagId?: string;
+  userId?: string[];
+  tagId?: string[];
   keyword?: string;
-  data?: string;
+  dataTime?: string;
 };
 
 export const getPostList = async (

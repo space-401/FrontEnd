@@ -36,7 +36,7 @@ const UserTiTle = styled.div`
 `;
 
 const TagTitle = styled.div`
-  ${omitText}
+  ${omitText};
 `;
 
 const TagGroup = styled.div`

@@ -12,17 +12,21 @@ type ModeType = {
   ModeClose: () => void;
 };
 
-export const useDetailModalStore = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
+type DetailModalType = {
+  postId: number;
+  setPostId: (postId: number) => void;
+};
 
-export const useSpaceUserModalStore = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
+export const useDetailModalStore = create<ModalType & DetailModalType>(
+  (setState) => ({
+    isOpen: false,
+    postId: 0,
+    setPostId: (postId: number) =>
+      setState((state) => ({ ...state, postId: postId })),
+    ModalOpen: () => setState((state) => ({ ...state, isOpen: true })),
+    ModalClose: () => setState((state) => ({ ...state, isOpen: false })),
+  })
+);
 
 export const usePhotoModalStore = create<ModalType>((setState) => ({
   isOpen: false,

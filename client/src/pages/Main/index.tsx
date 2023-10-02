@@ -1,7 +1,7 @@
 import S from '@pages/Main/style';
 import MainHeader from '@pages/Main/MainHeader/MainHeader';
 import PostList from '@pages/Main/PostList/PostList';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
 
@@ -18,14 +18,12 @@ const MainPage = () => {
           selectState={selectState}
           setSelectState={setSelectState}
         />
-        <Suspense fallback={<></>}>
-          <PostList
-            userList={userList}
-            tagList={tagList}
-            selectState={selectState}
-            spaceId={spaceId!}
-          />
-        </Suspense>
+        <PostList
+          userList={userList}
+          tagList={tagList}
+          selectState={selectState}
+          spaceId={spaceId!}
+        />
       </S.Wrapper>
     </>
   );

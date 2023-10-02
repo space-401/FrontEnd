@@ -1,7 +1,7 @@
 import { END_POINTS } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 
-type TokenData = {
+export type TokenData = {
   accessToken: string;
 };
 

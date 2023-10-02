@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   position: relative;
+  height: 50px;
 `;
 
-const SearchInput = styled.input<{ isValue: boolean }>`
+const SearchInput = styled.input`
   width: 168px;
-  height: 50px;
+  height: inherit;
   border-radius: 5px;
   padding: 12px 30px 12px 16px;
-  background: ${({ theme, isValue }) =>
-    !isValue ? theme.COLOR['gray-4'] : theme.COLOR['gray-5']};
+  background: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
@@ -27,7 +27,7 @@ const SearchInput = styled.input<{ isValue: boolean }>`
 
   transition: background 0.5s;
 `;
-const IconBox = styled.div`
+const IconBox = styled.button`
   position: absolute;
   top: 50%;
   transform: translate(50%, -50%);
