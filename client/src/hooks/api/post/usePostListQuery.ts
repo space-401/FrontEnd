@@ -11,6 +11,6 @@ export const usePostListQuery = (
   const { data: myPostListData, refetch } = useQuery<
     SpacePostListProps,
     AxiosError
-  >(['postList', spaceId], () => getPostList(spaceId, page, filter));
+  >(['postList', spaceId, filter], () => getPostList(spaceId, page, filter));
   return { myPostListData, refetch };
 };

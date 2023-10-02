@@ -13,18 +13,18 @@ export const userHandlers: RestHandler[] = [
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfoMock));
   }),
 
-  rest.get(END_POINTS.USERINFO + '/postList', (_, res, ctx) => {
+  rest.get(END_POINTS.USERINFO + '/post', (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(myPostListMock));
   }),
 
-  rest.get(END_POINTS.USERINFO + '/commentList', (_, res, ctx) => {
+  rest.get(END_POINTS.USERINFO + '/comment', (_, res, ctx) => {
     return res(
       ctx.status(HTTP_STATUS_CODE.SUCCESS),
       ctx.json(myCommentListMock)
     );
   }),
 
-  rest.get(END_POINTS.USERINFO + '/bookmarkList', (_, res, ctx) => {
+  rest.get(END_POINTS.USERINFO + '/bookmark', (_, res, ctx) => {
     return res(
       ctx.status(HTTP_STATUS_CODE.SUCCESS),
       ctx.json(bookMarkListMock)

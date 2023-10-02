@@ -26,10 +26,6 @@ const router = createBrowserRouter([
             element: <SelectSpace />,
           },
           {
-            path: PATH.SPACE_CREATE,
-            element: <CreateSpace />,
-          },
-          {
             path: PATH.SPACE + '/:spaceId',
             element: (
               <Suspense fallback={<></>}>
@@ -40,15 +36,6 @@ const router = createBrowserRouter([
           {
             path: PATH.SPACE_UPDATE + '/:spaceId',
             // element: 업데이트 스페이스
-          },
-          {
-            path: PATH.SPACE_CREATE,
-            element: <CreateSpace />,
-          },
-          /*포스트*/
-          {
-            path: PATH.POST_CREATE,
-            element: <CreatePost />,
           },
           {
             path: PATH.POST_UPDATE,
@@ -63,6 +50,14 @@ const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: PATH.SPACE_CREATE,
+        element: <CreateSpace />,
+      },
+      {
+        path: PATH.POST_CREATE,
+        element: <CreatePost />,
       },
     ],
   },

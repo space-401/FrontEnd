@@ -27,6 +27,7 @@ const movePage = (page: number) => {
 const LeftSection = (props: LeftSectionPropType) => {
   const { setIsSelect, setState, isSelect, postList, total, page, itemLength } =
     props;
+
   return (
     <S.Wrapper>
       {postList.map((item) => {

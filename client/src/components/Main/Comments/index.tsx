@@ -1,12 +1,11 @@
 import S from '@components/Main/Comments/style';
-import { useEffect, useState } from 'react';
-import { CommentType } from '@type/space.type';
-import commentMock from '@mocks/data/DetailPage/comment.mock';
 import OneComment from '@components/Main/Comments/OneComment/OneComment';
 import type { UserType } from '@type/post.type';
+import { useCommentQuery } from '@hooks/api/comment/useCommentQuery';
 
 type DetailCommentType = {
   isOpen: boolean;
+  postId: string;
   isReply:
     | {
         open: boolean;
@@ -23,12 +22,9 @@ type DetailCommentType = {
 };
 
 const DetailComments = (props: DetailCommentType) => {
-  const { setIsReply, isReply, isOpen, userList } = props;
-  const [list, setList] = useState<CommentType[]>([]);
+  const { setIsReply, isReply, isOpen, userList, postId } = props;
 
-  useEffect(() => {
-    setList(commentMock);
-  }, []);
+  const { commentList } = useCommentQuery(postId);
 
   const ReplyClose = () => {
     setIsReply({ open: false, refId: undefined, id: undefined });
@@ -45,7 +41,7 @@ const DetailComments = (props: DetailCommentType) => {
     <>
       <S.Wrapper isOpen={isOpen}>
         <S.CommentList isOpen={isOpen}>
-          {list.map((item) => (
+          {commentList?.map((item) => (
             <OneComment
               key={item.id}
               userList={userList}
