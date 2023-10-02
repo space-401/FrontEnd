@@ -34,6 +34,7 @@ const DetailPage = React.forwardRef(
     const { onClose: ModalClose } = props;
     useKakaoLoader({
       appkey: import.meta.env.VITE_KAKAO_KEY,
+      libraries: ['services'],
     });
     const [state, setState] = useState<{
       mapIsOpen: boolean;
@@ -276,6 +277,7 @@ const DetailPage = React.forwardRef(
                   isOpen={state.commentIsOpen}
                 >
                   <DetailComments
+                    postId={String(postId)}
                     userList={userList}
                     isReply={state.isReplyOpen}
                     setIsReply={setIsReply}

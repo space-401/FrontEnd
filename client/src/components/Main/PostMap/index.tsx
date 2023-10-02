@@ -5,13 +5,14 @@ import LeftSection from '@components/Main/PostMap/components/LeftSection';
 import MarkerContents from '@components/Main/PostMap/components/MarkerContents';
 import { getFormatDate } from '@utils/formatter';
 import { useState } from 'react';
-import { useDetailModalStore } from '@store/modal';
 import { DEFAULT_POSITION } from '@constants/policy';
 import { SpacePostListProps } from '@type/main.type';
+import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
 
 const Index = (props: SpacePostListProps) => {
   useKakaoLoader({
     appkey: import.meta.env.VITE_KAKAO_KEY,
+    libraries: ['services'],
   });
   const { postList, page, total, itemLength } = props;
   const [isSelect, setIsSelect] = useState<number>(postList[0].postId);
@@ -20,12 +21,8 @@ const Index = (props: SpacePostListProps) => {
     center: postList[0].position || DEFAULT_POSITION,
     isPanto: false,
   });
-  const modalOpen = useDetailModalStore((state) => state.ModalOpen);
 
-  const onClick = (number: number) => {
-    console.log(number, '아이디의 정보를 가져옵니다.');
-    setTimeout(() => modalOpen(), 1000);
-  };
+  const { DetailModalOpen } = useDetailModalOpen();
 
   return (
     <S.Wrapper>
@@ -52,7 +49,7 @@ const Index = (props: SpacePostListProps) => {
               value;
             return (
               <EventMarkerContainer
-                onClick={() => onClick(postId)}
+                onClick={() => DetailModalOpen(postId)}
                 key={`EventMarkerContainer-${value.position.lat}-${value.position.lng}`}
                 position={value.position}
                 setIsSelect={() => setIsSelect(postId)}
