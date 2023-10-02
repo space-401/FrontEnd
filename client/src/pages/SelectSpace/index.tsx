@@ -37,15 +37,22 @@ const SelectSpace = () => {
             return (
               <>
                 <FlipCard
+                  key={Math.floor(Math.random() * 1000)}
                   item={space}
                   size="medium"
-                  imgUrl={''}
+                  imgUrl={space.imgUrl}
                   onClick={() => {}}
                   borderRadius={'20px'}
                 />
               </>
             );
           })}
+          {spaceList.length < 5 &&
+            Array.from({ length: 4 - spaceListMock.length }).map(() => (
+              <S.EmptySpaceBox
+                key={Math.floor(Math.random() * 1000)}
+              ></S.EmptySpaceBox>
+            ))}
         </S.SpaceContainer>
       </S.Container>
     </S.Wrapper>

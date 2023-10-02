@@ -1,9 +1,9 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@components/Create/ImageEditModal/Cropper';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
-import { dataURLtoFile } from '@/utils/fileConvertor';
+// import { onConvertToFile } from '@/utils/fileConvertor';
 import { Box, Modal } from '@mui/material';
 import { ImageArrType } from '@/types/image.type';
 import CircleImageCropper from './CircleCropper';
@@ -24,7 +24,17 @@ const ImgEditModal = ({
   const cropperRef1 = useRef<ReactCropperElement>(null);
   const myRefs = [cropperRef1];
   const sliderRef = useRef<any>();
+
+  //사진 편집 모달이 열렸는지?
   const { ModalClose, isOpen } = usePhotoModalStore();
+
+  //현재 화면 크기
+  const screenWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any) => {
@@ -32,31 +42,32 @@ const ImgEditModal = ({
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
         .toDataURL();
-      console.log(imageArr);
+      // console.log(imageArr);
       setImageArr((prev) => ({ ...prev, cropImages: [newImage] }));
-      const filename = `SpaceImg`;
-      const convertedImg = dataURLtoFile(newImage, filename);
 
-      convertedImg &&
-        setImageArr((prev) => ({
-          ...prev,
-          convertedImages: [convertedImg],
-        }));
+      // const convertedImg = onConvertToFile(newImage, 'spaceImg');
+
+      // convertedImg &&
+      //   setImageArr((prev) => ({
+      //     ...prev,
+      //     convertedImages: [convertedImg],
+      //   }));
       ModalClose();
       if (isCircle) {
         setImageModalOpen!(false);
       }
     }
   };
-  useEffect(() => {
-    console.log(imageArr);
-  }, [imageArr]);
+
+  // useEffect(() => {
+  //   console.log(imageArr);
+  // }, [imageArr]);
 
   //크롭한 이미지를 모두 저장함.
   const onSaveAllEditImg = (e: any) => {
     e.preventDefault();
     if (imageArr.cropImages.length > 0) {
-      setImageArr((prev) => ({ ...prev, cropImages: [], convertedImages: [] }));
+      setImageArr((prev) => ({ ...prev, cropImages: [] }));
     }
     getCropData(cropperRef1);
     //기존에 크롭한 이미지가 존재하면 없애줌
@@ -67,19 +78,6 @@ const ImgEditModal = ({
     isCircle ? setImageModalOpen!(false) : ModalClose();
     setImageArr((prev) => ({ ...prev, images: [] }));
   };
-
-  //현재 화면 크기
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
-
-  useEffect(() => {
-    console.log('이미지 모달 열림');
-    console.log('image', imageArr);
-  }, []);
 
   return isCircle ? (
     <Box tabIndex={-1}>
@@ -132,8 +130,7 @@ const ImgEditModal = ({
               ))}
           </div>
         </div>
-
-        <S.Footer></S.Footer>
+        <S.Footer />
       </S.Form>
     </Box>
   ) : (

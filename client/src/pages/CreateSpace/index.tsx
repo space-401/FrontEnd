@@ -6,11 +6,12 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   useAlertModalStore,
   usePhotoModalStore,
   useSelectIconModalStore,
+  useSelectBasicIconModalStore,
 } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType } from '@/types/image.type';
@@ -20,33 +21,53 @@ import useInputs from '@/hooks/common/useInputs';
 import SelectIconModal from '@/components/Create/SelectIconModal';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
+import BasicIconModal from '@/components/Create/BasicIconModal';
+import { onConvertToFile } from '@/utils/fileConvertor';
+import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 
 const CreateSpace = () => {
+  //기본 이미지 선택
+  const [isBasicImg, setIsBasicImg] = useState<boolean>(false);
+  //기본 이미지
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
     images: [],
     cropImages: [],
-    convertedImages: [],
+    // convertedImages: [],
   });
+  const BasicIconArr = BasicIcon();
+  // const [fileImg, setFileImg] = useState<File | null>();
+
+  //기본이미지 선택
+  const [selectIconIdx, setSelectIconIdx] = useState(0);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  //모달
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
-  //현재 편집 모달이 열려있는지
+  //현재 경고 모달이 열려있는지
   const {
     ModalOpen: AlertModalOpen,
     isOpen: isAlertModalOpen,
     ModalClose: AlertModalClose,
   } = useAlertModalStore();
-
+  //현재 아이콘 선택 모달이 열려있는지
   const {
     ModalOpen: IconModalOpen,
     ModalClose: IconModalClose,
     isOpen: isIconModalOpen,
   } = useSelectIconModalStore();
+  //현재 기본 아이콘 선택 모달이 열려있는지
+  const {
+    ModalOpen: BasicIconModalOpen,
+    ModalClose: BasicIconModalClose,
+    isOpen: isBasicIconModalOpen,
+  } = useSelectBasicIconModalStore();
+  // const BasicIconArr = BasicIcon();
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  //인풋 관리
+  //스페이스 명, 스페이스 설명
   const { values, onChange } = useInputs({
     title: '',
     content: '',
@@ -57,7 +78,6 @@ const CreateSpace = () => {
   const [pswd, setPswd] = useState('');
   //비밀번호 보이기,숨기기
   const [isShowPswd, setIsShowPswd] = useState(false);
-
   const onToggleShowPswd = () => {
     setIsShowPswd((prev) => !prev);
   };
@@ -102,17 +122,42 @@ const CreateSpace = () => {
     IconModalClose();
   };
 
+  //기본 아이콘 이미지 선택 모달
+  const onMoveBasicIconModal = () => {
+    BasicIconModalOpen();
+    IconModalClose();
+  };
+
   //스페이스 생성하기
   const onSubmit = () => {
+    let convertedImg;
+    if (isBasicImg) {
+      convertedImg = onConvertToFile(BasicIconArr[selectIconIdx], 'spaceImg');
+    } else {
+      convertedImg = onConvertToFile(imageArr.cropImages[0], 'spaceImg');
+    }
     const spaceData = {
-      img: imageArr.convertedImages[0],
       title,
       content,
+      img: convertedImg,
       password: pswd,
     };
     console.log('space', spaceData);
-    // console.log('에러', error);
   };
+
+  useEffect(() => {
+    if (isIconModalOpen) {
+      setIsBasicImg(false);
+    }
+    if (isBasicIconModalOpen) {
+      setIsBasicImg(true);
+      setImageArr({
+        images: [],
+        cropImages: [],
+        // convertedImages: [],
+      });
+    }
+  }, [isIconModalOpen, isBasicIconModalOpen]);
 
   return (
     <S.Wrapper>
@@ -141,6 +186,17 @@ const CreateSpace = () => {
           modalClose={IconModalClose}
           isOpen={isIconModalOpen}
           onClickImgEditModal={onClickImgEditModal}
+          onMoveBasicIconModal={onMoveBasicIconModal}
+        />
+      )}
+      {/*기본 아이콘 선택 모달*/}
+      {isBasicIconModalOpen && (
+        <BasicIconModal
+          modalClose={BasicIconModalClose}
+          isOpen={isBasicIconModalOpen}
+          // setIsBasicImg={setIsBasicImg}
+          selectIconIdx={selectIconIdx}
+          setSelectIconIdx={setSelectIconIdx}
         />
       )}
       <S.Form>
@@ -149,7 +205,7 @@ const CreateSpace = () => {
           <div>스페이스 아이콘</div>
         </S.TitleContainer>
 
-        {imageArr.images.length == 0 ? (
+        {imageArr.images.length == 0 && !isBasicImg ? (
           <S.InputContainer number={1} onClick={IconModalOpen}>
             <input
               type="file"
@@ -168,11 +224,16 @@ const CreateSpace = () => {
           <S.InputContainer number={1}>
             <BasicBox
               onClick={IconModalOpen}
-              backgroundImage={imageArr.cropImages[0]}
+              backgroundImage={
+                isBasicImg && !isBasicIconModalOpen
+                  ? BasicIconArr[selectIconIdx]
+                  : imageArr.cropImages[0]
+              }
+              // backgroundImage={fileImg}
               width={160}
               borderradius={10}
               color="grey"
-            />
+            ></BasicBox>
             <S.EditButton onClick={PhotoModalOpen}>편집하기</S.EditButton>
           </S.InputContainer>
         )}
@@ -258,7 +319,7 @@ const CreateSpace = () => {
             width={160}
             height={47}
             disabled={
-              !imageArr.convertedImages.length ||
+              (!imageArr.cropImages.length && !isBasicImg) ||
               !title.length ||
               pswd.length < 5
             }

@@ -32,6 +32,7 @@ const router = createBrowserRouter([
             path: PATH.SPACE + '/:spaceId',
             element: <MainPage />,
           },
+
           {
             path: PATH.SPACE_UPDATE + '/:spaceId',
             // element: 업데이트 스페이스
@@ -39,15 +40,6 @@ const router = createBrowserRouter([
           {
             path: PATH.SPACE_CREATE,
             element: <CreateSpace />,
-          },
-          /*포스트*/
-          {
-            path: PATH.POST_CREATE,
-            element: <CreatePost />,
-          },
-          {
-            path: PATH.POST_UPDATE,
-            // element: 업데이트 포스트
           },
           {
             path: PATH.USER_INFO,

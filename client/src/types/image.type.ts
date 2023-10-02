@@ -6,5 +6,5 @@ export type ImageType = {
 export type ImageArrType = {
   images: ImageType[];
   cropImages: string[];
-  convertedImages: File[];
+  // convertedImages: File[];
 };

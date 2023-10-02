@@ -19,3 +19,9 @@ export const dataURLtoFile = (
     return null;
   }
 };
+
+// 파일 변환
+export const onConvertToFile = (originalImg: string, filename: string) => {
+  const convertedImg = dataURLtoFile(originalImg, filename);
+  return convertedImg;
+};

@@ -27,25 +27,42 @@ const Container = styled.div`
   border-radius: 40px;
   width: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  padding-top: 100px;
+  padding-top: 150px;
   margin-bottom: 30px;
   min-height: calc(100vh - 120px);
 `;
 
 const ButtonContainer = styled.div`
   position: absolute;
-  right: 160px;
+  right: 270px;
   top: 30px;
 `;
 
 const AddBox = styled.div`
   ${flexCenter}
-  width: 20rem;
-  height: 20rem;
+  width: 270px;
+  height: 270px;
   border-radius: 20px;
   border: 1px solid #4e4f55;
   background: var(--grey-4, #5f5f5f);
 `;
-const S = { Wrapper, Container, Img, SpaceContainer, AddBox, ButtonContainer };
+
+const EmptySpaceBox = styled.div`
+  width: 270px;
+  height: 270px;
+  border-radius: 20px;
+  border: 1px solid #57585e;
+  background: ${({ theme }) => theme.COLOR['gray-7']};
+`;
+
+const S = {
+  Wrapper,
+  Container,
+  Img,
+  SpaceContainer,
+  AddBox,
+  ButtonContainer,
+  EmptySpaceBox,
+};
 
 export default S;

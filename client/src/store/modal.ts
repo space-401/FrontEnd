@@ -47,3 +47,9 @@ export const useAlertModalStore = create<ModalType>((setState) => ({
   ModalOpen: () => setState(() => ({ isOpen: true })),
   ModalClose: () => setState(() => ({ isOpen: false })),
 }));
+
+export const useSelectBasicIconModalStore = create<ModalType>((setState) => ({
+  isOpen: false,
+  ModalOpen: () => setState(() => ({ isOpen: true })),
+  ModalClose: () => setState(() => ({ isOpen: false })),
+}));
