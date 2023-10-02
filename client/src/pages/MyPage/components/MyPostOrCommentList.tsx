@@ -1,7 +1,7 @@
-import { A, M } from '@pages/MyPage/MyBody/components/style';
+import { A, M } from '@pages/MyPage/components/style';
 import { Suspense, useState } from 'react';
-import MyPostList from '@pages/MyPage/MyBody/components/MyPostList';
-import MyCommentList from '@pages/MyPage/MyBody/components/MyCommentList';
+import MyPostList from '@pages/MyPage/components/MyPostList';
+import MyCommentList from '@pages/MyPage/components/MyCommentList';
 
 const MyPostOrCommentList = () => {
   const [isMyPost, setIsMyPost] = useState(true);

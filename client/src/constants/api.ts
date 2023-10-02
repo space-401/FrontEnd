@@ -19,6 +19,7 @@ export const END_POINTS = {
   USERINFO: '/mypage',
   BOOKMARK: '/bookmark',
   INVITATION: '/invitation',
+  LIST: '/list',
   COMMENT: (postId: string) => `/comment/${postId}`,
   SPACE_INFO: (spaceId: string) => `/space/${spaceId}`,
   POST_DETAIL: (postId: string) => `/post/${postId}`,
