@@ -9,11 +9,10 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   width: fit-content;
-  position: absolute;
   bottom: 100%;
   right: 0;
-  ${flexCenter}
-  margin:8px;
+  ${flexCenter};
+  margin: 8px;
   padding: 8px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
@@ -43,7 +42,7 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
 
 const DeleteIcon = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
-  position: 'absolute';
+  position: absolute;
   top: 0;
   right: 0;
   &:hover {

@@ -39,6 +39,7 @@ const SettingIconBox = styled.div`
   right: 10px;
   border-radius: 5px;
   transition: 0.5s;
+  padding: 5px;
   &:hover {
     background: ${({ theme }) => theme.COLOR['gray-4']};
   }
@@ -59,8 +60,8 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
 `;
 
 const MenuGroup = styled.div<{ isOpen: boolean }>`
-  right: 30px;
-  top: 10px;
+  right: 0;
+  top: calc(100% + 3px);
   position: absolute;
   width: 192px;
   display: ${({ isOpen }) => (isOpen ? 'inline-flex' : 'none')};
@@ -129,7 +130,7 @@ const ModalTop = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  padding: 0px 16px;
+  padding: 0 16px;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
@@ -142,7 +143,7 @@ const ModalTop = styled.div`
 
 const ModalMain = styled.div`
   width: 100%;
-  ${flexCenter}
+  ${flexCenter};
   padding: 24px;
   gap: 50px;
   border-bottom: 1px solid ${({ theme }) => theme.COLOR['gray-5']};

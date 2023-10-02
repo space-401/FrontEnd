@@ -57,6 +57,10 @@ export type SelectBoxProps = {
    * State를 받을 함수를 넣어주세요
    */
   setState: (select: selectType[]) => void;
+  /**
+   * 선택된 유저의 리스트를 넣어주세요
+   */
+  selectState: selectType[];
 };
 
 export type TagListProps = {
@@ -68,13 +72,8 @@ export type UserListProps = {
 };
 
 export type SearchProps = {
-  setState: (searchValue: string) => void;
   placeholder: string;
-  state: {
-    selectUserList: selectType[];
-    selectTagList: selectType[];
-    search: string;
-  };
+  state: PostListFilterProps;
 };
 
 export type SpacePostListProps = {
@@ -89,4 +88,10 @@ export type PaginationType = {
   page: number;
   itemLength: number;
   movePage: (number: number) => void;
+};
+
+export type PostListFilterProps = {
+  selectUserList: selectType[];
+  selectTagList: selectType[];
+  dateTime: string;
 };

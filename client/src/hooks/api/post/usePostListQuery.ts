@@ -8,10 +8,9 @@ export const usePostListQuery = (
   page: string,
   filter: FilterType
 ) => {
-  const { data: myPostListData } = useQuery<SpacePostListProps, AxiosError>(
-    ['postList', spaceId],
-    () => getPostList(spaceId, page, filter)
-  );
-  console.log(myPostListData, '가져옴');
-  return { myPostListData };
+  const { data: myPostListData, refetch } = useQuery<
+    SpacePostListProps,
+    AxiosError
+  >(['postList', spaceId, filter], () => getPostList(spaceId, page, filter));
+  return { myPostListData, refetch };
 };
