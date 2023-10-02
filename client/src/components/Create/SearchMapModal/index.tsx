@@ -38,6 +38,8 @@ const SearchModal = React.forwardRef(
       libraries: ['services'],
     });
 
+    const item_length = 4;
+
     const [keyword, setKeyword] = useState(mapInfo.content);
     const [data, setData] = useState<kakao.maps.services.PlacesSearchResult>(
       []
@@ -64,33 +66,44 @@ const SearchModal = React.forwardRef(
       if (!map) return;
       const ps = new kakao.maps.services.Places();
 
-      ps.keywordSearch(keyword, (data, status, _pagination) => {
-        if (status === kakao.maps.services.Status.OK) {
-          // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-          // LatLngBounds 객체에 좌표를 추가합니다
-          const bounds = new kakao.maps.LatLngBounds();
-          const markers: MarkerType[] = [];
-          setData(data);
-          setPagination(_pagination);
+      ps.keywordSearch(
+        keyword,
+        (data, status, _pagination) => {
+          if (status === kakao.maps.services.Status.OK) {
+            const bounds = new kakao.maps.LatLngBounds();
+            const markers: MarkerType[] = [];
+            setData(data);
+            setPagination(_pagination);
 
-          for (let i = 0; i < data.length; i++) {
-            const marker: MarkerType = {
-              markerId: data[i].id,
-              position: { lat: data[i].y, lng: data[i].x },
-              content: data[i].address_name,
-            };
-            markers.push(marker);
-            bounds.extend(
-              new kakao.maps.LatLng(Number(data[i].y), Number(data[i].x))
-            );
+            for (let i = 0; i < data.length; i++) {
+              const marker: MarkerType = {
+                markerId: data[i].id,
+                position: { lat: data[i].y, lng: data[i].x },
+                content: data[i].address_name,
+              };
+              markers.push(marker);
+              bounds.extend(
+                new kakao.maps.LatLng(Number(data[i].y), Number(data[i].x))
+              );
+            }
+            setMarkers(markers);
+
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+            map.setBounds(bounds);
           }
-          setMarkers(markers);
-
-          // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-          map.setBounds(bounds);
-        }
-      });
+        },
+        { size: item_length }
+      );
     }, [map, keyword]);
+
+    const selectAction = (data: kakao.maps.services.PlacesSearchResultItem) => {
+      setMapInfo({
+        content: data.place_name,
+        position: { lat: data.x, lng: data.y },
+        markerId: '',
+      });
+      onClose();
+    };
 
     return (
       <Modal
@@ -139,10 +152,17 @@ const SearchModal = React.forwardRef(
                         }
                       }}
                     >
-                      <S.PlaceTitle>{data.place_name}</S.PlaceTitle>
-                      <S.AddressTitle>{data.address_name}</S.AddressTitle>
-                      <S.Phone>{data.phone}</S.Phone>
-                      <S.Category>{data.category_group_name}</S.Category>
+                      <S.LeftInfo>
+                        <div>{data.place_name}</div>
+                        <div>{data.address_name}</div>
+                        <div>{data.phone}</div>
+                        <S.Category>{data.category_group_name}</S.Category>
+                      </S.LeftInfo>
+                      <S.RightButton>
+                        <S.SelectButton onClick={() => selectAction(data)}>
+                          확인
+                        </S.SelectButton>
+                      </S.RightButton>
                     </S.OneList>
                   );
                 })}
@@ -150,7 +170,7 @@ const SearchModal = React.forwardRef(
                   <Pagination
                     total={pagination.totalCount}
                     page={pagination.current}
-                    item_length={15}
+                    item_length={item_length}
                     setPage={pagination.gotoPage}
                   />
                 )}
