@@ -1,15 +1,19 @@
 import { Modal, Box } from '@mui/material';
 import S from '@/components/Create/SelectIconModal/style';
 
+type IconModalPropsType = {
+  isOpen: boolean;
+  onClickImgEditModal: any;
+  onMoveBasicIconModal: any;
+  modalClose: () => void;
+};
+
 const SelectIconModal = ({
   isOpen,
   modalClose,
   onClickImgEditModal,
-}: {
-  isOpen: boolean;
-  onClickImgEditModal: any;
-  modalClose: () => void;
-}) => {
+  onMoveBasicIconModal,
+}: IconModalPropsType) => {
   return (
     <Modal
       open={isOpen}
@@ -33,7 +37,11 @@ const SelectIconModal = ({
           >
             이미지 불러오기
           </S.Content>
-          <S.Content fontSize={18} lightgrey={false}>
+          <S.Content
+            fontSize={18}
+            lightgrey={false}
+            onClick={onMoveBasicIconModal}
+          >
             기본 아이콘 사용하기
           </S.Content>
           <S.Content fontSize={18} lightgrey={true} onClick={modalClose}>

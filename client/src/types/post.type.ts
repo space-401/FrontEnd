@@ -16,7 +16,7 @@ export type PostType = {
   title: string;
   content: string;
   people: selectType[];
-  tag: selectType[];
+  tags: selectType[];
   place: {
     content: string;
     position: {
@@ -25,10 +25,7 @@ export type PostType = {
     };
   };
   imgs: File[];
-  date: {
-    startDate: Date | null;
-    endDate: Date | null;
-  };
+  date: DateInfoType;
 };
 
 export type FlipCardSize = 'small' | 'medium' | 'big';
@@ -50,4 +47,9 @@ export type FlipType = {
   imgUrl: string;
   onClick: () => void;
   borderRadius?: string;
+};
+
+export type DateInfoType = {
+  startDate: string | undefined;
+  endDate: string | undefined;
 };

@@ -10,7 +10,6 @@ import SettingComponent from '@components/Main/Setting/SettingComponent';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo } = prop;
@@ -75,7 +74,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <S.CreateButton onClick={() => navigate(PATH.POST_CREATE)}>
+        <S.CreateButton onClick={() => navigate('post')}>
           게시물 작성
         </S.CreateButton>
       </S.HeaderFooter>

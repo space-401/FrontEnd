@@ -11,6 +11,7 @@ import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
 import Auth from '@/pages/Auth';
 import { PATH } from '@constants/path';
 import { Suspense } from 'react';
+import BackLayout from '@/layout/BackLayout';
 
 const router = createBrowserRouter([
   {
@@ -34,14 +35,6 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: PATH.SPACE_UPDATE + '/:spaceId',
-            // element: 업데이트 스페이스
-          },
-          {
-            path: PATH.POST_UPDATE,
-            // element: 업데이트 포스트
-          },
-          {
             path: PATH.USER_INFO,
             element: (
               <Suspense fallback={<></>}>
@@ -52,22 +45,27 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: PATH.SPACE_CREATE,
-        element: <CreateSpace />,
-      },
-      {
-        path: PATH.POST_CREATE,
-        element: <CreatePost />,
+        element: <BackLayout />,
+        children: [
+          {
+            path: PATH.SPACE + '/:spaceId' + '/post',
+            element: <CreatePost />,
+          },
+          {
+            path: PATH.SPACE_CREATE,
+            element: <CreateSpace />,
+          },
+          {
+            path: PATH.INVITE,
+            element: <InviteCode />,
+          },
+        ],
       },
     ],
   },
   {
     path: PATH.LANDING,
     element: <Landing />,
-  },
-  {
-    path: PATH.INVITE,
-    element: <InviteCode />,
   },
   {
     path: PATH.AUTH,
