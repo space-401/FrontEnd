@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 2fr;
   min-width: 1200px;
   max-width: 1280px;
-  height: 760px;
+  height: 800px;
   padding: 32px 24px;
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
@@ -17,6 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const LeftContainer = styled.div`
+  padding-top: 10px;
   position: relative;
   height: 100%;
   overflow: hidden;
@@ -51,26 +52,11 @@ const SubmitButton = styled.button`
 
 const SearchList = styled.ul`
   padding-top: 44px;
+  padding-right: 24px;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   height: 100%;
   gap: 10px;
-
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    height: 10%;
-    background: ${({ theme }) => theme.COLOR['gray-4']};
-    border-radius: 5px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.COLOR['gray-5']};
-    border-radius: 5px;
-  }
 `;
 
 const OneList = styled.li<{ select: boolean }>`
@@ -79,19 +65,40 @@ const OneList = styled.li<{ select: boolean }>`
   border: 2px solid
     ${({ select, theme }) =>
       select ? theme.COLOR['gray-4'] : theme.COLOR['gray-5']};
-  padding: 5px;
-  margin-right: 10px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
   background: ${({ theme }) => theme.COLOR['gray-5']};
 `;
 
-const PlaceTitle = styled.div``;
+const Category = styled.div`
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  color: ${({ theme }) => theme.COLOR['gray-2']};
+`;
 
-const AddressTitle = styled.div``;
+const LeftInfo = styled.div`
+  width: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: ${({ theme }) => theme.COLOR['gray-1']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
 
-const Phone = styled.div``;
+const RightButton = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-const Category = styled.div``;
-
+const SelectButton = styled.div`
+  display: flex;
+  padding: 12px 24px;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.COLOR.skyblue};
+`;
 export const S = {
   Wrapper,
   LeftContainer,
@@ -101,10 +108,10 @@ export const S = {
   SubmitButton,
   SearchList,
   OneList,
-  PlaceTitle,
-  AddressTitle,
-  Phone,
   Category,
+  LeftInfo,
+  RightButton,
+  SelectButton,
 };
 
 const PaginationBox = styled.div`
