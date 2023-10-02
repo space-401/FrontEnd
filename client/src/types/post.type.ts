@@ -1,6 +1,5 @@
 import { selectType } from './main.type';
-import { SpacePostType } from '@type/space.type';
-import { OneSpaceType } from '@type/space.type';
+import type { SpacePostType, OneSpaceType } from '@type/space.type';
 
 export type UserType = {
   userId: number;

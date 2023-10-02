@@ -11,7 +11,7 @@ import { SpacePostType, OneSpaceType } from '@/types/space.type';
 const FlipCard = (
   props: FlipType & (PostInfoBackPropsType | SpaceInfoBackPropsType)
 ) => {
-  const { imgUrl, onClick, size, item, borderRadius } = props;
+  const { imgUrl, onClick, size, item } = props;
 
   function isPostInfo(
     item: SpacePostType | OneSpaceType
@@ -22,7 +22,7 @@ const FlipCard = (
   return (
     <>
       <S.Flip size={size} onClick={onClick}>
-        <S.Card img={imgUrl} borderRadius={borderRadius} />
+        <S.Card img={imgUrl} />
         <S.Hover img={imgUrl}>
           {isPostInfo(item) ? (
             <PostInfoBack size={size} item={item} />
