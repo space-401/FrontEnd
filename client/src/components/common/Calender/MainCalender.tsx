@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
 import { postTimeChangeHelper } from '@/utils/time-helper';
 import '@components/common/Calender/calender.css';
-import { DateInfoType } from '@/types/post.type';
 import { getMonth } from 'date-fns';
 import { ReactComponent as DownIcon } from '@/assets/svg/chevron/chevron_down.svg';
 import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
@@ -16,30 +15,18 @@ import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
 type CalenderPropsType = {
   height: number;
   borderRadius: number;
-  setDateInfo: React.Dispatch<DateInfoType>;
+  setDateInfo: React.Dispatch<string>;
   isMain: boolean;
-  dateInfo?: DateInfoType;
 };
 
-const Calender = ({
+const MainCalender = ({
   setDateInfo,
   height,
   borderRadius,
   isMain,
-  dateInfo,
 }: CalenderPropsType) => {
   const [startDate, setStartDate] = useState<Date>();
-
-  useEffect(() => {
-    console.log('dateInfoaaaa', dateInfo);
-    dateInfo?.startDate && setStartDate(new Date(dateInfo.startDate));
-    dateInfo?.endDate && setEndDate(new Date(dateInfo.endDate));
-    console.log();
-  }, []);
-
-  const [endDate, setEndDate] = useState(
-    dateInfo?.endDate ? new Date(dateInfo.endDate) : null
-  );
+  // const [endDate, setEndDate] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
 
   const toggleDropdown = (index: number) => {
@@ -51,32 +38,19 @@ const Calender = ({
     }
   };
 
-  const onChange = (dates: any) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+  const onChange = (date: any) => {
+    // const [start, end] = dates;
+    setStartDate(date);
+    // setEndDate(end);
     setIsDropdownOpen([false, false]);
   };
 
-  //날짜 형식 변환해서 보내줌
   useEffect(() => {
-    console.log('dateInfo', startDate);
     if (startDate) {
-      let newDateStr: DateInfoType;
-      if (endDate) {
-        newDateStr = {
-          startDate: postTimeChangeHelper(startDate) || '',
-          endDate: postTimeChangeHelper(endDate) || '',
-        };
-      } else {
-        newDateStr = {
-          startDate: postTimeChangeHelper(startDate) || '',
-          endDate: postTimeChangeHelper(startDate) || '',
-        };
-      }
-      setDateInfo(newDateStr);
+      const stringDate = postTimeChangeHelper(startDate);
+      stringDate && setDateInfo(stringDate);
     }
-  }, [startDate, endDate]);
+  }, [startDate]);
 
   return (
     <div className="custom-react-datepicker__wrapper">
@@ -93,9 +67,9 @@ const Calender = ({
           selected={startDate}
           onChange={onChange}
           startDate={startDate}
-          endDate={endDate}
+          // endDate={endDate}
           locale={ko}
-          selectsRange
+          // selectsRange
           dateFormatCalendar="MMMM"
           calendarClassName="calenderWrapper"
           renderCustomHeader={({ date, changeYear, changeMonth }) => (
@@ -197,7 +171,7 @@ const Calender = ({
           )}
         ></StyledDatePicker>
         <CalenderIcon
-          style={{ position: 'absolute', bottom: '25', left: 280 }}
+          style={{ position: 'absolute', bottom: '25', left: 135 }}
         />
         {!startDate && !isMain && (
           <S.DateText
@@ -229,7 +203,7 @@ const Calender = ({
   );
 };
 
-export default Calender;
+export default MainCalender;
 
 const StyledDatePicker = styled(DatePicker)`
   height: ${({ height }) => height}px; /* 조건에 따라 height 설정 */
@@ -237,7 +211,7 @@ const StyledDatePicker = styled(DatePicker)`
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   border-radius: ${({ borderRadius }) => borderRadius}px;
-  width: ${({ isMain }) => (isMain ? '230' : '322')}px;
+  width: ${({ isMain }) => (isMain ? '168' : '322')}px;
   display: flex;
   padding-left: ${({ isMain }) => (isMain ? 1.2 : 2.6)}rem;
 `;

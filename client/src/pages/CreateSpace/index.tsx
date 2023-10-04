@@ -22,7 +22,6 @@ import SelectIconModal from '@/components/Create/SelectIconModal';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import BasicIconModal from '@/components/Create/BasicIconModal';
-import { onConvertToFile } from '@/utils/fileConvertor';
 import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 
 const CreateSpace = () => {
@@ -33,7 +32,7 @@ const CreateSpace = () => {
   const [imageArr, setImageArr] = useState<ImageArrType>({
     images: [],
     cropImages: [],
-    // convertedImages: [],
+    compressedImage: [],
   });
   const BasicIconArr = BasicIcon();
 
@@ -129,19 +128,19 @@ const CreateSpace = () => {
 
   //스페이스 생성하기
   const onSubmit = () => {
-    let convertedImg;
-    if (isBasicImg) {
-      convertedImg = onConvertToFile(BasicIconArr[selectIconIdx], 'spaceImg');
-    } else {
-      convertedImg = onConvertToFile(imageArr.cropImages[0], 'spaceImg');
-    }
-    const spaceData = {
-      title,
-      content,
-      img: convertedImg,
-      password: pswd,
-    };
-    console.log('space', spaceData);
+    // let convertedImg;
+    // if (isBasicImg) {
+    //   convertedImg = onConvertToFile(BasicIconArr[selectIconIdx], 'spaceImg');
+    // } else {
+    //   convertedImg = onConvertToFile(imageArr.cropImages[0], 'spaceImg');
+    // }
+    // const spaceData = {
+    //   title,
+    //   content,
+    //   img: convertedImg,
+    //   password: pswd,
+    // };
+    // console.log('space', spaceData);
   };
 
   useEffect(() => {
@@ -153,7 +152,7 @@ const CreateSpace = () => {
       setImageArr({
         images: [],
         cropImages: [],
-        // convertedImages: [],
+        compressedImage: [],
       });
     }
   }, [isIconModalOpen, isBasicIconModalOpen]);
@@ -267,6 +266,7 @@ const CreateSpace = () => {
         </S.TitleContainer>
         <S.InputContainer number={3}>
           <TextAreaBox
+            value={content}
             height={160}
             placeholder="스페이스 설명 입력"
             maxLength={100}

@@ -8,7 +8,7 @@ import {
 } from '@type/user.type';
 
 export const accountInfoMock: AccountDataType = {
-  loginState: '카카오톡',
+  loginState: 'kakao',
   name: '김은주',
   email: 'qwer@kakao.com',
 };

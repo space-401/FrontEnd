@@ -1,7 +1,7 @@
 import { MyCommentType, SpacePostType } from '@type/space.type';
 
 export type AccountDataType = {
-  loginState: '카카오톡' | '네이버' | 'Google';
+  loginState: 'kakao' | 'naver' | 'google';
   name: string;
   email: string;
 };

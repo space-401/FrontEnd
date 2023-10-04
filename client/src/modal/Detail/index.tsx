@@ -55,6 +55,7 @@ const DetailPage = React.forwardRef(
       value: '',
       isBookMark: false,
     });
+    const currentURL = window.location.href;
 
     const mapContainerRef = useRef(null);
     const commentContainerRef = useRef(null);
@@ -67,14 +68,13 @@ const DetailPage = React.forwardRef(
     const { postDetailData } = usePostDetailQuery(postId);
 
     const {
-      mainImgUrl,
-      subImgUrl,
+      imgs,
       userList,
       placeTitle,
       placeTag,
       postUpdatedAt,
       postCreatedAt,
-      position,
+      location,
       commentCount,
       isMine,
       postTitle,
@@ -143,8 +143,8 @@ const DetailPage = React.forwardRef(
                 {state.isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
               </IconButton>
             </S.LikeIconBox>
-            <S.LeftImgBox isArray={subImgUrl.length !== 0}>
-              {[mainImgUrl, ...subImgUrl].map((imgUrl) => (
+            <S.LeftImgBox isArray={imgs.length !== 0}>
+              {[...imgs].map((imgUrl) => (
                 <S.ImgBox key={imgUrl} imgUrl={imgUrl} />
               ))}
             </S.LeftImgBox>
@@ -179,7 +179,14 @@ const DetailPage = React.forwardRef(
                         }
                       />
                       <S.MenuGroup>
-                        <S.MenuButton>게시글 편집</S.MenuButton>
+                        <S.MenuButton
+                          onClick={() => {
+                            window.location.href =
+                              currentURL + `/post/${postId}`;
+                          }}
+                        >
+                          게시글 편집
+                        </S.MenuButton>
                         <S.MenuButton
                           onClick={() =>
                             setState((prev) => ({
@@ -240,14 +247,14 @@ const DetailPage = React.forwardRef(
                   <Map
                     zoomable={false}
                     draggable={false}
-                    center={position}
+                    center={location}
                     style={{
                       width: '100%',
                       height: '200px',
                     }}
                     level={4}
                   >
-                    <MapMarker position={position} />
+                    <MapMarker position={location} />
                   </Map>
                 </S.MapBox>
               </S.MapInfo>

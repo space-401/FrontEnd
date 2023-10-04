@@ -2,25 +2,35 @@ import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import S from '@pages/Main/PostList/style';
 import { Suspense, useEffect, useState } from 'react';
-import type { PostListPropType, selectType } from '@type/main.type';
+import type { selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import Pagination from '@components/common/Pagination';
-import Calender from '@/components/common/Calender/Calender';
+import MainCalender from '@/components/common/Calender/MainCalender';
 import { usePostListQuery } from '@hooks/api/post/usePostListQuery';
 import { useSearchParams } from 'react-router-dom';
 import { PostListFilterProps } from '@type/main.type';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import { UserType, TagType } from '@/types/post.type';
+
+export type PostListPropType = {
+  spaceId: string;
+  selectState: boolean;
+  userList: UserType[];
+  tagList: TagType[];
+};
 
 const PostList = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  //유저와 태그 필터
   const [state, setState] = useState<PostListFilterProps>({
     selectUserList: [],
     selectTagList: [],
-    dateTime: '',
   });
+
+  const [date, setDate] = useState('');
 
   const { spaceId, selectState, userList, tagList } = props;
 
@@ -73,8 +83,8 @@ const PostList = (props: PostListPropType) => {
     if (state.selectTagList.length !== 0) {
       select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
     }
-    if (state.dateTime.length !== 0) {
-      select = { ...select, dateTime: state.dateTime };
+    if (date.length !== 0) {
+      select = { ...select, dateTime: date };
     }
     if (keyword) {
       select = { ...select, keyword: keyword };
@@ -134,8 +144,13 @@ const PostList = (props: PostListPropType) => {
               : []
           }
         />
-        <Calender isMain={true} height={50} borderRadius={5} />
-        <MainSearchBox state={state} placeholder={'제목'} />
+        <MainCalender
+          isMain={true}
+          height={50}
+          borderRadius={5}
+          setDateInfo={setDate}
+        />
+        <MainSearchBox state={state} placeholder={'제목'} date={date} />
       </S.FilterGroup>
       {!selectState ? (
         postList.length === 0 ? (
