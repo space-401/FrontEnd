@@ -10,8 +10,6 @@ import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
 import { useState, useRef, useEffect } from 'react';
-import { users_mock } from '@/mocks/data/user/users.mock';
-import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
@@ -25,6 +23,7 @@ import { PostType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore } from '@/store/modal';
+import { tagList, userList } from '@mocks/data/common';
 
 // import { useUserStore } from '@/store/user';
 const CreatePost = () => {
@@ -257,10 +256,10 @@ const CreatePost = () => {
         <S.InputContainer number={2}>
           <CreateSelectBox
             labelName={'사용자'}
-            ListItem={users_mock}
+            ListItem={userList}
             BoxWidth={inputWidth}
             setState={setPeopleState}
-            menuHeight={89 * Math.floor(users_mock.length / 2)}
+            menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
           />
         </S.InputContainer>
@@ -275,10 +274,10 @@ const CreatePost = () => {
         <S.InputContainer number={3}>
           <CreateSelectBox
             labelName={'태그'}
-            ListItem={createPostMock}
+            ListItem={tagList}
             BoxWidth={inputWidth}
             setState={setTagState}
-            menuHeight={100 * Math.floor(users_mock.length / 2)}
+            menuHeight={100 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
           />
         </S.InputContainer>

@@ -3,6 +3,8 @@ import { axiosInstance } from '@apis/AxiosInstance';
 import { OneSpaceType } from '@type/space.type';
 
 export const getSpaceList = async () => {
-  const { data } = await axiosInstance.get<OneSpaceType[]>(END_POINTS.SPACE);
+  const { data } = await axiosInstance.get<OneSpaceType[]>(
+    END_POINTS.SPACE_LIST
+  );
   return data;
 };

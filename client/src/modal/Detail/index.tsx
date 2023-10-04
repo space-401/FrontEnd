@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import S, { mentionStyle } from '@/modal/Detail/style';
 import { Box, Chip, IconButton } from '@mui/material';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
@@ -12,7 +12,6 @@ import { motion } from 'framer-motion';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import DetailComments from '@components/Main/Comments';
 import ConfirmModal from '@modal/Confirm/ConfirmModal';
-import toast from 'react-hot-toast';
 import { ReactComponent as BookMarkFillSvg } from '@assets/svg/bookmark/fill.svg';
 import { ReactComponent as BookMarkEmptySvg } from '@assets/svg/bookmark/empty.svg';
 import {
@@ -24,6 +23,9 @@ import {
 import OneMention from '@/components/Detail/Mention/OneMention';
 import { usePostDetailQuery } from '@hooks/api/post/usePostDetailQuery';
 import { useDetailModalStore } from '@store/modal';
+import { UseBookMarkMutation } from '@hooks/api/post/useBookMarkMutation';
+import { toastColorMessage } from '@utils/toastMessage';
+import { theme } from '@styles/theme/theme';
 
 type DetailPageProps = {
   onClose: () => void;
@@ -90,11 +92,14 @@ const DetailPage = React.forwardRef(
       setReply(event.target.value);
     };
 
+    const { bookMarkAction } = UseBookMarkMutation(postId);
+
     const DeleteAction = () => {
       ModalClose();
-      toast('삭제되었습니다.', {
-        style: { background: 'black', color: 'white' },
-        position: 'top-center',
+      toastColorMessage({
+        background: theme.COLOR['gray-5'],
+        color: theme.COLOR.white,
+        message: '삭제되었습니다.',
       });
     };
 
@@ -117,8 +122,12 @@ const DetailPage = React.forwardRef(
     };
 
     const wishAsync = () => {
-      setState((prev) => ({ ...prev, isBookMark: !state.isBookMark }));
+      bookMarkAction();
     };
+
+    useEffect(() => {
+      console.log(state.deleteModalIsOpen);
+    }, [state.deleteModalIsOpen]);
 
     return (
       <Box tabIndex={-1} ref={forwardRef}>

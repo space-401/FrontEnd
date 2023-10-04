@@ -2,32 +2,53 @@ import { rest, RestHandler } from 'msw';
 
 import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
 import {
-  accountInfoMock,
-  bookMarkListMock,
-  myCommentListMock,
-  myPostListMock,
-} from '@mocks/data/MyPage/MyPageMock';
+  accountInfo,
+  bookMarkList,
+  myCommentList,
+  myPostList,
+} from '@mocks/data/user.mock';
 
 export const userHandlers: RestHandler[] = [
+  /**
+   * 로그인하는 api
+   */
+  rest.get(END_POINTS.LOGIN, (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfo));
+  }),
+  /**
+   * 로그아웃하는 api
+   */
+  rest.get(END_POINTS.LOGOUT, (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfo));
+  }),
+  /**
+   * 회원가입하는 api
+   */
+  rest.post(END_POINTS.USER, (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfo));
+  }),
+  /**
+   * 사용자 정보를 불러오는 api
+   */
   rest.get(END_POINTS.USERINFO, (_, res, ctx) => {
-    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfoMock));
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfo));
   }),
-
-  rest.get(END_POINTS.USERINFO + '/post', (_, res, ctx) => {
-    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(myPostListMock));
+  /**
+   * 내가 작성한 포스트 게시물들을 불러오는 api
+   */
+  rest.get(END_POINTS.MY_POST_LIST('page'), (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(myPostList));
   }),
-
-  rest.get(END_POINTS.USERINFO + '/comment', (_, res, ctx) => {
-    return res(
-      ctx.status(HTTP_STATUS_CODE.SUCCESS),
-      ctx.json(myCommentListMock)
-    );
+  /**
+   * 내가 작성한 댓글 리스트들을 불러오는 api
+   */
+  rest.get(END_POINTS.MY_COMMENT_LIST('page'), (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(myCommentList));
   }),
-
-  rest.get(END_POINTS.USERINFO + '/bookmark', (_, res, ctx) => {
-    return res(
-      ctx.status(HTTP_STATUS_CODE.SUCCESS),
-      ctx.json(bookMarkListMock)
-    );
+  /**
+   * 내가 북마크한 포스트 게시물들을 불러오는 api
+   */
+  rest.get(END_POINTS.MY_BOOK_MARK_LIST('page'), (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(bookMarkList));
   }),
 ];

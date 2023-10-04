@@ -1,5 +1,6 @@
 import { selectType } from './main.type';
 import type { SpacePostType, OneSpaceType } from '@type/space.type';
+import { ApiResponseType } from '@type/response.type';
 
 export type UserType = {
   userId: number;
@@ -51,3 +52,5 @@ export type FlipType = {
   onClick: () => void;
   borderRadius?: string;
 };
+
+export type PostResponseType = ApiResponseType & { postId: number };
