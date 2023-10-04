@@ -10,8 +10,6 @@ import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
 import { useState, useRef } from 'react';
-import { users_mock } from '@/mocks/data/user/users.mock';
-import createPostMock from '@/mocks/data/createPostPage/createPost.mock';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
@@ -29,6 +27,7 @@ import { useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
 import { makeObj } from '@/utils/makeObj';
 import ConfirmModal from '@/modal/Confirm/ConfirmModal';
+import { tagList, userList } from '@mocks/data/common';
 
 const CreatePost = () => {
   const params = useParams();
@@ -97,7 +96,7 @@ const CreatePost = () => {
   const [people, setPeople] = useState<selectType[]>(
     postDetailData ? postDetailData.tagUsers : []
   );
-  const [tags, setTags] = useState<selectType[]>();
+  const [tags, setTags] = useState<selectType[]>([]);
   //경고 모달
   const {
     isOpen: isAlertModalOpen,
@@ -284,10 +283,10 @@ const CreatePost = () => {
           <CreateSelectBox
             selectState={people}
             labelName={'사용자'}
-            ListItem={users_mock}
+            ListItem={userList}
             BoxWidth={inputWidth}
             setState={setPeople}
-            menuHeight={89 * Math.floor(users_mock.length / 2)}
+            menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
             // state={people.map((v) => ({
             //   id: v.userId,
@@ -307,10 +306,11 @@ const CreatePost = () => {
           <CreateSelectBox
             selectState={tags}
             labelName={'태그'}
-            ListItem={createPostMock}
+            ListItem={tagList}
             BoxWidth={inputWidth}
             setState={setTags}
-            menuHeight={100 * Math.floor(users_mock.length / 2)}
+            menuHeight={100 * Math.floor(userList.length / 2)}
+            // setState={setTagState}
             menuWidth={inputWidth}
           />
         </S.InputContainer>

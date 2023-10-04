@@ -2,7 +2,7 @@ import { CommentType } from '@type/space.type';
 import S from '@components/Main/Comments/OneComment/style';
 import Avatar from '@mui/material/Avatar';
 import { timeHelper } from '@utils/time-helper';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import type { UserType } from '@type/post.type';
 import { TextareaAutosize } from '@mui/material';
 import { ReactComponent as MyCommentSvg } from '@assets/svg/moreIcon.svg';
@@ -77,8 +77,6 @@ const OneComment = (props: OneCommentType) => {
       position: 'top-center',
     });
   };
-
-  useEffect(() => {}, [state.settingIsOpen]);
 
   while ((match = regex.exec(content)) !== null) {
     const user_name = match[1];

@@ -18,7 +18,9 @@ const HeaderLayout = () => {
             <DetailInner onClose={ModalClose} />
           </Suspense>
         </DetailModal>
-        <Header />
+        <Suspense fallback={<></>}>
+          <Header />
+        </Suspense>
         <S.ContentWrapper>
           <Outlet />
         </S.ContentWrapper>
