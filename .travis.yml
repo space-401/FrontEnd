@@ -1,7 +1,0 @@
-# language: node_js
-# node_js:
-#   - 14 # 또는 프로젝트에 맞는 Node.js 버전
-
-# before_script:
-#   - cd client # client 폴더로 이동
-#   - npx chromatic --project-token=chpt_fa538125e6b2f04
