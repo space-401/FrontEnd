@@ -1,11 +1,18 @@
-import {axiosInstance} from "@apis/AxiosInstance";
-import {ApiResponseType} from "@type/response.type";
-import {END_POINTS} from "@constants/api";
+import { axiosInstance } from '@apis/AxiosInstance';
+import { ApiResponseType } from '@type/response.type';
+import { END_POINTS } from '@constants/api';
 
-export const deleteSpaceTag = async (spaceId: number, tagId: number) => {
-    const {data} = await axiosInstance.post<ApiResponseType>(
-        END_POINTS.SPACE_TAG(spaceId), {tagId}
-    );
+export type DeleteSpaceTagType = {
+  spaceId: number;
+  tagId: number;
+};
 
-    return data;
+export const deleteSpaceTag = async (deleteTagInfo: DeleteSpaceTagType) => {
+  const { spaceId, tagId } = deleteTagInfo;
+  const { data } = await axiosInstance.delete<ApiResponseType>(
+    END_POINTS.SPACE_TAG(spaceId),
+    { data: { tagId } }
+  );
+
+  return data;
 };

@@ -1,8 +1,13 @@
 import { rest, RestHandler } from 'msw';
 
 import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
-import {spaceCreate, spaceInfo, spaceList, spacePostList} from "@mocks/data/space.mock";
-import {successResponse} from "@mocks/data/response.mock";
+import {
+  spaceCreate,
+  spaceInfo,
+  spaceList,
+  spacePostList,
+} from '@mocks/data/space.mock';
+import { successResponse } from '@mocks/data/response.mock';
 
 export const spaceHandlers: RestHandler[] = [
   /**
@@ -20,7 +25,7 @@ export const spaceHandlers: RestHandler[] = [
   /**
    * 스페이스 메인페이지 (리스트)를 불러오는 api
    */
-  rest.get(END_POINTS.SPACE+'/:spaceId/search', (_, res, ctx) => {
+  rest.get(END_POINTS.SPACE + '/:spaceId/search', (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(spacePostList));
   }),
   /**

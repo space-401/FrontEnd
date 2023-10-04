@@ -3,7 +3,7 @@ import FlipCard from '@/components/common/FlipCard/FlipCard';
 import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { useNavigate } from 'react-router-dom';
-import {spaceList} from "@mocks/data/space.mock";
+import { spaceList } from '@mocks/data/space.mock';
 
 const SelectSpace = () => {
   const navigate = useNavigate();

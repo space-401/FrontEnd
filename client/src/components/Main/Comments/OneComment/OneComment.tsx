@@ -78,7 +78,6 @@ const OneComment = (props: OneCommentType) => {
     });
   };
 
-
   while ((match = regex.exec(content)) !== null) {
     const user_name = match[1];
     const startIndex = match.index;

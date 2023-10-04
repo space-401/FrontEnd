@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 import { getRefreshToken, TokenData } from '@apis/user/getRefreshToken';
 
 export const useRefreshTokenQuery = () => {
