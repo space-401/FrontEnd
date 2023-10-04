@@ -4,7 +4,7 @@ import { PostDetailType } from '@type/space.type';
 
 export const getPostDetail = async (postId: number) => {
   const { data } = await axiosInstance.get<PostDetailType>(
-    END_POINTS.POST_DETAIL(postId)
+    END_POINTS.POST + `/${postId}`
   );
 
   return data;

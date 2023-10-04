@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
-import { users_mock } from '@mocks/data/user/users.mock';
+import { userList } from '@mocks/data/user.mock';
 import { selectType } from '@type/main.type';
 import CSelectBox from '@/components/Main/SelectBox';
 import { tags_mock } from '@mocks/data/tag/tags.mock';
@@ -37,7 +37,7 @@ const setState = (state: selectType[]) => {
 export const 사용자 = {
   args: {
     labelName: '함께한 친구들을 추가해 주세요',
-    ListItem: users_mock,
+    ListItem: userList,
     menuWidth: 628,
     menuHeight: 280,
     BoxWidth: 628,

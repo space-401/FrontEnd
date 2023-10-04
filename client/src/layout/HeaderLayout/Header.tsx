@@ -12,9 +12,10 @@ const Header = () => {
   const { spaceList } = useSpaceListQuery();
   const navigate = useNavigate();
   const moveSpace = (spaceId: number) => {
-    navigate(END_POINTS.SPACE_INFO(String(spaceId)));
+    navigate(END_POINTS.SPACE_INFO(spaceId));
   };
 
+  console.log(spaceList);
   return (
     <S.HeaderWrapper>
       <S.Container>
@@ -23,7 +24,7 @@ const Header = () => {
         </S.IconBox>
         <S.SpaceBox>
           <S.SpaceIconBox>
-            {spaceList?.map((space) => {
+            {spaceList!.map((space) => {
               const { spaceId, spaceTitle, imgUrl } = space;
 
               return (

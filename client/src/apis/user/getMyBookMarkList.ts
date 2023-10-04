@@ -4,7 +4,7 @@ import { BookMarkListType } from '@type/user.type';
 
 export const getMyBookMarkList = async (page: number) => {
   const { data } = await axiosInstance.get<BookMarkListType>(
-    END_POINTS.BOOK_MARK_LIST(page)
+    END_POINTS.MY_BOOK_MARK_LIST(page)
   );
 
   return data;
