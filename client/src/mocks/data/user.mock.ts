@@ -10,7 +10,7 @@ import { postList } from '@mocks/data/post.mock';
  * 사용자 정보에 대한 목 데이터
  */
 export const accountInfo: AccountDataType = {
-  loginState: '카카오톡',
+  loginState: 'kakao',
   name: '김은주',
   email: 'qwer@kakao.com',
 };
