@@ -29,7 +29,7 @@ const PostList = (props: PostListPropType) => {
   const userId: string[] | null = searchParams.getAll('userList');
   const tagId: string[] | null = searchParams.getAll('tagList');
   const dataTime: string | null =
-    searchParams.get('dataTime') ?? '2020-134-302'; // 날짜값 가져오기
+    searchParams.get('date') ?? '2020-134-302'; // 날짜값 가져오기
 
   let query = {};
 

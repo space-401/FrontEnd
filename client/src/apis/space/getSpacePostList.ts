@@ -6,16 +6,16 @@ export type FilterType = {
   userId?: string[];
   tagId?: string[];
   keyword?: string;
-  dataTime?: string;
+  date?: string;
 };
 
-export const getPostList = async (
+export const getSpacePostList = async (
   spaceId: string,
   page: string,
   filter: FilterType
 ) => {
   const { data } = await axiosInstance.get<SpacePostListProps>(
-    END_POINTS.POST_SEARCH_LIST(spaceId, page),
+    END_POINTS.SPACE_SEARCH_LIST(spaceId, page),
     { params: { ...filter } }
   );
 
