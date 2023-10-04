@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { END_POINTS } from '@constants/api';
 import { PATH } from '@constants/path';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
+import { useParams } from 'react-router-dom';
 
 const Header = () => {
   const { spaceList } = useSpaceListQuery();
@@ -15,7 +16,26 @@ const Header = () => {
     navigate(END_POINTS.SPACE_INFO(spaceId));
   };
 
+<<<<<<< HEAD
+  const params = useParams();
+  console.log(params.spaceId);
+  const currentSpaceId = Number(params.spaceId);
+
+  // const url = new URL(window.location.href);
+  // console.log(url.pathname);
+  // const spaceId = url.searchParams.get('spaceId');
+  // console.log(spaceId);
+  // const [currentId, setCurrentId] = useState<number>();
+
+  // useEffect(() => {
+  //   const url = new URL(window.location.href);
+  //   const spaceId = url.searchParams.get('spaceId');
+  //   spaceId && setCurrentId(spaceId);
+  // }, []);
+
+=======
   console.log(spaceList);
+>>>>>>> 6f40f99b6521b1c08c26bc62af5e3c1be30c4346
   return (
     <S.HeaderWrapper>
       <S.Container>
@@ -30,6 +50,7 @@ const Header = () => {
               return (
                 <Tooltip title={spaceTitle} key={spaceId}>
                   <S.SpaceIcon
+                    isCurrentSpace={currentSpaceId === spaceId}
                     onClick={() => moveSpace(spaceId)}
                     img_url={imgUrl}
                   />

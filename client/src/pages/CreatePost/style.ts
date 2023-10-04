@@ -11,9 +11,8 @@ const Wrapper = styled.div<{ width?: string }>`
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
     padding-top: 2rem;
-    display: flex;
-    align-items: center;
-    height: 100%;
+    ${flexCenter}
+    flex-direction: column;
   }
 `;
 
@@ -30,8 +29,10 @@ const GridWrapper = styled.div`
   grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6' 'empty button';
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    display: flex;
+    padding-top: 3rem;
     width: 80%;
+    flex-direction: column;
+    ${flexCenter}
   }
 `;
 

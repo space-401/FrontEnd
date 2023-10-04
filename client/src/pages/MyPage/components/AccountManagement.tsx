@@ -13,13 +13,13 @@ const AccountManagement = () => {
   let StateIcon: ReactElement;
 
   switch (loginState) {
-    case '카카오톡':
+    case 'kakao':
       StateIcon = <KaKaoSvg />;
       break;
-    case '네이버':
+    case 'naver':
       StateIcon = <NaverSvg />;
       break;
-    case 'Google':
+    case 'google':
       StateIcon = <GoogleSvg />;
       break;
   }

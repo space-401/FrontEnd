@@ -10,10 +10,12 @@ export type TextAreaBoxProps = {
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   name: string;
   children?: ReactElement;
+  value: string;
 };
 
 const TextAreaBox = (props: TextAreaBoxProps) => {
-  const { placeholder, maxLength, onChange, name, children, ...rest } = props;
+  const { value, placeholder, maxLength, onChange, name, children, ...rest } =
+    props;
   return (
     <S.Wrapper {...rest}>
       <S.TextArea
@@ -21,6 +23,7 @@ const TextAreaBox = (props: TextAreaBoxProps) => {
         maxLength={maxLength}
         onChange={onChange}
         name={name}
+        value={value}
       />
       <S.ChildrenWrapper>{children}</S.ChildrenWrapper>
     </S.Wrapper>

@@ -17,7 +17,7 @@ export const timeHelper = (date: string) => {
   return changeTime;
 };
 
-export const postTimeChangeHelper = (inputDateStr: string | undefined) => {
+export const postTimeChangeHelper = (inputDateStr: Date | undefined) => {
   if (inputDateStr) {
     const inputDate = new Date(inputDateStr);
     const year = inputDate.getFullYear();

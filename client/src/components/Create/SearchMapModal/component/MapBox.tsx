@@ -1,15 +1,7 @@
 import { Map } from 'react-kakao-maps-sdk';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import EventMarkerContainer from '@components/Create/SearchMapModal/component/EventMarkerContainer';
-
-export type MarkerType = {
-  markerId: string;
-  position: {
-    lat: string;
-    lng: string;
-  };
-  content: string;
-};
+import { MarkerType } from '@/types/marker.type';
 
 type MapBoxProps = {
   keyword: string;

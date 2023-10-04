@@ -13,26 +13,18 @@ import EventMarkerContainer from '@components/Create/SearchMapModal/component/Ev
 import Pagination from '@components/Create/SearchMapModal/component/Pagination';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import { DEFAULT_POSITION } from '@constants/policy';
-
-export type MarkerType = {
-  markerId: string;
-  position: {
-    lat: string;
-    lng: string;
-  };
-  content: string;
-};
+import { MarkerType, MapType } from '@/types/marker.type';
 
 type searchModalType = {
   isOpen: boolean;
   onClose: () => void;
-  mapInfo: MarkerType;
-  setMapInfo: Dispatch<SetStateAction<MarkerType>>;
+  mapInfo: MapType;
+  setMapInfo: Dispatch<SetStateAction<MapType>>;
 };
 
 const SearchModal = React.forwardRef(
   (prop: searchModalType, forwardRef: React.ForwardedRef<any>) => {
-    const { isOpen, mapInfo, setMapInfo, onClose } = prop;
+    const { isOpen, mapInfo, onClose, setMapInfo } = prop;
     useKakaoLoader({
       appkey: import.meta.env.VITE_KAKAO_KEY,
       libraries: ['services'],
@@ -100,7 +92,6 @@ const SearchModal = React.forwardRef(
       setMapInfo({
         content: data.place_name,
         position: { lat: data.x, lng: data.y },
-        markerId: '',
       });
       onClose();
     };

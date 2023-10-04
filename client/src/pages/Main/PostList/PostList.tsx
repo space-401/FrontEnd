@@ -1,21 +1,53 @@
 import DefaultImage from '@assets/svg/KKIRI.svg';
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import S from '@pages/Main/PostList/style';
+<<<<<<< HEAD
+import { Suspense, useEffect, useState } from 'react';
+import type { selectType } from '@type/main.type';
+=======
 import {Suspense, useEffect, useState} from 'react';
 import type {PostListPropType, selectType} from '@type/main.type';
+>>>>>>> 6f40f99b6521b1c08c26bc62af5e3c1be30c4346
 import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import Pagination from '@components/common/Pagination';
+<<<<<<< HEAD
+import MainCalender from '@/components/common/Calender/MainCalender';
+import { usePostListQuery } from '@hooks/api/post/usePostListQuery';
+import { useSearchParams } from 'react-router-dom';
+import { PostListFilterProps } from '@type/main.type';
+import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import { UserType, TagType } from '@/types/post.type';
+
+export type PostListPropType = {
+  spaceId: string;
+  selectState: boolean;
+  userList: UserType[];
+  tagList: TagType[];
+};
+=======
 import Calender from '@/components/common/Calender/Calender';
 import {useSearchParams} from 'react-router-dom';
 import {PostListFilterProps} from '@type/main.type';
 import {useDetailModalOpen} from '@hooks/common/useDetailModalOpen';
 import {useSpacePostListQuery} from '@hooks/api/space/useSpacePostListQuery';
+>>>>>>> 6f40f99b6521b1c08c26bc62af5e3c1be30c4346
 
 const PostList = (props: PostListPropType) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
+<<<<<<< HEAD
+  //유저와 태그 필터
+  const [state, setState] = useState<PostListFilterProps>({
+    selectUserList: [],
+    selectTagList: [],
+  });
+
+  const [date, setDate] = useState('');
+
+  const { spaceId, selectState, userList, tagList } = props;
+=======
     const [state, setState] = useState<PostListFilterProps>({
         selectUserList: [],
         selectTagList: [],
@@ -23,6 +55,7 @@ const PostList = (props: PostListPropType) => {
     });
 
     const {spaceId, selectState, userList, tagList} = props;
+>>>>>>> 6f40f99b6521b1c08c26bc62af5e3c1be30c4346
 
     const page: string = searchParams.get('page') ?? '0';
     const keyword: string | null = searchParams.get('keyword');
@@ -38,8 +71,13 @@ const PostList = (props: PostListPropType) => {
     if (userId.length !== 0) {
         query = {...query, userId};
     }
+<<<<<<< HEAD
+    if (date.length !== 0) {
+      select = { ...select, dateTime: date };
+=======
     if (tagId.length !== 0) {
         query = {...query, tagId};
+>>>>>>> 6f40f99b6521b1c08c26bc62af5e3c1be30c4346
     }
     if (dataTime.trim().length !== 0) {
         query = {...query, dataTime};
@@ -49,6 +87,110 @@ const PostList = (props: PostListPropType) => {
         ...query,
     });
 
+<<<<<<< HEAD
+  return (
+    <S.Wrapper>
+      <S.FilterGroup>
+        <SelectBox
+          setState={setUserState}
+          menuWidth={316}
+          menuHeight={lowList * 16 + (lowList - 1) * 8 + 32}
+          BoxWidth={168}
+          labelName={'사용자'}
+          ListItem={userList}
+          selectState={
+            userList.length !== 0
+              ? userList
+                  .filter(
+                    (prev) =>
+                      userId?.filter((v) => v === String(prev.userId))
+                        .length !== 0
+                  )
+                  .map((v) => ({
+                    id: v.userId,
+                    title: v.userName,
+                    imgUrl: v.imgUrl,
+                  }))
+              : []
+          }
+        />
+        <SelectBox
+          placeHolder={'태그명을 검색해주세요.'}
+          setState={setTagState}
+          menuWidth={192}
+          menuHeight={49 * Math.floor(tagList.length / 2)}
+          BoxWidth={168}
+          labelName={'태그'}
+          ListItem={tagList}
+          selectState={
+            tagList.length !== 0
+              ? tagList
+                  .filter(
+                    (prev) =>
+                      tagId?.filter((v) => v === String(prev.tagId)).length !==
+                      0
+                  )
+                  .map((v) => ({
+                    id: v.tagId,
+                    title: v.tagTitle,
+                  }))
+              : []
+          }
+        />
+        <MainCalender
+          isMain={true}
+          height={50}
+          borderRadius={5}
+          setDateInfo={setDate}
+        />
+        <MainSearchBox state={state} placeholder={'제목'} date={date} />
+      </S.FilterGroup>
+      {!selectState ? (
+        postList.length === 0 ? (
+          <S.UndefinedList>
+            <S.UndefinedDefaultImage imgUrl={DefaultImage} />
+            <S.UndefinedPostText>
+              첫번째 게시글을 등록해 주세요
+            </S.UndefinedPostText>
+            <S.UndefinedShareText>게시글 공유하기</S.UndefinedShareText>
+          </S.UndefinedList>
+        ) : (
+          <>
+            <S.PostList>
+              {postList.map((item) => {
+                const { postId, mainImgUrl } = item;
+                return (
+                  <FlipCard
+                    onClick={() => DetailModalOpen(postId)}
+                    size={'big'}
+                    key={postId}
+                    imgUrl={mainImgUrl}
+                    item={item}
+                  />
+                );
+              })}
+            </S.PostList>
+            <Pagination
+              movePage={movePage}
+              page={curPage}
+              total={total}
+              itemLength={itemLength}
+            />
+          </>
+        )
+      ) : (
+        <Suspense fallback={<></>}>
+          <KaKaoMap
+            page={curPage}
+            total={total}
+            itemLength={itemLength}
+            postList={postList}
+          />
+        </Suspense>
+      )}
+    </S.Wrapper>
+  );
+=======
     useEffect(() => {
         refetch();
     }, [refetch, page, keyword, userId, tagId, dataTime]);
@@ -185,6 +327,7 @@ const PostList = (props: PostListPropType) => {
             }
         </S.Wrapper>
     );
+>>>>>>> 6f40f99b6521b1c08c26bc62af5e3c1be30c4346
 };
 
 export default PostList;
