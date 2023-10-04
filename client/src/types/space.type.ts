@@ -43,24 +43,6 @@ export type SpacePostType = {
   position: { lat: number; lng: number };
 };
 
-export type PostDetailType = {
-  isMine: boolean;
-  postId: number;
-  postTitle: string;
-  postDescription: string;
-  placeTitle: string;
-  placeTag: TagType[];
-  postCreatedAt: string;
-  postUpdatedAt: string;
-  tagUsers: UserType[];
-  userList: UserType[];
-  mainImgUrl: string;
-  subImgUrl: string[];
-  position: { lat: number; lng: number };
-  commentCount: number;
-  isBookmark: boolean;
-};
-
 export type SelectSpacePropType = {
   spaceId: number;
   spaceTitle: string;

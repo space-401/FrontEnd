@@ -1,27 +1,44 @@
-export const dataURLtoFile = (
-  dataurl: string,
-  filename: string
-): File | null => {
-  const arr: string[] = dataurl.split(',');
-  const mime: string | undefined = arr[0].match(/:(.*?);/)?.[1];
-  const bstr: string = atob(arr[arr.length - 1]);
-  const n: number = bstr.length;
-  const u8arr: Uint8Array = new Uint8Array(n);
-
-  for (let i: number = 0; i < n; i++) {
-    u8arr[i] = bstr.charCodeAt(i);
+export const dataURItoFile = (dataURI: string) => {
+  const byteString = atob(dataURI.split(',')[1]);
+  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
   }
-
-  try {
-    return new File([u8arr], filename, { type: mime });
-  } catch (error) {
-    console.error('Error creating File object:', error);
-    return null;
-  }
+  const blob = new Blob([ab], { type: mimeString });
+  return new File([blob], 'uploadImage', { type: mimeString });
 };
 
-// 파일 변환
-export const onConvertToFile = (originalImg: string, filename: string) => {
-  const convertedImg = dataURLtoFile(originalImg, filename);
-  return convertedImg;
-};
+// export const onBlobToUrl = (Blob: Blob) => {
+//   return window.URL.createObjectURL(Blob);
+// };
+
+// export const base64ToBlob = async (dataURI: string) => {
+//   const byteString = atob(dataURI.split(',')[1]);
+
+//   const ab = new ArrayBuffer(byteString.length);
+//   const ia = new Uint8Array(ab);
+//   for (let i = 0; i < byteString.length; i++) {
+//     ia[i] = byteString.charCodeAt(i);
+//   }
+//   const blob = new Blob([ia], {
+//     type: 'image/jpeg',
+//   });
+//   const file = new File([blob], 'image.jpg');
+//   return file;
+// };
+
+// export const blobToBase64 = (blob: Blob) => {
+//   const reader = new FileReader();
+//   reader.onload = () => {
+//     const base64data = reader.result;
+//     console.log(base64data);
+//   };
+//   reader.readAsDataURL(blob);
+// };
+
+// export const blobToUrl = (blob: Blob) => {
+//   const url = URL.createObjectURL(blob);
+//   return url;
+// };

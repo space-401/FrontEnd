@@ -52,6 +52,10 @@ const router = createBrowserRouter([
             element: <CreatePost />,
           },
           {
+            path: PATH.SPACE + '/:spaceId' + '/post' + '/:postId',
+            element: <CreatePost />,
+          },
+          {
             path: PATH.SPACE_CREATE,
             element: <CreateSpace />,
           },

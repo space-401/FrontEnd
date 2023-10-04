@@ -20,49 +20,84 @@ import { ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
-import { MarkerType } from '@/components/Create/SearchMapModal/component/MapBox';
-import { PostType, DateInfoType } from '@/types/post.type';
+import { MapType } from '@/types/marker.type';
+import { DateInfoType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
-import { useAlertModalStore } from '@/store/modal';
-import { onConvertToFile } from '@/utils/fileConvertor';
+import { useAlertModalStore, useConfirmModalStore } from '@/store/modal';
+import { useParams } from 'react-router-dom';
+import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
+import { makeObj } from '@/utils/makeObj';
+import ConfirmModal from '@/modal/Confirm/ConfirmModal';
 
 const CreatePost = () => {
+  const params = useParams();
+  const postId = params.postId;
+  const { postDetailData } = usePostDetailQuery(Number(postId), true);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: [],
-    cropImages: [],
+    images: postDetailData ? makeObj(postDetailData.imgs) : [],
+    cropImages: postDetailData ? postDetailData.imgs : [],
+    convertedImages: [],
   });
-  //현재 편집 모달이 열려있는지
-  const { ModalOpen, isOpen } = usePhotoModalStore();
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
+
+  //수정모드일 떄 로직
+  // useEffect(() => {
+  //   if (postDetailData) {
+  //     setImageArr({
+  //       images: makeObj(postDetailData.imgs) || [],
+  //       cropImages: postDetailData.imgs || [],
+  //       convertedImages: [],
+  //     });
+  //     setDateInfo({
+  //       startDate: postDetailData.date.startDate,
+  //       endDate: postDetailData.date.endDate,
+  //     });
+  //   }
+  // }, []);
+
+  //현재 편집 모달이 열려있는지
+  const { ModalOpen, isOpen } = usePhotoModalStore();
+  //확인 모달이 열려있는지
+  const {
+    ModalOpen: confirmModalOpen,
+    ModalClose: confirmModalClose,
+    isOpen: isConfirmModalOpen,
+  } = useConfirmModalStore();
   //현재 글자개수 세기
   const { values, onChange } = useInputs({
-    title: '',
-    content: '',
+    title: postDetailData?.postTitle || '',
+    content: postDetailData?.postDescription || '',
   });
   const { title, content } = values;
 
   //선택한 장소 정보
-  const [mapInfo, setMapInfo] = useState<MarkerType>({
-    content: '',
-    position: { lng: '0', lat: '0' },
-    markerId: '',
+  const [mapInfo, setMapInfo] = useState<MapType>({
+    content: postDetailData ? postDetailData.placeTitle : '',
+    position: postDetailData
+      ? {
+          lng: String(postDetailData.location.lng),
+          lat: String(postDetailData.location.lat),
+        }
+      : { lng: '0', lat: '0' },
   });
   //날짜
   const [dateInfo, setDateInfo] = useState<DateInfoType>({
-    startDate: undefined,
-    endDate: undefined,
+    startDate: null,
+    endDate: null,
   });
   //장소 선택 모달이 열렸는지
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   //사람
-  const [people, setPeople] = useState<selectType[]>([]);
-  const [tags, setTags] = useState<selectType[]>([]);
-
+  const [people, setPeople] = useState<selectType[]>(
+    postDetailData ? postDetailData.tagUsers : []
+  );
+  const [tags, setTags] = useState<selectType[]>();
   //경고 모달
   const {
     isOpen: isAlertModalOpen,
@@ -76,7 +111,8 @@ const CreatePost = () => {
       inputRef.current.click();
     if (imageArr.cropImages.length > 0) {
       if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
-        return ModalOpen();
+        setImageArr((prev) => ({ ...prev, cropImages: [] }));
+        ModalOpen();
       }
     } else {
       ModalOpen();
@@ -101,11 +137,11 @@ const CreatePost = () => {
             id: currentImgNum + 1,
             img: result,
           };
-
           setImageArr((prevImageArr) => ({
             ...prevImageArr,
             images: [...prevImageArr.images, newImgObj],
           }));
+          console.log(imageArr);
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {
@@ -116,24 +152,23 @@ const CreatePost = () => {
     }
   };
 
+  //제출 후 포스트 생성 페이지로 이동
   const onSubmit = () => {
-    const convertedImgs: File[] = [];
-    imageArr.cropImages.map((img) => {
-      convertedImgs.push(onConvertToFile(img, 'spaceImg')!);
-    });
-
-    const sendData: PostType = {
-      title,
-      content,
-      people,
-      tags,
-      place: mapInfo,
-      imgs: convertedImgs,
-      date: dateInfo,
-    };
-
-    console.log(sendData);
+    console.log('제출', imageArr);
+    console.log();
+    //성공시
+    confirmModalOpen();
   };
+
+  const onMoveCreatePost = () => {
+    const currentURL = window.location.href;
+    const parts = currentURL.split('/');
+    const index = parts.indexOf('post');
+    const result = parts.slice(0, index + 1).join('/');
+    //확인 모달 닫히면 포스트 생성 페이지로 이동
+    window.location.href = result;
+  };
+
   const inputWidth = Number('calc(100% - 60px)');
 
   return (
@@ -145,6 +180,17 @@ const CreatePost = () => {
           width={300}
           alertMessage="확인"
           alertTitle="이미지는 10개까지만 추가됩니다."
+        />
+      )}
+      {isConfirmModalOpen && (
+        <ConfirmModal
+          isPositiveModal={true}
+          titleMessage="성공적으로 포스팅되었습니다."
+          ApproveMessage="확인"
+          closeMessage="닫기"
+          AsyncAction={onMoveCreatePost}
+          ModalClose={confirmModalClose}
+          isOpen={isConfirmModalOpen}
         />
       )}
       {isOpen && (
@@ -226,6 +272,7 @@ const CreatePost = () => {
             paddingLeft={65}
             onChange={onChange}
             name="title"
+            value={title}
           />
         </S.InputContainer>
 
@@ -242,6 +289,10 @@ const CreatePost = () => {
             setState={setPeople}
             menuHeight={89 * Math.floor(users_mock.length / 2)}
             menuWidth={inputWidth}
+            // state={people.map((v) => ({
+            //   id: v.userId,
+            //   title: v.userName,
+            // }))}
           />
         </S.InputContainer>
 
@@ -294,6 +345,7 @@ const CreatePost = () => {
             isMain={false}
             setDateInfo={setDateInfo}
             borderRadius={10}
+            dateInfo={dateInfo}
           />
         </S.InputContainer>
 
@@ -303,6 +355,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={6}>
           <TextAreaBox
+            value={content}
             width={inputWidth}
             height={212}
             placeholder="500자 이내의 내용을 입력해 주세요"
@@ -337,4 +390,5 @@ const CreatePost = () => {
     </S.Wrapper>
   );
 };
+
 export default CreatePost;

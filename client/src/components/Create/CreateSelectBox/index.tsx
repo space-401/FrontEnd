@@ -17,8 +17,24 @@ const CreateSelectBox = (props: SelectBoxProps) => {
     ListItem,
     labelName,
     setState,
+    selectState,
   } = props;
-  const [select, setSelect] = useState<selectType[]>([]);
+
+  // useEffect(() => {
+  //   if (labelName === '사용자') {
+  //     id = state.userId;
+  //     title = state.userName;
+  //     imgUrl = state.imgUrl;
+  //   } else {
+  //     // id = state.userId;
+  //     // title = state.userName;
+  //     // imgUrl = state.imgUrl;
+  //   }
+  // }, []);
+
+  const [select, setSelect] = useState<selectType[]>(
+    selectState ? selectState : []
+  );
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState('');
 

@@ -11,6 +11,7 @@ import { Box, Modal } from '@mui/material';
 import { usePhotoModalStore } from '@/store/modal';
 import { theme } from '@/styles/theme/theme';
 import { ImageArrType } from '@/types/image.type';
+import { dataURItoFile } from '@/utils/fileConvertor';
 
 type ModalType = {
   handleFileChange: any;
@@ -68,35 +69,21 @@ const ImagesEditModal = ({
     if (typeof cropperRef.current?.cropper !== 'undefined') {
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
-        .toDataURL();
-
+        .toDataURL(`image/jpeg`, 0.5);
+      const convertedImage = dataURItoFile(newImage);
       setImageArr((prev) => ({
         ...prev,
         cropImages: [...prev.cropImages, newImage],
+        convertedImages: [...prev.convertedImages, convertedImage],
       }));
-
-      // const filename = `${index}postImg`;
-      //   const convertedImg = onConvertToFile(newImage, filename);
-      //   convertedImg &&
-      //     setImageArr((prev) => ({
-      //       ...prev,
-      //       convertedImages: [...prev.convertedImages, convertedImg],
-      //     }));
-      // }
     }
   };
+
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = (e: any) => {
+  const onSaveAllEditImg = async (e: any) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    // if (imageArr.convertedImages.length > 0) {
-    //   setImageArr((prev: ImageArrType) => ({
-    //     ...prev,
-    //     cropImages: [],
-    //     convertedImages: [],
-    //   }));
-    // }
     myRefs.map((ref) => {
       getCropData(ref);
     });

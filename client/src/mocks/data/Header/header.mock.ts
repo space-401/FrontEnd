@@ -11,7 +11,7 @@ export const HeaderMock: HeaderType = {
     },
     {
       spaceId: 31312,
-      spaceTitle: '슈슈룬 덕질방',
+      spaceTitle: 'ㅊ',
       imgUrl: 'https://i.ytimg.com/vi/Z10UMD-0RbY/maxresdefault.jpg',
       userList: [],
     },

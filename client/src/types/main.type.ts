@@ -15,13 +15,6 @@ export type MenuListProps = {
   changeSelect: Dispatch<SetStateAction<selectType[]>>;
 };
 
-export type PostListPropType = {
-  spaceId: string;
-  selectState: boolean;
-  userList: UserType[];
-  tagList: TagType[];
-};
-
 export type MainHeaderPropType = {
   spaceInfo: SpaceInfo;
   selectState: boolean;
@@ -61,6 +54,7 @@ export type SelectBoxProps = {
    * 선택된 유저의 리스트를 넣어주세요
    */
   selectState: selectType[];
+  state?: any;
 };
 
 export type TagListProps = {
@@ -74,6 +68,7 @@ export type UserListProps = {
 export type SearchProps = {
   placeholder: string;
   state: PostListFilterProps;
+  date: string;
 };
 
 export type SpacePostListProps = {
@@ -93,5 +88,4 @@ export type PaginationType = {
 export type PostListFilterProps = {
   selectUserList: selectType[];
   selectTagList: selectType[];
-  dateTime: string;
 };

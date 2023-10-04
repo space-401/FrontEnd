@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
 import { useSearchParams } from 'react-router-dom';
 
 const MainSearchBox = (props: SearchProps) => {
-  const { state, placeholder } = props;
+  const { state, placeholder, date } = props;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = useRef('');
@@ -28,8 +28,8 @@ const MainSearchBox = (props: SearchProps) => {
     if (state.selectTagList.length !== 0) {
       select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
     }
-    if (state.dateTime.length !== 0) {
-      select = { ...select, dateTime: state.dateTime };
+    if (date.length !== 0) {
+      select = { ...select, dateTime: date };
     }
     if (keyword.current.trim().length !== 0) {
       select = { ...select, keyword: keyword.current };

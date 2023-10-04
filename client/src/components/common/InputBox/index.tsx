@@ -27,7 +27,7 @@ const InputBox = ({
   name,
   paddingLeft,
   readonly,
-
+  value,
   ...rest
 }: InputBoxProps) => {
   const hasIcon = children ? true : false;
@@ -44,6 +44,7 @@ const InputBox = ({
         hasIcon={hasIcon}
         name={name}
         readOnly={readonly}
+        value={value}
       />
       {children}
     </S.InputWrapper>
