@@ -1,16 +1,12 @@
 import S from '@pages/SelectSpace/style';
 import FlipCard from '@/components/common/FlipCard/FlipCard';
-import spaceListMock from '@/mocks/data/SpaceList/spaceList.mock';
-import { OneSpaceType } from '@/types/space.type';
-import { useState } from 'react';
 import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { useNavigate } from 'react-router-dom';
+import {spaceList} from "@mocks/data/space.mock";
 
 const SelectSpace = () => {
-  const [spaceList, setSpaceList] = useState<OneSpaceType[]>([]);
   const navigate = useNavigate();
-
   return (
     <S.Wrapper>
       <S.Container>
@@ -33,7 +29,7 @@ const SelectSpace = () => {
               <PlusIcon />
             </S.AddBox>
           )}
-          {spaceListMock?.map((space) => {
+          {spaceList.map((space) => {
             return (
               <>
                 <FlipCard

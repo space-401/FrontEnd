@@ -19,6 +19,7 @@ export type SpaceInfo = {
     userList: UserType[];
     tagList: TagType[];
     isAdmin: boolean;
+    isInitialized: boolean;
 };
 
 export type AlarmType = {
