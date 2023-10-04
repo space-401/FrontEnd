@@ -59,14 +59,15 @@ const SpaceIconBox = styled.div`
   gap: 16px;
 `;
 
-const SpaceIcon = styled.div<{ img_url: string }>`
+const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
   width: 40px;
   border-radius: 10px;
   aspect-ratio: 1/1;
-  background: url(${({ img_url }) => img_url});
+  background-image: url(${({ img_url }) => img_url});
   cursor: pointer;
-
   background-size: cover;
+  box-shadow: ${({ isCurrentSpace }) =>
+    isCurrentSpace && ' 0px 0px 10px 2px #c2c2c2'};
 `;
 
 const S = {

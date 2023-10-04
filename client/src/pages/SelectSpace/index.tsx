@@ -17,15 +17,17 @@ const SelectSpace = () => {
               fontSize={16}
               width={130}
               borderRadius={10}
-              onClick={() => {
-                navigate('/invite');
-              }}
+              onClick={() => {}}
             >
               초대코드 입력
             </BasicButton>
           </S.ButtonContainer>
           {spaceList.length < 5 && (
-            <S.AddBox>
+            <S.AddBox
+              onClick={() => {
+                navigate('/space/create');
+              }}
+            >
               <PlusIcon />
             </S.AddBox>
           )}
@@ -33,15 +35,24 @@ const SelectSpace = () => {
             return (
               <>
                 <FlipCard
+                  key={Math.floor(Math.random() * 1000)}
                   item={space}
                   size="medium"
-                  imgUrl={''}
-                  onClick={() => {}}
+                  imgUrl={space.imgUrl}
+                  onClick={() => {
+                    navigate(`/space/${space.spaceId}`);
+                  }}
                   borderRadius={'20px'}
                 />
               </>
             );
           })}
+          {spaceList.length < 5 &&
+            Array.from({ length: 4 - spaceList.length }).map(() => (
+              <S.EmptySpaceBox
+                key={Math.floor(Math.random() * 1000)}
+              ></S.EmptySpaceBox>
+            ))}
         </S.SpaceContainer>
       </S.Container>
     </S.Wrapper>

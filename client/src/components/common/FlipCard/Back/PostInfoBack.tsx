@@ -13,7 +13,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
   return (
     <S.Wrapper size={size}>
       <S.Shadow />
-      <S.Container className={'container'}>
+      <S.Container className={'container'} info="post">
         <div>
           <S.PostTitle className={'title'}>{placeTitle}</S.PostTitle>
           <S.PlaceCreateAt className={'create-time'}>
@@ -30,7 +30,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             ))}
           </S.ChipBox>
         </div>
-        <S.InfoBottom className={'info-bottom'}>
+        <S.InfoBottom className={'info-bottom'} info={'post'}>
           <S.PlaceTitle className={'place-name'}>
             <MapIcon width={18} height={18} />
             <span className={'place-span'}>{placeTitle}</span>

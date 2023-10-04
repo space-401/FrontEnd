@@ -5,13 +5,13 @@ import { ReactComponent as PrevBtn } from '@assets/svg/chevron/chevron_left.svg'
 import { ReactComponent as NextBtn } from '@assets/svg/chevron/chevron_right.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
 import { ReactCropperElement } from 'react-cropper';
-import { dataURLtoFile } from '@utils/fileConvertor';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { usePhotoModalStore } from '@/store/modal';
 import { theme } from '@/styles/theme/theme';
 import { ImageArrType } from '@/types/image.type';
+import { dataURItoFile } from '@/utils/fileConvertor';
 
 type ModalType = {
   handleFileChange: any;
@@ -65,40 +65,27 @@ const ImagesEditModal = ({
   const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
 
   //하나의 이미지를 크롭해서 저장함.
-  const getCropData = (cropperRef: any, index: number) => {
+  const getCropData = (cropperRef: any) => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
-        .toDataURL();
-
+        .toDataURL(`image/jpeg`, 0.5);
+      const convertedImage = dataURItoFile(newImage);
       setImageArr((prev) => ({
         ...prev,
         cropImages: [...prev.cropImages, newImage],
+        convertedImages: [...prev.convertedImages, convertedImage],
       }));
-
-      const filename = `${index}postImg`;
-      const convertedImg = dataURLtoFile(newImage, filename);
-      convertedImg &&
-        setImageArr((prev) => ({
-          ...prev,
-          convertedImages: [...prev.convertedImages, convertedImg],
-        }));
     }
   };
+
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = (e: any) => {
+  const onSaveAllEditImg = async (e: any) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    if (imageArr.convertedImages.length > 0) {
-      setImageArr((prev: ImageArrType) => ({
-        ...prev,
-        cropImages: [],
-        convertedImages: [],
-      }));
-    }
-    myRefs.map((ref, index) => {
-      getCropData(ref, index);
+    myRefs.map((ref) => {
+      getCropData(ref);
     });
     ModalClose();
   };
@@ -136,7 +123,6 @@ const ImagesEditModal = ({
   //취소
   const onClickCancelModal = () => {
     ModalClose();
-    // setImageArr((prev: ImageArrType) => ({ ...prev, images: [] }));
   };
 
   //선택한 이미지를 보기
@@ -145,7 +131,6 @@ const ImagesEditModal = ({
     const newPosition = -(idx * cropperWidth);
     sliderRef.current.style.transform = `translateX(${newPosition}px)`;
     setCurrentX(newPosition);
-    console.log('현재x축', newPosition);
   };
 
   return (
@@ -199,7 +184,9 @@ const ImagesEditModal = ({
               onClick={(e) => {
                 onSaveAllEditImg(e);
               }}
-            ></button>
+            >
+              완료
+            </button>
           </S.Header>
 
           {imageArr.images.length == 0 && (
@@ -272,4 +259,5 @@ const ImagesEditModal = ({
     </Modal>
   );
 };
+
 export default ImagesEditModal;

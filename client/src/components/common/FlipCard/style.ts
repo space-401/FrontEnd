@@ -3,11 +3,11 @@ import styled from 'styled-components';
 const Flip = styled.div<{ size: 'small' | 'medium' | 'big' }>`
   position: relative;
   width: ${({ size }) =>
-    size === 'big' ? '437px' : size === 'medium' ? '20rem' : '296.75px'};
+    size === 'big' ? '437px' : size === 'medium' ? '270px' : '296.75px'};
   cursor: pointer;
 `;
 
-const Card = styled.div<{ img: string; borderRadius?: number }>`
+const Card = styled.div<{ img: string; borderRadius?: string }>`
   aspect-ratio: 1/1;
   width: 100%;
   position: relative;

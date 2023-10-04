@@ -16,6 +16,7 @@ const Container = styled.div`
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
 `;
 
 const ApproveButton = styled.div<{ isPositiveModal: boolean }>`

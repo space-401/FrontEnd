@@ -8,27 +8,38 @@ import styled from 'styled-components';
 import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
 import { postTimeChangeHelper } from '@/utils/time-helper';
 import '@components/common/Calender/calender.css';
-import { PostType } from '@/types/post.type';
+import { DateInfoType } from '@/types/post.type';
 import { getMonth } from 'date-fns';
 import { ReactComponent as DownIcon } from '@/assets/svg/chevron/chevron_down.svg';
 import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
 
-//메인일 때는 검색기능
 type CalenderPropsType = {
   height: number;
   borderRadius: number;
-  setPostData?: React.Dispatch<React.SetStateAction<PostType>>;
+  setDateInfo: React.Dispatch<DateInfoType>;
   isMain: boolean;
+  dateInfo?: DateInfoType;
 };
 
 const Calender = ({
-  setPostData,
+  setDateInfo,
   height,
   borderRadius,
   isMain,
+  dateInfo,
 }: CalenderPropsType) => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState<Date>();
+
+  useEffect(() => {
+    console.log('dateInfoaaaa', dateInfo);
+    dateInfo?.startDate && setStartDate(new Date(dateInfo.startDate));
+    dateInfo?.endDate && setEndDate(new Date(dateInfo.endDate));
+    console.log();
+  }, []);
+
+  const [endDate, setEndDate] = useState(
+    dateInfo?.endDate ? new Date(dateInfo.endDate) : null
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
 
   const toggleDropdown = (index: number) => {
@@ -49,28 +60,21 @@ const Calender = ({
 
   //날짜 형식 변환해서 보내줌
   useEffect(() => {
+    console.log('dateInfo', startDate);
     if (startDate) {
-      let newDateStr = {};
+      let newDateStr: DateInfoType;
       if (endDate) {
         newDateStr = {
-          startDate: postTimeChangeHelper(startDate),
-          endDate: postTimeChangeHelper(endDate),
+          startDate: postTimeChangeHelper(startDate) || '',
+          endDate: postTimeChangeHelper(endDate) || '',
         };
       } else {
         newDateStr = {
-          startDate: postTimeChangeHelper(startDate),
-          endDate: postTimeChangeHelper(startDate),
+          startDate: postTimeChangeHelper(startDate) || '',
+          endDate: postTimeChangeHelper(startDate) || '',
         };
       }
-      {
-        !isMain &&
-          setPostData!((prev: any) => {
-            return {
-              ...prev,
-              date: newDateStr,
-            };
-          });
-      }
+      setDateInfo(newDateStr);
     }
   }, [startDate, endDate]);
 
