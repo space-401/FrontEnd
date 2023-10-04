@@ -1,4 +1,6 @@
 import { selectType } from './main.type';
+import type { SpacePostType, OneSpaceType } from '@type/space.type';
+import { ApiResponseType } from '@type/response.type';
 
 export type UserType = {
   userId: number;
@@ -40,3 +42,25 @@ export type PostDetailType = {
 };
 
 //포스트 생성 페이지에서는 tags가 추가적으로 필요하다.
+export type FlipCardSize = 'small' | 'medium' | 'big';
+
+export type PostInfoBackPropsType = {
+  item: SpacePostType;
+  size: FlipCardSize;
+};
+
+export type SpaceInfoBackPropsType = {
+  item: OneSpaceType;
+  size: FlipCardSize;
+};
+
+export type FlipType = {
+  /**
+   * 해당 이미지의 주소를 넣어주세요
+   */
+  imgUrl: string;
+  onClick: () => void;
+  borderRadius?: string;
+};
+
+export type PostResponseType = ApiResponseType & { postId: number };

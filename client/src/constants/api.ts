@@ -10,23 +10,25 @@ export const AXIOS_BASE_URL = Product
   : '/';
 
 export const END_POINTS = {
-  Tag: '/tag',
+  USER: '/user',
   LOGIN: '/login',
   LOGOUT: '/logout',
-  TOKEN: '/token',
-  POST: '/post',
-  SPACE: '/space',
+  TOKEN: '/refreshToken',
   USERINFO: '/mypage',
-  BOOKMARK: '/bookmark',
-  INVITATION: '/invitation',
-  COMMENT: (postId: string) => `/comment/${postId}`,
-  SPACE_INFO: (spaceId: string) => `/space/${spaceId}`,
-  POST_DETAIL: (postId: string) => `/post/${postId}`,
-  BOOK_MARK_LIST: (page: number) => `/mypage/bookmark?page=${page}`,
-  MY_POST_LIST: (page: number) => `/mypage/post?page=${page}`,
-  MY_COMMENT_LIST: (page: number) => `/mypage/comment?page=${page}`,
-  POST_SEARCH_LIST: (spaceId: string, page: string) =>
-    `/post/${spaceId}/search?page=${page}`,
+  MY_PROFILE: `/profile`,
+  SPACE: '/space',
+  POST: '/post',
+  SPACE_LIST: '/list',
+  COMMENT: '/comment',
+  POST_BOOK_MARK: '/post/bookmark',
+  SPACE_INFO: (spaceId: number | string) => `/space/${spaceId}`,
+  SPACE_TAG: (spaceId: number | string) => `/space/${spaceId}/tag`,
+  SPACE_USER: (spaceId: number | string) => `/space/${spaceId}/user`,
+  SPACE_SEARCH_LIST: (spaceId: number | string, page: number | string) =>
+    `space/${spaceId}/search?page=${page}`,
+  MY_BOOK_MARK_LIST: (page: number | string) => `/bookmark?page=${page}`,
+  MY_POST_LIST: (page: number | string) => `/mypost?page=${page}`,
+  MY_COMMENT_LIST: (page: number | string) => `/mycomment?page=${page}`,
 } as const;
 
 export const HTTP_STATUS_CODE = {

@@ -19,6 +19,7 @@ export type SpaceInfo = {
   userList: UserType[];
   tagList: TagType[];
   isAdmin: boolean;
+  isInitialized: boolean;
 };
 
 export type AlarmType = {
@@ -78,14 +79,13 @@ export type CommentType = {
 };
 
 export type MyCommentType = {
-  id: number;
   postId: number;
+  postTitle: string;
+  postContent: string;
+  postCreateDate: string;
   spaceTitle: string;
-  createDate: string;
-  writer: {
-    nick: string;
-    url: string;
-  };
-  content: string;
   mainImgUrl: string;
+  commentId: number;
+  commentContent: string;
+  commentCreateDate: string;
 };
