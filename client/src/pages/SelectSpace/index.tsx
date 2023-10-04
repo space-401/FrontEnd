@@ -48,7 +48,7 @@ const SelectSpace = () => {
             );
           })}
           {spaceList.length < 5 &&
-            Array.from({ length: 4 - spaceListMock.length }).map(() => (
+            Array.from({ length: 4 - spaceList.length }).map(() => (
               <S.EmptySpaceBox
                 key={Math.floor(Math.random() * 1000)}
               ></S.EmptySpaceBox>
