@@ -1,6 +1,6 @@
 import { END_POINTS } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
-import { SpacePostListProps } from '@type/main.type';
+import type { SpacePostListProps } from '@type/main.type';
 
 export type FilterType = {
   userId?: string[];

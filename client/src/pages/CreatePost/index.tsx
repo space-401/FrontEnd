@@ -23,7 +23,7 @@ import { PostType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore } from '@/store/modal';
-import {tagList, userList} from "@mocks/data/common";
+import { tagList, userList } from '@mocks/data/common';
 
 // import { useUserStore } from '@/store/user';
 const CreatePost = () => {

@@ -1,3 +1,3 @@
 export type ApiResponseType = {
-    message : "success" | "failure";
-}
+  message: 'success' | 'failure';
+};

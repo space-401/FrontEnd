@@ -37,7 +37,7 @@ const DetailComments = (props: DetailCommentType) => {
     setIsReply({ open: true, refId: refId, id: id });
   };
 
-  console.log(commentList)
+  console.log(commentList);
 
   return (
     <>
