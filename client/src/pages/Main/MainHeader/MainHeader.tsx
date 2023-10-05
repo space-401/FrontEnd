@@ -22,7 +22,12 @@ const MainHeader = (prop: MainHeaderPropType) => {
 
   return (
     <S.Wrapper>
-      <SettingModal disableScrollLock open={isOpen} onClose={onClose}>
+      <SettingModal
+        sx={{ zIndex: 900 }}
+        disableScrollLock
+        open={isOpen}
+        onClose={onClose}
+      >
         <SettingComponent
           spaceTitle={title}
           isAdmin={isAdmin}
