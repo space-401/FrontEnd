@@ -1,21 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import S from '@modal/Confirm/style';
+import { useConfirmModalStore } from '@store/modal';
 
-export type ConfirmModalType = {
-  isPositiveModal: boolean;
-  titleMessage: string;
-  descriptionMessage?: string;
-  ApproveMessage: string;
-  closeMessage: string;
-  AsyncAction: () => void;
-  ModalClose: () => void;
-  isOpen: boolean;
-};
-
-//사용할 때 Modal 태그로 감싸기
-const ConfirmModal = React.forwardRef(
-  (prop: ConfirmModalType, forwardRef: React.ForwardedRef<any>) => {
+const ConfirmInner = React.forwardRef(
+  (_, forwardRef: React.ForwardedRef<any>) => {
+    const { confirmState, ModalClose } = useConfirmModalStore((state) => state);
     const {
       AsyncAction,
       descriptionMessage,
@@ -23,12 +13,11 @@ const ConfirmModal = React.forwardRef(
       isPositiveModal,
       ApproveMessage,
       closeMessage,
-      ModalClose,
-    } = prop;
+    } = confirmState;
 
     const ApproveAction = () => {
-      AsyncAction();
       ModalClose();
+      AsyncAction();
     };
 
     return (
@@ -53,4 +42,4 @@ const ConfirmModal = React.forwardRef(
   }
 );
 
-export default ConfirmModal;
+export default ConfirmInner;
