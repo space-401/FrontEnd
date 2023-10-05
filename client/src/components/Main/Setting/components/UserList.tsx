@@ -10,37 +10,29 @@ import { useState } from 'react';
 import { Modal } from '@mui/material';
 import ProfileAndUserNameChangeModal from '@components/Main/Setting/components/ProfileAndUserNameChangeModal';
 import toast from 'react-hot-toast';
-import Index from '@modal/Confirm';
+import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 
 type UserListPropsType = {
   userInfo: UserType;
   index: number;
   isAdmin: boolean;
   myInfo: UserType;
+  changeAdminHandler: (userName: string, userId: number) => void;
 };
 
 const UserList = (props: UserListPropsType) => {
-  const { isAdmin, userInfo, myInfo, index } = props;
+  const { isAdmin, userInfo, index, changeAdminHandler } = props;
   const { userId, userName, imgUrl } = userInfo;
   const [state, setState] = useState({
-    isMemberOutModal: false,
-    isChangeAdminModal: false,
     isSettingMode: false,
     isUserModal: false,
   });
 
+  const confirmModalOpen = useConfirmModalOpen();
+
   // 현재 설정을 하고있는 상태인지를 확인하기 위한 모달
   const ChangeSettingMode = (newState: boolean) => {
     setState((prev) => ({ ...prev, isSettingMode: newState }));
-  };
-  // 멤버 추방을 하기위한 모달
-  const ChangeMemberModal = (newState: boolean) => {
-    setState((prev) => ({ ...prev, isMemberOutModal: newState }));
-  };
-
-  // 멤버 관리자 권한을 주기위한 모달
-  const ChangeAdminModal = (newState: boolean) => {
-    setState((prev) => ({ ...prev, isChangeAdminModal: newState }));
   };
 
   // 본인 정보 변경을 위한 모달
@@ -48,55 +40,29 @@ const UserList = (props: UserListPropsType) => {
     setState((prev) => ({ ...prev, isUserModal: newState }));
   };
 
-  const MemberOutAction = () => {
-    toast(userName + '님을 추방 하였습니다', {
+  const userGetOutAction = () => {
+    toast(userId + '님을 추방 하였습니다', {
       style: {
         borderRadius: '10px',
         background: '#000',
         color: '#fff',
       },
     });
-    ChangeSettingMode(false);
   };
 
-  const ChangeAdminAction = (userName: number) => {
-    console.log(userName + '님이 방장이 되었습니다.');
-    ChangeAdminModal(false);
-    ChangeSettingMode(false);
+  const userGetOutFromSpaceHandler = () => {
+    confirmModalOpen({
+      AsyncAction: userGetOutAction,
+      isPositiveModal: false,
+      descriptionMessage: '작성된 게시글과 댓글들은 삭제되지 않습니다.',
+      titleMessage: userName + ' 님을 스페이스에서 내보시겠습니까?',
+      ApproveMessage: '내보내기',
+      closeMessage: '취소',
+    });
   };
 
   return (
     <S.UserContainer>
-      <Modal
-        open={state.isMemberOutModal}
-        onClose={() => ChangeMemberModal(false)}
-      >
-        <Index
-          isPositiveModal={false}
-          titleMessage={userName + '님을 스페이스에서 내보내시겠습니까?'}
-          descriptionMessage={'작성된 게시글과 댓글들이 모두 삭제됩니다.'}
-          ApproveMessage={'내보내기'}
-          closeMessage={'취소'}
-          AsyncAction={MemberOutAction}
-          ModalClose={() => ChangeMemberModal(false)}
-          isOpen={state.isMemberOutModal}
-        />
-      </Modal>
-      <Modal
-        open={state.isChangeAdminModal}
-        onClose={() => ChangeAdminModal(false)}
-      >
-        <Index
-          isPositiveModal={true}
-          titleMessage={userName + ' 님에게 방장 권한을 주시겠습니까?'}
-          descriptionMessage={`방장 권한을 주면 ${myInfo.userName}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`}
-          ApproveMessage={'확인'}
-          closeMessage={'취소'}
-          AsyncAction={() => ChangeAdminAction(userId)}
-          ModalClose={() => ChangeAdminModal(false)}
-          isOpen={state.isChangeAdminModal}
-        />
-      </Modal>
       <Modal
         open={state.isUserModal}
         onClose={() => ChangeUserModal(false)}
@@ -152,11 +118,11 @@ const UserList = (props: UserListPropsType) => {
         </S.MenuGroup>
       ) : (
         <S.MenuGroup isOpen={state.isSettingMode}>
-          <S.MenuButton onClick={() => ChangeAdminModal(true)}>
+          <S.MenuButton onClick={() => changeAdminHandler(userName, userId)}>
             <MoreCrownSvg />
             방장 권한 주기
           </S.MenuButton>
-          <S.MenuButton onClick={() => ChangeMemberModal(true)}>
+          <S.MenuButton onClick={() => userGetOutFromSpaceHandler()}>
             <MoreLogOutSvg />
             방에서 내보내기
           </S.MenuButton>
