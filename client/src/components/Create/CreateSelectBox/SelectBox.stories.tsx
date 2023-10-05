@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 import { StoryFn } from '@storybook/react';
-import { userList } from '@mocks/data/user.mock';
+import { tagList, userList } from '@/mocks/data/common';
 import { selectType } from '@type/main.type';
 import CSelectBox from '@/components/Main/SelectBox';
-import { tags_mock } from '@mocks/data/tag/tags.mock';
 
 export default {
   title: 'post/CSelectBox',
@@ -48,7 +47,7 @@ export const 사용자 = {
 export const 태그 = {
   args: {
     labelName: '태그',
-    ListItem: tags_mock,
+    ListItem: tagList,
     placeHolder: '태그를 지정해주세요.',
     setState: setState,
     menuWidth: 628,

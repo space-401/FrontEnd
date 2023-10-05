@@ -1,9 +1,7 @@
-import postListMock from '@mocks/data/PostList/postList.mock';
-import commentListMock from '@mocks/data/MyPage/commentListMock';
+import { postList } from '../post.mock';
 import {
   AccountDataType,
   BookMarkListType,
-  MyCommentListType,
   MyPostListType,
 } from '@type/user.type';
 
@@ -14,22 +12,15 @@ export const accountInfoMock: AccountDataType = {
 };
 
 export const bookMarkListMock: BookMarkListType = {
-  bookMarkList: postListMock,
+  bookMarkList: postList,
   page: 2,
   total: 40,
   itemLength: 12,
 };
 
 export const myPostListMock: MyPostListType = {
-  myPostList: postListMock,
+  myPostList: postList,
   page: 2,
   total: 40,
   itemLength: 12,
-};
-
-export const myCommentListMock: MyCommentListType = {
-  myCommentList: commentListMock,
-  page: 3,
-  total: 30,
-  itemLength: 10,
 };

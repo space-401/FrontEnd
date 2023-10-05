@@ -35,7 +35,7 @@ export const myPostList: MyPostListType = {
 /**
  * 사용자가 작성한 댓글에 대한 목 데이터
  */
-export const myCommentList: MyCommentListType = {
+export const myCommentListAndInfo: MyCommentListType = {
   myCommentList: [
     {
       postId: 1,

@@ -70,19 +70,20 @@ const DetailPage = React.forwardRef(
     const { postDetailData } = usePostDetailQuery(postId);
 
     const {
-      imgs,
+      imgUrl,
       userList,
       placeTitle,
       placeTag,
       postUpdatedAt,
       postCreatedAt,
-      location,
+      position,
       commentCount,
       isMine,
       postTitle,
       postDescription,
       tagUsers,
     } = postDetailData!;
+    console.log('postDetailDate', postDetailData);
 
     const setReply = (newState: string) => {
       setState((prev) => ({ ...prev, value: newState }));
@@ -92,7 +93,7 @@ const DetailPage = React.forwardRef(
       setReply(event.target.value);
     };
 
-    const { bookMarkAction } = UseBookMarkMutation(postId);
+    const { postBookMarkAction } = UseBookMarkMutation();
 
     const DeleteAction = () => {
       ModalClose();
@@ -121,8 +122,8 @@ const DetailPage = React.forwardRef(
       setState((prev) => ({ ...prev, isReplyOpen: newReply }));
     };
 
-    const wishAsync = () => {
-      bookMarkAction();
+    const wishAsync = (postId: number) => {
+      postBookMarkAction(postId);
     };
 
     useEffect(() => {
@@ -147,13 +148,17 @@ const DetailPage = React.forwardRef(
         </S.DeleteIconBox>
         <S.Container>
           <Suspense>
-            <S.LikeIconBox onClick={wishAsync}>
+            <S.LikeIconBox
+              onClick={() => {
+                wishAsync(postId);
+              }}
+            >
               <IconButton>
                 {state.isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
               </IconButton>
             </S.LikeIconBox>
-            <S.LeftImgBox isArray={imgs.length !== 0}>
-              {[...imgs].map((imgUrl) => (
+            <S.LeftImgBox isArray={imgUrl?.length !== 0}>
+              {[...imgUrl].map((imgUrl) => (
                 <S.ImgBox key={imgUrl} imgUrl={imgUrl} />
               ))}
             </S.LeftImgBox>
@@ -256,14 +261,14 @@ const DetailPage = React.forwardRef(
                   <Map
                     zoomable={false}
                     draggable={false}
-                    center={location}
+                    center={position}
                     style={{
                       width: '100%',
                       height: '200px',
                     }}
                     level={4}
                   >
-                    <MapMarker position={location} />
+                    <MapMarker position={position} />
                   </Map>
                 </S.MapBox>
               </S.MapInfo>

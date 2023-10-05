@@ -32,14 +32,14 @@ import { tagList, userList } from '@mocks/data/common';
 const CreatePost = () => {
   const params = useParams();
   const postId = params.postId;
-  const { postDetailData } = usePostDetailQuery(Number(postId), true);
+  const { postDetailData } = usePostDetailQuery(Number(postId));
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: postDetailData ? makeObj(postDetailData.imgs) : [],
-    cropImages: postDetailData ? postDetailData.imgs : [],
+    images: postDetailData ? makeObj(postDetailData.imgUrl) : [],
+    cropImages: postDetailData ? postDetailData.imgUrl : [],
     convertedImages: [],
   });
   //현재 선택한 이미지의 index
@@ -80,8 +80,8 @@ const CreatePost = () => {
     content: postDetailData ? postDetailData.placeTitle : '',
     position: postDetailData
       ? {
-          lng: String(postDetailData.location.lng),
-          lat: String(postDetailData.location.lat),
+          lng: String(postDetailData.position.lng),
+          lat: String(postDetailData.position.lat),
         }
       : { lng: '0', lat: '0' },
   });
