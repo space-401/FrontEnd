@@ -29,6 +29,9 @@ const Calender = ({
   dateInfo,
 }: CalenderPropsType) => {
   const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState(
+    dateInfo?.endDate ? new Date(dateInfo.endDate) : null
+  );
 
   useEffect(() => {
     console.log('dateInfoaaaa', dateInfo);
@@ -37,9 +40,6 @@ const Calender = ({
     console.log();
   }, []);
 
-  const [endDate, setEndDate] = useState(
-    dateInfo?.endDate ? new Date(dateInfo.endDate) : null
-  );
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
 
   const toggleDropdown = (index: number) => {

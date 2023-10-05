@@ -1,4 +1,3 @@
-import { selectType } from './main.type';
 import type { SpacePostType, OneSpaceType } from '@type/space.type';
 import { ApiResponseType } from '@type/response.type';
 
@@ -26,7 +25,7 @@ export type PostDetailType = {
   postDescription: string;
   placeTitle: string;
   placeTag: TagType[];
-  location: {
+  position: {
     lat: number;
     lng: number;
   };
@@ -35,10 +34,10 @@ export type PostDetailType = {
   date: DateInfoType;
   commentCount: number;
   isBookmark: boolean;
-  tagUsers: selectType[];
-  userList: selectType[];
+  tagUsers: UserType[];
+  userList: UserType[];
   tagList: TagType[];
-  imgs: string[]; //나중에 File만 가능하게 바꿀 것, 목데이터 때문
+  imgUrl: string[]; //나중에 File만 가능하게 바꿀 것, 목데이터 때문
 };
 
 //포스트 생성 페이지에서는 tags가 추가적으로 필요하다.

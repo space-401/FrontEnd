@@ -4,7 +4,7 @@ import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
 import {
   accountInfo,
   bookMarkList,
-  myCommentList,
+  myCommentListAndInfo,
   myPostList,
 } from '@mocks/data/user.mock';
 
@@ -43,7 +43,10 @@ export const userHandlers: RestHandler[] = [
    * 내가 작성한 댓글 리스트들을 불러오는 api
    */
   rest.get(END_POINTS.MY_COMMENT_LIST('page'), (_, res, ctx) => {
-    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(myCommentList));
+    return res(
+      ctx.status(HTTP_STATUS_CODE.SUCCESS),
+      ctx.json(myCommentListAndInfo)
+    );
   }),
   /**
    * 내가 북마크한 포스트 게시물들을 불러오는 api
