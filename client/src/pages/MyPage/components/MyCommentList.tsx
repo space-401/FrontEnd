@@ -18,7 +18,7 @@ const MyCommentList = () => {
     setCurPage(number);
   };
 
-  const { DetailModalOpen } = useDetailModalOpen();
+  const detailModalOpen = useDetailModalOpen();
 
   return (
     <>
@@ -38,7 +38,7 @@ const MyCommentList = () => {
           return (
             <>
               <CL.OneCommentList
-                onClick={() => DetailModalOpen(postId)}
+                onClick={() => detailModalOpen(postId)}
                 key={commentId}
               >
                 <CL.LeftCard>

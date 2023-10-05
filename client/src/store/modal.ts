@@ -1,32 +1,51 @@
 import { create } from 'zustand';
+import {
+  AlertModalType,
+  ConfirmModalType,
+  DetailModalType,
+  ModalType,
+  ModeType,
+} from '@type/modal.type';
 
-type ModalType = {
-  isOpen: boolean;
-  ModalOpen: () => void;
-  ModalClose: () => void;
-};
+export const useDetailModalStore = create<DetailModalType>((setState) => ({
+  isOpen: false,
+  postId: 0,
+  setPostId: (postId) => setState((state) => ({ ...state, postId })),
+  ModalOpen: () => setState((state) => ({ ...state, isOpen: true })),
+  ModalClose: () => setState(() => ({ isOpen: false, postId: 0 })),
+}));
 
-type ModeType = {
-  isMode: boolean;
-  ModeOn: () => void;
-  ModeClose: () => void;
-};
+export const useAlertModalStore = create<AlertModalType>((setState) => ({
+  isOpen: false,
+  alertState: { alertMessage: '', alertTitle: '', width: 0 },
+  setAlertInfo: (alertInfo) =>
+    setState(() => ({ isOpen: false, alertState: { ...alertInfo } })),
+  ModalOpen: () => setState((state) => ({ ...state, isOpen: true })),
+  ModalClose: () =>
+    setState(() => ({
+      isOpen: false,
+      alertState: { alertMessage: '', alertTitle: '', width: 0 },
+    })),
+}));
 
-type DetailModalType = {
-  postId: number;
-  setPostId: (postId: number) => void;
-};
-
-export const useDetailModalStore = create<ModalType & DetailModalType>(
-  (setState) => ({
-    isOpen: false,
-    postId: 0,
-    setPostId: (postId: number) =>
-      setState((state) => ({ ...state, postId: postId })),
-    ModalOpen: () => setState((state) => ({ ...state, isOpen: true })),
-    ModalClose: () => setState((state) => ({ ...state, isOpen: false })),
-  })
-);
+export const useConfirmModalStore = create<ConfirmModalType>((setState) => ({
+  isOpen: false,
+  confirmState: {
+    isPositiveModal: false,
+    closeMessage: '',
+    ApproveMessage: '',
+    titleMessage: '',
+    AsyncAction: () => {},
+  },
+  setConfirmInfo: (confirmInfo) =>
+    setState({ isOpen: false, confirmState: { ...confirmInfo } }),
+  ModalOpen: () => setState((state) => ({ ...state, isOpen: true })),
+  ModalClose: () =>
+    setState((state) => ({
+      confirmState: { ...state.confirmState, descriptionMessage: undefined },
+      isOpen: false,
+    })),
+}));
 
 export const usePhotoModalStore = create<ModalType>((setState) => ({
   isOpen: false,
@@ -46,12 +65,6 @@ export const useSelectIconModalStore = create<ModalType>((setState) => ({
   ModalClose: () => setState(() => ({ isOpen: false })),
 }));
 
-export const useAlertModalStore = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
 export const useSelectBasicIconModalStore = create<ModalType>((setState) => ({
   isOpen: false,
   ModalOpen: () => setState(() => ({ isOpen: true })),
@@ -59,12 +72,6 @@ export const useSelectBasicIconModalStore = create<ModalType>((setState) => ({
 }));
 
 export const useCreateUserModal = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
-export const useConfirmModalStore = create<ModalType>((setState) => ({
   isOpen: false,
   ModalOpen: () => setState(() => ({ isOpen: true })),
   ModalClose: () => setState(() => ({ isOpen: false })),

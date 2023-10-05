@@ -38,7 +38,7 @@ const LeftSection = (props: LeftSectionPropType) => {
           usersList,
           postUpdatedAt,
           placeTag,
-          mainImgUrl,
+          imgUrl,
         } = item;
         return (
           <OnePostMapCard
@@ -47,7 +47,7 @@ const LeftSection = (props: LeftSectionPropType) => {
             postDescription={getFormatUser(usersList)}
             postPlace={placeTitle}
             postTags={placeTag}
-            imgUrl={mainImgUrl}
+            imgUrl={imgUrl[0]}
             createAt={postUpdatedAt}
             onClick={() => {
               setIsSelect(postId);
