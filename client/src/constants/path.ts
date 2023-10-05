@@ -16,5 +16,4 @@ export const PATH = {
   POST_UPDATE: `${BASE_PATH.POST}/update`,
   SPACE_CREATE: `${BASE_PATH.SPACE}/create`,
   SPACE_UPDATE: `${BASE_PATH.SPACE}/update`,
-  SPACE_SELECT: `${BASE_PATH.SPACE}/select`,
 };

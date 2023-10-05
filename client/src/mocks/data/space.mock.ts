@@ -8,7 +8,7 @@ import { tagList, userList } from '@mocks/data/common';
  */
 export const spaceInfo: SpaceInfo = {
   isInitialized: false,
-  isAdmin: false,
+  isAdmin: true,
   title: 'SPACE 401',
   description:
     '사면·감형 및 복권에 관한 사항은 법률로 정한다. 국정의 중요한 사항에 관한 대통령의 자문에 응하기 위하여 국가원로로 구성되는 국가원로자문회의를 둘 수 있다.어쩌구어쩌구어쩌구어쩌구',
