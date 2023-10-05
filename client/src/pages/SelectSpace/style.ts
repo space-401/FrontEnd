@@ -15,7 +15,7 @@ const Img = styled.div`
 `;
 
 const SpaceContainer = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   border-radius: 20px;
   gap: 8px;
   padding-top: 100px;

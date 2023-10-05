@@ -6,7 +6,6 @@ import S from './style';
 import { MenuToggle } from './components/Toggle';
 import MenuList from './components/MenuList';
 import SelectList from './components/component/SelectList';
-import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore } from '@/store/modal';
 
 const CreateSelectBox = (props: SelectBoxProps) => {
@@ -38,12 +37,6 @@ const CreateSelectBox = (props: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const {
-    isOpen: isAlertModalOpen,
-    ModalClose: AlertModalClose,
-    ModalOpen: AlertModalOpen,
-  } = useAlertModalStore();
-
   useEffect(() => {
     setState(select);
   }, [select]);
@@ -55,7 +48,12 @@ const CreateSelectBox = (props: SelectBoxProps) => {
 
   const EnterCheck = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'Enter') {
-      if (searchValue.trim().length === 0) return AlertModalOpen();
+      if (searchValue.trim().length === 0)
+        return ModalOpen({
+          width: 300,
+          alertMessage: '확인',
+          alertTitle: '아무것도 입력하지 않았습니다.',
+        });
 
       if (
         select.filter((prevState) => prevState.title === searchValue).length !==
@@ -75,19 +73,12 @@ const CreateSelectBox = (props: SelectBoxProps) => {
       ? '함께한 친구들을 추가해 주세요'
       : '태그를 지정해 주세요';
 
+  const { ModalOpen } = useAlertModalStore((state) => state);
+
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
     <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
-      {isAlertModalOpen && (
-        <AlertModal
-          ModalClose={AlertModalClose}
-          isOpen={isAlertModalOpen}
-          width={300}
-          alertMessage="확인"
-          alertTitle="아무것도 입력하지 않았습니다."
-        />
-      )}
       <S.LabelTitle>
         {!isOpen ? (
           select.map((prev) => prev.title).join(', ') || (

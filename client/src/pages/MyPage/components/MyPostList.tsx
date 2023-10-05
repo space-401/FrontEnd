@@ -12,7 +12,7 @@ const MyPostList = () => {
 
   const { myPostList, total, page, itemLength } = MyPostListData!;
 
-  const { DetailModalOpen } = useDetailModalOpen();
+  const detailModalOpen = useDetailModalOpen();
 
   const movePage = (number: number) => {
     setCurPage(number);
@@ -22,13 +22,13 @@ const MyPostList = () => {
     <>
       <B.FlipCardList>
         {myPostList.map((item) => {
-          const { postId, mainImgUrl } = item;
+          const { postId, imgUrl } = item;
           return (
             <FlipCard
               size={'small'}
-              onClick={() => DetailModalOpen(postId)}
+              onClick={() => detailModalOpen(postId)}
               key={postId}
-              imgUrl={mainImgUrl}
+              imgUrl={imgUrl[0]}
               item={item}
             />
           );

@@ -12,7 +12,7 @@ const BookMarkList = () => {
 
   const { total, page, bookMarkList, itemLength } = BookMarkListData!;
 
-  const { DetailModalOpen } = useDetailModalOpen();
+  const detailModalOpen = useDetailModalOpen();
 
   const movePage = (page: number) => {
     setCurPage(page);
@@ -27,13 +27,13 @@ const BookMarkList = () => {
       <A.Bar margin_top={16} />
       <B.FlipCardList>
         {bookMarkList.map((item) => {
-          const { postId, mainImgUrl } = item;
+          const { postId, imgUrl } = item;
           return (
             <FlipCard
               size={'small'}
-              onClick={() => DetailModalOpen(postId)}
+              onClick={() => detailModalOpen(postId)}
               key={postId}
-              imgUrl={mainImgUrl}
+              imgUrl={imgUrl[0]}
               item={item}
             />
           );
