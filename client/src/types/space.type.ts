@@ -30,6 +30,7 @@ export type AlarmType = {
   create_at: string;
   alarmMessage: string;
 };
+//포스트 타입
 
 export type SpacePostType = {
   postId: number;
@@ -39,8 +40,7 @@ export type SpacePostType = {
   postCreatedAt: string;
   postUpdatedAt: string;
   usersList: UserType[];
-  mainImgUrl: string;
-  subImgUrl?: string[];
+  imgUrl: string[];
   position: { lat: number; lng: number };
 };
 
