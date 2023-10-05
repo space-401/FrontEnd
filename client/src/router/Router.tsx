@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         children: [
           /*스페이스*/
           {
-            path: PATH.SPACE_SELECT,
+            path: PATH.HOME,
             element: <SelectSpace />,
           },
           {
