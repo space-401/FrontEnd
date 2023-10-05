@@ -36,7 +36,6 @@ const Calender = ({
   );
 
   useEffect(() => {
-    console.log('dateInfoaaaa', dateInfo);
     dateInfo?.startDate && setStartDate(new Date(dateInfo.startDate));
     dateInfo?.endDate && setEndDate(new Date(dateInfo.endDate));
     console.log();
@@ -62,18 +61,17 @@ const Calender = ({
 
   //날짜 형식 변환해서 보내줌
   useEffect(() => {
-    console.log('dateInfo', startDate);
     if (startDate) {
       let newDateStr: DateInfoType;
       if (endDate) {
         newDateStr = {
-          startDate: postTimeChangeHelper(startDate) || '',
-          endDate: postTimeChangeHelper(endDate) || '',
+          startDate: postTimeChangeHelper(startDate) ?? '',
+          endDate: postTimeChangeHelper(endDate) ?? '',
         };
       } else {
         newDateStr = {
-          startDate: postTimeChangeHelper(startDate) || '',
-          endDate: postTimeChangeHelper(startDate) || '',
+          startDate: postTimeChangeHelper(startDate) ?? '',
+          endDate: postTimeChangeHelper(startDate) ?? '',
         };
       }
       setDateInfo(newDateStr);

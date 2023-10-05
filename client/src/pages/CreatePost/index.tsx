@@ -9,25 +9,23 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgSlider from '@/components/Create/ImgSlider';
-import { ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
 import { DateInfoType, TagType, UserType } from '@/types/post.type';
-import { ImageArrType } from '@/types/image.type';
-import AlertModal from '@/modal/Alert/AlertModal';
-import { useAlertModalStore, useConfirmModalStore } from '@/store/modal';
+import { ImageType, ImageArrType } from '@/types/image.type';
 import { useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
 import { makeObj } from '@/utils/makeObj';
-import ConfirmModal from '@/modal/Confirm/ConfirmModal';
 import { tagList, userList } from '@mocks/data/common';
+import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
+import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 
 const CreatePost = () => {
   const params = useParams();
@@ -35,8 +33,6 @@ const CreatePost = () => {
   const { postDetailData } = usePostDetailQuery(Number(postId));
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {}, []);
 
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -48,16 +44,10 @@ const CreatePost = () => {
   const [currentIdx, setCurrentIdx] = useState(0);
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
-  //확인 모달이 열려있는지
-  const {
-    ModalOpen: confirmModalOpen,
-    ModalClose: confirmModalClose,
-    isOpen: isConfirmModalOpen,
-  } = useConfirmModalStore();
   //현재 글자개수 세기
   const { values, onChange } = useInputs({
-    title: postDetailData?.postTitle || '',
-    content: postDetailData?.postDescription || '',
+    title: postDetailData?.postTitle ?? '',
+    content: postDetailData?.postDescription ?? '',
   });
   const { title, content } = values;
 
@@ -112,13 +102,6 @@ const CreatePost = () => {
       : []
   );
 
-  //경고 모달
-  const {
-    isOpen: isAlertModalOpen,
-    ModalClose: AlertModalClose,
-    ModalOpen: AlertModalOpen,
-  } = useAlertModalStore();
-
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
     if (inputRef.current && imageArr.images.length == 0)
@@ -159,7 +142,7 @@ const CreatePost = () => {
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {
-          return AlertModalOpen();
+          return alertModalOpen();
         }
       };
       reader.readAsDataURL(files[i]);
@@ -183,30 +166,32 @@ const CreatePost = () => {
     window.location.href = result;
   };
 
-  const inputWidth = Number('calc(100% - 60px)');
+  const alertOpen = useAlertModalOpen();
+  const confirmOpen = useConfirmModalOpen();
+
+  /**경고 모달*/
+  const alertModalOpen = () => {
+    alertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '이미지는 10개까지만 추가됩니다.',
+    });
+  };
+  /**확인 모달*/
+  const confirmModalOpen = () => {
+    confirmOpen({
+      AsyncAction: onMoveCreatePost,
+      isPositiveModal: true,
+      ApproveMessage: '확인',
+      closeMessage: '닫기',
+      titleMessage: '성공적으로 포스팅되었습니다.',
+    });
+  };
+
+  const inputWidth = 500;
 
   return (
     <S.Wrapper>
-      {isAlertModalOpen && (
-        <AlertModal
-          ModalClose={AlertModalClose}
-          isOpen={isOpen}
-          width={300}
-          alertMessage="확인"
-          alertTitle="이미지는 10개까지만 추가됩니다."
-        />
-      )}
-      {isConfirmModalOpen && (
-        <ConfirmModal
-          isPositiveModal={true}
-          titleMessage="성공적으로 포스팅되었습니다."
-          ApproveMessage="확인"
-          closeMessage="닫기"
-          AsyncAction={onMoveCreatePost}
-          ModalClose={confirmModalClose}
-          isOpen={isConfirmModalOpen}
-        />
-      )}
       {isOpen && (
         <ImagesEditModal
           imageArr={imageArr}
@@ -216,39 +201,44 @@ const CreatePost = () => {
           handleFileChange={handleFileChange}
         />
       )}
+
       {imageArr.cropImages.length == 0 ? (
-        <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
-          <S.PhotoContainer>
-            <PhotoIcon />
-            <BasicButton
-              onClick={onClickImgEditModal}
-              width={55}
-              height={20}
-              borderRadius={5}
-              backgroundColor={theme.COLOR['gray-2']}
-            >
-              <form method="post" encType="form-data">
-                <input
-                  type="file"
-                  ref={inputRef}
-                  onChange={(e) => {
-                    handleFileChange(e);
-                  }}
-                  style={{ display: 'none' }}
-                  multiple
-                />
-              </form>
-              <div>사진 선택</div>
-            </BasicButton>
-          </S.PhotoContainer>
-        </BasicBox>
+        <S.BoxWrapper>
+          <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
+            <S.PhotoContainer>
+              <PhotoIcon />
+              <BasicButton
+                onClick={onClickImgEditModal}
+                width={55}
+                height={20}
+                borderRadius={5}
+                backgroundColor={theme.COLOR['gray-2']}
+              >
+                <form method="post" encType="form-data">
+                  <input
+                    type="file"
+                    ref={inputRef}
+                    onChange={(e) => {
+                      handleFileChange(e);
+                    }}
+                    style={{ display: 'none' }}
+                    multiple
+                  />
+                </form>
+                <div>사진 선택</div>
+              </BasicButton>
+            </S.PhotoContainer>
+          </BasicBox>
+        </S.BoxWrapper>
       ) : (
-        <div style={{ zIndex: 1000, width: '348px' }}>
-          <ImgSlider
-            images={imageArr.cropImages}
-            onClickImgEditModal={onClickImgEditModal}
-          />
-        </div>
+        <S.BoxWrapper>
+          <div style={{ zIndex: 1000, width: '348px' }}>
+            <ImgSlider
+              images={imageArr.cropImages}
+              onClickImgEditModal={onClickImgEditModal}
+            />
+          </div>
+        </S.BoxWrapper>
       )}
       {/*장소 찾기 모달*/}
       <SearchModal
@@ -271,6 +261,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={1}>
           <InputBox
+            width={inputWidth}
             height={60}
             readonly={false}
             placeholder="16자 이내의 제목을 입력해 주세요"
@@ -333,12 +324,12 @@ const CreatePost = () => {
         <S.InputContainer number={4}>
           <S.MapContainer onClick={() => setIsMapModalOpen(true)}>
             <InputBox
+              width={inputWidth}
               readonly={true}
               height={60}
               placeholder="등록할 장소를 입력해 주세요"
               type="text"
               maxLength={20}
-              width={inputWidth}
               onChange={() => {}}
               children={<SearchIcon />}
               value={mapInfo.content}
@@ -385,11 +376,13 @@ const CreatePost = () => {
         </S.InputContainer>
 
         <S.EmptyContainer />
-        <S.ButtonContainer>
+        <S.ButtonContainer paddingLeft={inputWidth - 160}>
           <BasicButton
             disabled={
-              !title.length || !content.length || !dateInfo.startDate
-              // !postData.place.content
+              !title.length ||
+              !content.length ||
+              !dateInfo.startDate ||
+              mapInfo.content == ''
             }
             onClick={onSubmit}
             width={160}

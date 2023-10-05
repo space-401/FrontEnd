@@ -1,6 +1,5 @@
-import { PostDetailType } from '@type/post.type';
 import { tagList, userList } from '@mocks/data/common';
-import { PostResponseType } from '@type/post.type';
+import { PostResponseType, PostDetailType } from '@type/post.type';
 import { SpacePostType } from '@/types/space.type';
 
 /**

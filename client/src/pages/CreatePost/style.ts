@@ -3,8 +3,8 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div<{ width?: string }>`
   display: flex;
-  justify-content: center;
   width: 100%;
+  justify-content: center;
   padding-top: 50px;
   background-color: ${({ theme }) => theme.COLOR['black']};
   color: ${({ theme }) => theme.COLOR.white};
@@ -16,23 +16,27 @@ const Wrapper = styled.div<{ width?: string }>`
   }
 `;
 
+const BoxWrapper = styled.div`
+  width: 30%;
+`;
+
 const GridWrapper = styled.div`
-  width: 50%;
-  margin-left: 4rem;
+  width: 60%;
+  margin-left: 5%;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   padding-bottom: 50px;
 
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
   grid-template-rows: 60px 60px 60px 60px 60px 60px 220px 60px;
   grid-gap: ${({ theme }) => theme.SPACING['gap-24']};
   grid-template-areas: 'spacename spacename' 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'title6 input6' 'empty button';
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
     padding-top: 3rem;
-    width: 80%;
     flex-direction: column;
     ${flexCenter}
+    margin-left: 0;
   }
 `;
 
@@ -84,20 +88,16 @@ const Label = styled.label<{ number: number; required: boolean }>`
 
 const InputContainer = styled.div<{ number: number }>`
   grid-area: ${({ number }) => `input${number}`};
-  width: calc(100% - 60px);
-
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    width: calc(80% - 60px);
-  }
+  position: relative;
 `;
 
 const EmptyContainer = styled.div`
   grid-area: empty;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.div<{ paddingLeft: number }>`
   grid-area: button;
-  margin-left: 470px;
+  padding-left: ${({ paddingLeft }) => paddingLeft}px;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     margin-left: 0;
   }
@@ -146,6 +146,7 @@ const MapContainer = styled.div`
 
 const S = {
   Wrapper,
+  BoxWrapper,
   GridWrapper,
   PhotoContainer,
   PhotoWrapper,

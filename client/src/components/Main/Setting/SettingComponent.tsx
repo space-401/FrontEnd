@@ -4,8 +4,8 @@ import { Box, Modal } from '@mui/material';
 import S from '@components/Main/Setting/style';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
 import UserList from '@components/Main/Setting/components/UserList';
-import ConfirmModal from '@modal/Confirm/ConfirmModal';
-import SelfErrorModal from '@modal/Alert/AlertModal';
+import Index from '@modal/Confirm';
+import SelfErrorModal from '@modal/Alert';
 import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
 import { theme } from '@styles/theme/theme';
 import { toastColorMessage } from '@utils/toastMessage';
@@ -81,7 +81,7 @@ const SettingComponent = React.forwardRef(
           >
             <SelfErrorModal
               width={368}
-              alertTitle={`${userList[0].userName} 방장님,\n 방장은 주고 나가주세요`}
+              alertTitle={`${userList[0].userName} 방장님,\n 방장을 다른 사람에게 양도하신 후 나가실 수 있습니다.`}
               alertMessage={`확인`}
               ModalClose={() => ChangeErrorModal(false)}
               isOpen={state.isErrorOutModal}
@@ -103,7 +103,7 @@ const SettingComponent = React.forwardRef(
             open={state.isSelfOutModal}
             onClose={() => ChangeSelfOutModal(false)}
           >
-            <ConfirmModal
+            <Index
               isPositiveModal={false}
               titleMessage={
                 "'" + spaceTitle + "'" + '스페이스에서 나가시겠습니까?'

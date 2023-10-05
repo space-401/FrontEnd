@@ -1,25 +1,22 @@
+import { flexCenter } from '@/styles/common';
 import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   @media ${({ theme }) => theme.DEVICE.tablet} {
     flex-direction: column;
-    display: flex;
+    ${flexCenter}
   }
 `;
 
 const Form = styled.div`
-  width: 50%;
+  width: 960px;
   padding-top: 2rem;
   padding-bottom: 2.5rem;
   color: white;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     flex-direction: column;
     display: flex;
+    ${flexCenter}
   }
 
   display: grid;
@@ -31,7 +28,7 @@ const Form = styled.div`
 
 const TitleSection = styled.div`
   padding-top: 2rem;
-  width: 50%;
+  width: 960px;
   div {
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
     color: ${({ theme }) => theme.COLOR.white};
@@ -43,6 +40,9 @@ const TitleSection = styled.div`
   }
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter}
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -82,9 +82,16 @@ const InputContainer = styled.div<IInput>`
   position: relative;
 `;
 
-const ButtonContainer = styled.div`
+const EmptyContainer = styled.div`
+  grid-area: empty;
+`;
+
+const ButtonContainer = styled.div<{ paddingLeft: number }>`
   grid-area: button;
-  margin-left: auto;
+  padding-left: ${({ paddingLeft }) => paddingLeft}px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-left: 0;
+  }
 `;
 
 const EditButton = styled.div`
@@ -105,6 +112,7 @@ const S = {
   EditButton,
   FlexContainer,
   TitleSection,
+  EmptyContainer,
 };
 
 export default S;

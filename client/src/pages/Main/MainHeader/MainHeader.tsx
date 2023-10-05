@@ -37,7 +37,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
           <S.ControlButton
             onClick={() => setIsOpen(true)}
             color={theme.COLOR.white}
-            hoverColor={theme.COLOR['gray-7']}
+            hoverColor={theme.COLOR['gray-4']}
           >
             인원 {userList.length}/8
           </S.ControlButton>
