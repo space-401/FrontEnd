@@ -342,7 +342,7 @@ export const postDetail: PostDetailType = {
     },
   ],
   userList: userList,
-  selectedTags: [
+  spaceTags: [
     { tagId: 1, tagTitle: '흥미진진한' },
     { tagId: 2, tagTitle: '긴장감이 넘치는' },
   ],

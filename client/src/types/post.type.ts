@@ -34,7 +34,7 @@ export type PostDetailType = {
   commentCount: number;
   isBookmark: boolean;
   selectedUsers: UserType[];
-  selectedTags: TagType[];
+  spaceTags: TagType[];
   userList: UserType[];
   tagList: TagType[];
   imgUrl: string[]; //나중에 File만 가능하게 바꿀 것, 목데이터 때문
