@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { UserType } from '@type/post.type';
-import { Box, Modal } from '@mui/material';
+import { Box } from '@mui/material';
 import S from '@components/Main/Setting/style';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
 import UserList from '@components/Main/Setting/components/UserList';
-import Index from '@modal/Confirm';
-import SelfErrorModal from '@modal/Alert';
 import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
 import { theme } from '@styles/theme/theme';
 import { toastColorMessage } from '@utils/toastMessage';
+import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
+import { PATH } from '@constants/path';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const SettingComponent = React.forwardRef(
   (
@@ -22,40 +25,37 @@ const SettingComponent = React.forwardRef(
     forwardRef: React.ForwardedRef<HTMLDivElement>
   ) => {
     const { isOpen, isAdmin, userList, spaceTitle, onClose } = props;
+    const navigate = useNavigate();
 
-    const [state, setState] = useState({
-      dropUserName: '',
-      // 본인이 나갈때 뜨는 모달창
-      isSelfOutModal: false,
-      // 다른 사람을 추방하였을 때 뜨는 모달창
-      isAlertModal: false,
-      // 본인이 나갈때 뜨는 경고 모달창
-      isErrorOutModal: false,
-    });
+    const alertModalOpen = useAlertModalOpen();
+    const confirmModalOpen = useConfirmModalOpen();
 
-    const ChangeAlertModal = (newState: boolean) => {
-      setState((prev) => ({ ...prev, isAlertModal: newState }));
+    const selfGetOutAction = () => {
+      console.log(userList[0].userId + '님이 방을 나갔습니다.');
+      navigate(PATH.HOME);
     };
 
-    const ChangeErrorModal = (newState: boolean) => {
-      setState((prev) => ({ ...prev, isErrorOutModal: newState }));
-    };
-
-    const ChangeSelfOutModal = (newState: boolean) => {
-      setState((prev) => ({ ...prev, isSelfOutModal: newState }));
-    };
-
-    const ChangeSelfAction = (user_id: number) => {
+    const selfGetOutFromSpaceHandler = () => {
       if (isAdmin) {
-        ChangeErrorModal(true);
+        alertModalOpen({
+          width: 368,
+          alertTitle: `${userList[0].userName} 방장님,\n 방장을 다른 분께 양도하신 후 나가실 수 있어요.`,
+          alertMessage: '확인',
+        });
         return;
       }
-      console.log(user_id + '님이 나갔습니다.');
-      // 스페이스 선택 페이지 이동 url
-      ChangeSelfOutModal(false);
+
+      confirmModalOpen({
+        AsyncAction: selfGetOutAction,
+        isPositiveModal: false,
+        descriptionMessage: '작성된 게시글과 댓글들은 삭제되지 않습니다.',
+        titleMessage: "'" + spaceTitle + "'" + '스페이스에서 나가시겠습니까?',
+        ApproveMessage: '나가기',
+        closeMessage: '취소',
+      });
     };
 
-    const InviteLinkCopyAction = async () => {
+    const inviteLinkCopyAction = async () => {
       try {
         await navigator.clipboard.writeText('www.KKIRI.com');
         toastColorMessage({
@@ -72,50 +72,31 @@ const SettingComponent = React.forwardRef(
       }
     };
 
+    const changeAdminAction = (userName: string, userId: number) => {
+      toast(userName + '님이 방장이 되었습니다.', {
+        style: {
+          borderRadius: '10px',
+          background: '#000',
+          color: '#fff',
+        },
+      });
+      console.log(userId);
+    };
+
+    const changeAdminHandler = (userName: string, userId: number) => {
+      confirmModalOpen({
+        AsyncAction: () => changeAdminAction(userName, userId),
+        isPositiveModal: true,
+        descriptionMessage: `방장 권한을 주면 ${userList[0].userName}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`,
+        titleMessage: userName + " 님에게 방장 권한을 주시겠습니까?'",
+        ApproveMessage: '확인',
+        closeMessage: '취소',
+      });
+    };
+
     return (
       <Box tabIndex={-1} ref={forwardRef}>
         <S.Container isOpen={isOpen}>
-          <Modal
-            open={state.isErrorOutModal}
-            onClose={() => ChangeSelfOutModal(false)}
-          >
-            <SelfErrorModal
-              width={368}
-              alertTitle={`${userList[0].userName} 방장님,\n 방장을 다른 사람에게 양도하신 후 나가실 수 있습니다.`}
-              alertMessage={`확인`}
-              ModalClose={() => ChangeErrorModal(false)}
-              isOpen={state.isErrorOutModal}
-            />
-          </Modal>
-          <Modal
-            open={state.isAlertModal}
-            onClose={() => ChangeAlertModal(false)}
-          >
-            <SelfErrorModal
-              width={368}
-              alertTitle={`${userList[0].userName} 방장님,\n 방장은 주고 나가주세요`}
-              alertMessage={`확인`}
-              ModalClose={() => ChangeAlertModal(false)}
-              isOpen={state.isAlertModal}
-            />
-          </Modal>
-          <Modal
-            open={state.isSelfOutModal}
-            onClose={() => ChangeSelfOutModal(false)}
-          >
-            <Index
-              isPositiveModal={false}
-              titleMessage={
-                "'" + spaceTitle + "'" + '스페이스에서 나가시겠습니까?'
-              }
-              descriptionMessage={'작성된 게시글과 댓글들은 삭제되지 않습니다.'}
-              ApproveMessage={'나가기'}
-              closeMessage={'취소'}
-              AsyncAction={() => ChangeSelfAction(userList[0].userId)}
-              ModalClose={() => ChangeSelfOutModal(false)}
-              isOpen={state.isSelfOutModal}
-            />
-          </Modal>
           <S.SettingTop>
             Member
             <S.UserCount>{userList.length}</S.UserCount>
@@ -131,14 +112,17 @@ const SettingComponent = React.forwardRef(
                 index={i}
                 userInfo={user}
                 isAdmin={isAdmin}
+                changeAdminHandler={(userName: string, userId: number) =>
+                  changeAdminHandler(userName, userId)
+                }
               />
             ))}
           </S.SettingCenter>
           <S.SettingBottom>
-            <S.SpaceOutBox onClick={() => ChangeSelfOutModal(true)}>
+            <S.SpaceOutBox onClick={() => selfGetOutFromSpaceHandler()}>
               <LogoutSvg width={24} height={24} />
             </S.SpaceOutBox>
-            <S.InviteUserBox onClick={InviteLinkCopyAction}>
+            <S.InviteUserBox onClick={inviteLinkCopyAction}>
               친구 초대하기
             </S.InviteUserBox>
           </S.SettingBottom>
