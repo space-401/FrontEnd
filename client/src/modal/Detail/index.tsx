@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 import S, { mentionStyle } from '@/modal/Detail/style';
 import { Box, Chip, IconButton } from '@mui/material';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
@@ -11,7 +11,6 @@ import { useDimensions } from '@hooks/common/useDimensions';
 import { motion } from 'framer-motion';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import DetailComments from '@components/Main/Comments';
-import ConfirmModal from '@modal/Confirm/ConfirmModal';
 import { ReactComponent as BookMarkFillSvg } from '@assets/svg/bookmark/fill.svg';
 import { ReactComponent as BookMarkEmptySvg } from '@assets/svg/bookmark/empty.svg';
 import {
@@ -22,18 +21,14 @@ import {
 } from 'react-mentions';
 import OneMention from '@/components/Detail/Mention/OneMention';
 import { usePostDetailQuery } from '@hooks/api/post/usePostDetailQuery';
-import { useDetailModalStore } from '@store/modal';
 import { UseBookMarkMutation } from '@hooks/api/post/useBookMarkMutation';
 import { toastColorMessage } from '@utils/toastMessage';
 import { theme } from '@styles/theme/theme';
+import { useDetailModalStore } from '@store/modal';
+import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 
-type DetailPageProps = {
-  onClose: () => void;
-};
-
-const DetailPage = React.forwardRef(
-  (props: DetailPageProps, forwardRef: React.ForwardedRef<HTMLDivElement>) => {
-    const { onClose: ModalClose } = props;
+const DetailInner = React.forwardRef(
+  (_, forwardRef: React.ForwardedRef<HTMLDivElement>) => {
     useKakaoLoader({
       appkey: import.meta.env.VITE_KAKAO_KEY,
       libraries: ['services'],
@@ -42,14 +37,12 @@ const DetailPage = React.forwardRef(
       mapIsOpen: boolean;
       settingIsOpen: boolean;
       commentIsOpen: boolean;
-      deleteModalIsOpen: boolean;
       isReplyOpen:
         | { open: boolean; refId: number | undefined; id: number | undefined }
         | undefined;
       value: string;
       isBookMark: boolean;
     }>({
-      deleteModalIsOpen: false,
       isReplyOpen: undefined,
       settingIsOpen: false,
       commentIsOpen: false,
@@ -65,9 +58,11 @@ const DetailPage = React.forwardRef(
     const { height: mapHeight } = useDimensions(mapContainerRef);
     const { height: commentHeight } = useDimensions(commentContainerRef);
 
-    const { postId } = useDetailModalStore((state) => state);
+    const { postId, ModalClose } = useDetailModalStore((state) => state);
 
     const { postDetailData } = usePostDetailQuery(postId);
+
+    const confirmModalOpen = useConfirmModalOpen();
 
     const {
       imgUrl,
@@ -83,7 +78,6 @@ const DetailPage = React.forwardRef(
       postDescription,
       tagUsers,
     } = postDetailData!;
-    console.log('postDetailDate', postDetailData);
 
     const setReply = (newState: string) => {
       setState((prev) => ({ ...prev, value: newState }));
@@ -104,16 +98,7 @@ const DetailPage = React.forwardRef(
       });
     };
 
-    const sendReply = () => {
-      console.log(state.value);
-      setReply('');
-    };
-
-    const renderList: SuggestionDataItem[] = userList.map((user) => ({
-      id: user.userId,
-      display: user.userName,
-    }));
-
+    // 대댓글 오픈
     const setIsReply = (
       newReply:
         | { open: boolean; refId: number | undefined; id: number | undefined }
@@ -122,27 +107,33 @@ const DetailPage = React.forwardRef(
       setState((prev) => ({ ...prev, isReplyOpen: newReply }));
     };
 
+    // 댓글 오픈
+    const sendReply = () => {
+      setReply('');
+    };
+
+    const renderList: SuggestionDataItem[] = userList.map((user) => ({
+      id: user.userId,
+      display: user.userName,
+    }));
+
+    // 북마크 요청을 보내는 함수
     const wishAsync = (postId: number) => {
       postBookMarkAction(postId);
     };
 
-    useEffect(() => {
-      console.log(state.deleteModalIsOpen);
-    }, [state.deleteModalIsOpen]);
+    const deleteConfirmOpen = () => {
+      confirmModalOpen({
+        isPositiveModal: false,
+        titleMessage: '이 게시글을 삭제하시겠습니까?',
+        closeMessage: '취소',
+        ApproveMessage: '삭제',
+        AsyncAction: DeleteAction,
+      });
+    };
 
     return (
       <Box tabIndex={-1} ref={forwardRef}>
-        <ConfirmModal
-          isPositiveModal={false}
-          titleMessage={'이 게시글을 삭제하시겠습니까?'}
-          ApproveMessage={'삭제'}
-          closeMessage={'취소'}
-          AsyncAction={DeleteAction}
-          ModalClose={() =>
-            setState((prev) => ({ ...prev, deleteModalIsOpen: false }))
-          }
-          isOpen={state.deleteModalIsOpen}
-        />
         <S.DeleteIconBox>
           <DeleteIcon onClick={ModalClose} width={'24px'} height={'24px'} />
         </S.DeleteIconBox>
@@ -201,14 +192,7 @@ const DetailPage = React.forwardRef(
                         >
                           게시글 편집
                         </S.MenuButton>
-                        <S.MenuButton
-                          onClick={() =>
-                            setState((prev) => ({
-                              ...prev,
-                              deleteModalIsOpen: true,
-                            }))
-                          }
-                        >
+                        <S.MenuButton onClick={() => deleteConfirmOpen()}>
                           게시글 삭제
                         </S.MenuButton>
                       </S.MenuGroup>
@@ -340,4 +324,4 @@ const DetailPage = React.forwardRef(
   }
 );
 
-export default DetailPage;
+export default DetailInner;

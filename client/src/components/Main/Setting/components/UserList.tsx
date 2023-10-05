@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { Modal } from '@mui/material';
 import ProfileAndUserNameChangeModal from '@components/Main/Setting/components/ProfileAndUserNameChangeModal';
 import toast from 'react-hot-toast';
-import ConfirmModal from '@modal/Confirm/ConfirmModal';
+import Index from '@modal/Confirm';
 
 type UserListPropsType = {
   userInfo: UserType;
@@ -71,7 +71,7 @@ const UserList = (props: UserListPropsType) => {
         open={state.isMemberOutModal}
         onClose={() => ChangeMemberModal(false)}
       >
-        <ConfirmModal
+        <Index
           isPositiveModal={false}
           titleMessage={userName + '님을 스페이스에서 내보내시겠습니까?'}
           descriptionMessage={'작성된 게시글과 댓글들이 모두 삭제됩니다.'}
@@ -86,7 +86,7 @@ const UserList = (props: UserListPropsType) => {
         open={state.isChangeAdminModal}
         onClose={() => ChangeAdminModal(false)}
       >
-        <ConfirmModal
+        <Index
           isPositiveModal={true}
           titleMessage={userName + ' 님에게 방장 권한을 주시겠습니까?'}
           descriptionMessage={`방장 권한을 주면 ${myInfo.userName}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`}

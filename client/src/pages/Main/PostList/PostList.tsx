@@ -9,10 +9,10 @@ import KaKaoMap from '@components/Main/PostMap';
 import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
 import { useSearchParams } from 'react-router-dom';
-import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
 import { useSpacePostListQuery } from '@hooks/api/space/useSpacePostListQuery';
 import { PostListFilterProps } from '@type/main.type';
 import { UserType, TagType, DateInfoType } from '@/types/post.type';
+import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
 // import MainCalender from '@/components/common/Calender/MainCalender';
 
 type PostListPropType = {
@@ -65,7 +65,7 @@ const PostList = (props: PostListPropType) => {
     refetch();
   }, [refetch, page, keyword, userId, tagId, dataTime]);
 
-  const { DetailModalOpen } = useDetailModalOpen();
+  const detailModalOpen = useDetailModalOpen();
 
   const { postList, total, page: curPage, itemLength } = spacePostList!;
 
@@ -79,12 +79,12 @@ const PostList = (props: PostListPropType) => {
   const movePage = (pageNumber: number) => {
     let select = {};
     if (state.selectUserList.length !== 0) {
-      state.selectUserList.map((user) => {
+      state.selectUserList.forEach((user) => {
         select = { ...select, user: user.id };
       });
     }
     if (state.selectTagList.length !== 0) {
-      state.selectTagList.map((tag) => {
+      state.selectTagList.forEach((tag) => {
         select = { ...select, tag: tag.id };
       });
     }
@@ -182,7 +182,7 @@ const PostList = (props: PostListPropType) => {
               const { postId, imgUrl } = item;
               return (
                 <FlipCard
-                  onClick={() => DetailModalOpen(postId)}
+                  onClick={() => detailModalOpen(postId)}
                   size={'big'}
                   key={postId}
                   imgUrl={imgUrl[0]}

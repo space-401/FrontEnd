@@ -1,12 +1,10 @@
 import S from '@pages/InviteCode/style';
 import InputBox from '@/components/common/InputBox';
 import BasicButton from '@/components/common/BasicButton';
-import React from 'react';
-import { useState } from 'react';
-import { useAlertModalStore } from '@/store/modal';
-import AlertModal from '@/modal/Alert/AlertModal';
+import React, { useState } from 'react';
 import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
+import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 
 const InviteCode = () => {
   //스페이스 코드
@@ -16,11 +14,6 @@ const InviteCode = () => {
   const [isShowPswd, setIsShowPswd] = useState(false);
 
   //현재 편집 모달이 열려있는지
-  const {
-    ModalOpen: AlertModalOpen,
-    isOpen: isAlertModalOpen,
-    ModalClose: AlertModalClose,
-  } = useAlertModalStore();
 
   //제출시 실행되는 함수
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +36,7 @@ const InviteCode = () => {
     if (!/^[0-9]*$/.test(value)) {
       // 숫자가 아닌 값이 있을 때 에러 처리
       setPswd('');
-      return AlertModalOpen();
+      return alertModalOpen();
     }
     setPswd(value);
   };
@@ -54,15 +47,18 @@ const InviteCode = () => {
     setSpaceCode(value);
   };
 
+  const alertOpen = useAlertModalOpen();
+
+  const alertModalOpen = () => {
+    alertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '비밀번호는 숫자만 입력해 주세요',
+    });
+  };
+
   return (
     <S.Wrapper>
-      <AlertModal
-        ModalClose={AlertModalClose}
-        isOpen={isAlertModalOpen}
-        width={300}
-        alertMessage="확인"
-        alertTitle="비밀번호는 숫자만 입력해 주세요"
-      />
       <S.TitleSection>
         <div>초대 코드 입력</div>
         <p>친구에게 초대받은 초대코드와 비밀번호를 입력해주세요. </p>

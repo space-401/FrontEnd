@@ -47,8 +47,6 @@ const MapBox = (props: MapBoxProps) => {
     });
   }, [map, keyword, setData, setPagination]);
 
-  console.log(center);
-
   return (
     <Map
       isPanto={center.isPanto}

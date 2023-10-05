@@ -22,7 +22,7 @@ const Index = (props: SpacePostListProps) => {
     isPanto: false,
   });
 
-  const { DetailModalOpen } = useDetailModalOpen();
+  const DetailModalOpen = useDetailModalOpen();
 
   return (
     <S.Wrapper>
