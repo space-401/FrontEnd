@@ -8,19 +8,17 @@ import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
 import { useState, useRef, useEffect } from 'react';
 import {
-  useAlertModalStore,
   usePhotoModalStore,
   useSelectIconModalStore,
   useSelectBasicIconModalStore,
+  useAlertModalStore,
 } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
-import { ImageType } from '@/types/image.type';
+import { ImageType, ImageArrType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import { theme } from '@/styles/theme/theme';
 import useInputs from '@/hooks/common/useInputs';
 import SelectIconModal from '@/components/Create/SelectIconModal';
-import { ImageArrType } from '@/types/image.type';
-import AlertModal from '@/modal/Alert/AlertModal';
 import BasicIconModal from '@/components/Create/BasicIconModal';
 import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 
@@ -45,12 +43,6 @@ const CreateSpace = () => {
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
-  //현재 경고 모달이 열려있는지
-  const {
-    ModalOpen: AlertModalOpen,
-    isOpen: isAlertModalOpen,
-    ModalClose: AlertModalClose,
-  } = useAlertModalStore();
   //현재 아이콘 선택 모달이 열려있는지
   const {
     ModalOpen: IconModalOpen,
@@ -86,9 +78,19 @@ const CreateSpace = () => {
     // 정규 표현식을 사용하여 숫자가 아닌 값 검사
     if (!/^[0-9]*$/.test(value)) {
       // 숫자가 아닌 값이 있을 때 에러 처리
-      return AlertModalOpen();
+      return alertModalOpen();
     }
     setPswd(value);
+  };
+
+  const { ModalOpen: alertOepn } = useAlertModalStore((state) => state);
+
+  const alertModalOpen = () => {
+    alertOepn({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '비밀번호는 숫자만 입력해 주세요',
+    });
   };
 
   //파일 변경 함수
@@ -159,13 +161,6 @@ const CreateSpace = () => {
 
   return (
     <S.Wrapper>
-      <AlertModal
-        ModalClose={AlertModalClose}
-        isOpen={isAlertModalOpen}
-        width={300}
-        alertMessage="확인"
-        alertTitle="비밀번호는 숫자만 입력해 주세요"
-      />
       <S.TitleSection>
         <div>스페이스 설정하기</div>
         <p>우리만을 위한 스페이스를 새로 만들어요.</p>
@@ -238,7 +233,7 @@ const CreateSpace = () => {
 
         {/*이름 지정 인풋*/}
         <S.TitleContainer number={2} required={true}>
-          <div>스페이스 명 </div>
+          <div>스페이스 명</div>
         </S.TitleContainer>
         <S.InputContainer number={2}>
           <InputBox

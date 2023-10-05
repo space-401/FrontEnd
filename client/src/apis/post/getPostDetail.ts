@@ -6,6 +6,5 @@ export const getPostDetail = async (postId: number) => {
   const { data } = await axiosInstance.get<PostDetailType>(
     END_POINTS.POST + `/${postId}`
   );
-  console.log('postDetail 호출');
   return data;
 };

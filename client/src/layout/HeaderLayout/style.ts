@@ -3,7 +3,7 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   background-color: ${({ theme }) => theme.COLOR['gray-7']};
   min-height: 100vh;
 `;
@@ -70,6 +70,12 @@ const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
     isCurrentSpace && ' 0px 0px 10px 2px #c2c2c2'};
 `;
 
+const ContentLayOut = styled.div`
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+`;
+
 const S = {
   SpaceIcon,
   SpaceIconBox,
@@ -79,6 +85,7 @@ const S = {
   SpaceBox,
   ContentWrapper,
   Container,
+  ContentLayOut,
 };
 
 export default S;

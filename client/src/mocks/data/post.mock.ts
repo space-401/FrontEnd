@@ -1,6 +1,5 @@
-import { PostDetailType } from '@type/post.type';
 import { tagList, userList } from '@mocks/data/common';
-import { PostResponseType } from '@type/post.type';
+import { PostResponseType, PostDetailType } from '@type/post.type';
 import { SpacePostType } from '@/types/space.type';
 
 /**
@@ -316,6 +315,7 @@ export const postList: SpacePostType[] = [
  * 포스트 게시물의 상세 목 데이터
  */
 export const postDetail: PostDetailType = {
+  tagList: tagList,
   isMine: true,
   postId: 1,
   position: {
