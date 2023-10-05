@@ -44,11 +44,11 @@ const router = createBrowserRouter([
         element: <BackLayout />,
         children: [
           {
-            path: PATH.SPACE + '/:spaceId' + '/post',
+            path: PATH.SPACE + '/:spaceId' + '/post' + '/:postId',
             element: <CreatePost />,
           },
           {
-            path: PATH.SPACE + '/:spaceId' + '/post' + '/:postId',
+            path: PATH.SPACE + '/:spaceId' + '/post',
             element: <CreatePost />,
           },
           {

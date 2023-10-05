@@ -9,7 +9,7 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
@@ -19,7 +19,7 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
-import { DateInfoType } from '@/types/post.type';
+import { DateInfoType, TagType, UserType } from '@/types/post.type';
 import { ImageArrType } from '@/types/image.type';
 import AlertModal from '@/modal/Alert/AlertModal';
 import { useAlertModalStore, useConfirmModalStore } from '@/store/modal';
@@ -36,6 +36,8 @@ const CreatePost = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {}, []);
+
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
     images: postDetailData ? makeObj(postDetailData.imgUrl) : [],
@@ -44,22 +46,6 @@ const CreatePost = () => {
   });
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
-
-  //수정모드일 떄 로직
-  // useEffect(() => {
-  //   if (postDetailData) {
-  //     setImageArr({
-  //       images: makeObj(postDetailData.imgs) || [],
-  //       cropImages: postDetailData.imgs || [],
-  //       convertedImages: [],
-  //     });
-  //     setDateInfo({
-  //       startDate: postDetailData.date.startDate,
-  //       endDate: postDetailData.date.endDate,
-  //     });
-  //   }
-  // }, []);
-
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
   //확인 모달이 열려있는지
@@ -87,16 +73,45 @@ const CreatePost = () => {
   });
   //날짜
   const [dateInfo, setDateInfo] = useState<DateInfoType>({
-    startDate: null,
-    endDate: null,
+    startDate: postDetailData?.date?.startDate
+      ? postDetailData.date.startDate
+      : '',
+    endDate: postDetailData?.date?.endDate ? postDetailData.date.endDate : '',
   });
   //장소 선택 모달이 열렸는지
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+
+  //
+  const onConvertedUserToSelectType = (list: UserType[]) => {
+    return list.map((user) => {
+      return {
+        id: user.userId,
+        title: user.userName,
+        imgUrl: user.imgUrl,
+      };
+    });
+  };
+
+  const onConvertedTagToSelectType = (list: TagType[]) => {
+    return list.map((tag) => {
+      return {
+        id: tag.tagId,
+        title: tag.tagTitle,
+      };
+    });
+  };
   //사람
   const [people, setPeople] = useState<selectType[]>(
-    postDetailData ? postDetailData.tagUsers : []
+    postDetailData
+      ? onConvertedUserToSelectType(postDetailData.selectedUsers)
+      : []
   );
-  const [tags, setTags] = useState<selectType[]>([]);
+  const [tags, setTags] = useState<selectType[]>(
+    postDetailData
+      ? onConvertedTagToSelectType(postDetailData.selectedTags)
+      : []
+  );
+
   //경고 모달
   const {
     isOpen: isAlertModalOpen,
@@ -288,10 +303,6 @@ const CreatePost = () => {
             setState={setPeople}
             menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
-            // state={people.map((v) => ({
-            //   id: v.userId,
-            //   title: v.userName,
-            // }))}
           />
         </S.InputContainer>
 
@@ -328,8 +339,9 @@ const CreatePost = () => {
               type="text"
               maxLength={20}
               width={inputWidth}
-              children={<SearchIcon />}
               onChange={() => {}}
+              children={<SearchIcon />}
+              value={mapInfo.content}
               name=""
             />
           </S.MapContainer>
