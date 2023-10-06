@@ -8,7 +8,7 @@ import { PostInfoBackPropsType } from '@type/post.type';
 const PostInfoBack = (props: PostInfoBackPropsType) => {
   const { item, size } = props;
 
-  const { placeTitle, placeTag, postUpdatedAt, usersList } = item;
+  const { placeTitle, selectedTags, postUpdatedAt, usersList } = item;
 
   return (
     <S.Wrapper size={size}>
@@ -20,7 +20,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             {getFormatDate(postUpdatedAt)}
           </S.PlaceCreateAt>
           <S.ChipBox className={'chip-box'}>
-            {placeTag.map((place) => (
+            {selectedTags.map((place) => (
               <Chip
                 className={'chip'}
                 key={place.tagId}
