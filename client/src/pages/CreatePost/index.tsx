@@ -97,7 +97,9 @@ const CreatePost = () => {
       : []
   );
   const [tags, setTags] = useState<selectType[]>(
-    postDetailData ? onConvertedTagToSelectType(postDetailData.spaceTags) : []
+    postDetailData
+      ? onConvertedTagToSelectType(postDetailData.selectedTags)
+      : []
   );
 
   //자식 inputRef 요소를 클릭하는 함수
