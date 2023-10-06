@@ -12,17 +12,9 @@ const WrapperInner = styled.div``;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 3fr 7fr;
-  grid-template-rows: 1016px;
+  grid-template-columns: 3fr 10fr;
+  height: 650px;
 `;
-
-const SearchForm = styled.form``;
-
-const SearchInput = styled.input``;
-
-const SubmitButtonBox = styled.div``;
-
-const SubmitButton = styled.input``;
 
 const StyleResetContainer = styled.div`
   div {
@@ -35,10 +27,6 @@ const S = {
   Wrapper,
   WrapperInner,
   Container,
-  SearchForm,
-  SearchInput,
-  SubmitButtonBox,
-  SubmitButton,
   StyleResetContainer,
 };
 
