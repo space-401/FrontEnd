@@ -23,7 +23,6 @@ import OneMention from '@/components/Detail/Mention/OneMention';
 import { usePostDetailQuery } from '@hooks/api/post/usePostDetailQuery';
 import { UseBookMarkMutation } from '@hooks/api/post/useBookMarkMutation';
 import { toastColorMessage } from '@utils/toastMessage';
-import { theme } from '@styles/theme/theme';
 import { useDetailModalStore } from '@store/modal';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 
@@ -91,11 +90,7 @@ const DetailInner = React.forwardRef(
 
     const DeleteAction = () => {
       ModalClose();
-      toastColorMessage({
-        background: theme.COLOR['gray-5'],
-        color: theme.COLOR.white,
-        message: '삭제되었습니다.',
-      });
+      toastColorMessage('삭제되었습니다.');
     };
 
     // 대댓글 오픈
