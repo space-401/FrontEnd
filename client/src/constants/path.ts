@@ -2,7 +2,7 @@ export const BASE_PATH = {
   HOME: '/',
   LANDING: '/landing',
   LOGIN: '/login',
-  POST: '/posts',
+  POST: '/post',
   SPACE: '/space',
   USER: '/users',
   INVITE: '/invite',
