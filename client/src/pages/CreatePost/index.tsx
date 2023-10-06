@@ -18,7 +18,7 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
-import { DateInfoType } from '@/types/post.type';
+import { DateInfoType, TagType, UserType } from '@/types/post.type';
 import { ImageType, ImageArrType } from '@/types/image.type';
 import { useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
@@ -42,22 +42,6 @@ const CreatePost = () => {
   });
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
-
-  //수정모드일 떄 로직
-  // useEffect(() => {
-  //   if (postDetailData) {
-  //     setImageArr({
-  //       images: makeObj(postDetailData.imgs) || [],
-  //       cropImages: postDetailData.imgs || [],
-  //       convertedImages: [],
-  //     });
-  //     setDateInfo({
-  //       startDate: postDetailData.date.startDate,
-  //       endDate: postDetailData.date.endDate,
-  //     });
-  //   }
-  // }, []);
-
   //현재 편집 모달이 열려있는지
   const { ModalOpen, isOpen } = usePhotoModalStore();
   //현재 글자개수 세기
@@ -79,16 +63,42 @@ const CreatePost = () => {
   });
   //날짜
   const [dateInfo, setDateInfo] = useState<DateInfoType>({
-    startDate: null,
-    endDate: null,
+    startDate: postDetailData?.date?.startDate
+      ? postDetailData.date.startDate
+      : '',
+    endDate: postDetailData?.date?.endDate ? postDetailData.date.endDate : '',
   });
   //장소 선택 모달이 열렸는지
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+
+  //
+  const onConvertedUserToSelectType = (list: UserType[]) => {
+    return list.map((user) => {
+      return {
+        id: user.userId,
+        title: user.userName,
+        imgUrl: user.imgUrl,
+      };
+    });
+  };
+
+  const onConvertedTagToSelectType = (list: TagType[]) => {
+    return list.map((tag) => {
+      return {
+        id: tag.tagId,
+        title: tag.tagTitle,
+      };
+    });
+  };
   //사람
   const [people, setPeople] = useState<selectType[]>(
-    postDetailData ? postDetailData.tagUsers : []
+    postDetailData
+      ? onConvertedUserToSelectType(postDetailData.selectedUsers)
+      : []
   );
-  const [tags, setTags] = useState<selectType[]>([]);
+  const [tags, setTags] = useState<selectType[]>(
+    postDetailData ? onConvertedTagToSelectType(postDetailData.spaceTags) : []
+  );
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
@@ -157,6 +167,7 @@ const CreatePost = () => {
   const alertOpen = useAlertModalOpen();
   const confirmOpen = useConfirmModalOpen();
 
+  /**경고 모달*/
   const alertModalOpen = () => {
     alertOpen({
       width: 300,
@@ -164,6 +175,7 @@ const CreatePost = () => {
       alertTitle: '이미지는 10개까지만 추가됩니다.',
     });
   };
+  /**확인 모달*/
   const confirmModalOpen = () => {
     confirmOpen({
       AsyncAction: onMoveCreatePost,
@@ -174,7 +186,7 @@ const CreatePost = () => {
     });
   };
 
-  const inputWidth = Number('calc(100% - 60px)');
+  const inputWidth = 500;
 
   return (
     <S.Wrapper>
@@ -187,39 +199,44 @@ const CreatePost = () => {
           handleFileChange={handleFileChange}
         />
       )}
+
       {imageArr.cropImages.length == 0 ? (
-        <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
-          <S.PhotoContainer>
-            <PhotoIcon />
-            <BasicButton
-              onClick={onClickImgEditModal}
-              width={55}
-              height={20}
-              borderRadius={5}
-              backgroundColor={theme.COLOR['gray-2']}
-            >
-              <form method="post" encType="form-data">
-                <input
-                  type="file"
-                  ref={inputRef}
-                  onChange={(e) => {
-                    handleFileChange(e);
-                  }}
-                  style={{ display: 'none' }}
-                  multiple
-                />
-              </form>
-              <div>사진 선택</div>
-            </BasicButton>
-          </S.PhotoContainer>
-        </BasicBox>
+        <S.BoxWrapper>
+          <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
+            <S.PhotoContainer>
+              <PhotoIcon />
+              <BasicButton
+                onClick={onClickImgEditModal}
+                width={55}
+                height={20}
+                borderRadius={5}
+                backgroundColor={theme.COLOR['gray-2']}
+              >
+                <form method="post" encType="form-data">
+                  <input
+                    type="file"
+                    ref={inputRef}
+                    onChange={(e) => {
+                      handleFileChange(e);
+                    }}
+                    style={{ display: 'none' }}
+                    multiple
+                  />
+                </form>
+                <div>사진 선택</div>
+              </BasicButton>
+            </S.PhotoContainer>
+          </BasicBox>
+        </S.BoxWrapper>
       ) : (
-        <div style={{ zIndex: 1000, width: '348px' }}>
-          <ImgSlider
-            images={imageArr.cropImages}
-            onClickImgEditModal={onClickImgEditModal}
-          />
-        </div>
+        <S.BoxWrapper>
+          <div style={{ zIndex: 1000, width: '348px' }}>
+            <ImgSlider
+              images={imageArr.cropImages}
+              onClickImgEditModal={onClickImgEditModal}
+            />
+          </div>
+        </S.BoxWrapper>
       )}
       {/*장소 찾기 모달*/}
       <SearchModal
@@ -242,6 +259,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={1}>
           <InputBox
+            width={inputWidth}
             height={60}
             readonly={false}
             placeholder="16자 이내의 제목을 입력해 주세요"
@@ -274,10 +292,6 @@ const CreatePost = () => {
             setState={setPeople}
             menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
-            // state={people.map((v) => ({
-            //   id: v.userId,
-            //   title: v.userName,
-            // }))}
           />
         </S.InputContainer>
 
@@ -308,14 +322,15 @@ const CreatePost = () => {
         <S.InputContainer number={4}>
           <S.MapContainer onClick={() => setIsMapModalOpen(true)}>
             <InputBox
+              width={inputWidth}
               readonly={true}
               height={60}
               placeholder="등록할 장소를 입력해 주세요"
               type="text"
               maxLength={20}
-              width={inputWidth}
-              children={<SearchIcon />}
               onChange={() => {}}
+              children={<SearchIcon />}
+              value={mapInfo.content}
               name=""
             />
           </S.MapContainer>
@@ -359,11 +374,13 @@ const CreatePost = () => {
         </S.InputContainer>
 
         <S.EmptyContainer />
-        <S.ButtonContainer>
+        <S.ButtonContainer paddingLeft={inputWidth - 160}>
           <BasicButton
             disabled={
-              !title.length || !content.length || !dateInfo.startDate
-              // !postData.place.content
+              !title.length ||
+              !content.length ||
+              !dateInfo.startDate ||
+              mapInfo.content == ''
             }
             onClick={onSubmit}
             width={160}

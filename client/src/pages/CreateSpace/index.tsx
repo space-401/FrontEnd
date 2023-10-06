@@ -11,7 +11,6 @@ import {
   usePhotoModalStore,
   useSelectIconModalStore,
   useSelectBasicIconModalStore,
-  useAlertModalStore,
 } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType, ImageArrType } from '@/types/image.type';
@@ -21,6 +20,7 @@ import useInputs from '@/hooks/common/useInputs';
 import SelectIconModal from '@/components/Create/SelectIconModal';
 import BasicIconModal from '@/components/Create/BasicIconModal';
 import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
+import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 
 const CreateSpace = () => {
   //기본 이미지 선택
@@ -30,7 +30,7 @@ const CreateSpace = () => {
   const [imageArr, setImageArr] = useState<ImageArrType>({
     images: [],
     cropImages: [],
-    compressedImage: [],
+    convertedImages: [],
   });
   const BasicIconArr = BasicIcon();
 
@@ -83,10 +83,10 @@ const CreateSpace = () => {
     setPswd(value);
   };
 
-  const { ModalOpen: alertOepn } = useAlertModalStore((state) => state);
+  const alertOpen = useAlertModalOpen();
 
   const alertModalOpen = () => {
-    alertOepn({
+    alertOpen({
       width: 300,
       alertMessage: '확인',
       alertTitle: '비밀번호는 숫자만 입력해 주세요',
@@ -154,10 +154,11 @@ const CreateSpace = () => {
       setImageArr({
         images: [],
         cropImages: [],
-        compressedImage: [],
+        convertedImages: [],
       });
     }
   }, [isIconModalOpen, isBasicIconModalOpen]);
+  const inputWidth = 628;
 
   return (
     <S.Wrapper>
@@ -237,6 +238,7 @@ const CreateSpace = () => {
         </S.TitleContainer>
         <S.InputContainer number={2}>
           <InputBox
+            width={inputWidth}
             readonly={false}
             height={60}
             placeholder="16자 이내의 제목을 입력해 주세요."
@@ -266,6 +268,7 @@ const CreateSpace = () => {
             placeholder="스페이스 설명 입력"
             maxLength={100}
             onChange={onChange}
+            width={inputWidth}
             name="content"
             children={
               <CharacterCounter
@@ -288,6 +291,7 @@ const CreateSpace = () => {
             onChange={(e) => {
               onCheckInputNumber(e);
             }}
+            width={300}
             readonly={false}
             height={60}
             type={isShowPswd ? 'text' : 'password'}
@@ -304,9 +308,9 @@ const CreateSpace = () => {
             }
           />
         </S.InputContainer>
-
+        <S.EmptyContainer />
         {/*스페이스 생성 버튼*/}
-        <S.ButtonContainer>
+        <S.ButtonContainer paddingLeft={inputWidth - 160}>
           <BasicButton
             children="스페이스 생성하기"
             onClick={onSubmit}

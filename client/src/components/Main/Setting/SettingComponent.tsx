@@ -39,7 +39,7 @@ const SettingComponent = React.forwardRef(
       if (isAdmin) {
         alertModalOpen({
           width: 368,
-          alertTitle: `${userList[0].userName} 방장님,\n 방장은 주고 나가주세요`,
+          alertTitle: `${userList[0].userName} 방장님,\n 방장을 다른 분께 양도하신 후 나가실 수 있어요.`,
           alertMessage: '확인',
         });
         return;
