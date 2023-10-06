@@ -5,13 +5,11 @@ import S from '@components/Main/Setting/style';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
 import UserList from '@components/Main/Setting/components/UserList';
 import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
-import { theme } from '@styles/theme/theme';
 import { toastColorMessage } from '@utils/toastMessage';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 const SettingComponent = React.forwardRef(
   (
@@ -58,29 +56,15 @@ const SettingComponent = React.forwardRef(
     const inviteLinkCopyAction = async () => {
       try {
         await navigator.clipboard.writeText('www.KKIRI.com');
-        toastColorMessage({
-          color: theme.COLOR.white,
-          message: '초대링크를 복사하였습니다.',
-          background: theme.COLOR['gray-5'],
-        });
+        toastColorMessage('초대링크를 복사하였습니다.');
       } catch (e) {
-        toastColorMessage({
-          color: theme.COLOR.white,
-          message: '초대링크를 복사를 실패하였습니다.',
-          background: theme.COLOR['gray-5'],
-        });
+        toastColorMessage('초대링크를 복사를 실패하였습니다.');
       }
     };
 
     const changeAdminAction = (userName: string, userId: number) => {
-      toast(userName + '님이 방장이 되었습니다.', {
-        style: {
-          borderRadius: '10px',
-          background: '#000',
-          color: '#fff',
-        },
-      });
-      console.log(userId);
+      toastColorMessage(userName + '님이 방장이 되었습니다.');
+      toastColorMessage(userId + '아이디 회원에게 방장 권한을 넘겼습니다.');
     };
 
     const changeAdminHandler = (userName: string, userId: number) => {
