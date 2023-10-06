@@ -16,6 +16,7 @@ export type MenuListProps = {
 };
 
 export type MainHeaderPropType = {
+  spaceId: string;
   spaceInfo: SpaceInfo;
   selectState: boolean;
   setSelectState: Dispatch<SetStateAction<boolean>>;

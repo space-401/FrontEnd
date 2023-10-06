@@ -10,9 +10,10 @@ import SettingComponent from '@components/Main/Setting/SettingComponent';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
-  const { setSelectState, selectState, spaceInfo } = prop;
+  const { setSelectState, selectState, spaceInfo, spaceId } = prop;
   const { isAdmin, title, imgUrl, userList, description } = spaceInfo;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
@@ -50,6 +51,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
             <S.ControlButton
               color={theme.COLOR.white}
               backgroundColor={theme.COLOR['gray-5']}
+              onClick={() => navigate(PATH.SPACE_UPDATE(spaceId))}
             >
               스페이스 관리
             </S.ControlButton>
@@ -79,7 +81,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
             {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
           </S.SelectButton>
         </S.FilterState>
-        <S.CreateButton onClick={() => navigate('post')}>
+        <S.CreateButton onClick={() => navigate(PATH.POST_CREATE(spaceId))}>
           게시물 작성
         </S.CreateButton>
       </S.HeaderFooter>
