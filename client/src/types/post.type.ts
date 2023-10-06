@@ -38,6 +38,20 @@ export type PostDetailType = {
   imgUrl: string[];
 };
 
+//포스트 생성 + 수정 타입
+export type CreatePostType = {
+  postTitle: string;
+  postDescription: string;
+  selectedUsers: number[];
+  selectedTags: number[];
+  placeTitle: string;
+  position: {
+    lat: number;
+    lng: number;
+  };
+  date: DateInfoType;
+};
+
 //포스트 생성 페이지에서는 tags가 추가적으로 필요하다.
 export type FlipCardSize = 'small' | 'medium' | 'big';
 

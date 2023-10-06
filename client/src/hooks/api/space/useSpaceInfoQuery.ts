@@ -4,9 +4,13 @@ import type { SpaceInfo } from '@type/space.type';
 import { AxiosError } from 'axios';
 
 export const useSpaceInfoQuery = (spaceId: string) => {
+  const NumberSpaceId = Number(spaceId);
   const { data: spaceInfo } = useQuery<SpaceInfo, AxiosError>(
-    ['spaceInfo', spaceId],
-    () => getSpaceDetail(spaceId)
+    ['spaceInfo', NumberSpaceId],
+    () => getSpaceDetail(NumberSpaceId),
+    {
+      enabled: !!spaceId,
+    }
   );
 
   return { spaceInfo };

@@ -48,11 +48,15 @@ const router = createBrowserRouter([
             element: <CreatePost />,
           },
           {
-            path: PATH.POST_UPDATE(':postId'),
+            path: PATH.POST_UPDATE(':spaceId', ':postId'),
             element: <CreatePost />,
           },
           {
             path: PATH.SPACE_CREATE,
+            element: <CreateSpace />,
+          },
+          {
+            path: PATH.SPACE_UPDATE(':spaceId'),
             element: <CreateSpace />,
           },
           {
