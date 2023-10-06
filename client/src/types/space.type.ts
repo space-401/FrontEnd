@@ -36,7 +36,7 @@ export type SpacePostType = {
   postId: number;
   postTitle: string;
   placeTitle: string;
-  placeTag: TagType[];
+  selectedTags: TagType[];
   postCreatedAt: string;
   postUpdatedAt: string;
   usersList: UserType[];

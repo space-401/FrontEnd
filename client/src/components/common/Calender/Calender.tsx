@@ -196,9 +196,15 @@ const Calender = ({
             </div>
           )}
         ></StyledDatePicker>
-        <CalenderIcon
-          style={{ position: 'absolute', bottom: '25', left: 280 }}
-        />
+        {isMain ? (
+          <CalenderIcon
+            style={{ position: 'absolute', bottom: '25', marginLeft: '230' }}
+          />
+        ) : (
+          <CalenderIcon
+            style={{ position: 'absolute', bottom: '28', marginLeft: '230' }}
+          />
+        )}
         {!startDate && !isMain && (
           <S.DateText
             style={{
@@ -232,14 +238,14 @@ const Calender = ({
 export default Calender;
 
 const StyledDatePicker = styled(DatePicker)`
-  height: ${({ height }) => height}px; /* 조건에 따라 height 설정 */
+  height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   border-radius: ${({ borderRadius }) => borderRadius}px;
-  width: ${({ isMain }) => (isMain ? '230' : '322')}px;
+  width: 270px;
   display: flex;
-  padding-left: ${({ isMain }) => (isMain ? 1.2 : 2.6)}rem;
+  padding-left: 1.2rem;
 `;
 
 const DateText = styled.div<{ isMain: boolean }>`
