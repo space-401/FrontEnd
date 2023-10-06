@@ -29,8 +29,8 @@ const PostList = (props: PostListPropType) => {
   });
 
   const [selectedDate, setSelectedDate] = useState<DateInfoType>({
-    startDate: null,
-    endDate: null,
+    startDate: '',
+    endDate: '',
   });
 
   const { spaceId, selectState, userList, tagList } = props;

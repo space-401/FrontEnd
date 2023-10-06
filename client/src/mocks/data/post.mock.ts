@@ -1,4 +1,4 @@
-import { tagList, userList } from '@mocks/data/common';
+import { userList } from '@mocks/data/common';
 import { PostResponseType, PostDetailType } from '@type/post.type';
 import { SpacePostType } from '@/types/space.type';
 
@@ -316,7 +316,6 @@ export const postList: SpacePostType[] = [
  */
 export const postDetail: PostDetailType = {
   isMine: true,
-  postId: 1,
   position: {
     lat: 37.27943075229118,
     lng: 127.01763998406159,
@@ -346,7 +345,6 @@ export const postDetail: PostDetailType = {
     { tagId: 1, tagTitle: '흥미진진한' },
     { tagId: 2, tagTitle: '긴장감이 넘치는' },
   ],
-  tagList: tagList,
   imgUrl: [
     'https://s3-alpha-sig.figma.com/img/5337/9618/c6819ebc891905be191c8fc51d7fba08?Expires=1695600000&Signature=Bi3nD9mKWQoCliTAOdM2qOhCSUUxvLbV~ganJ5CSrbqTbE6ftXjrVc9-XX18e7lKWxKFVHC7NcT1wD8p8h2z-XVTwmE7kWOe-k7SqyeTRZ4NEcN5VLuQRTzOu1~u-RBVew5Zpdld2b6W~mKLE2iSLAVJ33OG6Z~2WFF~njRhjVMpNJ5NqK~WVDCH1~Z5mo4ykMEWoLUy4d-vci~dM0jv6KMDXQG8wza-6rmudXTKBEvMfkE7c2IDS6~Q81ZnG0VJNaOHeD0~PbWYoGGqm7oaYWauxL7FAG-HZFsyfBuS99Sv-fpjd7oe0FXsKGxCtIAHLB0yZ0bM1deeynbswJbyDg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
     'https://s3-alpha-sig.figma.com/img/6a9e/e32d/49275dc65ca1d61672d87fe76a73c7c8?Expires=1695600000&Signature=eqsF~~1INJ3YyMhRiEh~skH-yQN9f6ADv14B8Uq7jykR5bQtHDZtW8OoLptLpmYcNJ52Se06q2htRowN0VqOSpq75KcqRnMy52mgyRFBT~XdpXglOLY9p4pjW9PwTfISRaC5YHNh-MIr9RcCTWZBZV8oBAD0-GrGWGcW3-FGQhACth491ekCuPN7XrhySop1JqQWoqX70MPaCcwS0Y86cvW-zITXDouxLksAya5eon55dgeuUSxGd5HtBbFoa96ZZIJqQKt2qItQBWbDn3B6Zt1GHBDsTvdguA5kBaagib0GrBcvq4ILdxh-QcscY2MgxB~KX7lzetp2N7nGK6pCmA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
@@ -361,6 +359,7 @@ export const postDetail: PostDetailType = {
     endDate: '2023-01-03',
   },
 };
+
 /**
  * 포스트를 작성 혹은 수정하고 나서 목 데이터
  */

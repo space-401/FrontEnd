@@ -13,13 +13,12 @@ export type TagType = {
 };
 
 export type DateInfoType = {
-  startDate: string | null;
-  endDate: string | null;
+  startDate: string;
+  endDate: string;
 };
 
 //포스트 타입
 export type PostDetailType = {
-  postId: number;
   isMine: boolean;
   postTitle: string;
   postDescription: string;
@@ -33,11 +32,10 @@ export type PostDetailType = {
   date: DateInfoType;
   commentCount: number;
   isBookmark: boolean;
+  userList: UserType[];
   selectedUsers: UserType[];
   selectedTags: TagType[];
-  userList: UserType[];
-  tagList: TagType[];
-  imgUrl: string[]; //나중에 File만 가능하게 바꿀 것, 목데이터 때문
+  imgUrl: string[];
 };
 
 //포스트 생성 페이지에서는 tags가 추가적으로 필요하다.

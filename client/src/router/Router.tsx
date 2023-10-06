@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             element: <SelectSpace />,
           },
           {
-            path: PATH.SPACE + '/:spaceId',
+            path: PATH.SPACE_MAIN(':spaceId'),
             element: (
               <Suspense fallback={<></>}>
                 <MainPage />
@@ -44,15 +44,19 @@ const router = createBrowserRouter([
         element: <BackLayout />,
         children: [
           {
-            path: PATH.POST_CREATE,
+            path: PATH.POST_CREATE(':spaceId'),
             element: <CreatePost />,
           },
           {
-            path: PATH.POST + '/:postId',
+            path: PATH.POST_UPDATE(':postId'),
             element: <CreatePost />,
           },
           {
             path: PATH.SPACE_CREATE,
+            element: <CreateSpace />,
+          },
+          {
+            path: PATH.SPACE_UPDATE(':spaceId'),
             element: <CreateSpace />,
           },
           {
