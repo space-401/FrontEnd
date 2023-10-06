@@ -68,7 +68,6 @@ const DetailInner = React.forwardRef(
       imgUrl,
       userList,
       placeTitle,
-      placeTag,
       postUpdatedAt,
       postCreatedAt,
       position,
@@ -76,7 +75,8 @@ const DetailInner = React.forwardRef(
       isMine,
       postTitle,
       postDescription,
-      tagUsers,
+      selectedUsers,
+      selectedTags,
     } = postDetailData!;
 
     const setReply = (newState: string) => {
@@ -161,8 +161,10 @@ const DetailInner = React.forwardRef(
                     : getFormatDate(postUpdatedAt)}
                 </S.DateBox>
                 <S.UserBox>
-                  <Avatars size={28.5} users={tagUsers} max={5} />
-                  <S.UserNameList>{getFormatUser(tagUsers)}</S.UserNameList>
+                  <Avatars size={28.5} users={selectedUsers} max={5} />
+                  <S.UserNameList>
+                    {getFormatUser(selectedUsers)}
+                  </S.UserNameList>
                   {isMine && (
                     <S.ManagementButton
                       onClick={() =>
@@ -202,7 +204,7 @@ const DetailInner = React.forwardRef(
                 <S.PostTitle>{postTitle}</S.PostTitle>
                 <S.PostDescription>{postDescription}</S.PostDescription>
                 <S.TagGroup>
-                  {placeTag.map((place) => {
+                  {selectedTags.map((place) => {
                     const { tagId, tagTitle } = place;
                     return (
                       <Chip

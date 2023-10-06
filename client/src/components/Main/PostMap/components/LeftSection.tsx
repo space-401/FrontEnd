@@ -37,7 +37,7 @@ const LeftSection = (props: LeftSectionPropType) => {
           placeTitle,
           usersList,
           postUpdatedAt,
-          placeTag,
+          selectedTags,
           imgUrl,
         } = item;
         return (
@@ -46,7 +46,7 @@ const LeftSection = (props: LeftSectionPropType) => {
             postTitle={postTitle}
             postDescription={getFormatUser(usersList)}
             postPlace={placeTitle}
-            postTags={placeTag}
+            postTags={selectedTags}
             imgUrl={imgUrl[0]}
             createAt={postUpdatedAt}
             onClick={() => {
