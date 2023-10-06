@@ -12,9 +12,12 @@ export const BASE_PATH = {
 export const PATH = {
   ...BASE_PATH,
   USER_INFO: `${BASE_PATH.USER}/mypage`,
-  POST_CREATE: `${BASE_PATH.POST}/create`,
-  POST_UPDATE: `${BASE_PATH.POST}/update`,
+  POST_CREATE: (spaceId: number | string) =>
+    `${BASE_PATH.SPACE}/${spaceId}/create`,
+  POST_UPDATE: (postId: number | string) =>
+    `${BASE_PATH.POST}/update/${postId}`,
+  SPACE_MAIN: (spaceId: number | string) => `${BASE_PATH.SPACE}/${spaceId}`,
   SPACE_CREATE: `${BASE_PATH.SPACE}/create`,
-  SPACE_UPDATE: `${BASE_PATH.SPACE}/update`,
-  SPACE_SELECT: `${BASE_PATH.SPACE}/select`,
+  SPACE_UPDATE: (spaceId: number | string) =>
+    `${BASE_PATH.SPACE}/update/${spaceId}`,
 };

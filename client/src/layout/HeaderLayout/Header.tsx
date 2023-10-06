@@ -3,11 +3,10 @@ import { ReactComponent as Logo } from '@assets/svg/KKIRI.svg';
 import { ReactComponent as AlarmIcon } from '@assets/svg/alarmIcon.svg';
 import { ReactComponent as UserIcon } from '@assets/svg/userIcon.svg';
 import { Tooltip } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { END_POINTS } from '@constants/api';
 import { PATH } from '@constants/path';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
-import { useParams } from 'react-router-dom';
 
 const Header = () => {
   const { spaceList } = useSpaceListQuery();
@@ -22,7 +21,7 @@ const Header = () => {
   return (
     <S.HeaderWrapper>
       <S.Container>
-        <S.IconBox onClick={() => navigate(PATH.SPACE_SELECT)} padding={30}>
+        <S.IconBox onClick={() => navigate(PATH.HOME)} padding={30}>
           <Logo />
         </S.IconBox>
         <S.SpaceBox>
