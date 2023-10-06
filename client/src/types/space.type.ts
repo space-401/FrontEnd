@@ -19,7 +19,8 @@ export type SpaceInfo = {
   userList: UserType[];
   tagList: TagType[];
   isAdmin: boolean;
-  isInitialized: boolean;
+  isFirst: boolean;
+  spacePassword: string;
 };
 
 export type AlarmType = {
@@ -88,4 +89,11 @@ export type MyCommentType = {
   commentId: number;
   commentContent: string;
   commentCreateDate: string;
+};
+
+export type CreateSpaceType = {
+  title: string;
+  description: string;
+  imgUrl: File;
+  spacePassword: number;
 };
