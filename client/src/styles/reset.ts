@@ -6,6 +6,10 @@ const resetStyle = css`
     padding: 0;
   }
 
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   input {
     box-shadow: none;
     outline: none;
