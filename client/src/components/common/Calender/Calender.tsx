@@ -28,9 +28,11 @@ const Calender = ({
   isMain,
   dateInfo,
 }: CalenderPropsType) => {
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState(
-    dateInfo?.endDate ? new Date(dateInfo.endDate) : null
+  const [startDate, setStartDate] = useState<Date | null>(
+    dateInfo?.startDate ? new Date(dateInfo.startDate!) : null
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    dateInfo?.endDate ? new Date(dateInfo.endDate!) : null
   );
 
   useEffect(() => {

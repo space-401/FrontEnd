@@ -24,7 +24,6 @@ export type PostDetailType = {
   postTitle: string;
   postDescription: string;
   placeTitle: string;
-  placeTag: TagType[];
   position: {
     lat: number;
     lng: number;
@@ -34,7 +33,8 @@ export type PostDetailType = {
   date: DateInfoType;
   commentCount: number;
   isBookmark: boolean;
-  tagUsers: UserType[];
+  selectedUsers: UserType[];
+  spaceTags: TagType[];
   userList: UserType[];
   tagList: TagType[];
   imgUrl: string[]; //나중에 File만 가능하게 바꿀 것, 목데이터 때문

@@ -315,7 +315,6 @@ export const postList: SpacePostType[] = [
  * 포스트 게시물의 상세 목 데이터
  */
 export const postDetail: PostDetailType = {
-  tagList: tagList,
   isMine: true,
   postId: 1,
   position: {
@@ -328,7 +327,26 @@ export const postDetail: PostDetailType = {
     '크 크 그리고 귀여워 서 레오 쿠키도 하나 시켰다...쫀킹',
   postCreatedAt: String(new Date()),
   postUpdatedAt: String(new Date()),
-  tagUsers: userList,
+  selectedUsers: [
+    {
+      userId: 147394546,
+      userName: '짱구',
+      imgUrl:
+        'https://i.namu.wiki/i/O_ySsnetZJl_AbRLxgT0Y21A6-UUuhk9-fI4kCHAyuxjvnTlAxM8DdMLCo2LNdOY0EjDP0WNUz8pAEIH8eXT53YcHI2Z-oxvqVeqp9VOCzrMX8Zq48UHh6XxQymLH5H8Jmy-ziOpmHKhH5uoPQl7Yw.webp',
+    },
+    {
+      userId: 148263681,
+      userName: '짱아',
+      imgUrl:
+        'https://i.namu.wiki/i/9H8iVzGgYgnUlDZer5h6PluEDVMB8Uy4RQxj2fR_Fr7aULTsvugOnFrw6FEG9YfkvmfsYHb3wXpRwIhU-1QZ7jMkn9gID85AnmYm2loamOJMTCy9VKOEa2PoZcqziehSqtxMr7SNKBZEjy4HslGKWw.webp',
+    },
+  ],
+  userList: userList,
+  spaceTags: [
+    { tagId: 1, tagTitle: '흥미진진한' },
+    { tagId: 2, tagTitle: '긴장감이 넘치는' },
+  ],
+  tagList: tagList,
   imgUrl: [
     'https://s3-alpha-sig.figma.com/img/5337/9618/c6819ebc891905be191c8fc51d7fba08?Expires=1695600000&Signature=Bi3nD9mKWQoCliTAOdM2qOhCSUUxvLbV~ganJ5CSrbqTbE6ftXjrVc9-XX18e7lKWxKFVHC7NcT1wD8p8h2z-XVTwmE7kWOe-k7SqyeTRZ4NEcN5VLuQRTzOu1~u-RBVew5Zpdld2b6W~mKLE2iSLAVJ33OG6Z~2WFF~njRhjVMpNJ5NqK~WVDCH1~Z5mo4ykMEWoLUy4d-vci~dM0jv6KMDXQG8wza-6rmudXTKBEvMfkE7c2IDS6~Q81ZnG0VJNaOHeD0~PbWYoGGqm7oaYWauxL7FAG-HZFsyfBuS99Sv-fpjd7oe0FXsKGxCtIAHLB0yZ0bM1deeynbswJbyDg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
     'https://s3-alpha-sig.figma.com/img/6a9e/e32d/49275dc65ca1d61672d87fe76a73c7c8?Expires=1695600000&Signature=eqsF~~1INJ3YyMhRiEh~skH-yQN9f6ADv14B8Uq7jykR5bQtHDZtW8OoLptLpmYcNJ52Se06q2htRowN0VqOSpq75KcqRnMy52mgyRFBT~XdpXglOLY9p4pjW9PwTfISRaC5YHNh-MIr9RcCTWZBZV8oBAD0-GrGWGcW3-FGQhACth491ekCuPN7XrhySop1JqQWoqX70MPaCcwS0Y86cvW-zITXDouxLksAya5eon55dgeuUSxGd5HtBbFoa96ZZIJqQKt2qItQBWbDn3B6Zt1GHBDsTvdguA5kBaagib0GrBcvq4ILdxh-QcscY2MgxB~KX7lzetp2N7nGK6pCmA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
@@ -337,8 +355,6 @@ export const postDetail: PostDetailType = {
   postTitle: '전국 카페투어',
   placeTitle: '둔촌동 커피맛집',
   commentCount: 13,
-  userList: userList,
-  placeTag: tagList,
   isBookmark: true,
   date: {
     startDate: '2023-01-01',
