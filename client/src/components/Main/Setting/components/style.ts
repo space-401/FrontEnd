@@ -21,9 +21,8 @@ const UserContainer = styled.div`
   }
 `;
 
-const UserProfile = styled.div``;
-
 const UserName = styled.div`
+  margin-left: 8px;
   display: flex;
   gap: 4px;
   align-items: center;
@@ -102,7 +101,6 @@ const MenuButton = styled.div`
 export const S = {
   UserContainer,
   UserName,
-  UserProfile,
   SettingIconBox,
   BackClickBlock,
   MenuGroup,

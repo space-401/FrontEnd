@@ -9,8 +9,8 @@ import { ReactComponent as MoreLogOutSvg } from '@assets/svg/mainSetting/logout.
 import { useState } from 'react';
 import { Modal } from '@mui/material';
 import ProfileAndUserNameChangeModal from '@components/Main/Setting/components/ProfileAndUserNameChangeModal';
-import toast from 'react-hot-toast';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+import { toastColorMessage } from '@utils/toastMessage';
 
 type UserListPropsType = {
   userInfo: UserType;
@@ -27,9 +27,7 @@ const UserList = (props: UserListPropsType) => {
     isSettingMode: false,
     isUserModal: false,
   });
-
   const confirmModalOpen = useConfirmModalOpen();
-
   // 현재 설정을 하고있는 상태인지를 확인하기 위한 모달
   const ChangeSettingMode = (newState: boolean) => {
     setState((prev) => ({ ...prev, isSettingMode: newState }));
@@ -41,13 +39,7 @@ const UserList = (props: UserListPropsType) => {
   };
 
   const userGetOutAction = () => {
-    toast(userId + '님을 추방 하였습니다', {
-      style: {
-        borderRadius: '10px',
-        background: '#000',
-        color: '#fff',
-      },
-    });
+    toastColorMessage(userId + '님을 추방 하였습니다');
   };
 
   const userGetOutFromSpaceHandler = () => {
@@ -80,26 +72,37 @@ const UserList = (props: UserListPropsType) => {
           }}
         />
       </Modal>
-      <S.UserProfile>
+      <div>
         <Avatar
           src={imgUrl}
           alt={userName}
-          sx={{ width: '48px', height: '48px' }}
+          sx={{
+            width: '48px',
+            height: '48px',
+            background: 'white',
+            border: '1.5px solid rgba(0,0,0,50%)',
+          }}
         />
-      </S.UserProfile>
+      </div>
       <S.UserName>
         {userName}
         {isAdmin && index === 0 ? <CrownSvg /> : null}
         {!isAdmin && index === 1 ? <CrownSvg /> : null}
       </S.UserName>
       {isAdmin ? (
-        <S.SettingIconBox className={'hoverIcon'}>
-          <MoreSvg onClick={() => ChangeSettingMode(true)} />
+        <S.SettingIconBox
+          onClick={() => ChangeSettingMode(true)}
+          className={'hoverIcon'}
+        >
+          <MoreSvg width={24} height={24} />
         </S.SettingIconBox>
       ) : (
         index === 0 && (
-          <S.SettingIconBox className={'hoverIcon'}>
-            <MoreSvg onClick={() => ChangeSettingMode(true)} />
+          <S.SettingIconBox
+            onClick={() => ChangeSettingMode(true)}
+            className={'hoverIcon'}
+          >
+            <MoreSvg width={24} height={24} />
           </S.SettingIconBox>
         )
       )}
