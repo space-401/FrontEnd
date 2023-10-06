@@ -7,14 +7,15 @@ import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
 
 const MainPage = () => {
   const [selectState, setSelectState] = useState(false);
-  const { spaceId } = useParams();
-  const { spaceInfo } = useSpaceInfoQuery(spaceId!);
+  const spaceId = useParams().spaceId!;
+  const spaceInfo = useSpaceInfoQuery(spaceId).spaceInfo!;
   const { userList, tagList } = spaceInfo!;
   return (
     <>
       <S.Wrapper>
         <MainHeader
-          spaceInfo={spaceInfo!}
+          spaceId={spaceId}
+          spaceInfo={spaceInfo}
           selectState={selectState}
           setSelectState={setSelectState}
         />
@@ -22,7 +23,7 @@ const MainPage = () => {
           userList={userList}
           tagList={tagList}
           selectState={selectState}
-          spaceId={spaceId!}
+          spaceId={spaceId}
         />
       </S.Wrapper>
     </>
