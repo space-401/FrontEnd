@@ -26,11 +26,13 @@ import { makeObj } from '@/utils/makeObj';
 import { tagList, userList } from '@mocks/data/common';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+// import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 
 const CreatePost = () => {
   const params = useParams();
   const postId = params.postId;
-  const { postDetailData } = usePostDetailQuery(Number(postId));
+  const { postDetailData } = usePostDetailQuery(postId!);
+  // const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
 
   const inputRef = useRef<HTMLInputElement>(null);
 
