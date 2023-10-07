@@ -189,11 +189,6 @@ const ImagesEditModal = ({
             </button>
           </S.Header>
 
-          {imageArr.images.length == 0 && (
-            <S.FlexContainer>
-              <div>이미지가 없습니다</div>
-            </S.FlexContainer>
-          )}
           <div
             style={{
               position: 'relative',

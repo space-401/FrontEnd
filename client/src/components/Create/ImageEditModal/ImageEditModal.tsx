@@ -80,21 +80,21 @@ const ImgEditModal = ({
           </button>
         </S.Header>
 
-        {imageArr.images.length == 0 && (
-          <S.FlexContainer>
-            <div>이미지가 없습니다</div>
-          </S.FlexContainer>
-        )}
         <div
           style={{
             position: 'relative',
             height: cropperWidth,
             width: cropperWidth,
-            overflow: 'hidden',
           }}
         >
           <div
-            style={{ display: 'flex', position: 'absolute', left: 0 }}
+            style={{
+              display: 'flex',
+              position: 'absolute',
+              left: '10',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
             ref={sliderRef}
           >
             {imageArr.images.length &&
@@ -144,11 +144,6 @@ const ImgEditModal = ({
             </button>
           </S.Header>
 
-          {imageArr.images.length == 0 && (
-            <S.FlexContainer>
-              <div>이미지가 없습니다</div>
-            </S.FlexContainer>
-          )}
           <div
             style={{
               position: 'relative',
@@ -158,7 +153,7 @@ const ImgEditModal = ({
             }}
           >
             <div
-              style={{ display: 'flex', position: 'absolute', left: 0 }}
+              style={{ display: 'flex', position: 'absolute' }}
               ref={sliderRef}
             >
               {imageArr.images.length &&
@@ -172,7 +167,7 @@ const ImgEditModal = ({
                   />
                 ) : (
                   <ImageCropper
-                    width={cropperWidth}
+                    width={cropperWidth - 50}
                     key={0}
                     image={imageArr.images[0].img}
                     index={0}

@@ -201,7 +201,7 @@ const CreatePost = () => {
 
   return (
     <S.Wrapper>
-      {isOpen && (
+      {isOpen && imageArr.images.length && (
         <ImagesEditModal
           imageArr={imageArr}
           setImageArr={setImageArr}

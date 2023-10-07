@@ -1,0 +1,11 @@
+import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=ca3acbfe"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import __vite__cjsImport1_reactDom_client from "/node_modules/.vite/deps/react-dom_client.js?v=ca3acbfe"; const ReactDOM = __vite__cjsImport1_reactDom_client.__esModule ? __vite__cjsImport1_reactDom_client.default : __vite__cjsImport1_reactDom_client;
+import App from "/src/App.tsx?t=1696659599247";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(/* @__PURE__ */ jsxDEV(App, {}, void 0, false, {
+  fileName: "/Users/hyerin/Desktop/프로젝트/KKIRI/client/src/main.tsx",
+  lineNumber: 5,
+  columnNumber: 13
+}, this));
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBT1k7QUFOWixPQUFPQSxjQUFjO0FBQ3JCLE9BQU9DLFNBQVM7QUFFaEIsTUFBTUMsT0FBT0YsU0FBU0csV0FDcEJDLFNBQVNDLGVBQWUsTUFBTSxDQUNoQztBQUNBSCxLQUFLSSxPQUFPLHVCQUFDLFNBQUQ7QUFBQTtBQUFBO0FBQUE7QUFBQSxPQUFJLENBQUciLCJuYW1lcyI6WyJSZWFjdERPTSIsIkFwcCIsInJvb3QiLCJjcmVhdGVSb290IiwiZG9jdW1lbnQiLCJnZXRFbGVtZW50QnlJZCIsInJlbmRlciJdLCJzb3VyY2VzIjpbIm1haW4udHN4Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIGltcG9ydCB7IFN0cmljdE1vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgUmVhY3RET00gZnJvbSAncmVhY3QtZG9tL2NsaWVudCc7XG5pbXBvcnQgQXBwIGZyb20gJy4vQXBwJztcblxuY29uc3Qgcm9vdCA9IFJlYWN0RE9NLmNyZWF0ZVJvb3QoXG4gIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyb290JykgYXMgSFRNTEVsZW1lbnRcbik7XG5yb290LnJlbmRlcig8QXBwIC8+KTtcbiJdLCJmaWxlIjoiL1VzZXJzL2h5ZXJpbi9EZXNrdG9wL+GEkeGFs+GEheGFqeGEjOGFpuGGqOGEkOGFsy9LS0lSSS9jbGllbnQvc3JjL21haW4udHN4In0=
