@@ -37,7 +37,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
           </S.PlaceTitle>
           <Avatars
             max={size === 'big' ? 4 : 5}
-            size={size === 'big' ? 45 : 28}
+            size={size === 'big' ? 29 : 28}
             users={usersList}
           />
         </S.InfoBottom>
