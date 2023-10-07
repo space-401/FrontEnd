@@ -4,6 +4,7 @@ import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { useNavigate } from 'react-router-dom';
 import { spaceList } from '@mocks/data/space.mock';
+import { PATH } from '@constants/path';
 
 const SelectSpace = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const SelectSpace = () => {
           {spaceList.length < 5 && (
             <S.AddBox
               onClick={() => {
-                navigate('/space/create');
+                navigate(PATH.SPACE_CREATE);
               }}
             >
               <PlusIcon />

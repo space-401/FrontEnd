@@ -15,15 +15,22 @@ const HeaderWrapper = styled.div`
   height: fit-content;
 `;
 
+const IconGroup = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+`;
+
 const IconBox = styled.div<{ padding?: number }>`
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  justify-content: center;
   height: inherit;
   width: 160px;
-  border-radius: 15px;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-
+  border-radius: 15px;
   svg {
     cursor: pointer;
     padding-left: ${(props) => (props.padding ? props.padding : 0)}px;
@@ -82,6 +89,7 @@ const S = {
   HeaderWrapper,
   Wrapper,
   IconBox,
+  IconGroup,
   SpaceBox,
   ContentWrapper,
   Container,
