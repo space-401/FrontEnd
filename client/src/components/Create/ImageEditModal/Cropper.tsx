@@ -11,7 +11,13 @@ type PropsType = {
 
 const ImageCropper = ({ image, myRef, width }: PropsType) => {
   return (
-    <div style={{ position: 'relative' }}>
+    <div
+      style={{
+        position: 'relative',
+        padding: '10px',
+        left: '15px',
+      }}
+    >
       <Cropper
         ref={myRef}
         aspectRatio={1}

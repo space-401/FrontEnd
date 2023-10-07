@@ -103,6 +103,7 @@ const CreateSpace = () => {
     setPswd(value);
   };
 
+  //경고모달
   const alertOpen = useAlertModalOpen();
 
   const alertModalOpen = () => {
@@ -213,7 +214,7 @@ const CreateSpace = () => {
         <p>우리만을 위한 스페이스를 새로 만들어요.</p>
       </S.TitleSection>
       {/*사진 편집 모달*/}
-      {isPhotoModalOpen && (
+      {isPhotoModalOpen && imageArr.images.length && (
         <ImgEditModal
           isCircle={false}
           imageArr={imageArr}
@@ -234,7 +235,6 @@ const CreateSpace = () => {
         <BasicIconModal
           modalClose={BasicIconModalClose}
           isOpen={isBasicIconModalOpen}
-          // setIsBasicImg={setIsBasicImg}
           selectIconIdx={selectIconIdx}
           setSelectIconIdx={setSelectIconIdx}
         />
