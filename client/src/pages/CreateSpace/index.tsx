@@ -21,15 +21,36 @@ import SelectIconModal from '@/components/Create/SelectIconModal';
 import BasicIconModal from '@/components/Create/BasicIconModal';
 import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
+import { CreateSpaceType } from '@/types/space.type';
+import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
+import { useParams } from 'react-router-dom';
+import { makeObj } from '@/utils/makeObj';
+import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+import { useNavigate } from 'react-router-dom';
 
 const CreateSpace = () => {
+  const params = useParams();
+  const spaceId = params.spaceId;
+  const navigate = useNavigate();
+
+  const { spaceInfo } = useSpaceInfoQuery(spaceId!);
+
+  console.log('ggg', spaceInfo);
+
+  // const {
+  //   title: spaceTitle,
+  //   description: spaceDescription,
+  //   imgUrl: spaceImgUrl,
+  //   spacePassword,
+  // } = spaceInfo!;
+
   //기본 이미지 선택
   const [isBasicImg, setIsBasicImg] = useState<boolean>(false);
   //기본 이미지
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: [],
-    cropImages: [],
+    images: spaceInfo ? makeObj([spaceInfo.imgUrl]) : [],
+    cropImages: spaceInfo ? [spaceInfo.imgUrl] : [],
     convertedImages: [],
   });
   const BasicIconArr = BasicIcon();
@@ -55,17 +76,16 @@ const CreateSpace = () => {
     ModalClose: BasicIconModalClose,
     isOpen: isBasicIconModalOpen,
   } = useSelectBasicIconModalStore();
-  // const BasicIconArr = BasicIcon();
 
   //스페이스 명, 스페이스 설명
   const { values, onChange } = useInputs({
-    title: '',
-    content: '',
+    title: spaceInfo ? spaceInfo.title : '',
+    content: spaceInfo ? spaceInfo.description : '',
   });
   const { title, content } = values;
 
   //비밀번호
-  const [pswd, setPswd] = useState('');
+  const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePassword : '');
   //비밀번호 보이기,숨기기
   const [isShowPswd, setIsShowPswd] = useState(false);
   const onToggleShowPswd = () => {
@@ -129,20 +149,27 @@ const CreateSpace = () => {
   };
 
   //스페이스 생성하기
-  const onSubmit = () => {
-    // let convertedImg;
-    // if (isBasicImg) {
-    //   convertedImg = onConvertToFile(BasicIconArr[selectIconIdx], 'spaceImg');
-    // } else {
-    //   convertedImg = onConvertToFile(imageArr.cropImages[0], 'spaceImg');
-    // }
-    // const spaceData = {
-    //   title,
-    //   content,
-    //   img: convertedImg,
-    //   password: pswd,
-    // };
-    // console.log('space', spaceData);
+  const onCreateSpace = () => {
+    const newData: CreateSpaceType = {
+      title: title,
+      description: content,
+      imgUrl: imageArr.convertedImages[0],
+      spacePassword: Number(pswd),
+    };
+    console.log('새로운 데이터', newData);
+    confirmModalOpen(false);
+  };
+
+  //스페이스 생성하기
+  const onUpdateSpace = () => {
+    const newData: CreateSpaceType = {
+      title: title,
+      description: content,
+      imgUrl: imageArr.convertedImages[0],
+      spacePassword: Number(pswd),
+    };
+    console.log('새로운 데이터', newData);
+    confirmModalOpen(true);
   };
 
   useEffect(() => {
@@ -158,7 +185,26 @@ const CreateSpace = () => {
       });
     }
   }, [isIconModalOpen, isBasicIconModalOpen]);
+
   const inputWidth = 628;
+  const confirmOpen = useConfirmModalOpen();
+
+  const onMoveSpacePage = () => {
+    navigate(`/space/${spaceId}`);
+  };
+
+  /**확인 모달*/
+  const confirmModalOpen = (isUpdate: boolean) => {
+    confirmOpen({
+      AsyncAction: onMoveSpacePage,
+      isPositiveModal: true,
+      ApproveMessage: '확인',
+      closeMessage: '닫기',
+      titleMessage: isUpdate
+        ? '스페이스 수정이 완료되었습니다.'
+        : '스페이스가 생성되었습니다.',
+    });
+  };
 
   return (
     <S.Wrapper>
@@ -223,7 +269,6 @@ const CreateSpace = () => {
                   ? BasicIconArr[selectIconIdx]
                   : imageArr.cropImages[0]
               }
-              // backgroundImage={fileImg}
               width={160}
               borderradius={10}
               color="grey"
@@ -254,6 +299,7 @@ const CreateSpace = () => {
             paddingLeft={65}
             onChange={onChange}
             name="title"
+            value={title}
           />
         </S.InputContainer>
 
@@ -311,18 +357,33 @@ const CreateSpace = () => {
         <S.EmptyContainer />
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer paddingLeft={inputWidth - 160}>
-          <BasicButton
-            children="스페이스 생성하기"
-            onClick={onSubmit}
-            width={160}
-            fontSize={16}
-            height={47}
-            disabled={
-              (!imageArr.cropImages.length && !isBasicImg) ||
-              !title.length ||
-              pswd.length < 5
-            }
-          />
+          {spaceId ? (
+            <BasicButton
+              children={'스페이스 수정하기'}
+              onClick={onUpdateSpace}
+              width={160}
+              fontSize={16}
+              height={47}
+              disabled={
+                (!imageArr.cropImages.length && !isBasicImg) ||
+                !title.length ||
+                pswd.length < 5
+              }
+            />
+          ) : (
+            <BasicButton
+              children={'스페이스 생성하기'}
+              onClick={onCreateSpace}
+              width={160}
+              fontSize={16}
+              height={47}
+              disabled={
+                (!imageArr.cropImages.length && !isBasicImg) ||
+                !title.length ||
+                pswd.length < 5
+              }
+            />
+          )}
         </S.ButtonContainer>
       </S.Form>
     </S.Wrapper>
