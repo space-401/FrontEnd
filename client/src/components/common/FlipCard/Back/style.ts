@@ -84,10 +84,8 @@ const Shadow = styled.div`
 
 const PostTitle = styled.div`
   margin-top: 16px;
-  text-align: center;
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-28']};
-  font-style: normal;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   width: 80%;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   line-height: 130%;
@@ -96,7 +94,7 @@ const PostTitle = styled.div`
 
 const PlaceCreateAt = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 130%;
   margin: 16px 0 24px;
@@ -107,13 +105,13 @@ const PlaceTitle = styled.div`
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   align-items: center;
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
   font-style: normal;
   gap: 4.2px;
 
   span {
     max-width: 170px;
-    flex-wrap: none;
+    flex-wrap: nowrap;
     ${omitText}
   }
 `;
@@ -128,10 +126,10 @@ const ChipBox = styled.div`
   .chip {
     color: ${({ theme }) => theme.COLOR.white};
     border: 1px solid ${({ theme }) => theme.COLOR.white};
-    font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
     font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
-    line-height: 130%;
-    padding: 10px;
+    padding: 4px 6px;
+    height: 26px;
 
     span {
       padding: 0;

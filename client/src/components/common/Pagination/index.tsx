@@ -9,7 +9,7 @@ const Pagination = (props: PaginationType) => {
     .fill('')
     .map((_, i) => i + 1);
 
-  const PAGE_MAX_LENGTH = 8;
+  const PAGE_MAX_LENGTH = 5;
 
   const ShowPageNumber = Math.ceil(pageState / PAGE_MAX_LENGTH);
   const ShowButtons = Buttons.filter(

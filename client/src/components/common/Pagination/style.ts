@@ -3,8 +3,7 @@ import styled from 'styled-components';
 const PaginationBox = styled.div`
   margin-top: 6px;
   display: flex;
-  gap: 24px;
-  justify-content: center;
+  justify-content: space-evenly;
 
   :disabled {
     display: none;
@@ -16,7 +15,7 @@ const Button = styled.button<{
   isHidden?: boolean;
   select?: boolean;
 }>`
-  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   position: relative;
   width: ${({ width }) => (width ? width : '')}px;
   min-width: 16px;

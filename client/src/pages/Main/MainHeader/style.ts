@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
-  height: 474px;
+  height: 400px;
   border-radius: 40px;
 
   padding: 26px 40px 0 40px;
@@ -27,7 +27,7 @@ const HeaderMain = styled.section`
 const HeaderFooter = styled.section`
   display: flex;
   justify-content: space-between;
-  margin-top: 151px;
+  margin-top: 80px;
   align-items: center;
 `;
 
@@ -64,7 +64,7 @@ const Description = styled.div`
 
 const FilterState = styled.div`
   position: absolute;
-  top: 380px;
+  top: 307px;
   left: 50%;
   transform: translate(-50%, 50%);
   display: flex;

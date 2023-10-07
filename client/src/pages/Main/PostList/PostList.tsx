@@ -1,4 +1,4 @@
-import DefaultImage from '@assets/svg/KKIRI.svg';
+import DefaultImage from '@assets/mock/space1.png';
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import S from '@pages/Main/PostList/style';
 import { Suspense, useEffect, useState } from 'react';
@@ -190,12 +190,14 @@ const PostList = (props: PostListPropType) => {
               );
             })}
           </S.PostList>
-          <Pagination
-            movePage={movePage}
-            page={curPage}
-            total={total}
-            itemLength={itemLength}
-          />
+          <S.PaginationBox>
+            <Pagination
+              movePage={movePage}
+              page={curPage}
+              total={total}
+              itemLength={itemLength}
+            />
+          </S.PaginationBox>
         </>
       )}
       {selectState && (
