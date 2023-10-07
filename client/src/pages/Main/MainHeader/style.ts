@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
   height: 400px;
-  border-radius: 40px;
+  border-radius: 30px;
 
   padding: 26px 40px 0 40px;
 `;
@@ -46,7 +46,7 @@ const Image = styled.div<{ imgUrl: string }>`
 const MainInfo = styled.div``;
 const MainTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY['IBM Plex Sans KR']};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   line-height: 0.8;
   font-size: 88px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
