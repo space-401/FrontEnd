@@ -51,7 +51,7 @@ const ImgEditModal = ({
   };
 
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = (e: any) => {
+  const onSaveAllEditImg = (e: React.MouseEvent) => {
     e.preventDefault();
     if (imageArr.cropImages.length > 0) {
       setImageArr((prev) => ({ ...prev, cropImages: [] }));

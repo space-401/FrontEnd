@@ -52,7 +52,7 @@ const Calender = ({
     }
   };
 
-  const onChange = (dates: any) => {
+  const onChange = (dates: [Date, Date]) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
