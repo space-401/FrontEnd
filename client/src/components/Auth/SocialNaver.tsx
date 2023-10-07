@@ -1,4 +1,4 @@
-import { NAVER_LOGIN_URL, LOGIN_REDIRECT_URI } from '@/constants/api';
+import { NAVER_LOGIN_URL, LOGIN_REDIRECT_URI } from '@/constants/auth';
 
 export const SocialNaver = () => {
   const naverURL = `${NAVER_LOGIN_URL}?client_id=${
