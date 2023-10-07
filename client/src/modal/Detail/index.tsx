@@ -59,7 +59,7 @@ const DetailInner = React.forwardRef(
 
     const { postId, ModalClose } = useDetailModalStore((state) => state);
 
-    const { postDetailData } = usePostDetailQuery(postId);
+    const { postDetailData } = usePostDetailQuery(String(postId));
 
     const confirmModalOpen = useConfirmModalOpen();
 

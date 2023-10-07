@@ -1,12 +1,13 @@
 import { END_POINTS } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import type { SpacePostListProps } from '@type/main.type';
+import { DateInfoType } from '@/types/post.type';
 
 export type FilterType = {
-  userId?: string[];
-  tagId?: string[];
+  userId?: number[];
+  tagId?: number[];
   keyword?: string;
-  date?: string;
+  date?: DateInfoType;
 };
 
 export const getSpacePostList = async (

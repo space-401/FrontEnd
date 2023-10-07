@@ -28,8 +28,12 @@ const MainSearchBox = (props: SearchProps) => {
     if (state.selectTagList.length !== 0) {
       select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
     }
-    if (date.length !== 0) {
-      select = { ...select, dateTime: date };
+    if (date.startDate) {
+      select = {
+        ...select,
+        startDate: date.startDate ?? null,
+        endDate: date.endDate ?? null,
+      };
     }
     if (keyword.current.trim().length !== 0) {
       select = { ...select, keyword: keyword.current };

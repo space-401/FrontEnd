@@ -18,19 +18,30 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
-import { DateInfoType, TagType, UserType } from '@/types/post.type';
+import { DateInfoType } from '@/types/post.type';
 import { ImageType, ImageArrType } from '@/types/image.type';
 import { useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
 import { makeObj } from '@/utils/makeObj';
-import { tagList, userList } from '@mocks/data/common';
+import { CreatePostType } from '@/types/post.type';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
+import {
+  onConvertedUserToSelectType,
+  onConvertedTagToSelectType,
+} from '@/utils/selectTypeConvertor';
+import { postPost } from '@/apis/post/postPost';
 
 const CreatePost = () => {
   const params = useParams();
   const postId = params.postId;
-  const { postDetailData } = usePostDetailQuery(Number(postId));
+  const spaceId = params.spaceId;
+  const { postDetailData } = usePostDetailQuery(postId!);
+  const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
+
+  console.log(spaceInfo);
+  const { imgUrl, title: spaceName, tagList, userList } = spaceInfo!;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -71,32 +82,14 @@ const CreatePost = () => {
   //장소 선택 모달이 열렸는지
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
-  //
-  const onConvertedUserToSelectType = (list: UserType[]) => {
-    return list.map((user) => {
-      return {
-        id: user.userId,
-        title: user.userName,
-        imgUrl: user.imgUrl,
-      };
-    });
-  };
-
-  const onConvertedTagToSelectType = (list: TagType[]) => {
-    return list.map((tag) => {
-      return {
-        id: tag.tagId,
-        title: tag.tagTitle,
-      };
-    });
-  };
-  //사람
-  const [people, setPeople] = useState<selectType[]>(
+  //선택된 유저
+  const [selectedUsers, setSelectedUsers] = useState<selectType[]>(
     postDetailData
       ? onConvertedUserToSelectType(postDetailData.selectedUsers)
       : []
   );
-  const [tags, setTags] = useState<selectType[]>(
+  //선택된 태그
+  const [selectedTags, setSelectedTags] = useState<selectType[]>(
     postDetailData
       ? onConvertedTagToSelectType(postDetailData.selectedTags)
       : []
@@ -151,8 +144,21 @@ const CreatePost = () => {
 
   //제출 후 포스트 생성 페이지로 이동
   const onSubmit = () => {
-    console.log('제출', imageArr);
-    console.log();
+    const newPost: CreatePostType = {
+      postTitle: title,
+      postDescription: content,
+      selectedUsers: selectedUsers.map((user) => user.id),
+      selectedTags: selectedTags.map((tag) => tag.id),
+      position: {
+        lng: Number(mapInfo.position.lng),
+        lat: Number(mapInfo.position.lat),
+      },
+      placeTitle: mapInfo.content,
+      date: dateInfo,
+    };
+    console.log(newPost);
+    postPost(Number(spaceId!));
+    //api 로직
     //성공시
     confirmModalOpen();
   };
@@ -166,10 +172,10 @@ const CreatePost = () => {
     window.location.href = result;
   };
 
-  const alertOpen = useAlertModalOpen();
-  const confirmOpen = useConfirmModalOpen();
-
   /**경고 모달*/
+
+  const alertOpen = useAlertModalOpen();
+
   const alertModalOpen = () => {
     alertOpen({
       width: 300,
@@ -178,6 +184,9 @@ const CreatePost = () => {
     });
   };
   /**확인 모달*/
+
+  const confirmOpen = useConfirmModalOpen();
+
   const confirmModalOpen = () => {
     confirmOpen({
       AsyncAction: onMoveCreatePost,
@@ -251,8 +260,8 @@ const CreatePost = () => {
       <S.GridWrapper>
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
-          <CircleIcon size={48} img_url=""></CircleIcon>
-          <div>스페이스 이름</div>
+          <CircleIcon size={48} img_url={imgUrl}></CircleIcon>
+          <div>{spaceName}</div>
         </S.SpaceInfoContainer>
 
         {/*게시글 제목*/}
@@ -287,11 +296,11 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={2}>
           <CreateSelectBox
-            selectState={people}
+            selectState={selectedUsers}
             labelName={'사용자'}
             ListItem={userList}
             BoxWidth={inputWidth}
-            setState={setPeople}
+            setState={setSelectedUsers}
             menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
           />
@@ -306,11 +315,11 @@ const CreatePost = () => {
 
         <S.InputContainer number={3}>
           <CreateSelectBox
-            selectState={tags}
+            selectState={selectedTags}
             labelName={'태그'}
             ListItem={tagList}
             BoxWidth={inputWidth}
-            setState={setTags}
+            setState={setSelectedTags}
             menuHeight={100 * Math.floor(userList.length / 2)}
             // setState={setTagState}
             menuWidth={inputWidth}
