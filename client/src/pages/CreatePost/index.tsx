@@ -41,7 +41,7 @@ const CreatePost = () => {
   const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
 
   console.log(spaceInfo);
-  const { imgUrl, title: spaceName, tagList, userList } = spaceInfo!;
+  const { imgUrl, spaceTitle, tagList, userList } = spaceInfo!;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -261,7 +261,7 @@ const CreatePost = () => {
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
           <CircleIcon size={48} img_url={imgUrl}></CircleIcon>
-          <div>{spaceName}</div>
+          <div>{spaceTitle}</div>
         </S.SpaceInfoContainer>
 
         {/*게시글 제목*/}

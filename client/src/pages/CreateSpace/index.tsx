@@ -37,13 +37,6 @@ const CreateSpace = () => {
 
   console.log('ggg', spaceInfo);
 
-  // const {
-  //   title: spaceTitle,
-  //   description: spaceDescription,
-  //   imgUrl: spaceImgUrl,
-  //   spacePassword,
-  // } = spaceInfo!;
-
   //기본 이미지 선택
   const [isBasicImg, setIsBasicImg] = useState<boolean>(false);
   //기본 이미지
@@ -79,13 +72,13 @@ const CreateSpace = () => {
 
   //스페이스 명, 스페이스 설명
   const { values, onChange } = useInputs({
-    title: spaceInfo ? spaceInfo.title : '',
-    content: spaceInfo ? spaceInfo.description : '',
+    title: spaceInfo ? spaceInfo.spaceTitle : '',
+    content: spaceInfo ? spaceInfo.spaceDescription : '',
   });
   const { title, content } = values;
 
   //비밀번호
-  const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePassword : '');
+  const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePw : '');
   //비밀번호 보이기,숨기기
   const [isShowPswd, setIsShowPswd] = useState(false);
   const onToggleShowPswd = () => {
@@ -152,10 +145,10 @@ const CreateSpace = () => {
   //스페이스 생성하기
   const onCreateSpace = () => {
     const newData: CreateSpaceType = {
-      title: title,
-      description: content,
+      spaceTitle: title,
+      spaceDescription: content,
       imgUrl: imageArr.convertedImages[0],
-      spacePassword: Number(pswd),
+      spacePw: Number(pswd),
     };
     console.log('새로운 데이터', newData);
     confirmModalOpen(false);
@@ -164,10 +157,10 @@ const CreateSpace = () => {
   //스페이스 생성하기
   const onUpdateSpace = () => {
     const newData: CreateSpaceType = {
-      title: title,
-      description: content,
+      spaceTitle: title,
+      spaceDescription: content,
       imgUrl: imageArr.convertedImages[0],
-      spacePassword: Number(pswd),
+      spacePw: Number(pswd),
     };
     console.log('새로운 데이터', newData);
     confirmModalOpen(true);
