@@ -4,7 +4,7 @@ import S from '@pages/Main/PostList/style';
 import { Suspense, useEffect, useState } from 'react';
 import type { selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
-// import MainSearchBox from '@components/Main/SearchBox';
+import MainSearchBox from '@components/Main/SearchBox';
 import KaKaoMap from '@components/Main/PostMap';
 import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
@@ -13,7 +13,6 @@ import { useSpacePostListQuery } from '@hooks/api/space/useSpacePostListQuery';
 import { PostListFilterProps } from '@type/main.type';
 import { UserType, TagType, DateInfoType } from '@/types/post.type';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
-// import MainCalender from '@/components/common/Calender/MainCalender';
 
 type PostListPropType = {
   userList: UserType[];
@@ -164,7 +163,7 @@ const PostList = (props: PostListPropType) => {
           borderRadius={5}
           setDateInfo={setSelectedDate}
         />
-        {/* <MainSearchBox state={state} placeholder={'제목'} /> */}
+        <MainSearchBox state={state} placeholder={'제목'} date={selectedDate} />
       </S.FilterGroup>
       {!selectState && postList.length === 0 && (
         <S.UndefinedList>

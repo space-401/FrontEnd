@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { PostDetailType } from '@/types/post.type';
 import { getPostDetail } from '@apis/post/getPostDetail';
 
-export const usePostDetailQuery = (postId: number) => {
+export const usePostDetailQuery = (postId: string) => {
   const { data: postDetailData } = useQuery<PostDetailType, AxiosError>(
     ['detail', postId],
     () => getPostDetail(postId!),
