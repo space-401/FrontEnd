@@ -40,9 +40,9 @@ const NavButton = styled.div<{ select: boolean }>`
   gap: 16px;
   border-radius: 15px;
   background: ${({ theme, select }) => (select ? theme.COLOR['gray-5'] : '')};
-  
-  svg{
-    margin-left: 10px; 
+
+  svg {
+    margin-left: 10px;
   }
 `;
 
