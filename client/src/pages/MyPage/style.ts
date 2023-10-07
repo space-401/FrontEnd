@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const MyPageWrapper = styled.div`
   width: 100%;
-  max-width: 1856px;
+  max-width: 1200px;
   min-height: calc(100vh - 82px);
   padding-bottom: 16px;
   display: flex;
@@ -10,8 +10,7 @@ const MyPageWrapper = styled.div`
 `;
 
 const Container = styled.section`
-  width: calc(100% - 310px);
-  min-width: 1545px;
+  width: calc(100% - 201px);
   height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   border-radius: 30px;
@@ -19,12 +18,12 @@ const Container = styled.section`
 `;
 
 const Wrapper = styled.nav`
-  width: 303px;
+  width: 194px;
   height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   border-radius: 30px;
   display: flex;
-  padding: 80px 24px;
+  padding: 80px 15px;
 `;
 const NavGroup = styled.div`
   display: flex;
@@ -34,20 +33,23 @@ const NavGroup = styled.div`
 
 const NavButton = styled.div<{ select: boolean }>`
   cursor: pointer;
-  height: 56px;
+  height: 36px;
   display: flex;
-  width: 255px;
-  padding: 16px;
-  align-items: flex-start;
+  width: 163px;
+  align-items: center;
   gap: 16px;
   border-radius: 15px;
   background: ${({ theme, select }) => (select ? theme.COLOR['gray-5'] : '')};
+
+  svg {
+    margin-left: 10px;
+  }
 `;
 
 const NavSpan = styled.span`
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
+  font-size: 13px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 `;
 

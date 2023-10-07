@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   left: 0;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
-  border-radius: 40px;
+  border-radius: 30px;
   min-height: 800px;
   background-color: ${({ theme }) => theme.COLOR.black};
 `;

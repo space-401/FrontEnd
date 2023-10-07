@@ -4,7 +4,7 @@ import S from '@/layout/BackLayout/style';
 import { useNavigate } from 'react-router-dom';
 import { Modal as AlertModal, Modal as ConfirmModal } from '@mui/material';
 import { useAlertModalStore, useConfirmModalStore } from '@store/modal';
-import AlertInner from '@modal/Detail';
+import AlertInner from '@modal/Alert';
 import ConfirmInner from '@modal/Confirm';
 
 const BackLayout = () => {
