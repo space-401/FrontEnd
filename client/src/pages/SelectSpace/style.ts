@@ -24,7 +24,7 @@ const SpaceContainer = styled.div`
 `;
 
 const Container = styled.div`
-  border-radius: 40px;
+  border-radius: 30px;
   width: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   padding-top: 20px;
