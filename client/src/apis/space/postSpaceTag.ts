@@ -11,8 +11,7 @@ export const postSpaceTag = async (postSpaceInfo: PostSpaceTagType) => {
   const { tagName, spaceId } = postSpaceInfo;
   const { data } = await axiosInstance.post<ApiResponseType>(
     END_POINTS.SPACE_TAG(spaceId),
-    { data: { tagName } }
+    { tagName }
   );
-
   return data;
 };
