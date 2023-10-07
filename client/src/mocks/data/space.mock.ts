@@ -7,7 +7,7 @@ import { tagList, userList } from '@mocks/data/common';
  * 스페이스 정보에 대한 목 데이터
  */
 export const spaceInfo: SpaceInfo = {
-  isFirst: false,
+  isFirst: true,
   isAdmin: true,
   spaceTitle: 'SPACE 401',
   spaceDescription:
