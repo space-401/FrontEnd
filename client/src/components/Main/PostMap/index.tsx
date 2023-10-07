@@ -50,7 +50,7 @@ const Index = (props: SpacePostListProps) => {
             return (
               <EventMarkerContainer
                 onClick={() => DetailModalOpen(postId)}
-                key={`EventMarkerContainer-${value.position.lat}-${value.position.lng}`}
+                key={postId}
                 position={value.position}
                 setIsSelect={() => setIsSelect(postId)}
                 content={

@@ -42,8 +42,10 @@ const Header = () => {
           </S.SpaceIconBox>
         </S.SpaceBox>
         <S.IconBox>
-          <AlarmIcon />
-          <UserIcon onClick={() => navigate(PATH.USER_INFO)} />
+          <S.IconGroup>
+            <AlarmIcon />
+            <UserIcon onClick={() => navigate(PATH.USER_INFO)} />
+          </S.IconGroup>
         </S.IconBox>
       </S.Container>
     </S.HeaderWrapper>
