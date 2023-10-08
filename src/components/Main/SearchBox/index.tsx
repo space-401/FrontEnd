@@ -47,7 +47,7 @@ const MainSearchBox = (props: SearchProps) => {
   return (
     <S.Wrapper onSubmit={onSubmit}>
       <S.IconBox>
-        <SearchIcon />
+        <SearchIcon width={12} height={12} />
       </S.IconBox>
       <S.SearchInput
         placeholder={placeholder}

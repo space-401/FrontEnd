@@ -78,7 +78,10 @@ const Calender = ({
   }, [startDate, endDate]);
 
   return (
-    <div className="custom-react-datepicker__wrapper">
+    <div
+      className="custom-react-datepicker__wrapper"
+      style={{ paddingBottom: '0' }}
+    >
       <label>
         <StyledDatePicker
           borderRadius={borderRadius}
@@ -237,7 +240,10 @@ const Calender = ({
 
 export default Calender;
 
-const StyledDatePicker = styled(DatePicker)<{height:number, borderRadius: number}>`
+const StyledDatePicker = styled(DatePicker)<{
+  height: number;
+  borderRadius: number;
+}>`
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};

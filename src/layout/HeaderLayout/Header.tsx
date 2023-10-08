@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <S.HeaderWrapper>
       <S.Container>
-        <S.IconBox onClick={() => navigate(PATH.HOME)} padding={30}>
+        <S.IconBox onClick={() => navigate(PATH.HOME)}>
           <Logo />
         </S.IconBox>
         <S.SpaceBox>
@@ -43,8 +43,12 @@ const Header = () => {
         </S.SpaceBox>
         <S.IconBox>
           <S.IconGroup>
-            <AlarmIcon />
-            <UserIcon onClick={() => navigate(PATH.USER_INFO)} />
+            <AlarmIcon width={15} height={15} />
+            <UserIcon
+              width={15}
+              height={15}
+              onClick={() => navigate(PATH.USER_INFO)}
+            />
           </S.IconGroup>
         </S.IconBox>
       </S.Container>
