@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
-  height: 420px;
+  height: 400px;
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
@@ -113,6 +113,7 @@ const ControlButton = styled.div<{
   }
 
   text-align: center;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   line-height: 150%;
