@@ -14,7 +14,7 @@ import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;
-  const { isAdmin, title, imgUrl, userList, description } = spaceInfo;
+  const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription } = spaceInfo;
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
     setIsOpen(false);
@@ -30,7 +30,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         onClose={onClose}
       >
         <SettingComponent
-          spaceTitle={title}
+          spaceTitle={spaceTitle}
           isAdmin={isAdmin}
           isOpen={isOpen}
           userList={userList}
@@ -61,8 +61,8 @@ const MainHeader = (prop: MainHeaderPropType) => {
       <S.HeaderMain>
         <S.Image imgUrl={imgUrl} />
         <S.MainInfo>
-          <S.MainTitle>{title}</S.MainTitle>
-          <S.Description>{description}</S.Description>
+          <S.MainTitle>{spaceTitle}</S.MainTitle>
+          <S.Description>{spaceDescription}</S.Description>
         </S.MainInfo>
       </S.HeaderMain>
       <S.HeaderFooter>
