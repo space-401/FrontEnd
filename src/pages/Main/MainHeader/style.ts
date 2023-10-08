@@ -4,18 +4,20 @@ const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
-  height: 400px;
+  height: 317px;
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  padding: 26px 30px 0;
+  padding: 0 24px;
 `;
 
 const HeaderHeader = styled.section`
+  height: 56px;
   line-height: 43px;
   display: flex;
   justify-content: flex-end;
-  gap: 9px;
+  gap: 8px;
+  align-items: center;
 `;
 
 const HeaderMain = styled.section`
@@ -28,7 +30,7 @@ const HeaderMain = styled.section`
 const HeaderFooter = styled.section`
   display: flex;
   justify-content: space-between;
-  margin-top: 80px;
+  margin-top: 96px;
   align-items: center;
 `;
 
@@ -40,22 +42,25 @@ const Image = styled.div<{ imgUrl: string }>`
   background-image: url(${({ imgUrl }) => imgUrl});
   background-position: center;
   background-size: cover;
-  width: 160px;
-  height: 160px;
-  border-radius: 25px;
+  width: 104px;
+  height: 104px;
+  border-radius: 15px;
 `;
 const MainInfo = styled.div``;
+
 const MainTitle = styled.div`
+  display: flex;
+  height: 40px;
   color: ${({ theme }) => theme.COLOR.white};
-  line-height: 0.8;
-  font-size: 70px;
+  font-size: 56px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
+  align-items: center;
 `;
 const Description = styled.div`
-  margin-top: 30px;
-  width: 37.625rem;
-  line-height: 1.6rem;
-  font-size: 14px;
+  margin-top: 24px;
+  width: 440px;
+  line-height: 160%;
+  font-size: 12px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   overflow: auto;
   color: ${({ theme }) => theme.COLOR.white};
@@ -63,29 +68,28 @@ const Description = styled.div`
 
 const FilterState = styled.div`
   position: absolute;
-  top: 307px;
+  top: 232px;
   left: 50%;
   transform: translate(-50%, 50%);
   display: flex;
   gap: 24px;
   margin-top: 37px;
-
-  svg {
-    margin: 3px 2px;
-  }
 `;
 
 const FilterGroup = styled.div``;
 
 const SelectButton = styled.div<{ $state: boolean }>`
+  height: 32px;
   display: flex;
   color: ${({ $state, theme }) =>
     $state ? theme.COLOR.white : theme.COLOR['gray-4']};
   gap: 8px;
   padding-bottom: ${({ $state }) => (!$state ? '11px' : '8px')};
+  align-items: center;
   border-bottom: 3px solid
     ${({ $state, theme }) => ($state ? theme.COLOR.white : 'none')};
   cursor: pointer;
+  font-size: 12px;
 `;
 
 const LeftEmpty = styled.div``;
@@ -96,14 +100,14 @@ const ControlButton = styled.div<{
   hoverColor?: string;
 }>`
   display: inline-flex;
-  height: 44px;
-  padding: 12px 16px;
+  height: 28px;
+  padding: 7.5px 10px;
   color: ${({ color }) => color};
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : ''};
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   flex-shrink: 0;
   border-radius: 10px;
   cursor: pointer;
@@ -113,26 +117,26 @@ const ControlButton = styled.div<{
   }
 
   text-align: center;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-size: 10px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
-  line-height: 150%;
 
   transition: 0.5s;
 `;
 
 const CreateButton = styled.div`
   display: inline-flex;
-  height: 44px;
-  padding: 10px 16px;
+  height: 32px;
+  padding: 7px 10px;
   color: ${({ theme }) => theme.COLOR.black};
   background-color: ${({ theme }) => theme.COLOR['gray-1']};
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  border-radius: 10px;
+  gap: 5px;
+  border-radius: 5px;
   cursor: pointer;
+  line-height: 150%;
+  font-size: 12px;
+  font-weight: 500;
 
   &:hover {
     background-color: ${({ theme }) => theme.COLOR['gray-2']};

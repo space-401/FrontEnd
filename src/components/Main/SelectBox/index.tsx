@@ -36,7 +36,7 @@ const CSelectBox = (props: SelectBoxProps) => {
     <S.Wrapper
       isSelect={select.length === 0}
       isOpen={isOpen}
-      minWidth={Math.max(150, BoxWidth)}
+      minWidth={BoxWidth}
     >
       <S.LabelTitle>
         {select.map((prev) => prev.title).join(', ') || labelName}

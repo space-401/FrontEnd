@@ -20,36 +20,35 @@ const IconGroup = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 28px;
 `;
 
 const IconBox = styled.div<{ padding?: number }>`
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
   justify-content: center;
   height: inherit;
-  width: 160px;
+  width: 120px;
   display: flex;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 10px;
   svg {
     cursor: pointer;
-    padding-left: ${(props) => (props.padding ? props.padding : 0)}px;
   }
 `;
 
 const SpaceBox = styled.div`
   width: 100%;
-  max-width: calc(100% - 360px);
+  max-width: calc(100% - 256px);
   height: inherit;
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
   ${flexCenter};
-  border-radius: 15px;
+  border-radius: 10px;
 `;
 
 const Container = styled.div`
   margin: 32px 32px 8px 32px;
   width: 100%;
-  height: 64px;
+  height: 48px;
   max-width: 1856px;
   display: flex;
   justify-content: space-between;
@@ -57,6 +56,8 @@ const Container = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   justify-content: center;
   border-radius: 30px;
@@ -67,8 +68,8 @@ const SpaceIconBox = styled.div`
 `;
 
 const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
-  width: 40px;
-  border-radius: 10px;
+  width: 24px;
+  border-radius: 8px;
   aspect-ratio: 1/1;
   background-image: url(${({ img_url }) => img_url});
   cursor: pointer;

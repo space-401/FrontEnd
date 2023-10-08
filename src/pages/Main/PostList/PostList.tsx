@@ -1,4 +1,4 @@
-import DefaultImage from '@assets/mock/space1.png';
+import DefaultImage from '@assets/png/DefaultImg.png';
 import FlipCard from '@components/common/FlipCard/FlipCard';
 import S from '@pages/Main/PostList/style';
 import { Suspense, useEffect, useState } from 'react';
@@ -115,8 +115,8 @@ const PostList = (props: PostListPropType) => {
           setState={setUserState}
           menuWidth={316}
           menuHeight={lowList * 16 + (lowList - 1) * 8 + 32}
-          BoxWidth={168}
-          labelName={'사용자'}
+          BoxWidth={105}
+          labelName={'작성자'}
           ListItem={userList}
           selectState={
             userList.length !== 0
@@ -134,12 +134,18 @@ const PostList = (props: PostListPropType) => {
               : []
           }
         />
+        <Calender
+          isMain={true}
+          height={28}
+          borderRadius={5}
+          setDateInfo={setSelectedDate}
+        />
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}
           setState={setTagState}
           menuWidth={192}
           menuHeight={49 * Math.floor(tagList.length / 2)}
-          BoxWidth={168}
+          BoxWidth={105}
           labelName={'태그'}
           ListItem={tagList}
           selectState={
@@ -156,12 +162,6 @@ const PostList = (props: PostListPropType) => {
                   }))
               : []
           }
-        />
-        <Calender
-          isMain={true}
-          height={50}
-          borderRadius={5}
-          setDateInfo={setSelectedDate}
         />
         <MainSearchBox state={state} placeholder={'제목'} date={selectedDate} />
       </S.FilterGroup>

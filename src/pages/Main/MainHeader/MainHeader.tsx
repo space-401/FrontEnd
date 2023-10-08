@@ -38,7 +38,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         />
       </SettingModal>
       <S.HeaderHeader>
-        <Avatars size={42.857} users={userList} max={4} />
+        <Avatars size={25} users={userList} max={4} />
         <S.ButtonGroup>
           <S.ControlButton
             onClick={() => setIsOpen(true)}
@@ -72,13 +72,23 @@ const MainHeader = (prop: MainHeaderPropType) => {
             onClick={() => setSelectState(false)}
             $state={!selectState}
           >
-            {!selectState ? <SelectTableIcon /> : <DoneTableIcon />}갤러리
+            {!selectState ? (
+              <SelectTableIcon width={15} height={15} />
+            ) : (
+              <DoneTableIcon width={15} height={15} />
+            )}
+            갤러리
           </S.SelectButton>
           <S.SelectButton
             onClick={() => setSelectState(true)}
             $state={selectState}
           >
-            {selectState ? <SelectMapIcon /> : <DoneMapIcon />}지도
+            {selectState ? (
+              <SelectMapIcon width={15} height={15} />
+            ) : (
+              <DoneMapIcon width={15} height={15} />
+            )}
+            지도
           </S.SelectButton>
         </S.FilterState>
         <S.CreateButton onClick={() => navigate(PATH.POST_CREATE(spaceId))}>
