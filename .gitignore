@@ -1,3 +1,4 @@
+
 # dependencies
 /node_modules
 /.pnp
@@ -24,58 +25,12 @@ yarn-error.log*
 # eslint
 .eslintcache
 
-# vs code #
-.vscode/
-
-# Created by http://gitignore.io
-
-### Windows ###
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-### Linux ###
-.*
-!.gitignore
-!.git*
-*~
-
-### OSX ###
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-### Java ###
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-### Gradle ###
-# Exclude Folder List #
-.gradle/
-build/
-
-### IntelliJ ###
+# IntelliJ IDEA #
+.idea
+*.iws
 *.iml
 *.ipr
-*.iws
-.idea/
+out/
 
-/bin
+# vs code #
+.vscode/
