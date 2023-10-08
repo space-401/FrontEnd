@@ -81,7 +81,6 @@ const Calender = ({
     <div className="custom-react-datepicker__wrapper">
       <label>
         <StyledDatePicker
-          isMain={isMain}
           borderRadius={borderRadius}
           height={height}
           dateFormat="yyyy.MM.dd"
@@ -238,7 +237,7 @@ const Calender = ({
 
 export default Calender;
 
-const StyledDatePicker = styled(DatePicker)`
+const StyledDatePicker = styled(DatePicker)<{height:number, borderRadius: number}>`
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
@@ -252,8 +251,8 @@ const StyledDatePicker = styled(DatePicker)`
 const DateText = styled.div<{ isMain: boolean }>`
   color: ${({ isMain }) => (isMain ? '#E9D7EF' : '#767676')};
   position: absolute;
-  bottom: 27;
-  left: 15;
+  bottom: 27px;
+  left: 15px;
   font-weight: 400;
 `;
 
