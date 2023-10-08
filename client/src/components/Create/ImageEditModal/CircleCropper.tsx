@@ -5,7 +5,7 @@ import '@components/Create/ImageEditModal/CircleCropper.module.css';
 type PropsType = {
   image: string;
   index: number;
-  myRef: any;
+  myRef: React.RefObject<HTMLImageElement>;
   width: number;
 };
 
@@ -13,8 +13,6 @@ const CircleImageCropper = ({ image, myRef, width }: PropsType) => {
   return (
     <div style={{ position: 'relative' }}>
       <Cropper
-        // cropBoxResizable={false}
-        // // cropBoxMovable={false}
         ref={myRef}
         aspectRatio={1}
         src={image}

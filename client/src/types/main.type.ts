@@ -55,7 +55,6 @@ export type SelectBoxProps = {
    * 선택된 유저의 리스트를 넣어주세요
    */
   selectState: selectType[];
-  state?: any;
 };
 
 export type TagListProps = {

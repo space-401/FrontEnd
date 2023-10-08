@@ -7,7 +7,6 @@ type userType = {
     token_key: string;
     img: string;
   } | null;
-  // Login : ()=> void
   Logout: () => void;
 };
 
