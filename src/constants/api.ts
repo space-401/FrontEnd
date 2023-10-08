@@ -6,7 +6,7 @@ export const NETWORK = {
 };
 
 export const AXIOS_BASE_URL = Product
-  ? `${window.location.protocol}//${import.meta.env.BASE_URL}`
+  ? `${window.location.protocol}//${import.meta.env.VITE_BASE_URL}`
   : '/';
 
 export const END_POINTS = {
