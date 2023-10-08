@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 const Flip = styled.div<{ size: 'small' | 'medium' | 'big' }>`
   position: relative;
-  width: ${({ size }) => (size === 'big' ? '280px' : '230px')};
+  width: ${({ size }) => (size === 'big' ? '274px' : '230px')};
   cursor: pointer;
 `;
 
 const Card = styled.div<{ img: string; borderRadius?: string }>`
+  box-sizing: border-box;
   aspect-ratio: 1/1;
   width: 100%;
   position: relative;
