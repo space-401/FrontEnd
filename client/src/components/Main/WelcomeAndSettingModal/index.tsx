@@ -1,9 +1,9 @@
 import { Modal, Box } from '@mui/material';
-import { S } from '@/components/Main/WelcomeAndSettingModal/style';
+import { S, M } from '@/components/Main/WelcomeAndSettingModal/style';
 import WelcomeModal from './WelcomeModal';
 import FirstSettingModal from './FirstSettingModal';
 import { useState } from 'react';
-// import { ReactComponent as DeleteIcon } from '@assets/svg/whiteDeleteIcon.svg';
+import { ReactComponent as DeleteIcon } from '@assets/svg/whiteDeleteIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { ReactComponent as GoArrowIcon } from '@/assets/svg/goArrowIcon.svg';
 
@@ -26,6 +26,7 @@ const WelcomeAndSettingModal = ({
   imgUrl,
   setImageArr,
   imageArr,
+  modalClose,
   setImageModalOpen,
 }: WelcomeAndSettingProps) => {
   const [modalNum, setModalNum] = useState(1);
@@ -50,9 +51,9 @@ const WelcomeAndSettingModal = ({
       }}
     >
       <Box tabIndex={-1}>
-        {/* <M.DeleteIconBox>
-          <DeleteIcon />
-        </M.DeleteIconBox> */}
+        <M.DeleteIconBox>
+          <DeleteIcon onClick={modalClose} />
+        </M.DeleteIconBox>
         <S.Wrapper>
           {modalNum ? (
             <WelcomeModal spaceTitle={spaceTitle} imgUrl={imgUrl} />
