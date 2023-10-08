@@ -210,6 +210,7 @@ const ProfileImg = styled.div<{ img: string }>`
   overflow: hidden;
   background-size: cover;
   background-image: url(${({ img }) => img});
+  background-position: center;
   font-weight: ${({ theme }) => theme.COLOR['gray-4']};
   border-radius: 100%;
 `;

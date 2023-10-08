@@ -8,8 +8,6 @@ interface IInputWrapper {
 }
 
 const InputWrapper = styled.div<IInputWrapper>`
-  display: flex;
-  align-items: center;
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ? backgroundColor : theme.COLOR['gray-5']};
   width: ${({ width }) => width}px;
@@ -22,6 +20,7 @@ interface IInput {
   paddingLeft?: number;
   hasIcon: boolean;
   readOnly: boolean;
+  autocomplete: 'on' | 'off';
 }
 
 const Input = styled.input<IInput>`

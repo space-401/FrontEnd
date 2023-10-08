@@ -38,7 +38,6 @@ const Calender = ({
   useEffect(() => {
     dateInfo?.startDate && setStartDate(new Date(dateInfo.startDate));
     dateInfo?.endDate && setEndDate(new Date(dateInfo.endDate));
-    console.log();
   }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
@@ -224,6 +223,8 @@ const Calender = ({
               position: 'absolute',
               bottom: 25,
               left: 15,
+              color: 'white',
+              fontSize: 14,
             }}
             isMain={true}
           >
