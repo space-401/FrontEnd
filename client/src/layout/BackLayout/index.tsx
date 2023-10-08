@@ -19,6 +19,7 @@ const BackLayout = () => {
       <S.IconWrapper>
         <S.IconContainer>
           <BackIcon
+            style={{ cursor: 'pointer' }}
             onClick={() => {
               navigate(-1);
             }}
