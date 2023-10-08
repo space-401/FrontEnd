@@ -32,6 +32,7 @@ const Modal = styled.div`
 
 const SmallPhotoBox = styled.div<{ image?: string }>`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-6']};
+  background-position: center;
   width: 64px;
   height: 64px;
   border-radius: 5px;

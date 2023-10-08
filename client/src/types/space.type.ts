@@ -13,14 +13,14 @@ export type OneSpaceType = {
 };
 
 export type SpaceInfo = {
-  title: string;
-  description: string;
+  spaceTitle: string;
+  spaceDescription: string;
   imgUrl: string;
   userList: UserType[];
   tagList: TagType[];
   isAdmin: boolean;
   isFirst: boolean;
-  spacePassword: string;
+  spacePw: string;
 };
 
 export type AlarmType = {
@@ -92,8 +92,8 @@ export type MyCommentType = {
 };
 
 export type CreateSpaceType = {
-  title: string;
-  description: string;
+  spaceTitle: string;
+  spaceDescription: string;
   imgUrl: File;
-  spacePassword: number;
+  spacePw: number;
 };

@@ -51,13 +51,14 @@ const ImgEditModal = ({
   };
 
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = (e: any) => {
+  const onSaveAllEditImg = (e: React.MouseEvent) => {
     e.preventDefault();
     if (imageArr.cropImages.length > 0) {
       setImageArr((prev) => ({ ...prev, cropImages: [] }));
     }
     getCropData(cropperRef1);
     //기존에 크롭한 이미지가 존재하면 없애줌
+    setImageModalOpen!(false);
   };
 
   //모달 취소
@@ -70,7 +71,7 @@ const ImgEditModal = ({
     <Box tabIndex={-1}>
       <S.Form width={cropperWidth}>
         <S.Header>
-          <button onClick={onClickCancelModal}>취소</button>
+          <button onClick={onClickCancelModal}>삭제</button>
           <button
             onClick={(e) => {
               onSaveAllEditImg(e);
@@ -80,21 +81,21 @@ const ImgEditModal = ({
           </button>
         </S.Header>
 
-        {imageArr.images.length == 0 && (
-          <S.FlexContainer>
-            <div>이미지가 없습니다</div>
-          </S.FlexContainer>
-        )}
         <div
           style={{
             position: 'relative',
             height: cropperWidth,
             width: cropperWidth,
-            overflow: 'hidden',
           }}
         >
           <div
-            style={{ display: 'flex', position: 'absolute', left: 0 }}
+            style={{
+              display: 'flex',
+              position: 'absolute',
+              left: '10',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
             ref={sliderRef}
           >
             {imageArr.images.length &&
@@ -144,11 +145,6 @@ const ImgEditModal = ({
             </button>
           </S.Header>
 
-          {imageArr.images.length == 0 && (
-            <S.FlexContainer>
-              <div>이미지가 없습니다</div>
-            </S.FlexContainer>
-          )}
           <div
             style={{
               position: 'relative',
@@ -158,7 +154,7 @@ const ImgEditModal = ({
             }}
           >
             <div
-              style={{ display: 'flex', position: 'absolute', left: 0 }}
+              style={{ display: 'flex', position: 'absolute' }}
               ref={sliderRef}
             >
               {imageArr.images.length &&
@@ -172,7 +168,7 @@ const ImgEditModal = ({
                   />
                 ) : (
                   <ImageCropper
-                    width={cropperWidth}
+                    width={cropperWidth - 50}
                     key={0}
                     image={imageArr.images[0].img}
                     index={0}

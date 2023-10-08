@@ -2,18 +2,17 @@ import { Modal, Box } from '@mui/material';
 import S from '@/components/Create/BasicIconModal/style';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
-// import { SetStateAction, Dispatch } from 'react';
 import BasicIcon from './BasicIcon';
-// import { useState } from 'react';
-// import { onConvertToFile } from '@/utils/fileConvertor';
+import React from 'react';
 
 type BasicIconModalPropsType = {
   isOpen: boolean;
   modalClose: () => void;
-  setSelectIconIdx: any;
-  selectIconIdx: any;
+  setSelectIconIdx: React.Dispatch<number>;
+  selectIconIdx: number;
 };
 
+//프로필 기본 이미지 선택
 const BasicIconModal = ({
   isOpen,
   modalClose,
@@ -22,12 +21,7 @@ const BasicIconModal = ({
 }: BasicIconModalPropsType) => {
   const BasicIconArr = BasicIcon();
 
-  // const [selectIconIdx, setSelectIconIdx] = useState(0);
-
   const onSubmitImg = () => {
-    // setIsBasicImg(true, selectIconIdx);
-    // const fileImg = onConvertToFile(BasicIconArr[selectIconIdx], 'spaceImage');
-    // setFileImg(fileImg);
     modalClose();
   };
 

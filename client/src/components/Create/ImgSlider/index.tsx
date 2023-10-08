@@ -50,7 +50,11 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
             <SwiperSlide key={Math.floor(Math.random() * 1000)}>
               <img
                 src={img}
-                style={{ width: '348px', height: '348px' }}
+                style={{
+                  width: '348px',
+                  height: '348px',
+                  backgroundPosition: 'center',
+                }}
                 onClick={onClickImgEditModal}
               />
             </SwiperSlide>
