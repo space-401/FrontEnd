@@ -31,7 +31,7 @@ const Pagination = (props: PaginationType) => {
     setPageState(newPage);
     movePage(newPage);
   };
-
+  console.log(pageState);
   return (
     <S.PaginationBox>
       <S.Button
@@ -50,7 +50,6 @@ const Pagination = (props: PaginationType) => {
           disabled={pageState === number}
         >
           {number}
-          <S.Select />
         </S.Button>
       ))}
       <S.Button

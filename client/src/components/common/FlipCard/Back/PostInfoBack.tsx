@@ -8,14 +8,15 @@ import { PostInfoBackPropsType } from '@type/post.type';
 const PostInfoBack = (props: PostInfoBackPropsType) => {
   const { item, size } = props;
 
-  const { placeTitle, selectedTags, postUpdatedAt, usersList } = item;
+  const { placeTitle, postTitle, selectedTags, postUpdatedAt, usersList } =
+    item;
 
   return (
     <S.Wrapper size={size}>
       <S.Shadow />
       <S.Container className={'container'} info="post">
         <div>
-          <S.PostTitle className={'title'}>{placeTitle}</S.PostTitle>
+          <S.PostTitle className={'title'}>{postTitle}</S.PostTitle>
           <S.PlaceCreateAt className={'create-time'}>
             {getFormatDate(postUpdatedAt)}
           </S.PlaceCreateAt>
