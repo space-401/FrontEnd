@@ -6,7 +6,7 @@ import S from './style';
 import { MenuToggle } from './components/Toggle';
 import MenuList from './components/MenuList';
 import SelectList from './components/component/SelectList';
-import { useAlertModalStore } from '@/store/modal';
+import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 
 const CreateSelectBox = (props: SelectBoxProps) => {
   const {
@@ -18,18 +18,6 @@ const CreateSelectBox = (props: SelectBoxProps) => {
     setState,
     selectState,
   } = props;
-
-  // useEffect(() => {
-  //   if (labelName === '사용자') {
-  //     id = state.userId;
-  //     title = state.userName;
-  //     imgUrl = state.imgUrl;
-  //   } else {
-  //     // id = state.userId;
-  //     // title = state.userName;
-  //     // imgUrl = state.imgUrl;
-  //   }
-  // }, []);
 
   const [select, setSelect] = useState<selectType[]>(
     selectState ? selectState : []
@@ -46,34 +34,37 @@ const CreateSelectBox = (props: SelectBoxProps) => {
     setSearchValue('');
   };
 
+  const alertOpen = useAlertModalOpen();
+
+  const alertModalOpen = () => {
+    alertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '아무것도 입력하지 않았습니다.',
+    });
+  };
+
   const EnterCheck = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'Enter') {
-      if (searchValue.trim().length === 0)
-        return ModalOpen({
-          width: 300,
-          alertMessage: '확인',
-          alertTitle: '아무것도 입력하지 않았습니다.',
-        });
-
+      alertModalOpen();
+    }
+    if (searchValue.trim().length === 0)
       if (
         select.filter((prevState) => prevState.title === searchValue).length !==
         0
       )
         return;
-      setSelect((prevState) => [
-        ...prevState,
-        { id: Math.floor(Math.random() * 10000), title: searchValue },
-      ]);
-      return setSearchValue('');
-    }
+    setSelect((prevState) => [
+      ...prevState,
+      { id: Math.floor(Math.random() * 10000), title: searchValue },
+    ]);
+    return setSearchValue('');
   };
 
   const placeholder =
     labelName == '사용자'
       ? '함께한 친구들을 추가해 주세요'
       : '태그를 지정해 주세요';
-
-  const { ModalOpen } = useAlertModalStore((state) => state);
 
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
@@ -127,5 +118,4 @@ const CreateSelectBox = (props: SelectBoxProps) => {
     </S.Wrapper>
   );
 };
-
 export default CreateSelectBox;

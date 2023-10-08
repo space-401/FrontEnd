@@ -25,11 +25,6 @@ const ContentWrapper = styled.div`
   ${flexCenter};
   flex-direction: column;
 `;
-// const IconWrapper = styled.div`
-//   left: 24px;
-//   position: absolute;
-//   top: 24px;
-// `;
 
 const S = {
   Wrapper,

@@ -11,10 +11,9 @@ const Wrapper = styled.div`
 `;
 
 const Form = styled.form<{ width: number }>`
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
+  z-index: 10000;
   ${flexCenter}
   flex-direction: column;
-  ${flexCenter}
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,6 +23,7 @@ const Form = styled.form<{ width: number }>`
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;
+  width: 570px;
 `;
 
 const Header = styled.div`
@@ -94,13 +94,23 @@ const PhotoContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+const CropperContainer = styled.div`
+  position: relative;
+  height: 550px;
+  width: 550px;
+  overflow: 'hidden';
 `;
 
+const NoImgBackground = styled.div`
+  width: 550px;
+  height: 550px;
+  background-color: ${({ theme }) => theme.COLOR['gray-4']};
+`;
+
+const FlexCenter = styled.div`
+  ${flexCenter}
+  margin-top:500px;
+`;
 const S = {
   Wrapper,
   Form,
@@ -110,7 +120,9 @@ const S = {
   MultiViewWrapper,
   SmallPhotoBox,
   PhotoContainer,
-  FlexContainer,
+  CropperContainer,
+  NoImgBackground,
+  FlexCenter,
 };
 
 export default S;

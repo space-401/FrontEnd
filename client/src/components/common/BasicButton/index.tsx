@@ -15,9 +15,14 @@ export type BasicButtonProps = {
 
 const BasicButton = ({
   children,
+  onClick,
   ...props
 }: PropsWithChildren<BasicButtonProps>) => {
-  return <S.ButtonWrapper {...props}>{children}</S.ButtonWrapper>;
+  return (
+    <S.ButtonWrapper onClick={onClick} {...props}>
+      {children}
+    </S.ButtonWrapper>
+  );
 };
 
 export default BasicButton;
