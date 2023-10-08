@@ -55,7 +55,6 @@ const UserCount = styled.div`
   border-radius: 5px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY['IBM Plex Sans KR']};
   font-size: 17px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 `;
