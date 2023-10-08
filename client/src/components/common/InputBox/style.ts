@@ -20,7 +20,9 @@ interface IInput {
   paddingLeft?: number;
   hasIcon: boolean;
   readOnly: boolean;
+  autocomplete: 'on' | 'off';
 }
+
 const Input = styled.input<IInput>`
   width: ${({ hasIcon, paddingLeft }) =>
     hasIcon && !paddingLeft

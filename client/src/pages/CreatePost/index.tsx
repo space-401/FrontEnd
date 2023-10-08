@@ -41,7 +41,7 @@ const CreatePost = () => {
   const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
 
   console.log(spaceInfo);
-  const { imgUrl, title: spaceName, tagList, userList } = spaceInfo!;
+  const { imgUrl, spaceTitle, tagList, userList } = spaceInfo!;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -201,7 +201,7 @@ const CreatePost = () => {
 
   return (
     <S.Wrapper>
-      {isOpen && (
+      {isOpen && imageArr.images.length && (
         <ImagesEditModal
           imageArr={imageArr}
           setImageArr={setImageArr}
@@ -261,7 +261,7 @@ const CreatePost = () => {
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
           <CircleIcon size={48} img_url={imgUrl}></CircleIcon>
-          <div>{spaceName}</div>
+          <div>{spaceTitle}</div>
         </S.SpaceInfoContainer>
 
         {/*게시글 제목*/}
@@ -273,14 +273,14 @@ const CreatePost = () => {
             width={inputWidth}
             height={60}
             readonly={false}
-            placeholder="16자 이내의 제목을 입력해 주세요"
+            placeholder="30자 이내의 제목을 입력해 주세요"
             type="text"
-            maxLength={16}
+            maxLength={30}
             children={
               <CharacterCounter
                 color={theme.COLOR['gray-3']}
                 currentNum={title.length}
-                maxNum={16}
+                maxNum={30}
               />
             }
             paddingLeft={65}

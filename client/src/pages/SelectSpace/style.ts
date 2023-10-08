@@ -12,6 +12,7 @@ const Img = styled.div`
   height: 143px;
   background-color: white;
   margin: 0 auto;
+  background-position: center;
 `;
 
 const SpaceContainer = styled.div`

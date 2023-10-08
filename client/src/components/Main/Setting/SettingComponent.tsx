@@ -3,7 +3,7 @@ import { UserType } from '@type/post.type';
 import { Box } from '@mui/material';
 import S from '@components/Main/Setting/style';
 import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
-import UserList from '@components/Main/Setting/components/UserList';
+import UserList from '@/components/common/UserSettingModal/UserList';
 import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
 import { toastColorMessage } from '@utils/toastMessage';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';

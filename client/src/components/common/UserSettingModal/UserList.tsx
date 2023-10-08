@@ -1,5 +1,5 @@
 import { UserType } from '@type/post.type';
-import { S } from '@components/Main/Setting/components/style';
+// import { S } from '@components/Main/Setting/components/style';
 import Avatar from '@mui/material/Avatar';
 import { ReactComponent as CrownSvg } from '@assets/svg/crown.svg';
 import { ReactComponent as MoreSvg } from '@assets/svg/moreIcon.svg';
@@ -8,7 +8,8 @@ import { ReactComponent as MoreUserSvg } from '@assets/svg/mainSetting/user.svg'
 import { ReactComponent as MoreLogOutSvg } from '@assets/svg/mainSetting/logout.svg';
 import { useState } from 'react';
 import { Modal } from '@mui/material';
-import ProfileAndUserNameChangeModal from '@components/Main/Setting/components/ProfileAndUserNameChangeModal';
+import UserSettingModal from '.';
+import { S } from '@/components/common/UserSettingModal/style';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { toastColorMessage } from '@utils/toastMessage';
 
@@ -66,7 +67,7 @@ const UserList = (props: UserListPropsType) => {
           },
         }}
       >
-        <ProfileAndUserNameChangeModal
+        <UserSettingModal
           ModalClose={() => {
             ChangeUserModal(false);
           }}
