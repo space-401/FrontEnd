@@ -22,7 +22,7 @@ const IconContainer = styled.div`
 `;
 const ContentWrapper = styled.div`
   width: 1200px;
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
 `;
 // const IconWrapper = styled.div`

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 30px 48px;
+  padding: 30px 30px 0;
+  margin-bottom: -20px;
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
+  top: -20px;
   left: 0;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
   border-radius: 30px;
@@ -34,7 +36,6 @@ const UndefinedPostText = styled.div`
   margin-top: 32px;
   color: ${({ theme }) => theme.COLOR.white};
   text-align: center;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: normal;
@@ -45,7 +46,6 @@ const UndefinedShareText = styled.div`
 
   color: ${({ theme }) => theme.COLOR.orange};
   text-align: center;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-700']};
 `;
@@ -53,9 +53,9 @@ const UndefinedShareText = styled.div`
 const PostList = styled.div`
   margin: 31px 0;
   display: flex;
-  gap: 4px;
+  gap: 6px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   @media ${({ theme }) => theme.DEVICE.tablet} {
   }
 `;

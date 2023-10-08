@@ -121,8 +121,7 @@ export const theme = {
     'LEVEL-6': 60,
   },
   FONT_FAMILY: {
-    'Pretendard': 'Pretendard',
-    'IBM Plex Sans KR': 'IBM Plex Sans KR',
+    Pretendard: 'Pretendard',
   },
   DEVICE: {
     mobile: `screen and (max-width: 580px)`,

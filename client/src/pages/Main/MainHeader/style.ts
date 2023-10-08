@@ -4,10 +4,11 @@ const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
-  height: 400px;
-  border-radius: 30px;
-
-  padding: 26px 40px 0 40px;
+  height: 420px;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  background: ${({ theme }) => theme.COLOR['gray-6']};
+  padding: 26px 30px 0;
 `;
 
 const HeaderHeader = styled.section`
@@ -46,17 +47,15 @@ const Image = styled.div<{ imgUrl: string }>`
 const MainInfo = styled.div``;
 const MainTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   line-height: 0.8;
-  font-size: 88px;
+  font-size: 70px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
 `;
 const Description = styled.div`
-  margin-top: 24px;
-  font-family: ${({ theme }) => theme.FONT_FAMILY['IBM Plex Sans KR']};
+  margin-top: 30px;
   width: 37.625rem;
   line-height: 1.6rem;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-size: 14px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   overflow: auto;
   color: ${({ theme }) => theme.COLOR.white};
@@ -114,7 +113,6 @@ const ControlButton = styled.div<{
   }
 
   text-align: center;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   line-height: 150%;

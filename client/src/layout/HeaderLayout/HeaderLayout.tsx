@@ -60,6 +60,7 @@ const HeaderLayout = () => {
           <S.ContentWrapper>
             <Outlet />
           </S.ContentWrapper>
+          <S.Footer />
         </S.ContentLayOut>
       </S.Wrapper>
     </>

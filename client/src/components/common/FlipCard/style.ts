@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 const Flip = styled.div<{ size: 'small' | 'medium' | 'big' }>`
   position: relative;
-  width: ${({ size }) =>
-    size === 'big' ? '273px' : size === 'medium' ? '230px' : '172px'};
+  width: ${({ size }) => (size === 'big' ? '280px' : '230px')};
   cursor: pointer;
 `;
 

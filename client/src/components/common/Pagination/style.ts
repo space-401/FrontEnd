@@ -17,38 +17,26 @@ const Button = styled.button<{
 }>`
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   position: relative;
-  width: ${({ width }) => (width ? width : '')}px;
+  width: ${({ width }) => (width ? width + 'px' : '')};
   min-width: 16px;
   height: 20px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   justify-content: center;
-  align-items: center;
-  border: none;
   cursor: pointer;
-  border-radius: 12px;
   color: ${({ theme }) => theme.COLOR.white};
+  padding-bottom: ${({ select }) => (select ? '' : '3px')};
+  border-bottom: ${({ select, theme }) =>
+    select ? `3px solid ${theme.COLOR.skyblue}` : ''};
 
   div {
     display: ${({ select }) => (select ? 'block' : 'none')};
   }
 `;
 
-const Select = styled.div`
-  position: absolute;
-  transform: translate(-50%, 50%);
-  left: 50%;
-  bottom: -10px;
-  width: 100%;
-  height: 3px;
-  background: ${({ theme }) => theme.COLOR.skyblue};
-  border-radius: 10px;
-`;
-
 const S = {
   PaginationBox,
   Button,
-  Select,
 };
 
 export default S;

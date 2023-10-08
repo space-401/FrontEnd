@@ -57,12 +57,14 @@ const LeftSection = (props: LeftSectionPropType) => {
           />
         );
       })}
-      <Pagination
-        movePage={movePage}
-        total={total}
-        page={page}
-        itemLength={itemLength}
-      />
+      <S.PaginationBox>
+        <Pagination
+          movePage={movePage}
+          total={total}
+          page={page}
+          itemLength={itemLength}
+        />
+      </S.PaginationBox>
     </S.Wrapper>
   );
 };

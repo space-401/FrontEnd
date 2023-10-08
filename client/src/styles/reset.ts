@@ -4,6 +4,7 @@ const resetStyle = css`
   * {
     margin: 0;
     padding: 0;
+    font-family: Pretendard;
   }
 
   body::-webkit-scrollbar {
@@ -62,6 +63,17 @@ const resetStyle = css`
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .progress-bar {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #000 4.9%, #56c9cc 68.68%);
+    transform-origin: 0;
   }
 `;
 

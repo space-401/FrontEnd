@@ -10,49 +10,6 @@ const Wrapper = styled.div<{ size: FlipCardSize }>`
   background-size: cover;
   backdrop-filter: blur(2px);
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
-
-  ${({ size, theme }) =>
-    size !== 'big' &&
-    `div {
-    z-index: ${theme.Z_INDEX['LEVEL-3']} !important;
-  }
-
-  .container {
-    padding: 24px !important;
-  }
-
-  .title {
-    font-size: ${theme.TEXT_SIZE['text-28']} !important;
-    font-weight: ${theme.FONT_WEIGHT['WEIGHT-500']} !important;
-    line-height: 140%;
-    margin-top: 8px !important;
-  }
-
-  .create-time {
-    font-size: ${theme.TEXT_SIZE['text-12']} !important;
-    margin-bottom: 16px !important;
-  }
-
-  .chip {
-    font-size: ${theme.TEXT_SIZE['text-14']} !important;
-    font-weight: ${theme.FONT_WEIGHT['WEIGHT-400']} !important;
-    height: 24px !important;
-  }
-
-  .place-span {
-    font-size: ${theme.TEXT_SIZE['text-18']} !important;
-    font-weight: ${theme.FONT_WEIGHT['WEIGHT-400']} !important;
-  }
-
-  .info-bottom {
-    line-height: ${theme.TEXT_SIZE['text-28']} !important;
-
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis !important;
-      max-width: 98px !important;
-    }
-  }`}
 `;
 
 const Container = styled.div<{ info: 'space' | 'post' }>`
@@ -60,7 +17,7 @@ const Container = styled.div<{ info: 'space' | 'post' }>`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   width: 100%;
   height: 100%;
-  padding: 24px;
+  padding: 28px 15px 16px;
   display: flex;
   flex-direction: column;
   align-items: ${({ info }) => (info === 'space' ? 'center' : 'none')};
@@ -83,10 +40,9 @@ const Shadow = styled.div`
 `;
 
 const PostTitle = styled.div`
-  margin-top: 16px;
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-  width: 80%;
+  width: 100%;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   line-height: 130%;
   white-space: pre-line;
@@ -97,7 +53,7 @@ const PlaceCreateAt = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 130%;
-  margin: 16px 0 24px;
+  margin: 5px 0 15px;
 `;
 
 const PlaceTitle = styled.div`
@@ -110,9 +66,9 @@ const PlaceTitle = styled.div`
   gap: 4.2px;
 
   span {
-    max-width: 170px;
+    max-width: 107px;
     flex-wrap: nowrap;
-    ${omitText}
+    ${omitText};
   }
 `;
 
@@ -121,14 +77,16 @@ const ChipBox = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 8px;
-  overflow: auto;
+
+  max-height: 60px;
+  overflow: hidden;
 
   .chip {
     color: ${({ theme }) => theme.COLOR.white};
     border: 1px solid ${({ theme }) => theme.COLOR.white};
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
     font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
-    padding: 4px 6px;
+    padding: 4px 12px;
     height: 26px;
 
     span {
