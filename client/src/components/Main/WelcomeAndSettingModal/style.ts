@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
-  flex-direction: column;
-  ${flexCenter}
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,10 +11,26 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
   color: ${({ theme }) => theme.COLOR.white};
-  gap: 30px;
   font-family: Pretendard;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 
+const SectionWrapper = styled.div<{ gap: number }>`
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  gap: ${({ gap }) => gap}px;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+`;
+const ButtonContainer = styled.div`
+  ${flexCenter}
+  position: absolute;
+  bottom: 25px;
+  height: 104px;
+  width: 370px;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+`;
 const IconBoxWrapper = styled.div`
   display: flex;
   gap: 16px;
@@ -164,7 +178,8 @@ const MenuButton = styled.div`
 
 const DeleteIconBox = styled.div`
   position: absolute;
-  right: 16px;
+  right: 24px;
+  top: 24px;
   cursor: pointer;
 `;
 const SubmitButton = styled.div`
@@ -202,10 +217,12 @@ const ImgBox = styled.div`
   width: 240px;
   height: 240px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.COLOR['gray-3']};
+  background-color: ${({ theme }) => theme.COLOR['gray-6']};
 `;
 
 const ImgButton = styled.div`
+  padding-top: 10px;
+  ${flexCenter}
   cursor: pointer;
   color: ${({ theme }) => theme.COLOR.skyblue};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
@@ -213,9 +230,17 @@ const ImgButton = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 
-const NickName = styled.div`
-  padding-bottom: 20px;
-  color: ${({ theme }) => theme.COLOR.white};
+const Label = styled.label<{ isAlert: boolean }>`
+  color: ${({ theme, isAlert }) =>
+    isAlert ? theme.COLOR.orange : theme.COLOR.white};
+  height: 0px;
+  font-size: 14px;
+`;
+
+const ButtonText = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  font-style: normal;
 `;
 
 export const M = {
@@ -224,19 +249,21 @@ export const M = {
   ProfileImg,
   ImgButton,
   ImgBox,
-  NickName,
+  Label,
 };
 
 export const S = {
+  SectionWrapper,
   UserContainer,
   UserName,
   SettingIconBox,
   BackClickBlock,
   MenuGroup,
   MenuButton,
-  //
+  ButtonContainer,
   Wrapper,
   IconBox,
+  ButtonText,
   Text,
   IconBoxWrapper,
   SubmitBtnWrapper,

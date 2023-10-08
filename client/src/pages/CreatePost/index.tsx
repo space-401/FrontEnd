@@ -273,14 +273,14 @@ const CreatePost = () => {
             width={inputWidth}
             height={60}
             readonly={false}
-            placeholder="16자 이내의 제목을 입력해 주세요"
+            placeholder="30자 이내의 제목을 입력해 주세요"
             type="text"
-            maxLength={16}
+            maxLength={30}
             children={
               <CharacterCounter
                 color={theme.COLOR['gray-3']}
                 currentNum={title.length}
-                maxNum={16}
+                maxNum={30}
               />
             }
             paddingLeft={65}

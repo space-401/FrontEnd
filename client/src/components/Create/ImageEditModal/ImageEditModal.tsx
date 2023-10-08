@@ -58,6 +58,7 @@ const ImgEditModal = ({
     }
     getCropData(cropperRef1);
     //기존에 크롭한 이미지가 존재하면 없애줌
+    setImageModalOpen!(false);
   };
 
   //모달 취소
@@ -70,7 +71,7 @@ const ImgEditModal = ({
     <Box tabIndex={-1}>
       <S.Form width={cropperWidth}>
         <S.Header>
-          <button onClick={onClickCancelModal}>취소</button>
+          <button onClick={onClickCancelModal}>삭제</button>
           <button
             onClick={(e) => {
               onSaveAllEditImg(e);

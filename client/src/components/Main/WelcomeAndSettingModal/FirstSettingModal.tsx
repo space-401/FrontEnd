@@ -1,48 +1,31 @@
-import { Modal, Box } from '@mui/material';
 import { S, M } from '@/components/Main/WelcomeAndSettingModal/style';
-import BasicButton from '@/components/common/BasicButton';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { ImageArrType } from '@/types/image.type';
 import { ImageType } from '@/types/image.type';
-import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import InputBox from '@/components/common/InputBox';
 import CharacterCounter from '@/components/Create/CharacterCounter';
-import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
+import { ReactComponent as ProfileMock } from '@assets/svg/profileMock.svg';
 
-type FirstSettingModalProps = {
-  isOpen: boolean;
-  modalClose: () => void;
+type SettingModalProps = {
+  setImageModalOpen: any;
+  setImageArr: any;
+  imageArr: any;
+  nickName: string;
+  setNickName: React.Dispatch<string>;
 };
 
 //프로필 기본 이미지 선택
-const FirstSettingModal = ({ isOpen }: FirstSettingModalProps) => {
-  // const SubmitAction = () => {
-  //   // 변경 완료시 누를 버튼
-  //   const newUserInfo = {
-  //     id: user?.id,
-  //     img: imageArr.convertedImages[0],
-  //     nickname: nickName,
-  //     token_key: user?.token_key,
-  //   };
-  //   console.log(newUserInfo);
-  //   modalClose();
-  // };
-
-  //이미지 저장하는 곳
-  const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: [],
-    cropImages: [],
-    convertedImages: [],
-  });
-
-  const [nickName, setNickName] = useState('');
-
-  const [isImageModalOpen, setImageModalOpen] = useState(false);
-
-  // const onToggleModal = () => {
-  //   setImageModalOpen((prev) => !prev);
-  // };
+const FirstSettingModal = ({
+  setImageModalOpen,
+  setImageArr,
+  imageArr,
+  nickName,
+  setNickName,
+}: SettingModalProps) => {
+  const onOpenModal = () => {
+    setImageModalOpen(true);
+  };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -64,6 +47,7 @@ const FirstSettingModal = ({ isOpen }: FirstSettingModalProps) => {
           id: 1,
           img: result,
         };
+        console.log('newObj', newObj);
         setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
       }
     };
@@ -74,99 +58,67 @@ const FirstSettingModal = ({ isOpen }: FirstSettingModalProps) => {
   const onClickImgEditModal = () => {
     if (inputRef.current) {
       inputRef.current.click();
+      onOpenModal();
     }
-    setImageModalOpen(true);
   };
-
-  {
-    if (isImageModalOpen) {
-      return (
-        <ImgEditModal
-          imageArr={imageArr}
-          setImageArr={setImageArr}
-          isCircle={true}
-        />
-      );
-    }
-  }
   return (
-    <Modal
-      open={isOpen}
-      slotProps={{
-        backdrop: {
-          sx: {
-            backgroundColor: 'rgba(0,0,0,0.6)',
-          },
-        },
-      }}
-    >
-      <Box tabIndex={-1}>
-        <S.Wrapper>
-          <S.Text weight={600}>Welcome to Kkiri!</S.Text>
-          <S.DetailText>
-            스페이스에서 사용할 닉네임과
-            <br /> 프로필을 지정해 주세요.
-          </S.DetailText>
-
-          {imageArr.images.length == 0 ? (
-            <M.ImgBox onClick={onClickImgEditModal}>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={(e) => {
-                  handleFileChange(e);
-                }}
-                ref={inputRef}
-              />
-              <PhotoIcon />
-              {/* <BasicBox
-                width={160}
-                borderradius={80}
-                onClick={onClickImgEditModal}
-              >
-                <PhotoIcon />
-              </BasicBox> */}
-            </M.ImgBox>
-          ) : (
-            <M.ImgBox>
-              <CircleIcon size={240} img_url={imageArr.cropImages[0]} />
-            </M.ImgBox>
-          )}
-          <M.NickName>닉네임</M.NickName>
-          <InputBox
-            height={60}
-            width={250}
-            maxLength={10}
-            paddingLeft={60}
-            type="text"
-            onChange={(e) => {
-              onChange(e);
+    <S.SectionWrapper gap={25}>
+      <S.DetailText>
+        스페이스에서 사용할 프로필과
+        <br /> 닉네임을 지정해 주세요.
+      </S.DetailText>
+      {imageArr.images.length == 0 ? (
+        <>
+          <M.Label isAlert={false}>프로필 사진</M.Label>
+          <M.ImgBox onClick={onClickImgEditModal}>
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                handleFileChange(e);
+              }}
+              ref={inputRef}
+            />
+            <ProfileMock />
+          </M.ImgBox>
+        </>
+      ) : (
+        <>
+          <M.Label isAlert={false}>프로필 사진</M.Label>
+          <M.ImgBox
+            onClick={() => {
+              setImageModalOpen(true);
             }}
-            backgroundColor={'#5F5F5F'}
-            name="nickname"
-            readonly={false}
-            children={
-              <CharacterCounter
-                color={'white'}
-                // color={({ theme }) => theme.COLOR['gray-3']}
-                currentNum={nickName.length}
-                maxNum={10}
-              />
-            }
+          >
+            <CircleIcon size={240} img_url={imageArr.cropImages[0]} />
+          </M.ImgBox>
+        </>
+      )}
+      <M.Label isAlert={false}>닉네임</M.Label>
+      <InputBox
+        placeholder="닉네임을 입력하세요"
+        height={60}
+        width={250}
+        maxLength={10}
+        paddingLeft={60}
+        type="text"
+        onChange={(e) => {
+          onChange(e);
+        }}
+        backgroundColor={'#5F5F5F'}
+        name="nickname"
+        readonly={false}
+        children={
+          <CharacterCounter
+            color={'white'}
+            currentNum={nickName.length}
+            maxNum={10}
           />
-          {/* {imageArr.images.length > 0 && (
-            <M.ImgButton onClick={onToggleModal}>완료</M.ImgButton>
-          )} */}
-          <S.Text weight={400}>{nickName}</S.Text>
-          <BasicButton width={212} height={48} onClick={() => {}}>
-            <S.FlexContainer>
-              <div>완료</div>
-            </S.FlexContainer>
-          </BasicButton>
-        </S.Wrapper>
-      </Box>
-    </Modal>
+        }
+      />
+      <M.Label isAlert={true}>중복된 닉네임입니다.</M.Label>
+    </S.SectionWrapper>
   );
 };
 
