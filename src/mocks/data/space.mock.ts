@@ -15,8 +15,7 @@ export const spaceInfo: SpaceInfo = {
   userList: userList,
   tagList: tagList,
   spacePw: '12345',
-  imgUrl:
-    'https://s3-alpha-sig.figma.com/img/69e5/7cd2/f6e082e1aa8e1ca7431590dfbdc116d0?Expires=1694390400&Signature=MYc2CXpsj4~59Y0mHRfwcGD-5qi-xOJuOVVJlzNzVORLqdG8Y1w-zaXVQ4k1~uN6jpy2UsAzX9BNaeGoDkBwdMo8c3KHVWYHbqMbAjmZ3eYhbrFCAxBleRQpWTSSw2sTbk~jRYViGNKBUflaxeXe2Wx316fczzy7XypApZ6kQC3deWhCUGpeJqBuDNEGe-fmQVAc4ge49pP~S74mBeydVlwss~jv3-MtgdjFxP5yNKPx533leCf5UdP8wjND7ipTfiUUE~CpULED7mdO3NQzcdui55piKmE8rfBCgCtSzLMFb6390k6Kl8fTslCvy9k22Zn0RHNEHSwvXMLdn3avpA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+  imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
 };
 /**
  * 스페이스 목록들에 대한 목 데이터
@@ -25,29 +24,25 @@ export const spaceList: OneSpaceType[] = [
   {
     spaceId: 1,
     spaceTitle: '카페좋아',
-    imgUrl:
-      'https://www.google.com/search?q=%EC%B9%B4%ED%8E%98&tbm=isch&ved=2ahUKEwiGhej4rdCBAxUEdt4KHYvPDfkQ2-cCegQIABAA&oq=%EC%B9%B4%ED%8E%98&gs_lcp=CgNpbWcQAzIICAAQgAQQsQMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6BAgjECc6BwgjEOoCECc6BAgAEANQ2QRY2Qtg_AxoAnAAeACAAXqIAZsFkgEDMC42mAEAoAEBqgELZ3dzLXdpei1pbWewAQrAAQE&sclient=img&ei=OgsXZYaAMYTs-QaLn7fIDw&bih=566&biw=707&rlz=1C5CHFA_enKR1048KR1048#imgrc=F4bk37qV7BCk3M',
+    imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
     userList: userList,
   },
   {
     spaceId: 2,
     spaceTitle: '고양이를 사랑하는 모임',
-    imgUrl:
-      'https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg',
+    imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
     userList: userList,
   },
   {
     spaceId: 3,
     spaceTitle: '404',
-    imgUrl:
-      'https://img.freepik.com/premium-vector/big-red-heart-isolated-on-white-background-vector-illustration_260787-631.jpg',
+    imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
     userList: userList,
   },
   {
     spaceId: 4,
     spaceTitle: 'music lovers',
-    imgUrl:
-      'https://www.google.com/search?q=%EC%B9%B4%ED%8E%98&tbm=isch&ved=2ahUKEwiGhej4rdCBAxUEdt4KHYvPDfkQ2-cCegQIABAA&oq=%EC%B9%B4%ED%8E%98&gs_lcp=CgNpbWcQAzIICAAQgAQQsQMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6BAgjECc6BwgjEOoCECc6BAgAEANQ2QRY2Qtg_AxoAnAAeACAAXqIAZsFkgEDMC42mAEAoAEBqgELZ3dzLXdpei1pbWewAQrAAQE&sclient=img&ei=OgsXZYaAMYTs-QaLn7fIDw&bih=566&biw=707&rlz=1C5CHFA_enKR1048KR1048#imgrc=F4bk37qV7BCk3M',
+    imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
     userList: userList,
   },
 ];

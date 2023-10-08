@@ -26,7 +26,7 @@ export type SelectBoxProps = {
   /**
    * 해당 박스의 라벨을 입력해주세요
    */
-  labelName: '사용자' | '태그';
+  labelName: '사용자' | '태그' | '작성자';
   /**
    * 해당 박스를 이루는 목록을 넣어주세요
    */
