@@ -50,7 +50,7 @@ const UndefinedShareText = styled.div`
 `;
 
 const PostList = styled.div`
-  margin: 16px 0;
+  margin: 16px 0 24px;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
@@ -67,7 +67,7 @@ const FilterGroup = styled.div`
 
 const PaginationBox = styled.div`
   width: 300px;
-  margin: 0 auto;
+  margin: 0 auto 16px;
 `;
 
 const S = {

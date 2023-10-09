@@ -1,6 +1,6 @@
 import S from '@pages/Main/style';
 import MainHeader from '@pages/Main/MainHeader/MainHeader';
-import PostList from '@pages/Main/PostList/PostList';
+import MainBody from '@pages/Main/MainBody/MainBody';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
@@ -13,7 +13,7 @@ const MainPage = () => {
   const [selectState, setSelectState] = useState(false);
   const spaceId = useParams().spaceId!;
   const spaceInfo = useSpaceInfoQuery(spaceId).spaceInfo!;
-  const { userList, tagList, isFirst, spaceTitle, imgUrl } = spaceInfo!;
+  const { userList, tagList, isFirst, spaceTitle, imgUrl } = spaceInfo;
   const [isImageModalOpen, setImageModalOpen] = useState(false);
 
   const {
@@ -27,7 +27,7 @@ const MainPage = () => {
     if (isFirst) {
       WelcomeModalOpen();
     }
-  }, []);
+  }, [isFirst, WelcomeModalOpen]);
 
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -68,7 +68,7 @@ const MainPage = () => {
           selectState={selectState}
           setSelectState={setSelectState}
         />
-        <PostList
+        <MainBody
           userList={userList}
           tagList={tagList}
           selectState={selectState}

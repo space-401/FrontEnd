@@ -38,7 +38,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         />
       </SettingModal>
       <S.HeaderHeader>
-        <Avatars size={25} users={userList} max={4} />
+        <Avatars fontSize={13} size={25} users={userList} max={4} />
         <S.ButtonGroup>
           <S.ControlButton
             onClick={() => setIsOpen(true)}

@@ -16,6 +16,7 @@ import ConfirmInner from '@modal/Confirm';
 import AlertInner from '@modal/Alert';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
+import HeaderSkeleton from '@layout/HeaderLayout/Skeleton';
 
 const HeaderLayOut = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =
@@ -54,7 +55,7 @@ const HeaderLayOut = () => {
           </Suspense>
         </DetailModal>
         <S.ContentLayOut>
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<HeaderSkeleton />}>
             <Header />
           </Suspense>
           <S.ContentWrapper>

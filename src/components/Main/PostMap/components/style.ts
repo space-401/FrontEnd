@@ -84,7 +84,7 @@ export const M = {
 
 const CardImg = styled.div<{ imgUrl: string }>`
   width: 107.5px;
-  height: 107.5px;
+  aspect-ratio: 1/1;
   background: url(${({ imgUrl }) => imgUrl});
   background-size: cover;
   border-radius: 15px;

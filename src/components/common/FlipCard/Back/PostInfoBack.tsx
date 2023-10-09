@@ -4,6 +4,7 @@ import { getFormatDate } from '@utils/formatter';
 import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
 import { PostInfoBackPropsType } from '@type/post.type';
+import { v4 as uuid } from 'uuid';
 
 const PostInfoBack = (props: PostInfoBackPropsType) => {
   const { item, size } = props;
@@ -24,7 +25,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             {selectedTags.map((place) => (
               <Chip
                 className={'chip'}
-                key={place.tagId}
+                key={uuid()}
                 label={'#' + place.tagTitle}
                 variant="outlined"
               />
