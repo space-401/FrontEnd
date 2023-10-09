@@ -7,14 +7,15 @@ import { ReactComponent as DeleteIcon } from '@assets/svg/whiteDeleteIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { ReactComponent as GoArrowIcon } from '@/assets/svg/goArrowIcon.svg';
 import { useWelcomeModal } from '@/store/modal';
+import { ImageArrType } from '@/types/image.type';
 
 type WelcomeAndSettingProps = {
   spaceTitle: string;
   imgUrl: string;
-  setImageArr: any;
-  imageArr: any;
-  isImageModalOpen: any;
-  setImageModalOpen: any;
+  setImageArr: React.Dispatch<ImageArrType>;
+  imageArr: ImageArrType;
+  isImageModalOpen: boolean;
+  setImageModalOpen: React.Dispatch<boolean>;
 };
 
 //프로필 기본 이미지 선택

@@ -74,7 +74,7 @@ const ImagesEditModal = ({
   };
 
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = async (e: any) => {
+  const onSaveAllEditImg = async (e: React.MouseEvent) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌

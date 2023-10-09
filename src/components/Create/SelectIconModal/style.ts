@@ -13,7 +13,11 @@ const Wrapper = styled.div`
   border-radius: 20px;
 `;
 
-const Content = styled.div<{ fontSize: number; lightgrey: boolean }>`
+const Content = styled.div<{
+  fontSize: number;
+  lightgrey: boolean;
+  onClick?: () => void;
+}>`
   width: 100%;
   ${flexCenter}
   padding-bottom:24px;

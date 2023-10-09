@@ -12,7 +12,7 @@ import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import BasicButton from '@/components/common/BasicButton';
 
 type SettinModalProps = {
-  ModalClose: any;
+  ModalClose: () => void;
 };
 
 //프로필 수정 모달
