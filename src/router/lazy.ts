@@ -1,4 +1,4 @@
-import {lazy} from "react";
+import { lazy } from 'react';
 
 export const MyPage = lazy(() => import('@pages/MyPage'));
 export const MainPage = lazy(() => import('@pages/Main'));
