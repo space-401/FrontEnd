@@ -1,15 +1,14 @@
 import styled from 'styled-components';
+import { omitText } from '@styles/common';
 
 const Title = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 
 const Description = styled.div<{ margin_top: number }>`
   color: ${({ theme }) => theme.COLOR['gray-2']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   margin-top: ${({ margin_top }) => margin_top}px;
@@ -32,7 +31,6 @@ const IconBox = styled.div<{ margin_top: number }>`
 
 const WhiteSpan = styled.span`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 `;
@@ -48,6 +46,7 @@ const ButtonGroup = styled.div`
   margin-top: 40px;
   gap: 24px;
   justify-content: flex-end;
+  margin-bottom: 200px;
 `;
 const Button = styled.div`
   cursor: pointer;
@@ -65,11 +64,132 @@ const Button = styled.div`
 
   color: ${({ theme }) => theme.COLOR['gray-1']};
   text-align: center;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 
+const TotalCount = styled.span`
+  color: ${({ theme }) => theme.COLOR.skyblue};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+`;
+
+const Table = styled.table`
+  width: 100%;
+  padding: 16px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
+
+  tr:first-child {
+    padding: 10px;
+    color: ${({ theme }) => theme.COLOR['gray-3']};
+    background: ${({ theme }) => theme.COLOR['gray-7']};
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    grid-template-columns: 397px 140px 140px;
+  }
+
+  tr {
+    padding: 15px 10px;
+    color: ${({ theme }) => theme.COLOR.white};
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    grid-template-columns: 397px 140px 140px;
+    border-bottom: 0.625px solid ${({ theme }) => theme.COLOR['gray-4']};
+    position: relative;
+    z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
+
+    td {
+      width: 100%;
+      ${omitText};
+      text-overflow: ellipsis;
+    }
+
+    td:first-child {
+      cursor: pointer;
+    }
+  }
+`;
+
+const PaginationBox = styled.div`
+  margin: 24px auto 0;
+  width: 120px;
+`;
+
+const AvatarBox = styled.div`
+  display: flex;
+`;
+
+const SettingButton = styled.div`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  transform: translate(50%, -50%);
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
+const BackClickBlock = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  content: ' ';
+  background: transparent;
+`;
+
+const MenuGroup = styled.div<{ isOpen: boolean }>`
+  right: -70px;
+  top: 20px;
+  position: absolute;
+  width: 102px;
+  display: ${({ isOpen }) => (isOpen ? 'inline-flex' : 'none')};
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border-radius: 10px;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
+  background: ${({ theme }) => theme.COLOR['gray-4']};
+  box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
+`;
+const MenuButton = styled.div`
+  position: relative;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
+  cursor: pointer;
+  display: flex;
+  padding: 4px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.COLOR.white};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+
+  border-radius: 5px;
+
+  &:hover {
+    background: ${({ theme }) => theme.COLOR['gray-6']};
+  }
+
+  transition: background 0.2s;
+`;
 export const A = {
   Title,
   Description,
@@ -80,23 +200,56 @@ export const A = {
   IConBox,
   ButtonGroup,
   Button,
+  TotalCount,
+  Table,
+  PaginationBox,
+  AvatarBox,
+  SettingButton,
+  BackClickBlock,
+  MenuGroup,
+  MenuButton,
 };
-const BWrapper = styled.div`
-  margin-bottom: 40px;
-`;
-const FlipCardList = styled.div`
-  margin: 40px 0 40px 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 4px;
-  flex-wrap: wrap;
-  justify-content: center;
-  justify-items: center;
+
+const BTable = styled.table`
+  width: 100%;
+  padding: 16px;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  position: relative;
+
+  tr {
+    padding: 15px 10px;
+    color: ${({ theme }) => theme.COLOR.white};
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    grid-template-columns: 397px 140px 140px 16px;
+    border-bottom: 0.625px solid ${({ theme }) => theme.COLOR['gray-4']};
+    position: relative;
+
+    td {
+      width: 100%;
+      text-overflow: ellipsis;
+    }
+
+    td:first-child {
+      cursor: pointer;
+      ${omitText};
+    }
+  }
+
+  tr:first-child {
+    padding: 10px;
+    color: ${({ theme }) => theme.COLOR['gray-3']};
+    background: ${({ theme }) => theme.COLOR['gray-7']};
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    grid-template-columns: 397px 140px 140px 16px;
+  }
 `;
 
 export const B = {
-  BWrapper,
-  FlipCardList,
+  BTable,
 };
 
 const HeaderButtonGroup = styled.div`
@@ -108,13 +261,12 @@ const HeaderButtonGroup = styled.div`
 const MButton = styled.div<{ select: boolean }>`
   cursor: pointer;
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
   padding-bottom: 16px;
 
   border-bottom: ${({ select, theme }) =>
-    select ? `5px solid ${theme.COLOR.skyblue}` : ''};
+    select ? `2px solid ${theme.COLOR.skyblue}` : ''};
 `;
 
 export const M = {
@@ -122,15 +274,12 @@ export const M = {
   MButton,
 };
 
-const CommentList = styled.div``;
-const MyCommentList = styled.div``;
 const OneCommentList = styled.div`
   cursor: pointer;
   display: flex;
-  padding: 40px 0;
+  padding: 20px 0;
   justify-content: space-between;
 `;
-const LeftCard = styled.div``;
 const UserCard = styled.div`
   display: flex;
   gap: 8px;
@@ -141,36 +290,33 @@ const UserCard = styled.div`
 `;
 const UserNameSpan = styled.span`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: 10px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 const CardInfo = styled.div`
   display: flex;
-  width: 1103px;
+  width: 675px;
   flex-direction: column;
   gap: 8px;
 `;
 const PostContent = styled.div`
   white-space: pre;
   color: ${({ theme }) => theme.COLOR['gray-2']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%;
+  ${omitText};
 `;
 const Comment = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%;
 `;
 
 const SpaceTitle = styled.span`
   color: ${({ theme }) => theme.COLOR['gray-2']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
 
@@ -185,14 +331,12 @@ const RightCard = styled.div<{ img_url: string }>`
 
 const PostTitle = styled.span`
   color: ${({ theme }) => theme.COLOR['gray-2']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-20']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-700']};
 `;
 
 const CreateAt = styled.span`
   color: ${({ theme }) => theme.COLOR['gray-2']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
@@ -201,7 +345,6 @@ const CardBottom = styled.div`
   display: flex;
   gap: 21px;
   color: ${({ theme }) => theme.COLOR['gray-2']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
@@ -226,11 +369,8 @@ const CommentInfoBox = styled.div`
 `;
 
 export const CL = {
-  CommentList,
-  MyCommentList,
   OneCommentList,
   PostTitle,
-  LeftCard,
   PostContent,
   UserCard,
   UserNameSpan,

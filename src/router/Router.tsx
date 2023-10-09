@@ -49,7 +49,11 @@ const router = createBrowserRouter([
           },
           {
             path: PATH.POST_UPDATE(':spaceId', ':postId'),
-            element: <CreatePost />,
+            element: (
+              <Suspense fallback={<></>}>
+                <CreatePost />
+              </Suspense>
+            ),
           },
           {
             path: PATH.SPACE_CREATE,
@@ -57,11 +61,11 @@ const router = createBrowserRouter([
           },
           {
             path: PATH.SPACE_UPDATE(':spaceId'),
-            element: <CreateSpace />,
-          },
-          {
-            path: PATH.SPACE_UPDATE(':spaceId'),
-            element: <CreateSpace />,
+            element: (
+              <Suspense fallback={<></>}>
+                <CreateSpace />
+              </Suspense>
+            ),
           },
           {
             path: PATH.INVITE,

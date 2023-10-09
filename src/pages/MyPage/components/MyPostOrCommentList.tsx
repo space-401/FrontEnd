@@ -16,7 +16,7 @@ const MyPostOrCommentList = () => {
           내가 쓴 댓글
         </M.MButton>
       </M.HeaderButtonGroup>
-      <A.Bar margin_top={55} />
+      <A.Bar margin_top={41} />
       <>
         {isMyPost ? (
           <Suspense fallback={<></>}>

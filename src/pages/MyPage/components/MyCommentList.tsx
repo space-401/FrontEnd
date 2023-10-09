@@ -22,7 +22,7 @@ const MyCommentList = () => {
 
   return (
     <>
-      <CL.CommentList>
+      <>
         {myCommentList.map((item) => {
           const {
             mainImgUrl,
@@ -41,40 +41,38 @@ const MyCommentList = () => {
                 onClick={() => detailModalOpen(postId)}
                 key={commentId}
               >
-                <CL.LeftCard>
-                  <CL.CardInfo>
-                    <CL.PostTitle>{postTitle}</CL.PostTitle>
-                    <CL.PostContent>{postContent}</CL.PostContent>
-                    <CL.CardBottom>
-                      <CL.SpaceTitle>{spaceTitle}</CL.SpaceTitle>
-                      <CL.CreateAt>{getFormatDate(postCreateDate)}</CL.CreateAt>
-                    </CL.CardBottom>
-                    <CL.CommentInfo>
-                      <CL.CommentIconBox>
-                        <FeatherSvg />
-                      </CL.CommentIconBox>
-                      <CL.CommentInfoBox>
-                        <CL.Comment>{commentContent}</CL.Comment>
-                        <CL.CreateAt>
-                          {timeHelper(commentCreateDate)}
-                        </CL.CreateAt>
-                      </CL.CommentInfoBox>
-                    </CL.CommentInfo>
-                  </CL.CardInfo>
-                </CL.LeftCard>
+                <CL.CardInfo>
+                  <CL.PostTitle>{postTitle}</CL.PostTitle>
+                  <CL.PostContent>{postContent}</CL.PostContent>
+                  <CL.CardBottom>
+                    <CL.SpaceTitle>{spaceTitle}</CL.SpaceTitle>
+                    <CL.CreateAt>{getFormatDate(postCreateDate)}</CL.CreateAt>
+                  </CL.CardBottom>
+                  <CL.CommentInfo>
+                    <CL.CommentIconBox>
+                      <FeatherSvg />
+                    </CL.CommentIconBox>
+                    <CL.CommentInfoBox>
+                      <CL.Comment>{commentContent}</CL.Comment>
+                      <CL.CreateAt>{timeHelper(commentCreateDate)}</CL.CreateAt>
+                    </CL.CommentInfoBox>
+                  </CL.CommentInfo>
+                </CL.CardInfo>
                 <CL.RightCard img_url={mainImgUrl} />
               </CL.OneCommentList>
               <A.Bar margin_top={0} />
             </>
           );
         })}
-      </CL.CommentList>
-      <Pagination
-        movePage={movePage}
-        page={page}
-        total={total}
-        itemLength={itemLength}
-      />
+      </>
+      <A.PaginationBox>
+        <Pagination
+          movePage={movePage}
+          page={page}
+          total={total}
+          itemLength={itemLength}
+        />
+      </A.PaginationBox>
     </>
   );
 };
