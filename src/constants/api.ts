@@ -5,7 +5,7 @@ export const NETWORK = {
   TIMEOUT: 10000,
 };
 
-export const AXIOS_BASE_URL =  '/';
+export const AXIOS_BASE_URL = '/';
 
 export const END_POINTS = {
   USER: '/user',

@@ -25,6 +25,8 @@ import { UseBookMarkMutation } from '@hooks/api/post/useBookMarkMutation';
 import { toastColorMessage } from '@utils/toastMessage';
 import { useDetailModalStore } from '@store/modal';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '@constants/path';
 
 const DetailInner = React.forwardRef(
   (_, forwardRef: React.ForwardedRef<HTMLDivElement>) => {
@@ -49,7 +51,7 @@ const DetailInner = React.forwardRef(
       value: '',
       isBookMark: false,
     });
-    const currentURL = window.location.href;
+    const navigate = useNavigate();
 
     const mapContainerRef = useRef(null);
     const commentContainerRef = useRef(null);
@@ -64,6 +66,7 @@ const DetailInner = React.forwardRef(
     const confirmModalOpen = useConfirmModalOpen();
 
     const {
+      spaceId,
       imgUrl,
       userList,
       placeTitle,
@@ -180,11 +183,11 @@ const DetailInner = React.forwardRef(
                           }))
                         }
                       />
-                      <S.MenuGroup>
+                      <S.MenuGroup width={113} isOpen={state.settingIsOpen}>
                         <S.MenuButton
                           onClick={() => {
-                            window.location.href =
-                              currentURL + `/post/${postId}`;
+                            navigate(PATH.POST_UPDATE(spaceId, postId));
+                            ModalClose();
                           }}
                         >
                           게시글 편집

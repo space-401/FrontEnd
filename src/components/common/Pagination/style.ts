@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const PaginationBox = styled.div`
-  margin-top: 6px;
   display: flex;
   justify-content: space-evenly;
 
@@ -18,7 +17,7 @@ const Button = styled.button<{
   display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   position: relative;
   width: ${({ width }) => (width ? width + 'px' : '')};
-  min-width: 16px;
+  min-width: 20px;
   height: 20px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
