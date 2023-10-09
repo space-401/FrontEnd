@@ -17,7 +17,7 @@ import AlertInner from '@modal/Alert';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 
-const HeaderLayout = () => {
+const HeaderLayOut = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =
     useDetailModalStore((state) => state);
   const { ModalClose: ConfirmModalClose, isOpen: ConfirmIsOpen } =
@@ -66,4 +66,4 @@ const HeaderLayout = () => {
     </>
   );
 };
-export default HeaderLayout;
+export default HeaderLayOut;
