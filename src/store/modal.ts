@@ -83,12 +83,6 @@ export const useWelcomeModal = create<ModalType>((setState) => ({
   ModalClose: () => setState(() => ({ isOpen: false })),
 }));
 
-export const useFirstsSettingModal = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
 export const mainUserSettingModal = create<ModalType>((setState) => ({
   isOpen: false,
   ModalOpen: () => setState(() => ({ isOpen: true })),

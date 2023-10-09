@@ -6,11 +6,9 @@ import { useState } from 'react';
 import { ReactComponent as DeleteIcon } from '@assets/svg/whiteDeleteIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { ReactComponent as GoArrowIcon } from '@/assets/svg/goArrowIcon.svg';
+import { useWelcomeModal } from '@/store/modal';
 
 type WelcomeAndSettingProps = {
-  isOpen: boolean;
-  modalClose: () => void;
-  SettingModalOpen: () => void;
   spaceTitle: string;
   imgUrl: string;
   setImageArr: any;
@@ -21,15 +19,16 @@ type WelcomeAndSettingProps = {
 
 //프로필 기본 이미지 선택
 const WelcomeAndSettingModal = ({
-  isOpen,
   spaceTitle,
   imgUrl,
   setImageArr,
   imageArr,
-  modalClose,
   setImageModalOpen,
 }: WelcomeAndSettingProps) => {
   const [modalNum, setModalNum] = useState(1);
+
+  const { isOpen: isWelcomeModalOpen, ModalClose: WelcomeModalClose } =
+    useWelcomeModal();
 
   //세팅 모달로 이동
   const onMoveSettingModal = () => {
@@ -41,7 +40,7 @@ const WelcomeAndSettingModal = ({
 
   return (
     <Modal
-      open={isOpen}
+      open={isWelcomeModalOpen}
       slotProps={{
         backdrop: {
           sx: {
@@ -52,7 +51,7 @@ const WelcomeAndSettingModal = ({
     >
       <Box tabIndex={-1}>
         <M.DeleteIconBox>
-          <DeleteIcon onClick={modalClose} />
+          <DeleteIcon onClick={WelcomeModalClose} />
         </M.DeleteIconBox>
         <S.Wrapper>
           {modalNum ? (
