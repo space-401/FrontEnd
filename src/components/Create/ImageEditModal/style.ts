@@ -23,7 +23,7 @@ const Form = styled.form<{ width: number }>`
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  width: 570px;
+  width: 500px;
 `;
 
 const Header = styled.div`

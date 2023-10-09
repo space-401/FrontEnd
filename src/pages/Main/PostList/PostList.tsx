@@ -139,6 +139,7 @@ const PostList = (props: PostListPropType) => {
           height={28}
           borderRadius={5}
           setDateInfo={setSelectedDate}
+          fontSize={10}
         />
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}

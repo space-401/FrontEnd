@@ -24,7 +24,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             {selectedTags.map((place) => (
               <Chip
                 className={'chip'}
-                key={place.tagId}
+                key={Math.floor(Math.random() * 1000)}
                 label={'#' + place.tagTitle}
                 variant="outlined"
               />
