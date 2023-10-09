@@ -3,7 +3,7 @@ import PrivateRoute from '@router/Private';
 import { PATH } from '@constants/path';
 import { Suspense } from 'react';
 
-import * as Lazy from '@router/lazy'
+import * as Lazy from '@router/lazy';
 
 const router = createBrowserRouter([
   {
