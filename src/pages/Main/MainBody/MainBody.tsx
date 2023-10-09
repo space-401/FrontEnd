@@ -1,11 +1,11 @@
 import DefaultImage from '@assets/png/DefaultImg.png';
 import FlipCard from '@components/common/FlipCard/FlipCard';
-import S from '@pages/Main/PostList/style';
+import S from '@pages/Main/MainBody/style';
 import { Suspense, useEffect, useState } from 'react';
 import type { selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
 import MainSearchBox from '@components/Main/SearchBox';
-import KaKaoMap from '@components/Main/PostMap';
+import PostMap from '@components/Main/PostMap';
 import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
 import { useSearchParams } from 'react-router-dom';
@@ -13,6 +13,7 @@ import { useSpacePostListQuery } from '@hooks/api/space/useSpacePostListQuery';
 import { PostListFilterProps } from '@type/main.type';
 import { UserType, TagType, DateInfoType } from '@/types/post.type';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import PostMapSkeleton from '@components/Main/PostMap/PostMap.Skeleton';
 
 type PostListPropType = {
   userList: UserType[];
@@ -20,7 +21,7 @@ type PostListPropType = {
   selectState: boolean;
   spaceId: string;
 };
-const PostList = (props: PostListPropType) => {
+const MainBody = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [state, setState] = useState<PostListFilterProps>({
@@ -201,8 +202,8 @@ const PostList = (props: PostListPropType) => {
         </>
       )}
       {selectState && (
-        <Suspense fallback={<></>}>
-          <KaKaoMap
+        <Suspense fallback={<PostMapSkeleton />}>
+          <PostMap
             page={curPage}
             total={total}
             itemLength={itemLength}
@@ -214,4 +215,4 @@ const PostList = (props: PostListPropType) => {
   );
 };
 
-export default PostList;
+export default MainBody;

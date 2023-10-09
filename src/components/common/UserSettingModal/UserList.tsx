@@ -1,5 +1,4 @@
 import { UserType } from '@type/post.type';
-// import { S } from '@components/Main/Setting/components/style';
 import Avatar from '@mui/material/Avatar';
 import { ReactComponent as CrownSvg } from '@assets/svg/crown.svg';
 import { ReactComponent as MoreSvg } from '@assets/svg/moreIcon.svg';
@@ -81,7 +80,7 @@ const UserList = (props: UserListPropsType) => {
             width: '48px',
             height: '48px',
             background: 'white',
-            border: '1.5px solid rgba(0,0,0,50%)',
+            border: 'none',
           }}
         />
       </div>

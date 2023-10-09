@@ -1,5 +1,7 @@
 import { A, M } from '@pages/MyPage/components/style';
 import { Suspense, useState } from 'react';
+import MyPostListSkeleton from '@pages/MyPage/Skeleton/MyPostList.skeleton';
+import MyCommentListSkeleton from '@pages/MyPage/Skeleton/MyCommentList.skeleton';
 import MyPostList from '@pages/MyPage/components/MyPostList';
 import MyCommentList from '@pages/MyPage/components/MyCommentList';
 
@@ -19,11 +21,11 @@ const MyPostOrCommentList = () => {
       <A.Bar margin_top={41} />
       <>
         {isMyPost ? (
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<MyPostListSkeleton />}>
             <MyPostList />
           </Suspense>
         ) : (
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<MyCommentListSkeleton />}>
             <MyCommentList />
           </Suspense>
         )}

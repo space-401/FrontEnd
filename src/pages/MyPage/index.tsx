@@ -4,8 +4,10 @@ import { ReactComponent as BookMarkSvg } from '@assets/svg/bookmark/empty.svg';
 import { ReactComponent as FolderSvg } from '@assets/svg/folder.svg';
 import { Suspense, useState } from 'react';
 import AccountManagement from '@pages/MyPage/components/AccountManagement';
-import BookMarkList from '@pages/MyPage/components/BookMarkList';
 import MyPostOrCommentList from '@pages/MyPage/components/MyPostOrCommentList';
+import BookMarkListSkeleton from '@pages/MyPage/Skeleton/BookMarkList.skeleton';
+import BookMarkList from '@pages/MyPage/components/BookMarkList';
+import AccountManagementSkeleton from '@pages/MyPage/Skeleton/AccountManagement.skeleton';
 
 const MyPageLayOut = () => {
   const [state, setState] = useState(0);
@@ -29,12 +31,12 @@ const MyPageLayOut = () => {
       </S.Wrapper>
       <S.Container>
         {state === 0 && (
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<AccountManagementSkeleton />}>
             <AccountManagement />
           </Suspense>
         )}
         {state === 1 && (
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<BookMarkListSkeleton />}>
             <BookMarkList />
           </Suspense>
         )}
