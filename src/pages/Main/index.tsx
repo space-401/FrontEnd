@@ -38,7 +38,6 @@ const MainPage = () => {
       {/*처음 스페이스 방문시 보이는 모달*/}
       {isWelcomeModalOpen && (
         <WelcomeAndSettingModal
-          // SettingModalOpen={WelcomeModalClose}
           spaceTitle={spaceTitle}
           imgUrl={imgUrl}
           setImageArr={setImageArr}
