@@ -16,7 +16,8 @@
       "@utils/*": ["src/utils/*"],
       "@story/*": ["src/stories/*"],
       "@store/*": ["src/store/*"],
-      "@modal/*": ["src/modal/*"]
+      "@modal/*": ["src/modal/*"],
+      "@layout/*": ["src/layout/*"]
     }
   }
 }

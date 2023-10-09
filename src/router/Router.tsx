@@ -1,17 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
-import CreateSpace from '@/pages/CreateSpace';
-import CreatePost from '@/pages/CreatePost';
-import MainPage from '@/pages/Main';
-import InviteCode from '@pages/InviteCode';
-import MyPage from '@pages/MyPage';
 import PrivateRoute from '@router/Private';
-import Landing from '@/pages/Landing';
-import SelectSpace from '@/pages/SelectSpace';
-import HeaderLayout from '@/layout/HeaderLayout/HeaderLayout';
-import Auth from '@/pages/Auth';
 import { PATH } from '@constants/path';
 import { Suspense } from 'react';
-import BackLayout from '@/layout/BackLayout';
+
+import * as Lazy from '@router/lazy';
 
 const router = createBrowserRouter([
   {
@@ -19,57 +11,81 @@ const router = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        element: <HeaderLayout />,
+        element: <Lazy.HeaderLayout />,
         children: [
           /*스페이스*/
           {
             path: PATH.HOME,
-            element: <SelectSpace />,
+            element: (
+              <Suspense fallback={<></>}>
+                <Lazy.SelectSpacePage />
+              </Suspense>
+            ),
           },
           {
             path: PATH.SPACE_MAIN(':spaceId'),
             element: (
               <Suspense fallback={<></>}>
-                <MainPage />
+                <Lazy.MainPage />
               </Suspense>
             ),
           },
           {
             path: PATH.USER_INFO,
-            element: <MyPage />,
+            element: (
+              <Suspense fallback={<></>}>
+                <Lazy.MyPage />
+              </Suspense>
+            ),
           },
         ],
       },
       {
-        element: <BackLayout />,
+        element: (
+          <Suspense fallback={<></>}>
+            <Lazy.BackLayout />
+          </Suspense>
+        ),
         children: [
           {
             path: PATH.POST_CREATE(':spaceId'),
-            element: <CreatePost />,
+            element: (
+              <Suspense fallback={<></>}>
+                <Lazy.CreatePostPage />
+              </Suspense>
+            ),
           },
           {
             path: PATH.POST_UPDATE(':spaceId', ':postId'),
             element: (
               <Suspense fallback={<></>}>
-                <CreatePost />
+                <Lazy.CreatePostPage />
               </Suspense>
             ),
           },
           {
             path: PATH.SPACE_CREATE,
-            element: <CreateSpace />,
+            element: (
+              <Suspense fallback={<></>}>
+                <Lazy.CreateSpacePage />
+              </Suspense>
+            ),
           },
           {
             path: PATH.SPACE_UPDATE(':spaceId'),
             element: (
               <Suspense fallback={<></>}>
-                <CreateSpace />
+                <Lazy.CreateSpacePage />
               </Suspense>
             ),
           },
           {
             path: PATH.INVITE,
-            element: <InviteCode />,
+            element: (
+              <Suspense fallback={<></>}>
+                <Lazy.InviteCodePage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -77,12 +93,19 @@ const router = createBrowserRouter([
   },
   {
     path: PATH.LANDING,
-    element: <Landing />,
+    element: (
+      <Suspense fallback={<></>}>
+        <Lazy.LandingPage />
+      </Suspense>
+    ),
   },
   {
     path: PATH.AUTH,
-    element: <Auth />,
+    element: (
+      <Suspense fallback={<></>}>
+        <Lazy.AuthPage />
+      </Suspense>
+    ),
   },
 ]);
-
 export default router;
