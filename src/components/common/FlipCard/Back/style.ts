@@ -33,7 +33,7 @@ const Shadow = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']} !important;
   background: black;
   opacity: 0.5;

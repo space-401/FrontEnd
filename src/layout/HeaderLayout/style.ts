@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
+import {flexCenter} from '@/styles/common';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${({ theme }) => theme.COLOR['gray-7']};
+  background-color: ${({theme}) => theme.COLOR['gray-7']};
   min-height: 100vh;
 `;
 
@@ -24,13 +24,14 @@ const IconGroup = styled.div`
 `;
 
 const IconBox = styled.div<{ padding?: number }>`
-  background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  background-color: ${({theme}) => theme.COLOR['gray-6']};
   justify-content: center;
   height: inherit;
   width: 120px;
   display: flex;
   align-items: center;
   border-radius: 10px;
+
   svg {
     cursor: pointer;
   }
@@ -40,7 +41,7 @@ const SpaceBox = styled.div`
   width: 100%;
   max-width: calc(100% - 256px);
   height: inherit;
-  background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  background-color: ${({theme}) => theme.COLOR['gray-6']};
   ${flexCenter};
   border-radius: 10px;
 `;
@@ -71,11 +72,10 @@ const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
   width: 24px;
   border-radius: 8px;
   aspect-ratio: 1/1;
-  background-image: url(${({ img_url }) => img_url});
+  background-image: url(${({img_url}) => img_url});
   cursor: pointer;
   background-size: cover;
-  box-shadow: ${({ isCurrentSpace }) =>
-    isCurrentSpace && ' 0px 0px 10px 2px #c2c2c2'};
+  border: ${({isCurrentSpace, theme}) => isCurrentSpace ? `1px solid ${theme.COLOR.skyblue}` : ''};
 `;
 
 const ContentLayOut = styled.div`
@@ -89,17 +89,17 @@ const Footer = styled.footer`
 `;
 
 const S = {
-  SpaceIcon,
-  SpaceIconBox,
-  HeaderWrapper,
-  Wrapper,
-  IconBox,
-  IconGroup,
-  SpaceBox,
-  ContentWrapper,
-  Container,
-  ContentLayOut,
-  Footer,
+    SpaceIcon,
+    SpaceIconBox,
+    HeaderWrapper,
+    Wrapper,
+    IconBox,
+    IconGroup,
+    SpaceBox,
+    ContentWrapper,
+    Container,
+    ContentLayOut,
+    Footer,
 };
 
 export default S;

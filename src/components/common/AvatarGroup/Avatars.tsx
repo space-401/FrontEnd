@@ -16,10 +16,11 @@ type PropType = {
    * 최대 몇 개의 사진을 보여줄지 결정합니다.
    */
   max: number;
+  fontSize?: number;
 };
 
-const Avatars = ({ users, size, max }: PropType) => (
-  <S.Wrapper>
+const Avatars = ({ users, size, max, fontSize = 15 }: PropType) => (
+  <S.Wrapper fontSize={fontSize}>
     <AvatarGroup
       max={max}
       sx={{

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const MyPageWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
-  min-height: calc(100vh - 82px);
+  min-height: 80vh;
   padding-bottom: 16px;
   display: flex;
   gap: 7px;
@@ -14,7 +14,8 @@ const Container = styled.section`
   height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   border-radius: 30px;
-  padding: 80px 150px 0;
+  padding: 48px 105px 0;
+  margin-bottom: 16px;
 `;
 
 const Wrapper = styled.nav`
@@ -37,13 +38,10 @@ const NavButton = styled.div<{ select: boolean }>`
   display: flex;
   width: 163px;
   align-items: center;
-  gap: 16px;
-  border-radius: 15px;
+  padding: 10px 16px;
+  gap: 8px;
+  border-radius: 10px;
   background: ${({ theme, select }) => (select ? theme.COLOR['gray-5'] : '')};
-
-  svg {
-    margin-left: 10px;
-  }
 `;
 
 const NavSpan = styled.span`
