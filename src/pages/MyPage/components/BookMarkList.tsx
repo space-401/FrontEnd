@@ -1,9 +1,9 @@
-import { A, B } from '@pages/MyPage/components/style';
+import { A } from '@pages/MyPage/components/style';
 import { useState } from 'react';
-import FlipCard from '@components/common/FlipCard/FlipCard';
 import Pagination from '@components/common/Pagination';
 import { useBookMarkListQuery } from '@hooks/api/user/useBookMarkListQuery';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import { getFormatDate } from '@utils/formatter';
 
 const BookMarkList = () => {
   const [curPage, setCurPage] = useState(0);
@@ -19,33 +19,46 @@ const BookMarkList = () => {
   };
 
   return (
-    <B.BWrapper>
-      <A.Title>북마크</A.Title>
+    <>
+      <A.Title>
+        북마크 <A.TotalCount>{`(${total})`}</A.TotalCount>
+      </A.Title>
       <A.Description margin_top={16}>
-        {'회원님이 저장한 게시글입니다.'}
+        회원님이 저장한 게시글입니다.
       </A.Description>
       <A.Bar margin_top={16} />
-      <B.FlipCardList>
-        {bookMarkList.map((item) => {
-          const { postId, imgUrl } = item;
+      <A.Table>
+        <tr>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+        </tr>
+        {bookMarkList.map((v) => {
+          const {
+            postWriterName,
+            postCreatedAt,
+            postId,
+            postTitle,
+            postCommentCount,
+          } = v;
           return (
-            <FlipCard
-              size={'small'}
-              onClick={() => detailModalOpen(postId)}
-              key={postId}
-              imgUrl={imgUrl[0]}
-              item={item}
-            />
+            <tr key={postId + postCommentCount + postCreatedAt}>
+              <td onClick={() => detailModalOpen(postId)}>{postTitle}</td>
+              <td>{postWriterName}</td>
+              <td>{getFormatDate(postCreatedAt)}</td>
+            </tr>
           );
         })}
-      </B.FlipCardList>
-      <Pagination
-        movePage={movePage}
-        page={page}
-        total={total}
-        itemLength={itemLength}
-      />
-    </B.BWrapper>
+      </A.Table>
+      <A.PaginationBox>
+        <Pagination
+          movePage={movePage}
+          page={page}
+          total={total}
+          itemLength={itemLength}
+        />
+      </A.PaginationBox>
+    </>
   );
 };
 

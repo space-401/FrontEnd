@@ -19,6 +19,7 @@ export type DateInfoType = {
 
 //포스트 타입
 export type PostDetailType = {
+  spaceId: number;
   isMine: boolean;
   postTitle: string;
   postDescription: string;

@@ -1,9 +1,9 @@
-import FlipCard from '@components/common/FlipCard/FlipCard';
-import { B } from '@pages/MyPage/components/style';
+import { A, B } from '@pages/MyPage/components/style';
 import { useState } from 'react';
 import Pagination from '@components/common/Pagination';
 import { useMyPostListQuery } from '@hooks/api/user/useMyPostListQuery';
-import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import OneMyPostList from '@pages/MyPage/components/OneMyPostList';
+import { v4 } from 'uuid';
 
 const MyPostList = () => {
   const [curPage, setCurPage] = useState<number>(0);
@@ -12,34 +12,31 @@ const MyPostList = () => {
 
   const { myPostList, total, page, itemLength } = MyPostListData!;
 
-  const detailModalOpen = useDetailModalOpen();
-
   const movePage = (number: number) => {
     setCurPage(number);
   };
 
   return (
     <>
-      <B.FlipCardList>
-        {myPostList.map((item) => {
-          const { postId, imgUrl } = item;
-          return (
-            <FlipCard
-              size={'small'}
-              onClick={() => detailModalOpen(postId)}
-              key={postId}
-              imgUrl={imgUrl[0]}
-              item={item}
-            />
-          );
-        })}
-      </B.FlipCardList>
-      <Pagination
-        movePage={movePage}
-        page={page}
-        total={total}
-        itemLength={itemLength}
-      />
+      <B.BTable>
+        <tr>
+          <th>제목</th>
+          <th>작성일</th>
+          <th>함께한 친구</th>
+          <th></th>
+        </tr>
+        {myPostList.map((v) => (
+          <OneMyPostList key={v4()} items={v} />
+        ))}
+      </B.BTable>
+      <A.PaginationBox>
+        <Pagination
+          movePage={movePage}
+          page={page}
+          total={total}
+          itemLength={itemLength}
+        />
+      </A.PaginationBox>
     </>
   );
 };

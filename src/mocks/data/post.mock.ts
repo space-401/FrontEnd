@@ -288,6 +288,7 @@ export const postList: SpacePostType[] = [
  * 포스트 게시물의 상세 목 데이터
  */
 export const postDetail: PostDetailType = {
+  spaceId: 1,
   isMine: true,
   position: {
     lat: 37.27943075229118,
