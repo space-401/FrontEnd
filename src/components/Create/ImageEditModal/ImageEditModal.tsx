@@ -1,6 +1,6 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@components/Create/ImageEditModal/Cropper';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
 import { Box, Modal } from '@mui/material';
@@ -62,7 +62,7 @@ const ImgEditModal = ({
 
   return isCircle ? (
     <Box tabIndex={-1}>
-      <S.Form width={cropperWidth}>
+      <S.Form>
         <S.Header>
           <button onClick={onClickCancelModal}>삭제</button>
           <button
@@ -77,8 +77,8 @@ const ImgEditModal = ({
         <div
           style={{
             position: 'relative',
-            height: cropperWidth,
-            width: cropperWidth,
+            height: cropperWidth + 'px',
+            width: cropperWidth + 'px',
           }}
         >
           <div
@@ -126,7 +126,7 @@ const ImgEditModal = ({
       }}
     >
       <Box tabIndex={-1}>
-        <S.Form width={cropperWidth}>
+        <S.Form>
           <S.Header>
             <button onClick={onClickCancelModal}>취소</button>
             <button
@@ -141,8 +141,8 @@ const ImgEditModal = ({
           <div
             style={{
               position: 'relative',
-              height: cropperWidth,
-              width: cropperWidth,
+              height: cropperWidth + 'px',
+              width: cropperWidth + 'px',
               overflow: 'hidden',
             }}
           >

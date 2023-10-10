@@ -80,7 +80,7 @@ const Table = styled.table`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
 
-  tr:first-child {
+  thead tr:first-child {
     padding: 10px;
     color: ${({ theme }) => theme.COLOR['gray-3']};
     background: ${({ theme }) => theme.COLOR['gray-7']};
@@ -231,13 +231,13 @@ const BTable = styled.table`
       text-overflow: ellipsis;
     }
 
-    td:first-child {
+    thead tr td:first-child {
       cursor: pointer;
       ${omitText};
     }
   }
 
-  tr:first-child {
+  thead tr:first-child {
     padding: 10px;
     color: ${({ theme }) => theme.COLOR['gray-3']};
     background: ${({ theme }) => theme.COLOR['gray-7']};

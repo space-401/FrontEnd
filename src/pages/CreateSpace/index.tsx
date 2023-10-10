@@ -209,6 +209,8 @@ const CreateSpace = () => {
       {/*사진 편집 모달*/}
       {isPhotoModalOpen && imageArr.images.length && (
         <ImgEditModal
+          // 임시로 넣은 setImageModalOpen
+          setImageModalOpen={() => {}}
           isCircle={false}
           imageArr={imageArr}
           setImageArr={setImageArr}
