@@ -10,12 +10,11 @@ type PropsType = {
 };
 
 const ImageCropper = ({ image, myRef, width }: PropsType) => {
+  console.log('너비', width);
   return (
     <div
       style={{
         position: 'relative',
-        padding: '10px',
-        left: '15px',
       }}
     >
       <Cropper

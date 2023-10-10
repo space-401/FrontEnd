@@ -9,7 +9,7 @@ import '@components/Create/ImgSlider/style.css';
 
 type SliderProps = {
   images: string[];
-  onClickImgEditModal: any;
+  onClickImgEditModal: () => void;
 };
 
 const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
