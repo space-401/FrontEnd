@@ -9,7 +9,7 @@ import '@components/Create/ImgSlider/style.css';
 
 type SliderProps = {
   images: string[];
-  onClickImgEditModal: any;
+  onClickImgEditModal: () => void;
 };
 
 const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
@@ -50,6 +50,7 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
             <SwiperSlide key={Math.floor(Math.random() * 1000)}>
               <img
                 src={img}
+                alt={img}
                 style={{
                   width: '348px',
                   height: '348px',

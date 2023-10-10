@@ -3,7 +3,7 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   flex-direction: column;
-  ${flexCenter}
+  ${flexCenter};
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,9 +13,13 @@ const Wrapper = styled.div`
   border-radius: 20px;
 `;
 
-const Content = styled.div<{ fontSize: number; lightgrey: boolean }>`
+const Content = styled.div<{
+  fontSize: number;
+  lightgrey: boolean;
+  onClick?: () => void;
+}>`
   width: 100%;
-  ${flexCenter}
+  ${flexCenter};
   padding-bottom:24px;
   padding-top: 24px;
   border-bottom: 1px solid var(--grey-4, #5f5f5f);

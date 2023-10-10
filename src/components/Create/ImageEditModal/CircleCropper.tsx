@@ -1,6 +1,6 @@
 import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import '@components/Create/ImageEditModal/CircleCropper.module.css';
+import '@components/Create/ImageEditModal/Cropper.css';
 
 type PropsType = {
   image: string;
