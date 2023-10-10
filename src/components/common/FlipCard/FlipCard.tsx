@@ -37,7 +37,7 @@ const FlipCard = (
     <>
       <S.Flip size={size} onClick={onClick}>
         <S.Card img={imgUrl} borderRadius={borderRadius} />
-        <S.Hover img={imgUrl}>
+        <S.Hover img={imgUrl} borderRadius={borderRadius}>
           {isPostInfo(item) ? (
             <PostInfoBack size={size} item={item} />
           ) : (
