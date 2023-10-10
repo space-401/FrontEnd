@@ -151,7 +151,7 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
-        <S.Form width={cropperWidth}>
+        <S.Form >
           <PrevBtn
             style={{
               position: 'absolute',
@@ -186,8 +186,8 @@ const ImagesEditModal = ({
           <div
             style={{
               position: 'relative',
-              height: cropperWidth+'px',
-              width: cropperWidth+'px',
+              height: cropperWidth + 'px',
+              width: cropperWidth + 'px',
               overflow: 'hidden',
               padding: 10,
             }}

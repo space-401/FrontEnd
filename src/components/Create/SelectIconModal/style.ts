@@ -20,7 +20,7 @@ const Content = styled.div<{
 }>`
   width: 100%;
   ${flexCenter};
-  padding-bottom:24px;
+  padding-bottom: 24px;
   padding-top: 24px;
   border-bottom: 1px solid var(--grey-4, #5f5f5f);
   color: ${({ theme }) => theme.COLOR.white};
