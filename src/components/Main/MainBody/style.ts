@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FLIP_CARD } from '@constants/policy';
 
 const Wrapper = styled.div`
   padding: 24px 24px 0;
@@ -22,6 +23,10 @@ const UndefinedList = styled.div`
   text-align: center;
 
   svg {
+    width: ${FLIP_CARD.SIZE.BIG}px;
+    aspect-ratio: 1/1;
+    border-radius: ${FLIP_CARD.BORDER_RADIUS.BIG}px;
+    border: 1px solid #4e4f55;
     margin-top: 102px;
   }
 `;
