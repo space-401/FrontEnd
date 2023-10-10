@@ -8,5 +8,5 @@ export const BackLayout = lazy(() => import('@layout/BackLayout'));
 export const AuthPage = lazy(() => import('@pages/Auth'));
 export const HeaderLayout = lazy(() => import('@layout/HeaderLayout'));
 export const SelectSpacePage = lazy(() => import('@pages/SelectSpace'));
-export const LandingPage = lazy(() => import('@pages/Landing'));
+export const SignPage = lazy(() => import('src/pages/Sign'));
 export const InviteCodePage = lazy(() => import('@pages/InviteCode'));

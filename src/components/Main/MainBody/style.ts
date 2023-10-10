@@ -50,7 +50,7 @@ const UndefinedShareText = styled.div`
 `;
 
 const PostList = styled.div`
-  margin: 16px 0 24px;
+  margin: 16px 0;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;

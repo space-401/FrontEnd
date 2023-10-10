@@ -1,4 +1,4 @@
-import { A, CL } from '@pages/MyPage/components/style';
+import { A, CL } from '@components/MyPage/style';
 import KSkeleton from '@components/common/Skeleton';
 import { v4 } from 'uuid';
 import { ReactComponent as FeatherSvg } from '@assets/svg/feather.svg';

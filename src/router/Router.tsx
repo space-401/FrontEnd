@@ -4,8 +4,8 @@ import { PATH } from '@constants/path';
 import { Suspense } from 'react';
 
 import * as Lazy from '@router/lazy';
-import MainPageSkeleton from '@pages/Main/Skeleton';
-import MyPageSkeleton from '@pages/MyPage/Skeleton';
+import MainPageSkeleton from '@components/Main/Skeleton';
+import MyPageSkeleton from '@components/MyPage/Skeleton';
 
 const router = createBrowserRouter([
   {
@@ -97,7 +97,7 @@ const router = createBrowserRouter([
     path: PATH.LANDING,
     element: (
       <Suspense fallback={<></>}>
-        <Lazy.LandingPage />
+        <Lazy.SignPage />
       </Suspense>
     ),
   },

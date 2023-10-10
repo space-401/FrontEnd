@@ -1,8 +1,8 @@
-import { A, B } from '@pages/MyPage/components/style';
+import { A, B } from '@components/MyPage/style';
 import { useState } from 'react';
 import Pagination from '@components/common/Pagination';
 import { useMyPostListQuery } from '@hooks/api/user/useMyPostListQuery';
-import OneMyPostList from '@pages/MyPage/components/OneMyPostList';
+import OneMyPostList from '@components/MyPage/OneMyPostList';
 import { v4 } from 'uuid';
 
 const MyPostList = () => {

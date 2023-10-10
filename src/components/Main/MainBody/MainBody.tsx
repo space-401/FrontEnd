@@ -1,6 +1,6 @@
 import DefaultImage from '@assets/png/DefaultImg.png';
 import FlipCard from '@components/common/FlipCard/FlipCard';
-import S from '@pages/Main/MainBody/style';
+import S from '@components/Main/MainBody/style';
 import { Suspense, useEffect, useState } from 'react';
 import type { selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
