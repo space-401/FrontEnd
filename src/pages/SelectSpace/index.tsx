@@ -40,12 +40,11 @@ const SelectSpace = () => {
                 <FlipCard
                   key={uuid()}
                   item={space}
-                  size="medium"
+                  isBig={false}
                   imgUrl={space.imgUrl}
                   onClick={() => {
                     navigate(PATH.SPACE_MAIN(space.spaceId));
                   }}
-                  borderRadius={'20px'}
                 />
               );
             })}

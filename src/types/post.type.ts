@@ -58,12 +58,12 @@ export type FlipCardSize = 'small' | 'medium' | 'big';
 
 export type PostInfoBackPropsType = {
   item: SpacePostType;
-  size: FlipCardSize;
+  isBig: boolean;
 };
 
 export type SpaceInfoBackPropsType = {
   item: OneSpaceType;
-  size: FlipCardSize;
+  isBig: boolean;
 };
 
 export type FlipType = {

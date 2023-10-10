@@ -1,21 +1,22 @@
 import styled from 'styled-components';
 import { FLIP_CARD } from '@constants/policy';
 
-const Flip = styled.div<{ size: string }>`
+const Flip = styled.div<{ isBig: boolean }>`
   position: relative;
-  width: ${({ size }) =>
-    size === 'big' ? FLIP_CARD.BIG_SIZE : FLIP_CARD.MEDIUM_SIZE};
+  width: ${({ isBig }) =>
+    isBig ? FLIP_CARD.SIZE.BIG : FLIP_CARD.SIZE.MEDIUM}px;
   cursor: pointer;
 `;
 
-const Card = styled.div<{ img: string; borderRadius?: string }>`
+const Card = styled.div<{ isBig: boolean; img: string }>`
   box-sizing: border-box;
   aspect-ratio: 1/1;
   width: 100%;
   position: relative;
   transition: 1.5s;
   transform-style: preserve-3d;
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
+  border-radius: ${({ isBig }) =>
+    isBig ? FLIP_CARD.BORDER_RADIUS.BIG : FLIP_CARD.BORDER_RADIUS.MEDIUM}px;
   overflow: hidden;
 
   background: url(${({ img }) => (img ? img : '#43444A')});
@@ -23,16 +24,18 @@ const Card = styled.div<{ img: string; borderRadius?: string }>`
   background-size: cover;
 `;
 
-const Hover = styled.div<{ img: string; borderRadius?: string }>`
+const Hover = styled.div<{ isBig: boolean; img: string }>`
   aspect-ratio: 1/1;
   top: 0;
   left: 0;
   position: absolute;
   overflow: hidden;
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
+  border-radius: ${({ isBig }) =>
+    isBig ? FLIP_CARD.BORDER_RADIUS.BIG : FLIP_CARD.BORDER_RADIUS.MEDIUM}px;
   width: 100%;
   backface-visibility: hidden;
   display: flex;
+  border: 1px solid #4e4f55;
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.COLOR.white};
