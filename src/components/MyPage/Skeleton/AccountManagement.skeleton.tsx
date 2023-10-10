@@ -1,4 +1,4 @@
-import { A } from '@pages/MyPage/components/style';
+import { A } from '@components/MyPage/style';
 import KSkeleton from '@components/common/Skeleton';
 const AccountManagementSkeleton = () => {
   return (

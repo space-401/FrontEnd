@@ -1,9 +1,9 @@
-import { A, M } from '@pages/MyPage/components/style';
+import { A, M } from '@components/MyPage/style';
 import { Suspense, useState } from 'react';
-import MyPostListSkeleton from '@pages/MyPage/Skeleton/MyPostList.skeleton';
-import MyCommentListSkeleton from '@pages/MyPage/Skeleton/MyCommentList.skeleton';
-import MyPostList from '@pages/MyPage/components/MyPostList';
-import MyCommentList from '@pages/MyPage/components/MyCommentList';
+import MyPostListSkeleton from '@components/MyPage/Skeleton/MyPostList.skeleton';
+import MyCommentListSkeleton from '@components/MyPage/Skeleton/MyCommentList.skeleton';
+import MyPostList from '@components/MyPage/MyPostList';
+import MyCommentList from '@components/MyPage/MyCommentList';
 
 const MyPostOrCommentList = () => {
   const [isMyPost, setIsMyPost] = useState(true);

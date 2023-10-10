@@ -1,4 +1,4 @@
-import { A } from '@pages/MyPage/components/style';
+import { A } from '@components/MyPage/style';
 import { ReactElement } from 'react';
 import { ReactComponent as KaKaoSvg } from '@assets/svg/api/kakao.svg';
 import { ReactComponent as NaverSvg } from '@assets/svg/api/naver.svg';

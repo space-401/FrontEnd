@@ -1,4 +1,4 @@
-import S from '@pages/Main/MainHeader/style';
+import S from '@components/Main/MainHeader/style';
 import KSkeleton from '@components/common/Skeleton';
 
 const MainHeaderSkeleton = () => {

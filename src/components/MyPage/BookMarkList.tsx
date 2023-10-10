@@ -1,4 +1,4 @@
-import { A } from '@pages/MyPage/components/style';
+import { A } from '@components/MyPage/style';
 import { useState } from 'react';
 import Pagination from '@components/common/Pagination';
 import { useBookMarkListQuery } from '@hooks/api/user/useBookMarkListQuery';

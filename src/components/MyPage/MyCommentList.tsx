@@ -1,4 +1,4 @@
-import { A, CL } from '@pages/MyPage/components/style';
+import { A, CL } from '@components/MyPage/style';
 import Pagination from '@components/common/Pagination';
 import { useState } from 'react';
 import { getFormatDate } from '@utils/formatter';
