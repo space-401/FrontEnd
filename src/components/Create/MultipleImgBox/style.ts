@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   position: absolute;
   right: 25%;
   bottom: 5%;
+  z-index: 100000;
 `;
 const Container = styled.div`
   display: flex;

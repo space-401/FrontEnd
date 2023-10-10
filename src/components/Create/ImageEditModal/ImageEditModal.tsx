@@ -11,7 +11,7 @@ type ModalType = {
   imageArr: ImageArrType;
   setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
   isCircle: boolean;
-  setImageModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setImageModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ImgEditModal = ({
@@ -27,13 +27,7 @@ const ImgEditModal = ({
   //사진 편집 모달이 열렸는지?
   const { ModalClose, isOpen } = usePhotoModalStore();
 
-  //현재 화면 크기
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
+  const cropperWidth = 500;
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any) => {
@@ -41,7 +35,6 @@ const ImgEditModal = ({
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
         .toDataURL();
-      // console.log(imageArr);
       setImageArr((prev) => ({ ...prev, cropImages: [newImage] }));
       ModalClose();
       if (isCircle) {
@@ -168,7 +161,7 @@ const ImgEditModal = ({
                   />
                 ) : (
                   <ImageCropper
-                    width={cropperWidth - 50}
+                    width={cropperWidth}
                     key={0}
                     image={imageArr.images[0].img}
                     index={0}

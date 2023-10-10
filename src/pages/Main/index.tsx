@@ -16,11 +16,8 @@ const MainPage = () => {
   const { userList, tagList, isFirst, spaceTitle, imgUrl } = spaceInfo!;
   const [isImageModalOpen, setImageModalOpen] = useState(false);
 
-  const {
-    isOpen: isWelcomeModalOpen,
-    ModalOpen: WelcomeModalOpen,
-    ModalClose: WelcomeModalClose,
-  } = useWelcomeModal();
+  const { isOpen: isWelcomeModalOpen, ModalOpen: WelcomeModalOpen } =
+    useWelcomeModal();
 
   //처음이라면 welcome 모달 열기
   useEffect(() => {
@@ -41,9 +38,6 @@ const MainPage = () => {
       {/*처음 스페이스 방문시 보이는 모달*/}
       {isWelcomeModalOpen && (
         <WelcomeAndSettingModal
-          isOpen={isWelcomeModalOpen}
-          modalClose={WelcomeModalClose}
-          SettingModalOpen={WelcomeModalClose}
           spaceTitle={spaceTitle}
           imgUrl={imgUrl}
           setImageArr={setImageArr}

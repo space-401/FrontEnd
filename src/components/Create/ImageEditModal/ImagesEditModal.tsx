@@ -56,13 +56,7 @@ const ImagesEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = imageArr.images.length;
 
-  //현재 화면 크기
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
+  const cropperWidth = 500;
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any) => {
@@ -80,7 +74,7 @@ const ImagesEditModal = ({
   };
 
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = async (e: any) => {
+  const onSaveAllEditImg = async (e: React.MouseEvent) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌

@@ -3,8 +3,8 @@ import S from '@/components/Create/SelectIconModal/style';
 
 type IconModalPropsType = {
   isOpen: boolean;
-  onClickImgEditModal: any;
-  onMoveBasicIconModal: any;
+  onClickImgEditModal: () => void;
+  onMoveBasicIconModal: () => void;
   modalClose: () => void;
 };
 
