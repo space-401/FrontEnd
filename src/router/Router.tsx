@@ -4,6 +4,8 @@ import { PATH } from '@constants/path';
 import { Suspense } from 'react';
 
 import * as Lazy from '@router/lazy';
+import MainPageSkeleton from '@pages/Main/Skeleton';
+import MyPageSkeleton from '@pages/MyPage/Skeleton';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
           {
             path: PATH.SPACE_MAIN(':spaceId'),
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<MainPageSkeleton />}>
                 <Lazy.MainPage />
               </Suspense>
             ),
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
           {
             path: PATH.USER_INFO,
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<MyPageSkeleton />}>
                 <Lazy.MyPage />
               </Suspense>
             ),

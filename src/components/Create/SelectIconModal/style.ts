@@ -3,7 +3,7 @@ import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   flex-direction: column;
-  ${flexCenter}
+  ${flexCenter};
   position: absolute;
   top: 50%;
   left: 50%;
@@ -19,8 +19,8 @@ const Content = styled.div<{
   onClick?: () => void;
 }>`
   width: 100%;
-  ${flexCenter}
-  padding-bottom:24px;
+  ${flexCenter};
+  padding-bottom: 24px;
   padding-top: 24px;
   border-bottom: 1px solid var(--grey-4, #5f5f5f);
   color: ${({ theme }) => theme.COLOR.white};

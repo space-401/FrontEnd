@@ -19,15 +19,19 @@ const MyPostList = () => {
   return (
     <>
       <B.BTable>
-        <tr>
-          <th>제목</th>
-          <th>작성일</th>
-          <th>함께한 친구</th>
-          <th></th>
-        </tr>
-        {myPostList.map((v) => (
-          <OneMyPostList key={v4()} items={v} />
-        ))}
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>함께한 친구</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {myPostList.map((v) => (
+            <OneMyPostList key={v4()} items={v} />
+          ))}
+        </tbody>
       </B.BTable>
       <A.PaginationBox>
         <Pagination

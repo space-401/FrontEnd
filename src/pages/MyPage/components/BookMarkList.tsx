@@ -28,27 +28,31 @@ const BookMarkList = () => {
       </A.Description>
       <A.Bar margin_top={16} />
       <A.Table>
-        <tr>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-        </tr>
-        {bookMarkList.map((v) => {
-          const {
-            postWriterName,
-            postCreatedAt,
-            postId,
-            postTitle,
-            postCommentCount,
-          } = v;
-          return (
-            <tr key={postId + postCommentCount + postCreatedAt}>
-              <td onClick={() => detailModalOpen(postId)}>{postTitle}</td>
-              <td>{postWriterName}</td>
-              <td>{getFormatDate(postCreatedAt)}</td>
-            </tr>
-          );
-        })}
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bookMarkList.map((v) => {
+            const {
+              postWriterName,
+              postCreatedAt,
+              postId,
+              postTitle,
+              postCommentCount,
+            } = v;
+            return (
+              <tr key={postId + postCommentCount + postCreatedAt}>
+                <td onClick={() => detailModalOpen(postId)}>{postTitle}</td>
+                <td>{postWriterName}</td>
+                <td>{getFormatDate(postCreatedAt)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </A.Table>
       <A.PaginationBox>
         <Pagination
