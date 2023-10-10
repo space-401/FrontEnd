@@ -17,7 +17,7 @@ const SpaceContainer = styled.div`
 `;
 
 const Container = styled.div`
-  border-radius: 30px;
+  border-radius: 15px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   height: 670px;
 `;

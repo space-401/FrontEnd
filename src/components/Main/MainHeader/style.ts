@@ -5,8 +5,8 @@ const Wrapper = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   width: 100%;
   height: 317px;
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   padding: 0 24px;
 `;
