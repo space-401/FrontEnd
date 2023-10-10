@@ -3,11 +3,11 @@ import { ReactComponent as AccountSvg } from '@assets/svg/mainSetting/user.svg';
 import { ReactComponent as BookMarkSvg } from '@assets/svg/bookmark/empty.svg';
 import { ReactComponent as FolderSvg } from '@assets/svg/folder.svg';
 import { Suspense, useState } from 'react';
-import AccountManagement from '@pages/MyPage/components/AccountManagement';
-import MyPostOrCommentList from '@pages/MyPage/components/MyPostOrCommentList';
-import BookMarkListSkeleton from '@pages/MyPage/Skeleton/BookMarkList.skeleton';
-import BookMarkList from '@pages/MyPage/components/BookMarkList';
-import AccountManagementSkeleton from '@pages/MyPage/Skeleton/AccountManagement.skeleton';
+import AccountManagement from '@components/MyPage/AccountManagement';
+import MyPostOrCommentList from '@components/MyPage/MyPostOrCommentList';
+import BookMarkListSkeleton from '@components/MyPage/Skeleton/BookMarkList.skeleton';
+import BookMarkList from '@components/MyPage/BookMarkList';
+import AccountManagementSkeleton from '@components/MyPage/Skeleton/AccountManagement.skeleton';
 
 const MyPageLayOut = () => {
   const [state, setState] = useState(0);

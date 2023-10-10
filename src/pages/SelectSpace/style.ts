@@ -7,45 +7,35 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Img = styled.div`
-  width: 623px;
-  height: 143px;
-  background-color: white;
-  margin: 0 auto;
-  background-position: center;
-`;
-
 const SpaceContainer = styled.div`
   ${flexCenter};
   border-radius: 20px;
   gap: 8px;
-  padding-top: 10rem;
-  flex-wrap: wrap;
+  margin-top: 16px;
   position: relative;
+  text-align: center !important;
 `;
 
 const Container = styled.div`
   border-radius: 30px;
-  width: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  padding-top: 20px;
-  margin-bottom: 30px;
-  min-height: calc(100vh - 120px);
+  height: 670px;
 `;
 
 const ButtonContainer = styled.div`
-  position: absolute;
-  top: 85px;
-  margin-left: calc(100% - 130px);
+  display: flex;
+  margin-top: 3px;
+  justify-content: end;
 `;
 
 const AddBox = styled.div`
-  ${flexCenter}
-  width: 230px;
-  height: 230px;
+  ${flexCenter};
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
   border-radius: 20px;
   border: 1px solid #4e4f55;
-  background: var(--grey-4, #5f5f5f);
+  background: ${({ theme }) => theme.COLOR['gray-4']};
 `;
 
 const EmptySpaceBox = styled.div`
@@ -56,14 +46,18 @@ const EmptySpaceBox = styled.div`
   background: ${({ theme }) => theme.COLOR['gray-7']};
 `;
 
+const Content = styled.div`
+  padding: 0 84px;
+`;
+
 const S = {
   Wrapper,
   Container,
-  Img,
   SpaceContainer,
   AddBox,
   ButtonContainer,
   EmptySpaceBox,
+  Content,
 };
 
 export default S;

@@ -26,9 +26,8 @@ const Header = () => {
         </S.IconBox>
         <S.SpaceBox>
           <S.SpaceIconBox>
-            {spaceList!.map((space) => {
+            {spaceList?.map((space) => {
               const { spaceId, spaceTitle, imgUrl } = space;
-
               return (
                 <Tooltip title={spaceTitle} key={spaceId}>
                   <S.SpaceIcon

@@ -18,13 +18,12 @@ const Button = styled.button<{
   position: relative;
   width: ${({ width }) => (width ? width + 'px' : '')};
   min-width: 20px;
-  height: 20px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   justify-content: center;
   cursor: pointer;
   color: ${({ theme }) => theme.COLOR.white};
-  padding-bottom: ${({ select }) => (select ? '' : '3px')};
+  padding-bottom: ${({ select }) => (select ? '2px' : '5px')};
   border-bottom: ${({ select, theme }) =>
     select ? `3px solid ${theme.COLOR.skyblue}` : ''};
 

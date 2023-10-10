@@ -1,6 +1,6 @@
 import S from '@pages/Main/style';
-import MainHeader from '@pages/Main/MainHeader/MainHeader';
-import MainBody from '@pages/Main/MainBody/MainBody';
+import MainHeader from '@components/Main/MainHeader/MainHeader';
+import MainBody from '@components/Main/MainBody/MainBody';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';

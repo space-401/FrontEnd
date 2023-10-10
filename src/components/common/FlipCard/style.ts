@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { FLIP_CARD } from '@constants/policy';
 
-const Flip = styled.div<{ size: 'small' | 'medium' | 'big' }>`
+const Flip = styled.div<{ size: string }>`
   position: relative;
-  width: ${({ size }) => (size === 'big' ? '274px' : '230px')};
+  width: ${({ size }) =>
+    size === 'big' ? FLIP_CARD.BIG_SIZE : FLIP_CARD.MEDIUM_SIZE};
   cursor: pointer;
 `;
 
@@ -21,13 +23,13 @@ const Card = styled.div<{ img: string; borderRadius?: string }>`
   background-size: cover;
 `;
 
-const Hover = styled.div<{ img: string }>`
+const Hover = styled.div<{ img: string; borderRadius?: string }>`
   aspect-ratio: 1/1;
   top: 0;
   left: 0;
   position: absolute;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
   width: 100%;
   backface-visibility: hidden;
   display: flex;
