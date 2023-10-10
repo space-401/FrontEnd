@@ -151,7 +151,7 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
-        <S.Form >
+        <S.Form>
           <PrevBtn
             style={{
               position: 'absolute',
