@@ -8,9 +8,9 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import { ReactComponent as ProfileMock } from '@assets/svg/profileMock.svg';
 
 type SettingModalProps = {
-  setImageModalOpen: any;
+  setImageModalOpen: React.Dispatch<boolean>;
   setImageArr: any;
-  imageArr: any;
+  imageArr: ImageArrType;
   nickName: string;
   setNickName: React.Dispatch<string>;
 };
@@ -47,7 +47,6 @@ const FirstSettingModal = ({
           id: 1,
           img: result,
         };
-        console.log('newObj', newObj);
         setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
       }
     };

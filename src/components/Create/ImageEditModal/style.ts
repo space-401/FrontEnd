@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 
 const Form = styled.form<{ width: number }>`
   z-index: 10000;
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
   position: absolute;
   top: 50%;
@@ -23,7 +23,7 @@ const Form = styled.form<{ width: number }>`
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  width: 570px;
+  width: 500px;
 `;
 
 const Header = styled.div`
@@ -48,7 +48,7 @@ const Header = styled.div`
 `;
 
 const Footer = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   position: 'relative';
   height: 4rem;
   width: 100%;
@@ -82,7 +82,7 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   border-radius: 5px;
   background-image: url(${({ image }) => image});
   background-size: cover;
-  ${flexCenter}
+  ${flexCenter};
   border:1px solid white;
 `;
 
@@ -108,7 +108,7 @@ const NoImgBackground = styled.div`
 `;
 
 const FlexCenter = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   margin-top:500px;
 `;
 const S = {

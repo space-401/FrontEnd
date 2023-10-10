@@ -7,10 +7,13 @@ import { ReactComponent as MoreUserSvg } from '@assets/svg/mainSetting/user.svg'
 import { ReactComponent as MoreLogOutSvg } from '@assets/svg/mainSetting/logout.svg';
 import { useState } from 'react';
 import { Modal } from '@mui/material';
-import UserSettingModal from '.';
+
 import { S } from '@/components/common/UserSettingModal/style';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { toastColorMessage } from '@utils/toastMessage';
+// import { ImageArrType } from '@/types/image.type';
+import SettingModal from '@/components/Main/WelcomeAndSettingModal/SettingModal';
+import { mainUserSettingModal } from '@/store/modal';
 
 type UserListPropsType = {
   userInfo: UserType;
@@ -53,8 +56,27 @@ const UserList = (props: UserListPropsType) => {
     });
   };
 
+  // const [isImageModalOpen, setImageModalOpen] = useState(false);
+  // const [nickName, setNickName] = useState('');
+  // const [imageArr, setImageArr] = useState<ImageArrType>({
+  //   images: [],
+  //   cropImages: [],
+  //   convertedImages: [],
+  // });
+
+  {
+    /* <UserSettingModal
+          ModalClose={() => {
+            ChangeUserModal(false);
+          }}
+        /> */
+  }
+
+  const { ModalClose, isOpen: isUserSettingModalOpen } = mainUserSettingModal();
+
   return (
     <S.UserContainer>
+      {isUserSettingModalOpen && <SettingModal ModalClose={ModalClose} />}
       <Modal
         open={state.isUserModal}
         onClose={() => ChangeUserModal(false)}
@@ -66,11 +88,7 @@ const UserList = (props: UserListPropsType) => {
           },
         }}
       >
-        <UserSettingModal
-          ModalClose={() => {
-            ChangeUserModal(false);
-          }}
-        />
+        <SettingModal ModalClose={ModalClose} />
       </Modal>
       <div>
         <Avatar
@@ -94,7 +112,7 @@ const UserList = (props: UserListPropsType) => {
           onClick={() => ChangeSettingMode(true)}
           className={'hoverIcon'}
         >
-          <MoreSvg width={24} height={24} />
+          <MoreSvg width={20} height={20} />
         </S.SettingIconBox>
       ) : (
         index === 0 && (
