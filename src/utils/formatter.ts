@@ -11,7 +11,6 @@ export const getFormatDate = (_: string) => {
 };
 
 export const getFormatUser = (_: UserType[]) => {
-  console.log('aaa', _);
   if (_.length < 3) {
     return _.map((user) => user.userName).join(', ');
   }
