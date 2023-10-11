@@ -12,6 +12,7 @@ import { Box } from '@mui/material';
 import { UserType } from '@/types/post.type';
 import { makeObj } from '@/utils/makeObj';
 import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
+import { theme } from '@/styles/theme/theme';
 
 type SettingModalProps = {
   ModalClose: () => void;
@@ -165,7 +166,7 @@ const UserSettingModal = ({
               onChange={(e) => {
                 onChange(e);
               }}
-              backgroundColor={'#5F5F5F'}
+              backgroundColor={theme.COLOR['gray-4']}
               name="nickname"
               value={nickName}
               readonly={false}
