@@ -11,6 +11,7 @@ import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { Box } from '@mui/material';
 import { UserType } from '@/types/post.type';
 import { makeObj } from '@/utils/makeObj';
+import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 
 type SettingModalProps = {
   ModalClose: () => void;
@@ -91,7 +92,20 @@ const UserSettingModal = ({
     if (result) {
       console.log('성공');
       ModalClose();
+      confirmModalOpen();
     }
+  };
+
+  const confirmOpen = useConfirmModalOpen();
+
+  const confirmModalOpen = () => {
+    confirmOpen({
+      AsyncAction: () => {},
+      isPositiveModal: true,
+      ApproveMessage: '확인',
+      closeMessage: '닫기',
+      titleMessage: '성공적으로 변경되었습니다.',
+    });
   };
 
   return (
