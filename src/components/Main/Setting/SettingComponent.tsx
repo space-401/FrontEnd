@@ -78,6 +78,10 @@ const SettingComponent = React.forwardRef(
       });
     };
 
+    const userNames = userList.map((user) => {
+      return user.userName;
+    });
+
     return (
       <Box tabIndex={-1} ref={forwardRef}>
         <S.Container isOpen={isOpen}>
@@ -99,6 +103,7 @@ const SettingComponent = React.forwardRef(
                 changeAdminHandler={(userName: string, userId: number) =>
                   changeAdminHandler(userName, userId)
                 }
+                userNames={userNames}
               />
             ))}
           </S.SettingCenter>

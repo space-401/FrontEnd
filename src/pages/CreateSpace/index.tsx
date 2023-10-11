@@ -35,8 +35,6 @@ const CreateSpace = () => {
 
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
 
-  console.log('ggg', spaceInfo);
-
   //기본 이미지 선택
   const [isBasicImg, setIsBasicImg] = useState<boolean>(false);
   //기본 이미지
