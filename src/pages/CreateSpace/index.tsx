@@ -351,7 +351,7 @@ const CreateSpace = () => {
         </S.InputContainer>
         <S.EmptyContainer />
         {/*스페이스 생성 버튼*/}
-        <S.ButtonContainer paddingLeft={inputWidth - 160}>
+        <S.ButtonContainer>
           {spaceId ? (
             <BasicButton
               children={'스페이스 수정하기'}

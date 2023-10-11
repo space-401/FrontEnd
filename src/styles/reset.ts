@@ -6,12 +6,12 @@ const resetStyle = css`
     padding: 0;
     font-family: Pretendard;
   }
-  
-  body{
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none
+
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   body::-webkit-scrollbar {
