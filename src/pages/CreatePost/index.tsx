@@ -201,14 +201,16 @@ const CreatePost = () => {
 
   return (
     <S.Wrapper>
-      {isOpen && imageArr.images.length && (
-        <ImagesEditModal
-          imageArr={imageArr}
-          setImageArr={setImageArr}
-          currentIdx={currentIdx}
-          setCurrentIdx={setCurrentIdx}
-          handleFileChange={handleFileChange}
-        />
+      {isOpen && imageArr.images.length > 0 && (
+        <>
+          <ImagesEditModal
+            imageArr={imageArr}
+            setImageArr={setImageArr}
+            currentIdx={currentIdx}
+            setCurrentIdx={setCurrentIdx}
+            handleFileChange={handleFileChange}
+          />
+        </>
       )}
 
       {imageArr.cropImages.length == 0 ? (
