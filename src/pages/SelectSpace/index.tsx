@@ -4,12 +4,14 @@ import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import { ReactComponent as SelectLogo } from '@/assets/svg/selectlogo.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { useNavigate } from 'react-router-dom';
-import { spaceList } from '@mocks/data/space.mock';
 import { PATH } from '@constants/path';
 import { v4 as uuid } from 'uuid';
+import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 
 const SelectSpace = () => {
   const navigate = useNavigate();
+  const spaceList = useSpaceListQuery().spaceList!;
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -26,7 +28,7 @@ const SelectSpace = () => {
             </BasicButton>
           </S.ButtonContainer>
           <S.SpaceContainer>
-            {spaceList?.length < 5 && (
+            {spaceList.length < 5 && (
               <S.AddBox
                 onClick={() => {
                   navigate(PATH.SPACE_CREATE);

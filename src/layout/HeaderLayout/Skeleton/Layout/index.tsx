@@ -1,4 +1,5 @@
-import S from './style';
+import Header from '@/layout/HeaderLayout/Header';
+import S from '@layout/HeaderLayout/style';
 import { Outlet } from 'react-router-dom';
 import {
   Modal as DetailModal,
@@ -15,11 +16,10 @@ import ConfirmInner from '@modal/Confirm';
 import AlertInner from '@modal/Alert';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
-import HeaderSkeleton from '@layout/HeaderLayout/Skeleton/Header';
 import DetailInnerSkeleton from '@modal/Detail/Skeleton';
-import Header from '@layout/HeaderLayout/Header';
+import HeaderSkeleton from '@layout/HeaderLayout/Skeleton/Header';
 
-const HeaderLayOut = () => {
+const HeaderLayOutSkeleton = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =
     useDetailModalStore((state) => state);
   const { ModalClose: ConfirmModalClose, isOpen: ConfirmIsOpen } =
@@ -68,4 +68,4 @@ const HeaderLayOut = () => {
     </>
   );
 };
-export default HeaderLayOut;
+export default HeaderLayOutSkeleton;

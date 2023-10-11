@@ -4,6 +4,7 @@ import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import BasicIcon from './BasicIcon';
 import React from 'react';
+import { v4 } from 'uuid';
 
 type BasicIconModalPropsType = {
   isOpen: boolean;
@@ -43,6 +44,7 @@ const BasicIconModal = ({
             {BasicIconArr.map((icon, index) => {
               return (
                 <S.IconBox
+                  key={v4()}
                   backImg={icon}
                   isSelected={selectIconIdx == index}
                   onClick={() => {
