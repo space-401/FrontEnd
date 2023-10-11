@@ -86,9 +86,11 @@ const EmptyContainer = styled.div`
   grid-area: empty;
 `;
 
-const ButtonContainer = styled.div<{ paddingLeft: number }>`
+const ButtonContainer = styled.div`
   grid-area: button;
-  padding-left: ${({ paddingLeft }) => paddingLeft}px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 35px;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     margin-left: 0;
   }

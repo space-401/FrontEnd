@@ -6,6 +6,12 @@ import { Suspense } from 'react';
 import * as Lazy from '@router/lazy';
 import MainPageSkeleton from '@components/Main/Skeleton';
 import MyPageSkeleton from '@components/MyPage/Skeleton';
+import CreatePostSkeleton from '@components/Create/Skeleton/CreatePost';
+import HeaderLayout from '@layout/HeaderLayout';
+import BackLayout from '@layout/BackLayout';
+import SelectSpaceSkeleton from '@components/SelectSpace/Skeleton';
+import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
+import { AuthPage, InviteCodePage, SignPage } from '@router/lazy';
 
 const router = createBrowserRouter([
   {
@@ -13,13 +19,12 @@ const router = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        element: <Lazy.HeaderLayout />,
+        element: <HeaderLayout />,
         children: [
-          /*스페이스*/
           {
             path: PATH.HOME,
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<SelectSpaceSkeleton />}>
                 <Lazy.SelectSpacePage />
               </Suspense>
             ),
@@ -43,16 +48,12 @@ const router = createBrowserRouter([
         ],
       },
       {
-        element: (
-          <Suspense fallback={<></>}>
-            <Lazy.BackLayout />
-          </Suspense>
-        ),
+        element: <BackLayout />,
         children: [
           {
             path: PATH.POST_CREATE(':spaceId'),
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<CreatePostSkeleton />}>
                 <Lazy.CreatePostPage />
               </Suspense>
             ),
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
           {
             path: PATH.POST_UPDATE(':spaceId', ':postId'),
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<CreatePostSkeleton />}>
                 <Lazy.CreatePostPage />
               </Suspense>
             ),
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
           {
             path: PATH.SPACE_CREATE,
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<CreateSpaceSkeleton />}>
                 <Lazy.CreateSpacePage />
               </Suspense>
             ),
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
           {
             path: PATH.SPACE_UPDATE(':spaceId'),
             element: (
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<CreateSpaceSkeleton />}>
                 <Lazy.CreateSpacePage />
               </Suspense>
             ),
@@ -84,8 +85,8 @@ const router = createBrowserRouter([
           {
             path: PATH.INVITE,
             element: (
-              <Suspense fallback={<></>}>
-                <Lazy.InviteCodePage />
+              <Suspense fallback={<>loading...</>}>
+                <InviteCodePage />
               </Suspense>
             ),
           },
@@ -96,16 +97,16 @@ const router = createBrowserRouter([
   {
     path: PATH.LANDING,
     element: (
-      <Suspense fallback={<></>}>
-        <Lazy.SignPage />
+      <Suspense fallback={<>loading...</>}>
+        <SignPage />
       </Suspense>
     ),
   },
   {
     path: PATH.AUTH,
     element: (
-      <Suspense fallback={<></>}>
-        <Lazy.AuthPage />
+      <Suspense fallback={<>loading...</>}>
+        <AuthPage />
       </Suspense>
     ),
   },
