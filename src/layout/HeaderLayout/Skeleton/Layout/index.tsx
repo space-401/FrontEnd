@@ -16,7 +16,7 @@ import ConfirmInner from '@modal/Confirm';
 import AlertInner from '@modal/Alert';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
-import DetailInnerSkeleton from '@modal/Detail/Skeleton';
+import DetailInnerSkeleton from 'src/components/Detail/Skeleton';
 import HeaderSkeleton from '@layout/HeaderLayout/Skeleton/Header';
 
 const HeaderLayOutSkeleton = () => {

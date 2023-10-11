@@ -1,4 +1,4 @@
-import S from '@/modal/Detail/style';
+import S from '@modal/Detail/style';
 import KSkeleton from '@components/common/Skeleton';
 import { Box } from '@mui/material';
 import React from 'react';
