@@ -27,6 +27,7 @@ import { useDetailModalStore } from '@store/modal';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
+import { v4 } from 'uuid';
 
 const DetailInner = React.forwardRef(
   (_, forwardRef: React.ForwardedRef<HTMLDivElement>) => {
@@ -34,36 +35,10 @@ const DetailInner = React.forwardRef(
       appkey: import.meta.env.VITE_KAKAO_KEY,
       libraries: ['services'],
     });
-    const [state, setState] = useState<{
-      mapIsOpen: boolean;
-      settingIsOpen: boolean;
-      commentIsOpen: boolean;
-      isReplyOpen:
-        | { open: boolean; refId: number | undefined; id: number | undefined }
-        | undefined;
-      value: string;
-      isBookMark: boolean;
-    }>({
-      isReplyOpen: undefined,
-      settingIsOpen: false,
-      commentIsOpen: false,
-      mapIsOpen: false,
-      value: '',
-      isBookMark: false,
-    });
-    const navigate = useNavigate();
-
-    const mapContainerRef = useRef(null);
-    const commentContainerRef = useRef(null);
-
-    const { height: mapHeight } = useDimensions(mapContainerRef);
-    const { height: commentHeight } = useDimensions(commentContainerRef);
 
     const { postId, ModalClose } = useDetailModalStore((state) => state);
 
     const { postDetailData } = usePostDetailQuery(String(postId));
-
-    const confirmModalOpen = useConfirmModalOpen();
 
     const {
       spaceId,
@@ -79,7 +54,36 @@ const DetailInner = React.forwardRef(
       postDescription,
       selectedUsers,
       selectedTags,
+      isBookmark,
     } = postDetailData!;
+
+    const [state, setState] = useState<{
+      mapIsOpen: boolean;
+      settingIsOpen: boolean;
+      commentIsOpen: boolean;
+      isReplyOpen:
+        | { open: boolean; refId: number | undefined; id: number | undefined }
+        | undefined;
+      value: string;
+    }>({
+      isReplyOpen: undefined,
+      settingIsOpen: false,
+      commentIsOpen: false,
+      mapIsOpen: false,
+      value: '',
+    });
+    const navigate = useNavigate();
+    const [isBookMark, setIsBookMark] = useState(isBookmark);
+
+    const mapContainerRef = useRef(null);
+    const commentContainerRef = useRef(null);
+
+    const { height: mapHeight } = useDimensions(mapContainerRef);
+    const { height: commentHeight } = useDimensions(commentContainerRef);
+
+    const { postBookMarkAction } = UseBookMarkMutation();
+
+    const confirmModalOpen = useConfirmModalOpen();
 
     const setReply = (newState: string) => {
       setState((prev) => ({ ...prev, value: newState }));
@@ -88,8 +92,6 @@ const DetailInner = React.forwardRef(
     const setChange: OnChangeHandlerFunc = (event) => {
       setReply(event.target.value);
     };
-
-    const { postBookMarkAction } = UseBookMarkMutation();
 
     const DeleteAction = () => {
       ModalClose();
@@ -117,7 +119,7 @@ const DetailInner = React.forwardRef(
 
     // 북마크 요청을 보내는 함수
     const wishAsync = (postId: number) => {
-      postBookMarkAction(postId);
+      postBookMarkAction({ postId: String(postId), setState: setIsBookMark });
     };
 
     const deleteConfirmOpen = () => {
@@ -142,12 +144,12 @@ const DetailInner = React.forwardRef(
             }}
           >
             <IconButton>
-              {state.isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
+              {isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
             </IconButton>
           </S.LikeIconBox>
           <S.LeftImgBox isArray={imgUrl?.length !== 0}>
             {[...imgUrl].map((imgUrl) => (
-              <S.ImgBox key={imgUrl} imgUrl={imgUrl} />
+              <S.ImgBox key={v4()} imgUrl={imgUrl} />
             ))}
           </S.LeftImgBox>
           <S.RightWrapper>

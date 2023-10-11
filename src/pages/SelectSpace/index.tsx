@@ -22,7 +22,7 @@ const SelectSpace = () => {
               fontSize={16}
               width={130}
               borderRadius={10}
-              onClick={() => {}}
+              onClick={() => navigate(PATH.INVITE)}
             >
               초대코드 입력
             </BasicButton>

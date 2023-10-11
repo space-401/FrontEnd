@@ -13,7 +13,7 @@ const Container = styled.section`
   width: calc(100% - 201px);
   height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  border-radius: 30px;
+  border-radius: 15px;
   padding: 48px 105px 0;
   margin-bottom: 16px;
 `;
@@ -22,7 +22,7 @@ const Wrapper = styled.nav`
   width: 194px;
   height: 100%;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  border-radius: 30px;
+  border-radius: 15px;
   display: flex;
   padding: 80px 15px;
 `;

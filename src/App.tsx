@@ -12,7 +12,7 @@ function App() {
     <KkiriProvider>
       <motion.div
         className="progress-bar"
-        style={{ scaleX: scrollYProgress }}
+        style={{ scaleX: scrollYProgress, zIndex: 900 }}
       />
       <RouterProvider router={router} />
     </KkiriProvider>

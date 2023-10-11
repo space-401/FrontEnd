@@ -10,6 +10,8 @@ import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageArrType } from '@/types/image.type';
 
 const MainPage = () => {
+  window.scrollTo({ top: 0 });
+
   const [selectState, setSelectState] = useState(false);
   const spaceId = useParams().spaceId!;
   const spaceInfo = useSpaceInfoQuery(spaceId).spaceInfo!;
