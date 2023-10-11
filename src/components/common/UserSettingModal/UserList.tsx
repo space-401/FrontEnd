@@ -11,9 +11,7 @@ import { Modal } from '@mui/material';
 import { S } from '@/components/common/UserSettingModal/style';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { toastColorMessage } from '@utils/toastMessage';
-// import { ImageArrType } from '@/types/image.type';
-import SettingModal from '@/components/Main/WelcomeAndSettingModal/SettingModal';
-import { mainUserSettingModal } from '@/store/modal';
+import UserSettingModal from '@/components/Main/WelcomeAndSettingModal/UserSettingModal';
 
 type UserListPropsType = {
   userInfo: UserType;
@@ -21,10 +19,11 @@ type UserListPropsType = {
   isAdmin: boolean;
   myInfo: UserType;
   changeAdminHandler: (userName: string, userId: number) => void;
+  userNames: string[];
 };
 
 const UserList = (props: UserListPropsType) => {
-  const { isAdmin, userInfo, index, changeAdminHandler } = props;
+  const { isAdmin, userInfo, index, changeAdminHandler, userNames } = props;
   const { userId, userName, imgUrl } = userInfo;
   const [state, setState] = useState({
     isSettingMode: false,
@@ -56,40 +55,27 @@ const UserList = (props: UserListPropsType) => {
     });
   };
 
-  // const [isImageModalOpen, setImageModalOpen] = useState(false);
-  // const [nickName, setNickName] = useState('');
-  // const [imageArr, setImageArr] = useState<ImageArrType>({
-  //   images: [],
-  //   cropImages: [],
-  //   convertedImages: [],
-  // });
-
-  {
-    /* <UserSettingModal
-          ModalClose={() => {
-            ChangeUserModal(false);
-          }}
-        /> */
-  }
-
-  const { ModalClose, isOpen: isUserSettingModalOpen } = mainUserSettingModal();
-
   return (
     <S.UserContainer>
-      {isUserSettingModalOpen && <SettingModal ModalClose={ModalClose} />}
-      <Modal
-        open={state.isUserModal}
-        onClose={() => ChangeUserModal(false)}
-        slotProps={{
-          backdrop: {
-            sx: {
-              backgroundColor: 'transparent',
+      {state.isSettingMode && (
+        <Modal
+          open={state.isUserModal}
+          onClose={() => ChangeUserModal(false)}
+          slotProps={{
+            backdrop: {
+              sx: {
+                backgroundColor: 'transparent',
+              },
             },
-          },
-        }}
-      >
-        <SettingModal ModalClose={ModalClose} />
-      </Modal>
+          }}
+        >
+          <UserSettingModal
+            ModalClose={() => ChangeUserModal(false)}
+            userNames={userNames}
+            userInfo={userInfo}
+          />
+        </Modal>
+      )}
       <div>
         <Avatar
           src={imgUrl}

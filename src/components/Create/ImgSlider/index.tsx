@@ -47,7 +47,10 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
       >
         {images.map((img) => {
           return (
-            <SwiperSlide key={Math.floor(Math.random() * 1000)}>
+            <SwiperSlide
+              key={Math.floor(Math.random() * 1000)}
+              style={{ border: '10px' }}
+            >
               <img
                 src={img}
                 alt={img}
