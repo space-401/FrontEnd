@@ -1,8 +1,8 @@
 import { getFormatDate } from '@utils/formatter';
-import { A } from '@pages/MyPage/components/style';
+import { A } from '@components/MyPage/style';
 import Avatars from '@components/common/AvatarGroup/Avatars';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
-import { OneMyPostType } from '@type/user.type';
+import type { OneMyPostType } from '@type/user.type';
 import { useState } from 'react';
 import S from '@modal/Detail/style';
 import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';
