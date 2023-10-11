@@ -1,6 +1,6 @@
-import DefaultImage from '@assets/png/DefaultImg.png';
+import { ReactComponent as DefaultImage } from '@assets/svg/defaultImg/img1.svg';
 import FlipCard from '@components/common/FlipCard/FlipCard';
-import S from '@pages/Main/MainBody/style';
+import S from '@components/Main/MainBody/style';
 import { Suspense, useEffect, useState } from 'react';
 import type { selectType } from '@type/main.type';
 import SelectBox from '@components/Main/SelectBox';
@@ -8,12 +8,13 @@ import MainSearchBox from '@components/Main/SearchBox';
 import PostMap from '@components/Main/PostMap';
 import Pagination from '@components/common/Pagination';
 import Calender from '@/components/common/Calender/Calender';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSpacePostListQuery } from '@hooks/api/space/useSpacePostListQuery';
 import { PostListFilterProps } from '@type/main.type';
 import { UserType, TagType, DateInfoType } from '@/types/post.type';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
 import PostMapSkeleton from '@components/Main/PostMap/PostMap.Skeleton';
+import { PATH } from '@constants/path';
 
 type PostListPropType = {
   userList: UserType[];
@@ -33,6 +34,8 @@ const MainBody = (props: PostListPropType) => {
     startDate: '',
     endDate: '',
   });
+
+  const navigate = useNavigate();
 
   const { spaceId, selectState, userList, tagList } = props;
 
@@ -169,11 +172,15 @@ const MainBody = (props: PostListPropType) => {
       </S.FilterGroup>
       {!selectState && postList.length === 0 && (
         <S.UndefinedList>
-          <S.UndefinedDefaultImage imgUrl={DefaultImage} />
+          <DefaultImage />
           <S.UndefinedPostText>
             첫번째 게시글을 등록해 주세요
           </S.UndefinedPostText>
-          <S.UndefinedShareText>게시글 공유하기</S.UndefinedShareText>
+          <S.UndefinedShareText
+            onClick={() => navigate(PATH.POST_CREATE(spaceId))}
+          >
+            게시글 공유하기
+          </S.UndefinedShareText>
         </S.UndefinedList>
       )}
       {!selectState && postList.length !== 0 && (
@@ -184,7 +191,7 @@ const MainBody = (props: PostListPropType) => {
               return (
                 <FlipCard
                   onClick={() => detailModalOpen(postId)}
-                  size={'big'}
+                  isBig={true}
                   key={postId}
                   imgUrl={imgUrl[0]}
                   item={item}

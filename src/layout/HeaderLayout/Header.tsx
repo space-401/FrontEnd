@@ -1,5 +1,5 @@
 import S from '@layout/HeaderLayout/style';
-import { ReactComponent as Logo } from '@assets/svg/KKIRI.svg';
+import { ReactComponent as Logo } from '@assets/svg/headerLogo.svg';
 import { ReactComponent as AlarmIcon } from '@assets/svg/alarmIcon.svg';
 import { ReactComponent as UserIcon } from '@assets/svg/userIcon.svg';
 import { Tooltip } from '@mui/material';
@@ -26,9 +26,8 @@ const Header = () => {
         </S.IconBox>
         <S.SpaceBox>
           <S.SpaceIconBox>
-            {spaceList!.map((space) => {
+            {spaceList?.map((space) => {
               const { spaceId, spaceTitle, imgUrl } = space;
-
               return (
                 <Tooltip title={spaceTitle} key={spaceId}>
                   <S.SpaceIcon

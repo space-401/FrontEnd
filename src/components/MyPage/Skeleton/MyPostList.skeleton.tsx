@@ -1,5 +1,5 @@
-import { A, B } from '@pages/MyPage/components/style';
-import OneTableListSkeleton from '@pages/MyPage/Skeleton/OneTableList.skeleton';
+import { A, B } from '@components/MyPage/style';
+import OneTableListSkeleton from '@components/MyPage/Skeleton/OneTableList.skeleton';
 
 const MyPostListSkeleton = () => {
   return (
