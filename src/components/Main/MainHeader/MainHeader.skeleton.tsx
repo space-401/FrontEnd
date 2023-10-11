@@ -35,7 +35,7 @@ const MainHeaderSkeleton = () => {
           <KSkeleton variant={'rounded'} width={105} height={28} />
           <KSkeleton variant={'rounded'} width={105} height={28} />
         </S.FilterState>
-        <KSkeleton variant={'rounded'} width={105} height={28} />
+        <KSkeleton variant={'rounded'} width={74} height={28} />
       </S.HeaderFooter>
     </S.Wrapper>
   );
