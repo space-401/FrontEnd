@@ -58,8 +58,7 @@ const SettingComponent = React.forwardRef(
 
     const inviteLinkCopyAction = async () => {
       try {
-        await navigator.clipboard.writeText(PATH.INVITE_CODE(spaceId, spacePw)
-        );
+        await navigator.clipboard.writeText(PATH.INVITE_CODE(spaceId, spacePw));
         toastColorMessage('초대링크를 복사하였습니다.');
       } catch (e) {
         toastColorMessage('초대링크를 복사를 실패하였습니다.');

@@ -21,5 +21,7 @@ export const PATH = {
   SPACE_UPDATE: (spaceId: number | string) =>
     `${BASE_PATH.SPACE}/update/${spaceId}`,
   INVITE_CODE: (code: number | string, password: number | string) => `
-  ${import.meta.env.VITE_BASE_URL}${PATH.INVITE}?code=${code}&password=${password}`,
+  ${import.meta.env.VITE_BASE_URL}${
+    PATH.INVITE
+  }?code=${code}&password=${password}`,
 };
