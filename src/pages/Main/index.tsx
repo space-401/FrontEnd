@@ -8,6 +8,8 @@ import WelcomeModal from '@/components/Main/WelcomeAndSettingModal/WelcomeModal'
 import UserSettingModal from '@/components/Main/WelcomeAndSettingModal/UserSettingModal';
 import { Modal } from '@mui/material';
 const MainPage = () => {
+  window.scrollTo({ top: 0 });
+
   const [selectState, setSelectState] = useState(false);
   const spaceId = useParams().spaceId!;
   const spaceInfo = useSpaceInfoQuery(spaceId).spaceInfo!;

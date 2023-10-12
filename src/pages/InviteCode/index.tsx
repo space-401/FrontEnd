@@ -7,6 +7,8 @@ import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 
 const InviteCode = () => {
+  window.scrollTo({ top: 0 });
+
   //스페이스 코드
   const [spaceCode, setSpaceCode] = useState('');
   //비밀번호

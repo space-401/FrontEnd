@@ -29,6 +29,8 @@ import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useNavigate } from 'react-router-dom';
 
 const CreateSpace = () => {
+  window.scrollTo({ top: 0 });
+
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
