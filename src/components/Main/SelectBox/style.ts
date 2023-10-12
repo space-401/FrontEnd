@@ -11,8 +11,9 @@ const Wrapper = styled.div<{
   background-color: ${({ theme, isSelect }) =>
     isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
   color: ${({ theme }) => theme.COLOR['gray-1']};
-  width: ${({ minWidth }) => minWidth}px;
-  height: 28px;
+  width: 150px;
+
+  height: 40px;
   transition: background-color 0.5s;
   align-items: center;
   justify-content: space-between;
@@ -26,16 +27,16 @@ const Wrapper = styled.div<{
 import styled from 'styled-components';
 
 const LabelTitle = styled.div`
-  font-size: 10px;
+  font-size: 12px;
   ${omitText}
+  width: 120px;
 `;
 
 const ModalButton = styled.div``;
 
 const SearchInput = styled.input`
-  width: 100%;
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: 10px;
+  font-size: 12px;
   background-color: inherit;
   padding: 5px 8px;
 

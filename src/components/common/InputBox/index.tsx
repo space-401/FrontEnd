@@ -2,7 +2,7 @@ import S from '@/components/common/InputBox/style';
 import { ReactElement } from 'react';
 
 type InputBoxProps = {
-  width?: number;
+  width: number;
   height: number;
   placeholder?: string;
   type: 'text' | 'button' | 'password';
@@ -12,9 +12,10 @@ type InputBoxProps = {
   children?: ReactElement;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   name: string;
-  value?: string;
+  value: string;
   paddingLeft?: number;
   readonly: boolean;
+  paddingTop?: number;
 };
 
 const InputBox = ({
@@ -28,6 +29,7 @@ const InputBox = ({
   paddingLeft,
   readonly,
   value,
+  paddingTop,
   ...rest
 }: InputBoxProps) => {
   const hasIcon = children ? true : false;
@@ -46,6 +48,7 @@ const InputBox = ({
         name={name}
         readOnly={readonly}
         value={value}
+        paddingTop={paddingTop}
       />
       {children}
     </S.InputWrapper>
