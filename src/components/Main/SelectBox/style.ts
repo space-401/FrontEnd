@@ -2,7 +2,8 @@ import { omitText } from '@styles/common';
 
 const Wrapper = styled.div<{
   isOpen: boolean;
-  minWidth: number;
+  width: number;
+  height: number;
   isSelect: boolean;
 }>`
   position: relative;
@@ -11,15 +12,15 @@ const Wrapper = styled.div<{
   background-color: ${({ theme, isSelect }) =>
     isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
   color: ${({ theme }) => theme.COLOR['gray-1']};
-  width: ${({ minWidth }) => minWidth}px;
-  height: 28px;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
   transition: background-color 0.5s;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
+  padding: 12px 8px 12px 10px;
 
   .user-title {
-    max-width: ${({ minWidth }) => minWidth / 2 + 20}px;
+    max-width: ${({ width }) => width / 2 + 20}px;
   }
 `;
 
@@ -93,7 +94,7 @@ const MenuList = styled.ul<{
 const Container = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   left: 0;
-  top: 60px;
+  top: 45px;
   width: 100%;
   height: 0;
   overflow: ${({ $isOpen }) => ($isOpen ? '' : 'hidden')};

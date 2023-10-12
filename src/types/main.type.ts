@@ -34,7 +34,11 @@ export type SelectBoxProps = {
   /**
    * 해당 박스의 길이를 선택해주세요
    */
-  BoxWidth?: number;
+  boxWidth?: number;
+  /**
+   * 해당 박스의 높이를 선택해주세요
+   */
+  boxHeight?: number;
   /**
    * 해당 박스의 place holder를 입력해주세요
    */
@@ -69,6 +73,8 @@ export type SearchProps = {
   placeholder: string;
   state: PostListFilterProps;
   date: DateInfoType;
+  height: number;
+  width: number;
 };
 
 export type SpacePostListProps = {
