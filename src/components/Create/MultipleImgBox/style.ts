@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ width: number }>`
   position: absolute;
-  right: 25%;
-  bottom: 5%;
+  width: ${({ width }) => width}px;
+  height: 100px;
+  bottom: 0;
   z-index: 100000;
+  ${flexCenter};
 `;
+
 const Container = styled.div`
   display: flex;
   width: fit-content;
-  bottom: 100%;
-  right: 0;
+
   ${flexCenter};
   margin: 8px;
   padding: 8px;

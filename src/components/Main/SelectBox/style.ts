@@ -12,7 +12,6 @@ const Wrapper = styled.div<{
     isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
   color: ${({ theme }) => theme.COLOR['gray-1']};
   width: 150px;
-
   height: 40px;
   transition: background-color 0.5s;
   align-items: center;

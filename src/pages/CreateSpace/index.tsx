@@ -11,6 +11,7 @@ import {
   usePhotoModalStore,
   useSelectIconModalStore,
   useSelectBasicIconModalStore,
+  useTagEditModal,
 } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType, ImageArrType } from '@/types/image.type';
@@ -27,6 +28,8 @@ import { useParams } from 'react-router-dom';
 import { makeObj } from '@/utils/makeObj';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
+import TagEditModal from '@/components/Create/TagEditModal';
 
 const CreateSpace = () => {
   window.scrollTo({ top: 0 });
@@ -200,8 +203,21 @@ const CreateSpace = () => {
     });
   };
 
+  const {
+    isOpen: isTagModalOpen,
+    ModalClose: TagModalClose,
+    ModalOpen: TagModalOpen,
+  } = useTagEditModal();
+
   return (
     <S.Wrapper>
+      {spaceId && isTagModalOpen && (
+        <TagEditModal
+          spaceId={spaceId}
+          isOpen={isTagModalOpen}
+          modalClose={TagModalClose}
+        />
+      )}
       <S.TitleSection>
         <div>스페이스 설정하기</div>
         <p>우리만을 위한 스페이스를 새로 만들어요.</p>
@@ -350,6 +366,28 @@ const CreateSpace = () => {
           />
         </S.InputContainer>
         <S.EmptyContainer />
+
+        {/*스페이스 태그 관리*/}
+        <S.FlexContainer>
+          <S.TitleContainer number={5} required={false}>
+            <div>스페이스 태그 관리</div>
+          </S.TitleContainer>
+        </S.FlexContainer>
+        <S.InputContainer number={5}>
+          <BasicButton
+            onClick={TagModalOpen}
+            backgroundColor={theme.COLOR.white}
+            borderRadius={10}
+            width={160}
+            height={47}
+          >
+            <S.ButtonInnerContainer>
+              <EditIcon />
+              태그 편집
+            </S.ButtonInnerContainer>
+          </BasicButton>
+        </S.InputContainer>
+
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer>
           {spaceId ? (

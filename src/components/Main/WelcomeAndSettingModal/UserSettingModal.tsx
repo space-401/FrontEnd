@@ -113,7 +113,7 @@ const UserSettingModal = ({
     userNames && (
       <Box tabIndex={-1}>
         <S.Wrapper>
-          {isImageModalOpen && (
+          {isImageModalOpen && imageArr.images.length > 0 && (
             <ImgEditModal
               setImageModalOpen={setImageModalOpen}
               imageArr={imageArr}

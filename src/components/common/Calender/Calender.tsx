@@ -26,8 +26,8 @@ type CalenderPropsType = {
 
 const Calender = ({
   setDateInfo,
-  width,
   height,
+  width,
   borderRadius,
   isMain,
   dateInfo,
