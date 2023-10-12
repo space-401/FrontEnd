@@ -15,6 +15,7 @@ const InputWrapper = styled.div<IInputWrapper>`
   border-radius: 10px;
   padding: 1rem;
   display: flex;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
 `;
 
 interface IInput {

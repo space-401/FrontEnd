@@ -21,9 +21,9 @@ const Form = styled.div`
 
   display: grid;
   grid-template-columns: 1fr 2.5fr;
-  grid-template-rows: 160px 60px 160px 60px 44px;
+  grid-template-rows: 160px 60px 160px 60px 60px 44px;
   grid-gap: 32px;
-  grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'empty button';
+  grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'empty button';
 `;
 
 const TitleSection = styled.div`
@@ -105,12 +105,21 @@ const EditButton = styled.div`
   left: 170px;
 `;
 
+const ButtonInnerContainer = styled.div`
+  display: flex;
+  width: 90px;
+  justify-content: space-between;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+`;
 const S = {
   Wrapper,
   Form,
   TitleContainer,
   InputContainer,
   ButtonContainer,
+  ButtonInnerContainer,
   EditButton,
   FlexContainer,
   TitleSection,

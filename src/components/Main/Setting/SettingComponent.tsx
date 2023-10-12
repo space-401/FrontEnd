@@ -78,7 +78,7 @@ const SettingComponent = React.forwardRef(
         AsyncAction: () => changeAdminAction(userName, userId),
         isPositiveModal: true,
         descriptionMessage: `방장 권한을 주면 ${userList[0].userName}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`,
-        titleMessage: userName + " 님에게 방장 권한을 주시겠습니까?'",
+        titleMessage: userName + ' 님에게 방장 권한을 주시겠습니까?',
         ApproveMessage: '확인',
         closeMessage: '취소',
       });

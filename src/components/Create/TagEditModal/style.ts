@@ -36,7 +36,7 @@ const Body = styled.div`
 const TagNum = styled.div`
   height: 43px;
   display: flex;
-  padding-top: 10px;
+  padding-top: 15px;
   gap: 4px;
   p {
     color: ${({ theme }) => theme.COLOR.white};

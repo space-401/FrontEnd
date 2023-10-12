@@ -120,7 +120,7 @@ const MultipleImgBox = ({
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper width={screenWidth}>
       <S.Container>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="imgList" direction="horizontal">
