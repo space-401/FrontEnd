@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface IInputWrapper {
-  width?: number;
+  width: number;
   height: number;
   placeholder?: string;
   backgroundColor?: string;
@@ -11,6 +11,7 @@ const InputWrapper = styled.div<IInputWrapper>`
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ? backgroundColor : theme.COLOR['gray-5']};
   width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
   border-radius: 10px;
   padding: 1rem;
   display: flex;
@@ -21,6 +22,7 @@ interface IInput {
   hasIcon: boolean;
   readOnly: boolean;
   autocomplete: 'on' | 'off';
+  paddingTop?: number;
 }
 
 const Input = styled.input<IInput>`
@@ -33,11 +35,13 @@ const Input = styled.input<IInput>`
   height: 100%;
   background-color: inherit;
   color: white;
+
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
   &:hover {
     cursor: ${({ readOnly }) => (readOnly ? 'pointer' : 'auto')};
   }
+  padding-top: ${({ paddingTop }) => (paddingTop ? paddingTop : 0)}px;
 `;
 
 const S = {

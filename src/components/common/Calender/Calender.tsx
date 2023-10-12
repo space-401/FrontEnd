@@ -15,6 +15,7 @@ import { ReactComponent as DownIcon } from '@/assets/svg/chevron/chevron_down.sv
 import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
 
 type CalenderPropsType = {
+  width: number;
   height: number;
   borderRadius: number;
   setDateInfo: React.Dispatch<DateInfoType>;
@@ -25,6 +26,7 @@ type CalenderPropsType = {
 
 const Calender = ({
   setDateInfo,
+  width,
   height,
   borderRadius,
   isMain,
@@ -89,6 +91,7 @@ const Calender = ({
         <StyledDatePicker
           fontSize={fontSize}
           borderRadius={borderRadius}
+          width={width}
           height={height}
           dateFormat="yyyy.MM.dd"
           showYearDropdown
@@ -205,8 +208,8 @@ const Calender = ({
           <MainCalenderIcon
             style={{
               position: 'absolute',
-              bottom: '4',
-              marginLeft: '230',
+              bottom: '10',
+              marginLeft: '170',
             }}
           />
         ) : (
@@ -231,10 +234,10 @@ const Calender = ({
           <S.DateText
             style={{
               position: 'absolute',
-              bottom: 8,
-              left: 10,
+              bottom: 12,
+              left: 8,
               color: 'white',
-              fontSize: 10,
+              fontSize: 12,
             }}
             isMain={true}
           >
@@ -249,19 +252,20 @@ const Calender = ({
 export default Calender;
 
 const StyledDatePicker = styled(DatePicker)<{
+  width: number;
   height: number;
   borderRadius: number;
   fontSize?: number;
 }>`
+  width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme, fontSize }) =>
     fontSize ? fontSize : theme.TEXT_SIZE['text-18']};
   border-radius: ${({ borderRadius }) => borderRadius}px;
-  width: 270px;
   display: flex;
-  padding-left: 1.2rem;
+  padding-left: 0.7rem;
 `;
 
 const DateText = styled.div<{ isMain: boolean }>`

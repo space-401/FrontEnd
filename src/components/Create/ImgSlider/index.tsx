@@ -56,6 +56,7 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
                   width: '348px',
                   height: '348px',
                   backgroundPosition: 'center',
+                  borderRadius: '20px',
                 }}
                 onClick={onClickImgEditModal}
               />
