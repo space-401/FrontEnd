@@ -34,6 +34,8 @@ import {
 import { postPost } from '@/apis/post/postPost';
 
 const CreatePost = () => {
+  window.scrollTo({ top: 0 });
+
   const params = useParams();
   const postId = params.postId;
   const spaceId = params.spaceId;

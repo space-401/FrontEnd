@@ -18,11 +18,14 @@ const SettingComponent = React.forwardRef(
       isAdmin: boolean;
       isOpen: boolean;
       onClose: () => void;
+      spaceId: string;
       spaceTitle: string;
+      spacePw: string;
     },
     forwardRef: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const { isOpen, isAdmin, userList, spaceTitle, onClose } = props;
+    const { isOpen, isAdmin, userList, spaceTitle, onClose, spacePw, spaceId } =
+      props;
     const navigate = useNavigate();
 
     const alertModalOpen = useAlertModalOpen();
@@ -55,7 +58,10 @@ const SettingComponent = React.forwardRef(
 
     const inviteLinkCopyAction = async () => {
       try {
-        await navigator.clipboard.writeText('www.KKIRI.com');
+        await navigator.clipboard.writeText(
+          import.meta.env.VITE_BASE_URL +
+            `${PATH.INVITE}?spaceId=${spaceId}&spacePw=${spacePw}`
+        );
         toastColorMessage('초대링크를 복사하였습니다.');
       } catch (e) {
         toastColorMessage('초대링크를 복사를 실패하였습니다.');

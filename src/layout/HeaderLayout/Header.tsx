@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { END_POINTS } from '@constants/api';
 import { PATH } from '@constants/path';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
+import { toastColorMessage } from '@utils/toastMessage';
 
 const Header = () => {
   const { spaceList } = useSpaceListQuery();
@@ -42,7 +43,11 @@ const Header = () => {
         </S.SpaceBox>
         <S.IconBox>
           <S.IconGroup>
-            <AlarmIcon width={15} height={15} />
+            <AlarmIcon
+              width={15}
+              height={15}
+              onClick={() => toastColorMessage('알림 기능은 출시 예정입니다.')}
+            />
             <UserIcon
               width={15}
               height={15}

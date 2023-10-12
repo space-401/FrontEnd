@@ -16,7 +16,7 @@ import AlertInner from '@modal/Alert';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import HeaderSkeleton from '@layout/HeaderLayout/Skeleton/Header';
-import DetailInnerSkeleton from '@modal/Detail/Skeleton';
+import DetailInnerSkeleton from 'src/components/Detail/Skeleton';
 import Header from '@layout/HeaderLayout/Header';
 
 const HeaderLayOut = () => {
@@ -47,7 +47,6 @@ const HeaderLayOut = () => {
         </ConfirmModal>
         <DetailModal
           sx={{ zIndex: 999 }}
-          disableScrollLock
           open={DetailIsOpen}
           onClose={DetailModalClose}
         >
