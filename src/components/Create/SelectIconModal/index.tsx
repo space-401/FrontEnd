@@ -6,6 +6,7 @@ type IconModalPropsType = {
   onClickImgEditModal: () => void;
   onMoveBasicIconModal: () => void;
   modalClose: () => void;
+  selectedImage: string | null;
 };
 
 const SelectIconModal = ({
@@ -30,6 +31,7 @@ const SelectIconModal = ({
           <S.Content fontSize={22} lightgrey={false}>
             아이콘 설정하기
           </S.Content>
+
           <S.Content
             fontSize={18}
             lightgrey={false}
@@ -37,6 +39,7 @@ const SelectIconModal = ({
           >
             이미지 불러오기
           </S.Content>
+
           <S.Content
             fontSize={18}
             lightgrey={false}
