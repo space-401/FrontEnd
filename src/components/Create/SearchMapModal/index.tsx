@@ -10,10 +10,10 @@ import { Box, Modal } from '@mui/material';
 import { S } from '@components/Create/SearchMapModal/style';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import EventMarkerContainer from '@components/Create/SearchMapModal/component/EventMarkerContainer';
-import Pagination from '@components/Create/SearchMapModal/component/Pagination';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import { DEFAULT_POSITION } from '@constants/policy';
 import { MarkerType, MapType } from '@/types/marker.type';
+import Pagination from '@components/common/Pagination';
 
 type searchModalType = {
   isOpen: boolean;
@@ -30,7 +30,7 @@ const SearchModal = React.forwardRef(
       libraries: ['services'],
     });
 
-    const item_length = 4;
+    const item_length = 10;
 
     const [keyword, setKeyword] = useState(mapInfo.content);
     const [data, setData] = useState<kakao.maps.services.PlacesSearchResult>(
@@ -80,7 +80,6 @@ const SearchModal = React.forwardRef(
             }
             setMarkers(markers);
 
-            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
             map.setBounds(bounds);
           }
         },
@@ -157,15 +156,19 @@ const SearchModal = React.forwardRef(
                     </S.OneList>
                   );
                 })}
-                {pagination && (
-                  <Pagination
-                    total={pagination.totalCount}
-                    page={pagination.current}
-                    item_length={item_length}
-                    setPage={pagination.gotoPage}
-                  />
-                )}
               </S.SearchList>
+              {pagination && (
+                <S.PaginationSticky>
+                  <S.StickyInner>
+                    <Pagination
+                      total={pagination.totalCount}
+                      page={pagination.current}
+                      itemLength={item_length}
+                      movePage={pagination.gotoPage}
+                    />
+                  </S.StickyInner>
+                </S.PaginationSticky>
+              )}
             </S.LeftContainer>
             <S.RightContainer>
               <Map
