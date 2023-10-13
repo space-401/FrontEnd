@@ -15,6 +15,7 @@ type tagEditProps = {
   spaceId: string;
   modalClose: () => void;
 };
+
 const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const [tagList, setTagList] = useState<TagType[]>([]);
   const [tagInput, setTagInput] = useState<string>();

@@ -10,15 +10,15 @@ import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { usePhotoModalStore } from '@/store/modal';
 import { theme } from '@/styles/theme/theme';
-import { ImageArrType } from '@/types/image.type';
+import { ImagesArrType } from '@/types/image.type';
 import { dataURItoFile } from '@/utils/fileConvertor';
 
 type ModalType = {
   handleFileChange: any;
   currentIdx: number;
   setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
-  imageArr: ImageArrType;
-  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
+  imageArr: ImagesArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImagesArrType>>;
 };
 
 const ImagesEditModal = ({

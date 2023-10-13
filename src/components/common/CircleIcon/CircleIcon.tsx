@@ -1,13 +1,14 @@
 import S from './style';
 
 type CircleIconProps = {
-  img_url: string;
+  imgUrl: string;
   size: number;
+  onClick?: () => void;
 };
 
 const CircleIcon = (props: CircleIconProps) => {
-  const { img_url, size } = props;
-  return <S.CircleImg src={img_url} size={size} />;
+  const { imgUrl, size, onClick } = props;
+  return <S.CircleImg imgUrl={imgUrl} size={size} onClick={onClick} />;
 };
 
 export default CircleIcon;
