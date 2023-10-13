@@ -56,6 +56,12 @@ const SearchList = styled.ul`
   flex-direction: column;
   height: 100%;
   gap: 10px;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const OneList = styled.li<{ select: boolean }>`
@@ -98,6 +104,19 @@ const SelectButton = styled.div`
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR.skyblue};
 `;
+
+const PaginationSticky = styled.div`
+  position: sticky;
+  bottom: 0px;
+  background: ${({ theme }) => theme.COLOR['gray-6']};
+`;
+
+const StickyInner = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 export const S = {
   Wrapper,
   LeftContainer,
@@ -111,6 +130,8 @@ export const S = {
   LeftInfo,
   RightButton,
   SelectButton,
+  PaginationSticky,
+  StickyInner,
 };
 
 const PaginationBox = styled.div`
@@ -129,7 +150,7 @@ const Button = styled.button<{
   isHidden?: boolean;
   select?: boolean;
 }>`
-  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   position: relative;
   width: ${({ width }) => (width ? width : '')}px;
   height: 20px;

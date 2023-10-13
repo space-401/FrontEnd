@@ -14,7 +14,7 @@ const Index = (props: SpacePostListProps) => {
     appkey: import.meta.env.VITE_KAKAO_KEY,
     libraries: ['services'],
   });
-  const { postList, page, total, itemLength } = props;
+  const { postList, page, total, itemLength, movePage } = props;
   const [isSelect, setIsSelect] = useState<number>(postList[0].postId);
 
   const [state, setState] = useState({
@@ -35,6 +35,7 @@ const Index = (props: SpacePostListProps) => {
           page={page}
           total={total}
           itemLength={itemLength}
+          movePage={movePage}
         />
         <Map
           center={state.center}

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  position: relative;
   background: ${({ theme }) => theme.COLOR['gray-7']};
-  padding: 24px;
+  padding: 24px 0 0 24px;
   display: flex;
   gap: 8px;
   flex-direction: column;
@@ -16,13 +17,26 @@ const Wrapper = styled.div`
 `;
 
 const PaginationBox = styled.div`
-  margin: 0 auto;
-  width: 200px;
+  position: sticky;
+  display: flex;
+  padding-right: 24px;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  background: ${({ theme }) => theme.COLOR['gray-7']};
+`;
+
+const PaginationInner = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const S = {
   Wrapper,
   PaginationBox,
+  PaginationInner,
 };
 
 const ContentBox = styled.div`
