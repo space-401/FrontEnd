@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `;
 const TitleSection = styled.div`
   padding-top: 2rem;
-  width: 50%;
+  width: 956px;
   div {
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
     color: ${({ theme }) => theme.COLOR.white};
@@ -32,11 +32,11 @@ const TitleSection = styled.div`
 `;
 
 const Form = styled.form`
-  width: 50%;
+  width: 80%;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
+  grid-template-columns: 1fr 2fr;
   grid-template-rows: 60px 60px 60px;
   grid-gap: 32px;
   grid-template-areas: 'title1 input1' 'title2 input2' 'button button';

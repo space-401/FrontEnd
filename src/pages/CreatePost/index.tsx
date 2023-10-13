@@ -265,7 +265,7 @@ const CreatePost = () => {
       <S.GridWrapper>
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
-          <CircleIcon size={48} img_url={imgUrl}></CircleIcon>
+          <CircleIcon size={48} imgUrl={imgUrl}></CircleIcon>
           <div>{spaceTitle}</div>
         </S.SpaceInfoContainer>
 
