@@ -141,10 +141,11 @@ const MainBody = (props: PostListPropType) => {
         />
         <Calender
           isMain={true}
-          height={28}
+          width={200}
+          height={40}
           borderRadius={5}
           setDateInfo={setSelectedDate}
-          fontSize={10}
+          fontSize={12}
         />
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}

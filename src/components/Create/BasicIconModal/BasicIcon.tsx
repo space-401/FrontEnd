@@ -1,11 +1,11 @@
-import BasicIcon1 from '@/assets/svg/defaultImg/img1.svg';
-import BasicIcon2 from '@/assets/svg/defaultImg/img2.svg';
-import BasicIcon3 from '@/assets/svg/defaultImg/img3.svg';
-import BasicIcon4 from '@/assets/svg/defaultImg/img4.svg';
-import BasicIcon5 from '@/assets/svg/defaultImg/img5.svg';
+import spaceOne from '@/assets/basicSpaceImg/spaceOne.jpg';
+import spaceTwo from '@/assets/basicSpaceImg/spaceTwo.jpg';
+import spaceThree from '@/assets/basicSpaceImg/spaceThree.jpg';
+import spaceFour from '@/assets/basicSpaceImg/spaceFour.jpg';
+import spaceFive from '@/assets/basicSpaceImg/spaceFive.jpg';
 
 const BasicIcon = () => {
-  return [BasicIcon1, BasicIcon2, BasicIcon3, BasicIcon4, BasicIcon5];
+  return [spaceOne, spaceTwo, spaceThree, spaceFour, spaceFive];
 };
 
 export default BasicIcon;
