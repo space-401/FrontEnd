@@ -49,10 +49,6 @@ const CreateSpace = () => {
     false,
   ]);
 
-  useEffect(() => {
-    console.log('aaa', isBasicIcon);
-  }, [isBasicIcon]);
-
   //모달
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
