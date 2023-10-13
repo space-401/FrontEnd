@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
+import { modalBackGround, omitText } from '@styles/common';
 import { theme } from '@styles/theme/theme';
 
 const Container = styled.div`
+  ${modalBackGround}
   position: absolute;
   display: flex;
   height: 100vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 const RightWrapper = styled.div`

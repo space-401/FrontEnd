@@ -11,15 +11,9 @@ type ModalType = {
   imageArr: ImageArrType;
   setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
   isCircle: boolean;
-  setImageModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ImgEditModal = ({
-  imageArr,
-  setImageArr,
-  isCircle,
-  setImageModalOpen,
-}: ModalType) => {
+const ImgEditModal = ({ imageArr, setImageArr, isCircle }: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
   const myRefs = [cropperRef1];
   const sliderRef = useRef<any>();
@@ -37,9 +31,6 @@ const ImgEditModal = ({
         .toDataURL();
       setImageArr((prev) => ({ ...prev, cropImages: [newImage] }));
       ModalClose();
-      if (isCircle) {
-        setImageModalOpen!(false);
-      }
     }
   };
 
@@ -50,13 +41,13 @@ const ImgEditModal = ({
       setImageArr((prev) => ({ ...prev, cropImages: [] }));
     }
     getCropData(cropperRef1);
-    //기존에 크롭한 이미지가 존재하면 없애줌
-    setImageModalOpen!(false);
+    //기존에 크롭한 이미지가 있으면 없애줌
+    ModalClose();
   };
 
   //모달 취소
   const onClickCancelModal = () => {
-    isCircle ? setImageModalOpen!(false) : ModalClose();
+    ModalClose();
     setImageArr((prev) => ({ ...prev, images: [] }));
   };
 
