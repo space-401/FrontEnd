@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-direction: column;
-    ${flexCenter}
+    p {
+      padding-left: 10px;
+    }
   }
 `;
 
