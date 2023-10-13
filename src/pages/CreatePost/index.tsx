@@ -357,6 +357,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={5}>
           <Calender
+            width={270}
             height={60}
             isMain={false}
             setDateInfo={setDateInfo}

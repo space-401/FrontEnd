@@ -62,3 +62,7 @@ export const spaceCreate: ApiResponseType & { spaceId: number } = {
   message: 'success',
   spaceId: 20,
 };
+
+export const SpaceTag = {
+  tagList: tagList,
+};
