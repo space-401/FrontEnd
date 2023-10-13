@@ -3,7 +3,7 @@ import { modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: absolute;
-  ${modalBackGround}
+  ${modalBackGround};
   display: grid;
   grid-template-columns: 1fr 2fr;
   min-width: 1200px;
@@ -107,7 +107,7 @@ const SelectButton = styled.div`
 
 const PaginationSticky = styled.div`
   position: sticky;
-  bottom: 0px;
+  bottom: 0;
   background: ${({ theme }) => theme.COLOR['gray-6']};
 `;
 
