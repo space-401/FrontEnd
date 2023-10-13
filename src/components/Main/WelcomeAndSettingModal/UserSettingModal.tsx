@@ -13,6 +13,7 @@ import { UserType } from '@/types/post.type';
 import { makeObj } from '@/utils/makeObj';
 import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 import { theme } from '@/styles/theme/theme';
+import { usePhotoModalStore } from '@/store/modal';
 
 type SettingModalProps = {
   ModalClose: () => void;
@@ -34,11 +35,8 @@ const UserSettingModal = ({
   });
   const [errorMsg, setErrorMsg] = useState<string | null>();
 
-  const [isImageModalOpen, setImageModalOpen] = useState(false);
-
-  const onImageModalOpen = () => {
-    setImageModalOpen(true);
-  };
+  const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
+    usePhotoModalStore();
 
   const checkAlreadyNickname = () => {
     if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
@@ -82,7 +80,7 @@ const UserSettingModal = ({
   const onClickImgEditModal = () => {
     if (inputRef.current) {
       inputRef.current.click();
-      onImageModalOpen();
+      imgEditModalOpen();
     }
   };
 
@@ -113,9 +111,8 @@ const UserSettingModal = ({
     userNames && (
       <Box tabIndex={-1}>
         <S.Wrapper>
-          {isImageModalOpen && imageArr.images.length > 0 && (
+          {isImgEditModalOpen && imageArr.images.length > 0 && (
             <ImgEditModal
-              setImageModalOpen={setImageModalOpen}
               imageArr={imageArr}
               setImageArr={setImageArr}
               isCircle={true}
@@ -146,11 +143,7 @@ const UserSettingModal = ({
             ) : (
               <>
                 <M.Label isAlert={false}>프로필 사진</M.Label>
-                <M.ImgBox
-                  onClick={() => {
-                    setImageModalOpen(true);
-                  }}
-                >
+                <M.ImgBox onClick={imgEditModalOpen}>
                   <CircleIcon size={240} img_url={imageArr.cropImages[0]} />
                 </M.ImgBox>
               </>
