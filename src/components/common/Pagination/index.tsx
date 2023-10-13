@@ -31,7 +31,7 @@ const Pagination = (props: PaginationType) => {
     setPageState(newPage);
     movePage(newPage);
   };
-  console.log(pageState);
+
   return (
     <S.PaginationBox>
       <S.Button
