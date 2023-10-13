@@ -7,8 +7,6 @@ import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 
 const InviteCode = () => {
-  window.scrollTo({ top: 0 });
-
   //스페이스 코드
   const [spaceCode, setSpaceCode] = useState('');
   //비밀번호
@@ -72,6 +70,7 @@ const InviteCode = () => {
         </S.TitleContainer>
         <S.InputContainer number={1}>
           <InputBox
+            width={628}
             readonly={false}
             name={spaceCode}
             onChange={(e) => {
@@ -94,6 +93,7 @@ const InviteCode = () => {
               onCheckInputNumber(e);
             }}
             readonly={false}
+            width={628}
             height={60}
             type={isShowPswd ? 'text' : 'password'}
             placeholder="숫자 5자리를 입력해주세요"
@@ -116,6 +116,7 @@ const InviteCode = () => {
             disabled={spaceCode.length == 0 || pswd.length < 5}
             children="완료"
             onClick={() => {}}
+            width={76}
           />
         </S.ButtonContainer>
       </S.Form>
