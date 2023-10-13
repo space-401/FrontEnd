@@ -6,7 +6,7 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType, ImageArrType } from '@/types/image.type';
@@ -20,10 +20,10 @@ import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 import { CreateSpaceType } from '@/types/space.type';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import { useParams, useNavigate } from 'react-router-dom';
-import { makeObj } from '@/utils/makeObj';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
+import { postNewSpace } from '@/apis/space/postSpace';
 
 const CreateSpace = () => {
   window.scrollTo({ top: 0 });
@@ -36,9 +36,9 @@ const CreateSpace = () => {
 
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: spaceInfo ? makeObj([spaceInfo.imgUrl]) : [],
-    cropImages: spaceInfo ? [spaceInfo.imgUrl] : [],
-    convertedImages: [],
+    image: null,
+    cropImage: spaceInfo ? spaceInfo.imgUrl : null,
+    convertedImage: null,
   });
   const BasicIconArr = BasicIcon();
 
@@ -115,19 +115,18 @@ const CreateSpace = () => {
           id: 1,
           img: result,
         };
-        setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
+        setImageArr((prev: ImageArrType) => ({ ...prev, image: newObj }));
       }
     };
     reader.readAsDataURL(files[0]);
   };
 
-  //자식 inputRef 요소를 클릭하는 함수
+  //새로운 이미지 불러오는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
+    setIsIconModalOpen([false, false]);
+    setIsBasicIcon([false]);
+    inputRef.current?.click();
     PhotoModalOpen();
-    setIsIconModalOpen([false, isIconModalOpen[1]]);
   };
 
   //스페이스 생성하기
@@ -135,9 +134,10 @@ const CreateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImages[0],
-      spacePw: Number(pswd),
+      imgUrl: imageArr.convertedImage!,
+      spacePassword: Number(pswd),
     };
+    postNewSpace(newData);
     console.log('새로운 데이터', newData);
     confirmModalOpen(false);
   };
@@ -147,22 +147,13 @@ const CreateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImages[0],
-      spacePw: Number(pswd),
+      imgUrl: imageArr.convertedImage!,
+      spacePassword: Number(pswd),
     };
+    postNewSpace(newData);
     console.log('새로운 데이터', newData);
     confirmModalOpen(true);
   };
-
-  useEffect(() => {
-    if (isIconModalOpen[1]) {
-      setImageArr({
-        images: [],
-        cropImages: [],
-        convertedImages: [],
-      });
-    }
-  }, [isIconModalOpen, isBasicIcon]);
 
   const inputWidth = 628;
   const confirmOpen = useConfirmModalOpen();
@@ -173,10 +164,17 @@ const CreateSpace = () => {
 
   //기본 아이콘 선택 함수
   const onSelectBasicIcon = (index: number) => {
+    if (imageArr.cropImage) {
+      setImageArr({
+        image: null,
+        cropImage: null,
+        convertedImage: null,
+      });
+    }
     setIsBasicIcon([true, index]);
   };
 
-  /**확인 모달*/
+  //확인 모달
   const confirmModalOpen = (isUpdate: boolean) => {
     confirmOpen({
       AsyncAction: onMoveSpacePage,
@@ -206,62 +204,57 @@ const CreateSpace = () => {
       </S.TitleSection>
 
       {/*사진 편집 모달*/}
-      {isPhotoModalOpen && imageArr.images.length && (
+      {isPhotoModalOpen && imageArr.image && (
         <ImgEditModal
           isCircle={false}
           imageArr={imageArr}
           setImageArr={setImageArr}
+          onCloseIconModal={() => {
+            setIsIconModalOpen([false, false]);
+          }}
         />
       )}
 
       {/*아이콘 선택 모달*/}
-      {
-        <SelectIconModal
-          modalClose={() => {
-            setIsIconModalOpen([false, isIconModalOpen[1]]);
-          }}
-          isOpen={isIconModalOpen[0]}
-          onClickImgEditModal={onClickImgEditModal}
-          onMoveBasicIconModal={() => {
-            setIsIconModalOpen([false, true]);
-          }}
-        />
-      }
+      <SelectIconModal
+        modalClose={() => {
+          setIsIconModalOpen([false, isIconModalOpen[1]]);
+        }}
+        isOpen={isIconModalOpen[0]}
+        onClickImgEditModal={onClickImgEditModal}
+        onMoveBasicIconModal={() => {
+          setIsIconModalOpen([false, true]);
+        }}
+        selectedImage={imageArr.cropImage}
+      />
 
       {/*기본 아이콘 선택 모달*/}
-      {
-        <BasicIconModal
-          modalClose={() => {
-            setIsIconModalOpen([isIconModalOpen[0], false]);
-          }}
-          isOpen={isIconModalOpen[1]}
-          onSelectBasicIcon={onSelectBasicIcon}
-          isBasicIcon={isBasicIcon}
-        />
-      }
+      <BasicIconModal
+        modalClose={() => {
+          setIsIconModalOpen([isIconModalOpen[0], false]);
+        }}
+        isOpen={isIconModalOpen[1]}
+        onSelectBasicIcon={onSelectBasicIcon}
+        isBasicIcon={isBasicIcon}
+      />
 
       <S.Form>
         {/*아이콘 지정 인풋*/}
         <S.TitleContainer number={1} required={true}>
           <div>스페이스 아이콘</div>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              handleFileChange(e);
+            }}
+            ref={inputRef}
+          />
         </S.TitleContainer>
 
-        {imageArr.images.length == 0 && !isBasicIcon[0] ? (
-          <S.InputContainer
-            number={1}
-            onClick={() => {
-              setIsIconModalOpen([true, isIconModalOpen[1]]);
-            }}
-          >
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: 'none' }}
-              onChange={(e) => {
-                handleFileChange(e);
-              }}
-              ref={inputRef}
-            />
+        {!imageArr.cropImage && !isBasicIcon[0] ? (
+          <S.InputContainer number={1} onClick={onClickImgEditModal}>
             <BasicBox width={160} borderradius={10}>
               <PhotoIcon />
             </BasicBox>
@@ -275,16 +268,12 @@ const CreateSpace = () => {
               backgroundImage={
                 isBasicIcon[0] == true
                   ? BasicIconArr[isBasicIcon[1]]
-                  : imageArr.cropImages[0]
+                  : imageArr.cropImage!
               }
               width={160}
               borderradius={10}
               color="grey"
             ></BasicBox>
-            {/*사진 선택 시에만 편집하기 생성*/}
-            {!isBasicIcon[0] && (
-              <S.EditButton onClick={PhotoModalOpen}>편집하기</S.EditButton>
-            )}
           </S.InputContainer>
         )}
 
@@ -400,7 +389,7 @@ const CreateSpace = () => {
               fontSize={16}
               height={47}
               disabled={
-                (!imageArr.cropImages.length && !isBasicIcon[0]) ||
+                (!imageArr.cropImage && !isBasicIcon[0]) ||
                 !title.length ||
                 pswd.length < 5
               }
@@ -413,7 +402,7 @@ const CreateSpace = () => {
               fontSize={16}
               height={47}
               disabled={
-                (!imageArr.cropImages.length && !isBasicIcon[0]) ||
+                (!imageArr.cropImage && !isBasicIcon[0]) ||
                 !title.length ||
                 pswd.length < 5
               }

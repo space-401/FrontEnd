@@ -10,7 +10,6 @@ import BasicButton from '@/components/common/BasicButton';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { Box } from '@mui/material';
 import { UserType } from '@/types/post.type';
-import { makeObj } from '@/utils/makeObj';
 import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
@@ -29,9 +28,9 @@ const UserSettingModal = ({
 }: SettingModalProps) => {
   const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: userInfo ? makeObj([userInfo.imgUrl!]) : [],
-    cropImages: userInfo ? [userInfo.imgUrl!] : [],
-    convertedImages: [],
+    image: null,
+    cropImage: userInfo ? userInfo.imgUrl! : null,
+    convertedImage: null,
   });
   const [errorMsg, setErrorMsg] = useState<string | null>();
 
@@ -40,11 +39,9 @@ const UserSettingModal = ({
 
   const checkAlreadyNickname = () => {
     if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
-      console.log('중복');
       setErrorMsg('중복된 닉네임입니다.');
       return false;
     } else {
-      console.log('중복 아님');
       setErrorMsg(null);
       return true;
     }
@@ -70,7 +67,7 @@ const UserSettingModal = ({
           id: 1,
           img: result,
         };
-        setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
+        setImageArr((prev: ImageArrType) => ({ ...prev, image: newObj }));
       }
     };
     reader.readAsDataURL(files[0]);
@@ -78,18 +75,14 @@ const UserSettingModal = ({
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-      imgEditModalOpen();
-    }
+    inputRef.current?.click();
+    imgEditModalOpen();
   };
 
   //제출 함수
   const onSubmitInfo = async () => {
     const result = checkAlreadyNickname();
-
     if (result) {
-      console.log('성공');
       ModalClose();
       confirmModalOpen();
     }
@@ -111,7 +104,7 @@ const UserSettingModal = ({
     userNames && (
       <Box tabIndex={-1}>
         <S.Wrapper>
-          {isImgEditModalOpen && imageArr.images.length > 0 && (
+          {isImgEditModalOpen && imageArr.image && (
             <ImgEditModal
               imageArr={imageArr}
               setImageArr={setImageArr}
@@ -123,28 +116,31 @@ const UserSettingModal = ({
             <S.DetailText>
               스페이스에서 사용할 프로필과
               <br /> 닉네임을 지정해 주세요.
-            </S.DetailText>
-            {imageArr.images.length == 0 ? (
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  handleFileChange(e);
+                }}
+                ref={inputRef}
+              />
+            </S.DetailText>{' '}
+            <M.Label isAlert={false}>프로필 사진</M.Label>
+            {!imageArr.cropImage ? (
               <>
-                <M.Label isAlert={false}>프로필 사진</M.Label>
                 <M.ImgBox onClick={onClickImgEditModal}>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    onChange={(e) => {
-                      handleFileChange(e);
-                    }}
-                    ref={inputRef}
-                  />
                   <ProfileMock />
                 </M.ImgBox>
               </>
             ) : (
               <>
-                <M.Label isAlert={false}>프로필 사진</M.Label>
                 <M.ImgBox onClick={imgEditModalOpen}>
-                  <CircleIcon size={240} img_url={imageArr.cropImages[0]} />
+                  <CircleIcon
+                    size={240}
+                    imgUrl={imageArr.cropImage!}
+                    onClick={onClickImgEditModal}
+                  />
                 </M.ImgBox>
               </>
             )}
@@ -172,7 +168,6 @@ const UserSettingModal = ({
               }
             />
             {errorMsg && <M.Label isAlert={true}>{errorMsg}</M.Label>}
-
             <S.ButtonContainer>
               <BasicButton
                 width={212}

@@ -95,5 +95,5 @@ export type CreateSpaceType = {
   spaceTitle: string;
   spaceDescription: string;
   imgUrl: File;
-  spacePw: number;
+  spacePassword: number;
 };
