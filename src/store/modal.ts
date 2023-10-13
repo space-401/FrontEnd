@@ -4,7 +4,6 @@ import {
   ConfirmModalType,
   DetailModalType,
   ModalType,
-  ModeType,
 } from '@type/modal.type';
 
 export const useDetailModalStore = create<DetailModalType>((setState) => ({
@@ -48,36 +47,6 @@ export const useConfirmModalStore = create<ConfirmModalType>((setState) => ({
 }));
 
 export const usePhotoModalStore = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
-export const useEditModeStore = create<ModeType>((setState) => ({
-  isMode: false,
-  ModeOn: () => setState(() => ({ isMode: true })),
-  ModeClose: () => setState(() => ({ isMode: false })),
-}));
-
-export const useSelectIconModalStore = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
-export const useSelectBasicIconModalStore = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
-export const useCreateUserModal = create<ModalType>((setState) => ({
-  isOpen: false,
-  ModalOpen: () => setState(() => ({ isOpen: true })),
-  ModalClose: () => setState(() => ({ isOpen: false })),
-}));
-
-export const useTagEditModal = create<ModalType>((setState) => ({
   isOpen: false,
   ModalOpen: () => setState(() => ({ isOpen: true })),
   ModalClose: () => setState(() => ({ isOpen: false })),

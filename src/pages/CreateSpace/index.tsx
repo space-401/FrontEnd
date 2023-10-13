@@ -7,12 +7,7 @@ import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
 import { useState, useRef, useEffect } from 'react';
-import {
-  usePhotoModalStore,
-  useSelectIconModalStore,
-  useSelectBasicIconModalStore,
-  useTagEditModal,
-} from '@/store/modal';
+import { usePhotoModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType, ImageArrType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
@@ -24,10 +19,9 @@ import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 import { CreateSpaceType } from '@/types/space.type';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { makeObj } from '@/utils/makeObj';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
 
@@ -40,9 +34,6 @@ const CreateSpace = () => {
 
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
 
-  //기본 이미지 선택
-  const [isBasicImg, setIsBasicImg] = useState<boolean>(false);
-  //기본 이미지
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
     images: spaceInfo ? makeObj([spaceInfo.imgUrl]) : [],
@@ -51,27 +42,30 @@ const CreateSpace = () => {
   });
   const BasicIconArr = BasicIcon();
 
-  //기본이미지 선택
-  const [selectIconIdx, setSelectIconIdx] = useState(0);
-
   const inputRef = useRef<HTMLInputElement>(null);
+
+  //기본 스페이스 아이콘 선택 [선택 여부, 선택 아이콘 인덱스]
+  const [isBasicIcon, setIsBasicIcon] = useState<[false] | [true, number]>([
+    false,
+  ]);
+
+  useEffect(() => {
+    console.log('aaa', isBasicIcon);
+  }, [isBasicIcon]);
 
   //모달
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
-  //현재 아이콘 선택 모달이 열려있는지
-  const {
-    ModalOpen: IconModalOpen,
-    ModalClose: IconModalClose,
-    isOpen: isIconModalOpen,
-  } = useSelectIconModalStore();
-  //현재 기본 아이콘 선택 모달이 열려있는지
-  const {
-    ModalOpen: BasicIconModalOpen,
-    ModalClose: BasicIconModalClose,
-    isOpen: isBasicIconModalOpen,
-  } = useSelectBasicIconModalStore();
+
+  //현재 아이콘 선택 모달이 열려있는지 [아이콘 모달, 기본 아이콘 모달]
+  const [isIconModalOpen, setIsIconModalOpen] = useState<[boolean, boolean]>([
+    false,
+    false,
+  ]);
+
+  //태그 편집 모달이 열려있는지
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
 
   //스페이스 명, 스페이스 설명
   const { values, onChange } = useInputs({
@@ -82,6 +76,7 @@ const CreateSpace = () => {
 
   //비밀번호
   const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePw : '');
+
   //비밀번호 보이기,숨기기
   const [isShowPswd, setIsShowPswd] = useState(false);
   const onToggleShowPswd = () => {
@@ -136,13 +131,7 @@ const CreateSpace = () => {
       inputRef.current.click();
     }
     PhotoModalOpen();
-    IconModalClose();
-  };
-
-  //기본 아이콘 이미지 선택 모달
-  const onMoveBasicIconModal = () => {
-    BasicIconModalOpen();
-    IconModalClose();
+    setIsIconModalOpen([false, isIconModalOpen[1]]);
   };
 
   //스페이스 생성하기
@@ -170,24 +159,25 @@ const CreateSpace = () => {
   };
 
   useEffect(() => {
-    if (isIconModalOpen) {
-      setIsBasicImg(false);
-    }
-    if (isBasicIconModalOpen) {
-      setIsBasicImg(true);
+    if (isIconModalOpen[1]) {
       setImageArr({
         images: [],
         cropImages: [],
         convertedImages: [],
       });
     }
-  }, [isIconModalOpen, isBasicIconModalOpen]);
+  }, [isIconModalOpen, isBasicIcon]);
 
   const inputWidth = 628;
   const confirmOpen = useConfirmModalOpen();
 
   const onMoveSpacePage = () => {
     navigate(`/space/${spaceId}`);
+  };
+
+  //기본 아이콘 선택 함수
+  const onSelectBasicIcon = (index: number) => {
+    setIsBasicIcon([true, index]);
   };
 
   /**확인 모달*/
@@ -203,61 +193,70 @@ const CreateSpace = () => {
     });
   };
 
-  const {
-    isOpen: isTagModalOpen,
-    ModalClose: TagModalClose,
-    ModalOpen: TagModalOpen,
-  } = useTagEditModal();
-
   return (
     <S.Wrapper>
       {spaceId && isTagModalOpen && (
         <TagEditModal
           spaceId={spaceId}
           isOpen={isTagModalOpen}
-          modalClose={TagModalClose}
+          modalClose={() => {
+            setIsTagModalOpen(false);
+          }}
         />
       )}
       <S.TitleSection>
         <div>스페이스 설정하기</div>
         <p>우리만을 위한 스페이스를 새로 만들어요.</p>
       </S.TitleSection>
+
       {/*사진 편집 모달*/}
       {isPhotoModalOpen && imageArr.images.length && (
         <ImgEditModal
-          // 임시로 넣은 setImageModalOpen
-          setImageModalOpen={() => {}}
           isCircle={false}
           imageArr={imageArr}
           setImageArr={setImageArr}
         />
       )}
+
       {/*아이콘 선택 모달*/}
-      {isIconModalOpen && (
+      {
         <SelectIconModal
-          modalClose={IconModalClose}
-          isOpen={isIconModalOpen}
+          modalClose={() => {
+            setIsIconModalOpen([false, isIconModalOpen[1]]);
+          }}
+          isOpen={isIconModalOpen[0]}
           onClickImgEditModal={onClickImgEditModal}
-          onMoveBasicIconModal={onMoveBasicIconModal}
+          onMoveBasicIconModal={() => {
+            setIsIconModalOpen([false, true]);
+          }}
         />
-      )}
+      }
+
       {/*기본 아이콘 선택 모달*/}
-      {isBasicIconModalOpen && (
+      {
         <BasicIconModal
-          modalClose={BasicIconModalClose}
-          isOpen={isBasicIconModalOpen}
-          selectIconIdx={selectIconIdx}
-          setSelectIconIdx={setSelectIconIdx}
+          modalClose={() => {
+            setIsIconModalOpen([isIconModalOpen[0], false]);
+          }}
+          isOpen={isIconModalOpen[1]}
+          onSelectBasicIcon={onSelectBasicIcon}
+          isBasicIcon={isBasicIcon}
         />
-      )}
+      }
+
       <S.Form>
         {/*아이콘 지정 인풋*/}
         <S.TitleContainer number={1} required={true}>
           <div>스페이스 아이콘</div>
         </S.TitleContainer>
 
-        {imageArr.images.length == 0 && !isBasicImg ? (
-          <S.InputContainer number={1} onClick={IconModalOpen}>
+        {imageArr.images.length == 0 && !isBasicIcon[0] ? (
+          <S.InputContainer
+            number={1}
+            onClick={() => {
+              setIsIconModalOpen([true, isIconModalOpen[1]]);
+            }}
+          >
             <input
               type="file"
               accept="image/*"
@@ -274,17 +273,22 @@ const CreateSpace = () => {
         ) : (
           <S.InputContainer number={1}>
             <BasicBox
-              onClick={IconModalOpen}
+              onClick={() => {
+                setIsIconModalOpen([true, false]);
+              }}
               backgroundImage={
-                isBasicImg && !isBasicIconModalOpen
-                  ? BasicIconArr[selectIconIdx]
+                isBasicIcon[0] == true
+                  ? BasicIconArr[isBasicIcon[1]]
                   : imageArr.cropImages[0]
               }
               width={160}
               borderradius={10}
               color="grey"
             ></BasicBox>
-            <S.EditButton onClick={PhotoModalOpen}>편집하기</S.EditButton>
+            {/*사진 선택 시에만 편집하기 생성*/}
+            {!isBasicIcon[0] && (
+              <S.EditButton onClick={PhotoModalOpen}>편집하기</S.EditButton>
+            )}
           </S.InputContainer>
         )}
 
@@ -375,7 +379,9 @@ const CreateSpace = () => {
         </S.FlexContainer>
         <S.InputContainer number={5}>
           <BasicButton
-            onClick={TagModalOpen}
+            onClick={() => {
+              setIsTagModalOpen(true);
+            }}
             backgroundColor={theme.COLOR.white}
             borderRadius={10}
             width={160}
@@ -398,7 +404,7 @@ const CreateSpace = () => {
               fontSize={16}
               height={47}
               disabled={
-                (!imageArr.cropImages.length && !isBasicImg) ||
+                (!imageArr.cropImages.length && !isBasicIcon[0]) ||
                 !title.length ||
                 pswd.length < 5
               }
@@ -411,7 +417,7 @@ const CreateSpace = () => {
               fontSize={16}
               height={47}
               disabled={
-                (!imageArr.cropImages.length && !isBasicImg) ||
+                (!imageArr.cropImages.length && !isBasicIcon[0]) ||
                 !title.length ||
                 pswd.length < 5
               }
