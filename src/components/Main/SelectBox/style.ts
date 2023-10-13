@@ -27,7 +27,7 @@ import styled from 'styled-components';
 
 const LabelTitle = styled.div`
   font-size: 12px;
-  ${omitText}
+  ${omitText};
   width: 120px;
 `;
 
@@ -56,6 +56,7 @@ const MenuList = styled.ul<{
   padding: 8px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 5px;
+  max-height: ${({ grid, maxHeight }) => (grid ? '' : maxHeight + 'px')};
   transition: height 0.5s;
   ${({ grid, menuWidth }) =>
     grid
@@ -65,7 +66,7 @@ const MenuList = styled.ul<{
       : 'display:flex; gap: 2px;'}
 
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   li {
     height: 32px;
@@ -93,7 +94,7 @@ const MenuList = styled.ul<{
 const Container = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   left: 0;
-  top: 60px;
+  top: 50px;
   width: 100%;
   height: 0;
   overflow: ${({ $isOpen }) => ($isOpen ? '' : 'hidden')};

@@ -76,6 +76,7 @@ export type SpacePostListProps = {
   page: number;
   total: number;
   itemLength: number;
+  movePage: (pageNumber: number | undefined) => void;
 };
 
 export type PaginationType = {

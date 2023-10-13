@@ -18,15 +18,20 @@ type LeftSectionPropType = {
   page: number;
   total: number;
   itemLength: number;
-};
-
-const movePage = (page: number) => {
-  console.log(page);
+  movePage: (pageNumber: number | undefined) => void;
 };
 
 const LeftSection = (props: LeftSectionPropType) => {
-  const { setIsSelect, setState, isSelect, postList, total, page, itemLength } =
-    props;
+  const {
+    setIsSelect,
+    setState,
+    movePage,
+    isSelect,
+    postList,
+    total,
+    page,
+    itemLength,
+  } = props;
 
   return (
     <S.Wrapper>
@@ -58,12 +63,14 @@ const LeftSection = (props: LeftSectionPropType) => {
         );
       })}
       <S.PaginationBox>
-        <Pagination
-          movePage={movePage}
-          total={total}
-          page={page}
-          itemLength={itemLength}
-        />
+        <S.PaginationInner>
+          <Pagination
+            movePage={movePage}
+            total={total}
+            page={page}
+            itemLength={itemLength}
+          />
+        </S.PaginationInner>
       </S.PaginationBox>
     </S.Wrapper>
   );
