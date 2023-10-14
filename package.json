@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "lint:fix": "eslint --fix --cache \"src/**/*.{ts,tsx}\"",
     "formatter": "prettier --write --cache \"src/**/*.{ts,tsx}\"",
-    "install" : "husky install"
+    "install": "husky install"
   },
   "lint-staged": {
     "src/**/*.{js,ts,jsx,tsx}": [
@@ -83,6 +83,7 @@
     "vite": "^4.4.5",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-favicon2": "^1.1.5",
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0"
   },
