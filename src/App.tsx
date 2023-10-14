@@ -6,14 +6,9 @@ import { worker } from '@mocks/browser';
 import { motion, useScroll } from 'framer-motion';
 
 function App() {
-  const { scrollYProgress } = useScroll();
   worker.start();
   return (
     <KkiriProvider>
-      <motion.div
-        className="progress-bar"
-        style={{ scaleX: scrollYProgress, zIndex: 900 }}
-      />
       <RouterProvider router={router} />
     </KkiriProvider>
   );
