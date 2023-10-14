@@ -12,6 +12,7 @@ import BackLayout from '@layout/BackLayout';
 import SelectSpaceSkeleton from '@components/SelectSpace/Skeleton';
 import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
 import { AuthPage, InviteCodePage, SignPage } from '@router/lazy';
+import LandingPage from '@pages/Landing';
 
 const router = createBrowserRouter([
   {
@@ -95,20 +96,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: PATH.LANDING,
-    element: (
-      <Suspense fallback={<>loading...</>}>
-        <SignPage />
-      </Suspense>
-    ),
+    path: PATH.LOGIN,
+    element: <SignPage />,
   },
   {
     path: PATH.AUTH,
-    element: (
-      <Suspense fallback={<>loading...</>}>
-        <AuthPage />
-      </Suspense>
-    ),
+    element: <AuthPage />,
+  },
+  {
+    path: PATH.LANDING,
+    element: <LandingPage />,
   },
 ]);
 export default router;
