@@ -109,7 +109,7 @@ export const S = {
 
 const Container = styled.div`
   position: absolute;
-  ${modalBackGround}
+  ${modalBackGround};
   padding: 16px 0;
   display: inline-flex;
   width: 526px;

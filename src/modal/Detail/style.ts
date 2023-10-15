@@ -3,7 +3,7 @@ import { modalBackGround, omitText } from '@styles/common';
 import { theme } from '@styles/theme/theme';
 
 const Container = styled.div`
-  ${modalBackGround}
+  ${modalBackGround};
   position: absolute;
   display: flex;
   height: 100vh;

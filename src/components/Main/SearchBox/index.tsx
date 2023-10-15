@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
 import { useSearchParams } from 'react-router-dom';
 
 const MainSearchBox = (props: SearchProps) => {
-  const { state, placeholder, date } = props;
+  const { state, placeholder, date, height, width } = props;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = useRef('');
@@ -45,11 +45,12 @@ const MainSearchBox = (props: SearchProps) => {
   };
 
   return (
-    <S.Wrapper onSubmit={onSubmit}>
+    <S.Wrapper height={height} onSubmit={onSubmit}>
       <S.IconBox>
         <SearchIcon width={12} height={12} />
       </S.IconBox>
       <S.SearchInput
+        width={width}
         placeholder={placeholder}
         autoFocus={true}
         onChange={(e) => onChange(e, keyword)}

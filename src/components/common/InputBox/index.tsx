@@ -32,7 +32,7 @@ const InputBox = ({
   paddingTop,
   ...rest
 }: InputBoxProps) => {
-  const hasIcon = children ? true : false;
+  const hasIcon = !!children;
 
   return (
     <S.InputWrapper {...rest}>

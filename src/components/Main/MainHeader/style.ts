@@ -50,7 +50,7 @@ const MainInfo = styled.div``;
 
 const MainTitle = styled.div`
   display: flex;
-  height: 40px;
+  height: 41px;
   color: ${({ theme }) => theme.COLOR.white};
   font-size: 48px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};

@@ -26,8 +26,6 @@ import TagEditModal from '@/components/Create/TagEditModal';
 import { postNewSpace } from '@/apis/space/postSpace';
 
 const CreateSpace = () => {
-  window.scrollTo({ top: 0 });
-
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
@@ -266,7 +264,7 @@ const CreateSpace = () => {
                 setIsIconModalOpen([true, false]);
               }}
               backgroundImage={
-                isBasicIcon[0] == true
+                isBasicIcon[0]
                   ? BasicIconArr[isBasicIcon[1]]
                   : imageArr.cropImage!
               }

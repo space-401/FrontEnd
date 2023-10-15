@@ -18,6 +18,7 @@ import { Toaster } from 'react-hot-toast';
 import HeaderSkeleton from '@layout/HeaderLayout/Skeleton/Header';
 import DetailInnerSkeleton from 'src/components/Detail/Skeleton';
 import Header from '@layout/HeaderLayout/Header';
+import { motion, useScroll } from 'framer-motion';
 
 const HeaderLayOut = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =
@@ -27,8 +28,13 @@ const HeaderLayOut = () => {
   const { ModalClose: AlertModalClose, isOpen: AlertIsOpen } =
     useAlertModalStore((state) => state);
 
+  const { scrollYProgress } = useScroll();
   return (
     <>
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress, zIndex: 900 }}
+      />
       <Toaster position={'top-center'} />
       <S.Wrapper>
         <AlertModal
