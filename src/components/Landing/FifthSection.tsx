@@ -11,7 +11,7 @@ const FifthSection = ({ marginTop }: SectionProps) => {
   return (
     <S.Wrapper>
       <S.MarginBox marginTop={marginTop} />
-      <S.BackGround>
+      <S.BackGround data-aos-duration="1500" data-aos="fade-down">
         <S.ImgBox>
           <BottomBackImg />
           <S.RandingButton onClick={onClick} bottom={72}>
