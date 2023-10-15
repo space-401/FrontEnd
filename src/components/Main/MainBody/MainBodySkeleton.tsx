@@ -6,10 +6,10 @@ const PostList = () => {
   return (
     <S.Wrapper>
       <S.FilterGroup>
-        <KSkeleton variant={'rounded'} width={105} height={28} />
-        <KSkeleton variant={'rounded'} width={105} height={28} />
-        <KSkeleton variant={'rounded'} width={105} height={28} />
-        <KSkeleton variant={'rounded'} width={105} height={28} />
+        <KSkeleton variant={'rounded'} width={150} height={40} />
+        <KSkeleton variant={'rounded'} width={200} height={40} />
+        <KSkeleton variant={'rounded'} width={150} height={40} />
+        <KSkeleton variant={'rounded'} width={150} height={40} />
       </S.FilterGroup>
       <S.PostList>
         <KSkeleton

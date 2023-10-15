@@ -18,7 +18,6 @@ const Header = () => {
 
   const params = useParams();
   const currentSpaceId = Number(params.spaceId);
-
   return (
     <S.HeaderWrapper>
       <S.Container>

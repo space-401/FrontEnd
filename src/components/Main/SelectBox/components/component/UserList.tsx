@@ -12,7 +12,6 @@ const UserList = (prop: UserListProps) => {
             width: '20px',
             height: '20px',
             background: 'white',
-            padding: '2px',
           }}
           alt={Item.userName}
           src={Item.imgUrl}

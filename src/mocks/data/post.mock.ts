@@ -16,10 +16,6 @@ export const postList: SpacePostType[] = [
     selectedTags: [
       { tagId: 1, tagTitle: '일상속 하루' },
       { tagId: 2, tagTitle: '커피 한잔의 여유' },
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),

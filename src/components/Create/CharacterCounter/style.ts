@@ -11,7 +11,6 @@ const CountWrapper = styled.div<ICountWrapper>`
   background-color: ${({ backgroundColor }) => backgroundColor};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   width: 80px;
-  height: 30px;
   margin-left: 10px;
   border-radius: 10px;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};

@@ -74,40 +74,36 @@ const MainBody = (props: PostListPropType) => {
 
   const setUserState = (newUserState: selectType[]) => {
     setState((prev) => ({ ...prev, selectUserList: newUserState }));
+    movePage(undefined);
   };
   const setTagState = (newTagState: selectType[]) => {
     setState((prev) => ({ ...prev, selectTagList: newTagState }));
+    movePage(undefined);
   };
-
-  const movePage = (pageNumber: number) => {
+  const movePage = (pageNumber: number | undefined) => {
     let select = {};
     if (state.selectUserList.length !== 0) {
-      state.selectUserList.forEach((user) => {
-        select = { ...select, user: user.id };
-      });
+      select = { ...select, userList: state.selectUserList.map((v) => v.id) };
     }
     if (state.selectTagList.length !== 0) {
-      state.selectTagList.forEach((tag) => {
-        select = { ...select, tag: tag.id };
-      });
+      select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
     }
     if (selectedDate.startDate) {
       select = {
         ...select,
         startDate: selectedDate.startDate,
-      };
-    }
-    if (selectedDate.startDate) {
-      select = {
-        ...select,
         endDate: selectedDate.endDate,
       };
     }
     if (keyword) {
       select = { ...select, keyword: keyword };
     }
+    if (!pageNumber && page) {
+      select = { ...select, page: page };
+    } else if (pageNumber) {
+      select = { ...select, page: pageNumber };
+    }
     setSearchParams(select);
-    setSearchParams({ ...select, page: String(pageNumber) });
     window.scrollTo({ top: 0 });
   };
 
@@ -142,10 +138,11 @@ const MainBody = (props: PostListPropType) => {
         />
         <Calender
           isMain={true}
-          height={38}
+          width={200}
+          height={40}
           borderRadius={5}
           setDateInfo={setSelectedDate}
-          fontSize={10}
+          fontSize={12}
         />
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}
@@ -221,6 +218,7 @@ const MainBody = (props: PostListPropType) => {
       {selectState && (
         <Suspense fallback={<PostMapSkeleton />}>
           <PostMap
+            movePage={movePage}
             page={curPage}
             total={total}
             itemLength={itemLength}

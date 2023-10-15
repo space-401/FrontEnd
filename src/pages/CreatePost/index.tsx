@@ -19,10 +19,9 @@ import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
 import { DateInfoType } from '@/types/post.type';
-import { ImageType, ImageArrType } from '@/types/image.type';
+import { ImageType, ImagesArrType } from '@/types/image.type';
 import { useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
-import { makeObj } from '@/utils/makeObj';
 import { CreatePostType } from '@/types/post.type';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
@@ -32,6 +31,7 @@ import {
   onConvertedTagToSelectType,
 } from '@/utils/selectTypeConvertor';
 import { postPost } from '@/apis/post/postPost';
+import { convertImgArrToObj } from '@/utils/makeObj';
 
 const CreatePost = () => {
   window.scrollTo({ top: 0 });
@@ -48,8 +48,8 @@ const CreatePost = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   //이미지 파일을 저장하는 곳
-  const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: postDetailData ? makeObj(postDetailData.imgUrl) : [],
+  const [imageArr, setImageArr] = useState<ImagesArrType>({
+    images: postDetailData ? convertImgArrToObj(postDetailData.imgUrl) : [],
     cropImages: postDetailData ? postDetailData.imgUrl : [],
     convertedImages: [],
   });
@@ -158,6 +158,7 @@ const CreatePost = () => {
       placeTitle: mapInfo.content,
       date: dateInfo,
     };
+
     console.log(newPost);
     postPost(Number(spaceId!));
     //api 로직
@@ -203,14 +204,16 @@ const CreatePost = () => {
 
   return (
     <S.Wrapper>
-      {isOpen && imageArr.images.length && (
-        <ImagesEditModal
-          imageArr={imageArr}
-          setImageArr={setImageArr}
-          currentIdx={currentIdx}
-          setCurrentIdx={setCurrentIdx}
-          handleFileChange={handleFileChange}
-        />
+      {isOpen && imageArr.images.length > 0 && (
+        <>
+          <ImagesEditModal
+            imageArr={imageArr}
+            setImageArr={setImageArr}
+            currentIdx={currentIdx}
+            setCurrentIdx={setCurrentIdx}
+            handleFileChange={handleFileChange}
+          />
+        </>
       )}
 
       {imageArr.cropImages.length == 0 ? (
@@ -262,7 +265,7 @@ const CreatePost = () => {
       <S.GridWrapper>
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
-          <CircleIcon size={48} img_url={imgUrl}></CircleIcon>
+          <CircleIcon size={48} imgUrl={imgUrl}></CircleIcon>
           <div>{spaceTitle}</div>
         </S.SpaceInfoContainer>
 
@@ -355,6 +358,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={5}>
           <Calender
+            width={270}
             height={60}
             isMain={false}
             setDateInfo={setDateInfo}

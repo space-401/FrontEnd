@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -11,13 +11,11 @@ const Wrapper = styled.div`
 `;
 
 const Form = styled.form`
+  ${modalBackGround}
   z-index: 10000;
   ${flexCenter};
   flex-direction: column;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;

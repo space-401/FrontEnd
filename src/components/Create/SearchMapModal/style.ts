@@ -1,10 +1,9 @@
 import styled from 'styled-components';
+import { modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${modalBackGround};
   display: grid;
   grid-template-columns: 1fr 2fr;
   min-width: 1200px;
@@ -57,6 +56,12 @@ const SearchList = styled.ul`
   flex-direction: column;
   height: 100%;
   gap: 10px;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const OneList = styled.li<{ select: boolean }>`
@@ -99,6 +104,19 @@ const SelectButton = styled.div`
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR.skyblue};
 `;
+
+const PaginationSticky = styled.div`
+  position: sticky;
+  bottom: 0;
+  background: ${({ theme }) => theme.COLOR['gray-6']};
+`;
+
+const StickyInner = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 export const S = {
   Wrapper,
   LeftContainer,
@@ -112,6 +130,8 @@ export const S = {
   LeftInfo,
   RightButton,
   SelectButton,
+  PaginationSticky,
+  StickyInner,
 };
 
 const PaginationBox = styled.div`
@@ -130,7 +150,7 @@ const Button = styled.button<{
   isHidden?: boolean;
   select?: boolean;
 }>`
-  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   position: relative;
   width: ${({ width }) => (width ? width : '')}px;
   height: 20px;

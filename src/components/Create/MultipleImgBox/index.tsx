@@ -5,11 +5,11 @@ import { useRef, useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { ImageType } from '@/types/image.type';
 import React from 'react';
-import { ImageArrType } from '@/types/image.type';
+import { ImagesArrType } from '@/types/image.type';
 
 type MultiBoxType = {
-  imageArr: ImageArrType;
-  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
+  imageArr: ImagesArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImagesArrType>>;
   isBackground: boolean;
   setCurrentIdx?: React.Dispatch<React.SetStateAction<number>>;
   currentIdx?: number;
@@ -41,7 +41,7 @@ const MultipleImgBox = ({
   };
 
   useEffect(() => {
-    setCurrentLength(imageArr.images.length);
+    setCurrentLength(imageArr.images?.length);
   }, [imageArr]);
 
   //이미지는 10개까지만 추가 설정
@@ -120,7 +120,7 @@ const MultipleImgBox = ({
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper width={screenWidth}>
       <S.Container>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="imgList" direction="horizontal">
