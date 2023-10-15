@@ -12,7 +12,10 @@ const FirstSection = () => {
       <L.Container>
         <L.ImgBox data-aos-duration="1500" data-aos="fade-up">
           <LandingTopImg />
-          <L.RandingButton onClick={() => navigate(PATH.LOGIN)} bottom={145}>
+          <L.RandingButton
+            onClick={() => navigate(PATH.LOGIN, { replace: true })}
+            bottom={145}
+          >
             시작하기
             <ArrowSvg />
           </L.RandingButton>

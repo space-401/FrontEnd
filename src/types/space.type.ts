@@ -31,7 +31,6 @@ export type AlarmType = {
   create_at: string;
   alarmMessage: string;
 };
-//포스트 타입
 
 export type SpacePostType = {
   postId: number;
