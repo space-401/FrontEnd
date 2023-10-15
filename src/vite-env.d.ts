@@ -1,14 +1,18 @@
-//vite-env.d.ts : env 타입을 정의하는 파일
 
 import 'vite/client';
 
 declare global {
   interface ImportMetaEnv {
-    // VITE_APP_API_KEY: string;
-    // VITE_APP_DEBUG: boolean;
-    // 추가 환경 변수들...
+    VITE_BASE_URL: string;
+    VITE_BACK_URL: string;
+    VITE_KAKAO_KEY: string;
+    VITE_KAKAO_REST_API: string;
+    VITE_NAVER_CLIENT_ID: string;
+    VITE_NAVER_CLIENT_KEY: string;
+    VITE_GOOGLE_CLIENT_ID: string;
   }
 }
 
-//import.meta.env 를 통해 환경변수 접근 가능
-//참고 : https://khj0426.tistory.com/238
+interface ImportMeta {
+  readonly env : ImportMetaEnv
+}

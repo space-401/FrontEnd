@@ -50,9 +50,9 @@ const MainInfo = styled.div``;
 
 const MainTitle = styled.div`
   display: flex;
-  height: 40px;
+  height: 41px;
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: 56px;
+  font-size: 48px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-600']};
   align-items: center;
 `;
@@ -117,7 +117,7 @@ const ControlButton = styled.div<{
   }
 
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 
   transition: 0.5s;

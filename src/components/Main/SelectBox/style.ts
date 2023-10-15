@@ -27,16 +27,16 @@ const Wrapper = styled.div<{
 import styled from 'styled-components';
 
 const LabelTitle = styled.div`
-  font-size: 10px;
-  ${omitText}
+  font-size: 12px;
+  ${omitText};
+  width: 120px;
 `;
 
 const ModalButton = styled.div``;
 
 const SearchInput = styled.input`
-  width: 100%;
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: 10px;
+  font-size: 12px;
   background-color: inherit;
   padding: 5px 8px;
 
@@ -57,6 +57,7 @@ const MenuList = styled.ul<{
   padding: 8px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 5px;
+  max-height: ${({ grid, maxHeight }) => (grid ? '' : maxHeight + 'px')};
   transition: height 0.5s;
   ${({ grid, menuWidth }) =>
     grid
@@ -66,7 +67,7 @@ const MenuList = styled.ul<{
       : 'display:flex; gap: 2px;'}
 
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   li {
     height: 32px;

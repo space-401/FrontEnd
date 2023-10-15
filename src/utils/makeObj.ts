@@ -1,11 +1,11 @@
 import { ImageType } from '@/types/image.type';
 
-export const makeObj = (array: string[]) => {
+export const convertImgArrToObj = (imgUrl: string[]) => {
   const newObj: ImageType[] = [];
-  array.map((imgFile, idx) => {
+  imgUrl.map((img, idx) => {
     newObj.push({
       id: idx + 1,
-      img: imgFile,
+      img: img,
     });
   });
   return newObj;

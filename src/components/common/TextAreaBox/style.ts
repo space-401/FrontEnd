@@ -15,6 +15,7 @@ const Wrapper = styled.div<{
 `;
 
 const TextArea = styled.textarea`
+  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   width: 100%;
   height: 100%;
   background-color: inherit;

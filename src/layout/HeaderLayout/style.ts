@@ -76,7 +76,7 @@ const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
   cursor: pointer;
   background-size: cover;
   border: ${({ isCurrentSpace, theme }) =>
-    isCurrentSpace ? `1px solid ${theme.COLOR.skyblue}` : ''};
+    isCurrentSpace ? `1.2px solid ${theme.COLOR.skyblue}` : ''};
 `;
 
 const ContentLayOut = styled.div`

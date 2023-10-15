@@ -13,7 +13,7 @@ const SearchInput = styled.input<{ width: number }>`
   background: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: 10px;
+  font-size: 12px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 
   &:focus {

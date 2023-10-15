@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
 
 const UserContainer = styled.div`
@@ -109,9 +109,7 @@ export const S = {
 
 const Container = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${modalBackGround}
   padding: 16px 0;
   display: inline-flex;
   width: 526px;

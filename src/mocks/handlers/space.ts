@@ -6,6 +6,7 @@ import {
   spaceInfo,
   spaceList,
   spacePostList,
+  SpaceTag,
 } from '@mocks/data/space.mock';
 import { successResponse } from '@mocks/data/response.mock';
 
@@ -69,6 +70,12 @@ export const spaceHandlers: RestHandler[] = [
    */
   rest.delete(END_POINTS.SPACE_USER(':spaceId'), (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(successResponse));
+  }),
+  /**
+   * 태그 조회하는 api
+   */
+  rest.get(END_POINTS.SPACE_TAG(':spaceId'), (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(SpaceTag));
   }),
   /**
    * 태그 추가하는 api
