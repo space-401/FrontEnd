@@ -3,9 +3,9 @@ import { flexCenter, modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
   flex-direction: column;
-  ${flexCenter}
+  ${flexCenter};
   position: absolute;
-  ${modalBackGround}
+  ${modalBackGround};
   width: 812px;
   height: 324px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
@@ -33,7 +33,6 @@ const IconBox = styled.div<{ backImg: string; isSelected: boolean }>`
 
 const Text = styled.div`
   text-align: center;
-  font-family: Pretendard;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
   font-style: normal;
   font-weight: 400;

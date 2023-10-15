@@ -2,7 +2,7 @@ import { modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  ${modalBackGround}
+  ${modalBackGround};
   position: absolute;
   display: inline-flex;
   min-width: 400px;
