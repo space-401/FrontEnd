@@ -34,8 +34,6 @@ import { postPost } from '@/apis/post/postPost';
 import { convertImgArrToObj } from '@/utils/makeObj';
 
 const CreatePost = () => {
-  window.scrollTo({ top: 0 });
-
   const params = useParams();
   const postId = params.postId;
   const spaceId = params.spaceId;
@@ -170,9 +168,7 @@ const CreatePost = () => {
     const currentURL = window.location.href;
     const parts = currentURL.split('/');
     const index = parts.indexOf('post');
-    const result = parts.slice(0, index + 1).join('/');
-    //확인 모달 닫히면 포스트 생성 페이지로 이동
-    window.location.href = result;
+    window.location.href = parts.slice(0, index + 1).join('/');
   };
 
   /**경고 모달*/
@@ -304,7 +300,7 @@ const CreatePost = () => {
             selectState={selectedUsers}
             labelName={'사용자'}
             ListItem={userList}
-            BoxWidth={inputWidth}
+            boxWidth={inputWidth}
             setState={setSelectedUsers}
             menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
@@ -323,7 +319,7 @@ const CreatePost = () => {
             selectState={selectedTags}
             labelName={'태그'}
             ListItem={tagList}
-            BoxWidth={inputWidth}
+            boxWidth={inputWidth}
             setState={setSelectedTags}
             menuHeight={100 * Math.floor(userList.length / 2)}
             // setState={setTagState}

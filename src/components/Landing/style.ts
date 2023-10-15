@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  height: 100vh;
   border: 1px solid white;
   display: flex;
   justify-content: center;
