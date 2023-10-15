@@ -2,7 +2,7 @@ import { modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
 
 const Container = styled.div<{ width?: number }>`
-  ${modalBackGround}
+  ${modalBackGround};
   position: absolute;
   display: inline-flex;
   width: ${({ width }) => (width ? width : 348)}px;
