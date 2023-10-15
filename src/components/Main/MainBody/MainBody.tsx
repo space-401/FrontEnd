@@ -104,7 +104,6 @@ const MainBody = (props: PostListPropType) => {
       select = { ...select, page: pageNumber };
     }
     setSearchParams(select);
-    window.scrollTo({ top: 0 });
   };
 
   const lowList = Math.ceil(userList.length / 2);

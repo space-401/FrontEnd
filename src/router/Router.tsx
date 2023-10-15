@@ -97,11 +97,19 @@ const router = createBrowserRouter([
   },
   {
     path: PATH.LOGIN,
-    element: <SignPage />,
+    element: (
+      <Suspense fallback={<>loading...</>}>
+        <SignPage />
+      </Suspense>
+    ),
   },
   {
     path: PATH.AUTH,
-    element: <AuthPage />,
+    element: (
+      <Suspense fallback={<>loading...</>}>
+        <AuthPage />
+      </Suspense>
+    ),
   },
   {
     path: PATH.LANDING,
