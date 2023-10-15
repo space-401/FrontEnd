@@ -9,10 +9,22 @@ const SecondSection = ({ marginTop }: SectionProps) => {
       <S.MarginBox marginTop={marginTop} />
       <S.Container>
         <S.SubContainer>
-          <S.LeftSection top={70} bottom={128}>
+          <S.LeftSection
+            data-aos-duration="1500"
+            data-aos="fade-up"
+            top={70}
+            bottom={128}
+          >
             <LeftSvg />
           </S.LeftSection>
-          <RightSvg />
+          <S.RightSection
+            data-aos-duration="1500"
+            data-aos="fade-up"
+            top={0}
+            bottom={0}
+          >
+            <RightSvg />
+          </S.RightSection>
         </S.SubContainer>
       </S.Container>
     </S.Wrapper>

@@ -9,7 +9,6 @@ const Wrapper = styled.section`
 
 const MarginBox = styled.div<{ marginTop: number }>`
   margin-top: ${({ marginTop }) => marginTop}px;
-  content: '';
 `;
 
 const Container = styled.div`
@@ -25,6 +24,7 @@ const LoginText = styled.div`
 `;
 
 const SubContainer = styled.div`
+  position: relative;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -32,11 +32,13 @@ const SubContainer = styled.div`
 `;
 
 const LeftSection = styled.div<{ top: number; bottom: number }>`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   padding-top: ${({ top }) => top}px;
   padding-bottom: ${({ bottom }) => bottom}px;
 `;
 
 const RightSection = styled.div<{ top: number; bottom: number }>`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   padding-top: ${({ top }) => top}px;
   padding-bottom: ${({ bottom }) => bottom}px;
 `;
@@ -69,6 +71,15 @@ const ImgBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const SvgBackGround = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
+  transform: translate(50%, -50%);
+  position: absolute;
+  filter: blur(9.5px);
+  right: -53px;
+  top: 75%;
+`;
 const S = {
   Wrapper,
   MarginBox,
@@ -80,6 +91,7 @@ const S = {
   BackGround,
   RandingButton,
   ImgBox,
+  SvgBackGround,
 };
 
 export default S;

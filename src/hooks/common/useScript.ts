@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
+import AOS from 'aos';
 
-const useScript = (src: string) => {
+const useScript = (src: string): [boolean, Error | Event | null] => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Event | string | Error | null>(null);
+  const [error, setError] = useState<Error | Event | null>(null);
 
   useEffect(() => {
-    let script: HTMLScriptElement = document.querySelector(`script[src="${src}"]`)!;
+    let script: HTMLScriptElement = document.querySelector(
+      `script[src="${src}"]`
+    )!;
 
     if (!script) {
       script = document.createElement('script');
@@ -13,8 +16,11 @@ const useScript = (src: string) => {
       script.async = true;
     }
 
-    const handleLoad = () => setLoading(false);
-    const handleError = (error: Event | string | Error) => setError(error);
+    const handleLoad = () => {
+      setLoading(false);
+      AOS.init();
+    };
+    const handleError = (error: Error | null | Event) => setError(error);
 
     script.addEventListener('load', handleLoad);
     script.addEventListener('error', handleError);
