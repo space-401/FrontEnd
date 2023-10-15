@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-direction: column;
     display: flex;
   }
 `;
@@ -42,7 +41,6 @@ const Form = styled.form`
   grid-template-areas: 'title1 input1' 'title2 input2' 'button button';
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-direction: column;
     display: flex;
   }
 `;

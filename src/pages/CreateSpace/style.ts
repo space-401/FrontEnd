@@ -15,9 +15,8 @@ const Form = styled.div`
   padding-bottom: 2.5rem;
   color: white;
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-direction: column;
     display: flex;
-    ${flexCenter}
+    ${flexCenter};
   }
 
   display: grid;

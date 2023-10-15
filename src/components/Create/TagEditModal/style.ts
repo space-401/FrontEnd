@@ -3,7 +3,7 @@ import { modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: absolute;
-  ${modalBackGround}
+  ${modalBackGround};
   display: flex;
   flex-direction: column;
   width: 628px;
@@ -12,8 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Text = styled.div`
-  color: var(--grey-3, #868585);
-  font-family: Pretendard;
+  color: ${({ theme }) => theme.COLOR['gray-3']}
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   font-weight: 400;
 `;
