@@ -96,3 +96,7 @@ export type PostListFilterProps = {
   selectUserList: selectType[];
   selectTagList: selectType[];
 };
+
+export type SectionProps = {
+  marginTop: number;
+};
