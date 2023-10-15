@@ -3,15 +3,16 @@ import FirstSection from '@components/Landing/FirstSection';
 import SecondSection from '@components/Landing/SecondSection';
 import ThirdSection from '@components/Landing/ThirdSection';
 import FourthSection from '@components/Landing/FourthSection';
-import Footer from '@components/Landing/Footer';
+import FifthSection from '@components/Landing/FifthSection';
+
 const LandingPage = () => {
   return (
     <S.Wrapper>
       <FirstSection />
-      <SecondSection />
-      <ThirdSection />
-      <FourthSection />
-      <Footer />
+      <SecondSection marginTop={171} />
+      <ThirdSection marginTop={259} />
+      <FourthSection marginTop={323} />
+      <FifthSection marginTop={43} />
     </S.Wrapper>
   );
 };
