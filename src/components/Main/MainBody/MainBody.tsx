@@ -104,7 +104,6 @@ const MainBody = (props: PostListPropType) => {
       select = { ...select, page: pageNumber };
     }
     setSearchParams(select);
-    window.scrollTo({ top: 0 });
   };
 
   const lowList = Math.ceil(userList.length / 2);
@@ -116,7 +115,8 @@ const MainBody = (props: PostListPropType) => {
           setState={setUserState}
           menuWidth={316}
           menuHeight={lowList * 16 + (lowList - 1) * 8 + 32}
-          BoxWidth={105}
+          boxWidth={168}
+          boxHeight={38}
           labelName={'작성자'}
           ListItem={userList}
           selectState={
@@ -148,7 +148,8 @@ const MainBody = (props: PostListPropType) => {
           setState={setTagState}
           menuWidth={192}
           menuHeight={49 * Math.floor(tagList.length / 2)}
-          BoxWidth={105}
+          boxWidth={168}
+          boxHeight={38}
           labelName={'태그'}
           ListItem={tagList}
           selectState={
@@ -166,7 +167,13 @@ const MainBody = (props: PostListPropType) => {
               : []
           }
         />
-        <MainSearchBox state={state} placeholder={'제목'} date={selectedDate} />
+        <MainSearchBox
+          height={38}
+          width={168}
+          state={state}
+          placeholder={'제목'}
+          date={selectedDate}
+        />
       </S.FilterGroup>
       {!selectState && postList.length === 0 && (
         <S.UndefinedList>

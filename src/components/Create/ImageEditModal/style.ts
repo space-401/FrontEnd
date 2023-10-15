@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Form = styled.form`
-  ${modalBackGround}
+  ${modalBackGround};
   z-index: 10000;
   ${flexCenter};
   flex-direction: column;

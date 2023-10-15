@@ -6,8 +6,8 @@ interface ICountWrapper {
   backgroundColor?: string;
 }
 const CountWrapper = styled.div<ICountWrapper>`
-  ${flexCenter}
-  font-size:15px;
+  ${flexCenter};
+  font-size: 15px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
   width: 80px;

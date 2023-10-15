@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.form`
+const Wrapper = styled.form<{ height: number }>`
   position: relative;
-  height: 40px;
+  height: ${({ height }) => height}px;
 `;
 
-const SearchInput = styled.input`
-  width: 150px;
+const SearchInput = styled.input<{ width: number }>`
+  width: ${({ width }) => width}px;
   height: inherit;
   border-radius: 5px;
-  padding: 8px 20px 8px 8px;
+  padding: 12px 8px 12px 10px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};

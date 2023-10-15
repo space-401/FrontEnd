@@ -8,7 +8,8 @@ import MenuList from '@components/Main/SelectBox/components/MenuList';
 
 const CSelectBox = (props: SelectBoxProps) => {
   const {
-    BoxWidth = 168,
+    boxHeight = 38,
+    boxWidth = 168,
     menuHeight = 200,
     placeHolder,
     menuWidth = 168,
@@ -36,7 +37,8 @@ const CSelectBox = (props: SelectBoxProps) => {
     <S.Wrapper
       isSelect={select.length === 0}
       isOpen={isOpen}
-      minWidth={BoxWidth}
+      width={boxWidth}
+      height={boxHeight}
     >
       <S.LabelTitle>
         {select.map((prev) => prev.title).join(', ') || labelName}

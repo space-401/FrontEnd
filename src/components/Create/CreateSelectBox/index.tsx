@@ -10,7 +10,7 @@ import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 
 const CreateSelectBox = (props: SelectBoxProps) => {
   const {
-    BoxWidth = 168,
+    boxWidth = 168,
     menuHeight = 200,
     menuWidth = 168,
     ListItem,
@@ -69,7 +69,7 @@ const CreateSelectBox = (props: SelectBoxProps) => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
-    <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
+    <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, boxWidth)}>
       <S.LabelTitle>
         {!isOpen ? (
           select.map((prev) => prev.title).join(', ') || (
