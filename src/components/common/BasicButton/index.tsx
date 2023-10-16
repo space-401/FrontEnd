@@ -11,6 +11,7 @@ export type BasicButtonProps = {
   height?: number;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
+  border?: string;
 };
 
 const BasicButton = ({

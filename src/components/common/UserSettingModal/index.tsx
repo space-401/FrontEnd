@@ -7,13 +7,12 @@ import InputBox from '@/components/common/InputBox';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import { ReactComponent as ProfileMock } from '@assets/svg/profileMock.svg';
 import BasicButton from '@/components/common/BasicButton';
-import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { Box } from '@mui/material';
 import { UserType } from '@/types/post.type';
 import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
-
+import CircleImgEditModal from '@/components/Create/ImageEditModal/CircleImageEditmodal';
 type SettingModalProps = {
   ModalClose: () => void;
   userNames: string[];
@@ -105,11 +104,7 @@ const UserSettingModal = ({
       <Box tabIndex={-1}>
         <S.Wrapper>
           {isImgEditModalOpen && imageArr.image && (
-            <ImgEditModal
-              imageArr={imageArr}
-              setImageArr={setImageArr}
-              isCircle={true}
-            />
+            <CircleImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
           )}
 
           <S.SectionWrapper gap={25}>

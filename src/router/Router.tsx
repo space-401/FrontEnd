@@ -14,6 +14,7 @@ import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
 import { AuthPage, InviteCodePage, SignPage } from '@router/lazy';
 import LandingPage from '@pages/Landing';
 
+import ErrorPage from '@/pages/Error';
 const router = createBrowserRouter([
   {
     path: PATH.HOME,
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
   {
     path: PATH.LANDING,
     element: <LandingPage />,
+  },
+  {
+    path: '/*',
+    element: <ErrorPage />,
   },
 ]);
 export default router;

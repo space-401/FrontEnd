@@ -138,7 +138,7 @@ const MainBody = (props: PostListPropType) => {
         <Calender
           isMain={true}
           width={200}
-          height={40}
+          height={38}
           borderRadius={5}
           setDateInfo={setSelectedDate}
           fontSize={12}

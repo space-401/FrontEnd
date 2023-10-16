@@ -7,12 +7,10 @@ import { ReactComponent as MoreUserSvg } from '@assets/svg/mainSetting/user.svg'
 import { ReactComponent as MoreLogOutSvg } from '@assets/svg/mainSetting/logout.svg';
 import { useState } from 'react';
 import { Modal } from '@mui/material';
-
-import { S } from '@/components/common/UserSettingModal/style';
+import { S } from '@/components/common/UserListModal/style';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { toastColorMessage } from '@utils/toastMessage';
-import UserSettingModal from '@/components/Main/WelcomeAndSettingModal/UserSettingModal';
-
+import UserSettingModal from '@components/common/UserSettingModal';
 type UserListPropsType = {
   userInfo: UserType;
   index: number;
