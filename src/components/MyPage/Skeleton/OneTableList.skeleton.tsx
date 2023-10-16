@@ -2,7 +2,6 @@ import S from '@modal/Detail/style';
 import KSkeleton from '@components/common/Skeleton';
 
 const OneTableListSkeleton = ({ iconBox }: { iconBox: boolean }) => {
-  console.log(iconBox);
   return (
     <tr>
       <td>

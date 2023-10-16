@@ -1,6 +1,5 @@
 export const BASE_PATH = {
   HOME: '/',
-  LANDING: '/landing',
   LOGIN: '/login',
   POST: '/post',
   SPACE: '/space',
