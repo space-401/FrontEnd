@@ -2,17 +2,13 @@ import S from '@layout/HeaderLayout/style';
 import { ReactComponent as Logo } from '@assets/svg/headerLogo.svg';
 import { ReactComponent as AlarmIcon } from '@assets/svg/alarmIcon.svg';
 import { ReactComponent as UserIcon } from '@assets/svg/userIcon.svg';
-import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
 import KSkeleton from '@components/common/Skeleton';
 
 const HeaderSkeleton = () => {
-  const navigate = useNavigate();
-
   return (
     <S.HeaderWrapper>
       <S.Container>
-        <S.IconBox onClick={() => navigate(PATH.HOME)}>
+        <S.IconBox>
           <Logo />
         </S.IconBox>
         <S.SpaceBox>
@@ -27,11 +23,7 @@ const HeaderSkeleton = () => {
         <S.IconBox>
           <S.IconGroup>
             <AlarmIcon width={15} height={15} />
-            <UserIcon
-              width={15}
-              height={15}
-              onClick={() => navigate(PATH.USER_INFO)}
-            />
+            <UserIcon width={15} height={15} />
           </S.IconGroup>
         </S.IconBox>
       </S.Container>
