@@ -264,3 +264,9 @@ export const myCommentListAndInfo: MyCommentListType = {
   total: 30,
   itemLength: 10,
 };
+/**
+ * 로그인했을 때의 임시값
+ */
+export const loginResponse = {
+  accessToken: 'accessTokenaccessTokenaccessTokenaccessToken123123132123132',
+};

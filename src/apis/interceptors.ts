@@ -18,7 +18,7 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
   const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
 
   if (!accessToken) {
-    window.location.href = PATH.LANDING;
+    window.location.href = PATH.LOGIN;
     throw new Error('토큰이 유효하지 않습니다');
   }
 

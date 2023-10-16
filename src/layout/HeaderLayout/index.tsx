@@ -14,7 +14,6 @@ import DetailInner from '@modal/Detail';
 import ConfirmInner from '@modal/Confirm';
 import AlertInner from '@modal/Alert';
 import { Suspense } from 'react';
-import { Toaster } from 'react-hot-toast';
 import HeaderSkeleton from '@layout/HeaderLayout/Skeleton/Header';
 import DetailInnerSkeleton from 'src/components/Detail/Skeleton';
 import Header from '@layout/HeaderLayout/Header';
@@ -35,7 +34,6 @@ const HeaderLayOut = () => {
         className="progress-bar"
         style={{ scaleX: scrollYProgress, zIndex: 900 }}
       />
-      <Toaster position={'top-center'} />
       <S.Wrapper>
         <AlertModal
           sx={{ zIndex: 1000 }}
