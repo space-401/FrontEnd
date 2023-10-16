@@ -20,7 +20,10 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const [tagList, setTagList] = useState<TagType[]>([]);
   const [tagInput, setTagInput] = useState<string>();
 
-  const { postTagAction } = useTagMutation();
+  const { postTagAction, isError, data } = useTagMutation();
+
+  console.log('isError', isError, 'data', data);
+
   const { deleteTagAction } = useTagDeleteMutation();
   const { spaceTag } = useSpaceTagQuery(spaceId);
 
@@ -34,11 +37,16 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   };
 
   //태그 생성
-  const onSubmitNewTag = (e: any) => {
+  const onSubmitNewTag = async (e: any) => {
     if (e.keyCode == 13) {
-      postTagAction({ tagName: tagInput!, spaceId });
+      onAddTag();
       setTagInput('');
     }
+  };
+
+  const onAddTag = async () => {
+    const res = await postTagAction({ tagName: tagInput!, spaceId });
+    await console.log('res', res);
   };
 
   const onDeleteTag = ({

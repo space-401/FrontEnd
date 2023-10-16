@@ -1,4 +1,4 @@
-import S from '@pages/Error/style';
+import S from '@components/common/Error/style';
 import { ReactComponent as ErrorIcon } from '@assets/svg/error/error.svg';
 import BasicButton from '@/components/common/BasicButton';
 import { useNavigate } from 'react-router-dom';

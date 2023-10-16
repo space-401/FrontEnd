@@ -2,7 +2,7 @@ import S from '@/components/common/InputBox/style';
 import { ReactElement } from 'react';
 
 type InputBoxProps = {
-  width: number;
+  width?: number;
   height: number;
   placeholder?: string;
   type: 'text' | 'button' | 'password';
