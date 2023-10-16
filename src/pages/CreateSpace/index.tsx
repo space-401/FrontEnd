@@ -153,7 +153,6 @@ const CreateSpace = () => {
     confirmModalOpen(true);
   };
 
-  const inputWidth = 628;
   const confirmOpen = useConfirmModalOpen();
 
   const onMoveSpacePage = () => {
@@ -281,7 +280,6 @@ const CreateSpace = () => {
         </S.TitleContainer>
         <S.InputContainer number={2}>
           <InputBox
-            width={inputWidth}
             readonly={false}
             height={60}
             placeholder="16자 이내의 제목을 입력해 주세요."
@@ -312,7 +310,6 @@ const CreateSpace = () => {
             placeholder="스페이스 설명 입력"
             maxLength={100}
             onChange={onChange}
-            width={inputWidth}
             name="content"
             children={
               <CharacterCounter

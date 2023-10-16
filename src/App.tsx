@@ -12,6 +12,7 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
   worker.start();
+
   return (
     <QueryClientProvider client={queryClient}>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>

@@ -15,8 +15,8 @@ const Form = styled.div`
   padding-bottom: 2.5rem;
   color: white;
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    display: flex;
     ${flexCenter};
+    flex-direction: column;
   }
 
   display: grid;
@@ -42,6 +42,11 @@ const TitleSection = styled.div`
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   @media ${({ theme }) => theme.DEVICE.tablet} {
     ${flexCenter}
+    flex-direction: column;
+  }
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    ${flexCenter};
+    flex-direction: column;
   }
 `;
 
@@ -80,6 +85,14 @@ const InputContainer = styled.div<IInput>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
   position: relative;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 400px;
+    ${flexCenter}
+  }
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    width: 200px;
+    ${flexCenter}
+  }
 `;
 
 const EmptyContainer = styled.div`
@@ -92,7 +105,8 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
   margin-right: 35px;
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    margin-left: 0;
+    ${flexCenter}
+    margin-left:40px;
   }
 `;
 

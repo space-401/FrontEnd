@@ -4,10 +4,12 @@ import type { AxiosError } from 'axios';
 import { postSpaceTag, PostSpaceTagType } from '@apis/space/postSpaceTag';
 
 export const useTagMutation = () => {
-  const { mutate: postTagAction } = useMutation<
-    ApiResponseType,
-    AxiosError,
-    PostSpaceTagType
-  >((postInfo) => postSpaceTag(postInfo));
-  return { postTagAction };
+  const {
+    isError,
+    data,
+    mutate: postTagAction,
+  } = useMutation<ApiResponseType, AxiosError, PostSpaceTagType>((postInfo) =>
+    postSpaceTag(postInfo)
+  );
+  return { isError, data, postTagAction };
 };

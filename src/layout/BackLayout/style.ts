@@ -9,6 +9,9 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
   flex-direction: column;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 100vw;
+  }
 `;
 
 const IconWrapper = styled.div`

@@ -8,8 +8,8 @@ import { END_POINTS } from '@constants/api';
 import { PATH } from '@constants/path';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 import { toastColorMessage } from '@utils/toastMessage';
-import ErrorBoundary from '@/pages/Error/errorBoundary';
-import ErrorPage from '@/pages/Error';
+import ErrorBoundary from '@/components/common/Error/errorBoundary';
+import ErrorPage from '@/components/common/Error';
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
 const Header = () => {
