@@ -78,6 +78,12 @@ const ImagesEditModal = ({
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
+    if (imageArr.cropImages.length > 0) {
+      setImageArr((prev) => ({
+        ...prev,
+        cropImages: [],
+      }));
+    }
     myRefs.map((ref) => {
       getCropData(ref);
     });
@@ -116,6 +122,10 @@ const ImagesEditModal = ({
 
   //취소
   const onClickCancelModal = () => {
+    setImageArr((prev) => ({
+      ...prev,
+      images: [],
+    }));
     ModalClose();
   };
 

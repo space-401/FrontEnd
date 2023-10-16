@@ -97,16 +97,11 @@ const CreatePost = () => {
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current && imageArr.images.length == 0)
+    if (inputRef.current && imageArr.images.length == 0) {
       inputRef.current.click();
-    if (imageArr.cropImages.length > 0) {
-      if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
-        setImageArr((prev) => ({ ...prev, cropImages: [] }));
-        ModalOpen();
-      }
-    } else {
-      ModalOpen();
+      return ModalOpen();
     }
+    ModalOpen();
   };
 
   //파일 변경 함수
@@ -182,6 +177,7 @@ const CreatePost = () => {
       alertTitle: '이미지는 10개까지만 추가됩니다.',
     });
   };
+
   /**확인 모달*/
 
   const confirmOpen = useConfirmModalOpen();
@@ -214,11 +210,16 @@ const CreatePost = () => {
 
       {imageArr.cropImages.length == 0 ? (
         <S.BoxWrapper>
-          <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
+          <BasicBox
+            color={theme.COLOR['gray-5']}
+            width={348}
+            borderradius={20}
+            onClick={onClickImgEditModal}
+          >
             <S.PhotoContainer>
               <PhotoIcon />
               <BasicButton
-                onClick={onClickImgEditModal}
+                onClick={() => {}}
                 width={55}
                 height={20}
                 borderRadius={5}
@@ -244,8 +245,8 @@ const CreatePost = () => {
         <S.BoxWrapper>
           <div style={{ zIndex: 1000, width: '348px' }}>
             <ImgSlider
-              images={imageArr.cropImages}
               onClickImgEditModal={onClickImgEditModal}
+              images={imageArr.cropImages}
             />
           </div>
         </S.BoxWrapper>

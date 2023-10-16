@@ -6,7 +6,7 @@ import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIco
 import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
 import S from '@components/Main/MainHeader/style';
 import type { MainHeaderPropType } from '@type/main.type';
-import SettingComponent from '@components/Main/Setting/SettingComponent';
+import SettingComponent from '@components/Main/Setting';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
