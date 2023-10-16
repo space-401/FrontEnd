@@ -5,12 +5,13 @@ const Wrapper = styled.form<{ height: number }>`
   height: ${({ height }) => height}px;
 `;
 
-const SearchInput = styled.input<{ width: number }>`
+const SearchInput = styled.input<{ width: number; isValue: boolean }>`
   width: ${({ width }) => width}px;
   height: inherit;
   border-radius: 5px;
   padding: 12px 8px 12px 10px;
-  background: ${({ theme }) => theme.COLOR['gray-5']};
+  background: ${({ theme, isValue }) =>
+    isValue ? theme.COLOR['gray-4'] : theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: 12px;
