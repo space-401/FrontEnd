@@ -1,12 +1,12 @@
 import { Modal, Box } from '@mui/material';
 import { S } from './style';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputBox from '@/components/common/InputBox';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/smallDeleteIcon.svg';
 import { TagType } from '@/types/post.type';
 import TagList from './TagList';
 import { isUserType } from '@utils/typeGuard';
-// import { useTagMutation } from '@/hooks/api/space/useTagMutation';
+import { useTagMutation } from '@/hooks/api/space/useTagMutation';
 import { useTagDeleteMutation } from '@/hooks/api/space/useTagDeleteMutation';
 import { useSpaceTagQuery } from '@/hooks/api/space/useSpaceTagQuery';
 
@@ -20,7 +20,7 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const [tagList, setTagList] = useState<TagType[]>([]);
   const [tagInput, setTagInput] = useState<string>();
 
-  // const { postTagAction } = useTagMutation();
+  const { postTagAction } = useTagMutation();
   const { deleteTagAction } = useTagDeleteMutation();
   const { spaceTag } = useSpaceTagQuery(spaceId);
 
@@ -31,6 +31,14 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setTagInput(value);
+  };
+
+  //태그 생성
+  const onSubmitNewTag = (e: any) => {
+    if (e.keyCode == 13) {
+      postTagAction({ tagName: tagInput!, spaceId });
+      setTagInput('');
+    }
   };
 
   const onDeleteTag = ({
@@ -54,7 +62,7 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
         },
       }}
     >
-      <Box tabIndex={-1}>
+      <Box tabIndex={-1} onKeyDown={onSubmitNewTag}>
         {tagList.length > 0 && (
           <S.Wrapper>
             <S.Header>

@@ -16,6 +16,7 @@ import tokenStorage from '@utils/tokenStorage';
 import Loading from '@pages/Loading';
 import Auth from '@pages/Auth';
 
+import ErrorPage from '@/pages/Error';
 const router = createBrowserRouter([
   {
     element: <PrivateRoute isAllowed={tokenStorage.hasAccessToken()} />,
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
         <LandingPage />
       </Suspense>
     ),
+  },
+  {
+    path: '/*',
+    element: <ErrorPage />,
   },
 ]);
 export default router;
