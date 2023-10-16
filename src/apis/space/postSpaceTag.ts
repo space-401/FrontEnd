@@ -3,7 +3,7 @@ import { END_POINTS } from '@constants/api';
 import { ApiResponseType } from '@type/response.type';
 
 export type PostSpaceTagType = {
-  spaceId: number;
+  spaceId: string;
   tagName: string;
 };
 

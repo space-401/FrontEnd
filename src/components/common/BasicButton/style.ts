@@ -8,6 +8,7 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
   width: ${({ width }) => width}px;
   ${flexCenter}
   border-radius:${({ borderRadius }) => borderRadius || 10}px;
+  border: ${({ border }) => (border ? border : 'none')};
   //스토리 적용
   padding: 12px;
   padding-left: ${({ padding }) => padding || 16}px;

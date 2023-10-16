@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Text = styled.div`
-  color: ${({ theme }) => theme.COLOR['gray-3']}
+  color: ${({ theme }) => theme.COLOR['white']};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   font-weight: 400;
 `;

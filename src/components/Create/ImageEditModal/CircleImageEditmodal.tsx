@@ -1,9 +1,8 @@
 import S from '@components/Create/ImageEditModal/style';
-import ImageCropper from '@components/Create/ImageEditModal/Cropper';
 import React, { useRef } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import { ReactCropperElement } from 'react-cropper';
-import { Box, Modal } from '@mui/material';
+import { Box } from '@mui/material';
 import { ImageArrType } from '@/types/image.type';
 import CircleImageCropper from './CircleCropper';
 import { dataURItoFile } from '@/utils/fileConvertor';
@@ -11,14 +10,12 @@ import { dataURItoFile } from '@/utils/fileConvertor';
 type ModalType = {
   imageArr: ImageArrType;
   setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
-  isCircle: boolean;
   onCloseIconModal?: () => void;
 };
 
-const ImgEditModal = ({
+const CircleImgEditModal = ({
   imageArr,
   setImageArr,
-  isCircle,
   onCloseIconModal,
 }: ModalType) => {
   const cropperRef1 = useRef<ReactCropperElement>(null);
@@ -26,7 +23,7 @@ const ImgEditModal = ({
   const sliderRef = useRef<any>();
 
   //사진 편집 모달이 열렸는지?
-  const { ModalClose, isOpen } = usePhotoModalStore();
+  const { ModalClose } = usePhotoModalStore();
 
   const cropperWidth = 500;
 
@@ -42,6 +39,7 @@ const ImgEditModal = ({
         cropImage: newImage,
         convertedImage: dataURItoFile(newImage),
       }));
+      console.log('imageimage', imageArr);
       ModalClose();
     }
   };
@@ -65,66 +63,50 @@ const ImgEditModal = ({
   };
 
   return (
-    <Modal
-      open={isOpen}
-      slotProps={{
-        backdrop: {
-          sx: {
-            backgroundColor: 'rgba(0,0,0,0.6)',
-          },
-        },
-      }}
-    >
-      <Box tabIndex={-1}>
-        <S.Form>
-          <S.Header>
-            <button onClick={onClickCancelModal}>취소</button>
-            <button
-              onClick={(e) => {
-                onSaveAllEditImg(e);
-              }}
-            >
-              완료
-            </button>
-          </S.Header>
-
-          <div
-            style={{
-              position: 'relative',
-              height: cropperWidth + 'px',
-              width: cropperWidth + 'px',
-              overflow: 'hidden',
+    <Box tabIndex={-1}>
+      <S.Form>
+        <S.Header>
+          <button onClick={onClickCancelModal}>취소</button>
+          <button
+            onClick={(e) => {
+              onSaveAllEditImg(e);
             }}
           >
-            <div
-              style={{ display: 'flex', position: 'absolute' }}
-              ref={sliderRef}
-            >
-              {imageArr.image &&
-                (isCircle ? (
-                  <CircleImageCropper
-                    width={cropperWidth}
-                    key={0}
-                    image={imageArr.image.img}
-                    index={0}
-                    myRef={myRefs[0]}
-                  />
-                ) : (
-                  <ImageCropper
-                    width={cropperWidth}
-                    key={0}
-                    image={imageArr.image.img}
-                    index={0}
-                    myRef={myRefs[0]}
-                  />
-                ))}
-            </div>
-          </div>
+            완료
+          </button>
+        </S.Header>
 
-          <S.Footer />
-        </S.Form>
-      </Box>
-    </Modal>
+        <div
+          style={{
+            position: 'relative',
+            height: cropperWidth + 'px',
+            width: cropperWidth + 'px',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              position: 'absolute',
+              left: '10',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            ref={sliderRef}
+          >
+            {imageArr.image && (
+              <CircleImageCropper
+                width={cropperWidth}
+                key={0}
+                image={imageArr.image.img}
+                index={0}
+                myRef={myRefs[0]}
+              />
+            )}
+          </div>
+        </div>
+        <S.Footer />
+      </S.Form>
+    </Box>
   );
 };
-export default ImgEditModal;
+export default CircleImgEditModal;

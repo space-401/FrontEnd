@@ -4,8 +4,8 @@ import MainBody from '@components/Main/MainBody/MainBody';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
-import WelcomeModal from '@/components/Main/WelcomeAndSettingModal/WelcomeModal';
-import UserSettingModal from '@/components/Main/WelcomeAndSettingModal/UserSettingModal';
+import WelcomeModal from '@/components/Main/WelcomeAndSettingModal';
+import UserSettingModal from '@/components/common/UserSettingModal';
 import { Modal } from '@mui/material';
 
 const MainPage = () => {
@@ -29,7 +29,7 @@ const MainPage = () => {
   //처음이라면 welcome 모달 열기
   useEffect(() => {
     console.log(isFirst); //이걸로 바꾸기
-    const fakeIsFirst = false;
+    const fakeIsFirst = true;
     if (fakeIsFirst) {
       setModalNum(1);
     }
