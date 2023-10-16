@@ -1,4 +1,4 @@
-import type { UserType, TagType, DateInfoType } from '@type/post.type';
+import type { UserType, TagType } from '@type/post.type';
 import { Dispatch, SetStateAction } from 'react';
 import type { SpaceInfo, SpacePostType } from '@type/space.type';
 
@@ -71,10 +71,10 @@ export type UserListProps = {
 
 export type SearchProps = {
   placeholder: string;
-  state: PostListFilterProps;
-  date: DateInfoType;
   height: number;
   width: number;
+  initialKeyword?: string;
+  movePage: (pageNumber: undefined, keyword: string) => void;
 };
 
 export type SpacePostListProps = {
