@@ -7,6 +7,7 @@ import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
 import WelcomeModal from '@/components/Main/WelcomeAndSettingModal';
 import UserSettingModal from '@/components/common/UserSettingModal';
 import { Modal } from '@mui/material';
+
 const MainPage = () => {
   const [selectState, setSelectState] = useState(false);
   const spaceId = useParams().spaceId!;
@@ -36,7 +37,7 @@ const MainPage = () => {
 
   return (
     <>
-      {modalNum && userList && (
+      {modalNum > 0 && (
         <Modal
           open={modalNum > 0}
           slotProps={{
@@ -61,7 +62,6 @@ const MainPage = () => {
           )}
         </Modal>
       )}
-
       <S.Wrapper>
         <MainHeader
           spaceId={spaceId}

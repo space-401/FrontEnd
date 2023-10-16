@@ -11,20 +11,21 @@ import HeaderLayout from '@layout/HeaderLayout';
 import BackLayout from '@layout/BackLayout';
 import SelectSpaceSkeleton from '@components/SelectSpace/Skeleton';
 import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
-import { AuthPage, InviteCodePage, SignPage } from '@router/lazy';
 import LandingPage from '@pages/Landing';
+import tokenStorage from '@utils/tokenStorage';
+import Loading from '@pages/Loading';
+import Auth from '@pages/Auth';
 
 import ErrorPage from '@/pages/Error';
 const router = createBrowserRouter([
   {
-    path: PATH.HOME,
-    element: <PrivateRoute />,
+    element: <PrivateRoute isAllowed={tokenStorage.hasAccessToken()} />,
     children: [
       {
         element: <HeaderLayout />,
         children: [
           {
-            path: PATH.HOME,
+            path: PATH.SPACE,
             element: (
               <Suspense fallback={<SelectSpaceSkeleton />}>
                 <Lazy.SelectSpacePage />
@@ -87,8 +88,8 @@ const router = createBrowserRouter([
           {
             path: PATH.INVITE,
             element: (
-              <Suspense fallback={<>loading...</>}>
-                <InviteCodePage />
+              <Suspense fallback={<Loading />}>
+                <Lazy.InviteCodePage />
               </Suspense>
             ),
           },
@@ -99,22 +100,26 @@ const router = createBrowserRouter([
   {
     path: PATH.LOGIN,
     element: (
-      <Suspense fallback={<>loading...</>}>
-        <SignPage />
+      <Suspense fallback={<Loading />}>
+        <Lazy.SignPage />
       </Suspense>
     ),
   },
   {
     path: PATH.AUTH,
     element: (
-      <Suspense fallback={<>loading...</>}>
-        <AuthPage />
+      <Suspense fallback={<Loading />}>
+        <Auth />
       </Suspense>
     ),
   },
   {
-    path: PATH.LANDING,
-    element: <LandingPage />,
+    path: PATH.HOME,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <LandingPage />
+      </Suspense>
+    ),
   },
   {
     path: '/*',

@@ -4,22 +4,24 @@ import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
 import {
   accountInfo,
   bookMarkList,
+  loginResponse,
   myCommentListAndInfo,
   myPostList,
 } from '@mocks/data/user.mock';
+import { successResponse } from '@mocks/data/response.mock';
 
 export const userHandlers: RestHandler[] = [
   /**
    * 로그인하는 api
    */
-  rest.get(END_POINTS.LOGIN, (_, res, ctx) => {
-    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfo));
+  rest.post(END_POINTS.LOGIN, (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(loginResponse));
   }),
   /**
    * 로그아웃하는 api
    */
-  rest.get(END_POINTS.LOGOUT, (_, res, ctx) => {
-    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(accountInfo));
+  rest.post(END_POINTS.LOGOUT, (_, res, ctx) => {
+    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(successResponse));
   }),
   /**
    * 회원가입하는 api
