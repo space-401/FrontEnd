@@ -4,7 +4,6 @@ import { ReactComponent as AlarmIcon } from '@assets/svg/alarmIcon.svg';
 import { ReactComponent as UserIcon } from '@assets/svg/userIcon.svg';
 import { Tooltip } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { END_POINTS } from '@constants/api';
 import { PATH } from '@constants/path';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 import { toastColorMessage } from '@utils/toastMessage';
@@ -16,7 +15,7 @@ const Header = () => {
   const { spaceList } = useSpaceListQuery();
   const navigate = useNavigate();
   const moveSpace = (spaceId: number) => {
-    navigate(END_POINTS.SPACE_INFO(spaceId));
+    navigate(PATH.SPACE_MAIN(spaceId));
   };
 
   const params = useParams();

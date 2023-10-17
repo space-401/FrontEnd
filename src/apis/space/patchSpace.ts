@@ -15,15 +15,13 @@ type postSpacePropType = {
 export const patchSpace = async (props: postSpacePropType) => {
   const { spaceId, spaceTitle, spaceDescription, spacePassword, imgUrl } =
     props;
-  const { data } = await axiosInstance.post<ApiResponseType>(
-    END_POINTS.SPACE_INFO(spaceId),
-    {
-      spaceId,
-      spaceName: spaceTitle,
-      spaceDescription,
-      spaceIconPath: imgUrl,
-      spacePw: spacePassword,
-    }
-  );
+
+  const { data } = await axiosInstance.post<ApiResponseType>(END_POINTS.SPACE, {
+    spaceId,
+    spaceName: spaceTitle,
+    spaceDescription,
+    spaceIconPath: imgUrl,
+    spacePw: spacePassword,
+  });
   return data;
 };
