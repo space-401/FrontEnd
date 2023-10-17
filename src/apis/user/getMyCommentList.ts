@@ -4,7 +4,8 @@ import { MyCommentListType } from '@type/user.type';
 
 export const getMyCommentList = async (page: number) => {
   const { data } = await axiosInstance.get<MyCommentListType>(
-    END_POINTS.MY_COMMENT_LIST(page)
+    END_POINTS.MY_COMMENT_LIST,
+    { params: { page } }
   );
 
   return data;

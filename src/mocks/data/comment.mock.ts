@@ -1,5 +1,5 @@
-import type { CommentType } from '@type/space.type';
 import { successResponse } from '@mocks/data/response.mock';
+import type { CommentType } from '@type/comment.type';
 /**
  * 포스트 게시물 댓글들의 목 데이터
  */

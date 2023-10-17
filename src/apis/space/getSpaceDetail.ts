@@ -3,8 +3,8 @@ import { axiosInstance } from '@apis/AxiosInstance';
 import { SpaceInfo } from '@type/space.type';
 
 export const getSpaceDetail = async (spaceId: number) => {
-  const { data } = await axiosInstance.get<SpaceInfo>(
-    END_POINTS.SPACE_INFO(spaceId)
-  );
+  const { data } = await axiosInstance.get<SpaceInfo>(END_POINTS.SPACE, {
+    params: { spaceId },
+  });
   return data;
 };

@@ -11,7 +11,6 @@ const Wrapper = styled.div<{
   border-radius: 5px;
   background-color: ${({ theme, isSelect }) =>
     isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
-  color: ${({ theme }) => theme.COLOR['gray-1']};
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   transition: background-color 0.5s;
@@ -132,7 +131,13 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
   background: transparent;
 `;
 
+const SelectLayOut = styled.div`
+  position: relative;
+  color: ${({ theme }) => theme.COLOR['gray-1']};
+`;
+
 const S = {
+  SelectLayOut,
   Wrapper,
   LabelTitle,
   ModalButton,

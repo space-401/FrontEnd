@@ -8,7 +8,7 @@ export const postHandlers: RestHandler[] = [
   /**
    * 상세 정보를 불러오는 api
    */
-  rest.get(END_POINTS.POST + `/:postId`, (_, res, ctx) => {
+  rest.get(END_POINTS.POST, (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(postDetail));
   }),
   /**
