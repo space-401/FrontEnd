@@ -25,6 +25,13 @@ type PostListPropType = {
 const MainBody = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const page: string = searchParams.get('page') ?? '1';
+  const keyword: string | null = searchParams.get('keyword');
+  const userId: string[] | [] = searchParams.getAll('userList');
+  const tagId: string[] | [] = searchParams.getAll('tagList');
+  const startDate: string | null = searchParams.get('startDate');
+  const endDate: string | null = searchParams.get('endDate');
+
   const [state, setState] = useState<PostListFilterProps>({
     selectUserList: [],
     selectTagList: [],
@@ -39,12 +46,6 @@ const MainBody = (props: PostListPropType) => {
 
   const { spaceId, selectState, userList, tagList } = props;
 
-  const page: string = searchParams.get('page') ?? '0';
-  const keyword: string | null = searchParams.get('keyword');
-  const userId: string[] | null = searchParams.getAll('userList');
-  const tagId: string[] | null = searchParams.getAll('tagList');
-  const dataTime: string | null = searchParams.get('date') ?? '2020-134-302'; // 날짜값 가져오기
-
   let query = {};
 
   if (keyword?.trim().length !== 0) {
@@ -56,8 +57,11 @@ const MainBody = (props: PostListPropType) => {
   if (tagId.length !== 0) {
     query = { ...query, tagId };
   }
-  if (dataTime.trim().length !== 0) {
-    query = { ...query, dataTime };
+  if (startDate?.length !== 0) {
+    query = { ...query, startDate };
+  }
+  if (endDate?.length !== 0) {
+    query = { ...query, endDate };
   }
 
   const { spacePostList, refetch } = useSpacePostListQuery(spaceId, page, {
@@ -66,7 +70,7 @@ const MainBody = (props: PostListPropType) => {
 
   useEffect(() => {
     refetch();
-  }, [refetch, page, keyword, userId, tagId, dataTime]);
+  }, [refetch, page, keyword, userId, tagId, startDate, endDate]);
 
   const detailModalOpen = useDetailModalOpen();
 
@@ -76,11 +80,13 @@ const MainBody = (props: PostListPropType) => {
     setState((prev) => ({ ...prev, selectUserList: newUserState }));
     movePage(undefined);
   };
+
   const setTagState = (newTagState: selectType[]) => {
     setState((prev) => ({ ...prev, selectTagList: newTagState }));
     movePage(undefined);
   };
-  const movePage = (pageNumber: number | undefined) => {
+
+  const movePage = (pageNumber: number | undefined, searchKeyword?: string) => {
     let select = {};
     if (state.selectUserList.length !== 0) {
       select = { ...select, userList: state.selectUserList.map((v) => v.id) };
@@ -95,14 +101,18 @@ const MainBody = (props: PostListPropType) => {
         endDate: selectedDate.endDate,
       };
     }
-    if (keyword) {
+    if (searchParams.get('keyword')) {
       select = { ...select, keyword: keyword };
     }
-    if (!pageNumber && page) {
-      select = { ...select, page: page };
-    } else if (pageNumber) {
+
+    if (searchKeyword) {
+      select = { ...select, keyword: searchKeyword };
+    }
+
+    if (pageNumber) {
       select = { ...select, page: pageNumber };
     }
+
     setSearchParams(select);
   };
 
@@ -168,11 +178,11 @@ const MainBody = (props: PostListPropType) => {
           }
         />
         <MainSearchBox
+          movePage={movePage}
+          initialKeyword={keyword ?? undefined}
           height={38}
           width={168}
-          state={state}
           placeholder={'제목'}
-          date={selectedDate}
         />
       </S.FilterGroup>
       {!selectState && postList.length === 0 && (

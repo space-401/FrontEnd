@@ -34,53 +34,56 @@ const CSelectBox = (props: SelectBoxProps) => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
-    <S.Wrapper
-      isSelect={select.length === 0}
-      isOpen={isOpen}
-      width={boxWidth}
-      height={boxHeight}
-    >
-      <S.LabelTitle>
-        {select.map((prev) => prev.title).join(', ') || labelName}
-      </S.LabelTitle>
-      <motion.nav
-        initial={false}
-        animate={isOpen ? 'open' : 'closed'}
-        custom={height}
-        ref={containerRef}
+    <S.SelectLayOut>
+      <S.Wrapper
+        onClick={toggleOpen}
+        isSelect={select.length === 0}
+        isOpen={isOpen}
+        width={boxWidth}
+        height={boxHeight}
       >
-        <MenuToggle toggle={toggleOpen} />
-        <S.Container $isOpen={isOpen}>
-          <S.BackClickBlock isOpen={isOpen} onClick={toggleOpen} />
-          <S.MenuList
-            row={Math.floor(ListItem.length / 2)}
-            grid={labelName !== '태그'}
-            menuWidth={menuWidth}
-            maxHeight={menuHeight + 2}
-            $isOpen={isOpen}
-          >
-            {labelName === '태그' && (
-              <S.InputContainer isOpen={isOpen}>
-                <S.SearchInput
-                  placeholder={
-                    select.map((prev) => prev.title).join(', ') ??
-                    placeHolder ??
-                    labelName
-                  }
-                  onChange={(e) => setSearchValue(e.target.value)}
-                />
-              </S.InputContainer>
-            )}
-            <MenuList
-              select={select}
-              changeSelect={setSelect}
-              searchValue={searchValue}
-              itemList={ListItem}
-            />
-          </S.MenuList>
-        </S.Container>
-      </motion.nav>
-    </S.Wrapper>
+        <S.LabelTitle>
+          {select.map((prev) => prev.title).join(', ') || labelName}
+        </S.LabelTitle>
+        <motion.nav
+          initial={false}
+          animate={isOpen ? 'open' : 'closed'}
+          custom={height}
+          ref={containerRef}
+        >
+          <MenuToggle />
+        </motion.nav>
+      </S.Wrapper>
+      <S.Container $isOpen={isOpen}>
+        <S.BackClickBlock isOpen={isOpen} onClick={toggleOpen} />
+        <S.MenuList
+          row={Math.floor(ListItem.length / 2)}
+          grid={labelName !== '태그'}
+          menuWidth={menuWidth}
+          maxHeight={menuHeight + 2}
+          $isOpen={isOpen}
+        >
+          {labelName === '태그' && (
+            <S.InputContainer isOpen={isOpen}>
+              <S.SearchInput
+                placeholder={
+                  select.map((prev) => prev.title).join(', ') ??
+                  placeHolder ??
+                  labelName
+                }
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </S.InputContainer>
+          )}
+          <MenuList
+            select={select}
+            changeSelect={setSelect}
+            searchValue={searchValue}
+            itemList={ListItem}
+          />
+        </S.MenuList>
+      </S.Container>
+    </S.SelectLayOut>
   );
 };
 
