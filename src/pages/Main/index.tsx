@@ -29,7 +29,7 @@ const MainPage = () => {
   //처음이라면 welcome 모달 열기
   useEffect(() => {
     console.log(isFirst); //이걸로 바꾸기
-    const fakeIsFirst = true;
+    const fakeIsFirst = false;
     if (fakeIsFirst) {
       setModalNum(1);
     }

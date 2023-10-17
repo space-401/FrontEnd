@@ -5,7 +5,7 @@ import { useCommentQuery } from '@hooks/api/comment/useCommentQuery';
 
 type DetailCommentType = {
   isOpen: boolean;
-  postId: string;
+  postId: number;
   isReply:
     | {
         open: boolean;
@@ -43,6 +43,7 @@ const DetailComments = (props: DetailCommentType) => {
         <S.CommentList isOpen={isOpen}>
           {commentList?.map((item) => (
             <OneComment
+              postId={postId}
               key={item.id}
               userList={userList}
               item={item}

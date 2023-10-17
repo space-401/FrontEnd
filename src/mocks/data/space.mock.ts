@@ -1,6 +1,9 @@
-import type { OneSpaceType, SpaceInfo } from '@type/space.type';
+import type {
+  OneSpaceType,
+  SpaceInfo,
+  SpaceResponseType,
+} from '@type/space.type';
 import { postList } from '@mocks/data/post.mock';
-import { ApiResponseType } from '@type/response.type';
 import { tagList, userList } from '@mocks/data/common';
 
 /**
@@ -58,7 +61,7 @@ export const spacePostList = {
 /**
  * 스페이르를 생성한 뒤 불러오는 목 데이터
  */
-export const spaceCreate: ApiResponseType & { spaceId: number } = {
+export const spaceCreate: SpaceResponseType = {
   message: 'success',
   spaceId: 20,
 };

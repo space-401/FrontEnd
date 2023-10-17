@@ -9,24 +9,22 @@ export const AXIOS_BASE_URL = '/';
 
 export const END_POINTS = {
   USER: '/user',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
   TOKEN: '/refreshToken',
+  MY_POST_LIST: `/mypost`,
   USERINFO: '/mypage',
-  MY_PROFILE: `/profile`,
+  MY_COMMENT_LIST: `/mycomment`,
+  LOGOUT: '/logout',
+  LOGIN: '/login',
+  MY_BOOK_MARK_LIST: `/bookmark`,
   SPACE: '/space',
+  SPACE_LIST: '/space/list',
+  SPACE_USER: `/space/user`,
+  SPACE_TAG: `/space/tag`,
+  SPACE_POST_LIST: `/space/search`,
+  MY_PROFILE: `/space/profile`,
   POST: '/post',
-  SPACE_LIST: '/list',
-  COMMENT: '/comment',
   POST_BOOK_MARK: '/post/bookmark',
-  SPACE_INFO: (spaceId: number | string) => `/space/${spaceId}`,
-  SPACE_TAG: (spaceId: number | string) => `/space/${spaceId}/tag`,
-  SPACE_USER: (spaceId: number | string) => `/space/${spaceId}/user`,
-  SPACE_SEARCH_LIST: (spaceId: number | string, page: number | string) =>
-    `space/${spaceId}/search?page=${page}`,
-  MY_BOOK_MARK_LIST: (page: number | string) => `/bookmark?page=${page}`,
-  MY_POST_LIST: (page: number | string) => `/mypost?page=${page}`,
-  MY_COMMENT_LIST: (page: number | string) => `/mycomment?page=${page}`,
+  COMMENT: '/comment',
 } as const;
 
 export const HTTP_STATUS_CODE = {

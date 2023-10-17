@@ -1,26 +1,16 @@
-import { CommentType } from '@type/space.type';
 import S from '@components/Main/Comments/OneComment/style';
 import Avatar from '@mui/material/Avatar';
 import { timeHelper } from '@utils/time-helper';
 import React, { ChangeEvent, useState } from 'react';
-import type { UserType } from '@type/post.type';
 import { TextareaAutosize } from '@mui/material';
 import { ReactComponent as MyCommentSvg } from '@assets/svg/moreIcon.svg';
 import toast from 'react-hot-toast';
-import { v1 as uuid } from 'uuid';
-
-type OneCommentType = {
-  item: CommentType;
-  ReplyOpen: (id: number, refId: number) => void;
-  ReplyClose: () => void;
-  isReply:
-    | { open: boolean; refId: number | undefined; id: number | undefined }
-    | undefined;
-  userList: UserType[];
-};
+import { v4 as uuid } from 'uuid';
+import { useCommentMutation } from '@hooks/api/comment/useCommentMutation';
+import type { OneCommentType } from '@type/comment.type';
 
 const OneComment = (props: OneCommentType) => {
-  const { ReplyOpen, ReplyClose, item, isReply, userList } = props;
+  const { ReplyOpen, ReplyClose, item, postId, isReply, userList } = props;
 
   const {
     createDate,
@@ -35,6 +25,8 @@ const OneComment = (props: OneCommentType) => {
   } = item;
 
   const [state, setState] = useState({ reply: '', settingIsOpen: false });
+
+  const { postCommentAction } = useCommentMutation();
 
   const regex = /@([^@]+)@/g;
   const parts = [];
@@ -55,8 +47,17 @@ const OneComment = (props: OneCommentType) => {
   };
 
   const ReplySubmit = () => {
-    console.log(isReply);
-    console.log(state.reply);
+    if (state.reply.trim().length !== 0) {
+      postCommentAction({
+        comment: state.reply,
+        postId,
+        refInfo: {
+          refId: id,
+          refMemberKey: writer.memberKey,
+        },
+      });
+    }
+    ReplyCancel();
   };
 
   const ReplyCancel = () => {
@@ -170,6 +171,9 @@ const OneComment = (props: OneCommentType) => {
                     ?.userName + '님에게 답글달기'
                 }
               />
+              {state.reply.length > 50 ? (
+                <S.ReplyCount>{state.reply.length + '/200'}</S.ReplyCount>
+              ) : null}
               <S.ReplyButton onClick={ReplySubmit}>게시</S.ReplyButton>
             </S.ReplyTextBox>
           )}
