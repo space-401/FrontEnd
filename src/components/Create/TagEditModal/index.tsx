@@ -6,8 +6,8 @@ import { ReactComponent as DeleteIcon } from '@/assets/svg/smallDeleteIcon.svg';
 import { TagType } from '@/types/post.type';
 import TagList from './TagList';
 import { isUserType } from '@utils/typeGuard';
-import { useTagMutation } from '@/hooks/api/space/useTagMutation';
-import { useTagDeleteMutation } from '@/hooks/api/space/useTagDeleteMutation';
+import { useTagMutation } from '@/hooks/api/space/useSpaceTagCreateMutation';
+import { useTagDeleteMutation } from '@/hooks/api/space/useSpaceTagDeleteMutation';
 import { useSpaceTagQuery } from '@/hooks/api/space/useSpaceTagQuery';
 
 type tagEditProps = {
@@ -20,12 +20,11 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const [tagList, setTagList] = useState<TagType[]>([]);
   const [tagInput, setTagInput] = useState<string>();
 
-  const { postTagAction, isError, data } = useTagMutation();
-
-  console.log('isError', isError, 'data', data);
-
+  const { postTagAction } = useTagMutation();
   const { deleteTagAction } = useTagDeleteMutation();
   const { spaceTag } = useSpaceTagQuery(spaceId);
+
+  console.log(spaceTag);
 
   useEffect(() => {
     spaceTag && setTagList(spaceTag);
@@ -45,15 +44,17 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   };
 
   const onAddTag = async () => {
-    const res = await postTagAction({ tagName: tagInput!, spaceId });
-    await console.log('res', res);
+    postTagAction({
+      tagName: tagInput!,
+      spaceId: Number(spaceId),
+    });
   };
 
   const onDeleteTag = ({
     spaceId,
     tagId,
   }: {
-    spaceId: string;
+    spaceId: number;
     tagId: number;
   }) => {
     deleteTagAction({ spaceId, tagId });
@@ -101,7 +102,10 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
                   >
                     <TagList
                       onDeleteTag={() => {
-                        onDeleteTag({ spaceId, tagId: item.tagId });
+                        onDeleteTag({
+                          spaceId: Number(spaceId),
+                          tagId: item.tagId,
+                        });
                       }}
                       item={item}
                     />

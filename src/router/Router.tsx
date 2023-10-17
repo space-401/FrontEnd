@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import PrivateRoute from '@router/Private';
 import { PATH } from '@constants/path';
 import { Suspense } from 'react';
-
 import * as Lazy from '@router/lazy';
 import MainPageSkeleton from '@components/Main/Skeleton';
 import MyPageSkeleton from '@components/MyPage/Skeleton';
@@ -15,7 +14,6 @@ import LandingPage from '@pages/Landing';
 import tokenStorage from '@utils/tokenStorage';
 import Loading from '@pages/Loading';
 import Auth from '@pages/Auth';
-
 import ErrorPage from '@/components/common/Error';
 
 const router = createBrowserRouter([
