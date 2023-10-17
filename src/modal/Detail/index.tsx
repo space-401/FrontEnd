@@ -28,6 +28,8 @@ import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
 import { v4 } from 'uuid';
+import { useCommentMutation } from '@hooks/api/comment/useCommentMutation';
+import { usePostDeleteMutation } from '@hooks/api/post/usePostDeleteMutation';
 
 const DetailInner = React.forwardRef(
   (_, forwardRef: React.ForwardedRef<HTMLDivElement>) => {
@@ -82,6 +84,7 @@ const DetailInner = React.forwardRef(
     const { height: commentHeight } = useDimensions(commentContainerRef);
 
     const { postBookMarkAction } = UseBookMarkMutation();
+    const { deletePostAction } = usePostDeleteMutation();
 
     const confirmModalOpen = useConfirmModalOpen();
 
@@ -96,6 +99,7 @@ const DetailInner = React.forwardRef(
     const DeleteAction = () => {
       ModalClose();
       toastColorMessage('삭제되었습니다.');
+      deletePostAction(postId);
     };
 
     // 대댓글 오픈
@@ -107,8 +111,11 @@ const DetailInner = React.forwardRef(
       setState((prev) => ({ ...prev, isReplyOpen: newReply }));
     };
 
+    const { postCommentAction } = useCommentMutation();
+
     // 댓글 오픈
     const sendReply = () => {
+      postCommentAction({ postId: postId, comment: state.value });
       setReply('');
     };
 
@@ -219,7 +226,14 @@ const DetailInner = React.forwardRef(
               </S.TagGroup>
             </S.DetailInfo>
             <S.MapInfo>
-              <S.MapTitle>
+              <S.MapTitle
+                onClick={() =>
+                  setState((prev) => ({
+                    ...prev,
+                    mapIsOpen: !prev.mapIsOpen,
+                  }))
+                }
+              >
                 <S.FlexBox>
                   <MarkerSvg width={'24px'} height={'24px'} />
                   {placeTitle}
@@ -230,14 +244,7 @@ const DetailInner = React.forwardRef(
                   custom={mapHeight}
                   ref={mapContainerRef}
                 >
-                  <MenuToggle
-                    toggle={() =>
-                      setState((prev) => ({
-                        ...prev,
-                        mapIsOpen: !prev.mapIsOpen,
-                      }))
-                    }
-                  />
+                  <MenuToggle />
                 </motion.nav>
               </S.MapTitle>
               <S.MapBox isOpen={state.mapIsOpen}>
@@ -256,7 +263,14 @@ const DetailInner = React.forwardRef(
               </S.MapBox>
             </S.MapInfo>
             <S.CommentInfo>
-              <S.CommentTitle>
+              <S.CommentTitle
+                onClick={() =>
+                  setState((prev) => ({
+                    ...prev,
+                    commentIsOpen: !prev.commentIsOpen,
+                  }))
+                }
+              >
                 <S.FlexBox>
                   댓글 {commentCount ? commentCount + '개' : null}
                 </S.FlexBox>
@@ -266,14 +280,7 @@ const DetailInner = React.forwardRef(
                   custom={commentHeight}
                   ref={commentContainerRef}
                 >
-                  <MenuToggle
-                    toggle={() =>
-                      setState((prev) => ({
-                        ...prev,
-                        commentIsOpen: !prev.commentIsOpen,
-                      }))
-                    }
-                  />
+                  <MenuToggle />
                 </motion.nav>
               </S.CommentTitle>
               <S.CommentBox
@@ -281,7 +288,7 @@ const DetailInner = React.forwardRef(
                 isOpen={state.commentIsOpen}
               >
                 <DetailComments
-                  postId={String(postId)}
+                  postId={postId}
                   userList={userList}
                   isReply={state.isReplyOpen}
                   setIsReply={setIsReply}

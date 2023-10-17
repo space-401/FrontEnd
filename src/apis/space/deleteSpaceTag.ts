@@ -10,8 +10,8 @@ export type DeleteSpaceTagType = {
 export const deleteSpaceTag = async (deleteTagInfo: DeleteSpaceTagType) => {
   const { spaceId, tagId } = deleteTagInfo;
   const { data } = await axiosInstance.delete<ApiResponseType>(
-    END_POINTS.SPACE_TAG(spaceId),
-    { data: { tagId } }
+    END_POINTS.SPACE_TAG,
+    { params: { spaceId, tagId } }
   );
 
   return data;
