@@ -5,7 +5,7 @@ import { ApiResponseType } from '@type/response.type';
 export const deletePost = async (postId: number) => {
   const { data } = await axiosInstance.delete<ApiResponseType>(
     END_POINTS.POST,
-    { data: { postId } }
+    { params: { postId } }
   );
 
   return data;

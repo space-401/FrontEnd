@@ -1,4 +1,5 @@
 import { TagType, UserType } from '@type/post.type';
+import { ApiResponseType } from '@type/response.type';
 
 export type HeaderType = {
   spaceInfo: OneSpaceType[];
@@ -51,33 +52,6 @@ export type SelectSpacePropType = {
   userList: UserType[];
 };
 
-export type CommentType = {
-  id: number;
-  // 참조하고 있는 아이디가 있는지 없으면 depth 0 댓글
-  refId: number;
-  // 댓글 작성자의 정보
-  writer: {
-    id: string;
-    // 토큰키 또는 소켓 아이디
-    memberKey: string;
-    nick: string;
-    url: string;
-  };
-  replyMember?: {
-    id: string;
-    // 토큰키 또는 소켓 아이디
-    memberKey: string;
-    nick: string;
-  };
-  content: string;
-  createDate: string;
-  updateDate: string;
-  // 이 댓글은 참조중인가?
-  isRef: boolean;
-  // 이 댓글의 작성자인가?
-  isMyComment: boolean;
-};
-
 export type MyCommentType = {
   postId: number;
   postTitle: string;
@@ -96,3 +70,5 @@ export type CreateSpaceType = {
   imgUrl: File;
   spacePassword: number;
 };
+
+export type SpaceResponseType = ApiResponseType & { spaceId: number };
