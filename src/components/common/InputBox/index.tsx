@@ -37,7 +37,7 @@ const InputBox = ({
   return (
     <S.InputWrapper {...rest}>
       <S.Input
-        autocomplete={'off'}
+        autocomplete="off"
         paddingLeft={paddingLeft}
         type={type}
         placeholder={placeholder}
