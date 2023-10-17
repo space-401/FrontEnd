@@ -20,7 +20,7 @@ export const patchSpace = async (props: postSpacePropType) => {
     spaceId,
     spaceName: spaceTitle,
     spaceDescription,
-    spaceIconPath: imgUrl,
+    imgUrl,
     spacePw: spacePassword,
   });
   return data;
