@@ -56,6 +56,7 @@ const MainPage = () => {
             />
           ) : (
             <UserSettingModal
+              spaceId={Number(spaceId)}
               userNames={userList.map((user) => user.userName)}
               ModalClose={onCloseSettingModal}
             />
