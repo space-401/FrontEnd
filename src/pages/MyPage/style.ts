@@ -55,7 +55,7 @@ const NavGroup = styled.div`
   gap: 8px;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     width: 100vw;
-    ${flexCenter}
+    ${flexCenter};
     flex-direction: row;
   }
 `;
@@ -72,7 +72,7 @@ const NavButton = styled.div<{ select: boolean }>`
   background: ${({ theme, select }) => (select ? theme.COLOR['gray-5'] : '')};
   @media ${({ theme }) => theme.DEVICE.tablet} {
     height: 50px;
-    ${flexCenter}
+    ${flexCenter};
     flex-direction: column;
   }
 `;

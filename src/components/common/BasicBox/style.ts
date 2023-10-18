@@ -8,7 +8,7 @@ const Wrapper = styled.div<BasicBoxProp>`
   background-color: ${({ color, theme }) =>
     color ? color : theme.COLOR['gray-5']};
   border-radius: ${(props) => props.borderradius}px;
-  ${flexCenter}
+  ${flexCenter};
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
 `;
