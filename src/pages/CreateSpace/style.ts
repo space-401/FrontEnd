@@ -2,7 +2,7 @@ import { flexCenter } from '@/styles/common';
 import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
-  @media ${({ theme }) => theme.DEVICE.mobile && theme.DEVICE.tablet} {
+  @media ${({ theme }) => theme.DEVICE.tablet} {
     flex-direction: column;
     ${flexCenter};
   }

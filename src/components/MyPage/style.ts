@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
+import { flexCenter, omitText } from '@styles/common';
 
 const Title = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 95%;
+    ${flexCenter}
+  }
 `;
 
 const Description = styled.div<{ margin_top: number }>`
@@ -256,6 +260,11 @@ const HeaderButtonGroup = styled.div`
   position: absolute;
   display: flex;
   gap: 46px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 95%;
+    ${flexCenter}
+    position: initial;
+  }
 `;
 
 const MButton = styled.div<{ select: boolean }>`
