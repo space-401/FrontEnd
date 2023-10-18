@@ -14,6 +14,7 @@ import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import { DEFAULT_POSITION } from '@constants/policy';
 import { MarkerType, MapType } from '@/types/marker.type';
 import Pagination from '@components/common/Pagination';
+import MarkerContents from '@components/Main/PostMap/components/MarkerContents';
 
 type searchModalType = {
   isOpen: boolean;
@@ -198,10 +199,26 @@ const SearchModal = React.forwardRef(
                   }
                 }}
               >
-                {markers.map((marker) => (
+                {markers.map((marker, i) => (
                   <EventMarkerContainer
-                    onClick={() => {}}
-                    content={marker.content}
+                    onClick={() => {
+                      if (marker.markerId !== center.selectId) {
+                        setCenter({
+                          selectId: marker.markerId,
+                          center: {
+                            lat: Number(marker.position.lat),
+                            lng: Number(marker.position.lng),
+                          },
+                          isPanto: true,
+                        });
+                      }
+                    }}
+                    content={
+                      <MarkerContents
+                        postTitle={data[i].place_name}
+                        placeTitle={marker.content}
+                      />
+                    }
                     key={marker.markerId}
                     position={marker.position}
                   />

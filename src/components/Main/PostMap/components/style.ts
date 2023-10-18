@@ -1,5 +1,6 @@
 import { flexCenter } from '@/styles/common';
 import styled from 'styled-components';
+import { omitText } from '@styles/common';
 
 const Wrapper = styled.div`
   position: relative;
@@ -64,6 +65,7 @@ const ContentTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-700']};
+  ${omitText};
 `;
 
 const ContentCreateAt = styled.div`
