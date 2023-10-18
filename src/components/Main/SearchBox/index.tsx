@@ -7,7 +7,6 @@ const MainSearchBox = (props: SearchProps) => {
   const { placeholder, movePage, initialKeyword = '', height, width } = props;
 
   const [keyword, setkeyword] = useState(initialKeyword);
-  console.log(keyword);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setkeyword(e.target.value);
   };
