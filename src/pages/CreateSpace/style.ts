@@ -21,7 +21,7 @@ const Form = styled.div`
   grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'empty button';
   flex-direction: column;
 
-  @media ${({ theme }) => theme.DEVICE.tablet && theme.DEVICE.mobile} {
+  @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
     ${flexCenter};
     flex-direction: column;
   }
@@ -41,7 +41,7 @@ const TitleSection = styled.div`
   }
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  @media ${({ theme }) => theme.DEVICE.tablet && theme.DEVICE.mobile} {
+  @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
     ${flexCenter};
     flex-direction: column;
   }
@@ -82,7 +82,7 @@ const InputContainer = styled.div<IInput>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
   position: relative;
-  @media ${({ theme }) => theme.DEVICE.tablet && theme.DEVICE.mobile} {
+  @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
     ${flexCenter};
     width: 50%;
   }

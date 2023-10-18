@@ -109,7 +109,12 @@ const SearchModal = React.forwardRef(
       >
         <Box tabIndex={-1} ref={forwardRef}>
           <DeleteIcon
-            style={{ position: 'absolute', top: '40px', right: '40px' }}
+            style={{
+              position: 'absolute',
+              top: '40px',
+              right: '40px',
+              zIndex: 1000,
+            }}
             onClick={onClose}
           />
           <S.Wrapper>

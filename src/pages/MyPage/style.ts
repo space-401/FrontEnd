@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
+
 const MyPageWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -44,17 +45,17 @@ const Wrapper = styled.nav`
   @media ${({ theme }) => theme.DEVICE.tablet} {
     ${flexCenter};
     flex-wrap: wrap;
-    height: 100px;
-    padding: 30px;
+    height: 80px;
     width: 95%;
+    padding: 0;
   }
 `;
 const NavGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    width: 100vw;
+  @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
+    width: 95%;
     ${flexCenter};
     flex-direction: row;
   }
@@ -71,7 +72,13 @@ const NavButton = styled.div<{ select: boolean }>`
   border-radius: 10px;
   background: ${({ theme, select }) => (select ? theme.COLOR['gray-5'] : '')};
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    height: 50px;
+    height: 100%;
+    ${flexCenter};
+    flex-direction: column;
+  }
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    height: 100%;
+    width: 7rem;
     ${flexCenter};
     flex-direction: column;
   }
@@ -79,7 +86,6 @@ const NavButton = styled.div<{ select: boolean }>`
 
 const NavSpan = styled.span`
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: 13px;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 `;

@@ -15,7 +15,9 @@ const SelectSpace = () => {
   return (
     <S.Wrapper>
       <S.Container>
-        <SelectLogo className={'main-logo'} />
+        <S.LogoBox>
+          <SelectLogo className={'main-logo'} />
+        </S.LogoBox>
         <S.Content>
           <S.ButtonContainer>
             <BasicButton
