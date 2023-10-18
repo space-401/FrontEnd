@@ -32,7 +32,7 @@ export type PostDetailType = {
   postUpdatedAt: string;
   date: DateInfoType;
   commentCount: number;
-  isBookmark: boolean;
+  isBookMark: boolean;
   userList: UserType[];
   selectedUsers: UserType[];
   selectedTags: TagType[];

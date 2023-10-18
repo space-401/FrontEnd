@@ -39,7 +39,7 @@ const CreatePost = () => {
   const postId = params.postId;
   const spaceId = params.spaceId;
 
-  const { postDetailData } = usePostDetailQuery(postId!);
+  const { postDetailData } = usePostDetailQuery(Number(postId!));
   const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
 
   const { createPostAction } = usePostCreateMutation();
