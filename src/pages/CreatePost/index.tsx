@@ -25,22 +25,26 @@ import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
 import { CreatePostType } from '@/types/post.type';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import {
   onConvertedUserToSelectType,
   onConvertedTagToSelectType,
 } from '@/utils/selectTypeConvertor';
-import { postPost } from '@/apis/post/postPost';
 import { convertImgArrToObj } from '@/utils/makeObj';
+import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
+import { usePostCreateMutation } from '@/hooks/api/post/usePostCreateMutation';
+import { usePostUpdateMutation } from '@/hooks/api/post/usePostUpdateMutation';
 
 const CreatePost = () => {
   const params = useParams();
   const postId = params.postId;
   const spaceId = params.spaceId;
+
   const { postDetailData } = usePostDetailQuery(postId!);
   const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
 
-  console.log(spaceInfo);
+  const { createPostAction } = usePostCreateMutation();
+  const { updatePostAction } = usePostUpdateMutation();
+
   const { imgUrl, spaceTitle, tagList, userList } = spaceInfo!;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -138,7 +142,26 @@ const CreatePost = () => {
   };
 
   //제출 후 포스트 생성 페이지로 이동
-  const onSubmit = () => {
+  const onSubmitCreatePost = () => {
+    const newPost: CreatePostType = {
+      postTitle: title,
+      postDescription: content,
+      selectedUsers: selectedUsers.map((user) => user.id),
+      selectedTags: selectedTags.map((tag) => tag.id),
+      position: {
+        lng: Number(mapInfo.position.lng),
+        lat: Number(mapInfo.position.lat),
+      },
+      placeTitle: mapInfo.content,
+      date: dateInfo,
+    };
+    createPostAction(newPost);
+    //api 로직
+    //성공시
+    confirmModalOpen();
+  };
+
+  const onSubmitUpdatePost = () => {
     const newPost: CreatePostType = {
       postTitle: title,
       postDescription: content,
@@ -153,7 +176,7 @@ const CreatePost = () => {
     };
 
     console.log(newPost);
-    postPost(Number(spaceId!));
+    updatePostAction({ ...newPost, spaceId: Number(spaceId) });
     //api 로직
     //성공시
     confirmModalOpen();
@@ -188,7 +211,9 @@ const CreatePost = () => {
       isPositiveModal: true,
       ApproveMessage: '확인',
       closeMessage: '닫기',
-      titleMessage: '성공적으로 포스팅되었습니다.',
+      titleMessage: spaceInfo
+        ? '성공적으로 수정되었습니다. '
+        : '성공적으로 포스팅되었습니다.',
     });
   };
 
@@ -389,19 +414,35 @@ const CreatePost = () => {
 
         <S.EmptyContainer />
         <S.ButtonContainer paddingLeft={inputWidth - 160}>
-          <BasicButton
-            disabled={
-              !title.length ||
-              !content.length ||
-              !dateInfo.startDate ||
-              mapInfo.content == ''
-            }
-            onClick={onSubmit}
-            width={160}
-            height={44}
-            children="게시글 올리기"
-            fontSize={14}
-          />
+          {spaceId ? (
+            <BasicButton
+              disabled={
+                !title.length ||
+                !content.length ||
+                !dateInfo.startDate ||
+                mapInfo.content == ''
+              }
+              onClick={onSubmitCreatePost}
+              width={160}
+              height={44}
+              children="게시글 올리기"
+              fontSize={14}
+            />
+          ) : (
+            <BasicButton
+              disabled={
+                !title.length ||
+                !content.length ||
+                !dateInfo.startDate ||
+                mapInfo.content == ''
+              }
+              onClick={onSubmitUpdatePost}
+              width={160}
+              height={44}
+              children="게시글 수정하기"
+              fontSize={14}
+            />
+          )}
         </S.ButtonContainer>
       </S.GridWrapper>
     </S.Wrapper>

@@ -10,7 +10,7 @@ export const postNewSpace = async (props: CreateSpaceType) => {
   const { data } = await axiosInstance.post<ApiResponseType>(END_POINTS.SPACE, {
     spaceName: spaceTitle,
     spaceDescription,
-    spaceIconPath: imgUrl,
+    imgUrl: imgUrl,
     spacePw: spacePassword,
   });
   return data;

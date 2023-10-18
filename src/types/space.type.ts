@@ -1,5 +1,4 @@
 import { TagType, UserType } from '@type/post.type';
-import { ApiResponseType } from '@type/response.type';
 
 export type HeaderType = {
   spaceInfo: OneSpaceType[];
@@ -71,4 +70,6 @@ export type CreateSpaceType = {
   spacePassword: number;
 };
 
-export type SpaceResponseType = ApiResponseType & { spaceId: number };
+export type UpdateSpaceType = CreateSpaceType & {
+  spaceId: number;
+};

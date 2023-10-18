@@ -33,7 +33,6 @@ const MultipleImgBox = ({
     window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth;
-  console.log('screenWidth', screenWidth);
 
   //이미지 추가하는 함수
   const onAddImage = () => {
