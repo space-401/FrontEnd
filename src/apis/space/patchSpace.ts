@@ -3,16 +3,9 @@
 import { axiosInstance } from '@apis/AxiosInstance';
 import { ApiResponseType } from '@type/response.type';
 import { END_POINTS } from '@constants/api';
+import { UpdateSpaceType } from '@/types/space.type';
 
-type postSpacePropType = {
-  spaceId: number;
-  spaceTitle: string;
-  spaceDescription: string;
-  imgUrl: string;
-  spacePassword: number;
-};
-
-export const patchSpace = async (props: postSpacePropType) => {
+export const patchSpace = async (props: UpdateSpaceType) => {
   const { spaceId, spaceTitle, spaceDescription, spacePassword, imgUrl } =
     props;
 

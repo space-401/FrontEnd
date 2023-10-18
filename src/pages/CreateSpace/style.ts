@@ -40,12 +40,8 @@ const TitleSection = styled.div`
   }
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  @media ${({ theme }) => theme.DEVICE.tablet} {
+  @media ${({ theme }) => theme.DEVICE.tablet && theme.DEVICE.mobile} {
     ${flexCenter}
-    flex-direction: column;
-  }
-  @media ${({ theme }) => theme.DEVICE.mobile} {
-    ${flexCenter};
     flex-direction: column;
   }
 `;
