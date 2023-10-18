@@ -13,13 +13,14 @@ import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
 import CircleImgEditModal from '@/components/Create/ImageEditModal/CircleImageEditmodal';
-// import DefaultProfile from '@assets/png/DefaultProfile.png';
-// import { useUserInfoQuery } from '@/hooks/api/user/useUserInfoQuery';
+import DefaultProfile from '@assets/png/DefaultProfile.png';
+import { useSpaceUserUpdateMutation } from '@/hooks/api/space/useSpaceUserUpdateMutation';
 
 type SettingModalProps = {
   ModalClose: () => void;
   userNames: string[];
   userInfo?: UserType;
+  spaceId: number;
 };
 
 //프로필 기본 이미지 선택
@@ -27,6 +28,7 @@ const UserSettingModal = ({
   userNames,
   ModalClose,
   userInfo,
+  spaceId,
 }: SettingModalProps) => {
   const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -39,8 +41,7 @@ const UserSettingModal = ({
   const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
     usePhotoModalStore();
 
-  // const { MyInfoData } = useUserInfoQuery({ spaceId, userName });
-
+  const { userUpdateAction } = useSpaceUserUpdateMutation();
   //중복 닉네임 체크
   const checkAlreadyNickname = () => {
     if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
@@ -87,7 +88,14 @@ const UserSettingModal = ({
   //제출 함수
   const onSubmitInfo = async () => {
     const result = checkAlreadyNickname();
+
+    const data = {
+      spaceId,
+      image: imageArr.convertedImage ? imageArr.convertedImage : DefaultProfile,
+      userNickName: nickName,
+    };
     if (result) {
+      userUpdateAction(data);
       ModalClose();
       confirmModalOpen();
     }
