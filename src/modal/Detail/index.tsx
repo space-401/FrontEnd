@@ -40,7 +40,7 @@ const DetailInner = React.forwardRef(
 
     const { postId, ModalClose } = useDetailModalStore((state) => state);
 
-    const { postDetailData } = usePostDetailQuery(String(postId));
+    const { postDetailData } = usePostDetailQuery(postId);
 
     const {
       spaceId,
@@ -56,7 +56,7 @@ const DetailInner = React.forwardRef(
       postDescription,
       selectedUsers,
       selectedTags,
-      isBookmark,
+      isBookMark,
     } = postDetailData!;
 
     const [state, setState] = useState<{
@@ -75,7 +75,6 @@ const DetailInner = React.forwardRef(
       value: '',
     });
     const navigate = useNavigate();
-    const [isBookMark, setIsBookMark] = useState(isBookmark);
 
     const mapContainerRef = useRef(null);
     const commentContainerRef = useRef(null);
@@ -84,7 +83,7 @@ const DetailInner = React.forwardRef(
     const { height: commentHeight } = useDimensions(commentContainerRef);
 
     const { postBookMarkAction } = UseBookMarkMutation();
-    const { deletePostAction } = usePostDeleteMutation();
+    const { deletePostAction } = usePostDeleteMutation(spaceId);
 
     const confirmModalOpen = useConfirmModalOpen();
 
@@ -126,7 +125,7 @@ const DetailInner = React.forwardRef(
 
     // 북마크 요청을 보내는 함수
     const wishAsync = (postId: number) => {
-      postBookMarkAction({ postId: String(postId), setState: setIsBookMark });
+      postBookMarkAction({ postId });
     };
 
     const deleteConfirmOpen = () => {

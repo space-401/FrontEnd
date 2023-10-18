@@ -20,8 +20,14 @@ export const spaceHandlers: RestHandler[] = [
   /**
    * 스페이스 메인페이지 (리스트)를 불러오는 api
    */
-  rest.get(END_POINTS.SPACE_POST_LIST, (_, res, ctx) => {
-    return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(spacePostList));
+  rest.get(END_POINTS.SPACE_POST_LIST, (req, res, ctx) => {
+    const referrer = req.url;
+    const url = new URL(referrer);
+    const page = url.searchParams.get('page')!;
+    return res(
+      ctx.status(HTTP_STATUS_CODE.SUCCESS),
+      ctx.json({ ...spacePostList, page: Number(page) })
+    );
   }),
   /**
    * 스페이스를 생성하는 api

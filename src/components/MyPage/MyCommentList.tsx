@@ -1,11 +1,12 @@
 import { A, CL } from '@components/MyPage/style';
 import Pagination from '@components/common/Pagination';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { getFormatDate } from '@utils/formatter';
 import { useMyCommentListQuery } from '@hooks/api/user/useMyCommentListQuery';
 import { timeHelper } from '@utils/time-helper';
 import { ReactComponent as FeatherSvg } from '@assets/svg/feather.svg';
 import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import { v4 } from 'uuid';
 
 const MyCommentList = () => {
   const [curPage, setCurPage] = useState(0);
@@ -36,7 +37,7 @@ const MyCommentList = () => {
             postId,
           } = item;
           return (
-            <>
+            <Fragment key={v4()}>
               <CL.OneCommentList
                 onClick={() => detailModalOpen(postId)}
                 key={commentId}
@@ -61,7 +62,7 @@ const MyCommentList = () => {
                 <CL.RightCard img_url={mainImgUrl} />
               </CL.OneCommentList>
               <A.Bar margin_top={0} />
-            </>
+            </Fragment>
           );
         })}
       </>

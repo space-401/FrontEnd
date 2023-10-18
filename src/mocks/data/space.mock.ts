@@ -54,7 +54,7 @@ export const spaceList: OneSpaceType[] = [
  */
 export const spacePostList = {
   postList: postList,
-  page: 2,
+  page: 1,
   total: 330,
   itemLength: 12,
 };
