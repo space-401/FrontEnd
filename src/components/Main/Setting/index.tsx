@@ -98,6 +98,7 @@ const SettingComponent = React.forwardRef(
           <S.SettingCenter>
             {userList.map((user, i) => (
               <UserList
+                spaceId={Number(spaceId)}
                 myInfo={userList[0]}
                 key={user.userId}
                 index={i}
