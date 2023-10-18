@@ -127,6 +127,7 @@ const MapTitle = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  cursor: pointer;
 `;
 
 const CommentInfo = styled.div`
@@ -190,6 +191,7 @@ const MapBox = styled.div<{ isOpen: boolean }>`
 `;
 
 const CommentTitle = styled.div`
+  cursor: pointer;
   display: flex;
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
