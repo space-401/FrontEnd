@@ -11,9 +11,9 @@ const PrivateRoute = ({ isAllowed }: PrivateRouteType) => {
   const navigate = useNavigate();
   const isLogin = useUserStore((e) => e.isLogin);
   useEffect(() => {
-    if (!isAllowed && !isLogin) {
-      navigate(PATH.LOGIN);
-    }
+    // if (!isAllowed && !isLogin) {
+    //   navigate(PATH.LOGIN);
+    // }
   }, [isAllowed, isLogin, navigate]);
 
   return <Outlet />;
