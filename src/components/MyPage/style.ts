@@ -7,7 +7,7 @@ const Title = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   @media ${({ theme }) => theme.DEVICE.tablet} {
     width: 95%;
-    ${flexCenter}
+    ${flexCenter};
   }
 `;
 
@@ -262,7 +262,7 @@ const HeaderButtonGroup = styled.div`
   gap: 46px;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     width: 95%;
-    ${flexCenter}
+    ${flexCenter};
     position: initial;
   }
 `;
