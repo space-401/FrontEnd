@@ -73,3 +73,8 @@ export type CreateSpaceType = {
 export type UpdateSpaceType = CreateSpaceType & {
   spaceId: number;
 };
+
+export type SpaceResponseType = {
+  spaceId: number;
+  message: string;
+};

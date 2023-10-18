@@ -41,7 +41,7 @@ const UserSettingModal = ({
   const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
     usePhotoModalStore();
 
-  const { userUpdateAction } = useSpaceUserUpdateMutation();
+  const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
   //중복 닉네임 체크
   const checkAlreadyNickname = () => {
     if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
