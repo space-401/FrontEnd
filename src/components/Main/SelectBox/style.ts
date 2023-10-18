@@ -17,6 +17,7 @@ const Wrapper = styled.div<{
   align-items: center;
   justify-content: space-between;
   padding: 12px 8px 12px 10px;
+  cursor: pointer;
 
   .user-title {
     max-width: ${({ width }) => width / 2 + 20}px;

@@ -10,6 +10,7 @@ import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
+import { useSpaceUserUpdateMutation } from '@hooks/api/space/useSpaceUserUpdateMutation';
 
 const SettingComponent = React.forwardRef(
   (
@@ -30,6 +31,7 @@ const SettingComponent = React.forwardRef(
 
     const alertModalOpen = useAlertModalOpen();
     const confirmModalOpen = useConfirmModalOpen();
+    const { userUpdateAction } = useSpaceUserUpdateMutation(spaceId);
 
     const selfGetOutAction = () => {
       console.log(userList[0].userId + '님이 방을 나갔습니다.');
@@ -68,6 +70,8 @@ const SettingComponent = React.forwardRef(
     const changeAdminAction = (userName: string, userId: number) => {
       toastColorMessage(userName + '님이 방장이 되었습니다.');
       toastColorMessage(userId + '아이디 회원에게 방장 권한을 넘겼습니다.');
+      onClose();
+      userUpdateAction({ userId, spaceId: Number(spaceId) });
     };
 
     const changeAdminHandler = (userName: string, userId: number) => {

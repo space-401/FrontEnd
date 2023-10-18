@@ -3,11 +3,10 @@ import type { ApiResponseType } from '@type/response.type';
 import { postBookMark } from '@apis/post/postBookMark';
 import type { AxiosError } from 'axios';
 import { toastColorMessage } from '@utils/toastMessage';
-import { Dispatch, SetStateAction } from 'react';
+import { PostDetailType } from '@type/post.type';
 
 interface IPostInfo {
-  postId: string;
-  setState: Dispatch<SetStateAction<boolean>>;
+  postId: number;
 }
 
 export const UseBookMarkMutation = () => {
@@ -16,13 +15,21 @@ export const UseBookMarkMutation = () => {
     ApiResponseType,
     AxiosError,
     IPostInfo
-  >((postInfo) => postBookMark(Number(postInfo.postId)), {
+  >((postInfo) => postBookMark(postInfo.postId), {
     onMutate: async (postInfo) => {
+      const prevInfo: PostDetailType = queryClient.getQueryData([
+        'detail',
+        postInfo.postId,
+      ])!;
       await queryClient.cancelQueries(['detail', postInfo.postId]);
-      postInfo.setState((state) => !state);
+      queryClient.setQueriesData(['detail', postInfo.postId], {
+        ...prevInfo,
+        isBookMark: !prevInfo.isBookMark,
+      });
     },
-    onError: async (error) => {
+    onError: async (error, variables) => {
       toastColorMessage(error.message);
+      await queryClient.invalidateQueries(['detail', variables.postId]);
     },
   });
 

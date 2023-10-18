@@ -2,13 +2,14 @@ import { A, CL } from '@components/MyPage/style';
 import KSkeleton from '@components/common/Skeleton';
 import { v4 } from 'uuid';
 import { ReactComponent as FeatherSvg } from '@assets/svg/feather.svg';
+import { Fragment } from 'react';
 const MyCommentListSkeleton = () => {
   return (
     <>
       {new Array(4).fill('').map(() => {
         return (
-          <>
-            <CL.OneCommentList key={v4()}>
+          <Fragment key={v4()}>
+            <CL.OneCommentList>
               <CL.CardInfo>
                 <CL.PostTitle>
                   <KSkeleton
@@ -57,7 +58,7 @@ const MyCommentListSkeleton = () => {
               <KSkeleton variant={'rounded'} width={98} height={98} />
             </CL.OneCommentList>
             <A.Bar margin_top={0} />
-          </>
+          </Fragment>
         );
       })}
     </>
