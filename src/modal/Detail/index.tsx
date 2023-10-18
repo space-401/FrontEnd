@@ -13,6 +13,7 @@ import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import DetailComments from '@components/Main/Comments';
 import { ReactComponent as BookMarkFillSvg } from '@assets/svg/bookmark/fill.svg';
 import { ReactComponent as BookMarkEmptySvg } from '@assets/svg/bookmark/empty.svg';
+import kakaoMapSvg from '@assets/svg/kakaomapMarker.svg';
 import {
   Mention,
   MentionsInput,
@@ -257,7 +258,16 @@ const DetailInner = React.forwardRef(
                   }}
                   level={4}
                 >
-                  <MapMarker position={position} />
+                  <MapMarker
+                    position={position}
+                    image={{
+                      src: kakaoMapSvg,
+                      size: {
+                        width: 29,
+                        height: 42,
+                      },
+                    }}
+                  />
                 </Map>
               </S.MapBox>
             </S.MapInfo>

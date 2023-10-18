@@ -4,10 +4,10 @@ import Avatars from '@components/common/AvatarGroup/Avatars';
 import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
 
 export type MarkerPropTypes = {
-  postTitle: string;
-  postUpdatedAt: string;
+  postTitle?: string;
+  postUpdatedAt?: string;
   placeTitle: string;
-  usersList: UserType[];
+  usersList?: UserType[];
 };
 
 const MarkerContents = (props: MarkerPropTypes) => {
@@ -16,15 +16,21 @@ const MarkerContents = (props: MarkerPropTypes) => {
   return (
     <M.ContentBox>
       <M.ContentPlace>
-        <PlaceIcon style={{ width: '16px', height: '16px' }} />
-        {postTitle}
+        {postTitle && (
+          <>
+            <PlaceIcon style={{ width: '16px', height: '16px' }} />
+            {placeTitle}
+          </>
+        )}
       </M.ContentPlace>
       <M.MarkerContainer>
-        <M.ContentTitle>{placeTitle}</M.ContentTitle>
-        <M.ContentInfo>
-          <M.ContentCreateAt>{postUpdatedAt}</M.ContentCreateAt>
-          <Avatars size={24} users={usersList} max={4} />
-        </M.ContentInfo>
+        <M.ContentTitle>{postTitle}</M.ContentTitle>
+        {usersList && (
+          <M.ContentInfo>
+            <M.ContentCreateAt>{postUpdatedAt}</M.ContentCreateAt>
+            <Avatars size={24} users={usersList} max={4} />
+          </M.ContentInfo>
+        )}
       </M.MarkerContainer>
     </M.ContentBox>
   );
