@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { MapMarker, useMap } from 'react-kakao-maps-sdk';
+import kakaoMapSvg from '@assets/svg/kakaomapMarker.svg';
 
 const EventMarkerContainer = ({
   position,
@@ -16,6 +17,13 @@ const EventMarkerContainer = ({
   const [isVisible, setIsVisible] = useState(false);
   return (
     <MapMarker
+      image={{
+        src: kakaoMapSvg,
+        size: {
+          width: 29,
+          height: 42,
+        },
+      }}
       position={position} // 마커를 표시할 위치
       onClick={(marker) => {
         map.panTo(marker.getPosition());
