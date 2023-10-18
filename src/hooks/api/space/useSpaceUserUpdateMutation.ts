@@ -1,28 +1,14 @@
-// import { useMutation, useQuery } from '@tanstack/react-query';
-// import type { AxiosError } from 'axios';
-// import { patchSpaceUser } from '@/apis/space/patchSpaceUser';
-// import type { AccountDataType } from '@type/user.type';
+import { useMutation } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
+import { patchSpaceUser } from '@/apis/space/patchSpaceUser';
+import { ApiResponseType } from '@/types/response.type';
+import { SpaceUserPropsType } from '@/apis/space/patchSpaceUser';
 
-// type userProps = {
-//   spaceId: number;
-//   isAdmin?: boolean;
-//   image?: File;
-//   userNickName?: string;
-// };
-
-// export const useSpaceUserUpdateMutation = (spaceId: string) => {
-//   const NumberSpaceId = Number(spaceId);
-//   const { data: MySpaceUserData } = useMutation(
-//     ['spaceUserInfo', NumberSpaceId],
-//     () => patchSpaceUser()
-//   );
-// };
-// const {  data: MySpaceUserData } = useMutation<
-// ApiResponseType,
-// AxiosError,
-// deleteSpaceType
-// >((deleteInfo) => deleteSpaceUser(deleteInfo.spaceId, deleteInfo.spaceId));
-// return { deleteSpaceAction };
-
-//   return { MySpaceUserData };
-// };
+export const useSpaceUserUpdateMutation = () => {
+  const { mutate: userUpdateAction } = useMutation<
+    ApiResponseType,
+    AxiosError,
+    SpaceUserPropsType
+  >((userInfo) => patchSpaceUser(userInfo));
+  return { userUpdateAction };
+};

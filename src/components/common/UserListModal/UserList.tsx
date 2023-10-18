@@ -18,10 +18,12 @@ type UserListPropsType = {
   myInfo: UserType;
   changeAdminHandler: (userName: string, userId: number) => void;
   userNames: string[];
+  spaceId: number;
 };
 
 const UserList = (props: UserListPropsType) => {
-  const { isAdmin, userInfo, index, changeAdminHandler, userNames } = props;
+  const { isAdmin, userInfo, index, changeAdminHandler, userNames, spaceId } =
+    props;
   const { userId, userName, imgUrl } = userInfo;
   const [state, setState] = useState({
     isSettingMode: false,
@@ -71,6 +73,7 @@ const UserList = (props: UserListPropsType) => {
             ModalClose={() => ChangeUserModal(false)}
             userNames={userNames}
             userInfo={userInfo}
+            spaceId={spaceId}
           />
         </Modal>
       )}

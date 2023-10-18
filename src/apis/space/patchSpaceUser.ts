@@ -1,16 +1,16 @@
 import { axiosInstance } from '@apis/AxiosInstance';
-import { SpacePostListProps } from '@type/main.type';
 import { END_POINTS } from '@constants/api';
+import { ApiResponseType } from '@/types/response.type';
 
-type userProps = {
+export type SpaceUserPropsType = {
   spaceId: number;
   userId?: number; //해당 유저가 방장이 되는 경우에만 추가함.
   isAdmin?: boolean;
-  image?: File;
+  image?: File | string;
   userNickName?: string;
 };
-export const patchSpaceUser = async (patchInfo: userProps) => {
-  const { data } = await axiosInstance.patch<SpacePostListProps>(
+export const patchSpaceUser = async (patchInfo: SpaceUserPropsType) => {
+  const { data } = await axiosInstance.patch<ApiResponseType>(
     END_POINTS.SPACE_USER,
     { ...patchInfo }
   );
