@@ -30,7 +30,7 @@ const UserSettingModal = ({
   userInfo,
   spaceId,
 }: SettingModalProps) => {
-  const { userUpdateAction } = useSpaceUserUpdateMutation();
+  const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
 
   const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({

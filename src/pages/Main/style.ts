@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
     ${flexCenter};
-    width: 100vw;
+    width: 95vw;
     flex-wrap: wrap;
     flex-direction: column;
   }

@@ -13,9 +13,6 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   height: fit-content;
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    width: 100%;
-  }
 `;
 
 const IconGroup = styled.div`
@@ -24,10 +21,6 @@ const IconGroup = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 28px;
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter};
-    gap: 30px;
-  }
 `;
 
 const IconBox = styled.div<{ padding?: number }>`
@@ -51,10 +44,6 @@ const SpaceBox = styled.div`
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
   ${flexCenter};
   border-radius: 10px;
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter};
-    width: 230px;
-  }
 `;
 
 const Container = styled.div`
@@ -97,6 +86,11 @@ const ContentLayOut = styled.div`
   width: 1200px;
   display: flex;
   flex-direction: column;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    width: 95%;
+  }
 `;
 
 const Footer = styled.footer`

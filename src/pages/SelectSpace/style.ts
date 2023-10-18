@@ -14,6 +14,14 @@ const SpaceContainer = styled.div`
   margin-top: 16px;
   position: relative;
   text-align: center !important;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    flex-wrap: wrap;
+  }
+`;
+
+const LogoBox = styled.div`
+  ${flexCenter};
 `;
 
 const Container = styled.div`
@@ -51,6 +59,7 @@ const Content = styled.div`
 `;
 
 const S = {
+  LogoBox,
   Wrapper,
   Container,
   SpaceContainer,

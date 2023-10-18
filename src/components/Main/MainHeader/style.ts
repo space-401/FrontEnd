@@ -64,6 +64,12 @@ const Description = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   overflow: auto;
   color: ${({ theme }) => theme.COLOR.white};
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 
 const FilterState = styled.div`
@@ -74,6 +80,10 @@ const FilterState = styled.div`
   display: flex;
   gap: 24px;
   margin-top: 37px;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-top: 100px;
+  }
 `;
 
 const FilterGroup = styled.div``;

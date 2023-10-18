@@ -13,6 +13,15 @@ const Wrapper = styled.div`
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    min-width: 300px;
+    width: 95%;
+
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const LeftContainer = styled.div`
@@ -20,9 +29,18 @@ const LeftContainer = styled.div`
   position: relative;
   height: 100%;
   overflow: hidden;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: 350px;
+  }
 `;
 
-const RightContainer = styled.div``;
+const RightContainer = styled.div`
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-top: 10px;
+    height: 450px;
+  }
+`;
 
 const SearchBox = styled.form`
   width: calc(100% - 20px);
@@ -62,6 +80,10 @@ const SearchList = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    padding-bottom: 50px;
+  }
 `;
 
 const OneList = styled.li<{ select: boolean }>`
@@ -74,6 +96,11 @@ const OneList = styled.li<{ select: boolean }>`
   display: flex;
   justify-content: space-between;
   background: ${({ theme }) => theme.COLOR['gray-5']};
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: 110px;
+    padding: 4px;
+  }
 `;
 
 const Category = styled.div`

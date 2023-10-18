@@ -15,12 +15,15 @@ const LoginPage = () => {
 
   return (
     <S.Wrapper>
-      <SignLogo />
+      <S.LogoBox>
+        <SignLogo />
+      </S.LogoBox>
       <S.Content>
         <S.Text>
           SNS로 간편하게 로그인하고 <br />
           친구들과 함께 추억을 기록하고 소통해보세요!
         </S.Text>
+
         <S.LoginContainer>
           <S.LoginBox
             backgroundColor={theme.LOGIN_COLOR.kakao}
