@@ -13,8 +13,8 @@ import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
 import CircleImgEditModal from '@/components/Create/ImageEditModal/CircleImageEditmodal';
-import DefaultProfile from '@assets/png/DefaultProfile.png';
 import { useSpaceUserUpdateMutation } from '@/hooks/api/space/useSpaceUserUpdateMutation';
+import SelectIconModal from '@/components/Create/SelectIconModal';
 
 type SettingModalProps = {
   ModalClose: () => void;
@@ -30,6 +30,8 @@ const UserSettingModal = ({
   userInfo,
   spaceId,
 }: SettingModalProps) => {
+  const { userUpdateAction } = useSpaceUserUpdateMutation();
+
   const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({
     image: null,
@@ -37,11 +39,18 @@ const UserSettingModal = ({
     convertedImage: null,
   });
   const [errorMsg, setErrorMsg] = useState<string | null>();
-
+  const [isSelectOptionModalOpen, setSelectOptionModalOpen] = useState(false);
   const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
     usePhotoModalStore();
 
-  const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
+  //이미지 선택 옵션 모달 열기
+  const onClickImgOptionModalOpen = () => {
+    if (imageArr.cropImage) {
+      return setSelectOptionModalOpen(true);
+    }
+    return onClickImgEditModal();
+  };
+
   //중복 닉네임 체크
   const checkAlreadyNickname = () => {
     if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
@@ -53,6 +62,15 @@ const UserSettingModal = ({
     }
   };
 
+  //기본 이미지로 설정
+  const onSelectDefaultImg = () => {
+    setImageArr({
+      image: null,
+      cropImage: null,
+      convertedImage: null,
+    });
+    setSelectOptionModalOpen(false);
+  };
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +99,9 @@ const UserSettingModal = ({
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
+    if (isSelectOptionModalOpen) {
+      setSelectOptionModalOpen(false);
+    }
     inputRef.current?.click();
     imgEditModalOpen();
   };
@@ -91,7 +112,7 @@ const UserSettingModal = ({
 
     const data = {
       spaceId,
-      image: imageArr.convertedImage ? imageArr.convertedImage : DefaultProfile,
+      image: imageArr.convertedImage ?? null,
       userNickName: nickName,
     };
     if (result) {
@@ -128,6 +149,25 @@ const UserSettingModal = ({
           {isImgEditModalOpen && imageArr.image && (
             <CircleImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
           )}
+          {/*이미지 옵션 선택 모달*/}
+
+          <SelectIconModal
+            title="프로필 사진"
+            isOpen={isSelectOptionModalOpen}
+            modalClose={() => {
+              setSelectOptionModalOpen(false);
+            }}
+            selectOptionArr={[
+              {
+                title: '기본 이미지로 변경',
+                asyncFunc: onSelectDefaultImg,
+              },
+              {
+                title: '파일에서 이미지 선택',
+                asyncFunc: onClickImgEditModal,
+              },
+            ]}
+          />
 
           <S.SectionWrapper gap={25}>
             <S.DetailText>
@@ -146,18 +186,14 @@ const UserSettingModal = ({
             <M.Label isAlert={false}>프로필 사진</M.Label>
             {!imageArr.cropImage ? (
               <>
-                <M.ImgBox onClick={onClickImgEditModal}>
+                <M.ImgBox onClick={onClickImgOptionModalOpen}>
                   <ProfileMock />
                 </M.ImgBox>
               </>
             ) : (
               <>
-                <M.ImgBox onClick={imgEditModalOpen}>
-                  <CircleIcon
-                    size={240}
-                    imgUrl={imageArr.cropImage!}
-                    onClick={onClickImgEditModal}
-                  />
+                <M.ImgBox onClick={onClickImgOptionModalOpen}>
+                  <CircleIcon size={240} imgUrl={imageArr.cropImage!} />
                 </M.ImgBox>
               </>
             )}
@@ -189,10 +225,10 @@ const UserSettingModal = ({
               <BasicButton
                 width={212}
                 height={48}
-                onClick={() => {}}
+                onClick={onSubmitInfo}
                 disabled={!nickName.length}
               >
-                <S.ButtonText onClick={onSubmitInfo}>완료</S.ButtonText>
+                <S.ButtonText>완료</S.ButtonText>
               </BasicButton>
             </S.ButtonContainer>
           </S.SectionWrapper>
