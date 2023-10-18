@@ -266,6 +266,7 @@ const StyledDatePicker = styled(DatePicker)<{
   border-radius: ${({ borderRadius }) => borderRadius}px;
   display: flex;
   padding-left: 0.7rem;
+  caret-color: transparent;
 `;
 
 const DateText = styled.div<{ isMain: boolean }>`

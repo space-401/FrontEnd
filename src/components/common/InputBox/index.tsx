@@ -2,7 +2,7 @@ import S from '@/components/common/InputBox/style';
 import { ReactElement } from 'react';
 
 type InputBoxProps = {
-  width: number;
+  width?: number;
   height: number;
   placeholder?: string;
   type: 'text' | 'button' | 'password';
@@ -37,7 +37,7 @@ const InputBox = ({
   return (
     <S.InputWrapper {...rest}>
       <S.Input
-        autocomplete={'off'}
+        autocomplete="off"
         paddingLeft={paddingLeft}
         type={type}
         placeholder={placeholder}

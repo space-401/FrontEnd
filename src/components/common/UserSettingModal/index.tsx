@@ -13,17 +13,22 @@ import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
 import CircleImgEditModal from '@/components/Create/ImageEditModal/CircleImageEditmodal';
+import DefaultProfile from '@assets/png/DefaultProfile.png';
+import { useSpaceUserUpdateMutation } from '@/hooks/api/space/useSpaceUserUpdateMutation';
+
 type SettingModalProps = {
   ModalClose: () => void;
   userNames: string[];
   userInfo?: UserType;
+  spaceId: number;
 };
 
 //프로필 기본 이미지 선택
 const UserSettingModal = ({
-  ModalClose,
   userNames,
+  ModalClose,
   userInfo,
+  spaceId,
 }: SettingModalProps) => {
   const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -36,6 +41,8 @@ const UserSettingModal = ({
   const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
     usePhotoModalStore();
 
+  const { userUpdateAction } = useSpaceUserUpdateMutation();
+  //중복 닉네임 체크
   const checkAlreadyNickname = () => {
     if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
       setErrorMsg('중복된 닉네임입니다.');
@@ -81,7 +88,14 @@ const UserSettingModal = ({
   //제출 함수
   const onSubmitInfo = async () => {
     const result = checkAlreadyNickname();
+
+    const data = {
+      spaceId,
+      image: imageArr.convertedImage ? imageArr.convertedImage : DefaultProfile,
+      userNickName: nickName,
+    };
     if (result) {
+      userUpdateAction(data);
       ModalClose();
       confirmModalOpen();
     }
@@ -95,13 +109,21 @@ const UserSettingModal = ({
       isPositiveModal: true,
       ApproveMessage: '확인',
       closeMessage: '닫기',
-      titleMessage: '성공적으로 변경되었습니다.',
+      titleMessage: userInfo
+        ? '성공적으로 변경되었습니다.'
+        : `${nickName}님 환영합니다!`,
     });
+  };
+
+  const onEnterClose = (e: any) => {
+    if (e.keyCode === 13) {
+      onSubmitInfo();
+    }
   };
 
   return (
     userNames && (
-      <Box tabIndex={-1}>
+      <Box tabIndex={-1} onKeyDown={onEnterClose}>
         <S.Wrapper>
           {isImgEditModalOpen && imageArr.image && (
             <CircleImgEditModal imageArr={imageArr} setImageArr={setImageArr} />

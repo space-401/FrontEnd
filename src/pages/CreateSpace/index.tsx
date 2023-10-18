@@ -23,13 +23,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
-import { postNewSpace } from '@/apis/space/postSpace';
+import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
+import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
 
 const CreateSpace = () => {
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
 
+  const { postSpaceAction } = useSpaceCreateMutation();
+  const { updateSpaceAction } = useSpaceUpdateMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
 
   //이미지 저장하는 곳
@@ -135,12 +138,12 @@ const CreateSpace = () => {
       imgUrl: imageArr.convertedImage!,
       spacePassword: Number(pswd),
     };
-    postNewSpace(newData);
+    postSpaceAction(newData);
     console.log('새로운 데이터', newData);
     confirmModalOpen(false);
   };
 
-  //스페이스 생성하기
+  //스페이스 수정하기
   const onUpdateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
@@ -148,12 +151,11 @@ const CreateSpace = () => {
       imgUrl: imageArr.convertedImage!,
       spacePassword: Number(pswd),
     };
-    postNewSpace(newData);
+    updateSpaceAction({ ...newData, spaceId: Number(spaceId!) });
     console.log('새로운 데이터', newData);
     confirmModalOpen(true);
   };
 
-  const inputWidth = 628;
   const confirmOpen = useConfirmModalOpen();
 
   const onMoveSpacePage = () => {
@@ -281,7 +283,6 @@ const CreateSpace = () => {
         </S.TitleContainer>
         <S.InputContainer number={2}>
           <InputBox
-            width={inputWidth}
             readonly={false}
             height={60}
             placeholder="16자 이내의 제목을 입력해 주세요."
@@ -312,7 +313,6 @@ const CreateSpace = () => {
             placeholder="스페이스 설명 입력"
             maxLength={100}
             onChange={onChange}
-            width={inputWidth}
             name="content"
             children={
               <CharacterCounter

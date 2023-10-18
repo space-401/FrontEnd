@@ -1,9 +1,11 @@
+// 완성
+
 import { axiosInstance } from '@apis/AxiosInstance';
 import { ApiResponseType } from '@type/response.type';
 import { END_POINTS } from '@constants/api';
 
 export type DeleteSpaceTagType = {
-  spaceId: string;
+  spaceId: number;
   tagId: number;
 };
 

@@ -53,6 +53,10 @@ export type CreatePostType = {
   date: DateInfoType;
 };
 
+export type CreatePostTypeWithSpaceId = CreatePostType & {
+  spaceId: number;
+};
+
 //포스트 생성 페이지에서는 tags가 추가적으로 필요하다.
 export type FlipCardSize = 'small' | 'medium' | 'big';
 
