@@ -1,19 +1,24 @@
 import { Modal, Box } from '@mui/material';
 import S from '@/components/Create/SelectIconModal/style';
 
+//한 옵션 타입
+type OneOptionType = {
+  title: string;
+  asyncFunc: () => void;
+};
+
 type IconModalPropsType = {
   isOpen: boolean;
-  onClickImgEditModal: () => void;
-  onMoveBasicIconModal: () => void;
   modalClose: () => void;
-  selectedImage: string | null;
+  title: string;
+  selectOptionArr: OneOptionType[];
 };
 
 const SelectIconModal = ({
   isOpen,
   modalClose,
-  onClickImgEditModal,
-  onMoveBasicIconModal,
+  title,
+  selectOptionArr,
 }: IconModalPropsType) => {
   return (
     <Modal
@@ -29,10 +34,20 @@ const SelectIconModal = ({
       <Box tabIndex={-1}>
         <S.Wrapper>
           <S.Content fontSize={22} lightgrey={false}>
-            아이콘 설정하기
+            {title}
           </S.Content>
-
-          <S.Content
+          {selectOptionArr.map((option) => {
+            return (
+              <S.Content
+                fontSize={18}
+                lightgrey={false}
+                onClick={option.asyncFunc}
+              >
+                {option.title}
+              </S.Content>
+            );
+          })}
+          {/* <S.Content
             fontSize={18}
             lightgrey={false}
             onClick={onClickImgEditModal}
@@ -46,7 +61,7 @@ const SelectIconModal = ({
             onClick={onMoveBasicIconModal}
           >
             기본 아이콘 사용하기
-          </S.Content>
+          </S.Content> */}
           <S.Content fontSize={18} lightgrey={true} onClick={modalClose}>
             닫기
           </S.Content>

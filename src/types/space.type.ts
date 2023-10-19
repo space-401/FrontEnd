@@ -66,7 +66,7 @@ export type MyCommentType = {
 export type CreateSpaceType = {
   spaceTitle: string;
   spaceDescription: string;
-  imgUrl: File;
+  imgUrl: File | number;
   spacePassword: number;
 };
 

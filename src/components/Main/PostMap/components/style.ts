@@ -1,3 +1,4 @@
+import { flexCenter } from '@/styles/common';
 import styled from 'styled-components';
 import { omitText } from '@styles/common';
 
@@ -14,6 +15,10 @@ const Wrapper = styled.div`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 100%;
   }
 `;
 
@@ -120,6 +125,11 @@ const OneWrapper = styled.div<{ isSelect: boolean }>`
   display: flex;
   padding: 16px;
   gap: 16px;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 100%;
+    height: 150px;
+  }
 `;
 
 const CardCreate = styled.div`
@@ -182,6 +192,10 @@ const TagGroup = styled.div`
 
   span {
     padding: 0;
+  }
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
   }
 `;
 

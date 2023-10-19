@@ -61,6 +61,11 @@ const CreateSpace = () => {
     false,
   ]);
 
+  //아이콘 옵션 선택 모달 열기
+  const onClickOptionModalOpen = () => {
+    setIsIconModalOpen([true, false]);
+  };
+
   //태그 편집 모달이 열려있는지
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
 
@@ -135,11 +140,10 @@ const CreateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImage!,
+      imgUrl: isBasicIcon[0] ? isBasicIcon[1] : imageArr.convertedImage!,
       spacePassword: Number(pswd),
     };
     postSpaceAction(newData);
-    console.log('새로운 데이터', newData);
     confirmModalOpen(false);
   };
 
@@ -148,11 +152,11 @@ const CreateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImage!,
+      imgUrl: isBasicIcon[0] ? isBasicIcon[1] : imageArr.convertedImage!,
       spacePassword: Number(pswd),
     };
     updateSpaceAction({ ...newData, spaceId: Number(spaceId!) });
-    console.log('새로운 데이터', newData);
+    console.log(newData);
     confirmModalOpen(true);
   };
 
@@ -172,6 +176,7 @@ const CreateSpace = () => {
       });
     }
     setIsBasicIcon([true, index]);
+    console.log(isBasicIcon);
   };
 
   //확인 모달
@@ -221,11 +226,17 @@ const CreateSpace = () => {
           setIsIconModalOpen([false, isIconModalOpen[1]]);
         }}
         isOpen={isIconModalOpen[0]}
-        onClickImgEditModal={onClickImgEditModal}
-        onMoveBasicIconModal={() => {
-          setIsIconModalOpen([false, true]);
-        }}
-        selectedImage={imageArr.cropImage}
+        title="스페이스 아이콘 설정"
+        selectOptionArr={[
+          {
+            title: '기본 아이콘 선택하기',
+            asyncFunc: () => setIsIconModalOpen([false, true]),
+          },
+          {
+            title: '이미지 불러오기',
+            asyncFunc: onClickImgEditModal,
+          },
+        ]}
       />
 
       {/*기본 아이콘 선택 모달*/}
@@ -238,6 +249,7 @@ const CreateSpace = () => {
         isBasicIcon={isBasicIcon}
       />
 
+      {/*스페이스 설정 폼*/}
       <S.Form>
         {/*아이콘 지정 인풋*/}
         <S.TitleContainer number={1} required={true}>
@@ -254,7 +266,7 @@ const CreateSpace = () => {
         </S.TitleContainer>
 
         {!imageArr.cropImage && !isBasicIcon[0] ? (
-          <S.InputContainer number={1} onClick={onClickImgEditModal}>
+          <S.InputContainer number={1} onClick={onClickOptionModalOpen}>
             <BasicBox width={160} borderradius={10}>
               <PhotoIcon />
             </BasicBox>

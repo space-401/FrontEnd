@@ -82,7 +82,6 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
               <InputBox
                 onChange={onChange}
                 height={53}
-                width={596}
                 type="text"
                 readonly={false}
                 name="tagInput"

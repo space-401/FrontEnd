@@ -125,8 +125,7 @@ export const theme = {
   },
   DEVICE: {
     mobile: `screen and (max-width: 580px)`,
-    tablet: `screen and (max-width: 768px)`,
-    pc: `screen and (max-width: 1024px)`,
+    tablet: `screen and (max-width: 1200px)`,
   },
 };
 
