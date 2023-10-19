@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { flexCenter } from '@/styles/common';
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -14,6 +14,12 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 3fr 10fr;
   height: 650px;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 `;
 
 const StyleResetContainer = styled.div`

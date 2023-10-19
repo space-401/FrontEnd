@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
+import { flexCenter, omitText } from '@styles/common';
 
 const Title = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-32']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 95%;
+    ${flexCenter};
+  }
 `;
 
 const Description = styled.div<{ margin_top: number }>`
@@ -47,6 +51,9 @@ const ButtonGroup = styled.div`
   gap: 24px;
   justify-content: flex-end;
   margin-bottom: 200px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter}
+  }
 `;
 const Button = styled.div`
   cursor: pointer;
@@ -87,7 +94,10 @@ const Table = styled.table`
     display: grid;
     gap: 24px;
     justify-items: start;
-    grid-template-columns: 397px 140px 140px;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    @media ${({ theme }) => theme.DEVICE.tablet} {
+      width: 100%;
+    }
   }
 
   tr {
@@ -96,7 +106,7 @@ const Table = styled.table`
     display: grid;
     gap: 24px;
     justify-items: start;
-    grid-template-columns: 397px 140px 140px;
+    grid-template-columns: 2.5fr 1fr 1fr;
     border-bottom: 0.625px solid ${({ theme }) => theme.COLOR['gray-4']};
     position: relative;
     z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
@@ -215,6 +225,11 @@ const BTable = styled.table`
   padding: 16px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   position: relative;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 100%;
+    ${flexCenter}
+    flex-direction: column;
+  }
 
   tr {
     padding: 15px 10px;
@@ -222,7 +237,7 @@ const BTable = styled.table`
     display: grid;
     gap: 24px;
     justify-items: start;
-    grid-template-columns: 397px 140px 140px 16px;
+    grid-template-columns: 3fr 1fr 1fr 0.3fr;
     border-bottom: 0.625px solid ${({ theme }) => theme.COLOR['gray-4']};
     position: relative;
 
@@ -244,7 +259,7 @@ const BTable = styled.table`
     display: grid;
     gap: 24px;
     justify-items: start;
-    grid-template-columns: 397px 140px 140px 16px;
+    grid-template-columns: 3fr 1fr 1fr 0.3fr;
   }
 `;
 
@@ -253,9 +268,13 @@ export const B = {
 };
 
 const HeaderButtonGroup = styled.div`
-  position: absolute;
   display: flex;
   gap: 46px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    position: initial;
+    width: 100%;
+  }
 `;
 
 const MButton = styled.div<{ select: boolean }>`
@@ -269,9 +288,18 @@ const MButton = styled.div<{ select: boolean }>`
     select ? `2px solid ${theme.COLOR.skyblue}` : ''};
 `;
 
+const FlexWrapper = styled.div`
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    flex-direction: column;
+    width: 95%;
+  }
+`;
+
 export const M = {
   HeaderButtonGroup,
   MButton,
+  FlexWrapper,
 };
 
 const OneCommentList = styled.div`
@@ -279,6 +307,11 @@ const OneCommentList = styled.div`
   display: flex;
   padding: 20px 0;
   justify-content: space-between;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    flex-wrap: wrap;
+    width: 95%;
+  }
 `;
 const UserCard = styled.div`
   display: flex;
@@ -298,6 +331,9 @@ const CardInfo = styled.div`
   width: 675px;
   flex-direction: column;
   gap: 8px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 70%;
+  }
 `;
 const PostContent = styled.div`
   white-space: pre;
@@ -312,6 +348,16 @@ const Comment = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+  }
+
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    width: 50%;
+  }
 `;
 
 const SpaceTitle = styled.span`
@@ -327,6 +373,9 @@ const RightCard = styled.div<{ img_url: string }>`
   border-radius: 15px;
   background: url(${({ img_url }) => img_url});
   background-size: cover;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-top: 10px;
+  }
 `;
 
 const PostTitle = styled.span`

@@ -54,6 +54,9 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -83,6 +86,11 @@ const ContentLayOut = styled.div`
   width: 1200px;
   display: flex;
   flex-direction: column;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    width: 95%;
+  }
 `;
 
 const Footer = styled.footer`

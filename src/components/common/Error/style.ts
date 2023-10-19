@@ -2,7 +2,7 @@ import { flexCenter } from '@/styles/common';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
   background-color: ${({ theme }) => theme.COLOR.black};
   width: 100%;

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter}
+    ${flexCenter};
     flex-direction: column;
   }
 `;
@@ -31,7 +31,7 @@ const TitleSection = styled.div`
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter}
+    ${flexCenter};
     flex-direction: column;
   }
 `;
@@ -47,7 +47,7 @@ const Form = styled.form`
   grid-template-areas: 'title1 input1' 'title2 input2' 'button button';
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter}
+    ${flexCenter};
     flex-direction: column;
   }
 `;
@@ -74,11 +74,11 @@ const InputContainer = styled.div<gridRowNum>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter}
+    ${flexCenter};
     width: 400px;
   }
   @media ${({ theme }) => theme.DEVICE.mobile} {
-    ${flexCenter}
+    ${flexCenter};
     width: 200px;
   }
 `;
