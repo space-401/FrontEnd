@@ -52,6 +52,7 @@ export const theme = {
     'text-16': '1rem',
     'text-14': '0.875rem',
     'text-12': '0.75rem',
+    'text-10': '0.6rem',
   },
   SPACING: {
     'px-50': '3.125rem',

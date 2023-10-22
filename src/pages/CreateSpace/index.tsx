@@ -6,7 +6,7 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
 import { ImageType, ImageArrType } from '@/types/image.type';
@@ -61,6 +61,16 @@ const CreateSpace = () => {
     false,
   ]);
 
+  //내 작성글이 아닐 경우에 돌려보내기
+  useEffect(() => {
+    if (spaceId) {
+      if (!spaceInfo?.isAdmin) {
+        noAuthalertModalOpen();
+        navigate('/space');
+      }
+    }
+  }, []);
+
   //아이콘 옵션 선택 모달 열기
   const onClickOptionModalOpen = () => {
     setIsIconModalOpen([true, false]);
@@ -104,6 +114,16 @@ const CreateSpace = () => {
       width: 300,
       alertMessage: '확인',
       alertTitle: '비밀번호는 숫자만 입력해 주세요',
+    });
+  };
+
+  const noAuthalertOpen = useAlertModalOpen();
+
+  const noAuthalertModalOpen = () => {
+    noAuthalertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '스페이스 수정 권한이 없습니다.',
     });
   };
 
