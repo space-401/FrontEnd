@@ -285,7 +285,7 @@ export const postList: SpacePostType[] = [
  */
 export const postDetail: PostDetailType = {
   spaceId: 1,
-  isMine: true,
+  isMine: false,
   position: {
     lat: 37.27943075229118,
     lng: 127.01763998406159,

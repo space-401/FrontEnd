@@ -9,7 +9,7 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
@@ -33,6 +33,7 @@ import { convertImgArrToObj } from '@/utils/makeObj';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import { usePostCreateMutation } from '@/hooks/api/post/usePostCreateMutation';
 import { usePostUpdateMutation } from '@/hooks/api/post/usePostUpdateMutation';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
   const params = useParams();
@@ -41,6 +42,17 @@ const CreatePost = () => {
 
   const { postDetailData } = usePostDetailQuery(Number(postId!));
   const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
+  const navigate = useNavigate();
+
+  //내 작성글이 아닐 경우에 돌려보내기
+  useEffect(() => {
+    if (postId) {
+      if (!postDetailData?.isMine) {
+        noAuthalertModalOpen();
+        navigate('/space');
+      }
+    }
+  }, []);
 
   const { createPostAction } = usePostCreateMutation();
   const { updatePostAction } = usePostUpdateMutation();
@@ -156,8 +168,6 @@ const CreatePost = () => {
       date: dateInfo,
     };
     createPostAction(newPost);
-    //api 로직
-    //성공시
     confirmModalOpen();
   };
 
@@ -198,6 +208,16 @@ const CreatePost = () => {
       width: 300,
       alertMessage: '확인',
       alertTitle: '이미지는 10개까지만 추가됩니다.',
+    });
+  };
+
+  const noAuthalertOpen = useAlertModalOpen();
+
+  const noAuthalertModalOpen = () => {
+    noAuthalertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '포스트 수정 권한이 없습니다.',
     });
   };
 

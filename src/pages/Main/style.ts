@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { flexCenter } from '@/styles/common';
+
 const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};

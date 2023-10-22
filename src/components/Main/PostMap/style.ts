@@ -6,6 +6,9 @@ const Wrapper = styled.div`
   margin: 32px 0 24px 0;
   border-radius: 20px;
   overflow: hidden;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: auto;
+  }
 `;
 
 const WrapperInner = styled.div``;
@@ -17,6 +20,7 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
     ${flexCenter};
+
     flex-direction: column;
     flex-wrap: wrap;
   }
