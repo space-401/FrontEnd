@@ -28,6 +28,9 @@ const Container = styled.div`
   border-radius: 15px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   height: 670px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: auto;
+  }
 `;
 
 const ButtonContainer = styled.div`

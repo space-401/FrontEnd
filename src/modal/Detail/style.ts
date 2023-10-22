@@ -106,7 +106,7 @@ const UserNameList = styled.div`
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
-  ${omitText}
+  ${omitText};
 `;
 
 const MapInfo = styled.div`

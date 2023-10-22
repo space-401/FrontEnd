@@ -7,6 +7,7 @@ const Title = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   @media ${({ theme }) => theme.DEVICE.tablet} {
     width: 95%;
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
     ${flexCenter};
   }
 `;
@@ -224,11 +225,10 @@ const BTable = styled.table`
   width: 100%;
   padding: 16px;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+
   position: relative;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     width: 100%;
-    ${flexCenter}
-    flex-direction: column;
   }
 
   tr {
@@ -244,11 +244,16 @@ const BTable = styled.table`
     td {
       width: 100%;
       text-overflow: ellipsis;
+      @media ${({ theme }) => theme.DEVICE.tablet} {
+        ${omitText};
+        text-overflow: ellipsis;
+      }
     }
 
     thead tr td:first-child {
       cursor: pointer;
       ${omitText};
+      text-overflow: ellipsis;
     }
   }
 
@@ -286,6 +291,11 @@ const MButton = styled.div<{ select: boolean }>`
 
   border-bottom: ${({ select, theme }) =>
     select ? `2px solid ${theme.COLOR.skyblue}` : ''};
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+    padding-bottom: 10px;
+  }
 `;
 
 const FlexWrapper = styled.div`
@@ -348,16 +358,7 @@ const Comment = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%;
-
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    display: flex;
-    flex-wrap: wrap;
-    width: 70%;
-  }
-
-  @media ${({ theme }) => theme.DEVICE.mobile} {
-    width: 50%;
-  }
+  ${omitText}
 `;
 
 const SpaceTitle = styled.span`
@@ -373,8 +374,12 @@ const RightCard = styled.div<{ img_url: string }>`
   border-radius: 15px;
   background: url(${({ img_url }) => img_url});
   background-size: cover;
+  z-index: 1;
   @media ${({ theme }) => theme.DEVICE.tablet} {
     margin-top: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
   }
 `;
 
@@ -408,6 +413,7 @@ const CommentInfo = styled.div`
   display: flex;
   gap: 16px;
   align-items: flex-end;
+  ${omitText};
 `;
 
 const CommentInfoBox = styled.div`

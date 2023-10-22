@@ -16,9 +16,10 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    width: 100%;
+    min-width: 200px;
+    height: 700px;
+    margin-right: 10px;
   }
 `;
 
@@ -30,6 +31,10 @@ const PaginationBox = styled.div`
   width: 100%;
   justify-content: center;
   background: ${({ theme }) => theme.COLOR['gray-7']};
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 200px;
+    height: 50px;
+  }
 `;
 
 const PaginationInner = styled.div`
@@ -63,7 +68,7 @@ const ContentPlace = styled.div`
 
 const ContentTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-700']};
   ${omitText};
 `;
@@ -74,7 +79,6 @@ const ContentCreateAt = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 16px;
 `;
-
 const AvatarBox = styled.div``;
 
 const MarkerContainer = styled.div`
@@ -109,6 +113,9 @@ const CardImg = styled.div<{ imgUrl: string }>`
   background: url(${({ imgUrl }) => imgUrl});
   background-size: cover;
   border-radius: 15px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    display: none;
+  }
 `;
 
 const OneWrapper = styled.div<{ isSelect: boolean }>`
@@ -127,8 +134,8 @@ const OneWrapper = styled.div<{ isSelect: boolean }>`
   gap: 16px;
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    width: 100%;
-    height: 150px;
+    width: 200px;
+    height: 130px;
   }
 `;
 
@@ -138,6 +145,9 @@ const CardCreate = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   min-height: 10px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-10']};
+  }
 `;
 
 const CardTitle = styled.div`
