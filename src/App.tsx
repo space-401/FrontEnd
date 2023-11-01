@@ -1,20 +1,21 @@
 import { RouterProvider } from 'react-router-dom';
 import router from '@router/Router';
 import '@styles/fonts/font.css';
-import { worker } from '@mocks/browser';
 import { queryClient } from '@hooks/api/queryClient';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GlobalStyles from '@styles/global';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@styles/theme/theme';
-import { QueryClientProvider } from '@tanstack/react-query';
+import {
+  QueryClientProvider,
+  QueryErrorResetBoundary,
+} from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import ErrorBoundary from './components/common/Error/errorBoundary';
 import ErrorPage from './components/common/Error';
 
 function App() {
-  worker.start();
+  // worker.start();
 
   return (
     <QueryErrorResetBoundary>

@@ -2,10 +2,12 @@ import { MyCommentType } from '@type/space.type';
 import { UserType } from '@type/post.type';
 
 export type AccountDataType = {
-  loginState: 'kakao' | 'naver' | 'google';
+  loginState: SocialType;
   name: string;
   email: string;
 };
+
+export type SocialType = 'kakao' | 'naver' | 'google';
 
 type OneMyBookMarkType = {
   postId: number;
