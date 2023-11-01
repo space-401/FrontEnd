@@ -8,8 +8,11 @@ export const postComment = async (commentInfo: SubmitCommentType) => {
   const { data } = await axiosInstance.post<ApiResponseType>(
     END_POINTS.COMMENT,
     {
-      commentContent: comment, postId, commentRefYn: refInfo === undefined, commentGroup: refInfo?.refId,
-    },
+      commentContent: comment,
+      postId,
+      commentRefYn: refInfo === undefined,
+      commentGroup: refInfo?.refId,
+    }
   );
 
   return data;
