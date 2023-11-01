@@ -5,7 +5,6 @@ import {
   handleAPIError,
   handleTokenError,
 } from '@apis/interceptors';
-import { getCookie } from '@utils/cookie';
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACK_URL,
@@ -13,7 +12,8 @@ export const axiosInstance = axios.create({
   withCredentials: true,
   useAuth: true,
   headers: {
-    Authorization: `Bearer ${getCookie('accessToken')}`,
+    // Authorization: `Bearer ${getCookie('accessToken')}`,
+    Authorization: 'accesstoken1',
   },
 });
 //

@@ -15,8 +15,6 @@ const InviteCode = () => {
   const [spacePw, setSpacePw] = useState('');
   const [isShowPswd, setIsShowPswd] = useState(false);
 
-  //현재 편집 모달이 열려있는지
-
   //제출시 실행되는 함수
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
