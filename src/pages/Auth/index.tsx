@@ -6,8 +6,7 @@ const Auth = () => {
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
     const state = new URL(window.location.href).searchParams.get('state');
-    console.log('code', code);
-    console.log('state', state);
+
     const fetchData = async () => {
       if (code && state) {
         try {
