@@ -1,6 +1,6 @@
 import Loading from '@pages/Loading';
 import { useEffect } from 'react';
-import axios from 'axios';
+import { getLogin } from '@apis/user/getLogin';
 
 const Auth = () => {
   useEffect(() => {
@@ -10,10 +10,8 @@ const Auth = () => {
     const fetchData = async () => {
       if (code && state) {
         try {
-          const response = await axios.get(
-            `http://52.79.57.246:8081/user/auth/kakao?code=${code}&state=${state}`
-          );
-          console.log('data', response.data);
+          const data = await getLogin({ code, socialType: 'kakao' });
+          console.log('로그인 결과', data);
         } catch (error) {
           console.error('Error:', error);
         }
