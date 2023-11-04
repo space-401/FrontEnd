@@ -11,8 +11,12 @@ const tokenStorage = {
     return getCookie(REFRESH_TOKEN_KEY);
   },
 
-  setAccessToken(accessToken: string, expiredDate: number) {
-    setCookie(ACCESS_TOKEN_KEY, accessToken, expiredDate);
+  setAccessToken(accessToken: string, expiredMinutes: number) {
+    setCookie(ACCESS_TOKEN_KEY, accessToken, expiredMinutes);
+  },
+
+  setRefreshToken(refreshToken: string, expiredMinutes: number) {
+    setCookie(REFRESH_TOKEN_KEY, refreshToken, expiredMinutes);
   },
 
   hasAccessToken() {

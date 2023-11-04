@@ -25,8 +25,12 @@ import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
 import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
 import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
+import tokenStorage from '@utils/tokenStorage';
 
 const CreateSpace = () => {
+  useEffect(() => {
+    console.log('storgae', tokenStorage.getAccessToken());
+  }, []);
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
