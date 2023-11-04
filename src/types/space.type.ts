@@ -12,7 +12,7 @@ export type OneSpaceType = {
   userList: UserType[];
 };
 
-export type SpaceInfo = {
+export type SpaceInfoType = {
   spaceTitle: string;
   spaceDescription: string;
   imgUrl: string;
@@ -64,10 +64,11 @@ export type MyCommentType = {
 };
 
 export type CreateSpaceType = {
-  spaceTitle: string;
+  spaceName: string;
   spaceDescription: string;
-  imgUrl: File | number;
-  spacePassword: number;
+  imgUrl: File | null;
+  defaultImg: number | null;
+  spacePw: number;
 };
 
 export type UpdateSpaceType = CreateSpaceType & {

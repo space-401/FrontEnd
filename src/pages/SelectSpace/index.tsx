@@ -12,6 +12,8 @@ const SelectSpace = () => {
   const navigate = useNavigate();
   const spaceList = useSpaceListQuery().spaceList!;
 
+  console.log(spaceList);
+
   return (
     <S.Wrapper>
       <S.Container>
