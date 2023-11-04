@@ -9,8 +9,7 @@ export const getLogin = async ({
   socialType: SocialType;
 }) => {
   const response = await axios.get(
-    import.meta.env.VITE_BACK_URL +
-      `/user/auth/${socialType}?code=${code}&state=false`
+    import.meta.env.VITE_BACK_URL + `/user/auth/${socialType}?code=${code}`
   );
   return response.data;
 };

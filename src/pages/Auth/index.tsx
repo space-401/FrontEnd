@@ -10,7 +10,7 @@ const Auth = () => {
     const fetchData = async () => {
       if (code && state) {
         try {
-          const data = await getLogin({ code, socialType: 'kakao' });
+          const data = await getLogin({ code, socialType: 'naver' });
           console.log('로그인 결과', data);
         } catch (error) {
           console.error('Error:', error);

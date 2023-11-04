@@ -1,14 +1,33 @@
 import { useGoogleLogin } from '@react-oauth/google';
+import { getLogin } from '@apis/user/getLogin';
 
 export const SocialGoogle = () => {
   const googleSocialLogin = useGoogleLogin({
     scope: 'email profile',
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
+    onSuccess: (tokenResponse) =>
+      fetchData({ code: tokenResponse.code, scope: tokenResponse.scope }),
     onError: (errorResponse) => {
       console.error(errorResponse);
     },
     flow: 'auth-code',
   });
+
+  const fetchData = async ({
+    code,
+    scope,
+  }: {
+    code: string;
+    scope: string;
+  }) => {
+    if (code && scope) {
+      try {
+        const data = await getLogin({ code, socialType: 'google' });
+        console.log('로그인 결과', data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  };
 
   return { googleSocialLogin };
 };

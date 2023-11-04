@@ -64,7 +64,7 @@ export type MyCommentType = {
 };
 
 export type CreateSpaceType = {
-  spaceName: string;
+  spaceTitle: string;
   spaceDescription: string;
   imgUrl: File | null;
   defaultImg: number | null;
@@ -73,6 +73,11 @@ export type CreateSpaceType = {
 
 export type UpdateSpaceType = CreateSpaceType & {
   spaceId: number;
+  spaceTitle: string;
+  spaceDescription: string;
+  imgUrl: File | null;
+  defaultImg: number | null;
+  spacePw: number;
 };
 
 export type SpaceResponseType = {

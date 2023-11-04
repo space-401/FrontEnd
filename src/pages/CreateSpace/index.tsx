@@ -158,7 +158,7 @@ const CreateSpace = () => {
   //스페이스 생성하기
   const onCreateSpace = () => {
     const newData: CreateSpaceType = {
-      spaceName: title,
+      spaceTitle: title,
       spaceDescription: content,
       imgUrl: imageArr.convertedImage && null,
       defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
@@ -171,7 +171,7 @@ const CreateSpace = () => {
   //스페이스 수정하기
   const onUpdateSpace = () => {
     const newData: CreateSpaceType = {
-      spaceName: title,
+      spaceTitle: title,
       spaceDescription: content,
       imgUrl: imageArr.convertedImage && null,
       defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
