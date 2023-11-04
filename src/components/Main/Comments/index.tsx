@@ -4,6 +4,7 @@ import type { UserType } from '@type/post.type';
 import { useCommentQuery } from '@hooks/api/comment/useCommentQuery';
 
 type DetailCommentType = {
+  spaceId: number;
   isOpen: boolean;
   postId: number;
   isReply:
@@ -22,9 +23,9 @@ type DetailCommentType = {
 };
 
 const DetailComments = (props: DetailCommentType) => {
-  const { setIsReply, isReply, isOpen, userList, postId } = props;
+  const { setIsReply, isReply, spaceId, isOpen, userList, postId } = props;
 
-  const { commentList } = useCommentQuery(postId);
+  const { commentList } = useCommentQuery(postId, spaceId);
 
   const ReplyClose = () => {
     setIsReply({ open: false, refId: undefined, id: undefined });

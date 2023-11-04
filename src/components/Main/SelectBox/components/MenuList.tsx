@@ -1,4 +1,4 @@
-import type { UserType, TagType } from '@type/post.type';
+import type { TagType, UserType } from '@type/post.type';
 import type { MenuListProps, selectType } from '@type/main.type';
 import UserList from './component/UserList';
 import TagList from './component/TagList';
