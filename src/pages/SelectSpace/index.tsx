@@ -11,7 +11,6 @@ import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 const SelectSpace = () => {
   const navigate = useNavigate();
   const spaceList = useSpaceListQuery().spaceList!;
-
   console.log(spaceList);
 
   return (
