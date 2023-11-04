@@ -1,7 +1,6 @@
-import { S, M } from '@/components/Main/WelcomeAndSettingModal/style';
+import { M, S } from '@/components/Main/WelcomeAndSettingModal/style';
 import { useRef, useState } from 'react';
-import { ImageArrType } from '@/types/image.type';
-import { ImageType } from '@/types/image.type';
+import { ImageArrType, ImageType } from '@/types/image.type';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import InputBox from '@/components/common/InputBox';
 import CharacterCounter from '@/components/Create/CharacterCounter';
@@ -112,6 +111,7 @@ const UserSettingModal = ({
 
     const data = {
       spaceId,
+      isAdmin: userInfo?.isAdmin,
       image: imageArr.convertedImage ?? null,
       userNickName: nickName,
     };

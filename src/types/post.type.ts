@@ -1,10 +1,11 @@
-import type { SpacePostType, OneSpaceType } from '@type/space.type';
+import type { OneSpaceType, SpacePostType } from '@type/space.type';
 import { ApiResponseType } from '@type/response.type';
 
 export type UserType = {
   userId: number;
   userName: string;
   imgUrl?: string;
+  isAdmin: boolean;
 };
 
 export type TagType = {
@@ -41,16 +42,18 @@ export type PostDetailType = {
 
 //포스트 생성 + 수정 타입
 export type CreatePostType = {
+  spaceId: number;
   postTitle: string;
-  postDescription: string;
-  selectedUsers: number[];
-  selectedTags: number[];
+  postContent: string;
+  people: number[];
+  tags: number[];
   placeTitle: string;
-  position: {
-    lat: number;
-    lng: number;
-  };
-  date: DateInfoType;
+  postLocationKeyword: string;
+  postLocationLng: number;
+  postLocationLat: number;
+  imgs: File[];
+  postBeginDate: string;
+  postEndDate: string;
 };
 
 export type CreatePostTypeWithSpaceId = CreatePostType & {

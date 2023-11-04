@@ -6,10 +6,10 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
-import { ImageType, ImageArrType } from '@/types/image.type';
+import { ImageArrType, ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import { theme } from '@/styles/theme/theme';
 import useInputs from '@/hooks/common/useInputs';
@@ -19,7 +19,7 @@ import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 import { CreateSpaceType } from '@/types/space.type';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
@@ -158,10 +158,11 @@ const CreateSpace = () => {
   //스페이스 생성하기
   const onCreateSpace = () => {
     const newData: CreateSpaceType = {
-      spaceTitle: title,
+      spaceName: title,
       spaceDescription: content,
-      imgUrl: isBasicIcon[0] ? isBasicIcon[1] : imageArr.convertedImage!,
-      spacePassword: Number(pswd),
+      imgUrl: imageArr.convertedImage && null,
+      defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
+      spacePw: Number(pswd),
     };
     postSpaceAction(newData);
     confirmModalOpen(false);
@@ -170,10 +171,11 @@ const CreateSpace = () => {
   //스페이스 수정하기
   const onUpdateSpace = () => {
     const newData: CreateSpaceType = {
-      spaceTitle: title,
+      spaceName: title,
       spaceDescription: content,
-      imgUrl: isBasicIcon[0] ? isBasicIcon[1] : imageArr.convertedImage!,
-      spacePassword: Number(pswd),
+      imgUrl: imageArr.convertedImage && null,
+      defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
+      spacePw: Number(pswd),
     };
     updateSpaceAction({ ...newData, spaceId: Number(spaceId!) });
     console.log(newData);

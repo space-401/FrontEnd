@@ -5,6 +5,10 @@ import tokenStorage from '@utils/tokenStorage';
 
 export const postLogout = async () => {
   const { data } = await axiosInstance.post<ApiResponseType>(END_POINTS.LOGOUT);
-  tokenStorage.clear();
-  return data;
+  if (data.message === 'success') {
+    tokenStorage.clear();
+    return data;
+  } else {
+    throw new Error('로그아웃이 실패하였습니다.');
+  }
 };

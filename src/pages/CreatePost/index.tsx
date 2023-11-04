@@ -9,7 +9,7 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import { selectType } from '@/types/main.type';
 import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
 import { theme } from '@/styles/theme/theme';
 import { usePhotoModalStore } from '@/store/modal';
@@ -18,22 +18,20 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
-import { DateInfoType } from '@/types/post.type';
-import { ImageType, ImagesArrType } from '@/types/image.type';
-import { useParams } from 'react-router-dom';
+import { CreatePostType, DateInfoType } from '@/types/post.type';
+import { ImagesArrType, ImageType } from '@/types/image.type';
+import { useNavigate, useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
-import { CreatePostType } from '@/types/post.type';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import {
-  onConvertedUserToSelectType,
   onConvertedTagToSelectType,
+  onConvertedUserToSelectType,
 } from '@/utils/selectTypeConvertor';
 import { convertImgArrToObj } from '@/utils/makeObj';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import { usePostCreateMutation } from '@/hooks/api/post/usePostCreateMutation';
 import { usePostUpdateMutation } from '@/hooks/api/post/usePostUpdateMutation';
-import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
   const params = useParams();
@@ -156,16 +154,18 @@ const CreatePost = () => {
   //제출 후 포스트 생성 페이지로 이동
   const onSubmitCreatePost = () => {
     const newPost: CreatePostType = {
+      spaceId: Number(spaceId),
       postTitle: title,
-      postDescription: content,
-      selectedUsers: selectedUsers.map((user) => user.id),
-      selectedTags: selectedTags.map((tag) => tag.id),
-      position: {
-        lng: Number(mapInfo.position.lng),
-        lat: Number(mapInfo.position.lat),
-      },
+      postContent: content,
+      people: selectedUsers.map((user) => user.id),
+      tags: selectedTags.map((tag) => tag.id),
+      postLocationLng: Number(mapInfo.position.lng),
+      postLocationLat: Number(mapInfo.position.lat),
+      postLocationKeyword: mapInfo.content,
+      postBeginDate: dateInfo.startDate,
+      postEndDate: dateInfo.endDate,
+      imgs: imageArr.convertedImages,
       placeTitle: mapInfo.content,
-      date: dateInfo,
     };
     createPostAction(newPost);
     confirmModalOpen();
@@ -173,16 +173,18 @@ const CreatePost = () => {
 
   const onSubmitUpdatePost = () => {
     const newPost: CreatePostType = {
+      spaceId: Number(spaceId),
       postTitle: title,
-      postDescription: content,
-      selectedUsers: selectedUsers.map((user) => user.id),
-      selectedTags: selectedTags.map((tag) => tag.id),
-      position: {
-        lng: Number(mapInfo.position.lng),
-        lat: Number(mapInfo.position.lat),
-      },
+      postContent: content,
+      people: selectedUsers.map((user) => user.id),
+      tags: selectedTags.map((tag) => tag.id),
+      postLocationLng: Number(mapInfo.position.lng),
+      postLocationLat: Number(mapInfo.position.lat),
+      postLocationKeyword: mapInfo.content,
+      postBeginDate: dateInfo.startDate,
+      postEndDate: dateInfo.endDate,
+      imgs: imageArr.convertedImages,
       placeTitle: mapInfo.content,
-      date: dateInfo,
     };
 
     console.log(newPost);
