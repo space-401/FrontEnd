@@ -10,57 +10,59 @@ import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 
 const SelectSpace = () => {
   const navigate = useNavigate();
+
   const spaceList = useSpaceListQuery().spaceList!;
-  console.log(spaceList);
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.LogoBox>
-          <SelectLogo className={'main-logo'} />
-        </S.LogoBox>
-        <S.Content>
-          <S.ButtonContainer>
-            <BasicButton
-              fontSize={16}
-              width={130}
-              borderRadius={10}
-              onClick={() => navigate(PATH.INVITE)}
-            >
-              초대코드 입력
-            </BasicButton>
-          </S.ButtonContainer>
-          <S.SpaceContainer>
-            {spaceList.length < 5 && (
-              <S.AddBox
-                onClick={() => {
-                  navigate(PATH.SPACE_CREATE);
-                }}
+    spaceList && (
+      <S.Wrapper>
+        <S.Container>
+          <S.LogoBox>
+            <SelectLogo className={'main-logo'} />
+          </S.LogoBox>
+          <S.Content>
+            <S.ButtonContainer>
+              <BasicButton
+                fontSize={16}
+                width={130}
+                borderRadius={10}
+                onClick={() => navigate(PATH.INVITE)}
               >
-                <PlusIcon width={24} height={24} />
-              </S.AddBox>
-            )}
-            {spaceList.map((space) => {
-              return (
-                <FlipCard
-                  key={uuid()}
-                  item={space}
-                  isBig={false}
-                  imgUrl={space.imgUrl}
+                초대코드 입력
+              </BasicButton>
+            </S.ButtonContainer>
+            <S.SpaceContainer>
+              {spaceList.length < 5 && (
+                <S.AddBox
                   onClick={() => {
-                    navigate(PATH.SPACE_MAIN(space.spaceId));
+                    navigate(PATH.SPACE_CREATE);
                   }}
-                />
-              );
-            })}
-            {spaceList.length < 5 &&
-              Array.from({ length: 4 - spaceList.length }).map(() => (
-                <S.EmptySpaceBox key={uuid()}></S.EmptySpaceBox>
-              ))}
-          </S.SpaceContainer>
-        </S.Content>
-      </S.Container>
-    </S.Wrapper>
+                >
+                  <PlusIcon width={24} height={24} />
+                </S.AddBox>
+              )}
+              {spaceList.map((space) => {
+                return (
+                  <FlipCard
+                    key={uuid()}
+                    item={space}
+                    isBig={false}
+                    imgUrl={space.imgUrl}
+                    onClick={() => {
+                      navigate(PATH.SPACE_MAIN(space.spaceId));
+                    }}
+                  />
+                );
+              })}
+              {spaceList.length < 5 &&
+                Array.from({ length: 4 - spaceList.length }).map(() => (
+                  <S.EmptySpaceBox key={uuid()}></S.EmptySpaceBox>
+                ))}
+            </S.SpaceContainer>
+          </S.Content>
+        </S.Container>
+      </S.Wrapper>
+    )
   );
 };
 export default SelectSpace;

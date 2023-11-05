@@ -8,7 +8,6 @@ export const SocialGoogle = () => {
       console.log(tokenResponse);
       const data = await getLogin({
         code: tokenResponse.code,
-        scope: tokenResponse.scope,
         socialType: 'google',
       });
       console.log(data);
