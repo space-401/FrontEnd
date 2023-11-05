@@ -42,18 +42,25 @@ const LoginBox = styled.div<ILoginBox>`
   position: relative;
 `;
 
+const LogoBox = styled.div`
+  margin-top: 100px;
+`;
 const Content = styled.div`
   ${flexCenter};
   flex-direction: column;
   color: white;
   gap: 50px;
+  display: absolute;
+  margin-top: -100px;
 `;
+
 const S = {
   Wrapper,
   Text,
   LoginContainer,
   LoginBox,
   Content,
+  LogoBox,
 };
 
 export default S;

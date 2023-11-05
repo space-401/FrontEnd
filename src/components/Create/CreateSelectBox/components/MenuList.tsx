@@ -1,4 +1,4 @@
-import type { UserType, TagType } from '@type/post.type';
+import type { TagType, UserType } from '@type/post.type';
 import type { MenuListProps, selectType } from '@type/main.type';
 import UserList from './component/UserList';
 import TagList from './component/TagList';
@@ -12,13 +12,14 @@ const MenuList = (props: MenuListProps) => {
     return select.filter((i) => i.id === thisValue).length !== 0;
   };
 
-  const ListItem = !isUserTypeArray(itemList)
+  const ListItem: TagType[] | UserType[] = !isUserTypeArray(itemList)
     ? [
         ...select.map((prev) => {
           return {
             userId: prev.id,
             userName: prev.title,
             imgUrl: prev.imgUrl,
+            isAdmin: prev.isAdmin,
           };
         }),
         ...itemList.filter((prev) => !checkSelectItem(prev.userId)),

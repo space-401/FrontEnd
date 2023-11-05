@@ -105,7 +105,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: PATH.AUTH,
+    path: PATH.SOCIAL_AUTH,
     element: (
       <Suspense fallback={<Loading />}>
         <Auth />

@@ -9,7 +9,7 @@ const MyPostOrCommentList = () => {
   const [isMyPost, setIsMyPost] = useState(true);
 
   return (
-    <>
+    <M.FlexWrapper>
       <M.HeaderButtonGroup>
         <M.MButton onClick={() => setIsMyPost(true)} select={isMyPost}>
           내가 쓴 글
@@ -30,7 +30,7 @@ const MyPostOrCommentList = () => {
           </Suspense>
         )}
       </>
-    </>
+    </M.FlexWrapper>
   );
 };
 

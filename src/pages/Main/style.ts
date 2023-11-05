@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: relative;
@@ -8,6 +9,13 @@ const Wrapper = styled.div`
   min-height: 520px;
   border-radius: 15px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    width: 95vw;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 `;
 
 const S = {

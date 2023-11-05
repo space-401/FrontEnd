@@ -297,6 +297,7 @@ const DetailInner = React.forwardRef(
                 isOpen={state.commentIsOpen}
               >
                 <DetailComments
+                  spaceId={spaceId}
                   postId={postId}
                   userList={userList}
                   isReply={state.isReplyOpen}

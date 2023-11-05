@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FLIP_CARD } from '@constants/policy';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   padding: 24px 24px 0;
@@ -13,6 +14,10 @@ const Wrapper = styled.div`
   border-radius: 20px;
   min-height: 800px;
   background-color: ${({ theme }) => theme.COLOR.black};
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-top: 65px;
+  }
 `;
 
 const UndefinedList = styled.div`
@@ -57,6 +62,7 @@ const PostList = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
   }
 `;
 
@@ -64,6 +70,10 @@ const FilterGroup = styled.div`
   display: flex;
   gap: 8px;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
+  @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
+    ${flexCenter};
+    flex-wrap: wrap;
+  }
 `;
 
 const PaginationBox = styled.div`
