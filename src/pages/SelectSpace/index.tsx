@@ -7,15 +7,19 @@ import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
 import { v4 as uuid } from 'uuid';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
+import { OneSpaceType } from '@type/space.type';
 
 const SelectSpace = () => {
   const navigate = useNavigate();
-  const spaceList = useSpaceListQuery().spaceList!;
+
+  const spaceList: OneSpaceType[] = useSpaceListQuery().spaceList!;
 
   return (
     <S.Wrapper>
       <S.Container>
-        <SelectLogo className={'main-logo'} />
+        <S.LogoBox>
+          <SelectLogo className={'main-logo'} />
+        </S.LogoBox>
         <S.Content>
           <S.ButtonContainer>
             <BasicButton

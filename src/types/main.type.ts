@@ -1,11 +1,12 @@
-import type { UserType, TagType } from '@type/post.type';
+import type { TagType, UserType } from '@type/post.type';
 import { Dispatch, SetStateAction } from 'react';
-import type { SpaceInfo, SpacePostType } from '@type/space.type';
+import type { SpaceInfoType, SpacePostType } from '@type/space.type';
 
 export type selectType = {
   id: number;
   title: string;
   imgUrl?: string;
+  isAdmin?: boolean;
 };
 
 export type MenuListProps = {
@@ -17,7 +18,7 @@ export type MenuListProps = {
 
 export type MainHeaderPropType = {
   spaceId: string;
-  spaceInfo: SpaceInfo;
+  spaceInfo: SpaceInfoType;
   selectState: boolean;
   setSelectState: Dispatch<SetStateAction<boolean>>;
 };

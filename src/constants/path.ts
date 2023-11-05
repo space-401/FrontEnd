@@ -10,6 +10,7 @@ export const BASE_PATH = {
 
 export const PATH = {
   ...BASE_PATH,
+  SOCIAL_AUTH: `${BASE_PATH.AUTH}/:socialType`,
   USER_INFO: `${BASE_PATH.USER}/mypage`,
   POST_CREATE: (spaceId: number | string) =>
     `${BASE_PATH.SPACE}/${spaceId}/post`,

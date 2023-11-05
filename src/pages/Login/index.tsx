@@ -7,20 +7,30 @@ import { ReactComponent as SignLogo } from '@assets/svg/signlogo.svg';
 import SocialKakao from '@/components/Auth/SocialKakao';
 import SocialNaver from '@/components/Auth/SocialNaver';
 import SocialGoogle from '@/components/Auth/SocialGoogle';
+import { useEffect } from 'react';
+import tokenStorage from '@utils/tokenStorage';
 
 const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
   const { naverHandleLogin } = SocialNaver();
   const { googleSocialLogin } = SocialGoogle();
 
+  useEffect(() => {
+    tokenStorage.removeAccessToken();
+    tokenStorage.removeRefreshToken();
+  }, []);
+
   return (
     <S.Wrapper>
-      <SignLogo />
+      <S.LogoBox>
+        <SignLogo />
+      </S.LogoBox>
       <S.Content>
         <S.Text>
           SNS로 간편하게 로그인하고 <br />
           친구들과 함께 추억을 기록하고 소통해보세요!
         </S.Text>
+
         <S.LoginContainer>
           <S.LoginBox
             backgroundColor={theme.LOGIN_COLOR.kakao}

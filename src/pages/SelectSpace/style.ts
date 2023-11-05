@@ -14,12 +14,23 @@ const SpaceContainer = styled.div`
   margin-top: 16px;
   position: relative;
   text-align: center !important;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    flex-wrap: wrap;
+  }
+`;
+
+const LogoBox = styled.div`
+  ${flexCenter};
 `;
 
 const Container = styled.div`
   border-radius: 15px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   height: 670px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: auto;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -39,8 +50,8 @@ const AddBox = styled.div`
 `;
 
 const EmptySpaceBox = styled.div`
-  width: 270px;
-  height: 270px;
+  width: 200px;
+  height: 200px;
   border-radius: 20px;
   border: 1px solid #57585e;
   background: ${({ theme }) => theme.COLOR['gray-7']};
@@ -51,6 +62,7 @@ const Content = styled.div`
 `;
 
 const S = {
+  LogoBox,
   Wrapper,
   Container,
   SpaceContainer,

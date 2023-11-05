@@ -6,10 +6,10 @@ import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
 import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
 import BasicBox from '@/components/common/BasicBox';
-import { useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
 import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
-import { ImageType, ImageArrType } from '@/types/image.type';
+import { ImageArrType, ImageType } from '@/types/image.type';
 import CharacterCounter from '@/components/Create/CharacterCounter';
 import { theme } from '@/styles/theme/theme';
 import useInputs from '@/hooks/common/useInputs';
@@ -19,14 +19,18 @@ import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 import { CreateSpaceType } from '@/types/space.type';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
 import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
 import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
+import tokenStorage from '@utils/tokenStorage';
 
 const CreateSpace = () => {
+  useEffect(() => {
+    console.log('storgae', tokenStorage.getAccessToken());
+  }, []);
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
@@ -60,6 +64,21 @@ const CreateSpace = () => {
     false,
     false,
   ]);
+
+  //내 작성글이 아닐 경우에 돌려보내기
+  useEffect(() => {
+    if (spaceId) {
+      if (!spaceInfo?.isAdmin) {
+        noAuthalertModalOpen();
+        navigate('/space');
+      }
+    }
+  }, []);
+
+  //아이콘 옵션 선택 모달 열기
+  const onClickOptionModalOpen = () => {
+    setIsIconModalOpen([true, false]);
+  };
 
   //태그 편집 모달이 열려있는지
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
@@ -102,6 +121,16 @@ const CreateSpace = () => {
     });
   };
 
+  const noAuthalertOpen = useAlertModalOpen();
+
+  const noAuthalertModalOpen = () => {
+    noAuthalertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '스페이스 수정 권한이 없습니다.',
+    });
+  };
+
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -135,11 +164,11 @@ const CreateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImage!,
-      spacePassword: Number(pswd),
+      imgUrl: imageArr.convertedImage && null,
+      defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
+      spacePw: Number(pswd),
     };
     postSpaceAction(newData);
-    console.log('새로운 데이터', newData);
     confirmModalOpen(false);
   };
 
@@ -148,11 +177,12 @@ const CreateSpace = () => {
     const newData: CreateSpaceType = {
       spaceTitle: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImage!,
-      spacePassword: Number(pswd),
+      imgUrl: imageArr.convertedImage && null,
+      defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
+      spacePw: Number(pswd),
     };
     updateSpaceAction({ ...newData, spaceId: Number(spaceId!) });
-    console.log('새로운 데이터', newData);
+    console.log(newData);
     confirmModalOpen(true);
   };
 
@@ -172,6 +202,7 @@ const CreateSpace = () => {
       });
     }
     setIsBasicIcon([true, index]);
+    console.log(isBasicIcon);
   };
 
   //확인 모달
@@ -221,11 +252,17 @@ const CreateSpace = () => {
           setIsIconModalOpen([false, isIconModalOpen[1]]);
         }}
         isOpen={isIconModalOpen[0]}
-        onClickImgEditModal={onClickImgEditModal}
-        onMoveBasicIconModal={() => {
-          setIsIconModalOpen([false, true]);
-        }}
-        selectedImage={imageArr.cropImage}
+        title="스페이스 아이콘 설정"
+        selectOptionArr={[
+          {
+            title: '기본 아이콘 선택하기',
+            asyncFunc: () => setIsIconModalOpen([false, true]),
+          },
+          {
+            title: '이미지 불러오기',
+            asyncFunc: onClickImgEditModal,
+          },
+        ]}
       />
 
       {/*기본 아이콘 선택 모달*/}
@@ -238,6 +275,7 @@ const CreateSpace = () => {
         isBasicIcon={isBasicIcon}
       />
 
+      {/*스페이스 설정 폼*/}
       <S.Form>
         {/*아이콘 지정 인풋*/}
         <S.TitleContainer number={1} required={true}>
@@ -254,7 +292,7 @@ const CreateSpace = () => {
         </S.TitleContainer>
 
         {!imageArr.cropImage && !isBasicIcon[0] ? (
-          <S.InputContainer number={1} onClick={onClickImgEditModal}>
+          <S.InputContainer number={1} onClick={onClickOptionModalOpen}>
             <BasicBox width={160} borderradius={10}>
               <PhotoIcon />
             </BasicBox>

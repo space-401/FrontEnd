@@ -4,6 +4,8 @@ import { ACCESS_TOKEN_KEY, HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
 import { getRefreshToken } from '@apis/user/getRefreshToken';
+import { useUserStore } from '@store/user';
+import { getCookie } from '@utils/cookie';
 
 export interface ErrorResponseData {
   statusCode?: number;
@@ -11,18 +13,19 @@ export interface ErrorResponseData {
   code?: number;
 }
 
+export const Interceptors = () => {
+  const { accessToken } = useUserStore();
+  return accessToken;
+};
+
 export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
   if (config.useAuth || !config.headers || config.headers.Authorization)
     return config;
-
-  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-
-  if (!accessToken) {
+  if (!getCookie('accessToken')) {
     window.location.href = PATH.LOGIN;
     throw new Error('토큰이 유효하지 않습니다');
   }
-
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  config.headers.Authorization = `Bearer ${getCookie('accessToken')}`;
 
   return config;
 };
@@ -62,6 +65,7 @@ export const handleAPIError = (error: AxiosError<ErrorResponseData>) => {
   if (status >= HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
     throw new HTTPError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, data.message);
   }
-
-  throw new HTTPError(status, data.message);
+  if (status === 401) {
+  }
+  // throw new HTTPError(status, data.message);
 };

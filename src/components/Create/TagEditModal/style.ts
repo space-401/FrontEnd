@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
+  border-radius: 10px;
   position: absolute;
   ${modalBackGround};
   display: flex;
@@ -9,6 +10,11 @@ const Wrapper = styled.div`
   width: 628px;
   min-height: 268px;
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 400px;
+    padding-top: 0.5rem;
+    flex-direction: column;
+  }
 `;
 
 const Text = styled.div`
