@@ -50,8 +50,8 @@ const AddBox = styled.div`
 `;
 
 const EmptySpaceBox = styled.div`
-  width: 270px;
-  height: 270px;
+  width: 200px;
+  height: 200px;
   border-radius: 20px;
   border: 1px solid #57585e;
   background: ${({ theme }) => theme.COLOR['gray-7']};

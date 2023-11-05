@@ -25,8 +25,12 @@ import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
 import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
 import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
+import tokenStorage from '@utils/tokenStorage';
 
 const CreateSpace = () => {
+  useEffect(() => {
+    console.log('storgae', tokenStorage.getAccessToken());
+  }, []);
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
@@ -158,7 +162,7 @@ const CreateSpace = () => {
   //스페이스 생성하기
   const onCreateSpace = () => {
     const newData: CreateSpaceType = {
-      spaceName: title,
+      spaceTitle: title,
       spaceDescription: content,
       imgUrl: imageArr.convertedImage && null,
       defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
@@ -171,7 +175,7 @@ const CreateSpace = () => {
   //스페이스 수정하기
   const onUpdateSpace = () => {
     const newData: CreateSpaceType = {
-      spaceName: title,
+      spaceTitle: title,
       spaceDescription: content,
       imgUrl: imageArr.convertedImage && null,
       defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,

@@ -5,7 +5,7 @@ export type UserType = {
   userId: number;
   userName: string;
   imgUrl?: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
 };
 
 export type TagType = {

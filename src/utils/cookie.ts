@@ -1,6 +1,10 @@
-export const setCookie = (key: string, value: string, expiredays: number) => {
+export const setCookie = (
+  key: string,
+  value: string,
+  expiredminutes: number
+) => {
   const todayDate = new Date();
-  todayDate.setDate(todayDate.getDate() + expiredays);
+  todayDate.setDate(todayDate.getTime() + expiredminutes * 1000 * 60);
   document.cookie = `${key}=${encodeURIComponent(
     value
   )}; path=/; expires=${todayDate.toUTCString()};`;

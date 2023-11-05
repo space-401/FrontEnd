@@ -27,7 +27,7 @@ const Avatars = ({ users, size, max, fontSize = 15 }: PropType) => (
         '& .MuiAvatar-root': { width: size, height: size, fontSize: 15 },
       }}
     >
-      {users.map((user) => {
+      {users?.map((user) => {
         const { userId, userName, imgUrl } = user;
         return (
           <Avatar
