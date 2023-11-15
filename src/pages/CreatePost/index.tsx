@@ -18,7 +18,7 @@ import CharacterCounter from '@/components/Create/CharacterCounter';
 import useInputs from '@/hooks/common/useInputs';
 import SearchModal from '@components/Create/SearchMapModal';
 import { MapType } from '@/types/marker.type';
-import { CreatePostType, DateInfoType } from '@/types/post.type';
+import { DateInfoType } from '@/types/post.type';
 import { ImagesArrType, ImageType } from '@/types/image.type';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
@@ -152,47 +152,52 @@ const CreatePost = () => {
   };
 
   //제출 후 포스트 생성 페이지로 이동
-  const onSubmitCreatePost = () => {
-    const newPost: CreatePostType = {
-      spaceId: Number(spaceId),
-      postTitle: title,
-      postContent: content,
-      people: selectedUsers.map((user) => user.id),
-      tags: selectedTags.map((tag) => tag.id),
-      postLocationLng: Number(mapInfo.position.lng),
-      postLocationLat: Number(mapInfo.position.lat),
-      postLocationKeyword: mapInfo.content,
-      postBeginDate: dateInfo.startDate,
-      postEndDate: dateInfo.endDate,
-      imgs: imageArr.convertedImages,
-      placeTitle: mapInfo.content,
-    };
-    createPostAction(newPost);
+  const onSubmitPost = () => {
+    const formData = new FormData();
+    formData.append('spaceId', spaceId!);
+    formData.append('postTitle', title);
+    formData.append('postContent', content);
+    formData.append(
+      'people',
+      JSON.stringify(selectedUsers.map((user) => user.id))
+    );
+    formData.append('tags', JSON.stringify(selectedTags.map((tag) => tag.id)));
+    formData.append('postLocationLng', mapInfo.position.lng),
+      formData.append('postLocationLat', mapInfo.position.lat),
+      formData.append('placeTitle', mapInfo.content),
+      formData.append('postLocationKeyword', mapInfo.content),
+      formData.append('postBeginDate', dateInfo.startDate),
+      formData.append('postEndDate', dateInfo.endDate),
+      imageArr.convertedImages.forEach((image, index) => {
+        formData.append(`file-${index}`, image);
+      });
+    postId ? updatePostAction(formData) : createPostAction(formData);
+
     confirmModalOpen();
   };
 
-  const onSubmitUpdatePost = () => {
-    const newPost: CreatePostType = {
-      spaceId: Number(spaceId),
-      postTitle: title,
-      postContent: content,
-      people: selectedUsers.map((user) => user.id),
-      tags: selectedTags.map((tag) => tag.id),
-      postLocationLng: Number(mapInfo.position.lng),
-      postLocationLat: Number(mapInfo.position.lat),
-      postLocationKeyword: mapInfo.content,
-      postBeginDate: dateInfo.startDate,
-      postEndDate: dateInfo.endDate,
-      imgs: imageArr.convertedImages,
-      placeTitle: mapInfo.content,
-    };
-
-    console.log(newPost);
-    updatePostAction({ ...newPost, spaceId: Number(spaceId) });
-    //api 로직
-    //성공시
-    confirmModalOpen();
-  };
+  // const onSubmitUpdatePost = () => {
+  //   const newPost: FormData = {
+  //     spaceId: spaceId,
+  //     postTitle: title,
+  //     postContent: content,
+  //     people: selectedUsers.map((user) => user.id),
+  //     tags: selectedTags.map((tag) => tag.id),
+  //     postLocationLng: Number(mapInfo.position.lng),
+  //     postLocationLat: Number(mapInfo.position.lat),
+  //     postLocationKeyword: mapInfo.content,
+  //     postBeginDate: dateInfo.startDate,
+  //     postEndDate: dateInfo.endDate,
+  //     imgs: imageArr.convertedImages,
+  //     placeTitle: mapInfo.content,
+  //   };
+  //
+  //   console.log(newPost);
+  //   updatePostAction(newPost);
+  //   //api 로직
+  //   //성공시
+  //   confirmModalOpen();
+  // };
 
   const onMoveCreatePost = () => {
     const currentURL = window.location.href;
@@ -444,7 +449,7 @@ const CreatePost = () => {
                 !dateInfo.startDate ||
                 mapInfo.content == ''
               }
-              onClick={onSubmitCreatePost}
+              onClick={onSubmitPost}
               width={160}
               height={44}
               children="게시글 올리기"
@@ -458,7 +463,7 @@ const CreatePost = () => {
                 !dateInfo.startDate ||
                 mapInfo.content == ''
               }
-              onClick={onSubmitUpdatePost}
+              onClick={onSubmitPost}
               width={160}
               height={44}
               children="게시글 수정하기"
