@@ -115,7 +115,7 @@ const UserSettingModal = ({
   };
 
   //제출 함수
-  const onSubmitInfo = async () => {
+  const onSubmitInfo = () => {
     const result = checkAlreadyNickname();
     const data = {
       spaceId,

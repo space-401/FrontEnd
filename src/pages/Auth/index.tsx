@@ -24,7 +24,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const { accessToken, refreshToken } = LoginResponse;
+      const { accessToken, refreshToken } = LoginResponse!;
       tokenStorage.setAccessToken(accessToken, 30);
       tokenStorage.setRefreshToken(refreshToken, 60 * 24 * 14);
       setUserInfo(LoginResponse);

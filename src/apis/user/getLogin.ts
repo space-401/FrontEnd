@@ -3,10 +3,6 @@ import { axiosInstance } from '@apis/AxiosInstance';
 import { PATH } from '@constants/path';
 import { UserStateType } from '@store/user';
 
-export interface ILoginResponse {
-  user: UserStateType;
-}
-
 export interface ILoginProps {
   code: string;
   socialType: SocialType;
