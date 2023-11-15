@@ -45,7 +45,6 @@ export const commentList: CommentType[] = [
     },
     replyMember: {
       id: 'jihyeong00',
-      memberKey: '3D6rpqP63f3E7gxXN1PHrg',
       nick: '칸탐로봇',
     },
     content: '잘부탁드립니다!',
