@@ -15,7 +15,7 @@ export interface ILoginProps {
 
 export const getLogin = async (props: ILoginProps) => {
   const { state = false, socialType, code } = props;
-  const response = await axiosInstance.get<ILoginResponse>(
+  const response = await axiosInstance.get<UserStateType>(
     PATH.SOCIAL_LOGIN(socialType),
     {
       params: {
