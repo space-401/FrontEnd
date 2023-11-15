@@ -172,7 +172,7 @@ const CreatePost = () => {
     const formData = new FormData();
 
     //이미지 파일 외 데이터들이 들어가는 객체
-    const postDTO = {
+    const createPostDTO = {
       spaceId,
       postTitle: title,
       postContent: content,
@@ -185,14 +185,22 @@ const CreatePost = () => {
       postEndDate: dateInfo.endDate,
     };
 
-    formData.append(postDTO);
+    const updatePostDTO = {
+      ...createPostDTO,
+      postId,
+    };
+
     imageArr.convertedImages.forEach((image, index) => {
       formData.append(`file-${index}`, image);
     });
 
     if (postId) {
+      //수정할 때
+      formData.append('postDTO', updatePostDTO);
       updatePostAction(formData);
     } else {
+      //처음 생성할 때
+      formData.append('postDTO', createPostDTO);
       createPostAction(formData);
     }
   };
@@ -210,7 +218,6 @@ const CreatePost = () => {
   };
 
   /**경고 모달*/
-
   const alertOpen = useAlertModalOpen();
 
   const alertModalOpen = () => {
