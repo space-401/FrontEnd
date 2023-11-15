@@ -28,9 +28,7 @@ const MainPage = () => {
 
   //처음이라면 welcome 모달 열기
   useEffect(() => {
-    console.log(isFirst); //이걸로 바꾸기
-    const fakeIsFirst = false;
-    if (fakeIsFirst) {
+    if (!isFirst) {
       setModalNum(1);
     }
   }, []);

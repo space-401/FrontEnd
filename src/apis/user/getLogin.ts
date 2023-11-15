@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { SocialType } from '@type/user.type';
+import { axiosInstance } from '@apis/AxiosInstance';
+import { PATH } from '@constants/path';
 
 export const getLogin = async ({
   code,
@@ -8,9 +9,12 @@ export const getLogin = async ({
   code: string;
   socialType: SocialType;
 }) => {
-  const socialUrl = `/user/auth/${socialType}?code=${code}&state=false`;
-  console.log('socialUrl', socialUrl);
-
-  const response = await axios.get(import.meta.env.VITE_BACK_URL + socialUrl);
+  const response = await axiosInstance.get(PATH.SOCIAL_LOGIN(socialType), {
+    params: {
+      code,
+      state: false,
+    },
+    useAuth: false,
+  });
   return response.data;
 };
