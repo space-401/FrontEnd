@@ -10,11 +10,11 @@ export interface ILoginResponse {
 export interface ILoginProps {
   code: string;
   socialType: SocialType;
-  state: boolean;
+  state?: boolean;
 }
 
 export const getLogin = async (props: ILoginProps) => {
-  const { state, socialType, code } = props;
+  const { state = false, socialType, code } = props;
   const response = await axiosInstance.get<ILoginResponse>(
     PATH.SOCIAL_LOGIN(socialType),
     {
