@@ -18,7 +18,6 @@ const Auth = () => {
     setUserEmail,
     setSocialType,
   } = useUserStore();
-  // ... (previous code)
 
   const fetchData = async () => {
     const code = new URL(window.location.href).searchParams.get('code');
