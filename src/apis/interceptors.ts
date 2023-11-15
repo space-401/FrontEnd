@@ -12,8 +12,6 @@ export interface ErrorResponseData {
   code?: number;
 }
 
-let isRefreshing = false;
-
 export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
   if (!config.useAuth || !config.headers || config.headers.Authorization)
     return config;
@@ -38,7 +36,10 @@ export const handleTokenError = async (
 
   const { data, status } = error.response;
 
-  if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
+  if (
+    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
+    data.message === '유효하지 않은 토큰입니다'
+  ) {
     const newAccessToken = await getNewAccessToken();
     originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
     tokenStorage.setAccessToken(newAccessToken, 30);
@@ -46,29 +47,10 @@ export const handleTokenError = async (
     return axiosInstance(originalRequest);
   }
 
-  if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
+  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
     tokenStorage.removeAccessToken();
 
     throw new HTTPError(status, data.message, data.code);
-  }
-
-  /*추가 부분 - 인증 에러가 날 때*/
-  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
-    if (!tokenStorage.hasRefreshToken()) {
-      // 리프레시 토큰도 없다면 로그인으로 이동
-      window.location.href = PATH.LOGIN;
-    } else {
-      //리프레싱 아직 안됐을때
-      if (!isRefreshing) {
-        isRefreshing = true;
-        tokenStorage.removeAccessToken();
-        const newAccessToken = await getNewAccessToken();
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        tokenStorage.setAccessToken(newAccessToken, 30);
-
-        return axiosInstance(originalRequest);
-      }
-    }
   }
 };
 export const handleAPIError = (error: AxiosError<ErrorResponseData>) => {
