@@ -12,7 +12,7 @@ export type UserStateType = {
 
 export type UserActionType = {
   userInfo?: UserStateType;
-  setUserInfo: (userInfo: UserStateType) => void;
+  setUserInfo: (userInfo?: UserStateType) => void;
 };
 
 export const useUserStore = create<UserActionType>((setState) => ({
