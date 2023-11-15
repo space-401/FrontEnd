@@ -5,28 +5,52 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '@constants/path';
 import { SocialType } from '@type/user.type';
 import { useEffect } from 'react';
+import { useUserStore } from '@store/user';
 
 const Auth = () => {
   const navigate = useNavigate();
   const params = useParams();
   const socialType: string = params.socialType as SocialType;
-  const code = new URL(window.location.href).searchParams.get('code');
-  const state = new URL(window.location.href).searchParams.get('state');
+  const {
+    setIsLogin,
+    setRefreshToken,
+    setAccessToken,
+    setUserEmail,
+    setSocialType,
+  } = useUserStore();
 
   const fetchData = async () => {
+    const code = new URL(window.location.href).searchParams.get('code');
+    const state = new URL(window.location.href).searchParams.get('state');
+
+    console.log('Code:', code);
+    console.log('State:', state);
+
+    let data;
     if (code && state) {
       try {
-        const data = await getLogin({
+        data = await getLogin({
           code,
           socialType: socialType as SocialType,
         });
-        console.log('로그인 결과', data);
-        tokenStorage.setAccessToken(data.accessToken, 30);
-        tokenStorage.setRefreshToken(data.refreshToken, 60 * 24 * 14);
-        navigate(PATH.SPACE);
+
+        console.log('Login Data:', data);
       } catch (error) {
         console.error('Error:', error);
       }
+
+      if (data) {
+        tokenStorage.setAccessToken(data.accessToken, 30);
+        tokenStorage.setRefreshToken(data.refreshToken, 60 * 24 * 14);
+        setIsLogin(true);
+        setRefreshToken(data.refreshToken);
+        setAccessToken(data.accessToken);
+        setUserEmail(data.userEmail);
+        setSocialType(data.socialType);
+      }
+
+      console.log('Navigating to SPACE');
+      navigate(PATH.SPACE);
     }
   };
 

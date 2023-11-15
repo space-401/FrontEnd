@@ -50,7 +50,6 @@ const Content = styled.div`
   flex-direction: column;
   color: white;
   gap: 50px;
-  display: absolute;
   margin-top: -100px;
 `;
 
