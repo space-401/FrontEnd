@@ -28,7 +28,7 @@ import { useDetailModalStore } from '@store/modal';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
-import { v4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { useCommentMutation } from '@hooks/api/comment/useCommentMutation';
 import { usePostDeleteMutation } from '@hooks/api/post/usePostDeleteMutation';
 
@@ -111,7 +111,7 @@ const DetailInner = React.forwardRef(
       setState((prev) => ({ ...prev, isReplyOpen: newReply }));
     };
 
-    const { postCommentAction } = useCommentMutation();
+    const { postCommentAction } = useCommentMutation(postId, spaceId);
 
     // 댓글 오픈
     const sendReply = () => {
@@ -156,7 +156,7 @@ const DetailInner = React.forwardRef(
           </S.LikeIconBox>
           <S.LeftImgBox isArray={imgUrl?.length !== 0}>
             {[...imgUrl].map((imgUrl) => (
-              <S.ImgBox key={v4()} imgUrl={imgUrl} />
+              <S.ImgBox key={uuid()} imgUrl={imgUrl} />
             ))}
           </S.LeftImgBox>
           <S.RightWrapper>

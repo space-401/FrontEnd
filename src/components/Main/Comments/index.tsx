@@ -44,6 +44,7 @@ const DetailComments = (props: DetailCommentType) => {
         <S.CommentList isOpen={isOpen}>
           {commentList?.map((item) => (
             <OneComment
+              spaceId={spaceId}
               postId={postId}
               key={item.id}
               userList={userList}
