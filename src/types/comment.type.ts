@@ -10,6 +10,7 @@ export type OneMentionType = {
 
 export type OneCommentType = {
   postId: number;
+  spaceId: number;
   item: CommentType;
   ReplyOpen: (id: number, refId: number) => void;
   ReplyClose: () => void;

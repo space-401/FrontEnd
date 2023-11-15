@@ -8,9 +8,11 @@ import toast from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
 import { useCommentMutation } from '@hooks/api/comment/useCommentMutation';
 import type { OneCommentType } from '@type/comment.type';
+import { useCommentDeleteMutation } from '@hooks/api/comment/useCommentDeleteMutation';
 
 const OneComment = (props: OneCommentType) => {
-  const { ReplyOpen, ReplyClose, item, postId, isReply, userList } = props;
+  const { ReplyOpen, ReplyClose, item, postId, isReply, userList, spaceId } =
+    props;
 
   const {
     createDate,
@@ -26,7 +28,9 @@ const OneComment = (props: OneCommentType) => {
 
   const [state, setState] = useState({ reply: '', settingIsOpen: false });
 
-  const { postCommentAction } = useCommentMutation();
+  const { postCommentAction } = useCommentMutation(postId, spaceId);
+
+  const { deleteCommentAction } = useCommentDeleteMutation(postId, spaceId);
 
   const regex = /@([^@]+)@/g;
   const parts = [];
@@ -72,7 +76,7 @@ const OneComment = (props: OneCommentType) => {
 
   const DeleteComment = () => {
     setSettingToggle(false);
-    console.log(id, '댓글을 삭제합니다.');
+    deleteCommentAction(id);
     toast('삭제되었습니다.', {
       style: { background: 'black', color: 'white' },
       position: 'top-center',
