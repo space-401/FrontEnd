@@ -9,12 +9,13 @@ import {
   myPostList,
 } from '@mocks/data/user.mock';
 import { successResponse } from '@mocks/data/response.mock';
+import {PATH} from "@constants/path";
 
 export const userHandlers: RestHandler[] = [
   /**
    * 로그인하는 api
    */
-  rest.post(END_POINTS.LOGIN, (_, res, ctx) => {
+  rest.get(PATH.SOCIAL_LOGIN(':socialType'), (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(loginResponse));
   }),
   /**
