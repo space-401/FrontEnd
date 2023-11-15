@@ -23,7 +23,6 @@ import { ImagesArrType, ImageType } from '@/types/image.type';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
 import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import {
   onConvertedTagToSelectType,
   onConvertedUserToSelectType,
@@ -32,6 +31,7 @@ import { convertImgArrToObj } from '@/utils/makeObj';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import { usePostCreateMutation } from '@/hooks/api/post/usePostCreateMutation';
 import { usePostUpdateMutation } from '@/hooks/api/post/usePostUpdateMutation';
+import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 
 const CreatePost = () => {
   const params = useParams();
@@ -52,8 +52,8 @@ const CreatePost = () => {
     }
   }, []);
 
-  const { createPostAction } = usePostCreateMutation();
-  const { updatePostAction } = usePostUpdateMutation();
+  const { createPostAction, postCreateSuccess } = usePostCreateMutation();
+  const { updatePostAction, updatePostSuccess } = usePostUpdateMutation();
 
   const { imgUrl, spaceTitle, tagList, userList } = spaceInfo!;
 
@@ -151,53 +151,56 @@ const CreatePost = () => {
     }
   };
 
+  /**확인 모달*/
+
+  const confirmOpen = useConfirmModalOpen();
+
+  const confirmModalOpen = () => {
+    confirmOpen({
+      AsyncAction: onMoveCreatePost,
+      isPositiveModal: true,
+      ApproveMessage: '확인',
+      closeMessage: '닫기',
+      titleMessage: spaceInfo
+        ? '성공적으로 수정되었습니다. '
+        : '성공적으로 포스팅되었습니다.',
+    });
+  };
+
   //제출 후 포스트 생성 페이지로 이동
   const onSubmitPost = () => {
     const formData = new FormData();
-    formData.append('spaceId', spaceId!);
-    formData.append('postTitle', title);
-    formData.append('postContent', content);
-    formData.append(
-      'people',
-      JSON.stringify(selectedUsers.map((user) => user.id))
-    );
-    formData.append('tags', JSON.stringify(selectedTags.map((tag) => tag.id)));
-    formData.append('postLocationLng', mapInfo.position.lng),
-      formData.append('postLocationLat', mapInfo.position.lat),
-      formData.append('placeTitle', mapInfo.content),
-      formData.append('postLocationKeyword', mapInfo.content),
-      formData.append('postBeginDate', dateInfo.startDate),
-      formData.append('postEndDate', dateInfo.endDate),
-      imageArr.convertedImages.forEach((image, index) => {
-        formData.append(`file-${index}`, image);
-      });
-    postId ? updatePostAction(formData) : createPostAction(formData);
 
-    confirmModalOpen();
+    //이미지 파일 외 데이터들이 들어가는 객체
+    const postDTO = {
+      spaceId,
+      postTitle: title,
+      postContent: content,
+      people: selectedUsers.map((user) => user.id),
+      tags: selectedTags.map((tag) => tag.id),
+      postLocationLat: mapInfo.position.lat,
+      postLocationLng: mapInfo.position.lng,
+      postLocationKeyword: mapInfo.content,
+      postBeginDate: dateInfo.startDate,
+      postEndDate: dateInfo.endDate,
+    };
+
+    formData.append(postDTO);
+    imageArr.convertedImages.forEach((image, index) => {
+      formData.append(`file-${index}`, image);
+    });
+
+    if (postId) {
+      updatePostAction(formData);
+    } else {
+      createPostAction(formData);
+    }
   };
 
-  // const onSubmitUpdatePost = () => {
-  //   const newPost: FormData = {
-  //     spaceId: spaceId,
-  //     postTitle: title,
-  //     postContent: content,
-  //     people: selectedUsers.map((user) => user.id),
-  //     tags: selectedTags.map((tag) => tag.id),
-  //     postLocationLng: Number(mapInfo.position.lng),
-  //     postLocationLat: Number(mapInfo.position.lat),
-  //     postLocationKeyword: mapInfo.content,
-  //     postBeginDate: dateInfo.startDate,
-  //     postEndDate: dateInfo.endDate,
-  //     imgs: imageArr.convertedImages,
-  //     placeTitle: mapInfo.content,
-  //   };
-  //
-  //   console.log(newPost);
-  //   updatePostAction(newPost);
-  //   //api 로직
-  //   //성공시
-  //   confirmModalOpen();
-  // };
+  //성공시 확인 모달 열기
+  if (postCreateSuccess || updatePostSuccess) {
+    confirmModalOpen();
+  }
 
   const onMoveCreatePost = () => {
     const currentURL = window.location.href;
@@ -225,22 +228,6 @@ const CreatePost = () => {
       width: 300,
       alertMessage: '확인',
       alertTitle: '포스트 수정 권한이 없습니다.',
-    });
-  };
-
-  /**확인 모달*/
-
-  const confirmOpen = useConfirmModalOpen();
-
-  const confirmModalOpen = () => {
-    confirmOpen({
-      AsyncAction: onMoveCreatePost,
-      isPositiveModal: true,
-      ApproveMessage: '확인',
-      closeMessage: '닫기',
-      titleMessage: spaceInfo
-        ? '성공적으로 수정되었습니다. '
-        : '성공적으로 포스팅되었습니다.',
     });
   };
 

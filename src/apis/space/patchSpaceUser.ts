@@ -1,4 +1,4 @@
-import { axiosInstance } from '@apis/AxiosInstance';
+import { formDataAxiosInstance } from '@apis/AxiosInstance';
 import { END_POINTS } from '@constants/api';
 import { ApiResponseType } from '@/types/response.type';
 
@@ -10,11 +10,10 @@ export type SpaceUserPropsType = {
   userNickName?: string;
 };
 export const patchSpaceUser = async (patchInfo: SpaceUserPropsType) => {
-  const { data } = await axiosInstance.patch<ApiResponseType>(
+  const { data } = await formDataAxiosInstance.patch<ApiResponseType>(
     END_POINTS.SPACE_USER,
     { ...patchInfo }
   );
-  console.log('우저 정보 수정', data);
 
   return data;
 };

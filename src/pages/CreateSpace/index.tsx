@@ -172,11 +172,8 @@ const CreateSpace = () => {
     if (imageArr.convertedImage) {
       formData.append('imgUrl', imageArr.convertedImage);
     }
-    const data = spaceId
-      ? postSpaceAction(formData)
-      : updateSpaceAction(formData);
-    // const data = postSpaceAction(formData);
-    console.log(data);
+    spaceId ? postSpaceAction(formData) : updateSpaceAction(formData);
+
     if (isUpdateSuccess || isPostSuccess) {
       confirmModalOpen(true);
     }
