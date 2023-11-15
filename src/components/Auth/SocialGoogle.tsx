@@ -6,7 +6,7 @@ export const SocialGoogle = () => {
     scope: 'email profile',
     onSuccess: async ({ code }) => {
       console.log(code);
-      const data = await getLogin({ code, socialType: 'google' });
+      const data = await getLogin({ code, socialType: 'google', state: false });
       console.log(data);
     },
     onError: (errorResponse) => {
