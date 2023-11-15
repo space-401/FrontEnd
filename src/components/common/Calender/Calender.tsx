@@ -6,6 +6,7 @@ import { YEARS, MONTHS } from './util';
 import getYear from 'date-fns/getYear';
 import styled from 'styled-components';
 import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
+import { ReactComponent as MainCalenderIcon } from '@assets/svg/mainCalender.svg';
 import { postTimeChangeHelper } from '@/utils/time-helper';
 import '@components/common/Calender/calender.css';
 import { DateInfoType } from '@/types/post.type';
@@ -14,19 +15,23 @@ import { ReactComponent as DownIcon } from '@/assets/svg/chevron/chevron_down.sv
 import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
 
 type CalenderPropsType = {
+  width: number;
   height: number;
   borderRadius: number;
   setDateInfo: React.Dispatch<DateInfoType>;
   isMain: boolean;
   dateInfo?: DateInfoType;
+  fontSize?: number;
 };
 
 const Calender = ({
   setDateInfo,
   height,
+  width,
   borderRadius,
   isMain,
   dateInfo,
+  fontSize,
 }: CalenderPropsType) => {
   const [startDate, setStartDate] = useState<Date | null>(
     dateInfo?.startDate ? new Date(dateInfo.startDate!) : null
@@ -84,7 +89,9 @@ const Calender = ({
     >
       <label>
         <StyledDatePicker
+          fontSize={fontSize}
           borderRadius={borderRadius}
+          width={width}
           height={height}
           dateFormat="yyyy.MM.dd"
           showYearDropdown
@@ -198,19 +205,23 @@ const Calender = ({
           )}
         ></StyledDatePicker>
         {isMain ? (
-          <CalenderIcon
-            style={{ position: 'absolute', bottom: '25', marginLeft: '230' }}
+          <MainCalenderIcon
+            style={{
+              position: 'absolute',
+              bottom: '10',
+              marginLeft: '170',
+            }}
           />
         ) : (
           <CalenderIcon
-            style={{ position: 'absolute', bottom: '28', marginLeft: '230' }}
+            style={{ position: 'absolute', bottom: '19', marginLeft: '230' }}
           />
         )}
         {!startDate && !isMain && (
           <S.DateText
             style={{
               position: 'absolute',
-              bottom: 27,
+              bottom: 20,
               left: 15,
               fontWeight: 350,
             }}
@@ -223,10 +234,10 @@ const Calender = ({
           <S.DateText
             style={{
               position: 'absolute',
-              bottom: 25,
-              left: 15,
+              bottom: 12,
+              left: 8,
               color: 'white',
-              fontSize: 14,
+              fontSize: 12,
             }}
             isMain={true}
           >
@@ -241,17 +252,21 @@ const Calender = ({
 export default Calender;
 
 const StyledDatePicker = styled(DatePicker)<{
+  width: number;
   height: number;
   borderRadius: number;
+  fontSize?: number;
 }>`
+  width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  font-size: ${({ theme, fontSize }) =>
+    fontSize ? fontSize : theme.TEXT_SIZE['text-18']};
   border-radius: ${({ borderRadius }) => borderRadius}px;
-  width: 270px;
   display: flex;
-  padding-left: 1.2rem;
+  padding-left: 0.7rem;
+  caret-color: transparent;
 `;
 
 const DateText = styled.div<{ isMain: boolean }>`

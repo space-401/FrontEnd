@@ -6,5 +6,6 @@ export const getSpaceList = async () => {
   const { data } = await axiosInstance.get<OneSpaceType[]>(
     END_POINTS.SPACE_LIST
   );
+
   return data;
 };

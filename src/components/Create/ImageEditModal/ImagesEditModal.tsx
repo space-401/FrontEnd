@@ -10,15 +10,15 @@ import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
 import { Box, Modal } from '@mui/material';
 import { usePhotoModalStore } from '@/store/modal';
 import { theme } from '@/styles/theme/theme';
-import { ImageArrType } from '@/types/image.type';
+import { ImagesArrType } from '@/types/image.type';
 import { dataURItoFile } from '@/utils/fileConvertor';
 
 type ModalType = {
   handleFileChange: any;
   currentIdx: number;
   setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
-  imageArr: ImageArrType;
-  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
+  imageArr: ImagesArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImagesArrType>>;
 };
 
 const ImagesEditModal = ({
@@ -56,13 +56,7 @@ const ImagesEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = imageArr.images.length;
 
-  //현재 화면 크기
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
+  const cropperWidth = 500;
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = (cropperRef: any) => {
@@ -80,10 +74,16 @@ const ImagesEditModal = ({
   };
 
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = async (e: any) => {
+  const onSaveAllEditImg = async (e: React.MouseEvent) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
+    if (imageArr.cropImages.length > 0) {
+      setImageArr((prev) => ({
+        ...prev,
+        cropImages: [],
+      }));
+    }
     myRefs.map((ref) => {
       getCropData(ref);
     });
@@ -122,6 +122,10 @@ const ImagesEditModal = ({
 
   //취소
   const onClickCancelModal = () => {
+    setImageArr((prev) => ({
+      ...prev,
+      images: [],
+    }));
     ModalClose();
   };
 
@@ -157,7 +161,7 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
-        <S.Form width={cropperWidth}>
+        <S.Form>
           <PrevBtn
             style={{
               position: 'absolute',
@@ -192,8 +196,8 @@ const ImagesEditModal = ({
           <div
             style={{
               position: 'relative',
-              height: cropperWidth,
-              width: cropperWidth,
+              height: cropperWidth + 'px',
+              width: cropperWidth + 'px',
               overflow: 'hidden',
               padding: 10,
             }}

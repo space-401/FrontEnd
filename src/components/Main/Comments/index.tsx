@@ -4,8 +4,9 @@ import type { UserType } from '@type/post.type';
 import { useCommentQuery } from '@hooks/api/comment/useCommentQuery';
 
 type DetailCommentType = {
+  spaceId: number;
   isOpen: boolean;
-  postId: string;
+  postId: number;
   isReply:
     | {
         open: boolean;
@@ -22,9 +23,9 @@ type DetailCommentType = {
 };
 
 const DetailComments = (props: DetailCommentType) => {
-  const { setIsReply, isReply, isOpen, userList, postId } = props;
+  const { setIsReply, isReply, spaceId, isOpen, userList, postId } = props;
 
-  const { commentList } = useCommentQuery(postId);
+  const { commentList } = useCommentQuery(postId, spaceId);
 
   const ReplyClose = () => {
     setIsReply({ open: false, refId: undefined, id: undefined });
@@ -43,6 +44,7 @@ const DetailComments = (props: DetailCommentType) => {
         <S.CommentList isOpen={isOpen}>
           {commentList?.map((item) => (
             <OneComment
+              postId={postId}
               key={item.id}
               userList={userList}
               item={item}

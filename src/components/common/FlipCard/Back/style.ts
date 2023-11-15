@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import { omitText } from '@styles/common';
-import { FlipCardSize } from '@/components/common/FlipCard/FlipCard';
 
-const Wrapper = styled.div<{ size: FlipCardSize }>`
+const Wrapper = styled.div<{ isBig: boolean }>`
   width: 100%;
   height: 100%;
   display: flex;
-  border-radius: ${({ size }) => (size == 'medium' ? 20 : 5)}px;
+  border-radius: ${({ isBig }) => (isBig ? 5 : 20)}px;
   background-size: cover;
   backdrop-filter: blur(2px);
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
@@ -33,7 +32,7 @@ const Shadow = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']} !important;
   background: black;
   opacity: 0.5;

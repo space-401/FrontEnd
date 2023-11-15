@@ -3,29 +3,25 @@ import PostInfoBack from '@components/common/FlipCard/Back/PostInfoBack';
 import SpaceInfoBack from './Back/SpaceInfoBack';
 import { SpacePostType, OneSpaceType } from '@/types/space.type';
 
-export type FlipCardSize = 'small' | 'medium' | 'big';
-
 export type PostInfoBackPropsType = {
   item: SpacePostType;
-  size: FlipCardSize;
 };
 
 export type SpaceInfoBackPropsType = {
   item: OneSpaceType;
-  size: FlipCardSize;
 };
 
 export type FlipType = {
   /*해당 이미지의 주소를 넣어주세요*/
   imgUrl: string;
   onClick: () => void;
-  borderRadius?: string;
+  isBig?: boolean;
 };
 
 const FlipCard = (
   props: FlipType & (PostInfoBackPropsType | SpaceInfoBackPropsType)
 ) => {
-  const { imgUrl, onClick, size, item, borderRadius } = props;
+  const { imgUrl, onClick, isBig = false, item } = props;
 
   function isPostInfo(
     item: SpacePostType | OneSpaceType
@@ -35,13 +31,13 @@ const FlipCard = (
 
   return (
     <>
-      <S.Flip size={size} onClick={onClick}>
-        <S.Card img={imgUrl} borderRadius={borderRadius} />
-        <S.Hover img={imgUrl}>
+      <S.Flip isBig={isBig} onClick={onClick}>
+        <S.Card img={imgUrl} isBig={isBig} />
+        <S.Hover img={imgUrl} isBig={isBig}>
           {isPostInfo(item) ? (
-            <PostInfoBack size={size} item={item} />
+            <PostInfoBack isBig={isBig} item={item} />
           ) : (
-            <SpaceInfoBack size={size} item={item} />
+            <SpaceInfoBack isBig={isBig} item={item} />
           )}
         </S.Hover>
       </S.Flip>

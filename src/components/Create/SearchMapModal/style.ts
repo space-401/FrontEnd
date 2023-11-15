@@ -1,10 +1,9 @@
 import styled from 'styled-components';
+import { modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${modalBackGround};
   display: grid;
   grid-template-columns: 1fr 2fr;
   min-width: 1200px;
@@ -14,6 +13,15 @@ const Wrapper = styled.div`
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    min-width: 300px;
+    width: 95%;
+
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const LeftContainer = styled.div`
@@ -21,9 +29,18 @@ const LeftContainer = styled.div`
   position: relative;
   height: 100%;
   overflow: hidden;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: 350px;
+  }
 `;
 
-const RightContainer = styled.div``;
+const RightContainer = styled.div`
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    margin-top: 10px;
+    height: 450px;
+  }
+`;
 
 const SearchBox = styled.form`
   width: calc(100% - 20px);
@@ -57,6 +74,16 @@ const SearchList = styled.ul`
   flex-direction: column;
   height: 100%;
   gap: 10px;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    padding-bottom: 50px;
+  }
 `;
 
 const OneList = styled.li<{ select: boolean }>`
@@ -69,6 +96,11 @@ const OneList = styled.li<{ select: boolean }>`
   display: flex;
   justify-content: space-between;
   background: ${({ theme }) => theme.COLOR['gray-5']};
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    height: 110px;
+    padding: 4px;
+  }
 `;
 
 const Category = styled.div`
@@ -99,6 +131,19 @@ const SelectButton = styled.div`
   border-radius: 10px;
   background: ${({ theme }) => theme.COLOR.skyblue};
 `;
+
+const PaginationSticky = styled.div`
+  position: sticky;
+  bottom: 0;
+  background: ${({ theme }) => theme.COLOR['gray-6']};
+`;
+
+const StickyInner = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 export const S = {
   Wrapper,
   LeftContainer,
@@ -112,6 +157,8 @@ export const S = {
   LeftInfo,
   RightButton,
   SelectButton,
+  PaginationSticky,
+  StickyInner,
 };
 
 const PaginationBox = styled.div`
@@ -130,7 +177,7 @@ const Button = styled.button<{
   isHidden?: boolean;
   select?: boolean;
 }>`
-  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
   position: relative;
   width: ${({ width }) => (width ? width : '')}px;
   height: 20px;

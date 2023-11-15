@@ -1,10 +1,9 @@
+import { modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
 
 const Container = styled.div<{ width?: number }>`
+  ${modalBackGround};
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: inline-flex;
   width: ${({ width }) => (width ? width : 348)}px;
   padding: 24px;

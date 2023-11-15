@@ -1,3 +1,4 @@
+import { flexCenter } from '@/styles/common';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -11,13 +12,13 @@ const Wrapper = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
     flex-direction: column;
-    display: flex;
   }
 `;
 const TitleSection = styled.div`
   padding-top: 2rem;
-  width: 50%;
+  width: 956px;
   div {
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
     color: ${({ theme }) => theme.COLOR.white};
@@ -29,21 +30,25 @@ const TitleSection = styled.div`
   }
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    flex-direction: column;
+  }
 `;
 
 const Form = styled.form`
-  width: 50%;
+  width: 80%;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
+  grid-template-columns: 1fr 2fr;
   grid-template-rows: 60px 60px 60px;
   grid-gap: 32px;
   grid-template-areas: 'title1 input1' 'title2 input2' 'button button';
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
     flex-direction: column;
-    display: flex;
   }
 `;
 
@@ -68,6 +73,14 @@ const TitleContainer = styled.div<gridRowNum>`
 const InputContainer = styled.div<gridRowNum>`
   grid-area: ${({ number }) => `input${number}`};
   display: flex;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    width: 400px;
+  }
+  @media ${({ theme }) => theme.DEVICE.mobile} {
+    ${flexCenter};
+    width: 200px;
+  }
 `;
 
 const ButtonContainer = styled.div`

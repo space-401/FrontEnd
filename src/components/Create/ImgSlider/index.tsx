@@ -6,10 +6,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import '@components/Create/ImgSlider/style.css';
+import { v4 as uuid } from 'uuid';
 
 type SliderProps = {
   images: string[];
-  onClickImgEditModal: any;
+  onClickImgEditModal: () => void;
 };
 
 const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
@@ -47,13 +48,15 @@ const ImgSlider = ({ images, onClickImgEditModal }: SliderProps) => {
       >
         {images.map((img) => {
           return (
-            <SwiperSlide key={Math.floor(Math.random() * 1000)}>
+            <SwiperSlide key={uuid()} style={{ border: '10px' }}>
               <img
                 src={img}
+                alt={img}
                 style={{
                   width: '348px',
                   height: '348px',
                   backgroundPosition: 'center',
+                  borderRadius: '20px',
                 }}
                 onClick={onClickImgEditModal}
               />

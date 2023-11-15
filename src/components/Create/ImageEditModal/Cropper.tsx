@@ -14,8 +14,6 @@ const ImageCropper = ({ image, myRef, width }: PropsType) => {
     <div
       style={{
         position: 'relative',
-        padding: '10px',
-        left: '15px',
       }}
     >
       <Cropper

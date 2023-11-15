@@ -1,7 +1,21 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { PATH } from '@constants/path';
+import { useEffect } from 'react';
+import { useUserStore } from '@store/user';
 
-const PrivateRoute = () => {
-  // 로그인된 유저만 들어오게하기
+type PrivateRouteType = {
+  isAllowed: boolean;
+};
+
+const PrivateRoute = ({ isAllowed }: PrivateRouteType) => {
+  const navigate = useNavigate();
+  const isLogin = useUserStore((e) => e.accessToken);
+  useEffect(() => {
+    if (!isAllowed && !isLogin) {
+      navigate(PATH.LOGIN);
+    }
+  }, [isAllowed, isLogin, navigate]);
+
   return <Outlet />;
 };
 

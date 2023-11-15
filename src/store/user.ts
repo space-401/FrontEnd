@@ -1,21 +1,28 @@
+import { SocialType } from '@type/user.type';
 import { create } from 'zustand';
 
 type userType = {
-  user: {
-    id: number;
-    nickname: string;
-    token_key: string;
-    img: string;
-  } | null;
-  Logout: () => void;
+  isLogin: boolean;
+  accessToken: string;
+  socialType: SocialType;
+  refreshToken: string;
+  userEmail: string;
+  setAccessToken: (token: string) => void;
+  setRefreshToken: (token: string) => void;
+  setUserEmail: (token: string) => void;
+  setSocialType: (type: SocialType) => void;
+  setIsLogin: (state: boolean) => void;
 };
 
 export const useUserStore = create<userType>((setState) => ({
-  user: {
-    id: 222123,
-    img: 'https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/4464098951/B.jpg?995000000',
-    token_key: 'undefined_token',
-    nickname: '칸탐로봇',
-  },
-  Logout: () => setState(() => ({ user: null })),
+  isLogin: false,
+  accessToken: 'accesstoken1',
+  refreshToken: 'refreshtoken1',
+  userEmail: 'user1@kakao.com',
+  socialType: 'kakao',
+  setIsLogin: (state: boolean) => setState({ isLogin: state }),
+  setAccessToken: (accessToken: string) => setState({ accessToken }),
+  setRefreshToken: (refreshToken: string) => setState({ refreshToken }),
+  setUserEmail: (userEmail: string) => setState({ userEmail }),
+  setSocialType: (socialType: SocialType) => setState({ socialType }),
 }));
