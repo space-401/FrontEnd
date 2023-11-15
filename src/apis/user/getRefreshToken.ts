@@ -1,12 +1,28 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
+import tokenStorage from '@/utils/tokenStorage';
+import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
+import axios from 'axios';
 
 export type TokenData = {
-  accessToken: string;
+  newRefreshToken: string;
 };
 
 export const getRefreshToken = async () => {
-  const { data } = await axiosInstance.post<TokenData>(END_POINTS.TOKEN);
+  try {
+    const response = await axios.get<TokenData>(END_POINTS.TOKEN, {
+      headers: {
+        Authorization: `Bearer ${tokenStorage.getRefreshToken()}`,
+      },
+    });
 
-  return data;
+    if (response.status === HTTP_STATUS_CODE.SUCCESS) {
+      return {
+        newRefreshToken: response.data.newRefreshToken,
+      };
+    } else {
+      throw new Error('리프레시 토큰 발급 실패');
+    }
+  } catch (error) {
+    console.error('리프레시 토큰 발급 실패');
+    throw error;
+  }
 };
