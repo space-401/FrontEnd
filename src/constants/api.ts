@@ -5,11 +5,11 @@ export const NETWORK = {
   TIMEOUT: 10000,
 };
 
-export const AXIOS_BASE_URL = '/';
+export const AXIOS_BASE_URL = Product ? import.meta.env.VITE_BACK_URL : '/';
 
 export const END_POINTS = {
   USER: '/user',
-  TOKEN: '/refreshToken',
+  TOKEN: '/user/refreshToken',
   MY_POST_LIST: `/mypost`,
   USERINFO: '/mypage',
   MY_COMMENT_LIST: `/mycomment`,
