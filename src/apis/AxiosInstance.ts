@@ -21,3 +21,28 @@ axiosInstance.interceptors.response.use(
 );
 
 axiosInstance.interceptors.response.use((response) => response, handleAPIError);
+
+export const formDataAxiosInstance = axios.create({
+  baseURL: AXIOS_BASE_URL,
+  timeout: NETWORK.TIMEOUT,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+  withCredentials: true,
+  useAuth: true,
+});
+
+formDataAxiosInstance.interceptors.request.use(
+  checkAndSetToken,
+  handleAPIError
+);
+
+formDataAxiosInstance.interceptors.response.use(
+  (response) => response,
+  handleTokenError
+);
+
+formDataAxiosInstance.interceptors.response.use(
+  (response) => response,
+  handleAPIError
+);
