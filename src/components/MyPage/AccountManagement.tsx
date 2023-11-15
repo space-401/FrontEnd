@@ -8,7 +8,7 @@ import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
 import { useDeleteKkiriUserMutation } from '@hooks/api/user/useDeleteKkiriUserMutation';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
-// import { useLogOutMutation } from '@hooks/api/user/useLogOutMutation';
+import { useLogOutMutation } from '@hooks/api/user/useLogOutMutation';
 import { toastColorMessage } from '@utils/toastMessage';
 
 const AccountManagement = () => {
@@ -34,7 +34,7 @@ const AccountManagement = () => {
   const confirmModalOpen = useConfirmModalOpen();
 
   const { deleteKkiriUserAction } = useDeleteKkiriUserMutation();
-  // const { logoutAction } = useLogOutMutation();
+  const { logoutAction } = useLogOutMutation();
 
   const kkiriOutHandler = () => {
     return confirmModalOpen({
@@ -53,8 +53,7 @@ const AccountManagement = () => {
   };
 
   const logoutHandler = () => {
-    // logoutAction();
-    navigate(PATH.HOME);
+    logoutAction();
     toastColorMessage('로그아웃 되었습니다.');
   };
 

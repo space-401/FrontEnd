@@ -32,7 +32,6 @@ export type CommentType = {
   };
   replyMember?: {
     id: string;
-    memberKey: string;
     nick: string;
   };
   content: string;

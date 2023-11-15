@@ -1,6 +1,6 @@
-import {Box, Modal} from '@mui/material';
+import { Box, Modal } from '@mui/material';
 import S from '@/components/Create/SelectIconModal/style';
-import {v4} from 'uuid';
+import { v4 as uuid } from 'uuid';
 //한 옵션 타입
 type OneOptionType = {
   title: string;
@@ -39,7 +39,7 @@ const SelectIconModal = ({
           {selectOptionArr.map((option) => {
             return (
               <S.Content
-                key={v4()}
+                key={uuid()}
                 fontSize={18}
                 lightgrey={false}
                 onClick={option.asyncFunc}
