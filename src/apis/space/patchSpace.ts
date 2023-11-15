@@ -1,14 +1,17 @@
-// 수정 완료
-
-import { formDataAxiosInstance } from '@apis/AxiosInstance';
+import { axiosInstance } from '@apis/AxiosInstance';
 import { ApiResponseType } from '@type/response.type';
 import { END_POINTS } from '@constants/api';
 
 export const patchSpace = async (spaceInfo: FormData) => {
-  const { data } = await formDataAxiosInstance.post<ApiResponseType>(
+  const { data } = await axiosInstance.post<ApiResponseType>(
     END_POINTS.SPACE,
     {
       ...spaceInfo,
+    },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     }
   );
   return data;

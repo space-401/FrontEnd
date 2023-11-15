@@ -1,4 +1,4 @@
-import { formDataAxiosInstance } from '@apis/AxiosInstance';
+import { axiosInstance } from '@apis/AxiosInstance';
 import { END_POINTS } from '@constants/api';
 import { ApiResponseType } from '@/types/response.type';
 
@@ -10,9 +10,14 @@ export type SpaceUserPropsType = {
   userNickName?: string;
 };
 export const patchSpaceUser = async (patchInfo: SpaceUserPropsType) => {
-  const { data } = await formDataAxiosInstance.patch<ApiResponseType>(
+  const { data } = await axiosInstance.patch<ApiResponseType>(
     END_POINTS.SPACE_USER,
-    { ...patchInfo }
+    { ...patchInfo },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
   );
 
   return data;
