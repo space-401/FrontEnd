@@ -14,6 +14,7 @@ export const patchSpaceUser = async (patchInfo: SpaceUserPropsType) => {
     END_POINTS.SPACE_USER,
     { ...patchInfo }
   );
+  console.log('우저 정보 수정', data);
 
   return data;
 };

@@ -17,7 +17,6 @@ import SelectIconModal from '@/components/Create/SelectIconModal';
 import BasicIconModal from '@/components/Create/BasicIconModal';
 import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
 import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
-import { CreateSpaceType } from '@/types/space.type';
 import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
@@ -25,18 +24,14 @@ import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
 import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
 import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
-import tokenStorage from '@utils/tokenStorage';
 
 const CreateSpace = () => {
-  useEffect(() => {
-    console.log('storgae', tokenStorage.getAccessToken());
-  }, []);
   const params = useParams();
   const spaceId = params.spaceId;
   const navigate = useNavigate();
 
-  const { postSpaceAction } = useSpaceCreateMutation();
-  const { updateSpaceAction } = useSpaceUpdateMutation();
+  const { postSpaceAction, isPostSuccess } = useSpaceCreateMutation();
+  const { updateSpaceAction, isUpdateSuccess } = useSpaceUpdateMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
 
   //이미지 저장하는 곳
@@ -160,30 +155,31 @@ const CreateSpace = () => {
   };
 
   //스페이스 생성하기
-  const onCreateSpace = () => {
-    const newData: CreateSpaceType = {
-      spaceTitle: title,
-      spaceDescription: content,
-      imgUrl: imageArr.convertedImage && null,
-      defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
-      spacePw: Number(pswd),
-    };
-    postSpaceAction(newData);
-    confirmModalOpen(false);
-  };
-
-  //스페이스 수정하기
-  const onUpdateSpace = () => {
-    const newData: CreateSpaceType = {
-      spaceTitle: title,
-      spaceDescription: content,
-      imgUrl: imageArr.convertedImage && null,
-      defaultImg: isBasicIcon[0] ? isBasicIcon[1] : null,
-      spacePw: Number(pswd),
-    };
-    updateSpaceAction({ ...newData, spaceId: Number(spaceId!) });
-    console.log(newData);
-    confirmModalOpen(true);
+  const onSubmitSpace = () => {
+    const formData = new FormData();
+    formData.append('spaceTitle', title);
+    formData.append('spaceDescription', content);
+    formData.append('spacePw', pswd);
+    //스페이스 수정일 때
+    if (spaceId) {
+      formData.append('spaceId', spaceId!);
+    }
+    //기본 아이콘을 사용할 때
+    if (isBasicIcon[0]) {
+      formData.append('defaultImg', String(isBasicIcon[1]));
+    }
+    //이미지를 사용할 때
+    if (imageArr.convertedImage) {
+      formData.append('imgUrl', imageArr.convertedImage);
+    }
+    const data = spaceId
+      ? postSpaceAction(formData)
+      : updateSpaceAction(formData);
+    // const data = postSpaceAction(formData);
+    console.log(data);
+    if (isUpdateSuccess || isPostSuccess) {
+      confirmModalOpen(true);
+    }
   };
 
   const confirmOpen = useConfirmModalOpen();
@@ -420,7 +416,7 @@ const CreateSpace = () => {
           {spaceId ? (
             <BasicButton
               children={'스페이스 수정하기'}
-              onClick={onUpdateSpace}
+              onClick={onSubmitSpace}
               width={160}
               fontSize={16}
               height={47}
@@ -433,7 +429,7 @@ const CreateSpace = () => {
           ) : (
             <BasicButton
               children={'스페이스 생성하기'}
-              onClick={onCreateSpace}
+              onClick={onSubmitSpace}
               width={160}
               fontSize={16}
               height={47}
