@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NETWORK } from '@constants/api';
+import { AXIOS_BACK_URL, NETWORK } from '@constants/api';
 import {
   checkAndSetToken,
   handleAPIError,
@@ -8,7 +8,7 @@ import {
 import { getCookie } from '@utils/cookie';
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BACK_URL,
+  baseURL: AXIOS_BACK_URL,
   timeout: NETWORK.TIMEOUT,
   withCredentials: true,
   useAuth: true,

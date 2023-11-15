@@ -13,9 +13,13 @@ import {
 import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from './components/common/Error/errorBoundary';
 import ErrorPage from './components/common/Error';
+import { DEV } from '@constants/api';
+import { worker } from '@mocks/browser';
 
 function App() {
-  // worker.start();
+  if (DEV) {
+    worker.start();
+  }
 
   return (
     <QueryErrorResetBoundary>

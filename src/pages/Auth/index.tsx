@@ -1,6 +1,7 @@
 import Loading from '@pages/Loading';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { AXIOS_BACK_URL } from '@constants/api';
 
 const Auth = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ const Auth = () => {
       if (code && state) {
         try {
           const response = await axios.get(
-            `http://52.79.57.246:8081/user/auth/kakao?code=${code}&state=${state}`
+            `${AXIOS_BACK_URL}/user/auth/kakao?code=${code}&state=${state}`
           );
           console.log('data', response.data);
         } catch (error) {
