@@ -9,7 +9,7 @@ import {
   myPostList,
 } from '@mocks/data/user.mock';
 import { successResponse } from '@mocks/data/response.mock';
-import {PATH} from "@constants/path";
+import { PATH } from '@constants/path';
 
 export const userHandlers: RestHandler[] = [
   /**
