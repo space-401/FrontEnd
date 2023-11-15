@@ -196,11 +196,11 @@ const CreatePost = () => {
 
     if (postId) {
       //수정할 때
-      formData.append('postDTO', updatePostDTO);
+      formData.append('postDTO', JSON.stringify(updatePostDTO));
       updatePostAction(formData);
     } else {
       //처음 생성할 때
-      formData.append('postDTO', createPostDTO);
+      formData.append('postDTO', JSON.stringify(createPostDTO));
       createPostAction(formData);
     }
   };

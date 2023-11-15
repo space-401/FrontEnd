@@ -8,5 +8,5 @@ export const usePostUpdateMutation = () => {
     useMutation<ApiResponseType, AxiosError, FormData>((updatePostInfo) =>
       patchPost(updatePostInfo)
     );
-  return { updatePostAction };
+  return { updatePostAction, updatePostSuccess };
 };

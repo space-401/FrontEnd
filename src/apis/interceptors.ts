@@ -3,7 +3,7 @@ import { PATH } from '@constants/path';
 import { HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
-import { getRefreshToken } from '@apis/user/getRefreshToken';
+import { getNewAccessToken } from '@apis/user/getNewAccessToken';
 import tokenStorage from '@utils/tokenStorage';
 
 export interface ErrorResponseData {
@@ -39,9 +39,9 @@ export const handleTokenError = async (
   const { data, status } = error.response;
 
   if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
-    const { newRefreshToken } = await getRefreshToken();
-    originalRequest.headers.Authorization = `Bearer ${newRefreshToken}`;
-    tokenStorage.setAccessToken(newRefreshToken, 30);
+    const newAccessToken = await getNewAccessToken();
+    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+    tokenStorage.setAccessToken(newAccessToken, 30);
 
     return axiosInstance(originalRequest);
   }
@@ -61,9 +61,10 @@ export const handleTokenError = async (
       //리프레싱 아직 안됐을때
       if (!isRefreshing) {
         isRefreshing = true;
-        const { newRefreshToken } = await getRefreshToken();
-        originalRequest.headers.Authorization = `Bearer ${newRefreshToken}`;
-        tokenStorage.setAccessToken(newRefreshToken, 30);
+        tokenStorage.removeAccessToken();
+        const newAccessToken = await getNewAccessToken();
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        tokenStorage.setAccessToken(newAccessToken, 30);
 
         return axiosInstance(originalRequest);
       }

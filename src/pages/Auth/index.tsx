@@ -1,11 +1,11 @@
 import Loading from '@pages/Loading';
-import tokenStorage from '@utils/tokenStorage';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PATH } from '@constants/path';
 import { SocialType } from '@type/user.type';
 import { useUserStore } from '@store/user';
 import { useLoginQuery } from '@hooks/api/user/useLoginQuery';
 import { useEffect } from 'react';
+import tokenStorage from '@utils/tokenStorage';
+import { PATH } from '@constants/path';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -24,10 +24,11 @@ const Auth = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const { accessToken, refreshToken } = LoginResponse!.user;
+      const { accessToken, refreshToken } = LoginResponse;
       tokenStorage.setAccessToken(accessToken, 30);
       tokenStorage.setRefreshToken(refreshToken, 60 * 24 * 14);
-      setUserInfo(LoginResponse!.user);
+      setUserInfo(LoginResponse);
+      console.log('LoginResponse', LoginResponse);
       navigate(PATH.SPACE);
     }
   }, [isSuccess]);

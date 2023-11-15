@@ -176,10 +176,10 @@ const CreateSpace = () => {
     }
 
     if (spaceId) {
-      formData.append('spaceDTO', updateSpaceDTO);
+      formData.append('spaceDTO', JSON.stringify(updateSpaceDTO));
       updateSpaceAction(formData);
     } else {
-      formData.append('spaceDTO', createSpaceDTO);
+      formData.append('spaceDTO', JSON.stringify(createSpaceDTO));
       postSpaceAction(formData);
     }
 
@@ -203,7 +203,6 @@ const CreateSpace = () => {
       });
     }
     setIsBasicIcon([true, index]);
-    console.log(isBasicIcon);
   };
 
   //확인 모달
