@@ -12,7 +12,7 @@ export type OneSpaceType = {
   userList: UserType[];
 };
 
-export type SpaceInfo = {
+export type SpaceInfoType = {
   spaceTitle: string;
   spaceDescription: string;
   imgUrl: string;
@@ -31,7 +31,6 @@ export type AlarmType = {
   create_at: string;
   alarmMessage: string;
 };
-//포스트 타입
 
 export type SpacePostType = {
   postId: number;
@@ -52,33 +51,6 @@ export type SelectSpacePropType = {
   userList: UserType[];
 };
 
-export type CommentType = {
-  id: number;
-  // 참조하고 있는 아이디가 있는지 없으면 depth 0 댓글
-  refId: number;
-  // 댓글 작성자의 정보
-  writer: {
-    id: string;
-    // 토큰키 또는 소켓 아이디
-    memberKey: string;
-    nick: string;
-    url: string;
-  };
-  replyMember?: {
-    id: string;
-    // 토큰키 또는 소켓 아이디
-    memberKey: string;
-    nick: string;
-  };
-  content: string;
-  createDate: string;
-  updateDate: string;
-  // 이 댓글은 참조중인가?
-  isRef: boolean;
-  // 이 댓글의 작성자인가?
-  isMyComment: boolean;
-};
-
 export type MyCommentType = {
   postId: number;
   postTitle: string;
@@ -94,6 +66,21 @@ export type MyCommentType = {
 export type CreateSpaceType = {
   spaceTitle: string;
   spaceDescription: string;
-  imgUrl: File;
+  imgUrl: File | null;
+  defaultImg: number | null;
   spacePw: number;
+};
+
+export type UpdateSpaceType = CreateSpaceType & {
+  spaceId: number;
+  spaceTitle: string;
+  spaceDescription: string;
+  imgUrl: File | null;
+  defaultImg: number | null;
+  spacePw: number;
+};
+
+export type SpaceResponseType = {
+  spaceId: number;
+  message: string;
 };

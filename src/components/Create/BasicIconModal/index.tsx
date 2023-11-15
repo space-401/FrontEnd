@@ -3,21 +3,21 @@ import S from '@/components/Create/BasicIconModal/style';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
 import BasicButton from '@/components/common/BasicButton';
 import BasicIcon from './BasicIcon';
-import React from 'react';
+import { v4 } from 'uuid';
 
 type BasicIconModalPropsType = {
   isOpen: boolean;
   modalClose: () => void;
-  setSelectIconIdx: React.Dispatch<number>;
-  selectIconIdx: number;
+  isBasicIcon: [boolean, number?];
+  onSelectBasicIcon: (index: number) => void;
 };
 
 //프로필 기본 이미지 선택
 const BasicIconModal = ({
   isOpen,
   modalClose,
-  setSelectIconIdx,
-  selectIconIdx,
+  onSelectBasicIcon,
+  isBasicIcon,
 }: BasicIconModalPropsType) => {
   const BasicIconArr = BasicIcon();
 
@@ -43,10 +43,11 @@ const BasicIconModal = ({
             {BasicIconArr.map((icon, index) => {
               return (
                 <S.IconBox
+                  key={v4()}
                   backImg={icon}
-                  isSelected={selectIconIdx == index}
+                  isSelected={isBasicIcon[1] == index}
                   onClick={() => {
-                    setSelectIconIdx(index);
+                    onSelectBasicIcon(index);
                   }}
                 />
               );

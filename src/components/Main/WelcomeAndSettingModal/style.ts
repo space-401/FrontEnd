@@ -1,17 +1,14 @@
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
+  ${modalBackGround};
   position: absolute;
-  top: 50%;
-  left: 50%;
   width: 370px;
   height: 645px;
-  transform: translate(-50%, -50%);
   background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: Pretendard;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 
@@ -24,7 +21,7 @@ const SectionWrapper = styled.div<{ gap: number }>`
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
 `;
 const ButtonContainer = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   position: absolute;
   bottom: 25px;
   height: 104px;
@@ -223,7 +220,7 @@ const ImgBox = styled.div`
 
 const ImgButton = styled.div`
   padding-top: 10px;
-  ${flexCenter}
+  ${flexCenter};
   cursor: pointer;
   color: ${({ theme }) => theme.COLOR.skyblue};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
@@ -234,7 +231,7 @@ const ImgButton = styled.div`
 const Label = styled.label<{ isAlert: boolean }>`
   color: ${({ theme, isAlert }) =>
     isAlert ? theme.COLOR.orange : theme.COLOR.white};
-  height: 0px;
+  height: 0;
   font-size: 14px;
 `;
 

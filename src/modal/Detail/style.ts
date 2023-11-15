@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
+import { modalBackGround, omitText } from '@styles/common';
 import { theme } from '@styles/theme/theme';
 
 const Container = styled.div`
+  ${modalBackGround};
   position: absolute;
   display: flex;
   height: 100vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 const RightWrapper = styled.div`
@@ -108,7 +106,7 @@ const UserNameList = styled.div`
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
-  ${omitText}
+  ${omitText};
 `;
 
 const MapInfo = styled.div`
@@ -129,6 +127,7 @@ const MapTitle = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  cursor: pointer;
 `;
 
 const CommentInfo = styled.div`
@@ -192,6 +191,7 @@ const MapBox = styled.div<{ isOpen: boolean }>`
 `;
 
 const CommentTitle = styled.div`
+  cursor: pointer;
   display: flex;
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
@@ -210,50 +210,46 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
   position: fixed;
   width: 100%;
   height: 100%;
-  display: ${({ isOpen }) => (isOpen ? 'none' : 'block')};
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
-  cursor: default;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
   content: ' ';
   background: transparent;
 `;
 
-const MenuGroup = styled.div`
-  top: 16px;
-  right: -15px;
+const MenuGroup = styled.div<{ isOpen: boolean; width?: number; top?: number }>`
+  right: -70px;
+  top: ${({ top }) => (top ? top : 20)}px;
   position: absolute;
-  width: 114px;
-  display: inline-flex;
+  width: ${({ width }) => (width ? width : 102)}px;
+  display: ${({ isOpen }) => (isOpen ? 'inline-flex' : 'none')};
   padding: 8px;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.COLOR['gray-5']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
+  background: ${({ theme }) => theme.COLOR['gray-4']};
   box-shadow: ${({ theme }) => theme.SHADOW['shadow-sm']};
 `;
-const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
-  width: 100%;
-  overflow: hidden;
-`;
-
-const MenuButton = styled.div`
+const MenuButton = styled.div<{ padding?: string; fontSize?: number }>`
   position: relative;
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-5']};
   cursor: pointer;
   display: flex;
-  padding: 4px 16px;
+  padding: ${({ padding }) => (padding ? padding : '4px 16px')};
   justify-content: center;
   align-items: center;
   gap: 8px;
 
   color: ${({ theme }) => theme.COLOR.white};
   font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
-  font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
+  font-size: ${({ theme, fontSize }) =>
+    fontSize ? fontSize + 'px' : theme.TEXT_SIZE['text-14']};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 
   border-radius: 5px;
 
@@ -262,6 +258,10 @@ const MenuButton = styled.div`
   }
 
   transition: background 0.2s;
+`;
+const CommentBox = styled.div<{ isOpen: boolean; isReply: boolean }>`
+  width: 100%;
+  overflow: hidden;
 `;
 
 const CommentInput = styled.div`
@@ -323,6 +323,11 @@ const ReplyComment = styled.button`
   line-height: 140%; /* 22.4px */
 `;
 
+const CommentDeleteIconBox = styled.div`
+  cursor: pointer;
+  display: inline;
+`;
+
 const S = {
   MapBox,
   RightWrapper,
@@ -351,6 +356,7 @@ const S = {
   ImgBox,
   ReplyComment,
   LikeIconBox,
+  CommentDeleteIconBox,
 };
 
 export default S;

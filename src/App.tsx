@@ -1,21 +1,40 @@
 import { RouterProvider } from 'react-router-dom';
 import router from '@router/Router';
-import KkiriProvider from './utils/KkiriProvider';
 import '@styles/fonts/font.css';
-import { worker } from '@mocks/browser';
-import { motion, useScroll } from 'framer-motion';
+import { queryClient } from '@hooks/api/queryClient';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import GlobalStyles from '@styles/global';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@styles/theme/theme';
+import {
+  QueryClientProvider,
+  QueryErrorResetBoundary,
+} from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
+import ErrorBoundary from './components/common/Error/errorBoundary';
+import ErrorPage from './components/common/Error';
 
 function App() {
-  const { scrollYProgress } = useScroll();
-  worker.start();
+  // worker.start();
+
   return (
-    <KkiriProvider>
-      <motion.div
-        className="progress-bar"
-        style={{ scaleX: scrollYProgress }}
-      />
-      <RouterProvider router={router} />
-    </KkiriProvider>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary fallback={ErrorPage} onReset={reset}>
+          <QueryClientProvider client={queryClient}>
+            <GoogleOAuthProvider
+              clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+            >
+              <GlobalStyles />
+              <ThemeProvider theme={theme}>
+                <Toaster position={'top-center'} />
+                <RouterProvider router={router} />
+              </ThemeProvider>
+            </GoogleOAuthProvider>
+          </QueryClientProvider>
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
   );
 }
 

@@ -4,15 +4,16 @@ import { getFormatDate } from '@utils/formatter';
 import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
 import { PostInfoBackPropsType } from '@type/post.type';
+import { v4 as uuid } from 'uuid';
 
 const PostInfoBack = (props: PostInfoBackPropsType) => {
-  const { item, size } = props;
+  const { item, isBig } = props;
 
   const { placeTitle, postTitle, selectedTags, postUpdatedAt, usersList } =
     item;
 
   return (
-    <S.Wrapper size={size}>
+    <S.Wrapper isBig={isBig}>
       <S.Shadow />
       <S.Container className={'container'} info="post">
         <div>
@@ -24,7 +25,7 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             {selectedTags.map((place) => (
               <Chip
                 className={'chip'}
-                key={place.tagId}
+                key={uuid()}
                 label={'#' + place.tagTitle}
                 variant="outlined"
               />
@@ -37,8 +38,8 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             <span className={'place-span'}>{placeTitle}</span>
           </S.PlaceTitle>
           <Avatars
-            max={size === 'big' ? 4 : 5}
-            size={size === 'big' ? 29 : 28}
+            max={isBig ? 4 : 5}
+            size={isBig ? 29 : 28}
             users={usersList}
           />
         </S.InfoBottom>

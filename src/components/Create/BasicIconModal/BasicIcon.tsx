@@ -1,18 +1,11 @@
-import BasicIcon1 from '@/assets/mock/space1.png';
-import BasicIcon2 from '@/assets/mock/space2.png';
-import BasicIcon3 from '@/assets/mock/space3.png';
-import BasicIcon4 from '@/assets/mock/space4.png';
-import BasicIcon5 from '@/assets/mock/space5.png';
+import spaceOne from '@/assets/svg/defaultImg/img1.svg';
+import spaceTwo from '@/assets/svg/defaultImg/img2.svg';
+import spaceThree from '@/assets/svg/defaultImg/img3.svg';
+import spaceFour from '@/assets/svg/defaultImg/img4.svg';
+import spaceFive from '@/assets/svg/defaultImg/img5.svg';
 
 const BasicIcon = () => {
-  const BasicIconArr = [
-    BasicIcon1,
-    BasicIcon2,
-    BasicIcon3,
-    BasicIcon4,
-    BasicIcon5,
-  ];
-  return BasicIconArr;
+  return [spaceOne, spaceTwo, spaceThree, spaceFour, spaceFive];
 };
 
 export default BasicIcon;

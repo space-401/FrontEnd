@@ -9,10 +9,9 @@ const Wrapper = styled.div<{ width?: string }>`
   background-color: ${({ theme }) => theme.COLOR['black']};
   color: ${({ theme }) => theme.COLOR.white};
 
-  @media ${({ theme }) => theme.DEVICE.tablet} {
-    padding-top: 2rem;
-    ${flexCenter}
+  @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
     flex-direction: column;
+    ${flexCenter};
   }
 `;
 
@@ -35,7 +34,7 @@ const GridWrapper = styled.div`
   @media ${({ theme }) => theme.DEVICE.tablet} {
     padding-top: 3rem;
     flex-direction: column;
-    ${flexCenter}
+    ${flexCenter};
     margin-left: 0;
   }
 `;

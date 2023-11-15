@@ -1,95 +1,48 @@
-import { Modal, Box } from '@mui/material';
-import { S, M } from '@/components/Main/WelcomeAndSettingModal/style';
-import WelcomeModal from './WelcomeModal';
-import FirstSettingModal from './FirstSettingModal';
-import { useState } from 'react';
-import { ReactComponent as DeleteIcon } from '@assets/svg/whiteDeleteIcon.svg';
+import { S } from '@/components/Main/WelcomeAndSettingModal/style';
+import BasicBox from '@/components/common/BasicBox';
 import BasicButton from '@/components/common/BasicButton';
 import { ReactComponent as GoArrowIcon } from '@/assets/svg/goArrowIcon.svg';
+import { Box } from '@mui/material';
 
-type WelcomeAndSettingProps = {
-  isOpen: boolean;
-  modalClose: () => void;
-  SettingModalOpen: () => void;
+type WelcomeModalProps = {
   spaceTitle: string;
   imgUrl: string;
-  setImageArr: any;
-  imageArr: any;
-  isImageModalOpen: any;
-  setImageModalOpen: any;
+  onMoveSettingModal: () => void;
 };
 
 //프로필 기본 이미지 선택
-const WelcomeAndSettingModal = ({
-  isOpen,
+const WelcomeModal = ({
   spaceTitle,
   imgUrl,
-  setImageArr,
-  imageArr,
-  modalClose,
-  setImageModalOpen,
-}: WelcomeAndSettingProps) => {
-  const [modalNum, setModalNum] = useState(1);
-
-  //세팅 모달로 이동
-  const onMoveSettingModal = () => {
-    setModalNum(0);
-  };
-
-  //닉네임
-  const [nickName, setNickName] = useState('');
-
+  onMoveSettingModal,
+}: WelcomeModalProps) => {
   return (
-    <Modal
-      open={isOpen}
-      slotProps={{
-        backdrop: {
-          sx: {
-            backgroundColor: 'rgba(0,0,0,0.6)',
-          },
-        },
-      }}
-    >
-      <Box tabIndex={-1}>
-        <M.DeleteIconBox>
-          <DeleteIcon onClick={modalClose} />
-        </M.DeleteIconBox>
-        <S.Wrapper>
-          {modalNum ? (
-            <WelcomeModal spaceTitle={spaceTitle} imgUrl={imgUrl} />
-          ) : (
-            <FirstSettingModal
-              setImageModalOpen={setImageModalOpen}
-              setImageArr={setImageArr}
-              imageArr={imageArr}
-              nickName={nickName}
-              setNickName={setNickName}
-            />
-          )}
-
-          <S.ButtonContainer>
-            {modalNum ? (
-              <BasicButton width={212} height={48} onClick={onMoveSettingModal}>
-                <S.FlexContainer>
-                  <div>프로필 설정하기</div>
-                  <GoArrowIcon />
-                </S.FlexContainer>
-              </BasicButton>
-            ) : (
-              <BasicButton
-                width={212}
-                height={48}
-                onClick={() => {}}
-                disabled={!nickName.length}
-              >
-                <S.ButtonText>완료</S.ButtonText>
-              </BasicButton>
-            )}
-          </S.ButtonContainer>
-        </S.Wrapper>
-      </Box>
-    </Modal>
+    <Box tabIndex={-1}>
+      <S.Wrapper>
+        <S.SectionWrapper gap={32}>
+          <S.Text weight={600}>Welcome to Kkiri!</S.Text>
+          <S.DetailText>
+            새로운 스페이스를 만들었습니다!
+            <br />
+            친구들과 함께 추억을 공유해보세요.
+          </S.DetailText>
+          <BasicBox
+            width={240}
+            borderradius={15}
+            backgroundImage={imgUrl}
+            color="grey"
+          />
+          <S.Text weight={400}>'{spaceTitle}'</S.Text>
+          <BasicButton width={212} height={48} onClick={onMoveSettingModal}>
+            <S.FlexContainer>
+              <div>프로필 설정하기</div>
+              <GoArrowIcon />
+            </S.FlexContainer>
+          </BasicButton>
+        </S.SectionWrapper>
+      </S.Wrapper>
+    </Box>
   );
 };
 
-export default WelcomeAndSettingModal;
+export default WelcomeModal;
