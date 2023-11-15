@@ -1,6 +1,6 @@
-import { Modal, Box } from '@mui/material';
+import {Box, Modal} from '@mui/material';
 import S from '@/components/Create/SelectIconModal/style';
-
+import {v4} from 'uuid';
 //한 옵션 타입
 type OneOptionType = {
   title: string;
@@ -39,6 +39,7 @@ const SelectIconModal = ({
           {selectOptionArr.map((option) => {
             return (
               <S.Content
+                key={v4()}
                 fontSize={18}
                 lightgrey={false}
                 onClick={option.asyncFunc}
@@ -47,21 +48,6 @@ const SelectIconModal = ({
               </S.Content>
             );
           })}
-          {/* <S.Content
-            fontSize={18}
-            lightgrey={false}
-            onClick={onClickImgEditModal}
-          >
-            이미지 불러오기
-          </S.Content>
-
-          <S.Content
-            fontSize={18}
-            lightgrey={false}
-            onClick={onMoveBasicIconModal}
-          >
-            기본 아이콘 사용하기
-          </S.Content> */}
           <S.Content fontSize={18} lightgrey={true} onClick={modalClose}>
             닫기
           </S.Content>

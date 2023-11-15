@@ -43,7 +43,7 @@ class ErrorBoundary extends React.Component<Props, State> {
     const { hasError, info } = this.state;
     const { children, message, isRefresh } = this.props;
 
-    console.log(info);
+    console.log('에러바운더리', info);
     //인포의 분기점에 따라 다른 에러 바운더리 실행
     //메세지와 버튼을 다르게 지정하기
     if (hasError) {
