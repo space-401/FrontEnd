@@ -1,11 +1,18 @@
-import { axiosInstance } from '@apis/AxiosInstance';
 import { END_POINTS } from '@constants/api';
 import { ApiResponseType } from '@/types/response.type';
+import { axiosInstance } from '@apis/AxiosInstance';
 
 export const postPost = async (postInfo: FormData) => {
-  const { data } = await axiosInstance.post<ApiResponseType>(END_POINTS.POST, {
-    postInfo,
-  });
-  console.log(data);
-  return data;
+  const response = await axiosInstance.post<ApiResponseType>(
+    END_POINTS.POST,
+    {
+      ...postInfo,
+    },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
+  return response.data;
 };

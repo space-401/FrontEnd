@@ -4,10 +4,9 @@ import type { AxiosError } from 'axios';
 import { postPost } from '@/apis/post/postPost';
 
 export const usePostCreateMutation = () => {
-  const { mutate: createPostAction } = useMutation<
-    ApiResponseType,
-    AxiosError,
-    FormData
-  >((spacePostInfo) => postPost(spacePostInfo));
-  return { createPostAction };
+  const { mutate: createPostAction, isSuccess: postCreateSuccess } =
+    useMutation<ApiResponseType, AxiosError, FormData>((spacePostInfo) =>
+      postPost(spacePostInfo)
+    );
+  return { createPostAction, postCreateSuccess };
 };
