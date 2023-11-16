@@ -3,7 +3,7 @@ import { PATH } from '@constants/path';
 import { HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
-import { getRefreshToken } from '@apis/user/getRefreshToken';
+import { getNewAccessToken } from '@apis/user/getNewAccessToken';
 import tokenStorage from '@utils/tokenStorage';
 
 export interface ErrorResponseData {
@@ -11,8 +11,6 @@ export interface ErrorResponseData {
   message?: string;
   code?: number;
 }
-
-let isRefreshing = false;
 
 export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
   if (!config.useAuth || !config.headers || config.headers.Authorization)
@@ -38,36 +36,21 @@ export const handleTokenError = async (
 
   const { data, status } = error.response;
 
-  if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
-    const { newRefreshToken } = await getRefreshToken();
-    originalRequest.headers.Authorization = `Bearer ${newRefreshToken}`;
-    tokenStorage.setAccessToken(newRefreshToken, 30);
+  if (
+    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
+    data.message === '유효하지 않은 토큰입니다'
+  ) {
+    const newAccessToken = await getNewAccessToken();
+    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+    tokenStorage.setAccessToken(newAccessToken, 30);
 
     return axiosInstance(originalRequest);
   }
 
-  if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
+  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
     tokenStorage.removeAccessToken();
 
     throw new HTTPError(status, data.message, data.code);
-  }
-
-  /*추가 부분 - 인증 에러가 날 때*/
-  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
-    if (!tokenStorage.hasRefreshToken()) {
-      // 리프레시 토큰도 없다면 로그인으로 이동
-      window.location.href = PATH.LOGIN;
-    } else {
-      //리프레싱 아직 안됐을때
-      if (!isRefreshing) {
-        isRefreshing = true;
-        const { newRefreshToken } = await getRefreshToken();
-        originalRequest.headers.Authorization = `Bearer ${newRefreshToken}`;
-        tokenStorage.setAccessToken(newRefreshToken, 30);
-
-        return axiosInstance(originalRequest);
-      }
-    }
   }
 };
 export const handleAPIError = (error: AxiosError<ErrorResponseData>) => {

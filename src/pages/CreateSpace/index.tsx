@@ -157,31 +157,36 @@ const CreateSpace = () => {
   //스페이스 생성하기
   const onSubmitSpace = () => {
     const formData = new FormData();
-    formData.append('spaceTitle', title);
-    formData.append('spaceDescription', content);
-    formData.append('spacePw', pswd);
-    //스페이스 수정일 때
-    if (spaceId) {
-      formData.append('spaceId', spaceId!);
-    }
-    //기본 아이콘을 사용할 때
-    if (isBasicIcon[0]) {
-      formData.append('defaultImg', String(isBasicIcon[1]));
-    }
+
+    const createSpaceDTO = {
+      spaceName: title,
+      spaceDescription: content,
+      defaultImg: isBasicIcon[0] ? String(isBasicIcon[1]) : '',
+      spacePw: pswd,
+    };
+
+    const updateSpaceDTO = {
+      ...createSpaceDTO,
+      spaceId,
+    };
+
     //이미지를 사용할 때
     if (imageArr.convertedImage) {
       formData.append('imgUrl', imageArr.convertedImage);
     }
-    const data = spaceId
-      ? postSpaceAction(formData)
-      : updateSpaceAction(formData);
-    // const data = postSpaceAction(formData);
-    console.log(data);
+
+    if (spaceId) {
+      formData.append('spaceDTO', JSON.stringify(updateSpaceDTO));
+      updateSpaceAction(formData);
+    } else {
+      formData.append('spaceDTO', JSON.stringify(createSpaceDTO));
+      postSpaceAction(formData);
+    }
+
     if (isUpdateSuccess || isPostSuccess) {
       confirmModalOpen(true);
     }
   };
-
   const confirmOpen = useConfirmModalOpen();
 
   const onMoveSpacePage = () => {
@@ -198,7 +203,6 @@ const CreateSpace = () => {
       });
     }
     setIsBasicIcon([true, index]);
-    console.log(isBasicIcon);
   };
 
   //확인 모달

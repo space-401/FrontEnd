@@ -115,15 +115,15 @@ const UserSettingModal = ({
   };
 
   //제출 함수
-  const onSubmitInfo = async () => {
+  const onSubmitInfo = () => {
     const result = checkAlreadyNickname();
-
     const data = {
       spaceId,
       isAdmin: userInfo?.isAdmin,
       image: imageArr.convertedImage ?? null,
       userNickName: nickName,
     };
+
     if (result) {
       userUpdateAction(data);
       ModalClose();

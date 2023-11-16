@@ -3,10 +3,6 @@ import { axiosInstance } from '@apis/AxiosInstance';
 import { PATH } from '@constants/path';
 import { UserStateType } from '@store/user';
 
-export interface ILoginResponse {
-  user: UserStateType;
-}
-
 export interface ILoginProps {
   code: string;
   socialType: SocialType;
@@ -15,7 +11,7 @@ export interface ILoginProps {
 
 export const getLogin = async (props: ILoginProps) => {
   const { state = false, socialType, code } = props;
-  const response = await axiosInstance.get<ILoginResponse>(
+  const response = await axiosInstance.get<UserStateType>(
     PATH.SOCIAL_LOGIN(socialType),
     {
       params: {
