@@ -1,6 +1,11 @@
-import type {AccountDataType, BookMarkListType, MyCommentListType, MyPostListType,} from '@type/user.type';
-import {userList} from '@mocks/data/common';
-import {UserStateType} from '@store/user';
+import type {
+  AccountDataType,
+  BookMarkListType,
+  MyCommentListType,
+  MyPostListType,
+} from '@type/user.type';
+import { userList } from '@mocks/data/common';
+import { UserTokenType } from '@type/user.type';
 
 /**
  * 사용자 정보에 대한 목 데이터
@@ -263,13 +268,9 @@ export const myCommentListAndInfo: MyCommentListType = {
 /**
  * 로그인했을 때의 임시값
  */
-export const loginResponse: UserStateType = {
-  userId: 1,
-  socialType: 'kakao',
-  userStatus: 'user',
+export const loginResponse: UserTokenType = {
   accessToken:
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk5Njc0NzE0LCJleHAiOjE2OTk2NzY1MTR9.fxTrYSQ0EyinmPd50UIqBW6d-Y8epqkoKSOx9DOT-20Opad9j1p69GdavJge-siGJpFIOIKDqssq9G-1lSIfGg',
   refreshToken:
     'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk5MDEwMDcyLCJleHAiOjE3MDAyMTk2NzJ9.OEQpv4MKpn8IRPlNE1dj6_U_WCqV7JTTXrZGZoDzrL5sESdQz7Ap5FvUCV3b1WSC9h9-CQvI_8ryYKIdlrFIpQ',
-  userEmail: 'puzzler1888@gmail.com',
 };
