@@ -1,6 +1,6 @@
 import Loading from '@pages/Loading';
 import { useNavigate, useParams } from 'react-router-dom';
-import {SocialType, UserTokenType} from '@type/user.type';
+import { SocialType, UserTokenType } from '@type/user.type';
 import { useLoginQuery } from '@hooks/api/user/useLoginQuery';
 import { useEffect } from 'react';
 import tokenStorage from '@utils/tokenStorage';
