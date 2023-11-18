@@ -1,7 +1,6 @@
 import Loading from '@pages/Loading';
 import { useNavigate, useParams } from 'react-router-dom';
-import { SocialType } from '@type/user.type';
-import { useUserStore } from '@store/user';
+import { SocialType, UserTokenType } from '@type/user.type';
 import { useLoginQuery } from '@hooks/api/user/useLoginQuery';
 import { useEffect } from 'react';
 import tokenStorage from '@utils/tokenStorage';
@@ -11,7 +10,6 @@ const Auth = () => {
   const navigate = useNavigate();
   const params = useParams();
   const socialType = params.socialType as SocialType;
-  const setUserInfo = useUserStore((state) => state.setUserInfo);
 
   const code = new URL(window.location.href).searchParams.get('code')!;
   const state = new URL(window.location.href).searchParams.get('state')!;
@@ -24,14 +22,12 @@ const Auth = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const { accessToken, refreshToken } = LoginResponse!;
+      const { accessToken, refreshToken } = LoginResponse as UserTokenType;
       tokenStorage.setAccessToken(accessToken, 30);
       tokenStorage.setRefreshToken(refreshToken, 60 * 24 * 14);
-      setUserInfo(LoginResponse);
-      console.log('LoginResponse', LoginResponse);
       navigate(PATH.SPACE);
     }
-  }, [isSuccess]);
+  }, [isSuccess, LoginResponse, navigate]);
 
   return <Loading />;
 };
