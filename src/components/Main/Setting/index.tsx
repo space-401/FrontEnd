@@ -71,7 +71,13 @@ const SettingComponent = React.forwardRef(
       toastColorMessage(userName + '님이 방장이 되었습니다.');
       toastColorMessage(userId + '아이디 회원에게 방장 권한을 넘겼습니다.');
       onClose();
-      userUpdateAction({ userId, spaceId: Number(spaceId) });
+      const formData = new FormData();
+      const spaceUserDTO = {
+        spaceId: spaceId,
+        isAdmin: true,
+      };
+      formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
+      userUpdateAction(formData);
     };
 
     const changeAdminHandler = (userName: string, userId: number) => {

@@ -1,5 +1,5 @@
 import { M, S } from '@/components/Main/WelcomeAndSettingModal/style';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ImageArrType, ImageType } from '@/types/image.type';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import InputBox from '@/components/common/InputBox';
@@ -43,10 +43,6 @@ const UserSettingModal = ({
     usePhotoModalStore();
 
   const [isDefaultImg, setIsDefaultImg] = useState(true);
-
-  useEffect(() => {
-    console.log('기본 이미지', isDefaultImg);
-  }, [isDefaultImg]);
 
   //이미지 선택 옵션 모달 열기
   const onClickImgOptionModalOpen = () => {
@@ -116,16 +112,21 @@ const UserSettingModal = ({
 
   //제출 함수
   const onSubmitInfo = () => {
-    const result = checkAlreadyNickname();
-    const data = {
+    const checkNickname = checkAlreadyNickname();
+    const formData = new FormData();
+    const spaceUserDTO = {
       spaceId,
       isAdmin: userInfo?.isAdmin,
-      image: imageArr.convertedImage ?? null,
       userNickName: nickName,
     };
 
-    if (result) {
-      userUpdateAction(data);
+    formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
+    if (imageArr.convertedImage) {
+      formData.append('image', imageArr.convertedImage);
+    }
+
+    if (checkNickname) {
+      userUpdateAction(formData);
       ModalClose();
       confirmModalOpen();
     }
