@@ -20,5 +20,7 @@ export const patchSpaceUser = async (patchInfo: FormData) => {
     }
   );
 
+  console.log('data', data);
+
   return data;
 };

@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   width: 628px;
   min-height: 268px;
   background-color: ${({ theme }) => theme.COLOR['gray-6']};
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
   @media ${({ theme }) => theme.DEVICE.tablet} {
     width: 400px;
     padding-top: 0.5rem;
@@ -42,9 +43,11 @@ const TagNum = styled.div`
   display: flex;
   padding-top: 15px;
   gap: 4px;
+
   p {
     color: ${({ theme }) => theme.COLOR.white};
   }
+
   span {
     color: ${({ theme }) => theme.COLOR.skyblue};
   }
@@ -59,6 +62,7 @@ const List = styled.li<{ select: boolean; grid: boolean }>`
   display: flex;
   align-items: center;
   width: 50%;
+
   &:hover {
     background-color: #413f3f;
     border-radius: ${({ grid }) => (grid ? 3 : 5)}px;
@@ -70,6 +74,10 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const ErrorMsg = styled.div`
+  color: ${({ theme }) => theme.COLOR.orange};
+`;
+
 export const S = {
   Wrapper,
   Text,
@@ -78,4 +86,5 @@ export const S = {
   TagNum,
   List,
   FlexContainer,
+  ErrorMsg,
 };

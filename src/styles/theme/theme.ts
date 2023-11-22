@@ -120,6 +120,7 @@ export const theme = {
     'LEVEL-4': 40,
     'LEVEL-5': 50,
     'LEVEL-6': 60,
+    'LEVEL-7': 70,
   },
   FONT_FAMILY: {
     Pretendard: 'Pretendard',

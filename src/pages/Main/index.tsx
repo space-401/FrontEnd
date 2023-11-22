@@ -16,6 +16,7 @@ const MainPage = () => {
 
   const [modalNum, setModalNum] = useState(0);
 
+  console.log(spaceInfo);
   //세팅 모달로 이동
   const onMoveSettingModal = () => {
     setModalNum(2);
@@ -57,6 +58,7 @@ const MainPage = () => {
               spaceId={Number(spaceId)}
               userNames={userList.map((user) => user.userName)}
               ModalClose={onCloseSettingModal}
+              isAdmin={spaceInfo.isAdmin}
             />
           )}
         </Modal>

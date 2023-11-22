@@ -20,6 +20,7 @@ type SettingModalProps = {
   userNames: string[];
   userInfo?: UserType;
   spaceId: number;
+  isAdmin: boolean;
 };
 
 //프로필 기본 이미지 선택
@@ -28,6 +29,7 @@ const UserSettingModal = ({
   ModalClose,
   userInfo,
   spaceId,
+  isAdmin,
 }: SettingModalProps) => {
   const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
 
@@ -114,16 +116,26 @@ const UserSettingModal = ({
   const onSubmitInfo = () => {
     const checkNickname = checkAlreadyNickname();
     const formData = new FormData();
-    const spaceUserDTO = {
+
+    console.log('userInfo', userInfo);
+    const spaceUserInfo = {
       spaceId,
-      isAdmin: userInfo?.isAdmin,
+      isAdmin,
       userNickName: nickName,
     };
 
-    formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
+    console.log('spaceUsrInfo', spaceUserInfo);
+
     if (imageArr.convertedImage) {
-      formData.append('image', imageArr.convertedImage);
+      const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
     }
+    const spaceUserDTO = new Blob([JSON.stringify(spaceUserInfo)], {
+      type: 'application/json',
+    });
+    formData.append('spaceUserDTO', spaceUserDTO);
 
     if (checkNickname) {
       userUpdateAction(formData);
