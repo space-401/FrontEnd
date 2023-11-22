@@ -7,18 +7,11 @@ import { ReactComponent as SignLogo } from '@assets/svg/signlogo.svg';
 import SocialKakao from '@/components/Auth/SocialKakao';
 import SocialNaver from '@/components/Auth/SocialNaver';
 import SocialGoogle from '@/components/Auth/SocialGoogle';
-import { useEffect } from 'react';
-import tokenStorage from '@utils/tokenStorage';
 
 const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
   const { naverHandleLogin } = SocialNaver();
   const { googleSocialLogin } = SocialGoogle();
-
-  useEffect(() => {
-    tokenStorage.removeAccessToken();
-    tokenStorage.removeRefreshToken();
-  }, []);
 
   return (
     <S.Wrapper>

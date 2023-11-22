@@ -1,5 +1,5 @@
 import { M, S } from '@/components/Main/WelcomeAndSettingModal/style';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ImageArrType, ImageType } from '@/types/image.type';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import InputBox from '@/components/common/InputBox';
@@ -42,6 +42,12 @@ const UserSettingModal = ({
   const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
     usePhotoModalStore();
 
+  const [isDefaultImg, setIsDefaultImg] = useState(true);
+
+  useEffect(() => {
+    console.log('기본 이미지', isDefaultImg);
+  }, [isDefaultImg]);
+
   //이미지 선택 옵션 모달 열기
   const onClickImgOptionModalOpen = () => {
     if (imageArr.cropImage) {
@@ -68,8 +74,10 @@ const UserSettingModal = ({
       cropImage: null,
       convertedImage: null,
     });
+    setIsDefaultImg(true);
     setSelectOptionModalOpen(false);
   };
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +99,7 @@ const UserSettingModal = ({
           img: result,
         };
         setImageArr((prev: ImageArrType) => ({ ...prev, image: newObj }));
+        setIsDefaultImg(false);
       }
     };
     reader.readAsDataURL(files[0]);
@@ -106,15 +115,15 @@ const UserSettingModal = ({
   };
 
   //제출 함수
-  const onSubmitInfo = async () => {
+  const onSubmitInfo = () => {
     const result = checkAlreadyNickname();
-
     const data = {
       spaceId,
       isAdmin: userInfo?.isAdmin,
       image: imageArr.convertedImage ?? null,
       userNickName: nickName,
     };
+
     if (result) {
       userUpdateAction(data);
       ModalClose();
@@ -184,7 +193,8 @@ const UserSettingModal = ({
               />
             </S.DetailText>{' '}
             <M.Label isAlert={false}>프로필 사진</M.Label>
-            {!imageArr.cropImage ? (
+            {/*프로필 사진을 설정하지 않았을 경우 mock*/}
+            {!imageArr.cropImage && isDefaultImg ? (
               <>
                 <M.ImgBox onClick={onClickImgOptionModalOpen}>
                   <ProfileMock />

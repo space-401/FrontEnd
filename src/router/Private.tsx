@@ -1,20 +1,14 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
-import { useEffect } from 'react';
-import { useUserStore } from '@store/user';
+import tokenStorage from '@utils/tokenStorage';
 
-type PrivateRouteType = {
-  isAllowed: boolean;
-};
-
-const PrivateRoute = ({ isAllowed }: PrivateRouteType) => {
+const PrivateRoute = () => {
   const navigate = useNavigate();
-  const isLogin = useUserStore((e) => e.accessToken);
-  useEffect(() => {
-    if (!isAllowed && !isLogin) {
-      navigate(PATH.LOGIN);
-    }
-  }, [isAllowed, isLogin, navigate]);
+  const accessToken = tokenStorage.getAccessToken();
+
+  if (!accessToken) {
+    navigate(PATH.LOGIN);
+  }
 
   return <Outlet />;
 };

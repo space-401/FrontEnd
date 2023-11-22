@@ -1,20 +1,17 @@
-export type LoginResponseType = {
-  isSuccess: boolean;
-};
+import { useMutation } from '@tanstack/react-query';
+import { postLogout } from '@apis/user/postLogout';
+import tokenStorage from '@utils/tokenStorage';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '@constants/path';
 
-// export const useLogOutMutation = () => {
-//   const setIsLogin = useUserStore((e) => e.setIsLogin);
-//   const { mutate: logoutAction } = useMutation<
-//     LoginResponseType,
-//     AxiosError,
-//   >(['logout'], postLogout, {
-//     onSuccess: () => {
-//       setIsLogin(false);
-//     },
-//     onError: (error) => {
-//       toastColorMessage(error.message);
-//     },
-//   });
-//
-//   return { logoutAction };
-// };
+export const useLogOutMutation = () => {
+  const navigate = useNavigate();
+  const { mutate: logoutAction } = useMutation(postLogout, {
+    onSuccess: () => {
+      tokenStorage.clear();
+      navigate(PATH.LOGIN);
+    },
+  });
+
+  return { logoutAction };
+};

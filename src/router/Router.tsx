@@ -11,14 +11,13 @@ import BackLayout from '@layout/BackLayout';
 import SelectSpaceSkeleton from '@components/SelectSpace/Skeleton';
 import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
 import LandingPage from '@pages/Landing';
-import tokenStorage from '@utils/tokenStorage';
 import Loading from '@pages/Loading';
 import Auth from '@pages/Auth';
 import ErrorPage from '@/components/common/Error';
 
 const router = createBrowserRouter([
   {
-    element: <PrivateRoute isAllowed={tokenStorage.hasAccessToken()} />,
+    element: <PrivateRoute />,
     children: [
       {
         element: <HeaderLayout />,
@@ -105,7 +104,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: PATH.SOCIAL_AUTH,
+    path: PATH.AUTH + '/:socialType',
     element: (
       <Suspense fallback={<Loading />}>
         <Auth />

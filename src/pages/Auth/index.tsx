@@ -1,38 +1,33 @@
 import Loading from '@pages/Loading';
-import { getLogin } from '@apis/user/getLogin';
-import tokenStorage from '@utils/tokenStorage';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PATH } from '@constants/path';
-import { SocialType } from '@type/user.type';
+import { SocialType, UserTokenType } from '@type/user.type';
+import { useLoginQuery } from '@hooks/api/user/useLoginQuery';
 import { useEffect } from 'react';
+import tokenStorage from '@utils/tokenStorage';
+import { PATH } from '@constants/path';
 
 const Auth = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const socialType: string = params.socialType as SocialType;
-  const code = new URL(window.location.href).searchParams.get('code');
-  const state = new URL(window.location.href).searchParams.get('state');
+  const socialType = params.socialType as SocialType;
 
-  const fetchData = async () => {
-    if (code && state) {
-      try {
-        const data = await getLogin({
-          code,
-          socialType: socialType as SocialType,
-        });
-        console.log('로그인 결과', data);
-        tokenStorage.setAccessToken(data.accessToken, 30);
-        tokenStorage.setRefreshToken(data.refreshToken, 60 * 24 * 14);
-        navigate(PATH.SPACE);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-  };
+  const code = new URL(window.location.href).searchParams.get('code')!;
+  const state = new URL(window.location.href).searchParams.get('state')!;
+
+  const { LoginResponse, isSuccess } = useLoginQuery({
+    code,
+    socialType,
+    state: Boolean(state),
+  });
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (isSuccess) {
+      const { accessToken, refreshToken } = LoginResponse as UserTokenType;
+      tokenStorage.setAccessToken(accessToken, 30);
+      tokenStorage.setRefreshToken(refreshToken, 60 * 24 * 14);
+      navigate(PATH.SPACE);
+    }
+  }, [isSuccess, LoginResponse, navigate]);
 
   return <Loading />;
 };

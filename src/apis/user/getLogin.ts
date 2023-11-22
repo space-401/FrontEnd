@@ -1,16 +1,24 @@
-import axios from 'axios';
-import { SocialType } from '@type/user.type';
+import { SocialType, UserTokenType } from '@type/user.type';
+import { axiosInstance } from '@apis/AxiosInstance';
+import { PATH } from '@constants/path';
 
-export const getLogin = async ({
-  code,
-  socialType,
-}: {
+export interface ILoginProps {
   code: string;
   socialType: SocialType;
-}) => {
-  const socialUrl = `/user/auth/${socialType}?code=${code}&state=false`;
-  console.log('socialUrl', socialUrl);
+  state?: boolean;
+}
 
-  const response = await axios.get(import.meta.env.VITE_BACK_URL + socialUrl);
+export const getLogin = async (props: ILoginProps) => {
+  const { state = false, socialType, code } = props;
+  const response = await axiosInstance.get<UserTokenType>(
+    PATH.SOCIAL_LOGIN(socialType),
+    {
+      params: {
+        code,
+        state,
+      },
+      useAuth: false,
+    }
+  );
   return response.data;
 };

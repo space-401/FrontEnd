@@ -46,3 +46,8 @@ export type MyCommentListType = {
   total: number;
   itemLength: number;
 };
+
+export type UserTokenType = {
+  accessToken: string;
+  refreshToken: string;
+};
