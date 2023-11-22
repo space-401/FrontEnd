@@ -6,7 +6,7 @@ import { END_POINTS } from '@constants/api';
 
 export type DeleteSpaceTagType = {
   spaceId: number;
-  tagId: string;
+  tagId: number;
 };
 
 export const deleteSpaceTag = async (deleteTagInfo: DeleteSpaceTagType) => {

@@ -20,7 +20,7 @@ export type SpaceInfoType = {
   tagList: TagType[];
   isAdmin: boolean;
   isFirst: boolean;
-  spacePw: number;
+  spacePw: string;
 };
 
 export type AlarmType = {

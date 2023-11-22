@@ -9,7 +9,6 @@ import { useTagMutation } from '@/hooks/api/space/useSpaceTagCreateMutation';
 import { useTagDeleteMutation } from '@/hooks/api/space/useSpaceTagDeleteMutation';
 import { useSpaceTagQuery } from '@/hooks/api/space/useSpaceTagQuery';
 import { tagMock } from '@mocks/data/tag';
-import { v4 } from 'uuid';
 import { TagType } from '@type/post.type';
 
 type tagEditProps = {
@@ -54,8 +53,8 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
       return setErrorMsg('태그는 20개 이상 추가하실 수 없습니다.');
     }
     if (!spaceId && tagInput) {
-      const newTag = { tagId: v4(), tagTitle: tagInput };
-      return setTagList((prev) => {
+      const newTag = { tagId: Math.random() * 1000, tagTitle: tagInput };
+      return setTagList((prev: TagType[]) => {
         return [...prev, newTag];
       });
     }
@@ -72,7 +71,7 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
     tagId,
   }: {
     spaceId: number;
-    tagId: string;
+    tagId: number;
   }) => {
     if (!spaceId) {
       const newTagList = tagList.filter((tag) => tag.tagId !== tagId);

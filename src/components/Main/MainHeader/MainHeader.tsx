@@ -28,7 +28,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         <SettingComponent
           spaceId={spaceId}
           spaceTitle={spaceTitle}
-          spacePw={spacePw}
+          spacePw={String(spacePw)}
           isAdmin={isAdmin}
           isOpen={isOpen}
           userList={userList}
