@@ -5,9 +5,7 @@ import { END_POINTS } from '@constants/api';
 export const postNewSpace = async (spaceInfo: FormData) => {
   const response = await axiosInstance.post<ApiResponseType>(
     END_POINTS.SPACE,
-    {
-      ...spaceInfo,
-    },
+    spaceInfo,
     {
       headers: {
         'Content-Type': 'multipart/form-data',
