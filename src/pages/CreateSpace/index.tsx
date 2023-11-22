@@ -86,7 +86,7 @@ const CreateSpace = () => {
   const { title, content } = values;
 
   //비밀번호
-  const [pswd, setPswd] = useState<number | null>(
+  const [pswd, setPswd] = useState<string | null>(
     spaceInfo ? spaceInfo.spacePw : null
   );
 
@@ -104,7 +104,7 @@ const CreateSpace = () => {
       // 숫자가 아닌 값이 있을 때 에러 처리
       return alertModalOpen();
     }
-    setPswd(parseInt(value));
+    setPswd(value);
   };
 
   //경고모달
