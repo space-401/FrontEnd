@@ -1,11 +1,10 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { PATH } from '@constants/path';
-import { ACCESS_TOKEN_KEY, HTTP_STATUS_CODE } from '@constants/api';
+import { HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
-import { getRefreshToken } from '@apis/user/getRefreshToken';
-import { useUserStore } from '@store/user';
-import { getCookie } from '@utils/cookie';
+import { getNewAccessToken } from '@apis/user/getNewAccessToken';
+import tokenStorage from '@utils/tokenStorage';
 
 export interface ErrorResponseData {
   statusCode?: number;
@@ -13,19 +12,16 @@ export interface ErrorResponseData {
   code?: number;
 }
 
-export const Interceptors = () => {
-  const { accessToken } = useUserStore();
-  return accessToken;
-};
-
 export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
-  if (config.useAuth || !config.headers || config.headers.Authorization)
+  if (!config.useAuth || !config.headers || config.headers.Authorization)
     return config;
-  if (!getCookie('accessToken')) {
+  const accessToken = tokenStorage.getAccessToken();
+
+  if (!accessToken) {
     window.location.href = PATH.LOGIN;
     throw new Error('토큰이 유효하지 않습니다');
   }
-  config.headers.Authorization = `Bearer ${getCookie('accessToken')}`;
+  config.headers.Authorization = `Bearer ${accessToken}`;
 
   return config;
 };
@@ -40,32 +36,31 @@ export const handleTokenError = async (
 
   const { data, status } = error.response;
 
-  if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
-    const { accessToken } = await getRefreshToken();
-    originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+  if (
+    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
+    data.message === '유효하지 않은 토큰입니다'
+  ) {
+    const newAccessToken = await getNewAccessToken();
+    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+    tokenStorage.setAccessToken(newAccessToken, 30);
 
     return axiosInstance(originalRequest);
   }
 
-  if (status === HTTP_STATUS_CODE.BAD_REQUEST) {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
+  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
+    tokenStorage.removeAccessToken();
 
     throw new HTTPError(status, data.message, data.code);
   }
-
-  throw error;
 };
-
 export const handleAPIError = (error: AxiosError<ErrorResponseData>) => {
   if (!error.response) throw error;
 
   const { data, status } = error.response;
 
-  if (status >= HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
+  if (status === HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
     throw new HTTPError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, data.message);
   }
-  if (status === 401) {
-  }
-  // throw new HTTPError(status, data.message);
+
+  throw new HTTPError(status, data.message, data.code);
 };

@@ -12,7 +12,12 @@ export type SpaceUserPropsType = {
 export const patchSpaceUser = async (patchInfo: SpaceUserPropsType) => {
   const { data } = await axiosInstance.patch<ApiResponseType>(
     END_POINTS.SPACE_USER,
-    { ...patchInfo }
+    { ...patchInfo },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
   );
 
   return data;

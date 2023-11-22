@@ -1,6 +1,6 @@
-import {userList} from '@mocks/data/common';
-import {PostDetailType, PostResponseType} from '@type/post.type';
-import {SpacePostType} from '@/types/space.type';
+import { userList } from '@mocks/data/common';
+import { PostDetailType, PostResponseType } from '@type/post.type';
+import { SpacePostType } from '@/types/space.type';
 
 /**
  * 포스트 게시물들의 목 데이터
