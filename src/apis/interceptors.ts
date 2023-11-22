@@ -1,10 +1,10 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { PATH } from '@constants/path';
 import { HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
 import { getNewAccessToken } from '@apis/user/getNewAccessToken';
 import tokenStorage from '@utils/tokenStorage';
+import { PATH } from '@constants/path';
 
 export interface ErrorResponseData {
   statusCode?: number;
@@ -25,7 +25,7 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
 
   return config;
 };
-
+let retry = false;
 export const handleTokenError = async (
   error: AxiosError<ErrorResponseData>
 ) => {
@@ -36,11 +36,10 @@ export const handleTokenError = async (
 
   const { data, status } = error.response;
 
-  if (
-    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
-    data.message === '유효하지 않은 토큰입니다'
-  ) {
+  if (status === HTTP_STATUS_CODE.UNAUTHORIZED && !retry) {
+    retry = true;
     const newAccessToken = await getNewAccessToken();
+    console.log('new', newAccessToken);
     originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
     tokenStorage.setAccessToken(newAccessToken, 30);
 

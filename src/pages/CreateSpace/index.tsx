@@ -27,7 +27,7 @@ import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation
 
 const CreateSpace = () => {
   const params = useParams();
-  const spaceId = params.spaceId;
+  const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
 
   const { postSpaceAction, isPostSuccess } = useSpaceCreateMutation();
@@ -86,7 +86,9 @@ const CreateSpace = () => {
   const { title, content } = values;
 
   //비밀번호
-  const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePw : '');
+  const [pswd, setPswd] = useState<string | null>(
+    spaceInfo ? spaceInfo.spacePw : null
+  );
 
   //비밀번호 보이기,숨기기
   const [isShowPswd, setIsShowPswd] = useState(false);
@@ -169,17 +171,26 @@ const CreateSpace = () => {
       ...createSpaceDTO,
       spaceId,
     };
-
-    //이미지를 사용할 때
     if (imageArr.convertedImage) {
-      formData.append('imgUrl', imageArr.convertedImage);
+      // 이미지 파일 추가
+      const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
     }
 
     if (spaceId) {
-      formData.append('spaceDTO', JSON.stringify(updateSpaceDTO));
+      // JSON 데이터 추가
+      const spaceDTO = new Blob([JSON.stringify(updateSpaceDTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceDTO', spaceDTO);
       updateSpaceAction(formData);
     } else {
-      formData.append('spaceDTO', JSON.stringify(createSpaceDTO));
+      const spaceDTO = new Blob([JSON.stringify(createSpaceDTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceDTO', spaceDTO);
       postSpaceAction(formData);
     }
 
@@ -220,10 +231,13 @@ const CreateSpace = () => {
 
   return (
     <S.Wrapper>
-      {spaceId && isTagModalOpen && (
+      {isTagModalOpen && (
         <TagEditModal
           spaceId={spaceId}
           isOpen={isTagModalOpen}
+          modalOpen={() => {
+            setIsTagModalOpen(true);
+          }}
           modalClose={() => {
             setIsTagModalOpen(false);
           }}
@@ -380,7 +394,7 @@ const CreateSpace = () => {
             placeholder="숫자 5자리를 입력해주세요"
             maxLength={5}
             name="password"
-            value={pswd}
+            value={pswd!}
             children={
               isShowPswd ? (
                 <ShowEye onClick={onToggleShowPswd} />
@@ -427,7 +441,7 @@ const CreateSpace = () => {
               disabled={
                 (!imageArr.cropImage && !isBasicIcon[0]) ||
                 !title.length ||
-                pswd.length < 5
+                String(pswd).length < 5
               }
             />
           ) : (
@@ -440,7 +454,7 @@ const CreateSpace = () => {
               disabled={
                 (!imageArr.cropImage && !isBasicIcon[0]) ||
                 !title.length ||
-                pswd.length < 5
+                String(pswd).length < 5
               }
             />
           )}

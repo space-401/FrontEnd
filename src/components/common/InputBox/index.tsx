@@ -12,7 +12,7 @@ type InputBoxProps = {
   children?: ReactElement;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   name: string;
-  value: string;
+  value: string | number;
   paddingLeft?: number;
   readonly: boolean;
   paddingTop?: number;

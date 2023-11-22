@@ -1,33 +1,37 @@
-import { Modal, Box } from '@mui/material';
+import { Box, Modal } from '@mui/material';
 import { S } from './style';
 import React, { useEffect, useState } from 'react';
 import InputBox from '@/components/common/InputBox';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/smallDeleteIcon.svg';
-import { TagType } from '@/types/post.type';
 import TagList from './TagList';
 import { isUserType } from '@utils/typeGuard';
 import { useTagMutation } from '@/hooks/api/space/useSpaceTagCreateMutation';
 import { useTagDeleteMutation } from '@/hooks/api/space/useSpaceTagDeleteMutation';
 import { useSpaceTagQuery } from '@/hooks/api/space/useSpaceTagQuery';
+import { tagMock } from '@mocks/data/tag';
+import { TagType } from '@type/post.type';
 
 type tagEditProps = {
   isOpen: boolean;
-  spaceId: string;
+  spaceId: string | null;
   modalClose: () => void;
+  modalOpen: () => void;
 };
 
 const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const [tagList, setTagList] = useState<TagType[]>([]);
   const [tagInput, setTagInput] = useState<string>();
-
   const { postTagAction } = useTagMutation();
   const { deleteTagAction } = useTagDeleteMutation();
   const { spaceTag } = useSpaceTagQuery(spaceId);
-
-  console.log(spaceTag);
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
-    spaceTag && setTagList(spaceTag);
+    if (spaceTag) {
+      setTagList(spaceTag);
+    } else {
+      setTagList(tagMock);
+    }
   }, [spaceTag]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +48,22 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   };
 
   const onAddTag = async () => {
-    postTagAction({
-      tagName: tagInput!,
-      spaceId: Number(spaceId),
-    });
+    setErrorMsg('');
+    if (tagList.length >= 10) {
+      return setErrorMsg('태그는 20개 이상 추가하실 수 없습니다.');
+    }
+    if (!spaceId && tagInput) {
+      const newTag = { tagId: Math.random() * 1000, tagTitle: tagInput };
+      return setTagList((prev: TagType[]) => {
+        return [...prev, newTag];
+      });
+    }
+    if (spaceId && tagInput) {
+      return postTagAction({
+        tagName: tagInput!,
+        spaceId: Number(spaceId),
+      });
+    }
   };
 
   const onDeleteTag = ({
@@ -57,7 +73,12 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
     spaceId: number;
     tagId: number;
   }) => {
-    deleteTagAction({ spaceId, tagId });
+    if (!spaceId) {
+      const newTagList = tagList.filter((tag) => tag.tagId !== tagId);
+      setTagList(newTagList);
+    } else {
+      deleteTagAction({ spaceId, tagId });
+    }
   };
 
   return (
@@ -72,7 +93,7 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
       }}
     >
       <Box tabIndex={-1} onKeyDown={onSubmitNewTag}>
-        {tagList.length > 0 && (
+        {
           <S.Wrapper>
             <S.Header>
               <S.Text>스페이스 고정 태그를 지정해주세요.</S.Text>
@@ -87,12 +108,21 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
                 name="tagInput"
                 value={tagInput!}
               />
-
               <S.TagNum>
                 <p>스페이스 태그</p>
-                <span>1</span>
+                <span>{tagList.length}</span>
               </S.TagNum>
               <S.FlexContainer>
+                {!tagList.length && (
+                  <S.List select={false} grid={false} key={1}>
+                    <div>태그를 추가해주세요</div>
+                  </S.List>
+                )}
+                {errorMsg && (
+                  <S.ErrorMsg>
+                    태그는 최대 20개까지 추가가 가능합니다.
+                  </S.ErrorMsg>
+                )}
                 {tagList.map((item) => (
                   <S.List
                     select={false}
@@ -113,7 +143,7 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
               </S.FlexContainer>
             </S.Body>
           </S.Wrapper>
-        )}
+        }
       </Box>
     </Modal>
   );
