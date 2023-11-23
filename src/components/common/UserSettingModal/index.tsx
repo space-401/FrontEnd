@@ -28,8 +28,7 @@ const UserSettingModal = ({
   userNames,
   ModalClose,
   userInfo,
-  spaceId,
-  isAdmin,
+  spaceId, // isAdmin,
 }: SettingModalProps) => {
   const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
 
@@ -117,20 +116,18 @@ const UserSettingModal = ({
     const checkNickname = checkAlreadyNickname();
     const formData = new FormData();
 
-    console.log('userInfo', userInfo);
     const spaceUserInfo = {
       spaceId,
-      isAdmin,
-      userNickName: nickName,
+      isAdmin: false,
+      userNickname: nickName,
     };
-
-    console.log('spaceUsrInfo', spaceUserInfo);
+    console.log('imageArr', imageArr);
 
     if (imageArr.convertedImage) {
       const image = new Blob([imageArr.convertedImage], {
         type: 'image/jpeg',
       });
-      formData.append('imgUrl', image, 'image.jpg');
+      formData.append('image', image, 'image');
     }
     const spaceUserDTO = new Blob([JSON.stringify(spaceUserInfo)], {
       type: 'application/json',
