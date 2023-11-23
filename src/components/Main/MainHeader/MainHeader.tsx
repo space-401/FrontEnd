@@ -9,13 +9,20 @@ import type { MainHeaderPropType } from '@type/main.type';
 import SettingComponent from '@components/Main/Setting';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;
   const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription, spacePw } =
     spaceInfo;
+  const params = useParams();
+  const currentSpaceId = params.spaceId;
+  const currentSpaceUserList = userList.filter(
+    (space: any) => space.spaceId == currentSpaceId
+  )[0].userList;
+  console.log('currentSpaceUserList', currentSpaceUserList);
+
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
     setIsOpen(false);
@@ -31,19 +38,19 @@ const MainHeader = (prop: MainHeaderPropType) => {
           spacePw={String(spacePw)}
           isAdmin={isAdmin}
           isOpen={isOpen}
-          userList={userList}
+          userList={currentSpaceUserList}
           onClose={onClose}
         />
       </SettingModal>
       <S.HeaderHeader>
-        <Avatars fontSize={13} size={25} users={userList} max={4} />
+        <Avatars fontSize={13} size={25} users={currentSpaceUserList} max={4} />
         <S.ButtonGroup>
           <S.ControlButton
             onClick={() => setIsOpen(true)}
             color={theme.COLOR.white}
             hoverColor={theme.COLOR['gray-4']}
           >
-            인원 {userList.length}/8
+            인원 {currentSpaceUserList.length}/8
           </S.ControlButton>
           {isAdmin && (
             <S.ControlButton
