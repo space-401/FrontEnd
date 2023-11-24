@@ -1,5 +1,5 @@
 export const Product = process.env.NODE_ENV === 'production';
-export const Dev = process.env.NODE_ENV === 'development';
+export const Dev = process.env.NODE_ENV !== 'development';
 export const NETWORK = {
   RETRY_COUNT: 2,
   TIMEOUT: 10000,
@@ -38,7 +38,23 @@ export const HTTP_STATUS_CODE = {
   INTERNAL_SERVER_ERROR: 500,
 } as const;
 
-export const ERROR_CODE = {} as const;
+export const ERROR_CODE = {
+  INVALID_REQUEST: 1000,
+  MISSING_PARAMETER: 1001,
+  DUPLICATED_MEMBER_NICKNAME: 1002,
+  ALREADY_SAVED_SPACE: 1003,
+  INVALID_SPACE_CODE_OR_PASSWORD: 1004,
+  ALREADY_DELETED_SPACE: 2001,
+  ALREADY_DELETED_POST: 2002,
+  OVER_SIZED_IMAGE: 5001,
+  MISSING_IMAGE: 5002,
+  INVALID_TOKEN: 9101,
+  EXPIRED_TOKEN: 9102,
+  FAIL_TO_VALIDATE_TOKEN: 9103,
+  TOKEN_NOT_FOUND: 9104,
+  UNAUTHORIZED_REQUEST: 9105,
+  SERVER_ERROR: 9999,
+} as const;
 
 export const HTTP_ERROR_MESSAGE = {
   [HTTP_STATUS_CODE.NOT_FOUND]: {
