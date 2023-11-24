@@ -16,7 +16,7 @@ export type SpaceInfoType = {
   spaceTitle: string;
   spaceDescription: string;
   imgUrl: string;
-  userList: UserType[];
+  userList: any;
   tagList: TagType[];
   isAdmin: boolean;
   isFirst: boolean;

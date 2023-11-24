@@ -7,6 +7,5 @@ export const getSpaceTag = async (spaceId: number) => {
   const { data } = await axiosInstance.get<any>(END_POINTS.SPACE_TAG, {
     params: { spaceId },
   });
-
-  return data?.tagList;
+  return data;
 };

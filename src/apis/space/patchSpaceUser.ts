@@ -1,6 +1,6 @@
-import {axiosInstance} from '@apis/AxiosInstance';
-import {END_POINTS} from '@constants/api';
-import {ApiResponseType} from '@/types/response.type';
+import { axiosInstance } from '@apis/AxiosInstance';
+import { END_POINTS } from '@constants/api';
+import { ApiResponseType } from '@/types/response.type'; // export type SpaceUserPropsType = {
 
 // export type SpaceUserPropsType = {
 //   spaceId: number;

@@ -7,6 +7,7 @@ import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
 import WelcomeModal from '@/components/Main/WelcomeAndSettingModal';
 import UserSettingModal from '@/components/common/UserSettingModal';
 import { Modal } from '@mui/material';
+import { UserType } from '@type/post.type';
 
 const MainPage = () => {
   const [selectState, setSelectState] = useState(false);
@@ -14,9 +15,9 @@ const MainPage = () => {
   const spaceInfo = useSpaceInfoQuery(spaceId).spaceInfo!;
   const { userList, tagList, isFirst, spaceTitle, imgUrl } = spaceInfo;
 
-  const [modalNum, setModalNum] = useState(0);
+  console.log('spaceInfo', spaceInfo);
 
-  console.log(spaceInfo);
+  const [modalNum, setModalNum] = useState(0);
   //세팅 모달로 이동
   const onMoveSettingModal = () => {
     setModalNum(2);
@@ -56,7 +57,7 @@ const MainPage = () => {
           ) : (
             <UserSettingModal
               spaceId={Number(spaceId)}
-              userNames={userList.map((user) => user.userName)}
+              userNames={userList.map((user: UserType) => user.userName)}
               ModalClose={onCloseSettingModal}
               isAdmin={spaceInfo.isAdmin}
             />
