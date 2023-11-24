@@ -1,5 +1,5 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { HTTP_STATUS_CODE } from '@constants/api';
+import { ERROR_CODE, HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
 import { getNewAccessToken } from '@apis/user/getNewAccessToken';
@@ -25,7 +25,13 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
 
   return config;
 };
-let retry = false;
+
+export interface ErrorResponseData {
+  statusCode?: number;
+  message?: string;
+  code?: number;
+}
+
 export const handleTokenError = async (
   error: AxiosError<ErrorResponseData>
 ) => {
@@ -36,19 +42,22 @@ export const handleTokenError = async (
 
   const { data, status } = error.response;
 
-  if (status === HTTP_STATUS_CODE.UNAUTHORIZED && !retry) {
-    retry = true;
+  if (
+    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
+    data.code === ERROR_CODE.EXPIRED_TOKEN
+  ) {
     const newAccessToken = await getNewAccessToken();
-    console.log('new', newAccessToken);
     originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
     tokenStorage.setAccessToken(newAccessToken, 30);
 
     return axiosInstance(originalRequest);
   }
 
-  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
+  if (
+    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
+    data.code !== ERROR_CODE.EXPIRED_TOKEN
+  ) {
     tokenStorage.removeAccessToken();
-
     throw new HTTPError(status, data.message, data.code);
   }
 };
