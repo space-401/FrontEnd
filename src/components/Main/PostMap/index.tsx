@@ -15,10 +15,10 @@ const Index = (props: SpacePostListProps) => {
     libraries: ['services'],
   });
   const { postList, page, total, itemLength, movePage } = props;
-  const [isSelect, setIsSelect] = useState<number>(postList[0].postId);
+  const [isSelect, setIsSelect] = useState<number>(postList[0]?.postId);
 
   const [state, setState] = useState({
-    center: postList[0].position || DEFAULT_POSITION,
+    center: postList[0]?.position || DEFAULT_POSITION,
     isPanto: false,
   });
 
