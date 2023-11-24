@@ -8,8 +8,12 @@ import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 const MenuList = (props: MenuListProps) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
+  console.log('menu', props);
+
   const checkSelectItem = (thisValue: number) => {
-    return select.filter((i) => i.id === thisValue).length !== 0;
+    if (select.length) {
+      return select.filter((i) => i.id === thisValue).length !== 0;
+    }
   };
 
   const ListItem: TagType[] | UserType[] = !isUserTypeArray(itemList)
@@ -66,7 +70,7 @@ const MenuList = (props: MenuListProps) => {
     return ListItem.map((item) => (
       <S.List
         grid={isUserType(item)}
-        select={checkSelectItem(item.userId)}
+        select={checkSelectItem(item.userId)!}
         onClick={() => setChange(item)}
         key={item.userId}
       >
@@ -84,7 +88,7 @@ const MenuList = (props: MenuListProps) => {
       return selectArray.map((item) => (
         <S.List
           grid={isUserType(item)}
-          select={checkSelectItem(item.tagId)}
+          select={checkSelectItem(item.tagId)!}
           onClick={() => setChange(item)}
           key={item.tagId}
         >
@@ -95,7 +99,7 @@ const MenuList = (props: MenuListProps) => {
     return ListItem.map((item) => (
       <S.List
         grid={isUserType(item)}
-        select={checkSelectItem(item.tagId)}
+        select={checkSelectItem(item.tagId)!}
         onClick={() => setChange(item)}
         key={item.tagId}
       >

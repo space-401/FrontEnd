@@ -17,11 +17,6 @@ const MainHeader = (prop: MainHeaderPropType) => {
   const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription, spacePw } =
     spaceInfo;
   const params = useParams();
-  const currentSpaceId = params.spaceId;
-  const currentSpaceUserList = userList.filter(
-    (space: any) => space.spaceId == currentSpaceId
-  )[0].userList;
-  console.log('currentSpaceUserList', currentSpaceUserList);
 
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
@@ -38,19 +33,19 @@ const MainHeader = (prop: MainHeaderPropType) => {
           spacePw={String(spacePw)}
           isAdmin={isAdmin}
           isOpen={isOpen}
-          userList={currentSpaceUserList}
+          userList={userList}
           onClose={onClose}
         />
       </SettingModal>
       <S.HeaderHeader>
-        <Avatars fontSize={13} size={25} users={currentSpaceUserList} max={4} />
+        <Avatars fontSize={13} size={25} users={userList} max={4} />
         <S.ButtonGroup>
           <S.ControlButton
             onClick={() => setIsOpen(true)}
             color={theme.COLOR.white}
             hoverColor={theme.COLOR['gray-4']}
           >
-            인원 {currentSpaceUserList.length}/8
+            인원 {userList.length}/8
           </S.ControlButton>
           {isAdmin && (
             <S.ControlButton

@@ -76,6 +76,9 @@ const CreatePost = () => {
   });
   const { title, content } = values;
 
+  console.log(tagList);
+
+  console.log(userList);
   //선택한 장소 정보
   const [mapInfo, setMapInfo] = useState<MapType>({
     content: postDetailData ? postDetailData.placeTitle : '',
