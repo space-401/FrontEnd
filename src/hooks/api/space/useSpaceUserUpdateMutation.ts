@@ -9,7 +9,7 @@ export const useSpaceUserUpdateMutation = (spaceId: string) => {
     ApiResponseType,
     AxiosError,
     FormData
-  >((formData: FormData) => patchSpaceUser(formData), {
+  >((formData) => patchSpaceUser(formData), {
     onSuccess: async () => {
       console.log('성공');
       await queryClient.invalidateQueries(['spaceInfo', Number(spaceId)]);
