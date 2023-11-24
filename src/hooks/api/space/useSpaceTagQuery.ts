@@ -5,7 +5,7 @@ import { TagType } from '@/types/post.type';
 
 export const useSpaceTagQuery = (spaceId: string | null) => {
   const NumberSpaceId = Number(spaceId);
-  const { data: spaceTag } = useQuery<TagType[], AxiosError>(
+  const { data } = useQuery<{ tags: TagType[] }, AxiosError>(
     ['spaceTag', NumberSpaceId],
     () => getSpaceTag(NumberSpaceId),
     {
@@ -13,5 +13,5 @@ export const useSpaceTagQuery = (spaceId: string | null) => {
     }
   );
 
-  return { spaceTag };
+  return data;
 };

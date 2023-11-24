@@ -7,9 +7,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '@constants/path';
 import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 import { toastColorMessage } from '@utils/toastMessage';
+import { OneSpaceType } from '@type/space.type';
 
 const Header = () => {
-  const { spaceList } = useSpaceListQuery();
+  const { spaceList } = useSpaceListQuery().spaceList!;
   const navigate = useNavigate();
   const moveSpace = (spaceId: number) => {
     navigate(PATH.SPACE_MAIN(spaceId));
@@ -25,7 +26,7 @@ const Header = () => {
         </S.IconBox>
         <S.SpaceBox>
           <S.SpaceIconBox>
-            {spaceList?.map((space) => {
+            {spaceList?.map((space: OneSpaceType) => {
               const { spaceId, spaceTitle, imgUrl } = space;
               return (
                 <Tooltip title={spaceTitle} key={spaceId}>

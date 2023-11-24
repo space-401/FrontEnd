@@ -23,16 +23,16 @@ const TagEditModal = ({ isOpen, spaceId, modalClose }: tagEditProps) => {
   const [tagInput, setTagInput] = useState<string>();
   const { postTagAction } = useTagMutation();
   const { deleteTagAction } = useTagDeleteMutation();
-  const { spaceTag } = useSpaceTagQuery(spaceId);
+  const { tags } = useSpaceTagQuery(spaceId)!;
   const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
-    if (spaceTag) {
-      setTagList(spaceTag);
+    if (tags) {
+      setTagList(tags);
     } else {
       setTagList(tagMock);
     }
-  }, [spaceTag]);
+  }, [tags]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

@@ -18,7 +18,7 @@ const Form = styled.div`
   grid-template-columns: 1fr 2.5fr;
   grid-template-rows: 160px 60px 160px 60px 60px 44px;
   grid-gap: 32px;
-  grid-template-areas: 'title1 input1' 'title2 input2' 'title3 input3' 'title4 input4' 'title5 input5' 'empty button';
+  grid-template-areas: ' title1 input1 ' ' title2 input2 ' ' title3 input3 ' ' title4 input4 ' ' title5 input5 ' ' empty button ';
   flex-direction: column;
 
   @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
@@ -30,15 +30,20 @@ const Form = styled.div`
 const TitleSection = styled.div`
   padding-top: 2rem;
   width: 960px;
+  display: flex;
+  justify-content: space-between;
+
   div {
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
     color: ${({ theme }) => theme.COLOR.white};
   }
+
   p {
     padding-top: 5px;
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
     color: rgba(255, 255, 255, 0.6);
   }
+
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   @media ${({ theme }) => theme.DEVICE.tablet || theme.DEVICE.mobile} {
@@ -120,6 +125,25 @@ const ButtonInnerContainer = styled.div`
   font-style: normal;
   font-weight: 400;
 `;
+
+const FlexBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const FlexBoxColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    margin-bottom: 20px;
+  }
+`;
+
+const DeleteButton = styled.div``;
+
 const S = {
   Wrapper,
   Form,
@@ -131,6 +155,9 @@ const S = {
   FlexContainer,
   TitleSection,
   EmptyContainer,
+  FlexBox,
+  DeleteButton,
+  FlexBoxColumn,
 };
 
 export default S;

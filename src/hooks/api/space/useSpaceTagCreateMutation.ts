@@ -22,7 +22,9 @@ export const useTagMutation = () => {
       const previousTags = queryClient.getQueryData(['spaceTag', spaceId]);
 
       queryClient.setQueryData(['spaceTag', spaceId], (prev: any) => {
-        return [...prev, { tagId: v4(), tagTitle: tagName }];
+        if (prev.length) {
+          return [...prev, { tagId: v4(), tagTitle: tagName }];
+        }
       });
 
       return { previousTags };
