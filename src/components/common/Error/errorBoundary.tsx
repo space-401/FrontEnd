@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import { HTTPError } from '@apis/HTTPError';
 import ErrorPage from '@components/common/Error/index';
+import { HTTP_STATUS_CODE } from '@constants/api';
 import { Outlet } from 'react-router-dom';
 
 interface Props {
   message?: string;
-  onReset?: (error: Error | HTTPError) => void;
-  isRefresh?: boolean;
+  onReset: () => void;
 }
 
 interface State {
@@ -27,24 +27,31 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   resetErrorBoundary = () => {
-    const { onReset } = this.props;
-    const { error } = this.state;
-
-    onReset?.(error!);
+    this.props.onReset();
     this.setState(initialState);
   };
 
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
+  static getDerivedStateFromError(error: Error | HTTPError) {
+    return { hasError: true, info: error };
+  }
+
+  componentDidCatch(error: Error | HTTPError) {
+    this.setState({ hasError: true, error });
   }
 
   render() {
-    const { error } = this.state;
-    if (error) {
+    const { error, hasError } = this.state;
+
+    console.log(hasError);
+
+    if (hasError) {
       return (
         <ErrorPage
-          statusCode={error instanceof HTTPError ? error.statusCode : undefined}
-          errorCode={error instanceof HTTPError ? error.code : undefined}
+          statusCode={
+            error instanceof HTTPError
+              ? error.statusCode
+              : HTTP_STATUS_CODE.NOT_FOUND
+          }
           resetError={this.resetErrorBoundary}
         />
       );
