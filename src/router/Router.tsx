@@ -120,15 +120,15 @@ const createRouter = (reset: () => void) => {
                 </Suspense>
               ),
             },
-            {
-              path: PATH.HOME,
-              element: (
-                <Suspense fallback={<Loading />}>
-                  <LandingPage />
-                </Suspense>
-              ),
-            },
           ],
+        },
+        {
+          path: PATH.HOME,
+          element: (
+              <Suspense fallback={<Loading />}>
+                <LandingPage />
+              </Suspense>
+          ),
         },
         {
           path: '/*',
