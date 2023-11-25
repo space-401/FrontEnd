@@ -7,7 +7,6 @@ export type TokenData = {
 };
 
 export const getNewAccessToken = async () => {
-  console.log('aa', tokenStorage.getRefreshToken());
   const { data } = await axiosInstance.get<TokenData>(END_POINTS.TOKEN, {
     headers: {
       Authorization: `Bearer ${tokenStorage.getRefreshToken()}`,

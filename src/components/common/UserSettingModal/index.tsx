@@ -121,7 +121,6 @@ const UserSettingModal = ({
       isAdmin: false,
       userNickname: nickName,
     };
-    console.log('imageArr', imageArr);
 
     if (imageArr.convertedImage) {
       const image = new Blob([imageArr.convertedImage], {

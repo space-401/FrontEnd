@@ -8,8 +8,6 @@ import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 const MenuList = (props: MenuListProps) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
-  console.log('menu', props);
-
   const checkSelectItem = (thisValue: number) => {
     if (select.length) {
       return select.filter((i) => i.id === thisValue).length !== 0;

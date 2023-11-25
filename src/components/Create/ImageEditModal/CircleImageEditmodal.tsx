@@ -62,7 +62,6 @@ const CircleImgEditModal = ({
     getCropData(cropperRef1);
     ModalClose();
     onCloseIconModal && onCloseIconModal();
-    console.log('imageArr', imageArr);
   };
 
   //모달 취소
