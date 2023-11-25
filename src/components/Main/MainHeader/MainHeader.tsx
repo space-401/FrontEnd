@@ -16,6 +16,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;
   const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription, spacePw } =
     spaceInfo;
+
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
     setIsOpen(false);
@@ -28,7 +29,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
         <SettingComponent
           spaceId={spaceId}
           spaceTitle={spaceTitle}
-          spacePw={spacePw}
+          spacePw={String(spacePw)}
           isAdmin={isAdmin}
           isOpen={isOpen}
           userList={userList}

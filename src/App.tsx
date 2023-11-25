@@ -11,8 +11,6 @@ import {
   QueryErrorResetBoundary,
 } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import ErrorBoundary from './components/common/Error/errorBoundary';
-import ErrorPage from './components/common/Error';
 import { worker } from '@mocks/browser';
 import { Dev } from '@constants/api';
 
@@ -23,21 +21,15 @@ function App() {
 
   return (
     <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary fallback={ErrorPage} onReset={reset}>
-          <QueryClientProvider client={queryClient}>
-            <GoogleOAuthProvider
-              clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
-            >
-              <GlobalStyles />
-              <ThemeProvider theme={theme}>
-                <Toaster position={'top-center'} />
-                <RouterProvider router={router} />
-              </ThemeProvider>
-            </GoogleOAuthProvider>
-          </QueryClientProvider>
-        </ErrorBoundary>
-      )}
+      <QueryClientProvider client={queryClient}>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+          <GlobalStyles />
+          <ThemeProvider theme={theme}>
+            <Toaster position={'top-center'} />
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </GoogleOAuthProvider>
+      </QueryClientProvider>
     </QueryErrorResetBoundary>
   );
 }

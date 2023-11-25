@@ -24,15 +24,19 @@ import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
 import TagEditModal from '@/components/Create/TagEditModal';
 import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
 import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
+import { useSpaceDeleteMutation } from '@hooks/api/space/useSpaceDeleteMutation';
+import { toastColorMessage } from '@utils/toastMessage';
 
 const CreateSpace = () => {
   const params = useParams();
-  const spaceId = params.spaceId;
+  const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
 
   const { postSpaceAction, isPostSuccess } = useSpaceCreateMutation();
   const { updateSpaceAction, isUpdateSuccess } = useSpaceUpdateMutation();
+  const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
+  console.log('spaceInfo', spaceInfo);
 
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -86,7 +90,9 @@ const CreateSpace = () => {
   const { title, content } = values;
 
   //비밀번호
-  const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePw : '');
+  const [pswd, setPswd] = useState<string | null>(
+    spaceInfo ? spaceInfo.spacePw : null
+  );
 
   //비밀번호 보이기,숨기기
   const [isShowPswd, setIsShowPswd] = useState(false);
@@ -169,22 +175,33 @@ const CreateSpace = () => {
       ...createSpaceDTO,
       spaceId,
     };
-
-    //이미지를 사용할 때
     if (imageArr.convertedImage) {
-      formData.append('imgUrl', imageArr.convertedImage);
+      // 이미지 파일 추가
+      const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
     }
 
     if (spaceId) {
-      formData.append('spaceDTO', JSON.stringify(updateSpaceDTO));
+      console.log('update', updateSpaceDTO);
+      // JSON 데이터 추가
+      const spaceDTO = new Blob([JSON.stringify(updateSpaceDTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceDTO', spaceDTO);
       updateSpaceAction(formData);
     } else {
-      formData.append('spaceDTO', JSON.stringify(createSpaceDTO));
+      const spaceDTO = new Blob([JSON.stringify(createSpaceDTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceDTO', spaceDTO);
       postSpaceAction(formData);
     }
 
     if (isUpdateSuccess || isPostSuccess) {
-      confirmModalOpen(true);
+      toastColorMessage('성공적으로 수정되었습니다.');
+      onMoveSpacePage();
     }
   };
   const confirmOpen = useConfirmModalOpen();
@@ -205,33 +222,55 @@ const CreateSpace = () => {
     setIsBasicIcon([true, index]);
   };
 
-  //확인 모달
-  const confirmModalOpen = (isUpdate: boolean) => {
+  const deleteSpace = () => {
+    if (spaceId) {
+      deleteSpaceAction(spaceId);
+    }
+    if (isDeleteSuccess) {
+      toastColorMessage('성공적으로 삭제되었습니다.');
+    }
+  };
+
+  const deleteSpaceModalOpen = () => {
     confirmOpen({
-      AsyncAction: onMoveSpacePage,
-      isPositiveModal: true,
+      AsyncAction: deleteSpace,
+      isPositiveModal: false,
       ApproveMessage: '확인',
       closeMessage: '닫기',
-      titleMessage: isUpdate
-        ? '스페이스 수정이 완료되었습니다.'
-        : '스페이스가 생성되었습니다.',
+      titleMessage: '스페이스를 삭제하시겠습니까?',
     });
   };
 
   return (
     <S.Wrapper>
-      {spaceId && isTagModalOpen && (
+      {isTagModalOpen && (
         <TagEditModal
           spaceId={spaceId}
           isOpen={isTagModalOpen}
+          modalOpen={() => {
+            setIsTagModalOpen(true);
+          }}
           modalClose={() => {
             setIsTagModalOpen(false);
           }}
         />
       )}
       <S.TitleSection>
-        <div>스페이스 설정하기</div>
-        <p>우리만을 위한 스페이스를 새로 만들어요.</p>
+        <S.FlexBoxColumn>
+          <div>스페이스 설정하기</div>
+          <p>우리만을 위한 스페이스를 새로 만들어요.</p>
+        </S.FlexBoxColumn>
+        <S.DeleteButton>
+          <BasicButton
+            onClick={deleteSpaceModalOpen}
+            backgroundColor={theme.COLOR.orange}
+            color={theme.COLOR.white}
+            fontSize={12}
+            height={40}
+          >
+            스페이스 삭제하기
+          </BasicButton>
+        </S.DeleteButton>
       </S.TitleSection>
 
       {/*사진 편집 모달*/}
@@ -380,7 +419,7 @@ const CreateSpace = () => {
             placeholder="숫자 5자리를 입력해주세요"
             maxLength={5}
             name="password"
-            value={pswd}
+            value={pswd!}
             children={
               isShowPswd ? (
                 <ShowEye onClick={onToggleShowPswd} />
@@ -418,18 +457,20 @@ const CreateSpace = () => {
         {/*스페이스 생성 버튼*/}
         <S.ButtonContainer>
           {spaceId ? (
-            <BasicButton
-              children={'스페이스 수정하기'}
-              onClick={onSubmitSpace}
-              width={160}
-              fontSize={16}
-              height={47}
-              disabled={
-                (!imageArr.cropImage && !isBasicIcon[0]) ||
-                !title.length ||
-                pswd.length < 5
-              }
-            />
+            <S.FlexBox>
+              <BasicButton
+                children={'스페이스 수정하기'}
+                onClick={onSubmitSpace}
+                width={160}
+                fontSize={16}
+                height={47}
+                disabled={
+                  (!imageArr.cropImage && !isBasicIcon[0]) ||
+                  !title.length ||
+                  String(pswd).length < 5
+                }
+              />
+            </S.FlexBox>
           ) : (
             <BasicButton
               children={'스페이스 생성하기'}
@@ -440,7 +481,7 @@ const CreateSpace = () => {
               disabled={
                 (!imageArr.cropImage && !isBasicIcon[0]) ||
                 !title.length ||
-                pswd.length < 5
+                String(pswd).length < 5
               }
             />
           )}

@@ -1,5 +1,5 @@
 import { M, S } from '@/components/Main/WelcomeAndSettingModal/style';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ImageArrType, ImageType } from '@/types/image.type';
 import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
 import InputBox from '@/components/common/InputBox';
@@ -20,6 +20,7 @@ type SettingModalProps = {
   userNames: string[];
   userInfo?: UserType;
   spaceId: number;
+  isAdmin: boolean;
 };
 
 //프로필 기본 이미지 선택
@@ -27,7 +28,7 @@ const UserSettingModal = ({
   userNames,
   ModalClose,
   userInfo,
-  spaceId,
+  spaceId, // isAdmin,
 }: SettingModalProps) => {
   const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
 
@@ -43,10 +44,6 @@ const UserSettingModal = ({
     usePhotoModalStore();
 
   const [isDefaultImg, setIsDefaultImg] = useState(true);
-
-  useEffect(() => {
-    console.log('기본 이미지', isDefaultImg);
-  }, [isDefaultImg]);
 
   //이미지 선택 옵션 모달 열기
   const onClickImgOptionModalOpen = () => {
@@ -116,16 +113,29 @@ const UserSettingModal = ({
 
   //제출 함수
   const onSubmitInfo = () => {
-    const result = checkAlreadyNickname();
-    const data = {
-      spaceId,
-      isAdmin: userInfo?.isAdmin,
-      image: imageArr.convertedImage ?? null,
-      userNickName: nickName,
-    };
+    const checkNickname = checkAlreadyNickname();
+    const formData = new FormData();
 
-    if (result) {
-      userUpdateAction(data);
+    const spaceUserInfo = {
+      spaceId,
+      isAdmin: false,
+      userNickname: nickName,
+    };
+    console.log('imageArr', imageArr);
+
+    if (imageArr.convertedImage) {
+      const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('image', image, 'image');
+    }
+    const spaceUserDTO = new Blob([JSON.stringify(spaceUserInfo)], {
+      type: 'application/json',
+    });
+    formData.append('spaceUserDTO', spaceUserDTO);
+
+    if (checkNickname) {
+      userUpdateAction(formData);
       ModalClose();
       confirmModalOpen();
     }

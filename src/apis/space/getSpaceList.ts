@@ -6,7 +6,7 @@ import tokenStorage from '@utils/tokenStorage';
 export const getSpaceList = async () => {
   console.log('tokenStorage', tokenStorage.getAccessToken());
   try {
-    const { data } = await axiosInstance.get<OneSpaceType[]>(
+    const { data } = await axiosInstance.get<{ spaceList: OneSpaceType[] }>(
       END_POINTS.SPACE_LIST
     );
     return data;

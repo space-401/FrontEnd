@@ -1,10 +1,10 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { PATH } from '@constants/path';
-import { HTTP_STATUS_CODE } from '@constants/api';
+import { ERROR_CODE, HTTP_STATUS_CODE } from '@constants/api';
 import { axiosInstance } from '@apis/AxiosInstance';
 import { HTTPError } from '@apis/HTTPError';
 import { getNewAccessToken } from '@apis/user/getNewAccessToken';
 import tokenStorage from '@utils/tokenStorage';
+import { PATH } from '@constants/path';
 
 export interface ErrorResponseData {
   statusCode?: number;
@@ -26,6 +26,12 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
   return config;
 };
 
+export interface ErrorResponseData {
+  statusCode?: number;
+  message?: string;
+  code?: number;
+}
+
 export const handleTokenError = async (
   error: AxiosError<ErrorResponseData>
 ) => {
@@ -38,7 +44,7 @@ export const handleTokenError = async (
 
   if (
     status === HTTP_STATUS_CODE.UNAUTHORIZED &&
-    data.message === '유효하지 않은 토큰입니다'
+    data.code === ERROR_CODE.EXPIRED_TOKEN
   ) {
     const newAccessToken = await getNewAccessToken();
     originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -47,9 +53,11 @@ export const handleTokenError = async (
     return axiosInstance(originalRequest);
   }
 
-  if (status === HTTP_STATUS_CODE.UNAUTHORIZED) {
+  if (
+    status === HTTP_STATUS_CODE.UNAUTHORIZED &&
+    data.code !== ERROR_CODE.EXPIRED_TOKEN
+  ) {
     tokenStorage.removeAccessToken();
-
     throw new HTTPError(status, data.message, data.code);
   }
 };
