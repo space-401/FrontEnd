@@ -1,6 +1,6 @@
+import { FLIP_CARD } from '@/constants';
 import S from '@/components/Main/MainBody/style';
 import { KSkeleton } from '@/components/common';
-import { FLIP_CARD } from '@/constants';
 
 export const MainBodySkeleton = () => {
   return (

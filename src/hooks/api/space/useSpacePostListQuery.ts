@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
 import { FilterType, getSpacePostList } from '@/apis';
-import type { AxiosError } from 'axios';
 import { SpacePostListProps } from '@/types';
+import { useQuery } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
 
 /**
  * @param spaceId 조회할 스페이스 아이디를 입력합니다.

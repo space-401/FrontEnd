@@ -1,6 +1,6 @@
 import { getLogin } from '@/apis';
-import { useGoogleLogin } from '@react-oauth/google';
 import { LOGIN_REDIRECT_URI } from '@/constants';
+import { useGoogleLogin } from '@react-oauth/google';
 
 export const SocialGoogle = () => {
   const googleSocialLogin = useGoogleLogin({

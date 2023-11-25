@@ -1,6 +1,5 @@
-import { rest, RestHandler } from 'msw';
-
 import { END_POINTS, HTTP_STATUS_CODE } from '@/constants';
+import { RestHandler, rest } from 'msw';
 import { postCreate, postDetail, successResponse } from '@/mocks/data';
 
 export const postHandlers: RestHandler[] = [

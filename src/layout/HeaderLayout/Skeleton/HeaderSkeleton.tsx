@@ -1,8 +1,8 @@
-import { S } from '../style';
-import { ReactComponent as Logo } from '@/assets/svg/headerLogo.svg';
 import { ReactComponent as AlarmIcon } from '@/assets/svg/alarmIcon.svg';
+import { ReactComponent as Logo } from '@/assets/svg/headerLogo.svg';
 import { ReactComponent as UserIcon } from '@/assets/svg/userIcon.svg';
 import { KSkeleton } from '@/components/common';
+import { S } from '../style';
 
 export const HeaderSkeleton = () => {
   return (

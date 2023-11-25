@@ -1,16 +1,16 @@
 import { UserType } from '@/types';
-import Avatar from '@mui/material/Avatar';
-import { ReactComponent as CrownSvg } from '@/assets/svg/crown.svg';
-import { ReactComponent as MoreSvg } from '@/assets/svg/moreIcon.svg';
-import { ReactComponent as MoreCrownSvg } from '@/assets/svg/mainSetting/crown.svg';
-import { ReactComponent as MoreUserSvg } from '@/assets/svg/mainSetting/user.svg';
-import { ReactComponent as MoreLogOutSvg } from '@/assets/svg/mainSetting/logout.svg';
-import { useState } from 'react';
-import { Modal } from '@mui/material';
-import { S } from '@/components/common/UserListModal/style';
-import { useConfirmModalOpen } from '@/hooks/common';
 import { toastColorMessage } from '@/utils';
+import { Modal } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import { useState } from 'react';
+import { ReactComponent as CrownSvg } from '@/assets/svg/crown.svg';
+import { ReactComponent as MoreCrownSvg } from '@/assets/svg/mainSetting/crown.svg';
+import { ReactComponent as MoreLogOutSvg } from '@/assets/svg/mainSetting/logout.svg';
+import { ReactComponent as MoreUserSvg } from '@/assets/svg/mainSetting/user.svg';
+import { ReactComponent as MoreSvg } from '@/assets/svg/moreIcon.svg';
+import { useConfirmModalOpen } from '@/hooks/common';
 import { UserSettingModal } from '@/components/common';
+import { S } from '@/components/common/UserListModal/style';
 
 type UserListPropsType = {
   userInfo: UserType;

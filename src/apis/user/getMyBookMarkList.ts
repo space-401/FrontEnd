@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/apis';
-import type { BookMarkListType } from '@/types';
 import { END_POINTS } from '@/constants';
+import type { BookMarkListType } from '@/types';
 
 export const getMyBookMarkList = async (page: number) => {
   const { data } = await axiosInstance.get<BookMarkListType>(

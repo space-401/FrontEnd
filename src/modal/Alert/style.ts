@@ -1,5 +1,5 @@
-import { modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
+import { modalBackGround } from '@/styles/common';
 
 const Container = styled.div<{ width?: number }>`
   ${modalBackGround};

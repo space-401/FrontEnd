@@ -1,6 +1,6 @@
-import React from 'react';
-import { Box } from '@mui/material';
 import { S } from '@/modal/Confirm/style';
+import { Box } from '@mui/material';
+import React from 'react';
 import { useConfirmModalStore } from '@/store/modal';
 
 export const ConfirmInner = React.forwardRef(

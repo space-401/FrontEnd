@@ -1,6 +1,6 @@
-import { Chip } from '@mui/material';
 import { theme } from '@/styles';
 import type { TagListProps } from '@/types';
+import { Chip } from '@mui/material';
 
 export const TagList = (props: TagListProps) => {
   const { Item } = props;

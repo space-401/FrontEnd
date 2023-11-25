@@ -1,8 +1,8 @@
-import S from './style';
-import { ReactComponent as RightSvg } from '@/assets/svg/landing/fourth_right.svg';
-import { ReactComponent as LeftSvg } from '@/assets/svg/landing/fourth_left.svg';
-import { ReactComponent as BackSvg } from '@/assets/svg/landing/foruth_background.svg';
 import { SectionProps } from '@/types';
+import { ReactComponent as BackSvg } from '@/assets/svg/landing/foruth_background.svg';
+import { ReactComponent as LeftSvg } from '@/assets/svg/landing/fourth_left.svg';
+import { ReactComponent as RightSvg } from '@/assets/svg/landing/fourth_right.svg';
+import S from './style';
 
 export const FourthSection = ({ marginTop }: SectionProps) => {
   return (

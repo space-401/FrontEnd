@@ -1,6 +1,7 @@
 import { Box, Modal } from '@mui/material';
-import S from './style';
 import { v4 as uuid } from 'uuid';
+import S from './style';
+
 //한 옵션 타입
 type OneOptionType = {
   title: string;

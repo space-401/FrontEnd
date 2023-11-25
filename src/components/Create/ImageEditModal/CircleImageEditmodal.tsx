@@ -1,12 +1,12 @@
-import { S } from './style';
-import React, { useRef } from 'react';
-import { usePhotoModalStore } from '@/store/modal';
-import { ReactCropperElement } from 'react-cropper';
-import { Box } from '@mui/material';
+import { useImageCompress } from '@/hooks';
 import { ImageArrType } from '@/types';
 import { dataURItoFile } from '@/utils';
-import { useImageCompress } from '@/hooks';
+import { Box } from '@mui/material';
+import React, { useRef } from 'react';
+import { ReactCropperElement } from 'react-cropper';
+import { usePhotoModalStore } from '@/store/modal';
 import { CircleCropper } from '@/components/Create';
+import { S } from './style';
 
 type ModalType = {
   imageArr: ImageArrType;

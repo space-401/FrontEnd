@@ -1,7 +1,7 @@
-import S from './style';
 import { SectionProps } from '@/types';
-import { ReactComponent as BottomBackImg } from '@/assets/svg/landing/landing_bottom.svg';
 import { ReactComponent as ArrowSvg } from '@/assets/svg/landing/arrow_right.svg';
+import { ReactComponent as BottomBackImg } from '@/assets/svg/landing/landing_bottom.svg';
+import S from './style';
 
 export const FifthSection = ({ marginTop }: SectionProps) => {
   const onClick = () => {

@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/apis';
-import type { OneSpaceType } from '@/types';
 import { END_POINTS } from '@/constants';
+import type { OneSpaceType } from '@/types';
 
 export const getSpaceList = async () => {
   try {

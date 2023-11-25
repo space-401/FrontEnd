@@ -1,9 +1,9 @@
 import { Box, Modal } from '@mui/material';
-import S from '@/components/Create/BasicIconModal/style';
-import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
-import { BasicIcon } from './BasicIcon';
 import { v4 } from 'uuid';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
+import S from '@/components/Create/BasicIconModal/style';
 import { BasicButton } from '@/components/common';
+import { BasicIcon } from './BasicIcon';
 
 type BasicIconModalPropsType = {
   isOpen: boolean;

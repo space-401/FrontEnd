@@ -1,7 +1,7 @@
-import { Map } from 'react-kakao-maps-sdk';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { EventMarkerContainer } from './EventMarkerContainer';
 import { MarkerType } from '@/types';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Map } from 'react-kakao-maps-sdk';
+import { EventMarkerContainer } from './EventMarkerContainer';
 
 type MapBoxProps = {
   keyword: string;

@@ -1,18 +1,18 @@
-import React from 'react';
-import { UserType } from '@/types';
-import { Box } from '@mui/material';
-import S from './style';
-import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
-import { UserList } from '@/components/common';
-import { ReactComponent as LogoutSvg } from '@/assets/svg/mainSetting/logout.svg';
-import { toastColorMessage } from '@/utils';
+import { PATH } from '@/constants';
 import {
-  useConfirmModalOpen,
   useAlertModalOpen,
+  useConfirmModalOpen,
   useSpaceUserUpdateMutation,
 } from '@/hooks';
-import { PATH } from '@/constants';
+import { UserType } from '@/types';
+import { toastColorMessage } from '@/utils';
+import { Box } from '@mui/material';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
+import { ReactComponent as LogoutSvg } from '@/assets/svg/mainSetting/logout.svg';
+import { UserList } from '@/components/common';
+import S from './style';
 
 export const SettingComponent = React.forwardRef(
   (

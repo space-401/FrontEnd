@@ -1,38 +1,38 @@
-import { S } from './style';
+import { PATH } from '@/constants';
 import {
-  InputBox,
-  BasicButton,
-  BasicBox,
-  TextAreaBox,
-} from '@/components/common';
+  useAlertModalOpen,
+  useConfirmModalOpen,
+  useInputs,
+  useSpaceCreateMutation,
+  useSpaceDeleteMutation,
+  useSpaceInfoQuery,
+  useSpaceUpdateMutation,
+} from '@/hooks';
+import { theme } from '@/styles';
+import type { ImageArrType, ImageType } from '@/types';
+import { toastColorMessage } from '@/utils';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ReactComponent as ClosedEye } from '@/assets/svg/closedEye.svg';
 import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
 import { ReactComponent as ShowEye } from '@/assets/svg/showEye.svg';
-import { ReactComponent as ClosedEye } from '@/assets/svg/closedEye.svg';
-import { useEffect, useRef, useState } from 'react';
+import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
 import { usePhotoModalStore } from '@/store/modal';
 import {
-  ImageEditModal,
-  CharacterCounter,
-  SelectIconModal,
-  BasicIconModal,
   BasicIcon,
+  BasicIconModal,
+  CharacterCounter,
+  ImageEditModal,
+  SelectIconModal,
   TagEditModal,
 } from '@/components/Create';
-import type { ImageArrType, ImageType } from '@/types';
-import { theme } from '@/styles';
 import {
-  useInputs,
-  useAlertModalOpen,
-  useSpaceInfoQuery,
-  useConfirmModalOpen,
-  useSpaceCreateMutation,
-  useSpaceUpdateMutation,
-  useSpaceDeleteMutation,
-} from '@/hooks';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
-import { toastColorMessage } from '@/utils';
-import { PATH } from '@/constants';
+  BasicBox,
+  BasicButton,
+  InputBox,
+  TextAreaBox,
+} from '@/components/common';
+import { S } from './style';
 
 const CreateSpace = () => {
   const params = useParams();

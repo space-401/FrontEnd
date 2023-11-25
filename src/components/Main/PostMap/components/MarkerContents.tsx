@@ -1,7 +1,7 @@
 import type { UserType } from '@/types';
-import { M } from './style';
-import { Avatars } from '@/components/common';
 import { ReactComponent as PlaceIcon } from '@/assets/svg/markerIcon.svg';
+import { Avatars } from '@/components/common';
+import { M } from './style';
 
 export type MarkerPropTypes = {
   postTitle?: string;

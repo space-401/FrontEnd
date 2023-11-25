@@ -1,20 +1,20 @@
-import { S } from './style';
-import { useRef, useState } from 'react';
-import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
-import { ReactComponent as NextBtn } from '@/assets/svg/chevron/chevron_right.svg';
-import { ReactComponent as MultipleIcon } from '@/assets/svg/photo/multipleIcon.svg';
-import { ReactCropperElement } from 'react-cropper';
-import { Box, Modal } from '@mui/material';
-import { usePhotoModalStore } from '@/store/modal';
+import { useImageCompress } from '@/hooks';
 import { theme } from '@/styles';
 import { ImagesArrType } from '@/types';
 import { dataURItoFile } from '@/utils';
-import { useImageCompress } from '@/hooks';
+import { Box, Modal } from '@mui/material';
+import { useRef, useState } from 'react';
+import { ReactCropperElement } from 'react-cropper';
+import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
+import { ReactComponent as NextBtn } from '@/assets/svg/chevron/chevron_right.svg';
+import { ReactComponent as MultipleIcon } from '@/assets/svg/photo/multipleIcon.svg';
+import { usePhotoModalStore } from '@/store/modal';
 import {
   CharacterCounter,
   ImageCropper,
   MultipleImgBox,
 } from '@/components/Create';
+import { S } from './style';
 
 type ModalType = {
   handleFileChange: any;

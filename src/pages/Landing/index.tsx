@@ -1,12 +1,12 @@
-import { S } from './style';
+import { useCss, useScript } from '@/hooks';
 import {
-  FirstSection,
-  ThirdSection,
-  FourthSection,
   FifthSection,
+  FirstSection,
+  FourthSection,
   SecondSection,
+  ThirdSection,
 } from '@/components/Landing';
-import { useScript, useCss } from '@/hooks';
+import { S } from './style';
 
 const LandingPage = () => {
   const [, scriptError] = useScript('https://unpkg.com/aos@2.3.1/dist/aos.js');

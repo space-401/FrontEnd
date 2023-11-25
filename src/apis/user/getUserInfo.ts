@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/apis';
-import type { AccountDataType } from '@/types';
 import { END_POINTS } from '@/constants';
+import type { AccountDataType } from '@/types';
 
 export const getUserInfo = async () => {
   const { data } = await axiosInstance.get<AccountDataType>(

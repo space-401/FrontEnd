@@ -1,8 +1,8 @@
-import { A } from './style';
-import { useState } from 'react';
-import { Pagination } from '@/components/common';
 import { useBookMarkListQuery, useDetailModalOpen } from '@/hooks';
 import { getFormatDate } from '@/utils';
+import { useState } from 'react';
+import { Pagination } from '@/components/common';
+import { A } from './style';
 
 export const BookMarkList = () => {
   const [curPage, setCurPage] = useState(0);

@@ -1,5 +1,5 @@
-import S from './style';
 import { PropsWithChildren } from 'react';
+import S from './style';
 
 export type BasicBoxProp = {
   width: number;

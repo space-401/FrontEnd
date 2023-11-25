@@ -1,5 +1,5 @@
-import { END_POINTS } from '@/constants';
 import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
 import { CommentType } from '@/types';
 
 export const getComment = async (postId: number, spaceId: number) => {

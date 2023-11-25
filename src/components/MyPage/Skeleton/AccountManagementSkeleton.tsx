@@ -1,5 +1,5 @@
-import { A } from '../style';
 import { KSkeleton } from '@/components/common';
+import { A } from '../style';
 
 export const AccountManagementSkeleton = () => {
   return (

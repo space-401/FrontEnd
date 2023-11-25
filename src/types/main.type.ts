@@ -1,4 +1,4 @@
-import type { TagType, UserType, SpaceInfoType, SpacePostType } from '@/types';
+import type { SpaceInfoType, SpacePostType, TagType, UserType } from '@/types';
 import { Dispatch, SetStateAction } from 'react';
 
 export type selectType = {

@@ -1,23 +1,23 @@
-import { ReactComponent as DefaultImage } from '@/assets/svg/defaultImg/img1.svg';
-import S from './style';
-import { Suspense, useEffect, useState } from 'react';
+import { PATH } from '@/constants';
+import { useDetailModalOpen, useSpacePostListQuery } from '@/hooks';
 import type {
-  selectType,
-  PostListFilterProps,
   DateInfoType,
+  PostListFilterProps,
   TagType,
   UserType,
+  selectType,
 } from '@/types';
+import { Suspense, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { ReactComponent as DefaultImage } from '@/assets/svg/defaultImg/img1.svg';
 import {
-  SelectBox,
-  SearchBox,
   PostMap,
   PostMapSkeleton,
+  SearchBox,
+  SelectBox,
 } from '@/components/Main';
 import { Calender, FlipCard, Pagination } from '@/components/common';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSpacePostListQuery, useDetailModalOpen } from '@/hooks';
-import { PATH } from '@/constants';
+import S from './style';
 
 type PostListPropType = {
   userList: UserType[];

@@ -1,17 +1,17 @@
+import {
+  useSpaceTagQuery,
+  useTagDeleteMutation,
+  useTagMutation,
+} from '@/hooks';
+import { TagType } from '@/types';
+import { isUserType } from '@/utils';
 import { Box, Modal } from '@mui/material';
-import { S } from './style';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/smallDeleteIcon.svg';
-import { isUserType } from '@/utils';
-import {
-  useTagMutation,
-  useTagDeleteMutation,
-  useSpaceTagQuery,
-} from '@/hooks';
 import { tagMock } from '@/mocks/data';
-import { TagType } from '@/types';
-import { InputBox } from '@/components/common';
 import { TagList } from '@/components/Create';
+import { InputBox } from '@/components/common';
+import { S } from './style';
 
 type tagEditProps = {
   isOpen: boolean;

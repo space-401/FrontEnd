@@ -1,4 +1,4 @@
-import type { OneSpaceType, SpacePostType, ApiResponseType } from '@/types';
+import type { ApiResponseType, OneSpaceType, SpacePostType } from '@/types';
 
 export type UserType = {
   userId: number;

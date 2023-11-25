@@ -1,16 +1,16 @@
+import { PATH } from '@/constants';
 import { theme } from '@/styles';
-import { Avatars } from '@/components/common';
-import { ReactComponent as SelectTableIcon } from '@/assets/svg/filter/selecttableIcon.svg';
-import { ReactComponent as SelectMapIcon } from '@/assets/svg/filter/selectmapIcon.svg';
-import { ReactComponent as DoneTableIcon } from '@/assets/svg/filter/donetableIcon.svg';
-import { ReactComponent as DoneMapIcon } from '@/assets/svg/filter/donemapIcon.svg';
-import S from './style';
 import type { MainHeaderPropType } from '@/types';
-import { SettingComponent } from '@/components/Main';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '@/constants';
+import { ReactComponent as DoneMapIcon } from '@/assets/svg/filter/donemapIcon.svg';
+import { ReactComponent as DoneTableIcon } from '@/assets/svg/filter/donetableIcon.svg';
+import { ReactComponent as SelectMapIcon } from '@/assets/svg/filter/selectmapIcon.svg';
+import { ReactComponent as SelectTableIcon } from '@/assets/svg/filter/selecttableIcon.svg';
+import { SettingComponent } from '@/components/Main';
+import { Avatars } from '@/components/common';
+import S from './style';
 
 export const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;

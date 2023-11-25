@@ -1,13 +1,13 @@
-import { getFormatDate, toastColorMessage } from '@/utils';
-import { A } from './style';
-import { Avatars } from '@/components/common';
-import { useDetailModalOpen, useConfirmModalOpen } from '@/hooks';
-import type { OneMyPostType } from '@/types';
-import { useState } from 'react';
-import { S } from '@/modal/Detail/style';
-import { ReactComponent as MenuSvg } from '@/assets/svg/menu.svg';
 import { PATH } from '@/constants';
+import { useConfirmModalOpen, useDetailModalOpen } from '@/hooks';
+import { S } from '@/modal/Detail/style';
+import type { OneMyPostType } from '@/types';
+import { getFormatDate, toastColorMessage } from '@/utils';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as MenuSvg } from '@/assets/svg/menu.svg';
+import { Avatars } from '@/components/common';
+import { A } from './style';
 
 export const OneMyPostList = ({ items }: { items: OneMyPostType }) => {
   const {

@@ -1,9 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import type { SocialType, UserTokenType } from '@/types';
-import { useLoginQuery } from '@/hooks';
-import { useEffect } from 'react';
-import { tokenStorage } from '@/utils';
 import { PATH } from '@/constants';
+import { useLoginQuery } from '@/hooks';
+import type { SocialType, UserTokenType } from '@/types';
+import { tokenStorage } from '@/utils';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Loading } from '@/components/common';
 
 const Auth = () => {

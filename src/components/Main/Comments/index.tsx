@@ -1,7 +1,7 @@
-import S from './style';
-import { OneComment } from './OneComment/OneComment';
-import type { UserType } from '@/types';
 import { useCommentQuery } from '@/hooks';
+import type { UserType } from '@/types';
+import { OneComment } from './OneComment/OneComment';
+import S from './style';
 
 type DetailCommentType = {
   spaceId: number;

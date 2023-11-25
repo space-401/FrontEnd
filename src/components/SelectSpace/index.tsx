@@ -1,6 +1,6 @@
 import { S } from '@/pages/SelectSpace/style';
-import { KSkeleton } from '@/components/common';
 import { FLIP_CARD } from '@/constants/policy';
+import { KSkeleton } from '@/components/common';
 
 export const SelectSpaceSkeleton = () => {
   return (

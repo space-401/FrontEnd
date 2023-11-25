@@ -1,8 +1,7 @@
 // 완성
-
 import { axiosInstance } from '@/apis';
-import type { ApiResponseType } from '@/types';
 import { END_POINTS } from '@/constants';
+import type { ApiResponseType } from '@/types';
 
 export type DeleteSpaceTagType = {
   spaceId: number;

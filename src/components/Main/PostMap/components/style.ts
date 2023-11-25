@@ -1,6 +1,6 @@
-import { flexCenter } from '@/styles/common';
-import styled from 'styled-components';
 import { omitText } from '@/styles';
+import styled from 'styled-components';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: relative;

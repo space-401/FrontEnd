@@ -1,5 +1,5 @@
-import { S } from './style';
 import { OnePostMapCardSkeleton } from './One-PostMapCard.Skeleton';
+import { S } from './style';
 
 export const LeftSectionSkeleton = () => {
   return (

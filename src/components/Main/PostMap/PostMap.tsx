@@ -1,15 +1,15 @@
-import S from './style';
+import { DEFAULT_POSITION } from '@/constants';
+import { useDetailModalOpen } from '@/hooks';
+import { SpacePostListProps } from '@/types';
+import { getFormatDate } from '@/utils';
+import { useState } from 'react';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import {
   EventMarkerContainer,
   LeftSection,
   MarkerContents,
 } from '@/components/Main';
-import { getFormatDate } from '@/utils';
-import { useState } from 'react';
-import { DEFAULT_POSITION } from '@/constants';
-import { SpacePostListProps } from '@/types';
-import { useDetailModalOpen } from '@/hooks';
+import S from './style';
 
 export const PostMap = (props: SpacePostListProps) => {
   useKakaoLoader({

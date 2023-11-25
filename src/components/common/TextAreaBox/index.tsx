@@ -1,5 +1,5 @@
-import S from './style';
 import { ReactElement } from 'react';
+import S from './style';
 
 export type TextAreaBoxProps = {
   width?: number;

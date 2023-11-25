@@ -1,6 +1,6 @@
+import { theme } from '@/styles';
 import { selectType } from '@/types';
 import { Chip, Stack } from '@mui/material';
-import { theme } from '@/styles';
 import { Dispatch, SetStateAction } from 'react';
 
 export const SelectList = (props: {

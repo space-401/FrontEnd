@@ -1,6 +1,6 @@
+import type { UserType } from '@/types';
 import { Avatar, AvatarGroup } from '@mui/material';
 import S from './style';
-import type { UserType } from '@/types';
 
 type PropType = {
   /**

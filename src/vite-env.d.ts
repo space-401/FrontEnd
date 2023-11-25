@@ -1,5 +1,5 @@
-import 'vite/client';
 import 'axios';
+import 'vite/client';
 
 declare global {
   interface ImportMetaEnv {

@@ -1,5 +1,5 @@
-import { Skeleton, SxProps, Theme } from '@mui/material';
 import { theme } from '@/styles';
+import { Skeleton, SxProps, Theme } from '@mui/material';
 
 type KSeletonType = {
   width: string | number;

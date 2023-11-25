@@ -1,7 +1,7 @@
-import type { TagType, UserType, MenuListProps, selectType } from '@/types';
+import type { MenuListProps, TagType, UserType, selectType } from '@/types';
+import { isUserType, isUserTypeArray } from '@/utils';
 import { TagList, UserList } from './component';
 import S from './style';
-import { isUserType, isUserTypeArray } from '@/utils';
 
 export const MenuList = (props: MenuListProps) => {
   const { itemList, searchValue, select, changeSelect } = props;

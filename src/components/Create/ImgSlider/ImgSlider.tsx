@@ -1,12 +1,12 @@
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { v4 as uuid } from 'uuid';
 import { ReactComponent as LeftIcon } from '@/assets/svg/chevron/chevron_left.svg';
 import { ReactComponent as RightIcon } from '@/assets/svg/chevron/chevron_right.svg';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Navigation, Pagination } from 'swiper/modules';
 import './style.css';
-import { v4 as uuid } from 'uuid';
 
 type SliderProps = {
   images: string[];

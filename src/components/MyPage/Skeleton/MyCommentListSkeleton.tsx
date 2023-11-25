@@ -1,8 +1,8 @@
-import { A, CL } from '../style';
-import { KSkeleton } from '@/components/common';
+import { Fragment } from 'react';
 import { v4 } from 'uuid';
 import { ReactComponent as FeatherSvg } from '@/assets/svg/feather.svg';
-import { Fragment } from 'react';
+import { KSkeleton } from '@/components/common';
+import { A, CL } from '../style';
 
 export const MyCommentListSkeleton = () => {
   return (

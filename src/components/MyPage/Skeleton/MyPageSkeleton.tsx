@@ -1,6 +1,6 @@
 import { S } from '@/pages/MyPage/style';
-import { KSkeleton } from '@/components/common';
 import { AccountManagementSkeleton } from '@/components/MyPage';
+import { KSkeleton } from '@/components/common';
 
 export const MyPageSkeleton = () => {
   return (

@@ -1,19 +1,19 @@
-import { M, S } from '@/components/Main/WelcomeModal/style';
-import { useRef, useState } from 'react';
+import { useConfirmModalOpen } from '@/hooks';
+import { useSpaceUserUpdateMutation } from '@/hooks';
+import { theme } from '@/styles';
 import { ImageArrType, ImageType } from '@/types/image.type';
-import { CircleIcon, BasicButton, InputBox } from '@/components/common';
+import { UserType } from '@/types/post.type';
+import { Box } from '@mui/material';
+import { useRef, useState } from 'react';
+import { ReactComponent as ProfileMock } from '@/assets/svg/profileMock.svg';
+import { usePhotoModalStore } from '@/store/modal';
 import {
   CharacterCounter,
   CircleImgEditModal,
   SelectIconModal,
 } from '@/components/Create';
-import { ReactComponent as ProfileMock } from '@/assets/svg/profileMock.svg';
-import { Box } from '@mui/material';
-import { UserType } from '@/types/post.type';
-import { useConfirmModalOpen } from '@/hooks';
-import { theme } from '@/styles';
-import { usePhotoModalStore } from '@/store/modal';
-import { useSpaceUserUpdateMutation } from '@/hooks';
+import { M, S } from '@/components/Main/WelcomeModal/style';
+import { BasicButton, CircleIcon, InputBox } from '@/components/common';
 
 type SettingModalProps = {
   ModalClose: () => void;

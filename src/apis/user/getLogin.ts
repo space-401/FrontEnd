@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/apis';
-import type { SocialType, UserTokenType } from '@/types';
 import { PATH } from '@/constants';
+import type { SocialType, UserTokenType } from '@/types';
 
 export interface ILoginProps {
   code: string;
