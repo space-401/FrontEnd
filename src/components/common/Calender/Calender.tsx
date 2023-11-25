@@ -1,10 +1,8 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState } from 'react';
 import { ko } from 'date-fns/esm/locale';
-import DatePicker from 'react-datepicker';
 import { YEARS, MONTHS } from './util';
 import getYear from 'date-fns/getYear';
-import styled from 'styled-components';
 import { ReactComponent as CalenderIcon } from '@assets/svg/calenderIcon.svg';
 import { ReactComponent as MainCalenderIcon } from '@assets/svg/mainCalender.svg';
 import { postTimeChangeHelper } from '@/utils/time-helper';
@@ -13,6 +11,7 @@ import { DateInfoType } from '@/types/post.type';
 import { getMonth } from 'date-fns';
 import { ReactComponent as DownIcon } from '@/assets/svg/chevron/chevron_down.svg';
 import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
+import { S } from '@/components/common/Calender/style';
 
 type CalenderPropsType = {
   width: number;
@@ -88,7 +87,7 @@ const Calender = ({
       style={{ paddingBottom: '0' }}
     >
       <label>
-        <StyledDatePicker
+        <S.StyledDatePicker
           fontSize={fontSize}
           borderRadius={borderRadius}
           width={width}
@@ -203,7 +202,7 @@ const Calender = ({
               </div>
             </div>
           )}
-        ></StyledDatePicker>
+        ></S.StyledDatePicker>
         {isMain ? (
           <MainCalenderIcon
             style={{
@@ -250,33 +249,3 @@ const Calender = ({
 };
 
 export default Calender;
-
-const StyledDatePicker = styled(DatePicker)<{
-  width: number;
-  height: number;
-  borderRadius: number;
-  fontSize?: number;
-}>`
-  width: ${({ width }) => width}px;
-  height: ${({ height }) => height}px;
-  background-color: ${({ theme }) => theme.COLOR['gray-5']};
-  color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme, fontSize }) =>
-    fontSize ? fontSize : theme.TEXT_SIZE['text-18']};
-  border-radius: ${({ borderRadius }) => borderRadius}px;
-  display: flex;
-  padding-left: 0.7rem;
-  caret-color: transparent;
-`;
-
-const DateText = styled.div<{ isMain: boolean }>`
-  color: ${({ isMain }) => (isMain ? '#E9D7EF' : '#767676')};
-  position: absolute;
-  bottom: 27px;
-  left: 15px;
-  font-weight: 400;
-`;
-
-export const S = {
-  DateText,
-};
