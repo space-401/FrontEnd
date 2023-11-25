@@ -1,3 +1,6 @@
+import { DEFAULT_POSITION } from '@/constants';
+import { MapType, MarkerType } from '@/types';
+import { Box, Modal } from '@mui/material';
 import React, {
   Dispatch,
   KeyboardEvent,
@@ -6,15 +9,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Box, Modal } from '@mui/material';
-import { S } from './style';
 import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
-import { DEFAULT_POSITION } from '@/constants';
-import { MapType, MarkerType } from '@/types';
-import { MarkerContents } from '@/components/Main';
 import { EventMarkerContainer } from '@/components/Create';
+import { MarkerContents } from '@/components/Main';
 import { Pagination } from '@/components/common';
+import { S } from './style';
 
 type searchModalType = {
   isOpen: boolean;

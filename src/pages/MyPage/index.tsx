@@ -1,15 +1,15 @@
-import { S } from './style';
-import { ReactComponent as AccountSvg } from '@/assets/svg/mainSetting/user.svg';
+import { Suspense, useState } from 'react';
 import { ReactComponent as BookMarkSvg } from '@/assets/svg/bookmark/empty.svg';
 import { ReactComponent as FolderSvg } from '@/assets/svg/folder.svg';
-import { Suspense, useState } from 'react';
+import { ReactComponent as AccountSvg } from '@/assets/svg/mainSetting/user.svg';
 import {
   AccountManagement,
   AccountManagementSkeleton,
   BookMarkList,
-  MyPostOrCommentList,
   MyBookMarkListSkeleton,
+  MyPostOrCommentList,
 } from '@/components/MyPage';
+import { S } from './style';
 
 const MyPage = () => {
   const [state, setState] = useState(0);

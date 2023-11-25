@@ -1,6 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
 import { inviteProps, postSpaceInvite } from '@/apis';
 import { ApiResponseType } from '@/types';
+import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 export const useSpaceUserInviteMutation = () => {

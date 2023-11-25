@@ -1,6 +1,6 @@
+import { SpaceInfoBackPropsType } from '@/types';
 import { Avatars } from '@/components/common';
 import S from './style';
-import { SpaceInfoBackPropsType } from '@/types';
 
 export const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
   const { item, isBig } = props;

@@ -1,5 +1,5 @@
-import { flexCenter } from '@/styles/common';
 import styled, { css } from 'styled-components';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   @media ${({ theme }) => theme.DEVICE.tablet} {

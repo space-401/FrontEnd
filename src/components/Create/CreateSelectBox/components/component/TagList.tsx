@@ -1,6 +1,6 @@
 import type { TagListProps } from '@/types';
-import S from '../style';
 import { ReactComponent } from '@/assets/svg/trash.svg';
+import S from '../style';
 
 export const TagList = (props: TagListProps) => {
   const { Item } = props;

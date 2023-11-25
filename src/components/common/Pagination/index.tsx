@@ -1,5 +1,5 @@
-import S from './style';
 import { PaginationType } from '@/types';
+import S from './style';
 
 export const Pagination = (props: PaginationType) => {
   const { page, movePage, total, itemLength } = props;

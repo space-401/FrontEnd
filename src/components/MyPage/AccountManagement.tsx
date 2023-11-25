@@ -1,17 +1,17 @@
-import { A } from './style';
-import { ReactElement } from 'react';
-import { ReactComponent as KaKaoSvg } from '@/assets/svg/api/kakao.svg';
-import { ReactComponent as NaverSvg } from '@/assets/svg/api/naver.svg';
-import { ReactComponent as GoogleSvg } from '@/assets/svg/api/google.svg';
+import { PATH } from '@/constants';
 import {
-  useUserInfoQuery,
   useConfirmModalOpen,
   useDeleteKkiriUserMutation,
+  useUserInfoQuery,
 } from '@/hooks';
-import { useNavigate } from 'react-router-dom';
-import { PATH } from '@/constants';
 import { useLogOutMutation } from '@/hooks';
 import { toastColorMessage } from '@/utils';
+import { ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as GoogleSvg } from '@/assets/svg/api/google.svg';
+import { ReactComponent as KaKaoSvg } from '@/assets/svg/api/kakao.svg';
+import { ReactComponent as NaverSvg } from '@/assets/svg/api/naver.svg';
+import { A } from './style';
 
 export const AccountManagement = () => {
   const { MyInfoData } = useUserInfoQuery();

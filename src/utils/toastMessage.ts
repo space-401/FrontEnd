@@ -1,5 +1,5 @@
-import toast from 'react-hot-toast';
 import { theme } from '@/styles';
+import toast from 'react-hot-toast';
 
 export const toastColorMessage = (message: string) => {
   toast(message, {

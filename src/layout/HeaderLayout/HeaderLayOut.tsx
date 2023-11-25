@@ -1,20 +1,20 @@
-import { S } from './style';
-import { Outlet } from 'react-router-dom';
+import { Header, HeaderSkeleton } from '@/layout';
+import { AlertInner, ConfirmInner, DetailInner } from '@/modal';
 import {
-  Modal as DetailModal,
   Modal as AlertModal,
   Modal as ConfirmModal,
+  Modal as DetailModal,
 } from '@mui/material';
+import { motion, useScroll } from 'framer-motion';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 import {
   useAlertModalStore,
   useConfirmModalStore,
   useDetailModalStore,
 } from '@/store/modal';
-import { DetailInner, ConfirmInner, AlertInner } from '@/modal';
-import { Suspense } from 'react';
-import { HeaderSkeleton, Header } from '@/layout';
 import { DetailInnerSkeleton } from '@/components/Detail';
-import { motion, useScroll } from 'framer-motion';
+import { S } from './style';
 
 export const HeaderLayOut = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =

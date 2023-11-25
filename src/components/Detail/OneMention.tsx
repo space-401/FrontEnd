@@ -1,6 +1,6 @@
-import S from './style';
-import Avatar from '@mui/material/Avatar';
 import { OneMentionType } from '@/types';
+import Avatar from '@mui/material/Avatar';
+import S from './style';
 
 export const OneMention = (props: OneMentionType) => {
   const { userList, suggestion } = props;

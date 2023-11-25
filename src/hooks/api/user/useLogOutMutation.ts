@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
 import { postLogout } from '@/apis';
-import { tokenStorage } from '@/utils';
-import { useNavigate } from 'react-router-dom';
 import { PATH } from '@/constants';
+import { tokenStorage } from '@/utils';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 export const useLogOutMutation = () => {
   const navigate = useNavigate();

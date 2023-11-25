@@ -1,8 +1,8 @@
-import { O } from './style';
 import type { TagType } from '@/types';
 import { getFormatDate } from '@/utils';
-import { ReactComponent as PlaceIcon } from '@/assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
+import { ReactComponent as PlaceIcon } from '@/assets/svg/markerIcon.svg';
+import { O } from './style';
 
 type OnePostPropType = {
   postTitle: string;

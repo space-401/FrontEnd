@@ -1,7 +1,7 @@
-import { S } from './style';
-import { BasicBox, BasicButton } from '@/components/common';
-import { ReactComponent as GoArrowIcon } from '@/assets/svg/goArrowIcon.svg';
 import { Box } from '@mui/material';
+import { ReactComponent as GoArrowIcon } from '@/assets/svg/goArrowIcon.svg';
+import { BasicBox, BasicButton } from '@/components/common';
+import { S } from './style';
 
 type WelcomeModalProps = {
   spaceTitle: string;

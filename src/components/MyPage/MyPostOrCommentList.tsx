@@ -1,11 +1,11 @@
-import { A, M } from './style';
 import { Suspense, useState } from 'react';
 import {
+  MyBookMarkListSkeleton,
   MyCommentList,
   MyCommentListSkeleton,
   MyPostList,
-  MyBookMarkListSkeleton,
 } from '@/components/MyPage';
+import { A, M } from './style';
 
 export const MyPostOrCommentList = () => {
   const [isMyPost, setIsMyPost] = useState(true);

@@ -1,6 +1,5 @@
-import { rest, RestHandler } from 'msw';
-
 import { END_POINTS, HTTP_STATUS_CODE, PATH } from '@/constants';
+import { RestHandler, rest } from 'msw';
 import {
   accountInfo,
   bookMarkList,

@@ -1,5 +1,5 @@
 import type { OneSpaceType, SpaceInfoType, SpaceResponseType } from '@/types';
-import { tagList, userList, postList } from '@/mocks/data/';
+import { postList, tagList, userList } from '@/mocks/data/';
 
 /**
  * 스페이스 정보에 대한 목 데이터

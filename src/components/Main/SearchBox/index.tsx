@@ -1,7 +1,7 @@
 import type { SearchProps } from '@/types';
-import S from './style';
 import React, { FormEvent, useState } from 'react';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
+import S from './style';
 
 export const SearchBox = (props: SearchProps) => {
   const { placeholder, movePage, initialKeyword = '', height, width } = props;

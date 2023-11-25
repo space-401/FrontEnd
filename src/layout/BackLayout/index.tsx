@@ -1,9 +1,9 @@
-import { ReactComponent as BackIcon } from '@/assets/svg/backIcon.svg';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { S } from './style';
-import { Modal as AlertModal, Modal as ConfirmModal } from '@mui/material';
-import { useAlertModalStore, useConfirmModalStore } from '@/store/modal';
 import { AlertInner, ConfirmInner } from '@/modal';
+import { Modal as AlertModal, Modal as ConfirmModal } from '@mui/material';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { ReactComponent as BackIcon } from '@/assets/svg/backIcon.svg';
+import { useAlertModalStore, useConfirmModalStore } from '@/store/modal';
+import { S } from './style';
 
 export const BackLayout = () => {
   const navigate = useNavigate();

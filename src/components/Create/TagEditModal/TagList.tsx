@@ -1,6 +1,6 @@
-import S from '@/components/Create/CreateSelectBox/components/style';
-import { ReactComponent } from '@/assets/svg/trash.svg';
 import { TagType } from '@/types';
+import { ReactComponent } from '@/assets/svg/trash.svg';
+import S from '@/components/Create/CreateSelectBox/components/style';
 
 type TagListProps = {
   onDeleteTag: () => void;

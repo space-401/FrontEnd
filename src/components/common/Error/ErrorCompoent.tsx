@@ -1,10 +1,10 @@
-import S from './style';
-import { ReactComponent as ErrorIcon } from '@/assets/svg/error/error.svg';
-import { BasicButton } from '@/components/common';
-import { theme } from '@/styles';
-import { isObjectKey } from '@/utils';
 import { HTTP_ERROR_MESSAGE, HTTP_STATUS_CODE } from '@/constants';
 import { useResetError } from '@/hooks';
+import { theme } from '@/styles';
+import { isObjectKey } from '@/utils';
+import { ReactComponent as ErrorIcon } from '@/assets/svg/error/error.svg';
+import { BasicButton } from '@/components/common';
+import S from './style';
 
 type PropsType = {
   statusCode?: number;

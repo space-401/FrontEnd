@@ -1,37 +1,37 @@
-import { S, mentionStyle } from '@/modal/Detail/style';
-import { Box, Chip, IconButton } from '@mui/material';
-import { getFormatDate, getFormatUser } from '@/utils';
-import { Avatars } from '@/components/common';
-import { MenuToggle, DetailComments } from '@/components/Main';
-import { OneMention } from '@/components/Detail';
+import { PATH } from '@/constants';
 import {
-  useDimensions,
-  useCommentMutation,
-  usePostDeleteMutation,
-  useConfirmModalOpen,
   UseBookMarkMutation,
+  useCommentMutation,
+  useConfirmModalOpen,
+  useDimensions,
+  usePostDeleteMutation,
   usePostDetailQuery,
 } from '@/hooks';
+import { S, mentionStyle } from '@/modal/Detail/style';
+import { getFormatDate, getFormatUser } from '@/utils';
 import { toastColorMessage } from '@/utils';
-import { PATH } from '@/constants';
-import { useDetailModalStore } from '@/store/modal';
-import { useNavigate } from 'react-router-dom';
-import React, { useRef, useState } from 'react';
+import { Box, Chip, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
-import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
-import { ReactComponent as MenuSvg } from '@/assets/svg/menu.svg';
-import { ReactComponent as MarkerSvg } from '@/assets/svg/markerIcon.svg';
-import { ReactComponent as BookMarkFillSvg } from '@/assets/svg/bookmark/fill.svg';
-import { ReactComponent as BookMarkEmptySvg } from '@/assets/svg/bookmark/empty.svg';
-import kakaoMapSvg from '@/assets/svg/kakaomapMarker.svg';
 import {
   Mention,
   MentionsInput,
   OnChangeHandlerFunc,
   SuggestionDataItem,
 } from 'react-mentions';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import { ReactComponent as BookMarkEmptySvg } from '@/assets/svg/bookmark/empty.svg';
+import { ReactComponent as BookMarkFillSvg } from '@/assets/svg/bookmark/fill.svg';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
+import kakaoMapSvg from '@/assets/svg/kakaomapMarker.svg';
+import { ReactComponent as MarkerSvg } from '@/assets/svg/markerIcon.svg';
+import { ReactComponent as MenuSvg } from '@/assets/svg/menu.svg';
+import { useDetailModalStore } from '@/store/modal';
+import { OneMention } from '@/components/Detail';
+import { DetailComments, MenuToggle } from '@/components/Main';
+import { Avatars } from '@/components/common';
 
 export const DetailInner = React.forwardRef(
   (_, forwardRef: React.ForwardedRef<HTMLDivElement>) => {

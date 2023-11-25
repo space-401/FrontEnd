@@ -1,13 +1,13 @@
-import S from './style';
-import Avatar from '@mui/material/Avatar';
+import { useCommentDeleteMutation, useCommentMutation } from '@/hooks';
+import type { OneCommentType } from '@/types';
 import { timeHelper } from '@/utils';
-import React, { ChangeEvent, useState } from 'react';
 import { TextareaAutosize } from '@mui/material';
-import { ReactComponent as MyCommentSvg } from '@/assets/svg/moreIcon.svg';
+import Avatar from '@mui/material/Avatar';
+import React, { ChangeEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
-import { useCommentMutation, useCommentDeleteMutation } from '@/hooks';
-import type { OneCommentType } from '@/types';
+import { ReactComponent as MyCommentSvg } from '@/assets/svg/moreIcon.svg';
+import S from './style';
 
 export const OneComment = (props: OneCommentType) => {
   const { ReplyOpen, ReplyClose, item, postId, isReply, userList, spaceId } =

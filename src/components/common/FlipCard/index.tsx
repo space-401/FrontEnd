@@ -1,6 +1,6 @@
-import S from './style';
-import { PostInfoBack, SpaceInfoBack } from './Back';
 import { OneSpaceType, SpacePostType } from '@/types';
+import { PostInfoBack, SpaceInfoBack } from './Back';
+import S from './style';
 
 export type PostInfoBackPropsType = {
   item: SpacePostType;

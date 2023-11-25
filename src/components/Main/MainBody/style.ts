@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import { FLIP_CARD } from '@/constants';
 import { flexCenter } from '@/styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 24px 24px 0;

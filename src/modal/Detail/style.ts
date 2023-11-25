@@ -1,6 +1,6 @@
+import { theme } from '@/styles';
 import styled from 'styled-components';
 import { modalBackGround, omitText } from '@/styles/common';
-import { theme } from '@/styles';
 
 const Container = styled.div`
   ${modalBackGround};

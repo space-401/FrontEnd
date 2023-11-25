@@ -1,7 +1,7 @@
-import S from './style';
-import { ReactComponent as RightSvg } from '@/assets/svg/landing/second_right.svg';
-import { ReactComponent as LeftSvg } from '@/assets/svg/landing/second_left.svg';
 import { SectionProps } from '@/types';
+import { ReactComponent as LeftSvg } from '@/assets/svg/landing/second_left.svg';
+import { ReactComponent as RightSvg } from '@/assets/svg/landing/second_right.svg';
+import S from './style';
 
 export const SecondSection = ({ marginTop }: SectionProps) => {
   return (

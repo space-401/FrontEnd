@@ -1,5 +1,4 @@
 import type { RestHandler } from 'msw';
-
 import {
   commentHandlers,
   postHandlers,

@@ -1,10 +1,10 @@
+import { PostInfoBackPropsType } from '@/types';
+import { getFormatDate } from '@/utils';
+import { Chip } from '@mui/material';
+import { v4 as uuid } from 'uuid';
+import { ReactComponent as MapIcon } from '@/assets/svg/markerIcon.svg';
 import { Avatars } from '@/components/common';
 import S from './style';
-import { getFormatDate } from '@/utils';
-import { ReactComponent as MapIcon } from '@/assets/svg/markerIcon.svg';
-import { Chip } from '@mui/material';
-import { PostInfoBackPropsType } from '@/types';
-import { v4 as uuid } from 'uuid';
 
 export const PostInfoBack = (props: PostInfoBackPropsType) => {
   const { item, isBig } = props;

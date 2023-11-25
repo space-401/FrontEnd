@@ -1,9 +1,9 @@
-import { KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import type { SelectBoxProps, selectType } from '@/types';
-import S from './style';
 import { useAlertModalOpen, useDimensions } from '@/hooks';
-import { SelectList, MenuToggle, MenuList } from './components';
+import type { SelectBoxProps, selectType } from '@/types';
+import { motion } from 'framer-motion';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { MenuList, MenuToggle, SelectList } from './components';
+import S from './style';
 
 export const CreateSelectBox = (props: SelectBoxProps) => {
   const {

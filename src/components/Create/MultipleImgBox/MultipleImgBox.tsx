@@ -1,9 +1,9 @@
-import S from './style';
-import { ReactComponent as PlusPhotoIcon } from '@/assets/svg/photo/plusIcon.svg';
-import { ReactComponent as DeleteIcon } from '@/assets/svg/photo/deleteIcon.svg';
+import { ImageType, ImagesArrType } from '@/types';
 import React, { useEffect, useRef, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { ImagesArrType, ImageType } from '@/types';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/photo/deleteIcon.svg';
+import { ReactComponent as PlusPhotoIcon } from '@/assets/svg/photo/plusIcon.svg';
+import S from './style';
 
 type MultiBoxType = {
   imageArr: ImagesArrType;

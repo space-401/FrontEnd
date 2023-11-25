@@ -1,9 +1,9 @@
-import { S } from './style';
-import { OnePostMapCard } from '@/components/Main';
 import { SpacePostType } from '@/types';
-import { Dispatch, SetStateAction } from 'react';
 import { getFormatUser } from '@/utils';
+import { Dispatch, SetStateAction } from 'react';
+import { OnePostMapCard } from '@/components/Main';
 import { Pagination } from '@/components/common';
+import { S } from './style';
 
 type LeftSectionPropType = {
   postList: SpacePostType[];

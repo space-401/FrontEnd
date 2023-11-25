@@ -1,6 +1,6 @@
-import S from './style';
 import { LeftSectionSkeleton } from '@/components/Main';
 import { KSkeleton } from '@/components/common';
+import S from './style';
 
 export const PostMapSkeleton = () => {
   return (

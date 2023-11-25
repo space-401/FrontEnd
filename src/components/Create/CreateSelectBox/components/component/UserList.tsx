@@ -1,6 +1,6 @@
+import type { UserListProps } from '@/types';
 import Avatar from '@mui/material/Avatar';
 import S from '../style';
-import type { UserListProps } from '@/types';
 
 export const UserList = (prop: UserListProps) => {
   const { Item } = prop;

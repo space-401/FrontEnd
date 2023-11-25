@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import { getSpaceDetail } from '@/apis';
 import type { SpaceInfoType } from '@/types';
+import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 export const useSpaceInfoQuery = (spaceId: string) => {

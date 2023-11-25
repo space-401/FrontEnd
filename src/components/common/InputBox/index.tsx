@@ -1,5 +1,5 @@
-import S from '@/components/common/InputBox/style';
 import { ReactElement } from 'react';
+import S from '@/components/common/InputBox/style';
 
 type InputBoxProps = {
   width?: number;

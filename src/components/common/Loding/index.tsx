@@ -1,6 +1,6 @@
-import { S } from './style';
 import { Box } from '@mui/material';
 import LoadingGIF from '@/assets/loading.gif';
+import { S } from './style';
 
 export const Loading = () => {
   return (

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import AOS from 'aos';
+import { useEffect, useState } from 'react';
 
 export const useScript = (src: string): [boolean, Error | Event | null] => {
   const [loading, setLoading] = useState(true);

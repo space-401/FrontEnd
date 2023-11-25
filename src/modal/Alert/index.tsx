@@ -1,7 +1,7 @@
-import React from 'react';
 import { Box } from '@mui/material';
-import { S } from './style';
+import React from 'react';
 import { useAlertModalStore } from '@/store/modal';
+import { S } from './style';
 
 export const AlertInner = React.forwardRef((_, ref) => {
   const { alertState, ModalClose } = useAlertModalStore((state) => state);

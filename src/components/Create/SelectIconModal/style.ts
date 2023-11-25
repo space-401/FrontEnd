@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { flexCenter, modalBackGround } from '@/styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   ${modalBackGround};

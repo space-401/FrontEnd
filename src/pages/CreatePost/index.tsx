@@ -1,47 +1,47 @@
-import { S } from './style';
 import {
-  BasicBox,
-  InputBox,
-  TextAreaBox,
-  CircleIcon,
-  BasicButton,
-  Calender,
-} from '@/components/common';
+  useAlertModalOpen,
+  useConfirmModalOpen,
+  useInputs,
+  usePostCreateMutation,
+  usePostDetailQuery,
+  usePostUpdateMutation,
+  useSpaceInfoQuery,
+} from '@/hooks';
+import { theme } from '@/styles';
+import type {
+  DateInfoType,
+  ImageType,
+  ImagesArrType,
+  MapType,
+  selectType,
+} from '@/types';
+import {
+  convertImgArrToObj,
+  onConvertedTagToSelectType,
+  onConvertedUserToSelectType,
+} from '@/utils';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
 import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
+import { usePhotoModalStore } from '@/store/modal';
+import { PATH } from '@/constants/path';
 import {
+  CharacterCounter,
   CreateSelectBox,
   ImagesEditModal,
   ImgSlider,
   SearchModal,
-  CharacterCounter,
 } from '@/components/Create';
-import { useEffect, useRef, useState } from 'react';
-import { theme } from '@/styles';
-import { usePhotoModalStore } from '@/store/modal';
 import {
-  useInputs,
-  usePostDetailQuery,
-  useAlertModalOpen,
-  useSpaceInfoQuery,
-  usePostCreateMutation,
-  usePostUpdateMutation,
-  useConfirmModalOpen,
-} from '@/hooks';
-import type {
-  MapType,
-  DateInfoType,
-  selectType,
-  ImagesArrType,
-  ImageType,
-} from '@/types';
-import { useNavigate, useParams } from 'react-router-dom';
-import {
-  onConvertedTagToSelectType,
-  onConvertedUserToSelectType,
-  convertImgArrToObj,
-} from '@/utils';
-import { PATH } from '@/constants/path';
+  BasicBox,
+  BasicButton,
+  Calender,
+  CircleIcon,
+  InputBox,
+  TextAreaBox,
+} from '@/components/common';
+import { S } from './style';
 
 const CreatePost = () => {
   const params = useParams();

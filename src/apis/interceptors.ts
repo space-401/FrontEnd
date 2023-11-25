@@ -1,7 +1,7 @@
-import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { HTTPError, axiosInstance, getNewAccessToken } from '@/apis';
 import { ERROR_CODE, HTTP_STATUS_CODE, PATH } from '@/constants';
-import { axiosInstance, HTTPError, getNewAccessToken } from '@/apis';
 import { tokenStorage } from '@/utils';
+import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 export interface ErrorResponseData {
   statusCode?: number;

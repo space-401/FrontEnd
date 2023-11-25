@@ -1,11 +1,11 @@
-import { S } from './style';
+import { PATH } from '@/constants';
+import { useSpaceListQuery } from '@/hooks';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import { ReactComponent as SelectLogo } from '@/assets/svg/selectlogo.svg';
 import { BasicButton, FlipCard } from '@/components/common';
-import { useSpaceListQuery } from '@/hooks';
-import { useNavigate } from 'react-router-dom';
-import { PATH } from '@/constants';
-import { v4 as uuid } from 'uuid';
+import { S } from './style';
 
 const SelectSpace = () => {
   const navigate = useNavigate();

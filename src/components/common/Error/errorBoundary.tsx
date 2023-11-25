@@ -1,8 +1,8 @@
-import { Component } from 'react';
 import { HTTPError } from '@/apis';
-import { ErrorComponent } from './ErrorCompoent';
 import { HTTP_STATUS_CODE } from '@/constants';
+import { Component } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ErrorComponent } from './ErrorCompoent';
 
 interface Props {
   message?: string;

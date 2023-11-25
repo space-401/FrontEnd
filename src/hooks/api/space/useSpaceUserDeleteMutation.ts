@@ -1,7 +1,7 @@
+import { deleteSpaceUser } from '@/apis';
 import type { ApiResponseType } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { deleteSpaceUser } from '@/apis';
 
 type deleteSpaceType = {
   spaceId: number;

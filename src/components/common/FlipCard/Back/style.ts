@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { omitText } from '@/styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div<{ isBig: boolean }>`
   width: 100%;

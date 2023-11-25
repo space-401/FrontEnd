@@ -1,5 +1,5 @@
-import { END_POINTS } from '@/constants';
 import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
 import type { ApiResponseType, SubmitCommentType } from '@/types';
 
 export const postComment = async (commentInfo: SubmitCommentType) => {

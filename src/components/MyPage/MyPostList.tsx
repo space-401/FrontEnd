@@ -1,9 +1,9 @@
-import { A, B } from './style';
-import { useState } from 'react';
-import { Pagination } from '@/components/common';
-import { OneMyPostList } from '@/components/MyPage';
 import { useMyPostListQuery } from '@/hooks';
+import { useState } from 'react';
 import { v4 } from 'uuid';
+import { OneMyPostList } from '@/components/MyPage';
+import { Pagination } from '@/components/common';
+import { A, B } from './style';
 
 export const MyPostList = () => {
   const [curPage, setCurPage] = useState<number>(0);

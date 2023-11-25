@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/apis';
-import type { MyCommentListType } from '@/types';
 import { END_POINTS } from '@/constants';
+import type { MyCommentListType } from '@/types';
 
 export const getMyCommentList = async (page: number) => {
   const { data } = await axiosInstance.get<MyCommentListType>(

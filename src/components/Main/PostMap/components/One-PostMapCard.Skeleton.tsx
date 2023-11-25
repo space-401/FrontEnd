@@ -1,5 +1,5 @@
-import { O } from './style';
 import { KSkeleton } from '@/components/common';
+import { O } from './style';
 
 export const OnePostMapCardSkeleton = () => {
   return (

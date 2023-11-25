@@ -1,16 +1,16 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { PrivateRoute, Lazy, VisitorRoute } from '@/router';
 import { PATH } from '@/constants';
+import { BackLayout, HeaderLayOut } from '@/layout';
+import { Lazy, PrivateRoute, VisitorRoute } from '@/router';
 import { Suspense } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import Auth from '@/pages/Auth';
+import LandingPage from '@/pages/Landing';
+import { CreatePostSkeleton } from '@/components/Create';
+import { CreateSpaceSkeleton } from '@/components/Create';
 import { MainPageSkeleton } from '@/components/Main';
 import { MyPageSkeleton } from '@/components/MyPage';
-import { CreatePostSkeleton } from '@/components/Create';
-import { HeaderLayOut, BackLayout } from '@/layout';
 import { SelectSpaceSkeleton } from '@/components/SelectSpace';
-import { CreateSpaceSkeleton } from '@/components/Create';
-import { Loading, ErrorComponent, ErrorBoundary } from '@/components/common';
-import LandingPage from '@/pages/Landing';
-import Auth from '@/pages/Auth';
+import { ErrorBoundary, ErrorComponent, Loading } from '@/components/common';
 
 export const createRouter = (reset: () => void) => {
   return createBrowserRouter([

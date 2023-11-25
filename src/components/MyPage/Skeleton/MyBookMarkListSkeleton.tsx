@@ -1,5 +1,5 @@
-import { A, B } from '../style';
 import { OneTableListSkeleton } from '@/components/MyPage';
+import { A, B } from '../style';
 
 export const MyBookMarkListSkeleton = () => {
   return (
