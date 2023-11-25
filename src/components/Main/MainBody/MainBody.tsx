@@ -48,7 +48,7 @@ const MainBody = (props: PostListPropType) => {
 
   let query = {};
 
-  if (keyword?.trim().length !== 0) {
+  if (keyword?.trim().length !== 0 && keyword !== null) {
     query = { ...query, keyword };
   }
   if (userId.length !== 0) {
@@ -57,10 +57,10 @@ const MainBody = (props: PostListPropType) => {
   if (tagId.length !== 0) {
     query = { ...query, tagId };
   }
-  if (startDate?.length !== 0) {
+  if (startDate?.length !== 0 && startDate !== null) {
     query = { ...query, startDate };
   }
-  if (endDate?.length !== 0) {
+  if (endDate?.length !== 0 && endDate !== null) {
     query = { ...query, endDate };
   }
 
@@ -94,18 +94,18 @@ const MainBody = (props: PostListPropType) => {
     if (state.selectTagList.length !== 0) {
       select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
     }
-    if (selectedDate.startDate) {
+    if (selectedDate.startDate !== null && selectedDate.startDate) {
       select = {
         ...select,
         startDate: selectedDate.startDate,
         endDate: selectedDate.endDate,
       };
     }
-    if (searchParams.get('keyword')) {
+    if (keyword !== null && keyword) {
       select = { ...select, keyword: keyword };
     }
 
-    if (searchKeyword) {
+    if (searchKeyword !== null && searchKeyword) {
       select = { ...select, keyword: searchKeyword };
     }
 
