@@ -1,9 +1,9 @@
 import { axiosInstance } from '@apis/AxiosInstance';
-import { ApiResponseType } from '@type/response.type';
+import { SpaceFormResponse } from '@type/response.type';
 import { END_POINTS } from '@constants/api';
 
 export const patchSpace = async (spaceInfo: FormData) => {
-  const { data } = await axiosInstance.patch<ApiResponseType>(
+  const { data } = await axiosInstance.patch<SpaceFormResponse>(
     END_POINTS.SPACE,
     spaceInfo,
     {

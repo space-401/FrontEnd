@@ -26,16 +26,28 @@ import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation
 import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
 import { useSpaceDeleteMutation } from '@hooks/api/space/useSpaceDeleteMutation';
 import { toastColorMessage } from '@utils/toastMessage';
+import { PATH } from '@constants/path';
 
 const CreateSpace = () => {
   const params = useParams();
   const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
+  const isUpdateForm = Number.isInteger(spaceId);
 
-  const { postSpaceAction, isPostSuccess } = useSpaceCreateMutation();
-  const { updateSpaceAction, isUpdateSuccess } = useSpaceUpdateMutation();
+  const { postSpaceAction, isPostSuccess, createResponse } =
+    useSpaceCreateMutation();
+  const { updateSpaceAction, isUpdateSuccess, updateResponse } =
+    useSpaceUpdateMutation();
   const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
+
+  const formTitle = isUpdateForm ? '스페이스 설정하기' : '스페이스 만들기';
+  const formDescription = isUpdateForm
+    ? '스페이스의 정보를 수정합니다.'
+    : '우리만을 위한 스페이스를 새로 만들어요.';
+  const formResponseMessage = isUpdateForm
+    ? '스페이스 정보를 수정하였습니다.'
+    : '스페이스를 생성하였습니다.';
 
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -68,10 +80,10 @@ const CreateSpace = () => {
     if (spaceId) {
       if (!spaceInfo?.isAdmin) {
         noAuthalertModalOpen();
-        navigate('/space');
+        navigate(PATH.SPACE);
       }
     }
-  }, []);
+  }, [navigate]);
 
   //아이콘 옵션 선택 모달 열기
   const onClickOptionModalOpen = () => {
@@ -196,17 +208,23 @@ const CreateSpace = () => {
       formData.append('spaceDTO', spaceDTO);
       postSpaceAction(formData);
     }
+  };
 
+  useEffect(() => {
     if (isUpdateSuccess || isPostSuccess) {
-      toastColorMessage('성공적으로 수정되었습니다.');
-      onMoveSpacePage();
-    }
-  };
-  const confirmOpen = useConfirmModalOpen();
+      toastColorMessage(formResponseMessage);
 
-  const onMoveSpacePage = () => {
-    navigate(`/space/${spaceId}`);
-  };
+      let movePath;
+      if (isUpdateForm) {
+        movePath = updateResponse?.spaceId;
+      } else {
+        movePath = createResponse?.spaceId;
+      }
+
+      navigate(PATH.SPACE_MAIN(String(movePath)));
+    }
+  }, [isUpdateSuccess, isPostSuccess]);
+  const confirmOpen = useConfirmModalOpen();
 
   //기본 아이콘 선택 함수
   const onSelectBasicIcon = (index: number) => {
@@ -255,20 +273,22 @@ const CreateSpace = () => {
       )}
       <S.TitleSection>
         <S.FlexBoxColumn>
-          <div>스페이스 설정하기</div>
-          <p>우리만을 위한 스페이스를 새로 만들어요.</p>
+          <div>{formTitle}</div>
+          <p>{formDescription}</p>
         </S.FlexBoxColumn>
-        <S.DeleteButton>
-          <BasicButton
-            onClick={deleteSpaceModalOpen}
-            backgroundColor={theme.COLOR.orange}
-            color={theme.COLOR.white}
-            fontSize={12}
-            height={40}
-          >
-            스페이스 삭제하기
-          </BasicButton>
-        </S.DeleteButton>
+        {isUpdateForm ?? (
+          <S.DeleteButton>
+            <BasicButton
+              onClick={deleteSpaceModalOpen}
+              backgroundColor={theme.COLOR.orange}
+              color={theme.COLOR.white}
+              fontSize={12}
+              height={40}
+            >
+              스페이스 삭제하기
+            </BasicButton>
+          </S.DeleteButton>
+        )}
       </S.TitleSection>
 
       {/*사진 편집 모달*/}

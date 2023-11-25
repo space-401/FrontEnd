@@ -32,6 +32,7 @@ import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import { usePostCreateMutation } from '@/hooks/api/post/usePostCreateMutation';
 import { usePostUpdateMutation } from '@/hooks/api/post/usePostUpdateMutation';
 import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
+import { PATH } from '@constants/path';
 
 const CreatePost = () => {
   const params = useParams();
@@ -47,10 +48,10 @@ const CreatePost = () => {
     if (postId) {
       if (!postDetailData?.isMine) {
         noAuthalertModalOpen();
-        navigate('/space');
+        navigate(PATH.SPACE);
       }
     }
-  }, []);
+  }, [navigate, postId]);
 
   const { createPostAction, postCreateSuccess } = usePostCreateMutation();
   const { updatePostAction, updatePostSuccess } = usePostUpdateMutation();
