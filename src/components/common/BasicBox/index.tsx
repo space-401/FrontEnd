@@ -1,4 +1,4 @@
-import S from '@/components/common/BasicBox/style';
+import S from './style';
 import { PropsWithChildren } from 'react';
 
 export type BasicBoxProp = {
@@ -9,9 +9,7 @@ export type BasicBoxProp = {
   backgroundImage?: string;
 };
 
-const BasicBox = (props: PropsWithChildren<BasicBoxProp>) => {
+export const BasicBox = (props: PropsWithChildren<BasicBoxProp>) => {
   const { children, ...Wrapperprops } = props;
   return <S.Wrapper {...Wrapperprops}>{children}</S.Wrapper>;
 };
-
-export default BasicBox;

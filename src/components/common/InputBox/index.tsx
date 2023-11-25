@@ -18,7 +18,7 @@ type InputBoxProps = {
   paddingTop?: number;
 };
 
-const InputBox = ({
+export const InputBox = ({
   type,
   placeholder,
   maxLength,
@@ -54,5 +54,3 @@ const InputBox = ({
     </S.InputWrapper>
   );
 };
-
-export default InputBox;

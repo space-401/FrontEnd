@@ -1,20 +1,23 @@
-import { ReactComponent as DefaultImage } from '@assets/svg/defaultImg/img1.svg';
-import FlipCard from '@components/common/FlipCard/FlipCard';
-import S from '@components/Main/MainBody/style';
+import { ReactComponent as DefaultImage } from '@/assets/svg/defaultImg/img1.svg';
+import S from './style';
 import { Suspense, useEffect, useState } from 'react';
-import type { selectType } from '@type/main.type';
-import SelectBox from '@components/Main/SelectBox';
-import MainSearchBox from '@components/Main/SearchBox';
-import PostMap from '@components/Main/PostMap';
-import Pagination from '@components/common/Pagination';
-import Calender from '@/components/common/Calender/Calender';
+import type {
+  selectType,
+  PostListFilterProps,
+  DateInfoType,
+  TagType,
+  UserType,
+} from '@/types';
+import {
+  SelectBox,
+  SearchBox,
+  PostMap,
+  PostMapSkeleton,
+} from '@/components/Main';
+import { Calender, FlipCard, Pagination } from '@/components/common';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSpacePostListQuery } from '@hooks/api/space/useSpacePostListQuery';
-import { PostListFilterProps } from '@type/main.type';
-import { UserType, TagType, DateInfoType } from '@/types/post.type';
-import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
-import PostMapSkeleton from '@components/Main/PostMap/PostMap.Skeleton';
-import { PATH } from '@constants/path';
+import { useSpacePostListQuery, useDetailModalOpen } from '@/hooks';
+import { PATH } from '@/constants';
 
 type PostListPropType = {
   userList: UserType[];
@@ -22,7 +25,7 @@ type PostListPropType = {
   selectState: boolean;
   spaceId: string;
 };
-const MainBody = (props: PostListPropType) => {
+export const MainBody = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page: string = searchParams.get('page') ?? '1';
@@ -177,7 +180,7 @@ const MainBody = (props: PostListPropType) => {
               : []
           }
         />
-        <MainSearchBox
+        <SearchBox
           movePage={movePage}
           initialKeyword={keyword ?? undefined}
           height={38}
@@ -238,5 +241,3 @@ const MainBody = (props: PostListPropType) => {
     </S.Wrapper>
   );
 };
-
-export default MainBody;

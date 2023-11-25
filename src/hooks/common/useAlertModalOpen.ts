@@ -1,5 +1,5 @@
-import { useAlertModalStore } from '@store/modal';
-import { AlertPropType } from '@type/modal.type';
+import { useAlertModalStore } from '@/store/modal';
+import type { AlertPropType } from '@/types';
 
 export const useAlertModalOpen = () => {
   const { ModalOpen, setAlertInfo } = useAlertModalStore((state) => state);

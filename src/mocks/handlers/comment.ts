@@ -1,11 +1,7 @@
 import { rest, RestHandler } from 'msw';
 
-import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
-import {
-  commentList,
-  deleteComment,
-  postComment,
-} from '@mocks/data/comment.mock';
+import { END_POINTS, HTTP_STATUS_CODE } from '@/constants';
+import { commentList, deleteComment, postComment } from '@/mocks/data';
 
 export const commentHandlers: RestHandler[] = [
   /**

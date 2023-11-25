@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
+import { flexCenter } from '@/styles';
 import type { BasicButtonProps } from './index';
 
 //비활성화시 색상

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { getComment } from '@apis/comment/getComment';
-import { CommentType } from '@type/comment.type';
+import { getComment } from '@/apis';
+import { CommentType } from '@/types';
 
 /**
  * @param postId 해당 포스트의 댓글 목록을 불러옵니다.

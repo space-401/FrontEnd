@@ -1,4 +1,4 @@
-import { flexCenter, modalBackGround } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles';
 import styled from 'styled-components';
 
 const UserContainer = styled.div`

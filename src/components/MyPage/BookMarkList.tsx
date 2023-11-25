@@ -1,11 +1,10 @@
-import { A } from '@components/MyPage/style';
+import { A } from './style';
 import { useState } from 'react';
-import Pagination from '@components/common/Pagination';
-import { useBookMarkListQuery } from '@hooks/api/user/useBookMarkListQuery';
-import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
-import { getFormatDate } from '@utils/formatter';
+import { Pagination } from '@/components/common';
+import { useBookMarkListQuery, useDetailModalOpen } from '@/hooks';
+import { getFormatDate } from '@/utils';
 
-const BookMarkList = () => {
+export const BookMarkList = () => {
   const [curPage, setCurPage] = useState(0);
 
   const { BookMarkListData } = useBookMarkListQuery(curPage);
@@ -65,5 +64,3 @@ const BookMarkList = () => {
     </>
   );
 };
-
-export default BookMarkList;

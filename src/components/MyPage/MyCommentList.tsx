@@ -1,14 +1,12 @@
-import { A, CL } from '@components/MyPage/style';
-import Pagination from '@components/common/Pagination';
+import { A, CL } from './style';
+import { Pagination } from '@/components/common';
 import { Fragment, useState } from 'react';
-import { getFormatDate } from '@utils/formatter';
-import { useMyCommentListQuery } from '@hooks/api/user/useMyCommentListQuery';
-import { timeHelper } from '@utils/time-helper';
-import { ReactComponent as FeatherSvg } from '@assets/svg/feather.svg';
-import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
+import { getFormatDate, timeHelper } from '@/utils';
+import { useMyCommentListQuery, useDetailModalOpen } from '@/hooks';
+import { ReactComponent as FeatherSvg } from '@/assets/svg/feather.svg';
 import { v4 } from 'uuid';
 
-const MyCommentList = () => {
+export const MyCommentList = () => {
   const [curPage, setCurPage] = useState(0);
 
   const { MyCommentListData } = useMyCommentListQuery(curPage);
@@ -77,5 +75,3 @@ const MyCommentList = () => {
     </>
   );
 };
-
-export default MyCommentList;

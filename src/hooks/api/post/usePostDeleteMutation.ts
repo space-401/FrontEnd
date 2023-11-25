@@ -1,8 +1,8 @@
-import type { ApiResponseType } from '@type/response.type';
+import type { ApiResponseType } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { deletePost } from '@/apis/post/deletePost';
-import { toastColorMessage } from '@utils/toastMessage';
+import { deletePost } from '@/apis';
+import { toastColorMessage } from '@/utils';
 
 export const usePostDeleteMutation = (spaceId: number) => {
   const queryClient = useQueryClient();

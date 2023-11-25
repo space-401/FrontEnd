@@ -1,9 +1,9 @@
-import { S } from '@components/Main/PostMap/components/style';
-import OnePostMapCard from '@components/Main/PostMap/components/One-PostMapCard';
-import { SpacePostType } from '@type/space.type';
+import { S } from './style';
+import { OnePostMapCard } from '@/components/Main';
+import { SpacePostType } from '@/types';
 import { Dispatch, SetStateAction } from 'react';
-import { getFormatUser } from '@utils/formatter';
-import Pagination from '@components/common/Pagination';
+import { getFormatUser } from '@/utils';
+import { Pagination } from '@/components/common';
 
 type LeftSectionPropType = {
   postList: SpacePostType[];
@@ -21,7 +21,7 @@ type LeftSectionPropType = {
   movePage: (pageNumber: number | undefined) => void;
 };
 
-const LeftSection = (props: LeftSectionPropType) => {
+export const LeftSection = (props: LeftSectionPropType) => {
   const {
     setIsSelect,
     setState,
@@ -75,5 +75,3 @@ const LeftSection = (props: LeftSectionPropType) => {
     </S.Wrapper>
   );
 };
-
-export default LeftSection;

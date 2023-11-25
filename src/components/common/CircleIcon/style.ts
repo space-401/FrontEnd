@@ -9,8 +9,6 @@ const CircleImg = styled.div<{ size: number; imgUrl: string }>`
   background-size: cover;
 `;
 
-const S = {
+export const S = {
   CircleImg,
 };
-
-export default S;

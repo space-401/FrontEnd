@@ -88,7 +88,7 @@ const ButtonContainer = styled.div`
   margin-left: auto;
 `;
 
-const S = {
+export const S = {
   Wrapper,
   TitleSection,
   Form,
@@ -96,5 +96,3 @@ const S = {
   InputContainer,
   ButtonContainer,
 };
-
-export default S;

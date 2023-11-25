@@ -1,9 +1,9 @@
-import type { SearchProps } from '@type/main.type';
-import S from '@components/Main/SearchBox/style';
+import type { SearchProps } from '@/types';
+import S from './style';
 import React, { FormEvent, useState } from 'react';
-import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
+import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 
-const MainSearchBox = (props: SearchProps) => {
+export const SearchBox = (props: SearchProps) => {
   const { placeholder, movePage, initialKeyword = '', height, width } = props;
 
   const [keyword, setkeyword] = useState(initialKeyword);
@@ -31,4 +31,3 @@ const MainSearchBox = (props: SearchProps) => {
     </S.Wrapper>
   );
 };
-export default MainSearchBox;

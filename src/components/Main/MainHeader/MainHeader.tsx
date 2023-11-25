@@ -1,18 +1,18 @@
-import { theme } from '@styles/theme/theme';
-import Avatars from '@components/common/AvatarGroup/Avatars';
-import { ReactComponent as SelectTableIcon } from '@assets/svg/filter/selecttableIcon.svg';
-import { ReactComponent as SelectMapIcon } from '@assets/svg/filter/selectmapIcon.svg';
-import { ReactComponent as DoneTableIcon } from '@assets/svg/filter/donetableIcon.svg';
-import { ReactComponent as DoneMapIcon } from '@assets/svg/filter/donemapIcon.svg';
-import S from '@components/Main/MainHeader/style';
-import type { MainHeaderPropType } from '@type/main.type';
-import SettingComponent from '@components/Main/Setting';
+import { theme } from '@/styles';
+import { Avatars } from '@/components/common';
+import { ReactComponent as SelectTableIcon } from '@/assets/svg/filter/selecttableIcon.svg';
+import { ReactComponent as SelectMapIcon } from '@/assets/svg/filter/selectmapIcon.svg';
+import { ReactComponent as DoneTableIcon } from '@/assets/svg/filter/donetableIcon.svg';
+import { ReactComponent as DoneMapIcon } from '@/assets/svg/filter/donemapIcon.svg';
+import S from './style';
+import type { MainHeaderPropType } from '@/types';
+import { SettingComponent } from '@/components/Main';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
+import { PATH } from '@/constants';
 
-const MainHeader = (prop: MainHeaderPropType) => {
+export const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;
   const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription, spacePw } =
     spaceInfo;
@@ -25,7 +25,7 @@ const MainHeader = (prop: MainHeaderPropType) => {
 
   return (
     <S.Wrapper>
-      <SettingModal sx={{ zIndex: 900 }} open={isOpen} onClose={onClose}>
+      <SettingModal sx={{ zAvatarGroup: 900 }} open={isOpen} onClose={onClose}>
         <SettingComponent
           spaceId={spaceId}
           spaceTitle={spaceTitle}
@@ -97,5 +97,3 @@ const MainHeader = (prop: MainHeaderPropType) => {
     </S.Wrapper>
   );
 };
-
-export default MainHeader;

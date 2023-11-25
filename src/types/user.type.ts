@@ -1,5 +1,4 @@
-import { MyCommentType } from '@type/space.type';
-import { UserType } from '@type/post.type';
+import { MyCommentType, UserType } from '@/types';
 
 export type AccountDataType = {
   loginState: SocialType;

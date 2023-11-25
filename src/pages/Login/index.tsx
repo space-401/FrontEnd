@@ -1,12 +1,10 @@
 import { theme } from '@/styles/theme/theme';
-import S from '@pages/Login/style';
-import { ReactComponent as KakaoIcon } from '@assets/svg/login/kakao.svg';
-import { ReactComponent as NaverIcon } from '@assets/svg/login/naver.svg';
-import { ReactComponent as GoogleIcon } from '@assets/svg/login/google.svg';
-import { ReactComponent as SignLogo } from '@assets/svg/signlogo.svg';
-import SocialKakao from '@/components/Auth/SocialKakao';
-import SocialNaver from '@/components/Auth/SocialNaver';
-import SocialGoogle from '@/components/Auth/SocialGoogle';
+import { S } from './style';
+import { ReactComponent as KakaoIcon } from '@/assets/svg/login/kakao.svg';
+import { ReactComponent as NaverIcon } from '@/assets/svg/login/naver.svg';
+import { ReactComponent as GoogleIcon } from '@/assets/svg/login/google.svg';
+import { ReactComponent as SignLogo } from '@/assets/svg/signlogo.svg';
+import { SocialKakao, SocialNaver, SocialGoogle } from '@/components/Auth';
 
 const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
@@ -54,4 +52,5 @@ const LoginPage = () => {
     </S.Wrapper>
   );
 };
+
 export default LoginPage;

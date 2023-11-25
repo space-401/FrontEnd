@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import S from '@modal/Confirm/style';
-import { useConfirmModalStore } from '@store/modal';
+import { S } from '@/modal/Confirm/style';
+import { useConfirmModalStore } from '@/store/modal';
 
-const ConfirmInner = React.forwardRef(
+export const ConfirmInner = React.forwardRef(
   (_, forwardRef: React.ForwardedRef<any>) => {
     const { confirmState, ModalClose } = useConfirmModalStore((state) => state);
     const {
@@ -41,5 +41,3 @@ const ConfirmInner = React.forwardRef(
     );
   }
 );
-
-export default ConfirmInner;

@@ -1,4 +1,5 @@
-import { omitText } from '@styles/common';
+import { omitText } from '@/styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div<{
   isOpen: boolean;
@@ -23,8 +24,6 @@ const Wrapper = styled.div<{
     max-width: ${({ width }) => width / 2 + 20}px;
   }
 `;
-
-import styled from 'styled-components';
 
 const LabelTitle = styled.div`
   font-size: 12px;

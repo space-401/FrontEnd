@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { getSpaceList } from '@apis/space/getSpaceList';
-import { OneSpaceType } from '@type/space.type';
+import { getSpaceList } from '@/apis';
+import { OneSpaceType } from '@/types';
 
 export const useSpaceListQuery = () => {
   const { data: spaceList } = useQuery<

@@ -1,8 +1,8 @@
-import S from '@components/Main/MainBody/style';
-import KSkeleton from '@components/common/Skeleton';
-import { FLIP_CARD } from '@constants/policy';
+import S from '@/components/Main/MainBody/style';
+import { KSkeleton } from '@/components/common';
+import { FLIP_CARD } from '@/constants';
 
-const PostList = () => {
+export const MainBodySkeleton = () => {
   return (
     <S.Wrapper>
       <S.FilterGroup>
@@ -88,5 +88,3 @@ const PostList = () => {
     </S.Wrapper>
   );
 };
-
-export default PostList;

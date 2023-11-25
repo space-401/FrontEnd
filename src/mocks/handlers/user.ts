@@ -1,15 +1,14 @@
 import { rest, RestHandler } from 'msw';
 
-import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
+import { END_POINTS, HTTP_STATUS_CODE, PATH } from '@/constants';
 import {
   accountInfo,
   bookMarkList,
   loginResponse,
   myCommentListAndInfo,
   myPostList,
-} from '@mocks/data/user.mock';
-import { successResponse } from '@mocks/data/response.mock';
-import { PATH } from '@constants/path';
+  successResponse,
+} from '@/mocks/data';
 
 export const userHandlers: RestHandler[] = [
   /**

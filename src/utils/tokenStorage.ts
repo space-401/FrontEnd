@@ -1,7 +1,7 @@
-import { deleteCookie, getCookie, hasCookie, setCookie } from '@utils/cookie';
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@constants/api';
+import { deleteCookie, getCookie, hasCookie, setCookie } from '@/utils';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/constants';
 
-const tokenStorage = {
+export const tokenStorage = {
   getAccessToken() {
     if (hasCookie(ACCESS_TOKEN_KEY)) {
       return getCookie(ACCESS_TOKEN_KEY);
@@ -40,5 +40,3 @@ const tokenStorage = {
     this.removeRefreshToken();
   },
 };
-
-export default tokenStorage;

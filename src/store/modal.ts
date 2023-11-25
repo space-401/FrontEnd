@@ -4,7 +4,7 @@ import {
   ConfirmModalType,
   DetailModalType,
   ModalType,
-} from '@type/modal.type';
+} from '@/types';
 
 export const useDetailModalStore = create<DetailModalType>((setState) => ({
   isOpen: false,

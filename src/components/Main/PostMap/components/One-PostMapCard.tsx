@@ -1,7 +1,7 @@
-import { O } from '@components/Main/PostMap/components/style';
-import type { TagType } from '@type/post.type';
-import { getFormatDate } from '@utils/formatter';
-import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
+import { O } from './style';
+import type { TagType } from '@/types';
+import { getFormatDate } from '@/utils';
+import { ReactComponent as PlaceIcon } from '@/assets/svg/markerIcon.svg';
 import { Chip } from '@mui/material';
 
 type OnePostPropType = {
@@ -14,7 +14,7 @@ type OnePostPropType = {
   isSelect: boolean;
   onClick: () => void;
 };
-const OnePostMapCard = (props: OnePostPropType) => {
+export const OnePostMapCard = (props: OnePostPropType) => {
   const {
     isSelect,
     onClick,
@@ -54,5 +54,3 @@ const OnePostMapCard = (props: OnePostPropType) => {
     </O.OneWrapper>
   );
 };
-
-export default OnePostMapCard;

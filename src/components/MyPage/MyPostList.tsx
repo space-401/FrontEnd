@@ -1,11 +1,11 @@
-import { A, B } from '@components/MyPage/style';
+import { A, B } from './style';
 import { useState } from 'react';
-import Pagination from '@components/common/Pagination';
-import { useMyPostListQuery } from '@hooks/api/user/useMyPostListQuery';
-import OneMyPostList from '@components/MyPage/OneMyPostList';
+import { Pagination } from '@/components/common';
+import { OneMyPostList } from '@/components/MyPage';
+import { useMyPostListQuery } from '@/hooks';
 import { v4 } from 'uuid';
 
-const MyPostList = () => {
+export const MyPostList = () => {
   const [curPage, setCurPage] = useState<number>(0);
 
   const { MyPostListData } = useMyPostListQuery(curPage);
@@ -44,5 +44,3 @@ const MyPostList = () => {
     </>
   );
 };
-
-export default MyPostList;

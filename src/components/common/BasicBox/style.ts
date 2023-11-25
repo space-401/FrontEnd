@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BasicBoxProp } from '.';
-import { flexCenter } from '@/styles/common';
+import { flexCenter } from '@/styles';
 
 const Wrapper = styled.div<BasicBoxProp>`
   width: ${(props) => props.width}px;

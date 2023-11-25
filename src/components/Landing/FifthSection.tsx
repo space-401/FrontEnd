@@ -1,9 +1,9 @@
-import S from '@components/Landing/style';
-import { SectionProps } from '@type/main.type';
-import { ReactComponent as BottomBackImg } from '@assets/svg/landing/landing_bottom.svg';
-import { ReactComponent as ArrowSvg } from '@assets/svg/landing/arrow_right.svg';
+import S from './style';
+import { SectionProps } from '@/types';
+import { ReactComponent as BottomBackImg } from '@/assets/svg/landing/landing_bottom.svg';
+import { ReactComponent as ArrowSvg } from '@/assets/svg/landing/arrow_right.svg';
 
-const FifthSection = ({ marginTop }: SectionProps) => {
+export const FifthSection = ({ marginTop }: SectionProps) => {
   const onClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -23,5 +23,3 @@ const FifthSection = ({ marginTop }: SectionProps) => {
     </S.Wrapper>
   );
 };
-
-export default FifthSection;

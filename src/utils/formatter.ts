@@ -1,4 +1,4 @@
-import { UserType } from '@type/post.type';
+import type { UserType } from '@/types';
 
 export const getFormatDate = (_: string) => {
   const date = new Date(_);

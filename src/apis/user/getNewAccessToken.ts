@@ -1,6 +1,6 @@
-import tokenStorage from '@/utils/tokenStorage';
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
+import { tokenStorage } from '@/utils';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
 
 export type TokenData = {
   newAccessToken: string;

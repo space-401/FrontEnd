@@ -1,4 +1,4 @@
-import { KAKAO_LOGIN_URL, LOGIN_REDIRECT_URI } from '@/constants/auth';
+import { KAKAO_LOGIN_URL, LOGIN_REDIRECT_URI } from '@/constants';
 
 export const SocialKakao = () => {
   const kakaoURL = `${KAKAO_LOGIN_URL}?client_id=${
@@ -9,5 +9,3 @@ export const SocialKakao = () => {
   };
   return { kakaoHandleLogin };
 };
-
-export default SocialKakao;

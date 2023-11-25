@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 
-const useScript = (src: string): [boolean, Error | Event | null] => {
+export const useScript = (src: string): [boolean, Error | Event | null] => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | Event | null>(null);
 
@@ -35,5 +35,3 @@ const useScript = (src: string): [boolean, Error | Event | null] => {
 
   return [loading, error];
 };
-
-export default useScript;

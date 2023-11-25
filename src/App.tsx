@@ -1,18 +1,17 @@
 import { RouterProvider } from 'react-router-dom';
-import '@styles/fonts/font.css';
-import { queryClient } from '@hooks/api/queryClient';
+import '@/styles/fonts/font.css';
+import { queryClient } from '@/hooks';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import GlobalStyles from '@styles/global';
+import { GlobalStyles, theme } from '@/styles';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '@styles/theme/theme';
 import {
   QueryClientProvider,
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import { worker } from '@mocks/browser';
-import { Dev } from '@constants/api';
-import createRouter from '@router/Router';
+import { worker } from '@/mocks/browser';
+import { Dev } from '@/constants';
+import { createRouter } from '@/router';
 
 function App() {
   if (Dev) {

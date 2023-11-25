@@ -1,7 +1,7 @@
-import type { ApiResponseType } from '@type/response.type';
+import type { ApiResponseType } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { deleteSpace } from '@apis/space/deleteSpace';
+import { deleteSpace } from '@/apis';
 
 export const useSpaceDeleteMutation = () => {
   const { mutate: deleteSpaceAction, isSuccess: isDeleteSuccess } = useMutation<
