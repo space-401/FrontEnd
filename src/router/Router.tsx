@@ -125,9 +125,9 @@ const createRouter = (reset: () => void) => {
         {
           path: PATH.HOME,
           element: (
-              <Suspense fallback={<Loading />}>
-                <LandingPage />
-              </Suspense>
+            <Suspense fallback={<Loading />}>
+              <LandingPage />
+            </Suspense>
           ),
         },
         {
