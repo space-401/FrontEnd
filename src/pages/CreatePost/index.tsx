@@ -76,9 +76,6 @@ const CreatePost = () => {
   });
   const { title, content } = values;
 
-  console.log(tagList);
-
-  console.log(userList);
   //선택한 장소 정보
   const [mapInfo, setMapInfo] = useState<MapType>({
     content: postDetailData ? postDetailData.placeTitle : '',
@@ -143,7 +140,6 @@ const CreatePost = () => {
             ...prevImageArr,
             images: [...prevImageArr.images, newImgObj],
           }));
-          console.log(imageArr);
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {

@@ -1,7 +1,6 @@
 import tokenStorage from '@utils/tokenStorage';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
-
 const useResetError = (resetError: () => void) => {
   const navigate = useNavigate();
   const accessToken = tokenStorage.getAccessToken();

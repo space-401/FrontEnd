@@ -36,7 +36,6 @@ const CreateSpace = () => {
   const { updateSpaceAction, isUpdateSuccess } = useSpaceUpdateMutation();
   const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
-  console.log('spaceInfo', spaceInfo);
 
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -184,7 +183,6 @@ const CreateSpace = () => {
     }
 
     if (spaceId) {
-      console.log('update', updateSpaceDTO);
       // JSON 데이터 추가
       const spaceDTO = new Blob([JSON.stringify(updateSpaceDTO)], {
         type: 'application/json',
