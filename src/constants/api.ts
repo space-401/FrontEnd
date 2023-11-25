@@ -1,11 +1,9 @@
 export const Product = process.env.NODE_ENV === 'production';
-export const Dev = process.env.NODE_ENV !== 'development';
+export const Dev = process.env.NODE_ENV === 'development';
 export const NETWORK = {
   RETRY_COUNT: 2,
   TIMEOUT: 10000,
 };
-
-// export const AXIOS_BASE_URL = Product ? import.meta.env.VITE_BACK_URL : '/';
 export const AXIOS_BASE_URL = import.meta.env.VITE_BACK_URL;
 export const END_POINTS = {
   USER: '/user',
