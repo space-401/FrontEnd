@@ -31,7 +31,7 @@ const MainPage = () => {
     if (!isFirst) {
       setModalNum(1);
     }
-  }, []);
+  }, [isFirst]);
 
   return (
     <>
