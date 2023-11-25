@@ -34,8 +34,8 @@ const SettingComponent = React.forwardRef(
     const { userUpdateAction } = useSpaceUserUpdateMutation(spaceId);
 
     const selfGetOutAction = () => {
-      console.log(userList[0].userId + '님이 방을 나갔습니다.');
-      navigate(PATH.HOME);
+      toastColorMessage(spaceTitle + ' 스페이스에서 나갔습니다.');
+      navigate(PATH.SPACE);
     };
 
     const selfGetOutFromSpaceHandler = () => {
