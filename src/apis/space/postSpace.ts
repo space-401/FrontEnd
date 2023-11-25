@@ -1,9 +1,9 @@
 import { axiosInstance } from '@apis/AxiosInstance';
-import { ApiResponseType } from '@type/response.type';
+import { SpaceFormResponse } from '@type/response.type';
 import { END_POINTS } from '@constants/api';
 
 export const postNewSpace = async (spaceInfo: FormData) => {
-  const response = await axiosInstance.post<ApiResponseType>(
+  const response = await axiosInstance.post<SpaceFormResponse>(
     END_POINTS.SPACE,
     spaceInfo,
     {
