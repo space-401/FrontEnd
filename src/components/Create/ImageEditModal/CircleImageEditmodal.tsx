@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import { ImageArrType } from '@/types/image.type';
 import CircleImageCropper from './CircleCropper';
 import { dataURItoFile } from '@/utils/fileConvertor';
+import useCompressImage from '@hooks/common/useCompressImage';
 
 type ModalType = {
   imageArr: ImageArrType;
@@ -27,20 +28,27 @@ const CircleImgEditModal = ({
 
   const cropperWidth = 500;
 
+  //사진을 압축함
+  const { compressImage, isLoading: isCompressedLoading } = useCompressImage();
+
   //하나의 이미지를 크롭해서 저장함.
-  const getCropData = (cropperRef: any) => {
+  const getCropData = async (cropperRef: any) => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
         .toDataURL();
 
-      setImageArr((prev) => ({
-        ...prev,
-        cropImage: newImage,
-        convertedImage: dataURItoFile(newImage),
-      }));
-      console.log('imageimage', imageArr);
-      ModalClose();
+      const convertedImage = dataURItoFile(newImage);
+      const compressedImage = await compressImage(convertedImage);
+
+      if (!isCompressedLoading && compressedImage) {
+        setImageArr((prev) => ({
+          ...prev,
+          cropImage: newImage,
+          convertedImage: compressedImage,
+        }));
+        ModalClose();
+      }
     }
   };
 

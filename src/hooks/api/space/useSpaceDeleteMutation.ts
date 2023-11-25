@@ -4,10 +4,12 @@ import type { AxiosError } from 'axios';
 import { deleteSpace } from '@apis/space/deleteSpace';
 
 export const useSpaceDeleteMutation = () => {
-  const { mutate: deleteSpaceAction } = useMutation<
+  const { mutate: deleteSpaceAction, isSuccess: isDeleteSuccess } = useMutation<
     ApiResponseType,
     AxiosError,
-    number
-  >((spaceId) => deleteSpace(spaceId));
-  return { deleteSpaceAction };
+    string
+  >({
+    mutationFn: (spaceId) => deleteSpace(spaceId),
+  });
+  return { deleteSpaceAction, isDeleteSuccess };
 };

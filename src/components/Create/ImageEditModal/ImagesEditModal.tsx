@@ -1,6 +1,6 @@
 import S from '@components/Create/ImageEditModal/style';
 import ImageCropper from '@/components/Create/ImageEditModal/Cropper';
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ReactComponent as PrevBtn } from '@assets/svg/chevron/chevron_left.svg';
 import { ReactComponent as NextBtn } from '@assets/svg/chevron/chevron_right.svg';
 import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
@@ -12,6 +12,7 @@ import { usePhotoModalStore } from '@/store/modal';
 import { theme } from '@/styles/theme/theme';
 import { ImagesArrType } from '@/types/image.type';
 import { dataURItoFile } from '@/utils/fileConvertor';
+import useCompressImage from '@hooks/common/useCompressImage';
 
 type ModalType = {
   handleFileChange: any;
@@ -58,18 +59,25 @@ const ImagesEditModal = ({
 
   const cropperWidth = 500;
 
+  const { compressImage, isLoading: isCompressedLoading } = useCompressImage();
+
   //하나의 이미지를 크롭해서 저장함.
-  const getCropData = (cropperRef: any) => {
+  const getCropData = async (cropperRef: any) => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
         .toDataURL(`image/jpeg`, 0.5);
+
       const convertedImage = dataURItoFile(newImage);
-      setImageArr((prev) => ({
-        ...prev,
-        cropImages: [...prev.cropImages, newImage],
-        convertedImages: [...prev.convertedImages, convertedImage],
-      }));
+      const compressedImage = await compressImage(convertedImage);
+
+      if (!isCompressedLoading && compressedImage) {
+        setImageArr((prev) => ({
+          ...prev,
+          cropImages: [...prev.cropImages, newImage],
+          convertedImages: [...prev.convertedImages, compressedImage],
+        }));
+      }
     }
   };
 

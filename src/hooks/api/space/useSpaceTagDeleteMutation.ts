@@ -1,8 +1,7 @@
 import type { ApiResponseType } from '@type/response.type';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 import { deleteSpaceTag, DeleteSpaceTagType } from '@apis/space/deleteSpaceTag';
-import { useQueryClient } from '@tanstack/react-query';
 
 export const useTagDeleteMutation = () => {
   const queryClient = useQueryClient();
