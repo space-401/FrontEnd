@@ -17,9 +17,10 @@ export const getSpacePostList = async (
   page: string,
   filter: FilterType
 ) => {
+  const searchValue = JSON.stringify({ spaceId, page, ...filter });
   const { data } = await axiosInstance.get<SpacePostListProps>(
     END_POINTS.SPACE_POST_LIST,
-    { params: { spaceId, page, ...filter } }
+    { params: { searchValue } }
   );
 
   return data;

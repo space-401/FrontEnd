@@ -9,14 +9,13 @@ import type { MainHeaderPropType } from '@type/main.type';
 import SettingComponent from '@components/Main/Setting';
 import { Modal as SettingModal } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PATH } from '@constants/path';
 
 const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;
   const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription, spacePw } =
     spaceInfo;
-  const params = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
