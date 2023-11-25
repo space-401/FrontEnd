@@ -1,11 +1,9 @@
-import type { TagType, UserType } from '@type/post.type';
-import type { MenuListProps, selectType } from '@type/main.type';
-import UserList from './component/UserList';
-import TagList from './component/TagList';
+import type { TagType, UserType, MenuListProps, selectType } from '@/types';
+import { TagList, UserList } from './component';
 import S from './style';
-import { isUserType, isUserTypeArray } from '@utils/typeGuard';
+import { isUserType, isUserTypeArray } from '@/utils';
 
-const MenuList = (props: MenuListProps) => {
+export const MenuList = (props: MenuListProps) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
   const checkSelectItem = (thisValue: number) => {
@@ -103,4 +101,3 @@ const MenuList = (props: MenuListProps) => {
     ));
   }
 };
-export default MenuList;

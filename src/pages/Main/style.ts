@@ -18,8 +18,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const S = {
+export const S = {
   Wrapper,
 };
-
-export default S;

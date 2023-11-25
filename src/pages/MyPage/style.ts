@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
+import { flexCenter } from '@/styles';
 
 const MyPageWrapper = styled.div`
   width: 100%;
@@ -90,7 +90,7 @@ const NavSpan = styled.span`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-500']};
 `;
 
-const S = {
+export const S = {
   MyPageWrapper,
   Container,
   Wrapper,
@@ -98,5 +98,3 @@ const S = {
   NavButton,
   NavSpan,
 };
-
-export default S;

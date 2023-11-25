@@ -1,4 +1,4 @@
-import { ApiResponseType } from '@type/response.type';
+import type { ApiResponseType } from '@/types';
 
 /**
  * 성공했을 때의 응답

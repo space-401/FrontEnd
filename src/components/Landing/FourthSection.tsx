@@ -1,10 +1,10 @@
-import S from '@components/Landing/style';
-import { ReactComponent as RightSvg } from '@assets/svg/landing/fourth_right.svg';
-import { ReactComponent as LeftSvg } from '@assets/svg/landing/fourth_left.svg';
-import { ReactComponent as BackSvg } from '@assets/svg/landing/foruth_background.svg';
-import { SectionProps } from '@type/main.type';
+import S from './style';
+import { ReactComponent as RightSvg } from '@/assets/svg/landing/fourth_right.svg';
+import { ReactComponent as LeftSvg } from '@/assets/svg/landing/fourth_left.svg';
+import { ReactComponent as BackSvg } from '@/assets/svg/landing/foruth_background.svg';
+import { SectionProps } from '@/types';
 
-const FourthSection = ({ marginTop }: SectionProps) => {
+export const FourthSection = ({ marginTop }: SectionProps) => {
   return (
     <S.Wrapper>
       <S.MarginBox marginTop={marginTop} />
@@ -34,5 +34,3 @@ const FourthSection = ({ marginTop }: SectionProps) => {
     </S.Wrapper>
   );
 };
-
-export default FourthSection;

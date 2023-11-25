@@ -1,19 +1,19 @@
-import { M, S } from '@/components/Main/WelcomeAndSettingModal/style';
+import { M, S } from '@/components/Main/WelcomeModal/style';
 import { useRef, useState } from 'react';
 import { ImageArrType, ImageType } from '@/types/image.type';
-import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
-import InputBox from '@/components/common/InputBox';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import { ReactComponent as ProfileMock } from '@assets/svg/profileMock.svg';
-import BasicButton from '@/components/common/BasicButton';
+import { CircleIcon, BasicButton, InputBox } from '@/components/common';
+import {
+  CharacterCounter,
+  CircleImgEditModal,
+  SelectIconModal,
+} from '@/components/Create';
+import { ReactComponent as ProfileMock } from '@/assets/svg/profileMock.svg';
 import { Box } from '@mui/material';
 import { UserType } from '@/types/post.type';
-import { useConfirmModalOpen } from '@/hooks/common/useConfirmModalOpen';
-import { theme } from '@/styles/theme/theme';
+import { useConfirmModalOpen } from '@/hooks';
+import { theme } from '@/styles';
 import { usePhotoModalStore } from '@/store/modal';
-import CircleImgEditModal from '@/components/Create/ImageEditModal/CircleImageEditmodal';
-import { useSpaceUserUpdateMutation } from '@/hooks/api/space/useSpaceUserUpdateMutation';
-import SelectIconModal from '@/components/Create/SelectIconModal';
+import { useSpaceUserUpdateMutation } from '@/hooks';
 
 type SettingModalProps = {
   ModalClose: () => void;
@@ -24,7 +24,7 @@ type SettingModalProps = {
 };
 
 //프로필 기본 이미지 선택
-const UserSettingModal = ({
+export const UserSettingModal = ({
   userNames,
   ModalClose,
   userInfo,

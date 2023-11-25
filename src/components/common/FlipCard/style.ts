@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FLIP_CARD } from '@constants/policy';
+import { FLIP_CARD } from '@/constants';
 
 const Flip = styled.div<{ isBig: boolean }>`
   position: relative;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexCenter, modalBackGround } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles';
 
 const Wrapper = styled.div`
   flex-direction: column;

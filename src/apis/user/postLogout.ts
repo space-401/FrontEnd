@@ -1,6 +1,6 @@
-import { axiosInstance } from '@apis/AxiosInstance';
-import { END_POINTS } from '@constants/api';
-import { ApiResponseType } from '@type/response.type';
+import { axiosInstance } from '@/apis';
+import type { ApiResponseType } from '@/types';
+import { END_POINTS } from '@/constants';
 
 export const postLogout = async () => {
   const { data } = await axiosInstance.post<ApiResponseType>(END_POINTS.LOGOUT);

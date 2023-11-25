@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { patchSpace } from '@/apis/space/patchSpace';
-import { SpaceFormResponse } from '@type/response.type';
+import { patchSpace } from '@/apis';
+import { SpaceFormResponse } from '@/types';
 
 export const useSpaceUpdateMutation = () => {
   const {

@@ -53,7 +53,7 @@ const Content = styled.div`
   margin-top: -100px;
 `;
 
-const S = {
+export const S = {
   Wrapper,
   Text,
   LoginContainer,
@@ -61,5 +61,3 @@ const S = {
   Content,
   LogoBox,
 };
-
-export default S;

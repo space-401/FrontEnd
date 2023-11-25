@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { patchSpaceUser } from '@/apis/space/patchSpaceUser';
-import { ApiResponseType } from '@/types/response.type';
+import { patchSpaceUser } from '@/apis';
+import { ApiResponseType } from '@/types';
 
 export const useSpaceUserUpdateMutation = (spaceId: string) => {
   const queryClient = useQueryClient();

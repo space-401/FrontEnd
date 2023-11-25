@@ -1,5 +1,5 @@
 import { Box, Modal } from '@mui/material';
-import S from '@/components/Create/SelectIconModal/style';
+import S from './style';
 import { v4 as uuid } from 'uuid';
 //한 옵션 타입
 type OneOptionType = {
@@ -14,7 +14,7 @@ type IconModalPropsType = {
   selectOptionArr: OneOptionType[];
 };
 
-const SelectIconModal = ({
+export const SelectIconModal = ({
   isOpen,
   modalClose,
   title,
@@ -56,4 +56,3 @@ const SelectIconModal = ({
     </Modal>
   );
 };
-export default SelectIconModal;

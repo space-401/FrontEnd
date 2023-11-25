@@ -1,8 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { postSpaceInvite } from '@/apis/space/postSpaceInvite';
-import { ApiResponseType } from '@/types/response.type';
+import { inviteProps, postSpaceInvite } from '@/apis';
+import { ApiResponseType } from '@/types';
 import { AxiosError } from 'axios';
-import { inviteProps } from '@/apis/space/postSpaceInvite';
 
 export const useSpaceUserInviteMutation = () => {
   const { mutate: userInviteAction } = useMutation<

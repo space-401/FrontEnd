@@ -60,11 +60,9 @@ const ButtonGroup = styled.div`
   align-items: center;
 `;
 
-const S = {
+export const S = {
   Container,
   AlertButton,
   AlertMessage,
   ButtonGroup,
 };
-
-export default S;

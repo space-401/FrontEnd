@@ -1,18 +1,20 @@
 import React from 'react';
-import { UserType } from '@type/post.type';
+import { UserType } from '@/types';
 import { Box } from '@mui/material';
-import S from '@components/Main/Setting/style';
-import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
-import UserList from '@/components/common/UserListModal/UserList';
-import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
-import { toastColorMessage } from '@utils/toastMessage';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
-import { PATH } from '@constants/path';
+import S from './style';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
+import { UserList } from '@/components/common';
+import { ReactComponent as LogoutSvg } from '@/assets/svg/mainSetting/logout.svg';
+import { toastColorMessage } from '@/utils';
+import {
+  useConfirmModalOpen,
+  useAlertModalOpen,
+  useSpaceUserUpdateMutation,
+} from '@/hooks';
+import { PATH } from '@/constants';
 import { useNavigate } from 'react-router-dom';
-import { useSpaceUserUpdateMutation } from '@hooks/api/space/useSpaceUserUpdateMutation';
 
-const SettingComponent = React.forwardRef(
+export const SettingComponent = React.forwardRef(
   (
     props: {
       userList: UserType[];

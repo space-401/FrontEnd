@@ -1,5 +1,5 @@
 import { Skeleton, SxProps, Theme } from '@mui/material';
-import { theme } from '@styles/theme/theme';
+import { theme } from '@/styles';
 
 type KSeletonType = {
   width: string | number;
@@ -9,7 +9,7 @@ type KSeletonType = {
   sx?: SxProps<Theme>;
 };
 
-const KSkeleton = (props: KSeletonType) => {
+export const KSkeleton = (props: KSeletonType) => {
   const { width, height, variant, animation, sx } = props;
   return (
     <Skeleton
@@ -21,5 +21,3 @@ const KSkeleton = (props: KSeletonType) => {
     />
   );
 };
-
-export default KSkeleton;

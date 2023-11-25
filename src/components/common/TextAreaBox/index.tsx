@@ -1,4 +1,4 @@
-import S from '@/components/common/TextAreaBox/style';
+import S from './style';
 import { ReactElement } from 'react';
 
 export type TextAreaBoxProps = {
@@ -13,7 +13,7 @@ export type TextAreaBoxProps = {
   value: string;
 };
 
-const TextAreaBox = (props: TextAreaBoxProps) => {
+export const TextAreaBox = (props: TextAreaBoxProps) => {
   const { value, placeholder, maxLength, onChange, name, children, ...rest } =
     props;
   return (
@@ -29,5 +29,3 @@ const TextAreaBox = (props: TextAreaBoxProps) => {
     </S.Wrapper>
   );
 };
-
-export default TextAreaBox;

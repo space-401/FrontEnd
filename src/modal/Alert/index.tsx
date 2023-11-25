@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import S from '@modal/Alert/style';
-import { useAlertModalStore } from '@store/modal';
+import { S } from './style';
+import { useAlertModalStore } from '@/store/modal';
 
-const AlertInner = React.forwardRef((_, ref) => {
+export const AlertInner = React.forwardRef((_, ref) => {
   const { alertState, ModalClose } = useAlertModalStore((state) => state);
   const { alertMessage, alertTitle, width } = alertState;
   const onEnterClose = (e: any) => {
@@ -23,4 +23,3 @@ const AlertInner = React.forwardRef((_, ref) => {
     </Box>
   );
 });
-export default AlertInner;

@@ -1,23 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
-import PrivateRoute from '@router/Private';
-import { PATH } from '@constants/path';
+import { PrivateRoute, Lazy, VisitorRoute } from '@/router';
+import { PATH } from '@/constants';
 import { Suspense } from 'react';
-import * as Lazy from '@router/lazy';
-import MainPageSkeleton from '@components/Main/Skeleton';
-import MyPageSkeleton from '@components/MyPage/Skeleton';
-import CreatePostSkeleton from '@components/Create/Skeleton/CreatePost';
-import HeaderLayout from '@layout/HeaderLayout';
-import BackLayout from '@layout/BackLayout';
-import SelectSpaceSkeleton from '@components/SelectSpace/Skeleton';
-import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
-import LandingPage from '@pages/Landing';
-import Loading from '@pages/Loading';
-import Auth from '@pages/Auth';
-import ErrorPage from '@/components/common/Error';
-import VisitorRoute from '@router/Visitor';
-import ErrorBoundary from '@components/common/Error/errorBoundary';
+import { MainPageSkeleton } from '@/components/Main';
+import { MyPageSkeleton } from '@/components/MyPage';
+import { CreatePostSkeleton } from '@/components/Create';
+import { HeaderLayOut, BackLayout } from '@/layout';
+import { SelectSpaceSkeleton } from '@/components/SelectSpace';
+import { CreateSpaceSkeleton } from '@/components/Create';
+import { Loading, ErrorComponent, ErrorBoundary } from '@/components/common';
+import LandingPage from '@/pages/Landing';
+import Auth from '@/pages/Auth';
 
-const createRouter = (reset: () => void) => {
+export const createRouter = (reset: () => void) => {
   return createBrowserRouter([
     {
       element: <ErrorBoundary onReset={reset} />,
@@ -26,7 +21,7 @@ const createRouter = (reset: () => void) => {
           element: <PrivateRoute />,
           children: [
             {
-              element: <HeaderLayout />,
+              element: <HeaderLayOut />,
               children: [
                 {
                   path: PATH.SPACE,
@@ -132,11 +127,9 @@ const createRouter = (reset: () => void) => {
         },
         {
           path: '/*',
-          element: <ErrorPage />,
+          element: <ErrorComponent />,
         },
       ],
     },
   ]);
 };
-
-export default createRouter;

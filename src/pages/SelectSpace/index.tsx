@@ -1,12 +1,11 @@
-import S from '@pages/SelectSpace/style';
-import FlipCard from '@/components/common/FlipCard/FlipCard';
+import { S } from './style';
 import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import { ReactComponent as SelectLogo } from '@/assets/svg/selectlogo.svg';
-import BasicButton from '@/components/common/BasicButton';
+import { BasicButton, FlipCard } from '@/components/common';
+import { useSpaceListQuery } from '@/hooks';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
+import { PATH } from '@/constants';
 import { v4 as uuid } from 'uuid';
-import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
 
 const SelectSpace = () => {
   const navigate = useNavigate();
@@ -65,4 +64,5 @@ const SelectSpace = () => {
     )
   );
 };
+
 export default SelectSpace;

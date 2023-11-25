@@ -1,11 +1,11 @@
-import L from '@components/Landing/style';
+import L from './style';
 
-import { ReactComponent as LandingTopImg } from '@assets/svg/landing/landing_top.svg';
-import { ReactComponent as ArrowSvg } from '@assets/svg/landing/arrow_right.svg';
+import { ReactComponent as LandingTopImg } from '@/assets/svg/landing/landing_top.svg';
+import { ReactComponent as ArrowSvg } from '@/assets/svg/landing/arrow_right.svg';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
+import { PATH } from '@/constants';
 
-const FirstSection = () => {
+export const FirstSection = () => {
   const navigate = useNavigate();
   return (
     <L.Wrapper>
@@ -24,5 +24,3 @@ const FirstSection = () => {
     </L.Wrapper>
   );
 };
-
-export default FirstSection;

@@ -1,13 +1,11 @@
-import S from '@pages/Main/style';
-import MainHeader from '@components/Main/MainHeader/MainHeader';
-import MainBody from '@components/Main/MainBody/MainBody';
+import { S } from './style';
+import { MainHeader, MainBody, WelcomeModal } from '@/components/Main';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSpaceInfoQuery } from '@hooks/api/space/useSpaceInfoQuery';
-import WelcomeModal from '@/components/Main/WelcomeAndSettingModal';
-import UserSettingModal from '@/components/common/UserSettingModal';
+import { useSpaceInfoQuery } from '@/hooks';
+import { UserSettingModal } from '@/components/common';
 import { Modal } from '@mui/material';
-import { UserType } from '@type/post.type';
+import type { UserType } from '@/types';
 
 const MainPage = () => {
   const [selectState, setSelectState] = useState(false);

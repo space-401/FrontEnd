@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/common';
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

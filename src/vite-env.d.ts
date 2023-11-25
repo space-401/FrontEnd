@@ -1,4 +1,5 @@
 import 'vite/client';
+import 'axios';
 
 declare global {
   interface ImportMetaEnv {
@@ -9,6 +10,12 @@ declare global {
     VITE_NAVER_CLIENT_ID: string;
     VITE_NAVER_CLIENT_KEY: string;
     VITE_GOOGLE_CLIENT_ID: string;
+  }
+}
+
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    useAuth?: boolean;
   }
 }
 

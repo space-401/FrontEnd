@@ -1,4 +1,4 @@
-import { BASE_PATH } from '@constants/path';
+import { BASE_PATH } from '@/constants/path';
 
 export const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize`;
 export const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize`;

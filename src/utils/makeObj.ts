@@ -1,4 +1,4 @@
-import { ImageType } from '@/types/image.type';
+import type { ImageType } from '@/types';
 
 export const convertImgArrToObj = (imgUrl: string[]) => {
   const newObj: ImageType[] = [];

@@ -1,4 +1,4 @@
-import { TagType, UserType } from '@type/post.type';
+import { TagType, UserType } from '@/types';
 
 export type HeaderType = {
   spaceInfo: OneSpaceType[];

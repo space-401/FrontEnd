@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useValidate = (password: string) => {
+export const useValidate = (password: string) => {
   const [error, setError] = useState('');
   const regex = /^[0-9]*$/;
   const passwordTest = regex.test(password);
@@ -10,4 +10,3 @@ const useValidate = (password: string) => {
   }
   return error;
 };
-export default useValidate;

@@ -4,8 +4,6 @@ import spaceThree from '@/assets/svg/defaultImg/img3.svg';
 import spaceFour from '@/assets/svg/defaultImg/img4.svg';
 import spaceFive from '@/assets/svg/defaultImg/img5.svg';
 
-const BasicIcon = () => {
+export const BasicIcon = () => {
   return [spaceOne, spaceTwo, spaceThree, spaceFour, spaceFive];
 };
-
-export default BasicIcon;

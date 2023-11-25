@@ -1,15 +1,17 @@
-import S from '@pages/MyPage/style';
-import { ReactComponent as AccountSvg } from '@assets/svg/mainSetting/user.svg';
-import { ReactComponent as BookMarkSvg } from '@assets/svg/bookmark/empty.svg';
-import { ReactComponent as FolderSvg } from '@assets/svg/folder.svg';
+import { S } from './style';
+import { ReactComponent as AccountSvg } from '@/assets/svg/mainSetting/user.svg';
+import { ReactComponent as BookMarkSvg } from '@/assets/svg/bookmark/empty.svg';
+import { ReactComponent as FolderSvg } from '@/assets/svg/folder.svg';
 import { Suspense, useState } from 'react';
-import AccountManagement from '@components/MyPage/AccountManagement';
-import MyPostOrCommentList from '@components/MyPage/MyPostOrCommentList';
-import BookMarkListSkeleton from '@components/MyPage/Skeleton/BookMarkList.skeleton';
-import BookMarkList from '@components/MyPage/BookMarkList';
-import AccountManagementSkeleton from '@components/MyPage/Skeleton/AccountManagement.skeleton';
+import {
+  AccountManagement,
+  AccountManagementSkeleton,
+  BookMarkList,
+  MyPostOrCommentList,
+  MyBookMarkListSkeleton,
+} from '@/components/MyPage';
 
-const MyPageLayOut = () => {
+const MyPage = () => {
   const [state, setState] = useState(0);
   return (
     <S.MyPageWrapper>
@@ -36,7 +38,7 @@ const MyPageLayOut = () => {
           </Suspense>
         )}
         {state === 1 && (
-          <Suspense fallback={<BookMarkListSkeleton />}>
+          <Suspense fallback={<MyBookMarkListSkeleton />}>
             <BookMarkList />
           </Suspense>
         )}
@@ -46,4 +48,4 @@ const MyPageLayOut = () => {
   );
 };
 
-export default MyPageLayOut;
+export default MyPage;

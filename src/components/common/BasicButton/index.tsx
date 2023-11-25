@@ -1,4 +1,4 @@
-import S from '@/components/common/BasicButton/style';
+import S from './style';
 import { PropsWithChildren } from 'react';
 
 export type BasicButtonProps = {
@@ -14,7 +14,7 @@ export type BasicButtonProps = {
   border?: string;
 };
 
-const BasicButton = ({
+export const BasicButton = ({
   children,
   onClick,
   ...props
@@ -25,5 +25,3 @@ const BasicButton = ({
     </S.ButtonWrapper>
   );
 };
-
-export default BasicButton;

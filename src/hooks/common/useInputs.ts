@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useInputs = <T extends object>(initialValue: T) => {
+export const useInputs = <T extends object>(initialValue: T) => {
   const [values, setValues] = useState(initialValue);
 
   const onChange = (
@@ -14,4 +14,3 @@ const useInputs = <T extends object>(initialValue: T) => {
 
   return { values, onChange, setValues };
 };
-export default useInputs;

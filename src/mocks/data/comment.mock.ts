@@ -1,5 +1,5 @@
-import { successResponse } from '@mocks/data/response.mock';
-import type { CommentType } from '@type/comment.type';
+import type { CommentType } from '@/types';
+
 /**
  * 포스트 게시물 댓글들의 목 데이터
  */
@@ -205,6 +205,10 @@ export const commentList: CommentType[] = [
   },
 ];
 
-export const postComment = successResponse;
+export const postComment = {
+  message: 'success',
+};
 
-export const deleteComment = successResponse;
+export const deleteComment = {
+  message: 'success',
+};

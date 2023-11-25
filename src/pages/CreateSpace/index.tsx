@@ -1,38 +1,44 @@
-import S from '@pages/CreateSpace/style';
-import InputBox from '@/components/common/InputBox';
-import BasicButton from '@/components/common/BasicButton';
-import TextAreaBox from '@/components/common/TextAreaBox';
-import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
-import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
-import BasicBox from '@/components/common/BasicBox';
+import { S } from './style';
+import {
+  InputBox,
+  BasicButton,
+  BasicBox,
+  TextAreaBox,
+} from '@/components/common';
+import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
+import { ReactComponent as ShowEye } from '@/assets/svg/showEye.svg';
+import { ReactComponent as ClosedEye } from '@/assets/svg/closedEye.svg';
 import { useEffect, useRef, useState } from 'react';
 import { usePhotoModalStore } from '@/store/modal';
-import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
-import { ImageArrType, ImageType } from '@/types/image.type';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import { theme } from '@/styles/theme/theme';
-import useInputs from '@/hooks/common/useInputs';
-import SelectIconModal from '@/components/Create/SelectIconModal';
-import BasicIconModal from '@/components/Create/BasicIconModal';
-import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
-import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
-import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
+import {
+  ImageEditModal,
+  CharacterCounter,
+  SelectIconModal,
+  BasicIconModal,
+  BasicIcon,
+  TagEditModal,
+} from '@/components/Create';
+import type { ImageArrType, ImageType } from '@/types';
+import { theme } from '@/styles';
+import {
+  useInputs,
+  useAlertModalOpen,
+  useSpaceInfoQuery,
+  useConfirmModalOpen,
+  useSpaceCreateMutation,
+  useSpaceUpdateMutation,
+  useSpaceDeleteMutation,
+} from '@/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { ReactComponent as EditIcon } from '@assets/svg/tagEditIcon.svg';
-import TagEditModal from '@/components/Create/TagEditModal';
-import { useSpaceCreateMutation } from '@/hooks/api/space/useSpaceCreateMutation';
-import { useSpaceUpdateMutation } from '@/hooks/api/space/useSpaceUpdateMutation';
-import { useSpaceDeleteMutation } from '@hooks/api/space/useSpaceDeleteMutation';
-import { toastColorMessage } from '@utils/toastMessage';
-import { PATH } from '@constants/path';
+import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
+import { toastColorMessage } from '@/utils';
+import { PATH } from '@/constants';
 
 const CreateSpace = () => {
   const params = useParams();
   const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
-  const isUpdateForm = Number.isInteger(spaceId);
+  const isUpdateForm = Number.isInteger(Number(spaceId));
 
   const { postSpaceAction, isPostSuccess, createResponse } =
     useSpaceCreateMutation();
@@ -293,7 +299,7 @@ const CreateSpace = () => {
 
       {/*사진 편집 모달*/}
       {isPhotoModalOpen && imageArr.image && (
-        <ImgEditModal
+        <ImageEditModal
           isCircle={false}
           imageArr={imageArr}
           setImageArr={setImageArr}
@@ -508,4 +514,5 @@ const CreateSpace = () => {
     </S.Wrapper>
   );
 };
+
 export default CreateSpace;
