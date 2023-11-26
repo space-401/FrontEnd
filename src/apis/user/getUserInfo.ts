@@ -1,6 +1,6 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import { AccountDataType } from '@type/user.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { AccountDataType } from '@/types';
 
 export const getUserInfo = async () => {
   const { data } = await axiosInstance.get<AccountDataType>(

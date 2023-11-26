@@ -1,15 +1,15 @@
-import S from '@layout/HeaderLayout/style';
-import { ReactComponent as Logo } from '@assets/svg/headerLogo.svg';
-import { ReactComponent as AlarmIcon } from '@assets/svg/alarmIcon.svg';
-import { ReactComponent as UserIcon } from '@assets/svg/userIcon.svg';
+import { PATH } from '@/constants';
+import { useSpaceListQuery } from '@/hooks';
+import { OneSpaceType } from '@/types';
+import { toastColorMessage } from '@/utils';
 import { Tooltip } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PATH } from '@constants/path';
-import { useSpaceListQuery } from '@hooks/api/space/useSpaceListQuery';
-import { toastColorMessage } from '@utils/toastMessage';
-import { OneSpaceType } from '@type/space.type';
+import { ReactComponent as AlarmIcon } from '@/assets/svg/alarmIcon.svg';
+import { ReactComponent as Logo } from '@/assets/svg/headerLogo.svg';
+import { ReactComponent as UserIcon } from '@/assets/svg/userIcon.svg';
+import { S } from './style';
 
-const Header = () => {
+export const Header = () => {
   const { spaceList } = useSpaceListQuery().spaceList!;
   const navigate = useNavigate();
   const moveSpace = (spaceId: number) => {
@@ -58,5 +58,3 @@ const Header = () => {
     </S.HeaderWrapper>
   );
 };
-
-export default Header;

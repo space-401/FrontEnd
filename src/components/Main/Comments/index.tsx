@@ -1,7 +1,7 @@
-import S from '@components/Main/Comments/style';
-import OneComment from '@components/Main/Comments/OneComment/OneComment';
-import type { UserType } from '@type/post.type';
-import { useCommentQuery } from '@hooks/api/comment/useCommentQuery';
+import { useCommentQuery } from '@/hooks';
+import type { UserType } from '@/types';
+import { OneComment } from './OneComment/OneComment';
+import S from './style';
 
 type DetailCommentType = {
   spaceId: number;
@@ -22,7 +22,7 @@ type DetailCommentType = {
   userList: UserType[];
 };
 
-const DetailComments = (props: DetailCommentType) => {
+export const DetailComments = (props: DetailCommentType) => {
   const { setIsReply, isReply, spaceId, isOpen, userList, postId } = props;
 
   const { commentList } = useCommentQuery(postId, spaceId);
@@ -59,5 +59,3 @@ const DetailComments = (props: DetailCommentType) => {
     </>
   );
 };
-
-export default DetailComments;

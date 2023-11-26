@@ -1,7 +1,7 @@
-import type { ApiResponseType } from '@type/response.type';
+import { postPost } from '@/apis';
+import type { ApiResponseType } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { postPost } from '@/apis/post/postPost';
 
 export const usePostCreateMutation = () => {
   const { mutate: createPostAction, isSuccess: postCreateSuccess } =

@@ -1,7 +1,7 @@
-import { Map } from 'react-kakao-maps-sdk';
+import { MarkerType } from '@/types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import EventMarkerContainer from '@components/Create/SearchMapModal/component/EventMarkerContainer';
-import { MarkerType } from '@/types/marker.type';
+import { Map } from 'react-kakao-maps-sdk';
+import { EventMarkerContainer } from './EventMarkerContainer';
 
 type MapBoxProps = {
   keyword: string;
@@ -14,7 +14,7 @@ type MapBoxProps = {
   };
 };
 
-const MapBox = (props: MapBoxProps) => {
+export const MapBox = (props: MapBoxProps) => {
   const [markers, setMarkers] = useState<MarkerType[]>([]);
   const [map, setMap] = useState<kakao.maps.Map>();
   const { setSelectMap, setData, setPagination, keyword, center } = props;
@@ -71,5 +71,3 @@ const MapBox = (props: MapBoxProps) => {
     </Map>
   );
 };
-
-export default MapBox;

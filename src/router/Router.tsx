@@ -1,23 +1,18 @@
-import { createBrowserRouter } from 'react-router-dom';
-import PrivateRoute from '@router/Private';
-import { PATH } from '@constants/path';
+import { PATH } from '@/constants';
+import { BackLayout, HeaderLayOut } from '@/layout';
+import { Lazy, PrivateRoute, VisitorRoute } from '@/router';
 import { Suspense } from 'react';
-import * as Lazy from '@router/lazy';
-import MainPageSkeleton from '@components/Main/Skeleton';
-import MyPageSkeleton from '@components/MyPage/Skeleton';
-import CreatePostSkeleton from '@components/Create/Skeleton/CreatePost';
-import HeaderLayout from '@layout/HeaderLayout';
-import BackLayout from '@layout/BackLayout';
-import SelectSpaceSkeleton from '@components/SelectSpace/Skeleton';
-import CreateSpaceSkeleton from '@components/Create/Skeleton/CreateSpace';
-import LandingPage from '@pages/Landing';
-import Loading from '@pages/Loading';
-import Auth from '@pages/Auth';
-import ErrorPage from '@/components/common/Error';
-import VisitorRoute from '@router/Visitor';
-import ErrorBoundary from '@components/common/Error/errorBoundary';
+import { createBrowserRouter } from 'react-router-dom';
+import Auth from '@/pages/Auth';
+import LandingPage from '@/pages/Landing';
+import { CreatePostSkeleton } from '@/components/Create';
+import { CreateSpaceSkeleton } from '@/components/Create';
+import { MainPageSkeleton } from '@/components/Main';
+import { MyPageSkeleton } from '@/components/MyPage';
+import { SelectSpaceSkeleton } from '@/components/SelectSpace';
+import { ErrorBoundary, ErrorComponent, Loading } from '@/components/common';
 
-const createRouter = (reset: () => void) => {
+export const createRouter = (reset: () => void) => {
   return createBrowserRouter([
     {
       element: <ErrorBoundary onReset={reset} />,
@@ -26,7 +21,7 @@ const createRouter = (reset: () => void) => {
           element: <PrivateRoute />,
           children: [
             {
-              element: <HeaderLayout />,
+              element: <HeaderLayOut />,
               children: [
                 {
                   path: PATH.SPACE,
@@ -132,11 +127,9 @@ const createRouter = (reset: () => void) => {
         },
         {
           path: '/*',
-          element: <ErrorPage />,
+          element: <ErrorComponent />,
         },
       ],
     },
   ]);
 };
-
-export default createRouter;

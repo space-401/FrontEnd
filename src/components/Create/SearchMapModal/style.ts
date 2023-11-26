@@ -1,5 +1,5 @@
+import { modalBackGround } from '@/styles';
 import styled from 'styled-components';
-import { modalBackGround } from '@/styles/common';
 
 const Wrapper = styled.div`
   position: absolute;

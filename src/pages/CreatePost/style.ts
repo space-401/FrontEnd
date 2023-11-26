@@ -143,7 +143,7 @@ const MapContainer = styled.div`
   cursor: pointer !important;
 `;
 
-const S = {
+export const S = {
   Wrapper,
   BoxWrapper,
   GridWrapper,
@@ -163,4 +163,3 @@ const S = {
   SearchIconBox,
   MapContainer,
 };
-export default S;

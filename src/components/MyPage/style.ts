@@ -1,5 +1,5 @@
+import { flexCenter, omitText } from '@/styles';
 import styled from 'styled-components';
-import { flexCenter, omitText } from '@styles/common';
 
 const Title = styled.div`
   color: ${({ theme }) => theme.COLOR.white};

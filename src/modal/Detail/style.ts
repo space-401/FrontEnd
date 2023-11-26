@@ -1,6 +1,6 @@
+import { theme } from '@/styles';
 import styled from 'styled-components';
-import { modalBackGround, omitText } from '@styles/common';
-import { theme } from '@styles/theme/theme';
+import { modalBackGround, omitText } from '@/styles/common';
 
 const Container = styled.div`
   ${modalBackGround};
@@ -328,7 +328,7 @@ const CommentDeleteIconBox = styled.div`
   display: inline;
 `;
 
-const S = {
+export const S = {
   MapBox,
   RightWrapper,
   DeleteIconBox,
@@ -358,5 +358,3 @@ const S = {
   LikeIconBox,
   CommentDeleteIconBox,
 };
-
-export default S;

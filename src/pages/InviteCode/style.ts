@@ -1,5 +1,5 @@
-import { flexCenter } from '@/styles/common';
 import styled from 'styled-components';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -88,7 +88,7 @@ const ButtonContainer = styled.div`
   margin-left: auto;
 `;
 
-const S = {
+export const S = {
   Wrapper,
   TitleSection,
   Form,
@@ -96,5 +96,3 @@ const S = {
   InputContainer,
   ButtonContainer,
 };
-
-export default S;

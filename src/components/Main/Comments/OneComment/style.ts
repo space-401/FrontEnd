@@ -1,5 +1,5 @@
+import { omitText } from '@/styles';
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
 
 const Wrapper = styled.li<{ isReply: boolean; isRef: boolean }>`
   position: relative;

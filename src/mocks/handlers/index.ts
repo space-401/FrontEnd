@@ -1,8 +1,10 @@
 import type { RestHandler } from 'msw';
-import { postHandlers } from '@mocks/handlers/post';
-import { spaceHandlers } from '@mocks/handlers/space';
-import { userHandlers } from '@mocks/handlers/user';
-import { commentHandlers } from '@mocks/handlers/comment';
+import {
+  commentHandlers,
+  postHandlers,
+  spaceHandlers,
+  userHandlers,
+} from '@/mocks/handlers';
 
 export const handlers: RestHandler[] = [
   ...postHandlers,
@@ -10,3 +12,8 @@ export const handlers: RestHandler[] = [
   ...userHandlers,
   ...commentHandlers,
 ];
+
+export * from './user';
+export * from './post';
+export * from './comment';
+export * from './space';

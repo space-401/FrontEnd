@@ -1,6 +1,6 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import { MyPostListType } from '@type/user.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { MyPostListType } from '@/types';
 
 export const getMyPostList = async (page: number) => {
   const { data } = await axiosInstance.get<MyPostListType>(
