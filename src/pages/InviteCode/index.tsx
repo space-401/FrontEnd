@@ -1,7 +1,7 @@
 import { useAlertModalOpen, useSpaceUserInviteMutation } from '@/hooks';
-import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
-import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
 import React, { useState } from 'react';
+import { ReactComponent as ClosedEye } from '@/assets/svg/closedEye.svg';
+import { ReactComponent as ShowEye } from '@/assets/svg/showEye.svg';
 import { BasicButton, InputBox } from '@/components/common';
 import { S } from './style';
 
