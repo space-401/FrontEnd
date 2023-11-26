@@ -1,8 +1,7 @@
-import type { ApiResponseType } from '@type/response.type';
-import { useMutation } from '@tanstack/react-query';
+import { PostSpaceTagType, postSpaceTag } from '@/apis';
+import type { ApiResponseType } from '@/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { postSpaceTag, PostSpaceTagType } from '@apis/space/postSpaceTag';
-import { useQueryClient } from '@tanstack/react-query';
 import { v4 } from 'uuid';
 
 export const useTagMutation = () => {

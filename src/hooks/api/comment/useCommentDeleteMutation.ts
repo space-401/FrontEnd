@@ -1,5 +1,5 @@
-import { deleteComment } from '@apis/comment/deleteComment';
-import type { ApiResponseType } from '@type/response.type';
+import { deleteComment } from '@/apis';
+import type { ApiResponseType } from '@/types';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 

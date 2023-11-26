@@ -1,5 +1,5 @@
-import S from '@/components/common/InputBox/style';
 import { ReactElement } from 'react';
+import S from '@/components/common/InputBox/style';
 
 type InputBoxProps = {
   width?: number;
@@ -18,7 +18,7 @@ type InputBoxProps = {
   paddingTop?: number;
 };
 
-const InputBox = ({
+export const InputBox = ({
   type,
   placeholder,
   maxLength,
@@ -54,5 +54,3 @@ const InputBox = ({
     </S.InputWrapper>
   );
 };
-
-export default InputBox;

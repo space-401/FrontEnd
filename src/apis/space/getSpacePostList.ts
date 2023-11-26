@@ -1,9 +1,7 @@
 //완성
-
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import type { SpacePostListProps } from '@type/main.type';
-import { DateInfoType } from '@/types/post.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { DateInfoType, SpacePostListProps } from '@/types';
 
 export type FilterType = {
   userId?: number[];

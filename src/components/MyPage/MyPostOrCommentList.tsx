@@ -1,11 +1,13 @@
-import { A, M } from '@components/MyPage/style';
 import { Suspense, useState } from 'react';
-import MyPostListSkeleton from '@components/MyPage/Skeleton/MyPostList.skeleton';
-import MyCommentListSkeleton from '@components/MyPage/Skeleton/MyCommentList.skeleton';
-import MyPostList from '@components/MyPage/MyPostList';
-import MyCommentList from '@components/MyPage/MyCommentList';
+import {
+  MyBookMarkListSkeleton,
+  MyCommentList,
+  MyCommentListSkeleton,
+  MyPostList,
+} from '@/components/MyPage';
+import { A, M } from './style';
 
-const MyPostOrCommentList = () => {
+export const MyPostOrCommentList = () => {
   const [isMyPost, setIsMyPost] = useState(true);
 
   return (
@@ -21,7 +23,7 @@ const MyPostOrCommentList = () => {
       <A.Bar margin_top={41} />
       <>
         {isMyPost ? (
-          <Suspense fallback={<MyPostListSkeleton />}>
+          <Suspense fallback={<MyBookMarkListSkeleton />}>
             <MyPostList />
           </Suspense>
         ) : (
@@ -33,5 +35,3 @@ const MyPostOrCommentList = () => {
     </M.FlexWrapper>
   );
 };
-
-export default MyPostOrCommentList;

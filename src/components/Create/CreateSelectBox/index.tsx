@@ -1,14 +1,11 @@
-import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { useAlertModalOpen, useDimensions } from '@/hooks';
+import type { SelectBoxProps, selectType } from '@/types';
 import { motion } from 'framer-motion';
-import { useDimensions } from '@hooks/common/useDimensions';
-import type { SelectBoxProps, selectType } from '@type/main.type';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { MenuList, MenuToggle, SelectList } from './components';
 import S from './style';
-import { MenuToggle } from './components/Toggle';
-import MenuList from './components/MenuList';
-import SelectList from './components/component/SelectList';
-import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 
-const CreateSelectBox = (props: SelectBoxProps) => {
+export const CreateSelectBox = (props: SelectBoxProps) => {
   const {
     boxWidth = 168,
     menuHeight = 200,
@@ -118,4 +115,3 @@ const CreateSelectBox = (props: SelectBoxProps) => {
     </S.Wrapper>
   );
 };
-export default CreateSelectBox;

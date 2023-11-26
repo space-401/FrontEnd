@@ -1,6 +1,6 @@
-import { axiosInstance } from '@apis/AxiosInstance';
-import { SpaceFormResponse } from '@type/response.type';
-import { END_POINTS } from '@constants/api';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { SpaceFormResponse } from '@/types';
 
 export const patchSpace = async (spaceInfo: FormData) => {
   const { data } = await axiosInstance.patch<SpaceFormResponse>(

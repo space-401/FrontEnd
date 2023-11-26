@@ -1,8 +1,8 @@
-import S from '@components/Main/PostMap/style';
-import LeftSectionSkeleton from '@components/Main/PostMap/components/LeftSection.Skeleton';
-import KSkeleton from '@components/common/Skeleton';
+import { LeftSectionSkeleton } from '@/components/Main';
+import { KSkeleton } from '@/components/common';
+import S from './style';
 
-const PostMapSkeleton = () => {
+export const PostMapSkeleton = () => {
   return (
     <S.Wrapper>
       <S.Container>
@@ -12,5 +12,3 @@ const PostMapSkeleton = () => {
     </S.Wrapper>
   );
 };
-
-export default PostMapSkeleton;

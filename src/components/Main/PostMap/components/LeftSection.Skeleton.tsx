@@ -1,7 +1,7 @@
-import { S } from '@components/Main/PostMap/components/style';
-import OnePostMapCardSkeleton from '@components/Main/PostMap/components/One-PostMapCard.Skeleton';
+import { OnePostMapCardSkeleton } from './One-PostMapCard.Skeleton';
+import { S } from './style';
 
-const LeftSectionSkeleton = () => {
+export const LeftSectionSkeleton = () => {
   return (
     <S.Wrapper>
       <OnePostMapCardSkeleton />
@@ -12,5 +12,3 @@ const LeftSectionSkeleton = () => {
     </S.Wrapper>
   );
 };
-
-export default LeftSectionSkeleton;

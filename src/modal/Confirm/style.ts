@@ -1,5 +1,5 @@
-import { modalBackGround } from '@/styles/common';
 import styled from 'styled-components';
+import { modalBackGround } from '@/styles/common';
 
 const Container = styled.div`
   ${modalBackGround};
@@ -98,7 +98,7 @@ const ButtonGroup = styled.div`
   align-items: center;
 `;
 
-const S = {
+export const S = {
   Container,
   ApproveButton,
   CloseButton,
@@ -106,5 +106,3 @@ const S = {
   DescriptionMessage,
   ButtonGroup,
 };
-
-export default S;

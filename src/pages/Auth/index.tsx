@@ -1,10 +1,10 @@
-import Loading from '@pages/Loading';
-import { useNavigate, useParams } from 'react-router-dom';
-import { SocialType, UserTokenType } from '@type/user.type';
-import { useLoginQuery } from '@hooks/api/user/useLoginQuery';
+import { PATH } from '@/constants';
+import { useLoginQuery } from '@/hooks';
+import type { SocialType, UserTokenType } from '@/types';
+import { tokenStorage } from '@/utils';
 import { useEffect } from 'react';
-import tokenStorage from '@utils/tokenStorage';
-import { PATH } from '@constants/path';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Loading } from '@/components/common';
 
 const Auth = () => {
   const navigate = useNavigate();

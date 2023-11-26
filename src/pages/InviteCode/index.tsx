@@ -1,11 +1,9 @@
-import S from '@pages/InviteCode/style';
-import InputBox from '@/components/common/InputBox';
-import BasicButton from '@/components/common/BasicButton';
-import React, { useState } from 'react';
-import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
+import { useAlertModalOpen, useSpaceUserInviteMutation } from '@/hooks';
 import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
-import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
-import { useSpaceUserInviteMutation } from '@/hooks/api/space/useSpaceUserInviteMutation';
+import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
+import React, { useState } from 'react';
+import { BasicButton, InputBox } from '@/components/common';
+import { S } from './style';
 
 const InviteCode = () => {
   const { userInviteAction } = useSpaceUserInviteMutation();

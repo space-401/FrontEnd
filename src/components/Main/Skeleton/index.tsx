@@ -1,8 +1,7 @@
-import S from '@pages/Main/style';
-import MainHeaderSkeleton from '@components/Main/MainHeader/MainHeader.skeleton';
-import MainBodySkeleton from '@components/Main/MainBody/MainBodySkeleton';
+import { S } from '@/pages/Main/style';
+import { MainBodySkeleton, MainHeaderSkeleton } from '@/components/Main';
 
-const MainPageSkeleton = () => {
+export const MainPageSkeleton = () => {
   return (
     <>
       <S.Wrapper>
@@ -12,5 +11,3 @@ const MainPageSkeleton = () => {
     </>
   );
 };
-
-export default MainPageSkeleton;

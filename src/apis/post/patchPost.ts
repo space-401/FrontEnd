@@ -1,6 +1,6 @@
-import { END_POINTS } from '@constants/api';
-import { ApiResponseType } from '@/types/response.type';
-import { axiosInstance } from '@apis/AxiosInstance';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { ApiResponseType } from '@/types';
 
 export const patchPost = async (postInfo: FormData) => {
   const { data } = await axiosInstance.patch<ApiResponseType>(

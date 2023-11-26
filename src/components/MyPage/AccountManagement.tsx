@@ -1,23 +1,25 @@
-import { A } from '@components/MyPage/style';
+import { PATH } from '@/constants';
+import {
+  useConfirmModalOpen,
+  useDeleteKkiriUserMutation,
+  useUserInfoQuery,
+} from '@/hooks';
+import { useLogOutMutation } from '@/hooks';
+import { toastColorMessage } from '@/utils';
 import { ReactElement } from 'react';
-import { ReactComponent as KaKaoSvg } from '@assets/svg/api/kakao.svg';
-import { ReactComponent as NaverSvg } from '@assets/svg/api/naver.svg';
-import { ReactComponent as GoogleSvg } from '@assets/svg/api/google.svg';
-import { useUserInfoQuery } from '@hooks/api/user/useUserInfoQuery';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useDeleteKkiriUserMutation } from '@hooks/api/user/useDeleteKkiriUserMutation';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
-import { useLogOutMutation } from '@hooks/api/user/useLogOutMutation';
-import { toastColorMessage } from '@utils/toastMessage';
+import { ReactComponent as GoogleSvg } from '@/assets/svg/api/google.svg';
+import { ReactComponent as KaKaoSvg } from '@/assets/svg/api/kakao.svg';
+import { ReactComponent as NaverSvg } from '@/assets/svg/api/naver.svg';
+import { A } from './style';
 
-const AccountManagement = () => {
+export const AccountManagement = () => {
   const { MyInfoData } = useUserInfoQuery();
   const navigate = useNavigate();
 
   const { loginState, email, name } = MyInfoData!;
 
-  let StateIcon: ReactElement;
+  let StateIcon: ReactElement | null = null;
 
   switch (loginState) {
     case 'kakao':
@@ -81,5 +83,3 @@ const AccountManagement = () => {
     </>
   );
 };
-
-export default AccountManagement;

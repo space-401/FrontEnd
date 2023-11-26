@@ -1,5 +1,5 @@
-import { useConfirmModalStore } from '@store/modal';
-import { ConfirmPropType } from '@type/modal.type';
+import { ConfirmPropType } from '@/types';
+import { useConfirmModalStore } from '@/store/modal';
 
 export const useConfirmModalOpen = () => {
   const { ModalOpen, setConfirmInfo } = useConfirmModalStore((state) => state);
