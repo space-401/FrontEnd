@@ -1,38 +1,47 @@
-import S from '@pages/CreatePost/style';
-import BasicBox from '@/components/common/BasicBox';
-import InputBox from '@/components/common/InputBox';
-import TextAreaBox from '@/components/common/TextAreaBox';
-import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
-import BasicButton from '@/components/common/BasicButton';
-import Calender from '@/components/common/Calender/Calender';
-import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
-import { selectType } from '@/types/main.type';
-import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useEffect, useRef, useState } from 'react';
-import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
-import { theme } from '@/styles/theme/theme';
-import { usePhotoModalStore } from '@/store/modal';
-import ImgSlider from '@/components/Create/ImgSlider';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import useInputs from '@/hooks/common/useInputs';
-import SearchModal from '@components/Create/SearchMapModal';
-import { MapType } from '@/types/marker.type';
-import { DateInfoType } from '@/types/post.type';
-import { ImagesArrType, ImageType } from '@/types/image.type';
-import { useNavigate, useParams } from 'react-router-dom';
-import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
-import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
 import {
+  useAlertModalOpen,
+  useConfirmModalOpen,
+  useInputs,
+  usePostCreateMutation,
+  usePostDetailQuery,
+  usePostUpdateMutation,
+  useSpaceInfoQuery,
+} from '@/hooks';
+import { theme } from '@/styles';
+import type {
+  DateInfoType,
+  ImageType,
+  ImagesArrType,
+  MapType,
+  selectType,
+} from '@/types';
+import {
+  convertImgArrToObj,
   onConvertedTagToSelectType,
   onConvertedUserToSelectType,
-} from '@/utils/selectTypeConvertor';
-import { convertImgArrToObj } from '@/utils/makeObj';
-import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
-import { usePostCreateMutation } from '@/hooks/api/post/usePostCreateMutation';
-import { usePostUpdateMutation } from '@/hooks/api/post/usePostUpdateMutation';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { PATH } from '@constants/path';
+} from '@/utils';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
+import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
+import { usePhotoModalStore } from '@/store/modal';
+import { PATH } from '@/constants/path';
+import {
+  CharacterCounter,
+  CreateSelectBox,
+  ImagesEditModal,
+  ImgSlider,
+  SearchModal,
+} from '@/components/Create';
+import {
+  BasicBox,
+  BasicButton,
+  Calender,
+  CircleIcon,
+  InputBox,
+  TextAreaBox,
+} from '@/components/common';
+import { S } from './style';
 
 const CreatePost = () => {
   const params = useParams();

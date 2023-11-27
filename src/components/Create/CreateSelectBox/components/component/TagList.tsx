@@ -1,8 +1,8 @@
-import type { TagListProps } from '@type/main.type';
-import S from '@components/Create/CreateSelectBox/components/style';
-import { ReactComponent } from '@assets/svg/trash.svg';
+import type { TagListProps } from '@/types';
+import { ReactComponent } from '@/assets/svg/trash.svg';
+import S from '../style';
 
-const TagList = (props: TagListProps) => {
+export const TagList = (props: TagListProps) => {
   const { Item } = props;
   return (
     <S.TagGroup>
@@ -13,5 +13,3 @@ const TagList = (props: TagListProps) => {
     </S.TagGroup>
   );
 };
-
-export default TagList;

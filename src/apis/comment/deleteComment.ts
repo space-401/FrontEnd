@@ -1,6 +1,6 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import type { ApiResponseType } from '@type/response.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { ApiResponseType } from '@/types';
 
 export const deleteComment = async (commentId: number) => {
   const { data } = await axiosInstance.delete<ApiResponseType>(

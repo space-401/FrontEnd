@@ -1,5 +1,5 @@
-import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import { Cropper } from 'react-cropper';
 
 type PropsType = {
   image: string;
@@ -8,7 +8,7 @@ type PropsType = {
   width: number;
 };
 
-const CircleImageCropper = ({ image, myRef, width }: PropsType) => {
+export const CircleCropper = ({ image, myRef, width }: PropsType) => {
   return (
     <div style={{ position: 'relative' }}>
       <style>
@@ -72,5 +72,3 @@ const CircleImageCropper = ({ image, myRef, width }: PropsType) => {
     </div>
   );
 };
-
-export default CircleImageCropper;

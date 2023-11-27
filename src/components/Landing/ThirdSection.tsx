@@ -1,9 +1,9 @@
-import S from '@components/Landing/style';
-import { ReactComponent as LeftSvg } from '@assets/svg/landing/third_left.svg';
-import { ReactComponent as RightSvg } from '@assets/svg/landing/third_right.svg';
-import { SectionProps } from '@type/main.type';
+import { SectionProps } from '@/types';
+import { ReactComponent as LeftSvg } from '@/assets/svg/landing/third_left.svg';
+import { ReactComponent as RightSvg } from '@/assets/svg/landing/third_right.svg';
+import S from './style';
 
-const ThirdSection = ({ marginTop }: SectionProps) => {
+export const ThirdSection = ({ marginTop }: SectionProps) => {
   return (
     <S.Wrapper>
       <S.MarginBox marginTop={marginTop} />
@@ -30,5 +30,3 @@ const ThirdSection = ({ marginTop }: SectionProps) => {
     </S.Wrapper>
   );
 };
-
-export default ThirdSection;

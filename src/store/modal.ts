@@ -1,10 +1,10 @@
-import { create } from 'zustand';
 import {
   AlertModalType,
   ConfirmModalType,
   DetailModalType,
   ModalType,
-} from '@type/modal.type';
+} from '@/types';
+import { create } from 'zustand';
 
 export const useDetailModalStore = create<DetailModalType>((setState) => ({
   isOpen: false,

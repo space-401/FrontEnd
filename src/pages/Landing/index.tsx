@@ -1,11 +1,12 @@
-import { S } from '@pages/Landing/style';
-import FirstSection from '@components/Landing/FirstSection';
-import SecondSection from '@components/Landing/SecondSection';
-import ThirdSection from '@components/Landing/ThirdSection';
-import FourthSection from '@components/Landing/FourthSection';
-import FifthSection from '@components/Landing/FifthSection';
-import useScript from '@hooks/common/useScript';
-import useCss from '@hooks/common/useCss';
+import { useCss, useScript } from '@/hooks';
+import {
+  FifthSection,
+  FirstSection,
+  FourthSection,
+  SecondSection,
+  ThirdSection,
+} from '@/components/Landing';
+import { S } from './style';
 
 const LandingPage = () => {
   const [, scriptError] = useScript('https://unpkg.com/aos@2.3.1/dist/aos.js');
@@ -28,4 +29,5 @@ const LandingPage = () => {
     </S.Wrapper>
   );
 };
+
 export default LandingPage;

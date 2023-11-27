@@ -1,8 +1,8 @@
 import { ReactNode, useState } from 'react';
 import { MapMarker, useMap } from 'react-kakao-maps-sdk';
-import kakaoMapSvg from '@assets/svg/kakaomapMarker.svg';
+import kakaoMapSvg from '@/assets/svg/kakaomapMarker.svg';
 
-const EventMarkerContainer = ({
+export const EventMarkerContainer = ({
   position,
   content,
   setIsSelect,
@@ -37,5 +37,3 @@ const EventMarkerContainer = ({
     </MapMarker>
   );
 };
-
-export default EventMarkerContainer;

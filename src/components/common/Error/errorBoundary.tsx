@@ -1,8 +1,8 @@
+import { HTTPError } from '@/apis';
+import { HTTP_STATUS_CODE } from '@/constants';
 import { Component } from 'react';
-import { HTTPError } from '@apis/HTTPError';
-import ErrorPage from '@components/common/Error/index';
-import { HTTP_STATUS_CODE } from '@constants/api';
 import { Outlet } from 'react-router-dom';
+import { ErrorComponent } from './ErrorCompoent';
 
 interface Props {
   message?: string;
@@ -19,7 +19,7 @@ const initialState: State = {
   error: null,
 };
 
-class ErrorBoundary extends Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = initialState;
@@ -44,7 +44,7 @@ class ErrorBoundary extends Component<Props, State> {
 
     if (hasError) {
       return (
-        <ErrorPage
+        <ErrorComponent
           statusCode={
             error instanceof HTTPError
               ? error.statusCode
@@ -58,5 +58,3 @@ class ErrorBoundary extends Component<Props, State> {
     return <Outlet />;
   }
 }
-
-export default ErrorBoundary;

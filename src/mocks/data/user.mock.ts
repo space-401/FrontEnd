@@ -3,9 +3,9 @@ import type {
   BookMarkListType,
   MyCommentListType,
   MyPostListType,
-} from '@type/user.type';
-import { userList } from '@mocks/data/common';
-import { UserTokenType } from '@type/user.type';
+  UserTokenType,
+} from '@/types';
+import { userList } from '@/mocks/data';
 
 /**
  * 사용자 정보에 대한 목 데이터

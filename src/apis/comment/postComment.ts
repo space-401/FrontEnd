@@ -1,7 +1,6 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import type { ApiResponseType } from '@type/response.type';
-import { SubmitCommentType } from '@type/comment.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { ApiResponseType, SubmitCommentType } from '@/types';
 
 export const postComment = async (commentInfo: SubmitCommentType) => {
   const { postId, comment, refInfo } = commentInfo;

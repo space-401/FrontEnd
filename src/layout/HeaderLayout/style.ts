@@ -1,5 +1,5 @@
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   display: flex;
@@ -97,7 +97,7 @@ const Footer = styled.footer`
   height: 32px;
 `;
 
-const S = {
+export const S = {
   SpaceIcon,
   SpaceIconBox,
   HeaderWrapper,
@@ -110,5 +110,3 @@ const S = {
   ContentLayOut,
   Footer,
 };
-
-export default S;

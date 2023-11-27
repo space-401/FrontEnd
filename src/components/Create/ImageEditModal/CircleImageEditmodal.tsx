@@ -1,12 +1,12 @@
-import S from '@components/Create/ImageEditModal/style';
-import React, { useRef } from 'react';
-import { usePhotoModalStore } from '@/store/modal';
-import { ReactCropperElement } from 'react-cropper';
+import { useImageCompress } from '@/hooks';
+import { ImageArrType } from '@/types';
+import { dataURItoFile } from '@/utils';
 import { Box } from '@mui/material';
-import { ImageArrType } from '@/types/image.type';
-import CircleImageCropper from './CircleCropper';
-import { dataURItoFile } from '@/utils/fileConvertor';
-import useCompressImage from '@hooks/common/useCompressImage';
+import React, { useRef } from 'react';
+import { ReactCropperElement } from 'react-cropper';
+import { usePhotoModalStore } from '@/store/modal';
+import { CircleCropper } from '@/components/Create';
+import { S } from './style';
 
 type ModalType = {
   imageArr: ImageArrType;
@@ -14,7 +14,7 @@ type ModalType = {
   onCloseIconModal?: () => void;
 };
 
-const CircleImgEditModal = ({
+export const CircleImgEditModal = ({
   imageArr,
   setImageArr,
   onCloseIconModal,
@@ -29,7 +29,7 @@ const CircleImgEditModal = ({
   const cropperWidth = 500;
 
   //사진을 압축함
-  const { compressImage, isLoading: isCompressedLoading } = useCompressImage();
+  const { compressImage, isLoading: isCompressedLoading } = useImageCompress();
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = async (cropperRef: any) => {
@@ -101,7 +101,7 @@ const CircleImgEditModal = ({
             ref={sliderRef}
           >
             {imageArr.image && (
-              <CircleImageCropper
+              <CircleCropper
                 width={cropperWidth}
                 key={0}
                 image={imageArr.image.img}
@@ -116,4 +116,3 @@ const CircleImgEditModal = ({
     </Box>
   );
 };
-export default CircleImgEditModal;

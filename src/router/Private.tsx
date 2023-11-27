@@ -1,9 +1,9 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
-import tokenStorage from '@utils/tokenStorage';
+import { PATH } from '@/constants';
+import { tokenStorage } from '@/utils';
 import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-const PrivateRoute = () => {
+export const PrivateRoute = () => {
   const navigate = useNavigate();
   const accessToken = tokenStorage.getAccessToken();
 
@@ -15,5 +15,3 @@ const PrivateRoute = () => {
 
   return <Outlet />;
 };
-
-export default PrivateRoute;

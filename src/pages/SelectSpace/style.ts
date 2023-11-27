@@ -61,7 +61,7 @@ const Content = styled.div`
   padding: 0 84px;
 `;
 
-const S = {
+export const S = {
   LogoBox,
   Wrapper,
   Container,
@@ -71,5 +71,3 @@ const S = {
   EmptySpaceBox,
   Content,
 };
-
-export default S;

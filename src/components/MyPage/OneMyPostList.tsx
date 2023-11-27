@@ -1,17 +1,15 @@
-import { getFormatDate } from '@utils/formatter';
-import { A } from '@components/MyPage/style';
-import Avatars from '@components/common/AvatarGroup/Avatars';
-import { useDetailModalOpen } from '@hooks/common/useDetailModalOpen';
-import type { OneMyPostType } from '@type/user.type';
+import { PATH } from '@/constants';
+import { useConfirmModalOpen, useDetailModalOpen } from '@/hooks';
+import { S } from '@/modal/Detail/style';
+import type { OneMyPostType } from '@/types';
+import { getFormatDate, toastColorMessage } from '@/utils';
 import { useState } from 'react';
-import S from '@modal/Detail/style';
-import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';
-import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { toastColorMessage } from '@utils/toastMessage';
+import { ReactComponent as MenuSvg } from '@/assets/svg/menu.svg';
+import { Avatars } from '@/components/common';
+import { A } from './style';
 
-const OneMyPostList = ({ items }: { items: OneMyPostType }) => {
+export const OneMyPostList = ({ items }: { items: OneMyPostType }) => {
   const {
     postCommentCount,
     postTitle,
@@ -85,5 +83,3 @@ const OneMyPostList = ({ items }: { items: OneMyPostType }) => {
     </tr>
   );
 };
-
-export default OneMyPostList;

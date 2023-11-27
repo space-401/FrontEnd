@@ -1,18 +1,20 @@
-import React from 'react';
-import { UserType } from '@type/post.type';
+import { PATH } from '@/constants';
+import {
+  useAlertModalOpen,
+  useConfirmModalOpen,
+  useSpaceUserUpdateMutation,
+} from '@/hooks';
+import { UserType } from '@/types';
+import { toastColorMessage } from '@/utils';
 import { Box } from '@mui/material';
-import S from '@components/Main/Setting/style';
-import { ReactComponent as DeleteIcon } from '@assets/svg/deleteIcon.svg';
-import UserList from '@/components/common/UserListModal/UserList';
-import { ReactComponent as LogoutSvg } from '@assets/svg/mainSetting/logout.svg';
-import { toastColorMessage } from '@utils/toastMessage';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
-import { PATH } from '@constants/path';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSpaceUserUpdateMutation } from '@hooks/api/space/useSpaceUserUpdateMutation';
+import { ReactComponent as DeleteIcon } from '@/assets/svg/deleteIcon.svg';
+import { ReactComponent as LogoutSvg } from '@/assets/svg/mainSetting/logout.svg';
+import { UserList } from '@/components/common';
+import S from './style';
 
-const SettingComponent = React.forwardRef(
+export const SettingComponent = React.forwardRef(
   (
     props: {
       userList: UserType[];

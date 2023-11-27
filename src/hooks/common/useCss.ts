@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useCss = (href: string) => {
+export const useCss = (href: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Event | string | Error | null>(null);
 
@@ -29,5 +29,3 @@ const useCss = (href: string) => {
 
   return [loading, error];
 };
-
-export default useCss;

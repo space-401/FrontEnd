@@ -1,6 +1,6 @@
-import { SuggestionDataItem } from 'react-mentions';
-import { UserType } from '@type/post.type';
+import { UserType } from '@/types';
 import { ReactNode } from 'react';
+import { SuggestionDataItem } from 'react-mentions';
 
 export type OneMentionType = {
   suggestion: SuggestionDataItem;
