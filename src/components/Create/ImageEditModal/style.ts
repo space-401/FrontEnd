@@ -1,4 +1,4 @@
-import { flexCenter, modalBackGround } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -107,7 +107,7 @@ const FlexCenter = styled.div`
   ${flexCenter};
   margin-top: 500px;
 `;
-const S = {
+export const S = {
   Wrapper,
   Form,
   Header,
@@ -120,5 +120,3 @@ const S = {
   NoImgBackground,
   FlexCenter,
 };
-
-export default S;

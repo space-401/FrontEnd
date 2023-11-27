@@ -1,4 +1,4 @@
-import type { UserType, TagType } from '@type/post.type';
+import type { TagType, UserType } from '@/types';
 
 export const isUserTypeArray = (
   items: UserType[] | TagType[]

@@ -1,7 +1,7 @@
-import { O } from '@components/Main/PostMap/components/style';
-import KSkeleton from '@components/common/Skeleton';
+import { KSkeleton } from '@/components/common';
+import { O } from './style';
 
-const OnePostMapCardSkeleton = () => {
+export const OnePostMapCardSkeleton = () => {
   return (
     <O.OneWrapper isSelect={false}>
       <KSkeleton variant={'rounded'} width={107.5} height={107.5} />
@@ -59,5 +59,3 @@ const OnePostMapCardSkeleton = () => {
     </O.OneWrapper>
   );
 };
-
-export default OnePostMapCardSkeleton;

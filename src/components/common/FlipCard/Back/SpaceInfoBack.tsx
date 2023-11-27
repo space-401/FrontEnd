@@ -1,8 +1,8 @@
-import Avatars from '@components/common/AvatarGroup/Avatars';
-import S from '@components/common/FlipCard/Back/style';
-import { SpaceInfoBackPropsType } from '@type/post.type';
+import { SpaceInfoBackPropsType } from '@/types';
+import { Avatars } from '@/components/common';
+import S from './style';
 
-const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
+export const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
   const { item, isBig } = props;
 
   const { spaceTitle, userList } = item;
@@ -23,5 +23,3 @@ const SpaceInfoBack = (props: SpaceInfoBackPropsType) => {
     </S.Wrapper>
   );
 };
-
-export default SpaceInfoBack;

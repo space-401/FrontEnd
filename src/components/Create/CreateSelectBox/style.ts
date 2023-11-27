@@ -1,4 +1,5 @@
-import { omitText } from '@styles/common';
+import { omitText } from '@/styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div<{ isOpen: boolean; minWidth: number }>`
   position: relative;
@@ -26,8 +27,6 @@ const Wrapper = styled.div<{ isOpen: boolean; minWidth: number }>`
     white-space: nowrap;
   }
 `;
-
-import styled from 'styled-components';
 
 const LabelTitle = styled.div`
   width: calc(100% - 20px);

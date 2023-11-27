@@ -1,12 +1,12 @@
-import Avatars from '@components/common/AvatarGroup/Avatars';
-import S from '@components/common/FlipCard/Back/style';
-import { getFormatDate } from '@utils/formatter';
-import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
+import { PostInfoBackPropsType } from '@/types';
+import { getFormatDate } from '@/utils';
 import { Chip } from '@mui/material';
-import { PostInfoBackPropsType } from '@type/post.type';
 import { v4 as uuid } from 'uuid';
+import { ReactComponent as MapIcon } from '@/assets/svg/markerIcon.svg';
+import { Avatars } from '@/components/common';
+import S from './style';
 
-const PostInfoBack = (props: PostInfoBackPropsType) => {
+export const PostInfoBack = (props: PostInfoBackPropsType) => {
   const { item, isBig } = props;
 
   const { placeTitle, postTitle, selectedTags, postUpdatedAt, usersList } =
@@ -47,5 +47,3 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
     </S.Wrapper>
   );
 };
-
-export default PostInfoBack;

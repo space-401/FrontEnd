@@ -1,18 +1,20 @@
-import S from '@components/Create/ImageEditModal/style';
-import ImageCropper from '@/components/Create/ImageEditModal/Cropper';
-import { useRef, useState } from 'react';
-import { ReactComponent as PrevBtn } from '@assets/svg/chevron/chevron_left.svg';
-import { ReactComponent as NextBtn } from '@assets/svg/chevron/chevron_right.svg';
-import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
-import { ReactCropperElement } from 'react-cropper';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
+import { useImageCompress } from '@/hooks';
+import { theme } from '@/styles';
+import { ImagesArrType } from '@/types';
+import { dataURItoFile } from '@/utils';
 import { Box, Modal } from '@mui/material';
+import { useRef, useState } from 'react';
+import { ReactCropperElement } from 'react-cropper';
+import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
+import { ReactComponent as NextBtn } from '@/assets/svg/chevron/chevron_right.svg';
+import { ReactComponent as MultipleIcon } from '@/assets/svg/photo/multipleIcon.svg';
 import { usePhotoModalStore } from '@/store/modal';
-import { theme } from '@/styles/theme/theme';
-import { ImagesArrType } from '@/types/image.type';
-import { dataURItoFile } from '@/utils/fileConvertor';
-import useCompressImage from '@hooks/common/useCompressImage';
+import {
+  CharacterCounter,
+  ImageCropper,
+  MultipleImgBox,
+} from '@/components/Create';
+import { S } from './style';
 
 type ModalType = {
   handleFileChange: any;
@@ -22,7 +24,7 @@ type ModalType = {
   setImageArr: React.Dispatch<React.SetStateAction<ImagesArrType>>;
 };
 
-const ImagesEditModal = ({
+export const ImagesEditModal = ({
   imageArr,
   setImageArr,
   currentIdx,
@@ -59,7 +61,7 @@ const ImagesEditModal = ({
 
   const cropperWidth = 500;
 
-  const { compressImage, isLoading: isCompressedLoading } = useCompressImage();
+  const { compressImage, isLoading: isCompressedLoading } = useImageCompress();
 
   //하나의 이미지를 크롭해서 저장함.
   const getCropData = async (cropperRef: any) => {
@@ -266,5 +268,3 @@ const ImagesEditModal = ({
     </Modal>
   );
 };
-
-export default ImagesEditModal;

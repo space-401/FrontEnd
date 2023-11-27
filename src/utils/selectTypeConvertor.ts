@@ -1,4 +1,4 @@
-import { UserType, TagType } from '@/types/post.type';
+import type { TagType, UserType } from '@/types';
 
 export const onConvertedUserToSelectType = (list: UserType[]) => {
   return list.map((user) => {

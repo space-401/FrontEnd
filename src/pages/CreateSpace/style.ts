@@ -1,5 +1,5 @@
-import { flexCenter } from '@/styles/common';
 import styled, { css } from 'styled-components';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   @media ${({ theme }) => theme.DEVICE.tablet} {
@@ -144,7 +144,7 @@ const FlexBoxColumn = styled.div`
 
 const DeleteButton = styled.div``;
 
-const S = {
+export const S = {
   Wrapper,
   Form,
   TitleContainer,
@@ -159,5 +159,3 @@ const S = {
   DeleteButton,
   FlexBoxColumn,
 };
-
-export default S;

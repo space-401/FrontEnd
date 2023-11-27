@@ -1,9 +1,9 @@
-import { selectType } from '@type/main.type';
+import { theme } from '@/styles';
+import { selectType } from '@/types';
 import { Chip, Stack } from '@mui/material';
-import { theme } from '@styles/theme/theme';
 import { Dispatch, SetStateAction } from 'react';
 
-const SelectList = (props: {
+export const SelectList = (props: {
   Items: selectType[];
   setState: Dispatch<SetStateAction<selectType[]>>;
 }) => {
@@ -46,5 +46,3 @@ const SelectList = (props: {
     </Stack>
   );
 };
-
-export default SelectList;

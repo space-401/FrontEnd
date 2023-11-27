@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/common';
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -29,11 +29,9 @@ const ContentWrapper = styled.div`
   flex-direction: column;
 `;
 
-const S = {
+export const S = {
   Wrapper,
   IconWrapper,
   IconContainer,
   ContentWrapper,
 };
-
-export default S;

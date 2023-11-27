@@ -1,7 +1,7 @@
-import S from '@components/common/Pagination/style';
-import { PaginationType } from '@type/main.type';
+import { PaginationType } from '@/types';
+import S from './style';
 
-const Pagination = (props: PaginationType) => {
+export const Pagination = (props: PaginationType) => {
   const { page, movePage, total, itemLength } = props;
   const Buttons = new Array(Math.ceil(total / itemLength))
     .fill('')
@@ -59,5 +59,3 @@ const Pagination = (props: PaginationType) => {
     </S.PaginationBox>
   );
 };
-
-export default Pagination;

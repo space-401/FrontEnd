@@ -1,7 +1,7 @@
-import type { UserType } from '@type/post.type';
-import { M } from '@components/Main/PostMap/components/style';
-import Avatars from '@components/common/AvatarGroup/Avatars';
-import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
+import type { UserType } from '@/types';
+import { ReactComponent as PlaceIcon } from '@/assets/svg/markerIcon.svg';
+import { Avatars } from '@/components/common';
+import { M } from './style';
 
 export type MarkerPropTypes = {
   postTitle?: string;
@@ -10,7 +10,7 @@ export type MarkerPropTypes = {
   usersList?: UserType[];
 };
 
-const MarkerContents = (props: MarkerPropTypes) => {
+export const MarkerContents = (props: MarkerPropTypes) => {
   const { postTitle, postUpdatedAt, placeTitle, usersList } = props;
 
   return (
@@ -35,5 +35,3 @@ const MarkerContents = (props: MarkerPropTypes) => {
     </M.ContentBox>
   );
 };
-
-export default MarkerContents;

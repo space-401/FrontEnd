@@ -1,9 +1,8 @@
+import { postBookMark } from '@/apis';
+import type { ApiResponseType, PostDetailType } from '@/types';
+import { toastColorMessage } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { ApiResponseType } from '@type/response.type';
-import { postBookMark } from '@apis/post/postBookMark';
 import type { AxiosError } from 'axios';
-import { toastColorMessage } from '@utils/toastMessage';
-import { PostDetailType } from '@type/post.type';
 
 interface IPostInfo {
   postId: number;
