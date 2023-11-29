@@ -1,3 +1,4 @@
+import { useResetError } from '@/hooks';
 import { Header, HeaderSkeleton } from '@/layout';
 import { AlertInner, ConfirmInner, DetailInner } from '@/modal';
 import {
@@ -14,6 +15,7 @@ import {
   useDetailModalStore,
 } from '@/store/modal';
 import { DetailInnerSkeleton } from '@/components/Detail';
+import { ErrorBoundary } from '@/components/common';
 import { S } from './style';
 
 export const HeaderLayOut = () => {
@@ -25,8 +27,9 @@ export const HeaderLayOut = () => {
     useAlertModalStore((state) => state);
 
   const { scrollYProgress } = useScroll();
+  const { handleErrorReset } = useResetError();
   return (
-    <>
+    <ErrorBoundary onReset={handleErrorReset}>
       <motion.div
         className="progress-bar"
         style={{ scaleX: scrollYProgress, zIndex: 900 }}
@@ -65,7 +68,7 @@ export const HeaderLayOut = () => {
           <S.Footer />
         </S.ContentLayOut>
       </S.Wrapper>
-    </>
+    </ErrorBoundary>
   );
 };
 export default HeaderLayOut;
