@@ -1,0 +1,36 @@
+import {S} from "@/pages/CreateSpace/style";
+import {TextAreaBox} from "@/components/common";
+import {CharacterCounter} from "@/components/Create";
+import {theme} from "@/styles";
+
+const SpaceDescription = ({content, onChange}: {
+    content: string,
+    onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+}) => {
+    return (
+        <>
+            <S.TitleContainer number={3} required={false}>
+                <div>스페이스 설명</div>
+            </S.TitleContainer>
+            <S.InputContainer number={3}>
+                <TextAreaBox
+                    value={content}
+                    height={160}
+                    placeholder="스페이스 설명 입력"
+                    maxLength={100}
+                    onChange={onChange}
+                    name="content"
+                    children={
+                        <CharacterCounter
+                            color={theme.COLOR['gray-3']}
+                            currentNum={content.length}
+                            maxNum={100}
+                        />
+                    }
+                />
+            </S.InputContainer>
+        </>
+    )
+}
+
+export default SpaceDescription
