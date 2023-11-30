@@ -1,5 +1,3 @@
-const SpaceModal = () => {
+const SpaceModal = () => {};
 
-}
-
-export default SpaceModal
+export default SpaceModal;
