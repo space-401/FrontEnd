@@ -1,12 +1,10 @@
 import { HTTPError } from '@/apis';
-import { HTTP_STATUS_CODE } from '@/constants';
-import { Component } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Component, PropsWithChildren } from 'react';
 import { ErrorComponent } from './ErrorCompoent';
 
 interface Props {
   message?: string;
-  onReset: () => void;
+  onReset: (error: Error | HTTPError) => void;
 }
 
 interface State {
@@ -19,42 +17,33 @@ const initialState: State = {
   error: null,
 };
 
-export class ErrorBoundary extends Component<Props, State> {
+export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
   constructor(props: Props) {
     super(props);
     this.state = initialState;
-    this.resetErrorBoundary = this.resetErrorBoundary.bind(this);
   }
 
   resetErrorBoundary = () => {
-    this.props.onReset();
+    const { onReset } = this.props;
+    const { error } = this.state;
+
+    onReset?.(error!);
     this.setState(initialState);
   };
-
   static getDerivedStateFromError(error: Error | HTTPError) {
-    return { hasError: true, info: error };
-  }
-
-  componentDidCatch(error: Error | HTTPError) {
-    this.setState({ hasError: true, error });
+    return { hasError: true, error };
   }
 
   render() {
     const { error, hasError } = this.state;
 
-    if (hasError) {
-      return (
-        <ErrorComponent
-          statusCode={
-            error instanceof HTTPError
-              ? error.statusCode
-              : HTTP_STATUS_CODE.NOT_FOUND
-          }
-          resetError={this.resetErrorBoundary}
-        />
-      );
-    }
-
-    return <Outlet />;
+    return hasError ? (
+      <ErrorComponent
+        statusCode={error instanceof HTTPError ? error.statusCode : undefined}
+        resetError={this.resetErrorBoundary}
+      />
+    ) : (
+      this.props.children
+    );
   }
 }
