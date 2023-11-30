@@ -1,4 +1,3 @@
-import {Dev} from '@/constants';
 import {queryClient} from '@/hooks';
 import {createRouter} from '@/router';
 import {GlobalStyles, theme} from '@/styles';
@@ -7,28 +6,29 @@ import {QueryClientProvider, useQueryErrorResetBoundary,} from '@tanstack/react-
 import {Toaster} from 'react-hot-toast';
 import {RouterProvider} from 'react-router-dom';
 import {ThemeProvider} from 'styled-components';
-import {worker} from '@/mocks/browser';
 import '@/styles/fonts/font.css';
+// import {Dev} from '@/constants';
+// import {worker} from '@/mocks/browser';
 
 function App() {
-  if (Dev) {
-    worker.start();
-  }
-  const { reset } = useQueryErrorResetBoundary();
+    // if (Dev) {
+    //     worker.start();
+    // }
+    const {reset} = useQueryErrorResetBoundary();
 
-  const router = createRouter(reset);
+    const router = createRouter(reset);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <GlobalStyles />
-        <ThemeProvider theme={theme}>
-          <Toaster position={'top-center'} />
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </GoogleOAuthProvider>
-    </QueryClientProvider>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+                <GlobalStyles/>
+                <ThemeProvider theme={theme}>
+                    <Toaster position={'top-center'}/>
+                    <RouterProvider router={router}/>
+                </ThemeProvider>
+            </GoogleOAuthProvider>
+        </QueryClientProvider>
+    );
 }
 
 export default App;
