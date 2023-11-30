@@ -10,6 +10,7 @@ export const BASE_PATH = {
 
 export const PATH = {
   ...BASE_PATH,
+  RELOAD: -1,
   SOCIAL_LOGIN: (socialType: string) => `/user/auth/${socialType}`,
   USER_INFO: `${BASE_PATH.USER}/mypage`,
   POST_CREATE: (spaceId: number | string) =>
