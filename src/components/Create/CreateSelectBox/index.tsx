@@ -1,16 +1,13 @@
-import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { useAlertModalOpen, useDimensions } from '@/hooks';
+import type { SelectBoxProps, selectType } from '@/types';
 import { motion } from 'framer-motion';
-import { useDimensions } from '@hooks/common/useDimensions';
-import type { SelectBoxProps, selectType } from '@type/main.type';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { MenuList, MenuToggle, SelectList } from './components';
 import S from './style';
-import { MenuToggle } from './components/Toggle';
-import MenuList from './components/MenuList';
-import SelectList from './components/component/SelectList';
-import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
 
-const CreateSelectBox = (props: SelectBoxProps) => {
+export const CreateSelectBox = (props: SelectBoxProps) => {
   const {
-    BoxWidth = 168,
+    boxWidth = 168,
     menuHeight = 200,
     menuWidth = 168,
     ListItem,
@@ -69,7 +66,7 @@ const CreateSelectBox = (props: SelectBoxProps) => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
-    <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, BoxWidth)}>
+    <S.Wrapper isOpen={isOpen} minWidth={Math.max(150, boxWidth)}>
       <S.LabelTitle>
         {!isOpen ? (
           select.map((prev) => prev.title).join(', ') || (
@@ -118,4 +115,3 @@ const CreateSelectBox = (props: SelectBoxProps) => {
     </S.Wrapper>
   );
 };
-export default CreateSelectBox;

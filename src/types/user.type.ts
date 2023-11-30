@@ -1,20 +1,39 @@
-import { MyCommentType, SpacePostType } from '@type/space.type';
+import { MyCommentType, UserType } from '@/types';
 
 export type AccountDataType = {
-  loginState: 'kakao' | 'naver' | 'google';
+  loginState: SocialType;
   name: string;
   email: string;
 };
 
+export type SocialType = 'kakao' | 'naver' | 'google';
+
+type OneMyBookMarkType = {
+  postId: number;
+  postTitle: string;
+  postCommentCount: number;
+  postCreatedAt: string;
+  postWriterName: string;
+};
+
 export type BookMarkListType = {
-  bookMarkList: SpacePostType[];
+  bookMarkList: OneMyBookMarkType[];
   page: number;
   total: number;
   itemLength: number;
 };
 
+export type OneMyPostType = {
+  spaceId: number;
+  postId: number;
+  postTitle: string;
+  postCreatedAt: string;
+  postCommentCount: number;
+  selectedUsers: UserType[];
+};
+
 export type MyPostListType = {
-  myPostList: SpacePostType[];
+  myPostList: OneMyPostType[];
   page: number;
   total: number;
   itemLength: number;
@@ -25,4 +44,9 @@ export type MyCommentListType = {
   page: number;
   total: number;
   itemLength: number;
+};
+
+export type UserTokenType = {
+  accessToken: string;
+  refreshToken: string;
 };

@@ -1,40 +1,33 @@
 import DatePicker from 'react-datepicker';
 import styled from 'styled-components';
 
-const DStyledDatePicker = styled(DatePicker)`
+const StyledDatePicker = styled(DatePicker)<{
+  width: number;
+  height: number;
+  borderRadius: number;
+  fontSize?: number;
+}>`
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.COLOR['gray-5']};
   color: ${({ theme }) => theme.COLOR.white};
-  height: 60px;
-  border-radius: 10px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-  width: 322px !important;
-
+  font-size: ${({ theme, fontSize }) =>
+    fontSize ? fontSize : theme.TEXT_SIZE['text-18']};
+  border-radius: ${({ borderRadius }) => borderRadius}px;
   display: flex;
-  padding-left: 2.6rem;
-`;
-
-const MStyledDatePicker = styled(DatePicker)`
-  height: 50px;
-  border-radius: 5px !important;
-  background-color: ${({ theme }) => theme.COLOR['gray-5']};
-  color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
-
-  width: 322px !important;
-  display: flex;
-  padding-left: 2.6rem;
+  padding-left: 0.7rem;
+  caret-color: transparent;
 `;
 
 const DateText = styled.div<{ isMain: boolean }>`
   color: ${({ isMain }) => (isMain ? '#E9D7EF' : '#767676')};
   position: absolute;
-  bottom: 27;
-  left: 15;
+  bottom: 27px;
+  left: 15px;
   font-weight: 400;
 `;
 
 export const S = {
+  StyledDatePicker,
   DateText,
-  DStyledDatePicker,
-  MStyledDatePicker,
 };

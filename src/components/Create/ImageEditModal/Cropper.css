@@ -2,3 +2,6 @@
 .cropper-dashed.dashed-h {
   border: none;
 }
+.cropper-point {
+  background-color: #56c9cc !important;
+}

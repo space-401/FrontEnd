@@ -1,8 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import { PATH } from '@/constants';
+import { tokenStorage } from '@/utils';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-const PrivateRoute = () => {
-  // 로그인된 유저만 들어오게하기
+export const PrivateRoute = () => {
+  const navigate = useNavigate();
+  const accessToken = tokenStorage.getAccessToken();
+
+  useEffect(() => {
+    if (!accessToken) {
+      navigate(PATH.LOGIN);
+    }
+  }, [navigate, accessToken]);
+
   return <Outlet />;
 };
-
-export default PrivateRoute;

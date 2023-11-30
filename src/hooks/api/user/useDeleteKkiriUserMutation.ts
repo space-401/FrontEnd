@@ -1,13 +1,17 @@
-import type { ApiResponseType } from '@type/response.type';
+import type { ApiResponseType } from '@/types';
+import { tokenStorage } from '@/utils';
 import { useMutation } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { deleteKkiriUser } from '@apis/user/deleteKkiriUser';
+import { deleteKkiriUser } from '@/apis/user';
 
 export const useDeleteKkiriUserMutation = () => {
   const { mutate: deleteKkiriUserAction } = useMutation<
     ApiResponseType,
-    AxiosError,
-    number
-  >((deleteUserId) => deleteKkiriUser(deleteUserId));
+    AxiosError
+  >(() => deleteKkiriUser(), {
+    onMutate: () => {
+      tokenStorage.clear();
+    },
+  });
   return { deleteKkiriUserAction };
 };

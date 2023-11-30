@@ -1,32 +1,32 @@
-export const Product = process.env.NODE_ENV === 'production';
-export const Dev = process.env.NODE_ENV === 'development';
+export const Dev = process.env.NODE_ENV == 'development';
+
 export const NETWORK = {
   RETRY_COUNT: 2,
   TIMEOUT: 10000,
 };
 
-export const AXIOS_BASE_URL =  '/';
+export const AXIOS_BASE_URL = Dev
+  ? import.meta.env.VITE_BASE_URL
+  : import.meta.env.VITE_BACK_URL;
 
 export const END_POINTS = {
   USER: '/user',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
-  TOKEN: '/refreshToken',
+  TOKEN: '/user/refreshToken',
+  MY_POST_LIST: `/mypost`,
   USERINFO: '/mypage',
-  MY_PROFILE: `/profile`,
+  MY_COMMENT_LIST: `/mycomment`,
+  LOGOUT: '/logout',
+  LOGIN: '/login',
+  MY_BOOK_MARK_LIST: `/bookmark`,
   SPACE: '/space',
+  SPACE_LIST: '/space/list',
+  SPACE_USER: `/space/user`,
+  SPACE_TAG: `/space/tag`,
+  SPACE_POST_LIST: `/space/search`,
+  MY_PROFILE: `/space/profile`,
   POST: '/post',
-  SPACE_LIST: '/list',
-  COMMENT: '/comment',
   POST_BOOK_MARK: '/post/bookmark',
-  SPACE_INFO: (spaceId: number | string) => `/space/${spaceId}`,
-  SPACE_TAG: (spaceId: number | string) => `/space/${spaceId}/tag`,
-  SPACE_USER: (spaceId: number | string) => `/space/${spaceId}/user`,
-  SPACE_SEARCH_LIST: (spaceId: number | string, page: number | string) =>
-    `space/${spaceId}/search?page=${page}`,
-  MY_BOOK_MARK_LIST: (page: number | string) => `/bookmark?page=${page}`,
-  MY_POST_LIST: (page: number | string) => `/mypost?page=${page}`,
-  MY_COMMENT_LIST: (page: number | string) => `/mycomment?page=${page}`,
+  COMMENT: '/comment',
 } as const;
 
 export const HTTP_STATUS_CODE = {
@@ -40,7 +40,23 @@ export const HTTP_STATUS_CODE = {
   INTERNAL_SERVER_ERROR: 500,
 } as const;
 
-export const ERROR_CODE = {} as const;
+export const ERROR_CODE = {
+  INVALID_REQUEST: 1000,
+  MISSING_PARAMETER: 1001,
+  DUPLICATED_MEMBER_NICKNAME: 1002,
+  ALREADY_SAVED_SPACE: 1003,
+  INVALID_SPACE_CODE_OR_PASSWORD: 1004,
+  ALREADY_DELETED_SPACE: 2001,
+  ALREADY_DELETED_POST: 2002,
+  OVER_SIZED_IMAGE: 5001,
+  MISSING_IMAGE: 5002,
+  INVALID_TOKEN: 9101,
+  EXPIRED_TOKEN: 9102,
+  FAIL_TO_VALIDATE_TOKEN: 9103,
+  TOKEN_NOT_FOUND: 9104,
+  UNAUTHORIZED_REQUEST: 9105,
+  SERVER_ERROR: 9999,
+} as const;
 
 export const HTTP_ERROR_MESSAGE = {
   [HTTP_STATUS_CODE.NOT_FOUND]: {
@@ -60,6 +76,5 @@ export const HTTP_ERROR_MESSAGE = {
   },
 } as const;
 
-export const ERROR_MESSAGE = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
-
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
+export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';

@@ -1,13 +1,18 @@
-import type { ApiResponseType } from '@type/response.type';
-import { useMutation } from '@tanstack/react-query';
-import { postComment } from '@apis/comment/postComment';
+import { postComment } from '@/apis';
+import type { ApiResponseType, SubmitCommentType } from '@/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
-export const useCommentMutation = () => {
+export const useCommentMutation = (postId: number, spaceId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: postCommentAction } = useMutation<
     ApiResponseType,
     AxiosError,
-    string
-  >((comment) => postComment(comment));
+    SubmitCommentType
+  >((comment) => postComment(comment), {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['commentList', postId, spaceId]);
+    },
+  });
   return { postCommentAction };
 };

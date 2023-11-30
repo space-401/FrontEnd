@@ -1,4 +1,4 @@
-import { useDetailModalStore } from '@store/modal';
+import { useDetailModalStore } from '@/store/modal';
 
 export const useDetailModalOpen = () => {
   const { ModalOpen, setPostId } = useDetailModalStore((state) => state);

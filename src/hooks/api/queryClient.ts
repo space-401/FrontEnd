@@ -1,6 +1,5 @@
+import { NETWORK } from '@/constants';
 import { QueryClient } from '@tanstack/react-query';
-
-import { NETWORK } from '@constants/api';
 
 export const queryClient = new QueryClient({
   defaultOptions: {

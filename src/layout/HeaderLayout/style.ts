@@ -1,5 +1,5 @@
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,6 +31,7 @@ const IconBox = styled.div<{ padding?: number }>`
   display: flex;
   align-items: center;
   border-radius: 10px;
+
   svg {
     cursor: pointer;
   }
@@ -46,13 +47,16 @@ const SpaceBox = styled.div`
 `;
 
 const Container = styled.div`
-  margin: 32px 32px 8px 32px;
+  margin: 16px 32px 8px 32px;
   width: 100%;
   height: 48px;
   max-width: 1856px;
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -74,21 +78,26 @@ const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
   background-image: url(${({ img_url }) => img_url});
   cursor: pointer;
   background-size: cover;
-  box-shadow: ${({ isCurrentSpace }) =>
-    isCurrentSpace && ' 0px 0px 10px 2px #c2c2c2'};
+  border: ${({ isCurrentSpace, theme }) =>
+    isCurrentSpace ? `1.2px solid ${theme.COLOR.skyblue}` : ''};
 `;
 
 const ContentLayOut = styled.div`
   width: 1200px;
   display: flex;
   flex-direction: column;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    width: 95%;
+  }
 `;
 
 const Footer = styled.footer`
-  height: 56px;
+  height: 32px;
 `;
 
-const S = {
+export const S = {
   SpaceIcon,
   SpaceIconBox,
   HeaderWrapper,
@@ -101,5 +110,3 @@ const S = {
   ContentLayOut,
   Footer,
 };
-
-export default S;

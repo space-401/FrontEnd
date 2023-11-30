@@ -1,12 +1,9 @@
-import { axiosInstance } from '@apis/AxiosInstance';
-import { ApiResponseType } from '@type/response.type';
-import { END_POINTS } from '@constants/api';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { ApiResponseType } from '@/types';
 
-export const deleteKkiriUser = async (userId: number) => {
-  const { data } = await axiosInstance.delete<ApiResponseType>(
-    END_POINTS.USER,
-    { data: userId }
-  );
+export const deleteKkiriUser = async () => {
+  const { data } = await axiosInstance.delete<ApiResponseType>(END_POINTS.USER);
 
   return data;
 };
