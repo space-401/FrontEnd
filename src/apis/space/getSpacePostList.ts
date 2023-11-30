@@ -1,7 +1,7 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import type { SpacePostListProps } from '@type/main.type';
-import { DateInfoType } from '@/types/post.type';
+//완성
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { DateInfoType, SpacePostListProps } from '@/types';
 
 export type FilterType = {
   userId?: number[];
@@ -15,9 +15,10 @@ export const getSpacePostList = async (
   page: string,
   filter: FilterType
 ) => {
+  const searchValue = JSON.stringify({ spaceId, page, ...filter });
   const { data } = await axiosInstance.get<SpacePostListProps>(
-    END_POINTS.SPACE_SEARCH_LIST(spaceId, page),
-    { params: { ...filter } }
+    END_POINTS.SPACE_POST_LIST,
+    { params: { searchValue } }
   );
 
   return data;

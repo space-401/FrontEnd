@@ -1,13 +1,14 @@
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
 import type { BasicButtonProps } from './index';
 
 //비활성화시 색상
 const ButtonWrapper = styled.button<BasicButtonProps>`
   height: ${({ height }) => height}px;
   width: ${({ width }) => width}px;
-  ${flexCenter}
-  border-radius:${({ borderRadius }) => borderRadius || 10}px;
+  ${flexCenter};
+  border-radius: ${({ borderRadius }) => borderRadius || 10}px;
+  border: ${({ border }) => (border ? border : 'none')};
   //스토리 적용
   padding: 12px;
   padding-left: ${({ padding }) => padding || 16}px;

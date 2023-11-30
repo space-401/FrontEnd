@@ -1,62 +1,68 @@
-import S from '@pages/SelectSpace/style';
-import FlipCard from '@/components/common/FlipCard/FlipCard';
-import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
-import BasicButton from '@/components/common/BasicButton';
+import { PATH } from '@/constants';
+import { useSpaceListQuery } from '@/hooks';
 import { useNavigate } from 'react-router-dom';
-import { spaceList } from '@mocks/data/space.mock';
-import { PATH } from '@constants/path';
+import { v4 as uuid } from 'uuid';
+import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
+import { ReactComponent as SelectLogo } from '@/assets/svg/selectlogo.svg';
+import { BasicButton, FlipCard } from '@/components/common';
+import { S } from './style';
 
 const SelectSpace = () => {
   const navigate = useNavigate();
+
+  const spaceList = useSpaceListQuery().spaceList!.spaceList!;
+
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Img />
-        <S.SpaceContainer>
-          <S.ButtonContainer>
-            <BasicButton
-              fontSize={16}
-              width={130}
-              borderRadius={10}
-              onClick={() => {}}
-            >
-              초대코드 입력
-            </BasicButton>
-          </S.ButtonContainer>
-          {spaceList.length < 5 && (
-            <S.AddBox
-              onClick={() => {
-                navigate(PATH.SPACE_CREATE);
-              }}
-            >
-              <PlusIcon />
-            </S.AddBox>
-          )}
-          {spaceList.map((space) => {
-            return (
-              <>
-                <FlipCard
-                  key={Math.floor(Math.random() * 1000)}
-                  item={space}
-                  size="medium"
-                  imgUrl={space.imgUrl}
+    spaceList && (
+      <S.Wrapper>
+        <S.Container>
+          <S.LogoBox>
+            <SelectLogo className={'main-logo'} />
+          </S.LogoBox>
+          <S.Content>
+            <S.ButtonContainer>
+              <BasicButton
+                fontSize={16}
+                width={130}
+                borderRadius={10}
+                onClick={() => navigate(PATH.INVITE)}
+              >
+                초대코드 입력
+              </BasicButton>
+            </S.ButtonContainer>
+            <S.SpaceContainer>
+              {spaceList?.length < 5 && (
+                <S.AddBox
                   onClick={() => {
-                    navigate(`/space/${space.spaceId}`);
+                    navigate(PATH.SPACE_CREATE);
                   }}
-                  borderRadius={'20px'}
-                />
-              </>
-            );
-          })}
-          {spaceList.length < 5 &&
-            Array.from({ length: 4 - spaceList.length }).map(() => (
-              <S.EmptySpaceBox
-                key={Math.floor(Math.random() * 1000)}
-              ></S.EmptySpaceBox>
-            ))}
-        </S.SpaceContainer>
-      </S.Container>
-    </S.Wrapper>
+                >
+                  <PlusIcon width={24} height={24} />
+                </S.AddBox>
+              )}
+              {spaceList?.map((space) => {
+                return (
+                  <FlipCard
+                    key={uuid()}
+                    item={space}
+                    isBig={false}
+                    imgUrl={space.imgUrl}
+                    onClick={() => {
+                      navigate(PATH.SPACE_MAIN(space.spaceId));
+                    }}
+                  />
+                );
+              })}
+              {spaceList.length < 5 &&
+                Array.from({ length: 4 - spaceList.length }).map(() => (
+                  <S.EmptySpaceBox key={uuid()}></S.EmptySpaceBox>
+                ))}
+            </S.SpaceContainer>
+          </S.Content>
+        </S.Container>
+      </S.Wrapper>
+    )
   );
 };
+
 export default SelectSpace;

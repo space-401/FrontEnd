@@ -1,6 +1,6 @@
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
 import { BasicBoxProp } from '.';
-import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div<BasicBoxProp>`
   width: ${(props) => props.width}px;
@@ -8,7 +8,7 @@ const Wrapper = styled.div<BasicBoxProp>`
   background-color: ${({ color, theme }) =>
     color ? color : theme.COLOR['gray-5']};
   border-radius: ${(props) => props.borderradius}px;
-  ${flexCenter}
+  ${flexCenter};
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
 `;

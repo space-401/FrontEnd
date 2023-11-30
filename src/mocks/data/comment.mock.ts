@@ -1,5 +1,5 @@
-import type { CommentType } from '@type/space.type';
-import { successResponse } from '@mocks/data/response.mock';
+import type { CommentType } from '@/types';
+
 /**
  * 포스트 게시물 댓글들의 목 데이터
  */
@@ -45,7 +45,6 @@ export const commentList: CommentType[] = [
     },
     replyMember: {
       id: 'jihyeong00',
-      memberKey: '3D6rpqP63f3E7gxXN1PHrg',
       nick: '칸탐로봇',
     },
     content: '잘부탁드립니다!',
@@ -206,6 +205,10 @@ export const commentList: CommentType[] = [
   },
 ];
 
-export const postComment = successResponse;
+export const postComment = {
+  message: 'success',
+};
 
-export const deleteComment = successResponse;
+export const deleteComment = {
+  message: 'success',
+};

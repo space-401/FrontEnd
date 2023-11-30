@@ -1,9 +1,9 @@
-import { S } from '@components/Main/PostMap/components/style';
-import OnePostMapCard from '@components/Main/PostMap/components/One-PostMapCard';
-import { SpacePostType } from '@type/space.type';
+import { SpacePostType } from '@/types';
+import { getFormatUser } from '@/utils';
 import { Dispatch, SetStateAction } from 'react';
-import { getFormatUser } from '@utils/formatter';
-import Pagination from '@components/common/Pagination';
+import { OnePostMapCard } from '@/components/Main';
+import { Pagination } from '@/components/common';
+import { S } from './style';
 
 type LeftSectionPropType = {
   postList: SpacePostType[];
@@ -18,15 +18,20 @@ type LeftSectionPropType = {
   page: number;
   total: number;
   itemLength: number;
+  movePage: (pageNumber: number | undefined) => void;
 };
 
-const movePage = (page: number) => {
-  console.log(page);
-};
-
-const LeftSection = (props: LeftSectionPropType) => {
-  const { setIsSelect, setState, isSelect, postList, total, page, itemLength } =
-    props;
+export const LeftSection = (props: LeftSectionPropType) => {
+  const {
+    setIsSelect,
+    setState,
+    movePage,
+    isSelect,
+    postList,
+    total,
+    page,
+    itemLength,
+  } = props;
 
   return (
     <S.Wrapper>
@@ -58,15 +63,15 @@ const LeftSection = (props: LeftSectionPropType) => {
         );
       })}
       <S.PaginationBox>
-        <Pagination
-          movePage={movePage}
-          total={total}
-          page={page}
-          itemLength={itemLength}
-        />
+        <S.PaginationInner>
+          <Pagination
+            movePage={movePage}
+            total={total}
+            page={page}
+            itemLength={itemLength}
+          />
+        </S.PaginationInner>
       </S.PaginationBox>
     </S.Wrapper>
   );
 };
-
-export default LeftSection;

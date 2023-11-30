@@ -1,13 +1,22 @@
-import type { ApiResponseType } from '@type/response.type';
-import { useMutation } from '@tanstack/react-query';
+import { deletePost } from '@/apis';
+import type { ApiResponseType } from '@/types';
+import { toastColorMessage } from '@/utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { deletePost } from '@/apis/post/deletePost';
 
-export const usePostDeleteMutation = () => {
+export const usePostDeleteMutation = (spaceId: number) => {
+  const queryClient = useQueryClient();
   const { mutate: deletePostAction } = useMutation<
     ApiResponseType,
     AxiosError,
     number
-  >((postId) => deletePost(postId));
+  >((postId) => deletePost(postId), {
+    onError: (error) => {
+      toastColorMessage(error.message);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['postList', String(spaceId)]);
+    },
+  });
   return { deletePostAction };
 };

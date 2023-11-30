@@ -1,11 +1,6 @@
+import { checkAndSetToken, handleAPIError, handleTokenError } from '@/apis';
+import { AXIOS_BASE_URL, NETWORK } from '@/constants';
 import axios from 'axios';
-
-import { AXIOS_BASE_URL, NETWORK } from '@constants/api';
-import {
-  checkAndSetToken,
-  handleAPIError,
-  handleTokenError,
-} from '@apis/interceptors';
 
 export const axiosInstance = axios.create({
   baseURL: AXIOS_BASE_URL,

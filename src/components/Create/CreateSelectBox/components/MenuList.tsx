@@ -1,24 +1,25 @@
-import type { UserType, TagType } from '@type/post.type';
-import type { MenuListProps, selectType } from '@type/main.type';
-import UserList from './component/UserList';
-import TagList from './component/TagList';
+import type { MenuListProps, TagType, UserType, selectType } from '@/types';
+import { isUserType, isUserTypeArray } from '@/utils';
+import { TagList, UserList } from './component';
 import S from './style';
-import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 
-const MenuList = (props: MenuListProps) => {
+export const MenuList = (props: MenuListProps) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
   const checkSelectItem = (thisValue: number) => {
-    return select.filter((i) => i.id === thisValue).length !== 0;
+    if (select.length) {
+      return select.filter((i) => i.id === thisValue).length !== 0;
+    }
   };
 
-  const ListItem = !isUserTypeArray(itemList)
+  const ListItem: TagType[] | UserType[] = !isUserTypeArray(itemList)
     ? [
         ...select.map((prev) => {
           return {
             userId: prev.id,
             userName: prev.title,
             imgUrl: prev.imgUrl,
+            isAdmin: prev.isAdmin,
           };
         }),
         ...itemList.filter((prev) => !checkSelectItem(prev.userId)),
@@ -65,7 +66,7 @@ const MenuList = (props: MenuListProps) => {
     return ListItem.map((item) => (
       <S.List
         grid={isUserType(item)}
-        select={checkSelectItem(item.userId)}
+        select={checkSelectItem(item.userId)!}
         onClick={() => setChange(item)}
         key={item.userId}
       >
@@ -83,7 +84,7 @@ const MenuList = (props: MenuListProps) => {
       return selectArray.map((item) => (
         <S.List
           grid={isUserType(item)}
-          select={checkSelectItem(item.tagId)}
+          select={checkSelectItem(item.tagId)!}
           onClick={() => setChange(item)}
           key={item.tagId}
         >
@@ -94,7 +95,7 @@ const MenuList = (props: MenuListProps) => {
     return ListItem.map((item) => (
       <S.List
         grid={isUserType(item)}
-        select={checkSelectItem(item.tagId)}
+        select={checkSelectItem(item.tagId)!}
         onClick={() => setChange(item)}
         key={item.tagId}
       >
@@ -103,4 +104,3 @@ const MenuList = (props: MenuListProps) => {
     ));
   }
 };
-export default MenuList;

@@ -1,53 +1,77 @@
-import S from '@pages/CreatePost/style';
-import BasicBox from '@/components/common/BasicBox';
-import InputBox from '@/components/common/InputBox';
-import TextAreaBox from '@/components/common/TextAreaBox';
-import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
-import BasicButton from '@/components/common/BasicButton';
-import Calender from '@/components/common/Calender/Calender';
-import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
-import { selectType } from '@/types/main.type';
-import CreateSelectBox from '@/components/Create/CreateSelectBox';
-import { useState, useRef } from 'react';
-import ImagesEditModal from '@/components/Create/ImageEditModal/ImagesEditModal';
-import { theme } from '@/styles/theme/theme';
-import { usePhotoModalStore } from '@/store/modal';
-import ImgSlider from '@/components/Create/ImgSlider';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import useInputs from '@/hooks/common/useInputs';
-import SearchModal from '@components/Create/SearchMapModal';
-import { MapType } from '@/types/marker.type';
-import { DateInfoType } from '@/types/post.type';
-import { ImageType, ImageArrType } from '@/types/image.type';
-import { useParams } from 'react-router-dom';
-import { usePostDetailQuery } from '@/hooks/api/post/usePostDetailQuery';
-import { makeObj } from '@/utils/makeObj';
-import { CreatePostType } from '@/types/post.type';
-import { useAlertModalOpen } from '@hooks/common/useAlertModalOpen';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
 import {
-  onConvertedUserToSelectType,
+  useAlertModalOpen,
+  useConfirmModalOpen,
+  useInputs,
+  usePostCreateMutation,
+  usePostDetailQuery,
+  usePostUpdateMutation,
+  useSpaceInfoQuery,
+} from '@/hooks';
+import { theme } from '@/styles';
+import type {
+  DateInfoType,
+  ImageType,
+  ImagesArrType,
+  MapType,
+  selectType,
+} from '@/types';
+import {
+  convertImgArrToObj,
   onConvertedTagToSelectType,
-} from '@/utils/selectTypeConvertor';
-import { postPost } from '@/apis/post/postPost';
+  onConvertedUserToSelectType,
+} from '@/utils';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
+import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
+import { usePhotoModalStore } from '@/store/modal';
+import { PATH } from '@/constants/path';
+import {
+  CharacterCounter,
+  CreateSelectBox,
+  ImagesEditModal,
+  ImgSlider,
+  SearchModal,
+} from '@/components/Create';
+import {
+  BasicBox,
+  BasicButton,
+  Calender,
+  CircleIcon,
+  InputBox,
+  TextAreaBox,
+} from '@/components/common';
+import { S } from './style';
 
 const CreatePost = () => {
   const params = useParams();
   const postId = params.postId;
   const spaceId = params.spaceId;
-  const { postDetailData } = usePostDetailQuery(postId!);
-  const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
 
-  console.log(spaceInfo);
+  const { postDetailData } = usePostDetailQuery(Number(postId!));
+  const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
+  const navigate = useNavigate();
+
+  //내 작성글이 아닐 경우에 돌려보내기
+  useEffect(() => {
+    if (postId) {
+      if (!postDetailData?.isMine) {
+        noAuthalertModalOpen();
+        navigate(PATH.SPACE);
+      }
+    }
+  }, [navigate, postId]);
+
+  const { createPostAction, postCreateSuccess } = usePostCreateMutation();
+  const { updatePostAction, updatePostSuccess } = usePostUpdateMutation();
+
   const { imgUrl, spaceTitle, tagList, userList } = spaceInfo!;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   //이미지 파일을 저장하는 곳
-  const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: postDetailData ? makeObj(postDetailData.imgUrl) : [],
+  const [imageArr, setImageArr] = useState<ImagesArrType>({
+    images: postDetailData ? convertImgArrToObj(postDetailData.imgUrl) : [],
     cropImages: postDetailData ? postDetailData.imgUrl : [],
     convertedImages: [],
   });
@@ -97,16 +121,11 @@ const CreatePost = () => {
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current && imageArr.images.length == 0)
+    if (inputRef.current && imageArr.images.length == 0) {
       inputRef.current.click();
-    if (imageArr.cropImages.length > 0) {
-      if (confirm('기존에 편집사항들이 삭제됩니다. 다시 편집하시겠습니까?')) {
-        setImageArr((prev) => ({ ...prev, cropImages: [] }));
-        ModalOpen();
-      }
-    } else {
-      ModalOpen();
+      return ModalOpen();
     }
+    ModalOpen();
   };
 
   //파일 변경 함수
@@ -131,7 +150,6 @@ const CreatePost = () => {
             ...prevImageArr,
             images: [...prevImageArr.images, newImgObj],
           }));
-          console.log(imageArr);
           currentImgNum++;
         }
         if (currentImgNum >= 10 && !hasAlert) {
@@ -142,47 +160,6 @@ const CreatePost = () => {
     }
   };
 
-  //제출 후 포스트 생성 페이지로 이동
-  const onSubmit = () => {
-    const newPost: CreatePostType = {
-      postTitle: title,
-      postDescription: content,
-      selectedUsers: selectedUsers.map((user) => user.id),
-      selectedTags: selectedTags.map((tag) => tag.id),
-      position: {
-        lng: Number(mapInfo.position.lng),
-        lat: Number(mapInfo.position.lat),
-      },
-      placeTitle: mapInfo.content,
-      date: dateInfo,
-    };
-    console.log(newPost);
-    postPost(Number(spaceId!));
-    //api 로직
-    //성공시
-    confirmModalOpen();
-  };
-
-  const onMoveCreatePost = () => {
-    const currentURL = window.location.href;
-    const parts = currentURL.split('/');
-    const index = parts.indexOf('post');
-    const result = parts.slice(0, index + 1).join('/');
-    //확인 모달 닫히면 포스트 생성 페이지로 이동
-    window.location.href = result;
-  };
-
-  /**경고 모달*/
-
-  const alertOpen = useAlertModalOpen();
-
-  const alertModalOpen = () => {
-    alertOpen({
-      width: 300,
-      alertMessage: '확인',
-      alertTitle: '이미지는 10개까지만 추가됩니다.',
-    });
-  };
   /**확인 모달*/
 
   const confirmOpen = useConfirmModalOpen();
@@ -193,7 +170,80 @@ const CreatePost = () => {
       isPositiveModal: true,
       ApproveMessage: '확인',
       closeMessage: '닫기',
-      titleMessage: '성공적으로 포스팅되었습니다.',
+      titleMessage: spaceInfo
+        ? '성공적으로 수정되었습니다. '
+        : '성공적으로 포스팅되었습니다.',
+    });
+  };
+
+  //제출 후 포스트 생성 페이지로 이동
+  const onSubmitPost = () => {
+    const formData = new FormData();
+
+    //이미지 파일 외 데이터들이 들어가는 객체
+    const createPostDTO = {
+      spaceId,
+      postTitle: title,
+      postContent: content,
+      people: selectedUsers.map((user) => user.id),
+      tags: selectedTags.map((tag) => tag.id),
+      postLocationLat: mapInfo.position.lat,
+      postLocationLng: mapInfo.position.lng,
+      postLocationKeyword: mapInfo.content,
+      postBeginDate: dateInfo.startDate,
+      postEndDate: dateInfo.endDate,
+    };
+
+    const updatePostDTO = {
+      ...createPostDTO,
+      postId,
+    };
+
+    imageArr.convertedImages.forEach((image, index) => {
+      formData.append(`file-${index}`, image);
+    });
+
+    if (postId) {
+      //수정할 때
+      formData.append('postDTO', JSON.stringify(updatePostDTO));
+      updatePostAction(formData);
+    } else {
+      //처음 생성할 때
+      formData.append('postDTO', JSON.stringify(createPostDTO));
+      createPostAction(formData);
+    }
+  };
+
+  //성공시 확인 모달 열기
+  if (postCreateSuccess || updatePostSuccess) {
+    confirmModalOpen();
+  }
+
+  const onMoveCreatePost = () => {
+    const currentURL = window.location.href;
+    const parts = currentURL.split('/');
+    const index = parts.indexOf('post');
+    window.location.href = parts.slice(0, index + 1).join('/');
+  };
+
+  /**경고 모달*/
+  const alertOpen = useAlertModalOpen();
+
+  const alertModalOpen = () => {
+    alertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '이미지는 10개까지만 추가됩니다.',
+    });
+  };
+
+  const noAuthalertOpen = useAlertModalOpen();
+
+  const noAuthalertModalOpen = () => {
+    noAuthalertOpen({
+      width: 300,
+      alertMessage: '확인',
+      alertTitle: '포스트 수정 권한이 없습니다.',
     });
   };
 
@@ -201,23 +251,30 @@ const CreatePost = () => {
 
   return (
     <S.Wrapper>
-      {isOpen && imageArr.images.length && (
-        <ImagesEditModal
-          imageArr={imageArr}
-          setImageArr={setImageArr}
-          currentIdx={currentIdx}
-          setCurrentIdx={setCurrentIdx}
-          handleFileChange={handleFileChange}
-        />
+      {isOpen && imageArr.images.length > 0 && (
+        <>
+          <ImagesEditModal
+            imageArr={imageArr}
+            setImageArr={setImageArr}
+            currentIdx={currentIdx}
+            setCurrentIdx={setCurrentIdx}
+            handleFileChange={handleFileChange}
+          />
+        </>
       )}
 
       {imageArr.cropImages.length == 0 ? (
         <S.BoxWrapper>
-          <BasicBox color={theme.COLOR['gray-5']} width={348} borderradius={20}>
+          <BasicBox
+            color={theme.COLOR['gray-5']}
+            width={348}
+            borderradius={20}
+            onClick={onClickImgEditModal}
+          >
             <S.PhotoContainer>
               <PhotoIcon />
               <BasicButton
-                onClick={onClickImgEditModal}
+                onClick={() => {}}
                 width={55}
                 height={20}
                 borderRadius={5}
@@ -243,8 +300,8 @@ const CreatePost = () => {
         <S.BoxWrapper>
           <div style={{ zIndex: 1000, width: '348px' }}>
             <ImgSlider
-              images={imageArr.cropImages}
               onClickImgEditModal={onClickImgEditModal}
+              images={imageArr.cropImages}
             />
           </div>
         </S.BoxWrapper>
@@ -260,7 +317,7 @@ const CreatePost = () => {
       <S.GridWrapper>
         {/*스페이스 정보*/}
         <S.SpaceInfoContainer>
-          <CircleIcon size={48} img_url={imgUrl}></CircleIcon>
+          <CircleIcon size={48} imgUrl={imgUrl}></CircleIcon>
           <div>{spaceTitle}</div>
         </S.SpaceInfoContainer>
 
@@ -299,7 +356,7 @@ const CreatePost = () => {
             selectState={selectedUsers}
             labelName={'사용자'}
             ListItem={userList}
-            BoxWidth={inputWidth}
+            boxWidth={inputWidth}
             setState={setSelectedUsers}
             menuHeight={89 * Math.floor(userList.length / 2)}
             menuWidth={inputWidth}
@@ -318,7 +375,7 @@ const CreatePost = () => {
             selectState={selectedTags}
             labelName={'태그'}
             ListItem={tagList}
-            BoxWidth={inputWidth}
+            boxWidth={inputWidth}
             setState={setSelectedTags}
             menuHeight={100 * Math.floor(userList.length / 2)}
             // setState={setTagState}
@@ -353,6 +410,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={5}>
           <Calender
+            width={270}
             height={60}
             isMain={false}
             setDateInfo={setDateInfo}
@@ -386,19 +444,35 @@ const CreatePost = () => {
 
         <S.EmptyContainer />
         <S.ButtonContainer paddingLeft={inputWidth - 160}>
-          <BasicButton
-            disabled={
-              !title.length ||
-              !content.length ||
-              !dateInfo.startDate ||
-              mapInfo.content == ''
-            }
-            onClick={onSubmit}
-            width={160}
-            height={44}
-            children="게시글 올리기"
-            fontSize={14}
-          />
+          {spaceId ? (
+            <BasicButton
+              disabled={
+                !title.length ||
+                !content.length ||
+                !dateInfo.startDate ||
+                mapInfo.content == ''
+              }
+              onClick={onSubmitPost}
+              width={160}
+              height={44}
+              children="게시글 올리기"
+              fontSize={14}
+            />
+          ) : (
+            <BasicButton
+              disabled={
+                !title.length ||
+                !content.length ||
+                !dateInfo.startDate ||
+                mapInfo.content == ''
+              }
+              onClick={onSubmitPost}
+              width={160}
+              height={44}
+              children="게시글 수정하기"
+              fontSize={14}
+            />
+          )}
         </S.ButtonContainer>
       </S.GridWrapper>
     </S.Wrapper>

@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/common';
+import { flexCenter, modalBackGround } from '@/styles';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -10,20 +10,16 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
-const Form = styled.form<{ width: number }>`
+const Form = styled.form`
+  ${modalBackGround};
   z-index: 10000;
-  ${flexCenter}
+  ${flexCenter};
   flex-direction: column;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: ${({ width }) => width};
-  border-radius: 8px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  width: 570px;
+  width: 500px;
 `;
 
 const Header = styled.div`
@@ -48,8 +44,8 @@ const Header = styled.div`
 `;
 
 const Footer = styled.div`
-  ${flexCenter}
-  position: 'relative';
+  ${flexCenter};
+  position: relative;
   height: 4rem;
   width: 100%;
   justify-content: space-between;
@@ -82,8 +78,8 @@ const SmallPhotoBox = styled.div<{ image?: string }>`
   border-radius: 5px;
   background-image: url(${({ image }) => image});
   background-size: cover;
-  ${flexCenter}
-  border:1px solid white;
+  ${flexCenter};
+  border: 1px solid white;
 `;
 
 const PhotoContainer = styled.div`
@@ -98,7 +94,7 @@ const CropperContainer = styled.div`
   position: relative;
   height: 550px;
   width: 550px;
-  overflow: 'hidden';
+  overflow: hidden;
 `;
 
 const NoImgBackground = styled.div`
@@ -108,10 +104,10 @@ const NoImgBackground = styled.div`
 `;
 
 const FlexCenter = styled.div`
-  ${flexCenter}
-  margin-top:500px;
+  ${flexCenter};
+  margin-top: 500px;
 `;
-const S = {
+export const S = {
   Wrapper,
   Form,
   Header,
@@ -124,5 +120,3 @@ const S = {
   NoImgBackground,
   FlexCenter,
 };
-
-export default S;

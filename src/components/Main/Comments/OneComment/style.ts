@@ -1,5 +1,5 @@
+import { omitText } from '@/styles';
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
 
 const Wrapper = styled.li<{ isReply: boolean; isRef: boolean }>`
   position: relative;
@@ -43,7 +43,6 @@ const CommentWriter = styled.span`
 const CommentRef = styled.span`
   margin-right: 5px;
   color: ${({ theme }) => theme.COLOR.skyblue};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
@@ -51,7 +50,6 @@ const CommentRef = styled.span`
 const CommentContent = styled.span`
   ${omitText};
   color: ${({ theme }) => theme.COLOR['gray-1']};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 `;
@@ -86,6 +84,7 @@ const Container = styled.div`
 `;
 
 const ReplyTextBox = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   padding: 8px;
@@ -99,7 +98,6 @@ const ReplyTextBox = styled.div`
     padding-right: 44px;
     flex: 1 0 0;
     color: ${({ theme }) => theme.COLOR['gray-1']};
-    font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
     font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
     font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
     line-height: 140%;
@@ -130,9 +128,8 @@ const ReplyButton = styled.div`
   position: absolute;
   z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
   cursor: pointer;
-  right: 50px;
+  right: 20px;
   color: ${({ theme }) => theme.COLOR.skyblue};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%;
@@ -186,7 +183,6 @@ const MenuButton = styled.div`
   gap: 8px;
 
   color: ${({ theme }) => theme.COLOR.white};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.Pretendard};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
   font-size: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
 
@@ -197,6 +193,14 @@ const MenuButton = styled.div`
   }
 
   transition: background 0.2s;
+`;
+
+const ReplyCount = styled.span`
+  position: absolute;
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
+  right: 20px;
+  bottom: 5px;
+  color: ${({ theme }) => theme.COLOR['gray-6']};
 `;
 
 const S = {
@@ -219,6 +223,7 @@ const S = {
   BackClickBlock,
   MenuGroup,
   MenuButton,
+  ReplyCount,
 };
 
 export default S;

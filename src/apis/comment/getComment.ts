@@ -1,11 +1,10 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import { CommentType } from '@type/space.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import { CommentType } from '@/types';
 
-export const getComment = async (postId: string) => {
+export const getComment = async (postId: number, spaceId: number) => {
   const { data } = await axiosInstance.get<CommentType[]>(END_POINTS.COMMENT, {
-    data: { postId },
+    params: { postId, spaceId },
   });
-
   return data;
 };

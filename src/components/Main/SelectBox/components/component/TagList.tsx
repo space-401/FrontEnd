@@ -1,8 +1,8 @@
+import { theme } from '@/styles';
+import type { TagListProps } from '@/types';
 import { Chip } from '@mui/material';
-import { theme } from '@styles/theme/theme';
-import type { TagListProps } from '@type/main.type';
 
-const TagList = (props: TagListProps) => {
+export const TagList = (props: TagListProps) => {
   const { Item } = props;
   return (
     <Chip
@@ -22,5 +22,3 @@ const TagList = (props: TagListProps) => {
     />
   );
 };
-
-export default TagList;

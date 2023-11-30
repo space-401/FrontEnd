@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/common';
+import { flexCenter } from '@/styles';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,6 +9,9 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
   flex-direction: column;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 100vw;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -26,11 +29,9 @@ const ContentWrapper = styled.div`
   flex-direction: column;
 `;
 
-const S = {
+export const S = {
   Wrapper,
   IconWrapper,
   IconContainer,
   ContentWrapper,
 };
-
-export default S;

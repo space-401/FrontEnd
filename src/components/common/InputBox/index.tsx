@@ -1,5 +1,5 @@
-import S from '@/components/common/InputBox/style';
 import { ReactElement } from 'react';
+import S from '@/components/common/InputBox/style';
 
 type InputBoxProps = {
   width?: number;
@@ -12,12 +12,13 @@ type InputBoxProps = {
   children?: ReactElement;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   name: string;
-  value?: string;
+  value: string | number;
   paddingLeft?: number;
   readonly: boolean;
+  paddingTop?: number;
 };
 
-const InputBox = ({
+export const InputBox = ({
   type,
   placeholder,
   maxLength,
@@ -28,14 +29,15 @@ const InputBox = ({
   paddingLeft,
   readonly,
   value,
+  paddingTop,
   ...rest
 }: InputBoxProps) => {
-  const hasIcon = children ? true : false;
+  const hasIcon = !!children;
 
   return (
     <S.InputWrapper {...rest}>
       <S.Input
-        autocomplete={'off'}
+        autocomplete="off"
         paddingLeft={paddingLeft}
         type={type}
         placeholder={placeholder}
@@ -46,10 +48,9 @@ const InputBox = ({
         name={name}
         readOnly={readonly}
         value={value}
+        paddingTop={paddingTop}
       />
       {children}
     </S.InputWrapper>
   );
 };
-
-export default InputBox;
