@@ -5,6 +5,7 @@ import { ReactComponent as ShowEye } from '@/assets/svg/showEye.svg';
 import { S } from '@/pages/CreateSpace/style';
 import { InputBox } from '@/components/common';
 
+
 const SpacePswd = ({
   pswd,
   setPswd,
@@ -41,11 +42,6 @@ const SpacePswd = ({
 
   return (
     <>
-      <S.FlexContainer>
-        <S.TitleContainer number={4} required={true}>
-          <div>스페이스 비밀번호</div>
-        </S.TitleContainer>
-      </S.FlexContainer>
       <S.InputContainer number={4}>
         <InputBox
           onChange={(e) => {

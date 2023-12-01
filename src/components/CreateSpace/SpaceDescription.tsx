@@ -3,6 +3,7 @@ import { S } from '@/pages/CreateSpace/style';
 import { CharacterCounter } from '@/components/Create';
 import { TextAreaBox } from '@/components/common';
 
+
 const SpaceDescription = ({
   content,
   onChange,
@@ -14,9 +15,6 @@ const SpaceDescription = ({
 }) => {
   return (
     <>
-      <S.TitleContainer number={3} required={false}>
-        <div>스페이스 설명</div>
-      </S.TitleContainer>
       <S.InputContainer number={3}>
         <TextAreaBox
           value={content}

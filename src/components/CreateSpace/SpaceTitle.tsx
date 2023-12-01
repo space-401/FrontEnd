@@ -3,6 +3,7 @@ import { S } from '@/pages/CreateSpace/style';
 import { CharacterCounter } from '@/components/Create';
 import { InputBox } from '@/components/common';
 
+
 const SpaceTitle = ({
   title,
   onChange,
@@ -14,9 +15,6 @@ const SpaceTitle = ({
 }) => {
   return (
     <>
-      <S.TitleContainer number={2} required={true}>
-        <div>스페이스 명</div>
-      </S.TitleContainer>
       <S.InputContainer number={2}>
         <InputBox
           readonly={false}
