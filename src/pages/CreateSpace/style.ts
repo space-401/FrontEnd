@@ -1,9 +1,14 @@
 import styled, { css } from 'styled-components';
 import { flexCenter } from '@/styles/common';
 
+
 const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.COLOR.black};
+  min-height: 100vh;
+  ${flexCenter};
+  flex-direction: column;
+
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    flex-direction: column;
     ${flexCenter};
   }
 `;

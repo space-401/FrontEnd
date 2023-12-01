@@ -13,12 +13,10 @@ import type { ImageArrType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
 import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
 import { usePhotoModalStore } from '@/store/modal';
 import { SPACE_MESSAGE } from '@/constants/message';
 import {
-  BasicIcon,
   BasicIconModal,
   ImageEditModal,
   SelectIconModal,
@@ -28,8 +26,9 @@ import SpaceDescription from '@/components/CreateSpace/SpaceDescription';
 import SpaceIcon from '@/components/CreateSpace/SpaceIcon';
 import SpacePswd from '@/components/CreateSpace/SpacePswd';
 import SpaceTitle from '@/components/CreateSpace/SpaceTitle';
-import { BasicBox, BasicButton } from '@/components/common';
+import { BasicButton } from '@/components/common';
 import { S } from './style';
+
 
 const CreateSpace = () => {
   const params = useParams();
@@ -62,14 +61,6 @@ const CreateSpace = () => {
     cropImage: spaceInfo ? spaceInfo.imgUrl : null,
     convertedImage: null,
   });
-  const BasicIconArr = BasicIcon();
-
-  //기본 스페이스 아이콘 선택 [선택 여부, 선택 아이콘 인덱스]
-  const [isBasicIcon, setIsBasicIcon] = useState<[false] | [true, number]>([
-    false,
-  ]);
-
-  //모달
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
@@ -119,6 +110,11 @@ const CreateSpace = () => {
       alertTitle: '스페이스 수정 권한이 없습니다.',
     });
   };
+
+  //기본 스페이스 아이콘 선택 [선택 여부, 선택 아이콘 인덱스]
+  const [isBasicIcon, setIsBasicIcon] = useState<[false] | [true, number]>([
+    false,
+  ]);
 
   //새로운 이미지 불러오는 함수
   const onClickImgEditModal = () => {
@@ -292,40 +288,45 @@ const CreateSpace = () => {
       {/*스페이스 설정 폼*/}
       <S.Form>
         {/*아이콘 지정 인풋*/}
-        <SpaceIcon setImageArr={setImageArr} inputRef={inputRef} />
-
-        {!imageArr.cropImage && !isBasicIcon[0] ? (
-          <S.InputContainer number={1} onClick={onClickOptionModalOpen}>
-            <BasicBox width={160} borderradius={10}>
-              <PhotoIcon />
-            </BasicBox>
-          </S.InputContainer>
-        ) : (
-          <S.InputContainer number={1}>
-            <BasicBox
-              onClick={() => {
-                setIsIconModalOpen([true, false]);
-              }}
-              backgroundImage={
-                isBasicIcon[0]
-                  ? BasicIconArr[isBasicIcon[1]]
-                  : imageArr.cropImage!
-              }
-              width={160}
-              borderradius={10}
-              color="grey"
-            ></BasicBox>
-          </S.InputContainer>
-        )}
+        <>
+          <S.TitleContainer number={1} required={true}>
+            <div>스페이스 아이콘</div>
+          </S.TitleContainer>
+          <SpaceIcon
+            isBasicIcon={isBasicIcon}
+            setIsIconModalOpen={setIsIconModalOpen}
+            setImageArr={setImageArr}
+            inputRef={inputRef}
+            imageArr={imageArr}
+            onClickOptionModalOpen={onClickOptionModalOpen}
+          />
+        </>
 
         {/*이름 지정 인풋*/}
-        <SpaceTitle title={title} onChange={onChange} />
+        <>
+          <S.TitleContainer number={2} required={true}>
+            <div>스페이스 명</div>
+          </S.TitleContainer>
+          <SpaceTitle title={title} onChange={onChange} />
+        </>
 
         {/*설명 지정 인풋*/}
-        <SpaceDescription content={content} onChange={onChange} />
+        <>
+          <S.TitleContainer number={3} required={false}>
+            <div>스페이스 설명</div>
+          </S.TitleContainer>
+          <SpaceDescription content={content} onChange={onChange} />
+        </>
 
         {/*비밀번호 지정 인풋*/}
-        <SpacePswd pswd={pswd} setPswd={setPswd} />
+        <>
+          <S.FlexContainer>
+            <S.TitleContainer number={4} required={true}>
+              <div>스페이스 비밀번호</div>
+            </S.TitleContainer>
+          </S.FlexContainer>
+          <SpacePswd pswd={pswd} setPswd={setPswd} />
+        </>
         <S.EmptyContainer />
 
         {/*스페이스 태그 관리*/}
