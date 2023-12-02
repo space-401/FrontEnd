@@ -3,6 +3,7 @@ import { axiosInstance } from '@/apis';
 import { END_POINTS } from '@/constants';
 import type { DateInfoType, SpacePostListProps } from '@/types';
 
+
 export type FilterType = {
   userId?: number[];
   tagId?: number[];
@@ -15,11 +16,12 @@ export const getSpacePostList = async (
   page: string,
   filter: FilterType
 ) => {
-  const searchValue = JSON.stringify({ spaceId, page, ...filter });
+  const searchValue = { spaceId, page, ...filter };
   const { data } = await axiosInstance.get<SpacePostListProps>(
     END_POINTS.SPACE_POST_LIST,
-    { params: { searchValue } }
+    { data: searchValue }
   );
+  console.log('data', data);
 
   return data;
 };

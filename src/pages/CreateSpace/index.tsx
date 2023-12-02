@@ -14,6 +14,7 @@ import { toastColorMessage } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
+import { tagMock } from '@/mocks/data';
 import { usePhotoModalStore } from '@/store/modal';
 import { SPACE_MESSAGE } from '@/constants/message';
 import {
@@ -45,7 +46,8 @@ const CreateSpace = () => {
   const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
   //스페이스 생성 태그
-  const [createTags, setCreateTags] = useState<TagType[]>([]);
+  const [createTags, setCreateTags] = useState<TagType[]>([...tagMock]);
+
   const formTitle = isUpdateForm
     ? SPACE_MESSAGE.TITLE.UPDATE
     : SPACE_MESSAGE.TITLE.CREATE;
@@ -127,6 +129,7 @@ const CreateSpace = () => {
 
   //스페이스 생성하기
   const onSubmitSpace = () => {
+    const createTagsName = createTags.map((tag) => tag.tagTitle);
     const formData = new FormData();
 
     const createSpaceDTO = {
@@ -134,8 +137,9 @@ const CreateSpace = () => {
       spaceDescription: content,
       defaultImg: isBasicIcon[0] ? String(isBasicIcon[1]) : '',
       spacePw: pswd,
-      tags: [],
+      tags: createTagsName,
     };
+    console.log('createSpaceDTO', createSpaceDTO);
     const updateSpaceDTO = {
       ...createSpaceDTO,
       spaceId,
@@ -143,6 +147,11 @@ const CreateSpace = () => {
     if (imageArr.convertedImage) {
       // 이미지 파일 추가
       const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
+    } else {
+      const image = new Blob([], {
         type: 'image/jpeg',
       });
       formData.append('imgUrl', image, 'image.jpg');
@@ -210,10 +219,6 @@ const CreateSpace = () => {
       titleMessage: '스페이스를 삭제하시겠습니까?',
     });
   };
-
-  useEffect(() => {
-    console.log('space', createTags);
-  }, [createTags]);
 
   return (
     <S.Wrapper>
