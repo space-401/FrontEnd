@@ -1,0 +1,70 @@
+name: AWS Deploy
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v2
+
+      - name: Check Node v
+        run: node -v
+
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "VITE_BACK_URL=$VITE_BACK_URL" >> .env
+          echo "VITE_BASE_URL=$VITE_BASE_URL" >> .env
+          echo "VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID" >> .env
+          echo "VITE_KAKAO_KEY=$VITE_KAKAO_KEY" >> .env
+          echo "VITE_KAKAO_REST_API=$VITE_KAKAO_REST_API" >> .env
+          echo "VITE_NAVER_CLIENT_ID=$VITE_NAVER_CLIENT_ID" >> .env
+          echo "VITE_NAVER_CLIENT_KEY=$VITE_NAVER_CLIENT_KEY" >> .env
+        env:
+          VITE_BACK_URL: ${{ secrets.VITE_BACK_URL }}
+          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+          VITE_KAKAO_KEY: ${{ secrets.VITE_KAKAO_KEY }}
+          VITE_KAKAO_REST_API: ${{ secrets.VITE_KAKAO_REST_API }}
+          VITE_NAVER_CLIENT_ID: ${{ secrets.VITE_NAVER_CLIENT_ID }}
+          VITE_NAVER_CLIENT_KEY: ${{ secrets.VITE_NAVER_CLIENT_KEY }}
+          
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: ""
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY_ID }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload to S3 # Upload build file to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY_ID }}
+        run: |
+          aws s3 sync --region ap-northeast-2 dist s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
+
+      - name: CloudFront Invalidation
+        env:
+          CLOUD_FRONT_ID: ${{ secrets.AWS_CLOUDFRONT_ID}}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id $CLOUD_FRONT_ID --paths /*
