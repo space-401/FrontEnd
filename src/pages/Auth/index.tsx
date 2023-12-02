@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Loading } from '@/components/common';
 
+
 const Auth = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -25,6 +26,7 @@ const Auth = () => {
       const { accessToken, refreshToken } = LoginResponse as UserTokenType;
       tokenStorage.setAccessToken(accessToken, 30);
       tokenStorage.setRefreshToken(refreshToken, 60 * 24 * 14);
+      console.log('accessToken', accessToken);
       navigate(PATH.SPACE);
     }
   }, [isSuccess, LoginResponse, navigate]);

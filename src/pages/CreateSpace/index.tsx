@@ -9,7 +9,7 @@ import {
   useSpaceUpdateMutation,
 } from '@/hooks';
 import { theme } from '@/styles';
-import type { ImageArrType } from '@/types';
+import type { ImageArrType, TagType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -44,7 +44,8 @@ const CreateSpace = () => {
     useSpaceUpdateMutation();
   const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
-
+  //스페이스 생성 태그
+  const [createTags, setCreateTags] = useState<TagType[]>([]);
   const formTitle = isUpdateForm
     ? SPACE_MESSAGE.TITLE.UPDATE
     : SPACE_MESSAGE.TITLE.CREATE;
@@ -133,8 +134,8 @@ const CreateSpace = () => {
       spaceDescription: content,
       defaultImg: isBasicIcon[0] ? String(isBasicIcon[1]) : '',
       spacePw: pswd,
+      tags: [],
     };
-
     const updateSpaceDTO = {
       ...createSpaceDTO,
       spaceId,
@@ -210,18 +211,22 @@ const CreateSpace = () => {
     });
   };
 
+  useEffect(() => {
+    console.log('space', createTags);
+  }, [createTags]);
+
   return (
     <S.Wrapper>
       {isTagModalOpen && (
         <TagEditModal
+          createTags={createTags}
+          setCreateTags={setCreateTags}
           spaceId={spaceId}
           isOpen={isTagModalOpen}
           modalOpen={() => {
             setIsTagModalOpen(true);
           }}
-          modalClose={() => {
-            setIsTagModalOpen(false);
-          }}
+          setIsTagModalOpen={setIsTagModalOpen}
         />
       )}
       <S.TitleSection>
