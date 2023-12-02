@@ -1,5 +1,5 @@
 import { PATH } from '@/constants';
-import { BackLayout, HeaderLayOut } from '@/layout';
+import { BackLayout, HeaderLayout } from '@/layout';
 import { Lazy, PrivateRoute } from '@/router';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        element: <HeaderLayOut />,
+        element: <HeaderLayout />,
         children: [
           {
             path: PATH.SPACE,
