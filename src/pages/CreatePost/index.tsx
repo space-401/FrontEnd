@@ -60,7 +60,7 @@ const CreatePost = () => {
         navigate(PATH.SPACE);
       }
     }
-  }, [navigate, postId]);
+  }, [postId]);
 
   const { createPostAction, postCreateSuccess } = usePostCreateMutation();
   const { updatePostAction, updatePostSuccess } = usePostUpdateMutation();
@@ -162,6 +162,13 @@ const CreatePost = () => {
 
   /**확인 모달*/
 
+  const onMoveCreatePost = () => {
+    const currentURL = window.location.href;
+    const parts = currentURL.split('/');
+    const index = parts.indexOf('post');
+    window.location.href = parts.slice(0, index + 1).join('/');
+  };
+
   const confirmOpen = useConfirmModalOpen();
 
   const confirmModalOpen = () => {
@@ -170,7 +177,7 @@ const CreatePost = () => {
       isPositiveModal: true,
       ApproveMessage: '확인',
       closeMessage: '닫기',
-      titleMessage: spaceInfo
+      titleMessage: postId
         ? '성공적으로 수정되었습니다. '
         : '성공적으로 포스팅되었습니다.',
     });
@@ -182,13 +189,13 @@ const CreatePost = () => {
 
     //이미지 파일 외 데이터들이 들어가는 객체
     const createPostDTO = {
-      spaceId,
+      spaceId: Number(spaceId),
       postTitle: title,
       postContent: content,
       people: selectedUsers.map((user) => user.id),
       tags: selectedTags.map((tag) => tag.id),
-      postLocationLat: mapInfo.position.lat,
-      postLocationLng: mapInfo.position.lng,
+      postLocationLat: Number(mapInfo.position.lat),
+      postLocationLng: Number(mapInfo.position.lng),
       postLocationKeyword: mapInfo.content,
       postBeginDate: dateInfo.startDate,
       postEndDate: dateInfo.endDate,
@@ -199,34 +206,44 @@ const CreatePost = () => {
       postId,
     };
 
-    imageArr.convertedImages.forEach((image, index) => {
-      formData.append(`file-${index}`, image);
-    });
+    if (imageArr.convertedImages) {
+      imageArr.convertedImages.forEach((image) => {
+        const blobImg = new Blob([image], {
+          type: 'image/jpeg',
+        });
+        formData.append(`imgs`, blobImg, 'image.jpg');
+      });
+    } else {
+      const blobImg = new Blob([], {
+        type: 'image/jpeg',
+      });
+      formData.append(`imgs`, blobImg, 'image.jpg');
+    }
 
     if (postId) {
-      //수정할 때
-      formData.append('postDTO', JSON.stringify(updatePostDTO));
+      //수정할 때createPostDTO
+      const postDTO = new Blob([JSON.stringify(updatePostDTO)], {
+        type: 'application/json',
+      });
+      formData.append('postDTO', postDTO);
       updatePostAction(formData);
     } else {
+      const postDTO = new Blob([JSON.stringify(createPostDTO)], {
+        type: 'application/json',
+      });
       //처음 생성할 때
-      formData.append('postDTO', JSON.stringify(createPostDTO));
+      formData.append('postDTO', postDTO);
       createPostAction(formData);
     }
   };
 
   //성공시 확인 모달 열기
   if (postCreateSuccess || updatePostSuccess) {
+    navigate(`/space/${spaceId}`);
     confirmModalOpen();
   }
 
-  const onMoveCreatePost = () => {
-    const currentURL = window.location.href;
-    const parts = currentURL.split('/');
-    const index = parts.indexOf('post');
-    window.location.href = parts.slice(0, index + 1).join('/');
-  };
-
-  /**경고 모달*/
+  /*경고 모달*/
   const alertOpen = useAlertModalOpen();
 
   const alertModalOpen = () => {

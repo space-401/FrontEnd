@@ -1,4 +1,4 @@
-import { ReactComponent as GoogleIcon } from '@/assets/svg/login/google.svg';
+//import { ReactComponent as GoogleIcon } from '@/assets/svg/login/google.svg';
 import { ReactComponent as KakaoIcon } from '@/assets/svg/login/kakao.svg';
 import { ReactComponent as NaverIcon } from '@/assets/svg/login/naver.svg';
 import { ReactComponent as SignLogo } from '@/assets/svg/signlogo.svg';
@@ -38,16 +38,6 @@ const LoginPage = () => {
           >
             <NaverIcon style={{ position: 'absolute', left: 16 }} />
             네이버 로그인
-          </S.LoginBox>
-          <S.LoginBox
-            backgroundColor={theme.LOGIN_COLOR.google}
-            color={theme.COLOR['gray-6']}
-            onClick={() => {
-              window.location.href = import.meta.env.VITE_GOOGLE_LOGIN;
-            }}
-          >
-            <GoogleIcon style={{ position: 'absolute', left: 16 }} />
-            구글 로그인
           </S.LoginBox>
         </S.LoginContainer>
       </S.Content>

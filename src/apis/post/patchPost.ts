@@ -5,9 +5,7 @@ import type { ApiResponseType } from '@/types';
 export const patchPost = async (postInfo: FormData) => {
   const { data } = await axiosInstance.patch<ApiResponseType>(
     END_POINTS.POST,
-    {
-      ...postInfo,
-    },
+    postInfo,
     {
       headers: {
         'Content-Type': 'multipart/form-data',
