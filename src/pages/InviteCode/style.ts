@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 
   @media ${({ theme }) => theme.DEVICE.tablet} {
     ${flexCenter};
+    width: 100%;
     flex-direction: column;
   }
 `;
@@ -86,6 +87,10 @@ const InputContainer = styled.div<gridRowNum>`
 const ButtonContainer = styled.div`
   grid-area: button;
   margin-left: auto;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
+    flex-direction: column;
+  }
 `;
 
 export const S = {
