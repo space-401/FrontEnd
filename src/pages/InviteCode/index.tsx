@@ -23,10 +23,7 @@ const InviteCode = () => {
 
   //제출시 실행되는 함수
   const onSubmit = () => {
-    // if (code && password) {
-    console.log('aaa');
     userInviteAction({ spaceCode, spacePw: String(spacePw) });
-    // }
 
     if (inviteSuccess) {
       toastColorMessage('스페이스에 가입되셨습니다.');
@@ -80,11 +77,6 @@ const InviteCode = () => {
         <div>초대 코드 입력</div>
         <p>친구에게 초대받은 초대코드와 비밀번호를 입력해주세요. </p>
       </S.TitleSection>
-      {/* <S.Form
-        onSubmit={(e) => {
-          onSubmit(e);
-        }}
-      > */}
       {/*스페이스 코드*/}
       <S.TitleContainer number={1}>
         <div>스페이스 코드</div>
@@ -130,17 +122,14 @@ const InviteCode = () => {
       </S.InputContainer>
 
       {/*완료 버튼*/}
-      {/* <S.ButtonContainer> */}
       <BasicButton
-        // disabled={spaceCode.length == 0 || spacePw.length < 5}
+        disabled={spaceCode.length == 0 || !spacePw}
         children="완료"
         onClick={() => {
           onSubmit();
         }}
         width={76}
       />
-      {/* </S.ButtonContainer> */}
-      {/* </S.Form> */}
     </S.Wrapper>
   );
 };
