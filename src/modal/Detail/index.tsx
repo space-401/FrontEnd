@@ -46,7 +46,7 @@ export const DetailInner = React.forwardRef(
 
     const {
       spaceId,
-      imgUrl,
+      imgsUrl,
       userList,
       placeTitle,
       postUpdatedAt,
@@ -155,8 +155,8 @@ export const DetailInner = React.forwardRef(
               {isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
             </IconButton>
           </S.LikeIconBox>
-          <S.LeftImgBox isArray={imgUrl?.length !== 0}>
-            {[...imgUrl].map((imgUrl) => (
+          <S.LeftImgBox isArray={imgsUrl?.length !== 0}>
+            {[...imgsUrl].map((imgUrl) => (
               <S.ImgBox key={uuid()} imgUrl={imgUrl} />
             ))}
           </S.LeftImgBox>
@@ -210,7 +210,7 @@ export const DetailInner = React.forwardRef(
               <S.PostDescription>{postDescription}</S.PostDescription>
               <S.TagGroup>
                 {selectedTags.map((place) => {
-                  const { tagId, tagTitle } = place;
+                  const { tagId, tagName } = place;
                   return (
                     <Chip
                       sx={{
@@ -219,7 +219,7 @@ export const DetailInner = React.forwardRef(
                         padding: '0 8px',
                       }}
                       key={tagId}
-                      label={tagTitle}
+                      label={tagName}
                       variant="filled"
                     />
                   );
