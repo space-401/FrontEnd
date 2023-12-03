@@ -23,10 +23,10 @@ import {
   SelectIconModal,
   TagEditModal,
 } from '@/components/Create';
-import SpaceDescription from '@/components/CreateSpace/SpaceDescription';
-import SpaceIcon from '@/components/CreateSpace/SpaceIcon';
-import SpacePswd from '@/components/CreateSpace/SpacePswd';
-import SpaceTitle from '@/components/CreateSpace/SpaceTitle';
+import { SpaceDescription } from '@/components/CreateSpace/SpaceDescription';
+import { SpaceIcon } from '@/components/CreateSpace/SpaceIcon';
+import { SpacePswd } from '@/components/CreateSpace/SpacePswd';
+import { SpaceTitle } from '@/components/CreateSpace/SpaceTitle';
 import { BasicButton } from '@/components/common';
 import { S } from './style';
 

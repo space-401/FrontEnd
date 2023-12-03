@@ -4,7 +4,7 @@ import { CharacterCounter } from '@/components/Create';
 import { InputBox } from '@/components/common';
 
 
-const SpaceTitle = ({
+export const SpaceTitle = ({
   title,
   onChange,
 }: {
@@ -38,5 +38,3 @@ const SpaceTitle = ({
     </>
   );
 };
-
-export default SpaceTitle;
