@@ -3,11 +3,10 @@ import { axiosInstance } from '@/apis';
 import { END_POINTS } from '@/constants';
 import type { DateInfoType, SpacePostListProps } from '@/types';
 
-export type FilterType = {
+export type FilterType = Partial<DateInfoType> & {
   userId?: number[];
   tagId?: number[];
   keyword?: string;
-  date?: DateInfoType;
 };
 
 export const getSpacePostList = async (
@@ -18,7 +17,11 @@ export const getSpacePostList = async (
   const searchValue = { spaceId, page, ...filter };
   const { data } = await axiosInstance.post<SpacePostListProps>(
     END_POINTS.SPACE_POST_LIST,
-    { data: searchValue }
+    { ...searchValue }
   );
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2a416860a886088d22bdcb36df67d9f6a452fec4
   return data;
 };

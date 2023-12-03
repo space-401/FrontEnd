@@ -6,7 +6,7 @@ export type AccountDataType = {
   email: string;
 };
 
-export type SocialType = 'kakao' | 'naver' | 'google';
+export type SocialType = 'kakao' | 'naver';
 
 type OneMyBookMarkType = {
   postId: number;

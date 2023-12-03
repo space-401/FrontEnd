@@ -1,23 +1,24 @@
 import { PATH } from '@/constants';
 import {
   useConfirmModalOpen,
-  useDeleteKkiriUserMutation,
-  useUserInfoQuery,
+  useDeleteKkiriUserMutation, // useUserInfoQuery,
 } from '@/hooks';
 import { useLogOutMutation } from '@/hooks';
+import { SocialType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as GoogleSvg } from '@/assets/svg/api/google.svg';
 import { ReactComponent as KaKaoSvg } from '@/assets/svg/api/kakao.svg';
 import { ReactComponent as NaverSvg } from '@/assets/svg/api/naver.svg';
 import { A } from './style';
 
 export const AccountManagement = () => {
-  const { MyInfoData } = useUserInfoQuery();
+  // const { MyInfoData } = useUserInfoQuery();
+  // console.log(MyInfoData);
   const navigate = useNavigate();
-
-  const { loginState, email, name } = MyInfoData!;
+  const loginState: SocialType = 'kakao';
+  const email = '';
+  const name = '';
 
   let StateIcon: ReactElement | null = null;
 
@@ -25,11 +26,8 @@ export const AccountManagement = () => {
     case 'kakao':
       StateIcon = <KaKaoSvg />;
       break;
-    case 'naver':
+    default:
       StateIcon = <NaverSvg />;
-      break;
-    case 'google':
-      StateIcon = <GoogleSvg />;
       break;
   }
 
