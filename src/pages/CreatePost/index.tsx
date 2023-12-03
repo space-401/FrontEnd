@@ -228,7 +228,6 @@ const CreatePost = () => {
       formData.append('postDTO', postDTO);
       updatePostAction(formData);
     } else {
-      console.log('생성');
       const postDTO = new Blob([JSON.stringify(createPostDTO)], {
         type: 'application/json',
       });
