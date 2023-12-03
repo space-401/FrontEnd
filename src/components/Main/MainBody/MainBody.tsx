@@ -25,6 +25,8 @@ type PostListPropType = {
   selectState: boolean;
   spaceId: string;
 };
+
+// @Todo 필터 값이 변할 때 마다 데이터 재요청 보내기
 export const MainBody = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -160,7 +162,7 @@ export const MainBody = (props: PostListPropType) => {
           placeHolder={'태그명을 검색해주세요.'}
           setState={setTagState}
           menuWidth={192}
-          menuHeight={49 * Math.floor(tagList.length / 2)}
+          menuHeight={49 * Math.floor(tagList.length / 2) * 2}
           boxWidth={168}
           boxHeight={38}
           labelName={'태그'}
