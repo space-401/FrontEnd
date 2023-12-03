@@ -30,7 +30,9 @@ export const UserSettingModal = ({
   userInfo,
   spaceId, // isAdmin,
 }: SettingModalProps) => {
-  const { userUpdateAction } = useSpaceUserUpdateMutation(String(spaceId));
+  const { userUpdateAction, isUserUpdateSuccess } = useSpaceUserUpdateMutation(
+    String(spaceId)
+  );
 
   const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -141,6 +143,9 @@ export const UserSettingModal = ({
     if (checkNickname) {
       userUpdateAction(formData);
       ModalClose();
+    }
+
+    if (isUserUpdateSuccess) {
       confirmModalOpen();
     }
   };
