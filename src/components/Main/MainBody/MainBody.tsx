@@ -5,7 +5,7 @@ import type { TagType, UserType, selectType } from '@/types';
 import { objectHelperWithNotUndefined } from '@/utils/object-helper';
 import { Suspense, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ReactComponent as DefaultImage } from '@/assets/svg/defaultImg/img1.svg';
+import DefaultImage from '@/assets/svg/defaultImg/img1.svg';
 import {
   PostMap,
   PostMapSkeleton,
@@ -13,7 +13,7 @@ import {
   SelectBox,
 } from '@/components/Main';
 import { Calender, FlipCard, Pagination } from '@/components/common';
-import S from './style';
+import { S } from './style';
 
 type PostListPropType = {
   userList: UserType[];
@@ -39,12 +39,14 @@ export const MainBody = (props: PostListPropType) => {
     setSearchParams(objectHelperWithNotUndefined(query));
   };
 
-  const setKeyWorld = (keyword: string) => {
-    setParams(() => setQuery((prev) => ({ ...prev, keyword: keyword.trim() })));
+  const setKeyWorld = async (keyword: string) => {
+    await setParams(() =>
+      setQuery((prev) => ({ ...prev, keyword: keyword.trim() }))
+    );
   };
 
-  const setUserId = (selectUserList: selectType[]) => {
-    setParams(() =>
+  const setUserId = async (selectUserList: selectType[]) => {
+    await setParams(() =>
       setQuery((prev) => ({
         ...prev,
         userId: selectUserList.map((v) => String(v.id)),
@@ -52,8 +54,8 @@ export const MainBody = (props: PostListPropType) => {
     );
   };
 
-  const setTagId = (selectTagList: selectType[]) => {
-    setParams(() =>
+  const setTagId = async (selectTagList: selectType[]) => {
+    await setParams(() =>
       setQuery((prev) => ({
         ...prev,
         tagId: selectTagList.map((v) => String(v.id)),
@@ -61,18 +63,20 @@ export const MainBody = (props: PostListPropType) => {
     );
   };
 
-  const setDateInfo = ({
+  const setDateInfo = async ({
     startDate,
     endDate,
   }: {
     startDate: string;
     endDate: string;
   }) => {
-    setParams(() => setQuery((prev) => ({ ...prev, startDate, endDate })));
+    await setParams(() =>
+      setQuery((prev) => ({ ...prev, startDate, endDate }))
+    );
   };
 
-  const setPage = (pageNumber: number | undefined) => {
-    setParams(() =>
+  const setPage = async (pageNumber: number | undefined) => {
+    await setParams(() =>
       setQuery((prev) => ({ ...prev, page: String(pageNumber) }))
     );
   };
@@ -165,7 +169,7 @@ export const MainBody = (props: PostListPropType) => {
       </S.FilterGroup>
       {!selectState && postList.length === 0 && (
         <S.UndefinedList>
-          <DefaultImage />
+          <S.DefaultImg src={DefaultImage} alt={'defaultImg'} />
           <S.UndefinedPostText>
             첫번째 게시글을 등록해 주세요
           </S.UndefinedPostText>
