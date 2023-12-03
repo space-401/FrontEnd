@@ -4,9 +4,10 @@ import S from '../style';
 
 export const TagList = (props: TagListProps) => {
   const { Item } = props;
+  console.log(Item);
   return (
     <S.TagGroup>
-      <S.TagTitle>{Item.tagTitle}</S.TagTitle>
+      <S.TagTitle>{Item.tagName}</S.TagTitle>
       <S.DeleteButton>
         <ReactComponent />
       </S.DeleteButton>
