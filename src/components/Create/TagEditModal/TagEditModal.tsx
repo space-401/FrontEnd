@@ -12,7 +12,6 @@ import { TagList } from '@/components/Create';
 import { InputBox } from '@/components/common';
 import { S } from './style';
 
-
 type tagEditProps = {
   isOpen: boolean;
   spaceId: string | null;

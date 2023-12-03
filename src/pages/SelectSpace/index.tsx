@@ -7,7 +7,6 @@ import { ReactComponent as SelectLogo } from '@/assets/svg/selectlogo.svg';
 import { BasicButton, FlipCard } from '@/components/common';
 import { S } from './style';
 
-
 const SelectSpace = () => {
   const navigate = useNavigate();
 

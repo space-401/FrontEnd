@@ -3,7 +3,6 @@ import { S } from '@/pages/CreateSpace/style';
 import { CharacterCounter } from '@/components/Create';
 import { InputBox } from '@/components/common';
 
-
 export const SpaceTitle = ({
   title,
   onChange,
