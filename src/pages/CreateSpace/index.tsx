@@ -138,7 +138,6 @@ const CreateSpace = () => {
       spacePw: pswd,
       tags: createTagsName,
     };
-    console.log('createSpaceDTO', createSpaceDTO);
     const updateSpaceDTO = {
       ...createSpaceDTO,
       spaceId,
