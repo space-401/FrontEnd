@@ -34,7 +34,7 @@ const CreateSpace = () => {
   const params = useParams();
   const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
-  const isUpdateForm = Number.isInteger(Number(spaceId));
+  const isUpdateForm = spaceId ? true : false;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,6 +80,7 @@ const CreateSpace = () => {
         noAuthalertModalOpen();
         navigate(PATH.SPACE);
       }
+      console.log('spaceId', spaceInfo);
     }
   }, [navigate]);
 
@@ -161,6 +162,7 @@ const CreateSpace = () => {
         type: 'application/json',
       });
       formData.append('spaceDTO', spaceDTO);
+      console.log('스페이스 수정', spaceDTO);
       updateSpaceAction(formData);
     } else {
       const spaceDTO = new Blob([JSON.stringify(createSpaceDTO)], {
@@ -185,6 +187,7 @@ const CreateSpace = () => {
       navigate(PATH.SPACE_MAIN(String(movePath)));
     }
   }, [isUpdateSuccess, isPostSuccess]);
+
   const confirmOpen = useConfirmModalOpen();
 
   //기본 아이콘 선택 함수
@@ -199,23 +202,20 @@ const CreateSpace = () => {
     setIsBasicIcon([true, index]);
   };
 
-  const deleteSpace = () => {
-    if (spaceId) {
-      deleteSpaceAction(spaceId);
-    }
-    if (isDeleteSuccess) {
-      toastColorMessage('성공적으로 삭제되었습니다.');
-    }
-  };
-
   const deleteSpaceModalOpen = () => {
     confirmOpen({
-      AsyncAction: deleteSpace,
+      AsyncAction: () => {
+        deleteSpaceAction(spaceId!);
+      },
       isPositiveModal: false,
       ApproveMessage: '확인',
       closeMessage: '닫기',
       titleMessage: '스페이스를 삭제하시겠습니까?',
     });
+    if (isDeleteSuccess) {
+      navigate(PATH.SPACE);
+      toastColorMessage('성공적으로 삭제되었습니다.');
+    }
   };
 
   return (

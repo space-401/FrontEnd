@@ -11,5 +11,6 @@ export const useSpaceDeleteMutation = () => {
   >({
     mutationFn: (spaceId) => deleteSpace(spaceId),
   });
+
   return { deleteSpaceAction, isDeleteSuccess };
 };

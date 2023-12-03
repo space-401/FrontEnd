@@ -14,8 +14,15 @@ import S from './style';
 
 export const MainHeader = (prop: MainHeaderPropType) => {
   const { setSelectState, selectState, spaceInfo, spaceId } = prop;
-  const { isAdmin, spaceTitle, imgUrl, userList, spaceDescription, spacePw } =
-    spaceInfo;
+  const {
+    isAdmin,
+    spaceTitle,
+    imgUrl,
+    userList,
+    spaceDescription,
+    spacePw,
+    spaceCode,
+  } = spaceInfo;
 
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
@@ -34,6 +41,7 @@ export const MainHeader = (prop: MainHeaderPropType) => {
           isOpen={isOpen}
           userList={userList}
           onClose={onClose}
+          spaceCode={spaceCode}
         />
       </SettingModal>
       <S.HeaderHeader>
