@@ -13,12 +13,14 @@ export type MenuListProps = {
   itemList: UserType[] | TagType[];
   select: selectType[];
   changeSelect: Dispatch<SetStateAction<selectType[]>>;
+  spaceCode: string;
 };
 
 export type MainHeaderPropType = {
   spaceId: string;
   spaceInfo: SpaceInfoType;
   selectState: boolean;
+  spaceCode: string;
   setSelectState: Dispatch<SetStateAction<boolean>>;
 };
 
