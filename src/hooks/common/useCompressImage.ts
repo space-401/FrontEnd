@@ -22,7 +22,6 @@ export const useImageCompress = () => {
       return compressedFile;
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
     }
   };
 

@@ -1,7 +1,8 @@
 // import { PATH } from '@/constants';
 import {
   useConfirmModalOpen,
-  useDeleteKkiriUserMutation, // useUserInfoQuery,
+  useDeleteKkiriUserMutation,
+  useUserInfoQuery, // useUserInfoQuery,
 } from '@/hooks';
 import { useLogOutMutation } from '@/hooks';
 import { SocialType } from '@/types';
@@ -12,11 +13,8 @@ import { ReactComponent as NaverSvg } from '@/assets/svg/api/naver.svg';
 import { A } from './style';
 
 export const AccountManagement = () => {
-  // const { MyInfoData } = useUserInfoQuery();
-  // console.log(MyInfoData);
+  const { MyInfoData } = useUserInfoQuery();
   const loginState: SocialType = 'kakao';
-  const email = '';
-  const name = '';
 
   let StateIcon: ReactElement | null = null;
 
@@ -60,14 +58,10 @@ export const AccountManagement = () => {
         {loginState + ' 간편가입 회원입니다.'}
       </A.Description>
       <A.Bar margin_top={16} />
-      <A.Description margin_top={40}>이름</A.Description>
-      <A.NameBox margin_top={16}>
-        <A.WhiteSpan>{name}</A.WhiteSpan>
-      </A.NameBox>
       <A.Description margin_top={32}>이메일</A.Description>
       <A.IConBox margin_top={16}>
         {StateIcon}
-        <A.WhiteSpan>{email}</A.WhiteSpan>
+        <A.WhiteSpan>{MyInfoData?.email}</A.WhiteSpan>
       </A.IConBox>
       <A.Bar margin_top={40} />
       <A.ButtonGroup>
