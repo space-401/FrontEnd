@@ -15,7 +15,7 @@ export const END_POINTS = {
   USER: '/user',
   TOKEN: '/user/refreshToken',
   MY_POST_LIST: `/mypost`,
-  USERINFO: '/mypage',
+  USERINFO: '/user/mypage',
   MY_COMMENT_LIST: `/mycomment`,
   LOGOUT: '/logout',
   LOGIN: '/login',
