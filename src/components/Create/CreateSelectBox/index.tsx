@@ -1,7 +1,9 @@
-import { useAlertModalOpen, useDimensions } from '@/hooks';
+import { useDimensions, useTagMutation } from '@/hooks';
 import type { SelectBoxProps, selectType } from '@/types';
+import { toastColorMessage } from '@/utils';
 import { motion } from 'framer-motion';
-import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { MenuList, MenuToggle, SelectList } from './components';
 import S from './style';
 
@@ -20,7 +22,9 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
     selectState ? selectState : []
   );
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const { spaceId } = useParams();
 
   useEffect(() => {
     setState(select);
@@ -30,32 +34,19 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
     setIsOpen((prev) => !prev);
     setSearchValue('');
   };
+  const { postTagAction } = useTagMutation();
 
-  const alertOpen = useAlertModalOpen();
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (ListItem.length === 20)
+      return toastColorMessage('이미 태그의 갯수가 20개 최대치입니다. ');
+    if (searchValue?.trim().length === 0)
+      return toastColorMessage('값이 비어있습니다.');
+    if (select.findIndex((prevState) => prevState.title === searchValue) !== -1)
+      return toastColorMessage('이미 있는 태그입니다.');
 
-  const alertModalOpen = () => {
-    alertOpen({
-      width: 300,
-      alertMessage: '확인',
-      alertTitle: '아무것도 입력하지 않았습니다.',
-    });
-  };
-
-  const EnterCheck = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === 'Enter') {
-      alertModalOpen();
-    }
-    if (searchValue.trim().length === 0)
-      if (
-        select.filter((prevState) => prevState.title === searchValue).length !==
-        0
-      )
-        return;
-    setSelect((prevState) => [
-      ...prevState,
-      { id: Math.floor(Math.random() * 10000), title: searchValue },
-    ]);
-    return setSearchValue('');
+    postTagAction({ spaceId: Number(spaceId)!, tagName: searchValue });
+    setSearchValue('');
   };
 
   const placeholder =
@@ -90,18 +81,22 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
           <S.MenuList
             grid={labelName !== '태그'}
             menuWidth={menuWidth}
-            maxHeight={300}
             $isOpen={isOpen}
+            maxHeight={300}
           >
             {labelName === '태그' && (
-              <S.InputContainer isOpen={isOpen}>
-                <SelectList setState={setSelect} Items={select} />
-                <S.SearchInput
-                  value={searchValue}
-                  onKeyDown={EnterCheck}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                />
-              </S.InputContainer>
+              <form onSubmit={onSubmit}>
+                <S.InputContainer isOpen={isOpen}>
+                  <SelectList setState={setSelect} Items={select} />
+                  <S.SearchInput
+                    value={searchValue}
+                    placeholder={
+                      '없는 태그는 Enter 키를 통해 추가할 수 있습니다.'
+                    }
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
+                </S.InputContainer>
+              </form>
             )}
             <MenuList
               select={select}

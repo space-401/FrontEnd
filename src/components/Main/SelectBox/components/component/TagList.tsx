@@ -2,7 +2,7 @@ import { theme } from '@/styles';
 import type { TagListProps } from '@/types';
 import { Chip } from '@mui/material';
 
-export const TagList = (props: TagListProps) => {
+export const TagList = (props: Omit<TagListProps, 'onClick'>) => {
   const { Item } = props;
   return (
     <Chip
