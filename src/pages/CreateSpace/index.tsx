@@ -238,7 +238,7 @@ const CreateSpace = () => {
           <div>{formTitle}</div>
           <p>{formDescription}</p>
         </S.FlexBoxColumn>
-        {isUpdateForm ?? (
+        {isUpdateForm ? (
           <S.DeleteButton>
             <BasicButton
               onClick={deleteSpaceModalOpen}
@@ -250,7 +250,7 @@ const CreateSpace = () => {
               스페이스 삭제하기
             </BasicButton>
           </S.DeleteButton>
-        )}
+        ) : null}
       </S.TitleSection>
 
       {/*사진 편집 모달*/}
