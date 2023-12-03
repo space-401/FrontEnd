@@ -4,7 +4,6 @@ import { Lazy, PrivateRoute } from '@/router';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Auth from '@/pages/Auth';
-import CreateSpace from '@/pages/CreateSpace';
 import LandingPage from '@/pages/Landing';
 import NotFound from '@/pages/NotFound';
 import { CreatePostSkeleton, CreateSpaceSkeleton } from '@/components/Create';
@@ -12,7 +11,6 @@ import { MainPageSkeleton } from '@/components/Main';
 import { MyPageSkeleton } from '@/components/MyPage';
 import { SelectSpaceSkeleton } from '@/components/SelectSpace';
 import { Loading } from '@/components/common';
-
 
 export const router = createBrowserRouter([
   {
@@ -117,10 +115,6 @@ export const router = createBrowserRouter([
         <LandingPage />
       </Suspense>
     ),
-  },
-  {
-    path: '/createSpace',
-    element: <CreateSpace />,
   },
   {
     path: '/*',

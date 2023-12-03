@@ -30,7 +30,6 @@ import { SpaceTitle } from '@/components/CreateSpace/SpaceTitle';
 import { BasicButton } from '@/components/common';
 import { S } from './style';
 
-
 const CreateSpace = () => {
   const params = useParams();
   const spaceId = params.spaceId ?? null;

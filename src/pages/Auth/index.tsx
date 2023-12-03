@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Loading } from '@/components/common';
 
-
 const Auth = () => {
   const navigate = useNavigate();
   const params = useParams();
