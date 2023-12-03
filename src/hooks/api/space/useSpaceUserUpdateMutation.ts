@@ -5,14 +5,14 @@ import type { AxiosError } from 'axios';
 
 export const useSpaceUserUpdateMutation = (spaceId: string) => {
   const queryClient = useQueryClient();
-  const { mutate: userUpdateAction } = useMutation<
-    ApiResponseType,
-    AxiosError,
-    FormData
-  >((formData) => patchSpaceUser(formData), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['spaceInfo', Number(spaceId)]);
-    },
-  });
-  return { userUpdateAction };
+  const { mutate: userUpdateAction, isSuccess: isUserUpdateSuccess } =
+    useMutation<ApiResponseType, AxiosError, FormData>(
+      (formData) => patchSpaceUser(formData),
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['spaceInfo', Number(spaceId)]);
+        },
+      }
+    );
+  return { userUpdateAction, isUserUpdateSuccess };
 };

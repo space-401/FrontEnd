@@ -55,15 +55,15 @@ export const userList: UserType[] = [
  */
 type TagType = {
   tagId: number;
-  tagTitle: string;
+  tagName: string;
 };
 export const tagList: TagType[] = [
-  { tagId: 1, tagTitle: '흥미진진한' },
-  { tagId: 2, tagTitle: '긴장감이 넘치는' },
-  { tagId: 3, tagTitle: '인기가 많은' },
-  { tagId: 4, tagTitle: '한참 시간이 붐비는' },
-  { tagId: 5, tagTitle: '흥미진진한' },
-  { tagId: 6, tagTitle: '긴장감이 넘치는' },
-  { tagId: 7, tagTitle: '인기가 많은' },
-  { tagId: 8, tagTitle: '한참 시간이 붐비는' },
+  { tagId: 1, tagName: '흥미진진한' },
+  { tagId: 2, tagName: '긴장감이 넘치는' },
+  { tagId: 3, tagName: '인기가 많은' },
+  { tagId: 4, tagName: '한참 시간이 붐비는' },
+  { tagId: 5, tagName: '흥미진진한' },
+  { tagId: 6, tagName: '긴장감이 넘치는' },
+  { tagId: 7, tagName: '인기가 많은' },
+  { tagId: 8, tagName: '한참 시간이 붐비는' },
 ];

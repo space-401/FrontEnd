@@ -29,7 +29,7 @@ const MainPage = () => {
 
   //처음이라면 welcome 모달 열기
   useEffect(() => {
-    if (!isFirst) {
+    if (isFirst) {
       setModalNum(1);
     }
   }, [isFirst]);

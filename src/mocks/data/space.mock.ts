@@ -14,6 +14,7 @@ export const spaceInfo: SpaceInfoType = {
   tagList: tagList,
   spacePw: '12345',
   imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
+  spaceCode: 'abc',
 };
 /**
  * 스페이스 목록들에 대한 목 데이터
