@@ -127,6 +127,11 @@ export const UserSettingModal = ({
         type: 'image/jpeg',
       });
       formData.append('image', image, 'image');
+    } else {
+      const image = new Blob([], {
+        type: 'image/jpeg',
+      });
+      formData.append('image', image, 'image');
     }
     const spaceUserDTO = new Blob([JSON.stringify(spaceUserInfo)], {
       type: 'application/json',

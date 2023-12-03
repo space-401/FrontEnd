@@ -175,7 +175,7 @@ export const MainBody = (props: PostListPropType) => {
                   )
                   .map((v) => ({
                     id: v.tagId,
-                    title: v.tagTitle,
+                    title: v.tagName,
                   }))
               : []
           }
