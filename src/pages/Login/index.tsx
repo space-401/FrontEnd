@@ -1,9 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as GoogleIcon } from '@/assets/svg/login/google.svg';
 import { ReactComponent as KakaoIcon } from '@/assets/svg/login/kakao.svg';
 import { ReactComponent as NaverIcon } from '@/assets/svg/login/naver.svg';
 import { ReactComponent as SignLogo } from '@/assets/svg/signlogo.svg';
-import { SocialKakao, SocialNaver } from '@/components/Auth';
+import { SocialKakao, SocialNaver } from '@/apis/login';
 import { theme } from '@/styles/theme/theme';
 import { S } from './style';
 
@@ -12,7 +11,6 @@ const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
   const { naverHandleLogin } = SocialNaver();
   // const { googleSocialLogin } = SocialGoogle();
-  const navigate = useNavigate();
 
   return (
     <S.Wrapper>
@@ -46,8 +44,7 @@ const LoginPage = () => {
             backgroundColor={theme.LOGIN_COLOR.google}
             color={theme.COLOR['gray-6']}
             onClick={() => {
-              window.location.href =
-                'https://accounts.google.com/o/oauth2/v2/auth?client_id=1056152786225-ssoboempquap25h5h6hghcsp21tk5n7j.apps.googleusercontent.com&redirect_uri=http://localhost:3000/auth/google&response_type=code&scope=email+profile';
+              window.location.href = import.meta.env.VITE_GOOGLE_LOGIN;
             }}
           >
             <GoogleIcon style={{ position: 'absolute', left: 16 }} />

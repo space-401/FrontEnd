@@ -6,7 +6,7 @@ import { S } from '@/pages/CreateSpace/style';
 import { InputBox } from '@/components/common';
 
 
-const SpacePswd = ({
+export const SpacePswd = ({
   pswd,
   setPswd,
 }: {
@@ -67,5 +67,3 @@ const SpacePswd = ({
     </>
   );
 };
-
-export default SpacePswd;

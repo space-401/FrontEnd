@@ -5,7 +5,7 @@ import { BasicIcon } from '@/components/Create';
 import { BasicBox } from '@/components/common';
 
 
-const SpaceIcon = ({
+export const SpaceIcon = ({
   setImageArr,
   inputRef,
   imageArr,
@@ -79,5 +79,3 @@ const SpaceIcon = ({
     </>
   );
 };
-
-export default SpaceIcon;

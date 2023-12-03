@@ -4,7 +4,7 @@ import { CharacterCounter } from '@/components/Create';
 import { TextAreaBox } from '@/components/common';
 
 
-const SpaceDescription = ({
+export const SpaceDescription = ({
   content,
   onChange,
 }: {
@@ -35,5 +35,3 @@ const SpaceDescription = ({
     </>
   );
 };
-
-export default SpaceDescription;
