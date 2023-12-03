@@ -1,5 +1,6 @@
 import { useDimensions } from '@/hooks';
 import type { SelectBoxProps, selectType } from '@/types';
+import { toastColorMessage } from '@/utils';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { MenuList, MenuToggle } from '@/components/Main';
@@ -30,12 +31,17 @@ export const SelectBox = (props: SelectBoxProps) => {
     setSearchValue('');
   };
 
+  const onClick = () => {
+    if (ListItem.length > 1) toggleOpen();
+    else toastColorMessage('해당하는 필터 값이 없습니다.');
+  };
+
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   return (
     <S.SelectLayOut>
       <S.Wrapper
-        onClick={toggleOpen}
+        onClick={onClick}
         isSelect={select.length === 0}
         isOpen={isOpen}
         width={boxWidth}

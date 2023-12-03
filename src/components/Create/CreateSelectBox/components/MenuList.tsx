@@ -3,7 +3,7 @@ import { isUserType, isUserTypeArray } from '@/utils';
 import { TagList, UserList } from './component';
 import S from './style';
 
-export const MenuList = (props: MenuListProps) => {
+export const MenuList = (props: Omit<MenuListProps, 'spaceCode'>) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
   const checkSelectItem = (thisValue: number) => {
@@ -88,7 +88,7 @@ export const MenuList = (props: MenuListProps) => {
           onClick={() => setChange(item)}
           key={item.tagId}
         >
-          <TagList Item={item} />
+          <TagList Item={item} onClick={() => setChange(item)} />
         </S.List>
       ));
     }
@@ -96,10 +96,9 @@ export const MenuList = (props: MenuListProps) => {
       <S.List
         grid={isUserType(item)}
         select={checkSelectItem(item.tagId)!}
-        onClick={() => setChange(item)}
         key={item.tagId}
       >
-        <TagList Item={item} />
+        <TagList Item={item} onClick={() => setChange(item)} />
       </S.List>
     ));
   }

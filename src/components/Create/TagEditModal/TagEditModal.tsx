@@ -42,7 +42,7 @@ export const TagEditModal = ({
     } else {
       setTagList(createTags);
     }
-  }, [tags]);
+  }, [setTagList, spaceId, tags, createTags]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

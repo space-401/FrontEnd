@@ -71,7 +71,7 @@ export const SearchModal = React.forwardRef(
             for (let i = 0; i < data.length; i++) {
               const marker: MarkerType = {
                 markerId: data[i].id,
-                position: { lat: data[i].y, lng: data[i].x },
+                position: { lat: data[i].x, lng: data[i].y },
                 content: data[i].address_name,
               };
               markers.push(marker);
