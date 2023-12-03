@@ -60,9 +60,8 @@ const PostList = styled.div`
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   @media ${({ theme }) => theme.DEVICE.tablet} {
-    ${flexCenter};
   }
 `;
 

@@ -1,4 +1,4 @@
-import { FilterType, getSpacePostList } from '@/apis';
+import { SearchValuesType, getSpacePostList } from '@/apis';
 import { SpacePostListProps } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
@@ -8,14 +8,10 @@ import type { AxiosError } from 'axios';
  * @param page 해당 페이지의 내용을 받아옵니다.
  * @param filter 해당 필터값으로 조회를 합니다.
  */
-export const useSpacePostListQuery = (
-  spaceId: string,
-  page: string,
-  filter: FilterType
-) => {
+export const useSpacePostListQuery = (searchValues: SearchValuesType) => {
   const { data: spacePostList, refetch } = useQuery<
     SpacePostListProps,
     AxiosError
-  >(['postList', spaceId], () => getSpacePostList(spaceId, page, filter));
+  >(['postList', searchValues.spaceId], () => getSpacePostList(searchValues));
   return { spacePostList, refetch };
 };

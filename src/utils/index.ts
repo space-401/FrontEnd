@@ -7,3 +7,4 @@ export * from './selectTypeConvertor';
 export * from './toastMessage';
 export * from './tokenStorage';
 export * from './typeGuard';
+export * from './object-helper';
