@@ -36,7 +36,7 @@ export type PostDetailType = {
   userList: UserType[];
   selectedUsers: UserType[];
   selectedTags: TagType[];
-  imgUrl: string[];
+  imgsUrl: string[];
 };
 
 //포스트 생성 + 수정 타입

@@ -71,8 +71,8 @@ const CreatePost = () => {
 
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImagesArrType>({
-    images: postDetailData ? convertImgArrToObj(postDetailData.imgUrl) : [],
-    cropImages: postDetailData ? postDetailData.imgUrl : [],
+    images: postDetailData ? convertImgArrToObj(postDetailData.imgsUrl) : [],
+    cropImages: postDetailData ? postDetailData.imgsUrl : [],
     convertedImages: [],
   });
   //현재 선택한 이미지의 index

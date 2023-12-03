@@ -26,7 +26,7 @@ export const MenuList = (props: MenuListProps) => {
       ]
     : [
         ...select.map((prev) => {
-          return { tagId: prev.id, tagTitle: prev.title };
+          return { tagId: prev.id, tagName: prev.title };
         }),
         ...itemList.filter((prev) => !checkSelectItem(prev.tagId)),
       ];
@@ -37,7 +37,7 @@ export const MenuList = (props: MenuListProps) => {
       if (!checkSelectItem(thisValue)) {
         const newItem: selectType = {
           id: ListItem.tagId,
-          title: ListItem.tagTitle,
+          title: ListItem.tagName,
         };
         changeSelect((prev) => [...prev, newItem]);
       } else {
@@ -76,7 +76,7 @@ export const MenuList = (props: MenuListProps) => {
   } else {
     if (searchValue.length !== 0) {
       const selectArray = ListItem.filter((item) => {
-        const changeArray = item.tagTitle.split('');
+        const changeArray = item.tagName.split('');
         return (
           changeArray.splice(0, searchValue.length).join('') === searchValue
         );
