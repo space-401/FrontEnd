@@ -9,29 +9,25 @@ import {
   useSpaceUpdateMutation,
 } from '@/hooks';
 import { theme } from '@/styles';
-import type { ImageArrType, ImageType } from '@/types';
+import type { ImageArrType, TagType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ReactComponent as ClosedEye } from '@/assets/svg/closedEye.svg';
-import { ReactComponent as PhotoIcon } from '@/assets/svg/photoIcon.svg';
-import { ReactComponent as ShowEye } from '@/assets/svg/showEye.svg';
 import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
+import { tagMock } from '@/mocks/data';
 import { usePhotoModalStore } from '@/store/modal';
+import { SPACE_MESSAGE } from '@/constants/message';
 import {
-  BasicIcon,
   BasicIconModal,
-  CharacterCounter,
   ImageEditModal,
   SelectIconModal,
   TagEditModal,
 } from '@/components/Create';
-import {
-  BasicBox,
-  BasicButton,
-  InputBox,
-  TextAreaBox,
-} from '@/components/common';
+import { SpaceDescription } from '@/components/CreateSpace/SpaceDescription';
+import { SpaceIcon } from '@/components/CreateSpace/SpaceIcon';
+import { SpacePswd } from '@/components/CreateSpace/SpacePswd';
+import { SpaceTitle } from '@/components/CreateSpace/SpaceTitle';
+import { BasicButton } from '@/components/common';
 import { S } from './style';
 
 const CreateSpace = () => {
@@ -40,20 +36,26 @@ const CreateSpace = () => {
   const navigate = useNavigate();
   const isUpdateForm = Number.isInteger(Number(spaceId));
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { postSpaceAction, isPostSuccess, createResponse } =
     useSpaceCreateMutation();
   const { updateSpaceAction, isUpdateSuccess, updateResponse } =
     useSpaceUpdateMutation();
   const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
+  //스페이스 생성 태그
+  const [createTags, setCreateTags] = useState<TagType[]>([...tagMock]);
 
-  const formTitle = isUpdateForm ? '스페이스 설정하기' : '스페이스 만들기';
+  const formTitle = isUpdateForm
+    ? SPACE_MESSAGE.TITLE.UPDATE
+    : SPACE_MESSAGE.TITLE.CREATE;
   const formDescription = isUpdateForm
-    ? '스페이스의 정보를 수정합니다.'
-    : '우리만을 위한 스페이스를 새로 만들어요.';
+    ? SPACE_MESSAGE.DESCRIPTION.UPDATE
+    : SPACE_MESSAGE.DESCRIPTION.CREATE;
   const formResponseMessage = isUpdateForm
-    ? '스페이스 정보를 수정하였습니다.'
-    : '스페이스를 생성하였습니다.';
+    ? SPACE_MESSAGE.RESPONSE.UPDATE
+    : SPACE_MESSAGE.RESPONSE.CREATE;
 
   //이미지 저장하는 곳
   const [imageArr, setImageArr] = useState<ImageArrType>({
@@ -61,16 +63,6 @@ const CreateSpace = () => {
     cropImage: spaceInfo ? spaceInfo.imgUrl : null,
     convertedImage: null,
   });
-  const BasicIconArr = BasicIcon();
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  //기본 스페이스 아이콘 선택 [선택 여부, 선택 아이콘 인덱스]
-  const [isBasicIcon, setIsBasicIcon] = useState<[false] | [true, number]>([
-    false,
-  ]);
-
-  //모달
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
@@ -111,34 +103,6 @@ const CreateSpace = () => {
     spaceInfo ? spaceInfo.spacePw : null
   );
 
-  //비밀번호 보이기,숨기기
-  const [isShowPswd, setIsShowPswd] = useState(false);
-  const onToggleShowPswd = () => {
-    setIsShowPswd((prev) => !prev);
-  };
-
-  //비밀번호 숫자만
-  const onCheckInputNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    // 정규 표현식을 사용하여 숫자가 아닌 값 검사
-    if (!/^[0-9]*$/.test(value)) {
-      // 숫자가 아닌 값이 있을 때 에러 처리
-      return alertModalOpen();
-    }
-    setPswd(value);
-  };
-
-  //경고모달
-  const alertOpen = useAlertModalOpen();
-
-  const alertModalOpen = () => {
-    alertOpen({
-      width: 300,
-      alertMessage: '확인',
-      alertTitle: '비밀번호는 숫자만 입력해 주세요',
-    });
-  };
-
   const noAuthalertOpen = useAlertModalOpen();
 
   const noAuthalertModalOpen = () => {
@@ -149,25 +113,10 @@ const CreateSpace = () => {
     });
   };
 
-  //파일 변경 함수
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const files = e.target.files;
-    if (!files) return;
-    //여러개의 파일을 하나씩 순회하여 읽어오기
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result;
-      if (typeof result === 'string') {
-        const newObj: ImageType = {
-          id: 1,
-          img: result,
-        };
-        setImageArr((prev: ImageArrType) => ({ ...prev, image: newObj }));
-      }
-    };
-    reader.readAsDataURL(files[0]);
-  };
+  //기본 스페이스 아이콘 선택 [선택 여부, 선택 아이콘 인덱스]
+  const [isBasicIcon, setIsBasicIcon] = useState<[false] | [true, number]>([
+    false,
+  ]);
 
   //새로운 이미지 불러오는 함수
   const onClickImgEditModal = () => {
@@ -179,6 +128,7 @@ const CreateSpace = () => {
 
   //스페이스 생성하기
   const onSubmitSpace = () => {
+    const createTagsName = createTags.map((tag) => tag.tagTitle);
     const formData = new FormData();
 
     const createSpaceDTO = {
@@ -186,8 +136,9 @@ const CreateSpace = () => {
       spaceDescription: content,
       defaultImg: isBasicIcon[0] ? String(isBasicIcon[1]) : '',
       spacePw: pswd,
+      tags: createTagsName,
     };
-
+    console.log('createSpaceDTO', createSpaceDTO);
     const updateSpaceDTO = {
       ...createSpaceDTO,
       spaceId,
@@ -195,6 +146,11 @@ const CreateSpace = () => {
     if (imageArr.convertedImage) {
       // 이미지 파일 추가
       const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
+    } else {
+      const image = new Blob([], {
         type: 'image/jpeg',
       });
       formData.append('imgUrl', image, 'image.jpg');
@@ -267,14 +223,14 @@ const CreateSpace = () => {
     <S.Wrapper>
       {isTagModalOpen && (
         <TagEditModal
+          createTags={createTags}
+          setCreateTags={setCreateTags}
           spaceId={spaceId}
           isOpen={isTagModalOpen}
           modalOpen={() => {
             setIsTagModalOpen(true);
           }}
-          modalClose={() => {
-            setIsTagModalOpen(false);
-          }}
+          setIsTagModalOpen={setIsTagModalOpen}
         />
       )}
       <S.TitleSection>
@@ -341,118 +297,45 @@ const CreateSpace = () => {
       {/*스페이스 설정 폼*/}
       <S.Form>
         {/*아이콘 지정 인풋*/}
-        <S.TitleContainer number={1} required={true}>
-          <div>스페이스 아이콘</div>
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={(e) => {
-              handleFileChange(e);
-            }}
-            ref={inputRef}
+        <>
+          <S.TitleContainer number={1} required={true}>
+            <div>스페이스 아이콘</div>
+          </S.TitleContainer>
+          <SpaceIcon
+            isBasicIcon={isBasicIcon}
+            setIsIconModalOpen={setIsIconModalOpen}
+            setImageArr={setImageArr}
+            inputRef={inputRef}
+            imageArr={imageArr}
+            onClickOptionModalOpen={onClickOptionModalOpen}
           />
-        </S.TitleContainer>
-
-        {!imageArr.cropImage && !isBasicIcon[0] ? (
-          <S.InputContainer number={1} onClick={onClickOptionModalOpen}>
-            <BasicBox width={160} borderradius={10}>
-              <PhotoIcon />
-            </BasicBox>
-          </S.InputContainer>
-        ) : (
-          <S.InputContainer number={1}>
-            <BasicBox
-              onClick={() => {
-                setIsIconModalOpen([true, false]);
-              }}
-              backgroundImage={
-                isBasicIcon[0]
-                  ? BasicIconArr[isBasicIcon[1]]
-                  : imageArr.cropImage!
-              }
-              width={160}
-              borderradius={10}
-              color="grey"
-            ></BasicBox>
-          </S.InputContainer>
-        )}
+        </>
 
         {/*이름 지정 인풋*/}
-        <S.TitleContainer number={2} required={true}>
-          <div>스페이스 명</div>
-        </S.TitleContainer>
-        <S.InputContainer number={2}>
-          <InputBox
-            readonly={false}
-            height={60}
-            placeholder="16자 이내의 제목을 입력해 주세요."
-            type="text"
-            maxLength={16}
-            children={
-              <CharacterCounter
-                color={theme.COLOR['gray-3']}
-                currentNum={title.length}
-                maxNum={16}
-              />
-            }
-            paddingLeft={65}
-            onChange={onChange}
-            name="title"
-            value={title}
-          />
-        </S.InputContainer>
+        <>
+          <S.TitleContainer number={2} required={true}>
+            <div>스페이스 명</div>
+          </S.TitleContainer>
+          <SpaceTitle title={title} onChange={onChange} />
+        </>
 
         {/*설명 지정 인풋*/}
-        <S.TitleContainer number={3} required={false}>
-          <div>스페이스 설명</div>
-        </S.TitleContainer>
-        <S.InputContainer number={3}>
-          <TextAreaBox
-            value={content}
-            height={160}
-            placeholder="스페이스 설명 입력"
-            maxLength={100}
-            onChange={onChange}
-            name="content"
-            children={
-              <CharacterCounter
-                color={theme.COLOR['gray-3']}
-                currentNum={content.length}
-                maxNum={100}
-              />
-            }
-          />
-        </S.InputContainer>
+        <>
+          <S.TitleContainer number={3} required={false}>
+            <div>스페이스 설명</div>
+          </S.TitleContainer>
+          <SpaceDescription content={content} onChange={onChange} />
+        </>
 
         {/*비밀번호 지정 인풋*/}
-        <S.FlexContainer>
-          <S.TitleContainer number={4} required={true}>
-            <div>스페이스 비밀번호</div>
-          </S.TitleContainer>
-        </S.FlexContainer>
-        <S.InputContainer number={4}>
-          <InputBox
-            onChange={(e) => {
-              onCheckInputNumber(e);
-            }}
-            width={300}
-            readonly={false}
-            height={60}
-            type={isShowPswd ? 'text' : 'password'}
-            placeholder="숫자 5자리를 입력해주세요"
-            maxLength={5}
-            name="password"
-            value={pswd!}
-            children={
-              isShowPswd ? (
-                <ShowEye onClick={onToggleShowPswd} />
-              ) : (
-                <ClosedEye onClick={onToggleShowPswd} />
-              )
-            }
-          />
-        </S.InputContainer>
+        <>
+          <S.FlexContainer>
+            <S.TitleContainer number={4} required={true}>
+              <div>스페이스 비밀번호</div>
+            </S.TitleContainer>
+          </S.FlexContainer>
+          <SpacePswd pswd={pswd} setPswd={setPswd} />
+        </>
         <S.EmptyContainer />
 
         {/*스페이스 태그 관리*/}
