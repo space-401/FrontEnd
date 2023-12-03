@@ -50,6 +50,7 @@ const CreatePost = () => {
 
   const { postDetailData } = usePostDetailQuery(Number(postId!));
   const { spaceInfo } = useSpaceInfoQuery(String(spaceId));
+  console.log('spaceInfo', spaceInfo);
   const navigate = useNavigate();
 
   //내 작성글이 아닐 경우에 돌려보내기
@@ -199,8 +200,11 @@ const CreatePost = () => {
       postId,
     };
 
-    imageArr.convertedImages.forEach((image, index) => {
-      formData.append(`file-${index}`, image);
+    imageArr.convertedImages.forEach((image) => {
+      const convertedImage = new Blob([image], {
+        type: 'image/jpeg',
+      });
+      formData.append(`imgs`, convertedImage, 'image.jpg');
     });
 
     if (postId) {

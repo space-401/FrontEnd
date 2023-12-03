@@ -11,19 +11,18 @@
   "endOfLine": "lf",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
-    "^@\/assets/(.*)$",
-    "^@\/mocks/(.*)$",
-    "^@\/apis/(.*)$",
-    "^@\/util/(.*)$",
-    "^@\/hooks/(.*)$",
-    "^@\/store/(.*)$",
-    "^@\/pages/(.*)$",
-    "^@\/constants/(.*)$",
-    "^@\/components/(.*)$",
-    "^@\/styles/(.*)$",
-    "^[.\/]"
+    "^@/assets/(.*)$",
+    "^@/mocks/(.*)$",
+    "^@/apis/(.*)$",
+    "^@/util/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/store/(.*)$",
+    "^@/pages/(.*)$",
+    "^@/constants/(.*)$",
+    "^@/components/(.*)$",
+    "^@/styles/(.*)$",
+    "^[./]"
   ],
   "importOrderSeparation": false,
   "importOrderSortSpecifiers": true
 }
-

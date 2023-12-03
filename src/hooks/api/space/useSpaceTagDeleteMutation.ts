@@ -15,12 +15,9 @@ export const useTagDeleteMutation = () => {
 
       await queryClient.cancelQueries(['spaceTag', spaceId]);
 
-      // const previousTags = queryClient.getQueryData(['spaceTag', spaceId]);
       queryClient.setQueryData(['spaceTag', spaceId], (prev: any) => {
-        return prev.filter((tag: any) => tag.tagId !== tagId);
+        return prev.tags.filter((tag: any) => tag.tagId !== tagId);
       });
-
-      // return { previousTags };
     },
   });
   return { deleteTagAction };

@@ -12,7 +12,6 @@ import { TagList } from '@/components/Create';
 import { InputBox } from '@/components/common';
 import { S } from './style';
 
-
 type tagEditProps = {
   isOpen: boolean;
   spaceId: string | null;
@@ -65,7 +64,7 @@ export const TagEditModal = ({
     }
     /*스페이스 생성일 때 */
     if (!spaceId && tagInput) {
-      const newTag = { tagId: Math.random() * 1000, tagTitle: tagInput };
+      const newTag = { tagId: Math.random() * 1000, tagName: tagInput };
       setTagList((prev) => {
         return [...prev, newTag];
       });

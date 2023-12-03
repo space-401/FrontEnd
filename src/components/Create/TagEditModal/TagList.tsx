@@ -10,7 +10,7 @@ type TagListProps = {
 export const TagList = ({ onDeleteTag, item }: TagListProps) => {
   return (
     <S.TagGroup>
-      <S.TagTitle>{item.tagTitle}</S.TagTitle>
+      <S.TagTitle>{item.tagName}</S.TagTitle>
       <S.DeleteButton>
         <ReactComponent onClick={onDeleteTag} />
       </S.DeleteButton>

@@ -128,7 +128,7 @@ const CreateSpace = () => {
 
   //스페이스 생성하기
   const onSubmitSpace = () => {
-    const createTagsName = createTags.map((tag) => tag.tagTitle);
+    const createTagsName = createTags.map((tag) => tag.tagName);
     const formData = new FormData();
 
     const createSpaceDTO = {
