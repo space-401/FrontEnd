@@ -18,7 +18,7 @@ import { DetailInnerSkeleton } from '@/components/Detail';
 import { ErrorBoundary } from '@/components/common';
 import { S } from './style';
 
-export const HeaderLayOut = () => {
+export const HeaderLayout = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =
     useDetailModalStore((state) => state);
   const { ModalClose: ConfirmModalClose, isOpen: ConfirmIsOpen } =
@@ -71,4 +71,3 @@ export const HeaderLayOut = () => {
     </ErrorBoundary>
   );
 };
-export default HeaderLayOut;
