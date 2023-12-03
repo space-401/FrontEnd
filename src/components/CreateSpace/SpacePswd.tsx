@@ -5,7 +5,6 @@ import { ReactComponent as ShowEye } from '@/assets/svg/showEye.svg';
 import { S } from '@/pages/CreateSpace/style';
 import { InputBox } from '@/components/common';
 
-
 export const SpacePswd = ({
   pswd,
   setPswd,

@@ -4,7 +4,6 @@ import { S } from '@/pages/CreateSpace/style';
 import { BasicIcon } from '@/components/Create';
 import { BasicBox } from '@/components/common';
 
-
 export const SpaceIcon = ({
   setImageArr,
   inputRef,

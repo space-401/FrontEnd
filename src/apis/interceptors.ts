@@ -3,7 +3,6 @@ import { ERROR_CODE, HTTP_STATUS_CODE, PATH } from '@/constants';
 import { tokenStorage } from '@/utils';
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-
 export interface ErrorResponseData {
   statusCode?: number;
   message?: string;
