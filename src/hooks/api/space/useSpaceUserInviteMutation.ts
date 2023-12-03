@@ -4,10 +4,10 @@ import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 export const useSpaceUserInviteMutation = () => {
-  const { mutate: userInviteAction } = useMutation<
+  const { mutate: userInviteAction, isSuccess: inviteSuccess } = useMutation<
     ApiResponseType,
     AxiosError,
     inviteProps
   >((inviteInfo) => postSpaceInvite(inviteInfo));
-  return { userInviteAction };
+  return { userInviteAction, inviteSuccess };
 };

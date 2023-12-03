@@ -4,6 +4,5 @@ import type { ApiResponseType } from '@/types';
 
 export const deleteKkiriUser = async () => {
   const { data } = await axiosInstance.delete<ApiResponseType>(END_POINTS.USER);
-
   return data;
 };
