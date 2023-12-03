@@ -36,7 +36,7 @@ export const HeaderLayout = () => {
       />
       <S.Wrapper>
         <AlertModal
-          sx={{ zIndex: 1505}}
+          sx={{ zIndex: 1505 }}
           onClose={AlertModalClose}
           open={AlertIsOpen}
         >
