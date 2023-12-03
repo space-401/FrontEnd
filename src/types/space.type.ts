@@ -21,6 +21,7 @@ export type SpaceInfoType = {
   isAdmin: boolean;
   isFirst: boolean;
   spacePw: string;
+  spaceCode: string;
 };
 
 export type AlarmType = {

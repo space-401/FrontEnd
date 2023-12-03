@@ -1,4 +1,4 @@
-import { PATH } from '@/constants';
+// import { PATH } from '@/constants';
 import {
   useConfirmModalOpen,
   useDeleteKkiriUserMutation, // useUserInfoQuery,
@@ -7,7 +7,6 @@ import { useLogOutMutation } from '@/hooks';
 import { SocialType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { ReactElement } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as KaKaoSvg } from '@/assets/svg/api/kakao.svg';
 import { ReactComponent as NaverSvg } from '@/assets/svg/api/naver.svg';
 import { A } from './style';
@@ -15,7 +14,6 @@ import { A } from './style';
 export const AccountManagement = () => {
   // const { MyInfoData } = useUserInfoQuery();
   // console.log(MyInfoData);
-  const navigate = useNavigate();
   const loginState: SocialType = 'kakao';
   const email = '';
   const name = '';
@@ -40,8 +38,6 @@ export const AccountManagement = () => {
     return confirmModalOpen({
       AsyncAction: () => {
         deleteKkiriUserAction();
-        navigate(PATH.HOME);
-        toastColorMessage('탈퇴 되었습니다.');
       },
       isPositiveModal: false,
       descriptionMessage:
