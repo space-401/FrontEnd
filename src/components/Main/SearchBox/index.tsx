@@ -4,7 +4,13 @@ import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
 import S from './style';
 
 export const SearchBox = (props: SearchProps) => {
-  const { placeholder, movePage, initialKeyword = '', height, width } = props;
+  const {
+    placeholder,
+    setKeyWorld,
+    initialKeyword = '',
+    height,
+    width,
+  } = props;
 
   const [keyword, setkeyword] = useState(initialKeyword);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +19,13 @@ export const SearchBox = (props: SearchProps) => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    movePage(undefined, keyword);
+    setKeyWorld(keyword);
+  };
+
+  const onkeydown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      setKeyWorld(keyword);
+    }
   };
 
   return (
@@ -26,6 +38,7 @@ export const SearchBox = (props: SearchProps) => {
         width={width}
         value={keyword}
         placeholder={placeholder}
+        onKeyDown={onkeydown}
         onChange={(e) => onChange(e)}
       ></S.SearchInput>
     </S.Wrapper>

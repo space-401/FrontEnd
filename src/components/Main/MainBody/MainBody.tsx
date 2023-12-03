@@ -1,12 +1,8 @@
+import { SearchValuesType } from '@/apis';
 import { PATH } from '@/constants';
 import { useDetailModalOpen, useSpacePostListQuery } from '@/hooks';
-import type {
-  DateInfoType,
-  PostListFilterProps,
-  TagType,
-  UserType,
-  selectType,
-} from '@/types';
+import type { TagType, UserType, selectType } from '@/types';
+import { objectHelperWithNotUndefined } from '@/utils/object-helper';
 import { Suspense, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ReactComponent as DefaultImage } from '@/assets/svg/defaultImg/img1.svg';
@@ -26,100 +22,77 @@ type PostListPropType = {
   spaceId: string;
 };
 
-// @Todo 필터 값이 변할 때 마다 데이터 재요청 보내기
 export const MainBody = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const page: string = searchParams.get('page') ?? '1';
-  const keyword: string | null = searchParams.get('keyword');
-  const userId: string[] | [] = searchParams.getAll('userList');
-  const tagId: string[] | [] = searchParams.getAll('tagList');
-  const startDate: string | null = searchParams.get('startDate');
-  const endDate: string | null = searchParams.get('endDate');
-
-  const [state, setState] = useState<PostListFilterProps>({
-    selectUserList: [],
-    selectTagList: [],
+  const [query, setQuery] = useState<Omit<SearchValuesType, 'spaceId'>>({
+    page: searchParams.get('page') ?? '1',
+    keyword: searchParams.get('keyword') ?? undefined,
+    userId: searchParams.getAll('userList') ?? undefined,
+    tagId: searchParams.getAll('tagList') ?? undefined,
+    startDate: searchParams.get('startDate') ?? undefined,
+    endDate: searchParams.get('endDate') ?? undefined,
   });
 
-  const [selectedDate, setSelectedDate] = useState<DateInfoType>({
-    startDate: '',
-    endDate: '',
-  });
+  const setParams = async (callBack: () => void) => {
+    await callBack();
+    setSearchParams(objectHelperWithNotUndefined(query));
+  };
+
+  const setKeyWorld = (keyword: string) => {
+    setParams(() => setQuery((prev) => ({ ...prev, keyword: keyword.trim() })));
+  };
+
+  const setUserId = (selectUserList: selectType[]) => {
+    setParams(() =>
+      setQuery((prev) => ({
+        ...prev,
+        userId: selectUserList.map((v) => String(v.id)),
+      }))
+    );
+  };
+
+  const setTagId = (selectTagList: selectType[]) => {
+    setParams(() =>
+      setQuery((prev) => ({
+        ...prev,
+        tagId: selectTagList.map((v) => String(v.id)),
+      }))
+    );
+  };
+
+  const setDateInfo = ({
+    startDate,
+    endDate,
+  }: {
+    startDate: string;
+    endDate: string;
+  }) => {
+    setParams(() => setQuery((prev) => ({ ...prev, startDate, endDate })));
+  };
+
+  const setPage = (pageNumber: number | undefined) => {
+    setParams(() =>
+      setQuery((prev) => ({ ...prev, page: String(pageNumber) }))
+    );
+  };
 
   const navigate = useNavigate();
 
   const { spaceId, selectState, userList, tagList } = props;
 
-  let query = {};
-
-  if (keyword?.trim().length !== 0 && keyword !== null) {
-    query = { ...query, keyword };
-  }
-  if (userId.length !== 0) {
-    query = { ...query, userId };
-  }
-  if (tagId.length !== 0) {
-    query = { ...query, tagId };
-  }
-  if (startDate?.length !== 0 && startDate !== null) {
-    query = { ...query, startDate };
-  }
-  if (endDate?.length !== 0 && endDate !== null) {
-    query = { ...query, endDate };
-  }
-
-  const { spacePostList, refetch } = useSpacePostListQuery(spaceId, page, {
+  const { spacePostList, refetch } = useSpacePostListQuery({
+    spaceId,
     ...query,
   });
 
-  useEffect(() => {
-    refetch();
-  }, [refetch, page, keyword, userId, tagId, startDate, endDate]);
-
-  const detailModalOpen = useDetailModalOpen();
-
   const { postList, total, page: curPage, itemLength } = spacePostList!;
 
-  const setUserState = (newUserState: selectType[]) => {
-    setState((prev) => ({ ...prev, selectUserList: newUserState }));
-    movePage(undefined);
-  };
+  useEffect(() => {
+    refetch();
+  }, [refetch, query]);
 
-  const setTagState = (newTagState: selectType[]) => {
-    setState((prev) => ({ ...prev, selectTagList: newTagState }));
-    movePage(undefined);
-  };
-
-  const movePage = (pageNumber: number | undefined, searchKeyword?: string) => {
-    let select = {};
-    if (state.selectUserList.length !== 0) {
-      select = { ...select, userList: state.selectUserList.map((v) => v.id) };
-    }
-    if (state.selectTagList.length !== 0) {
-      select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
-    }
-    if (selectedDate.startDate !== null && selectedDate.startDate) {
-      select = {
-        ...select,
-        startDate: selectedDate.startDate,
-        endDate: selectedDate.endDate,
-      };
-    }
-    if (keyword !== null && keyword) {
-      select = { ...select, keyword: keyword };
-    }
-
-    if (searchKeyword !== null && searchKeyword) {
-      select = { ...select, keyword: searchKeyword };
-    }
-
-    if (pageNumber) {
-      select = { ...select, page: pageNumber };
-    }
-
-    setSearchParams(select);
-  };
+  const detailModalOpen = useDetailModalOpen();
 
   const lowList = Math.ceil(userList.length / 2);
 
@@ -127,7 +100,7 @@ export const MainBody = (props: PostListPropType) => {
     <S.Wrapper>
       <S.FilterGroup>
         <SelectBox
-          setState={setUserState}
+          setState={setUserId}
           menuWidth={316}
           menuHeight={lowList * 16 + (lowList - 1) * 8 + 32}
           boxWidth={168}
@@ -135,11 +108,11 @@ export const MainBody = (props: PostListPropType) => {
           labelName={'작성자'}
           ListItem={userList}
           selectState={
-            userList.length !== 0
+            query.userId?.length !== 0
               ? userList
                   .filter(
                     (prev) =>
-                      userId?.filter((v) => v === String(prev.userId))
+                      query.userId?.filter((v) => v === String(prev.userId))
                         .length !== 0
                   )
                   .map((v) => ({
@@ -155,12 +128,12 @@ export const MainBody = (props: PostListPropType) => {
           width={200}
           height={38}
           borderRadius={5}
-          setDateInfo={setSelectedDate}
+          setDateInfo={setDateInfo}
           fontSize={12}
         />
         <SelectBox
           placeHolder={'태그명을 검색해주세요.'}
-          setState={setTagState}
+          setState={setTagId}
           menuWidth={192}
           menuHeight={49 * Math.floor(tagList.length / 2) * 2}
           boxWidth={168}
@@ -172,8 +145,8 @@ export const MainBody = (props: PostListPropType) => {
               ? tagList
                   .filter(
                     (prev) =>
-                      tagId?.filter((v) => v === String(prev.tagId)).length !==
-                      0
+                      query.tagId?.filter((v) => v === String(prev.tagId))
+                        .length !== 0
                   )
                   .map((v) => ({
                     id: v.tagId,
@@ -183,8 +156,8 @@ export const MainBody = (props: PostListPropType) => {
           }
         />
         <SearchBox
-          movePage={movePage}
-          initialKeyword={keyword ?? undefined}
+          setKeyWorld={setKeyWorld}
+          initialKeyword={query.keyword ?? undefined}
           height={38}
           width={168}
           placeholder={'제목'}
@@ -221,7 +194,7 @@ export const MainBody = (props: PostListPropType) => {
           </S.PostList>
           <S.PaginationBox>
             <Pagination
-              movePage={movePage}
+              movePage={setPage}
               page={curPage}
               total={total}
               itemLength={itemLength}
@@ -232,7 +205,7 @@ export const MainBody = (props: PostListPropType) => {
       {selectState && (
         <Suspense fallback={<PostMapSkeleton />}>
           <PostMap
-            movePage={movePage}
+            movePage={setPage}
             page={curPage}
             total={total}
             itemLength={itemLength}

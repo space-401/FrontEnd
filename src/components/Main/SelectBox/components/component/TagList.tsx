@@ -18,7 +18,7 @@ export const TagList = (props: TagListProps) => {
         textOverflow: 'ellipsis',
       }}
       variant="outlined"
-      label={Item.tagTitle}
+      label={Item.tagName}
     />
   );
 };

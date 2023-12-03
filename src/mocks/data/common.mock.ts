@@ -1,4 +1,4 @@
-import type { UserType } from '@/types';
+import type { TagType, UserType } from '@/types';
 
 export const userList: UserType[] = [
   {
@@ -53,10 +53,6 @@ export const userList: UserType[] = [
 /**
  * 태그 정보에 대한 목 데이터
  */
-type TagType = {
-  tagId: number;
-  tagName: string;
-};
 export const tagList: TagType[] = [
   { tagId: 1, tagName: '흥미진진한' },
   { tagId: 2, tagName: '긴장감이 넘치는' },
