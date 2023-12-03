@@ -4,7 +4,7 @@ import type { ApiResponseType } from '@/types';
 
 export type inviteProps = {
   spaceCode: string;
-  spacePw: number;
+  spacePw: string;
 };
 
 export const postSpaceInvite = async (props: inviteProps) => {

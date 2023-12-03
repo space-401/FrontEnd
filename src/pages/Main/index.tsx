@@ -11,7 +11,10 @@ const MainPage = () => {
   const [selectState, setSelectState] = useState(false);
   const spaceId = useParams().spaceId!;
   const spaceInfo = useSpaceInfoQuery(spaceId).spaceInfo!;
-  const { userList, tagList, isFirst, spaceTitle, imgUrl } = spaceInfo;
+  const { userList, tagList, isFirst, spaceTitle, imgUrl, spaceCode } =
+    spaceInfo;
+
+  console.log('spaceInfo', spaceInfo);
 
   const [modalNum, setModalNum] = useState(0);
   //세팅 모달로 이동
@@ -66,6 +69,7 @@ const MainPage = () => {
           spaceInfo={spaceInfo}
           selectState={selectState}
           setSelectState={setSelectState}
+          spaceCode={spaceCode}
         />
         <MainBody
           userList={userList}

@@ -11,7 +11,6 @@ export const useSpaceUserUpdateMutation = (spaceId: string) => {
     FormData
   >((formData) => patchSpaceUser(formData), {
     onSuccess: () => {
-      console.log('성공');
       queryClient.invalidateQueries(['spaceInfo', Number(spaceId)]);
     },
   });

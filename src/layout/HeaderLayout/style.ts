@@ -80,6 +80,8 @@ const SpaceIcon = styled.div<{ img_url: string; isCurrentSpace: boolean }>`
   background-size: cover;
   border: ${({ isCurrentSpace, theme }) =>
     isCurrentSpace ? `1.2px solid ${theme.COLOR.skyblue}` : ''};
+  box-shadow: ${({ isCurrentSpace, theme }) =>
+    isCurrentSpace ? `0 0 4px 4px ${theme.COLOR['gray-2']}` : ''};
 `;
 
 const ContentLayOut = styled.div`

@@ -160,20 +160,11 @@ const CreatePost = () => {
     }
   };
 
-  /**확인 모달*/
-
-  const onMoveCreatePost = () => {
-    const currentURL = window.location.href;
-    const parts = currentURL.split('/');
-    const index = parts.indexOf('post');
-    window.location.href = parts.slice(0, index + 1).join('/');
-  };
-
   const confirmOpen = useConfirmModalOpen();
 
   const confirmModalOpen = () => {
     confirmOpen({
-      AsyncAction: onMoveCreatePost,
+      AsyncAction: () => {},
       isPositiveModal: true,
       ApproveMessage: '확인',
       closeMessage: '닫기',
@@ -192,10 +183,10 @@ const CreatePost = () => {
       spaceId: Number(spaceId),
       postTitle: title,
       postContent: content,
-      people: selectedUsers.map((user) => user.id),
-      tags: selectedTags.map((tag) => tag.id),
-      postLocationLat: Number(mapInfo.position.lat),
-      postLocationLng: Number(mapInfo.position.lng),
+      people: selectedUsers.map((user) => user.id) ?? [],
+      tags: selectedTags.map((tag) => tag.id) ?? [],
+      postLocationLat: mapInfo.position.lat,
+      postLocationLng: mapInfo.position.lng,
       postLocationKeyword: mapInfo.content,
       postBeginDate: dateInfo.startDate,
       postEndDate: dateInfo.endDate,
