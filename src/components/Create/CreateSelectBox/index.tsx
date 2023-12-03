@@ -8,7 +8,7 @@ import S from './style';
 export const CreateSelectBox = (props: SelectBoxProps) => {
   const {
     boxWidth = 168,
-    menuHeight = 200,
+    // menuHeight = 200,
     menuWidth = 168,
     ListItem,
     labelName,
@@ -90,7 +90,7 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
           <S.MenuList
             grid={labelName !== '태그'}
             menuWidth={menuWidth}
-            maxHeight={menuHeight}
+            maxHeight={300}
             $isOpen={isOpen}
           >
             {labelName === '태그' && (

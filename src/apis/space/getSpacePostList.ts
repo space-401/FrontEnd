@@ -19,6 +19,5 @@ export const getSpacePostList = async (
     END_POINTS.SPACE_POST_LIST,
     { ...searchValue }
   );
-
   return data;
 };

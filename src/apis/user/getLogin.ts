@@ -20,6 +20,5 @@ export const getLogin = async (props: ILoginProps) => {
       useAuth: false,
     }
   );
-  console.log('response', response);
   return response.data;
 };

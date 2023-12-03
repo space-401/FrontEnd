@@ -9,7 +9,7 @@ export type UserType = {
 
 export type TagType = {
   tagId: number;
-  tagTitle: string;
+  tagName: string;
 };
 
 export type DateInfoType = {

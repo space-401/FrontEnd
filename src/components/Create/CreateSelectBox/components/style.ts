@@ -1,7 +1,9 @@
 import { omitText } from '@/styles';
 import styled from 'styled-components';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 1000px;
+`;
 
 const List = styled.li<{ select: boolean; grid: boolean }>`
   border-radius: ${({ select }) => (select ? 3 : 5)}px;
