@@ -1,4 +1,4 @@
-export const Dev = process.env.NODE_ENV !== 'development';
+export const Dev = process.env.NODE_ENV === 'development';
 
 export const NETWORK = {
   RETRY_COUNT: 2,
