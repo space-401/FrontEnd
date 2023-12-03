@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
-import svgrPlugin from 'vite-plugin-svgr';
+import { defineConfig } from 'vite';
 import { ViteFaviconsPlugin } from 'vite-plugin-favicon2';
+import svgrPlugin from 'vite-plugin-svgr';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
+
 export default defineConfig({
   server: {
     port: 3000,
@@ -21,5 +22,6 @@ export default defineConfig({
   ],
   optimizeDeps: {
     include: ['cli-table3'],
+    exclude: ['js-big-decimal'],
   },
 });

@@ -3,6 +3,7 @@ import { ERROR_CODE, HTTP_STATUS_CODE, PATH } from '@/constants';
 import { tokenStorage } from '@/utils';
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
+
 export interface ErrorResponseData {
   statusCode?: number;
   message?: string;
@@ -18,6 +19,7 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
     window.location.href = PATH.LOGIN;
     throw new Error('토큰이 유효하지 않습니다');
   }
+  console.log('accessToken', accessToken);
   config.headers.Authorization = `Bearer ${accessToken}`;
 
   return config;

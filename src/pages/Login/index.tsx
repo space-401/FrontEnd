@@ -2,14 +2,15 @@ import { ReactComponent as GoogleIcon } from '@/assets/svg/login/google.svg';
 import { ReactComponent as KakaoIcon } from '@/assets/svg/login/kakao.svg';
 import { ReactComponent as NaverIcon } from '@/assets/svg/login/naver.svg';
 import { ReactComponent as SignLogo } from '@/assets/svg/signlogo.svg';
-import { SocialGoogle, SocialKakao, SocialNaver } from '@/components/Auth';
+import { SocialKakao, SocialNaver } from '@/apis/login';
 import { theme } from '@/styles/theme/theme';
 import { S } from './style';
+
 
 const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
   const { naverHandleLogin } = SocialNaver();
-  const { googleSocialLogin } = SocialGoogle();
+  // const { googleSocialLogin } = SocialGoogle();
 
   return (
     <S.Wrapper>
@@ -42,7 +43,9 @@ const LoginPage = () => {
           <S.LoginBox
             backgroundColor={theme.LOGIN_COLOR.google}
             color={theme.COLOR['gray-6']}
-            onClick={googleSocialLogin}
+            onClick={() => {
+              window.location.href = import.meta.env.VITE_GOOGLE_LOGIN;
+            }}
           >
             <GoogleIcon style={{ position: 'absolute', left: 16 }} />
             구글 로그인

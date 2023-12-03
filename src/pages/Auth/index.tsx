@@ -25,6 +25,7 @@ const Auth = () => {
       const { accessToken, refreshToken } = LoginResponse as UserTokenType;
       tokenStorage.setAccessToken(accessToken, 30);
       tokenStorage.setRefreshToken(refreshToken, 60 * 24 * 14);
+      console.log('accessToken', accessToken);
       navigate(PATH.SPACE);
     }
   }, [isSuccess, LoginResponse, navigate]);
