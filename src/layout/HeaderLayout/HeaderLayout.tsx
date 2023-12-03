@@ -36,21 +36,21 @@ export const HeaderLayout = () => {
       />
       <S.Wrapper>
         <AlertModal
-          sx={{ zIndex: 1000 }}
+          sx={{ zIndex: 1505}}
           onClose={AlertModalClose}
           open={AlertIsOpen}
         >
           <AlertInner />
         </AlertModal>
         <ConfirmModal
-          sx={{ zIndex: 1000 }}
+          sx={{ zIndex: 1505 }}
           onClose={ConfirmModalClose}
           open={ConfirmIsOpen}
         >
           <ConfirmInner />
         </ConfirmModal>
         <DetailModal
-          sx={{ zIndex: 999 }}
+          sx={{ zIndex: 1500 }}
           open={DetailIsOpen}
           onClose={DetailModalClose}
         >
