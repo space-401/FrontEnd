@@ -1,4 +1,4 @@
-export const Dev = process.env.NODE_ENV === 'development';
+export const Dev = process.env.NODE_ENV !== 'development';
 
 export const NETWORK = {
   RETRY_COUNT: 2,
@@ -9,7 +9,7 @@ export const BASE_URL = Dev
   ? 'http://localhost:3000'
   : import.meta.env.VITE_BASE_URL;
 
-export const AXIOS_BASE_URL = !Dev ? '/' : import.meta.env.VITE_BACK_URL;
+export const AXIOS_BASE_URL = Dev ? '/' : import.meta.env.VITE_BACK_URL;
 
 export const END_POINTS = {
   USER: '/user',

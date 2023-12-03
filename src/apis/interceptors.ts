@@ -18,7 +18,6 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
     window.location.href = PATH.LOGIN;
     throw new Error('토큰이 유효하지 않습니다');
   }
-  console.log('accessToken', accessToken);
   config.headers.Authorization = `Bearer ${accessToken}`;
 
   return config;
