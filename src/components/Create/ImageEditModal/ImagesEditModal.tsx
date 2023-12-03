@@ -5,6 +5,7 @@ import { dataURItoFile } from '@/utils';
 import { Box, Modal } from '@mui/material';
 import { useRef, useState } from 'react';
 import { ReactCropperElement } from 'react-cropper';
+import { v4 } from 'uuid';
 import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
 import { ReactComponent as NextBtn } from '@/assets/svg/chevron/chevron_right.svg';
 import { ReactComponent as MultipleIcon } from '@/assets/svg/photo/multipleIcon.svg';
@@ -230,6 +231,7 @@ export const ImagesEditModal = ({
                         display: 'flex',
                         alignItems: 'center',
                       }}
+                      key={v4()}
                     >
                       <ImageCropper
                         width={cropperWidth - 20}
