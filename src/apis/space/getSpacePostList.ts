@@ -3,7 +3,6 @@ import { axiosInstance } from '@/apis';
 import { END_POINTS } from '@/constants';
 import type { DateInfoType, SpacePostListProps } from '@/types';
 
-
 export type FilterType = {
   userId?: number[];
   tagId?: number[];

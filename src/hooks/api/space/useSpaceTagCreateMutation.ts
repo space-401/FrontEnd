@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 import { v4 } from 'uuid';
 
-
 export const useTagMutation = () => {
   const queryClient = useQueryClient();
   const { mutate: postTagAction } = useMutation<

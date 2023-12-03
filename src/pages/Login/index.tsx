@@ -6,7 +6,6 @@ import { SocialKakao, SocialNaver } from '@/apis/login';
 import { theme } from '@/styles/theme/theme';
 import { S } from './style';
 
-
 const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
   const { naverHandleLogin } = SocialNaver();
