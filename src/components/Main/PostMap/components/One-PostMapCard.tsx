@@ -39,12 +39,12 @@ export const OnePostMapCard = (props: OnePostPropType) => {
         </O.CardPlace>
         <O.TagGroup>
           {postTags.map((place) => {
-            const { tagTitle, tagId } = place;
+            const { tagName, tagId } = place;
             return (
               <Chip
                 sx={{ background: 'white', height: '21px', padding: '0 8px' }}
                 key={tagId}
-                label={tagTitle}
+                label={tagName}
                 variant="filled"
               />
             );

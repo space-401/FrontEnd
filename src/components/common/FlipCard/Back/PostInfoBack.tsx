@@ -26,7 +26,7 @@ export const PostInfoBack = (props: PostInfoBackPropsType) => {
               <Chip
                 className={'chip'}
                 key={uuid()}
-                label={'#' + place.tagTitle}
+                label={'#' + place.tagName}
                 variant="outlined"
               />
             ))}
