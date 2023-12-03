@@ -74,7 +74,7 @@ export type SearchProps = {
   height: number;
   width: number;
   initialKeyword?: string;
-  movePage: (pageNumber: undefined, keyword: string) => void;
+  setKeyWorld: (keyword: string) => void;
 };
 
 export type SpacePostListProps = {
