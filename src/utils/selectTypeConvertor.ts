@@ -14,7 +14,7 @@ export const onConvertedTagToSelectType = (list: TagType[]) => {
   return list.map((tag) => {
     return {
       id: tag.tagId,
-      title: tag.tagTitle,
+      title: tag.tagName,
     };
   });
 };
