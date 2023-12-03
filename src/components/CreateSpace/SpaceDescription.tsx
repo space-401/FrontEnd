@@ -3,7 +3,6 @@ import { S } from '@/pages/CreateSpace/style';
 import { CharacterCounter } from '@/components/Create';
 import { TextAreaBox } from '@/components/common';
 
-
 export const SpaceDescription = ({
   content,
   onChange,
