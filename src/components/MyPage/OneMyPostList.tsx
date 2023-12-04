@@ -1,5 +1,9 @@
 import { PATH } from '@/constants';
-import { useConfirmModalOpen, useDetailModalOpen } from '@/hooks';
+import {
+  useConfirmModalOpen,
+  useDetailModalOpen,
+  usePostDeleteMutation,
+} from '@/hooks';
 import { S } from '@/modal/Detail/style';
 import type { OneMyPostType } from '@/types';
 import { getFormatDate, toastColorMessage } from '@/utils';
@@ -25,8 +29,10 @@ export const OneMyPostList = ({ items }: { items: OneMyPostType }) => {
   const navigate = useNavigate();
 
   const confirmModalOpen = useConfirmModalOpen();
+  const { deletePostAction } = usePostDeleteMutation(spaceId);
 
   const DeleteAction = () => {
+    deletePostAction(postId);
     toastColorMessage('삭제되었습니다.');
   };
 

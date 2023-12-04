@@ -423,6 +423,11 @@ const CommentInfoBox = styled.div`
   padding-left: 30px;
 `;
 
+const EmptyList = styled.div`
+  margin: 10px 0 0 10px;
+  color: ${({ theme }) => theme.COLOR['gray-2']};
+`;
+
 export const CL = {
   OneCommentList,
   PostTitle,
@@ -438,4 +443,5 @@ export const CL = {
   CommentInfo,
   CommentIconBox,
   CommentInfoBox,
+  EmptyList,
 };
