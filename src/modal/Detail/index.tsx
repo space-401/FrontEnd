@@ -152,10 +152,10 @@ export const DetailInner = React.forwardRef(
             }}
           >
             <IconButton>
-              {isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
+              {!isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
             </IconButton>
           </S.LikeIconBox>
-          <S.LeftImgBox isArray={imgsUrl?.length !== 0}>
+          <S.LeftImgBox isArray={imgsUrl?.length >= 2}>
             {[...imgsUrl].map((imgUrl) => (
               <S.ImgBox key={uuid()} imgUrl={imgUrl} />
             ))}

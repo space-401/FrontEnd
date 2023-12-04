@@ -1,4 +1,5 @@
 import { PostSpaceTagType, postSpaceTag } from '@/apis';
+import { END_POINTS } from '@/constants';
 import type { ApiResponseType } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
@@ -13,16 +14,19 @@ export const useTagMutation = () => {
   >((tagInfo) => postSpaceTag(tagInfo), {
     onMutate: async (tagInfo) => {
       const { tagName, spaceId } = tagInfo;
-      const previousTags = queryClient.getQueryData(['spaceInfo', spaceId]);
+      const previousTags = queryClient.getQueryData([
+        END_POINTS.SPACE,
+        spaceId,
+      ]);
       const newTagId = v4();
-      queryClient.setQueryData(['spaceInfo', spaceId], (prev: any) => {
+      queryClient.setQueryData([END_POINTS.SPACE, spaceId], (prev: any) => {
         return {
           ...prev,
           tagList: [...prev.tagList, { tagId: newTagId, tagName }],
         };
       });
       await queryClient.cancelQueries({
-        queryKey: ['spaceInfo', spaceId],
+        queryKey: [END_POINTS.SPACE, spaceId],
       });
       return { previousTags, newTagId };
     },
