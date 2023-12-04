@@ -42,6 +42,7 @@ export const Calender = ({
   useEffect(() => {
     dateInfo?.startDate && setStartDate(new Date(dateInfo.startDate));
     dateInfo?.endDate && setEndDate(new Date(dateInfo.endDate));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
@@ -79,6 +80,7 @@ export const Calender = ({
       }
       setDateInfo(newDateStr);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startDate, endDate]);
 
   return (

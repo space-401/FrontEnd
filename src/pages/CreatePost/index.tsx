@@ -60,6 +60,7 @@ const CreatePost = () => {
         navigate(PATH.SPACE);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
   const { createPostAction, postCreateSuccess } = usePostCreateMutation();
@@ -191,7 +192,6 @@ const CreatePost = () => {
       postBeginDate: dateInfo.startDate,
       postEndDate: dateInfo.endDate,
     };
-    console.log('createPostDTO', createPostDTO);
     const updatePostDTO = {
       ...createPostDTO,
       postId,
