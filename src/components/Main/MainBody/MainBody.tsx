@@ -34,19 +34,17 @@ export const MainBody = (props: PostListPropType) => {
     endDate: searchParams.get('endDate') ?? undefined,
   });
 
-  const setParams = async (callBack: () => void) => {
-    await callBack();
+  const setParams = (callBack: () => void) => {
+    callBack();
     setSearchParams(objectHelperWithNotUndefined(query));
   };
 
-  const setKeyWorld = async (keyword: string) => {
-    await setParams(() =>
-      setQuery((prev) => ({ ...prev, keyword: keyword.trim() }))
-    );
+  const setKeyWorld = (keyword: string) => {
+    setParams(() => setQuery((prev) => ({ ...prev, keyword: keyword.trim() })));
   };
 
-  const setUserId = async (selectUserList: selectType[]) => {
-    await setParams(() =>
+  const setUserId = (selectUserList: selectType[]) => {
+    setParams(() =>
       setQuery((prev) => ({
         ...prev,
         userId: selectUserList.map((v) => String(v.id)),
@@ -54,8 +52,8 @@ export const MainBody = (props: PostListPropType) => {
     );
   };
 
-  const setTagId = async (selectTagList: selectType[]) => {
-    await setParams(() =>
+  const setTagId = (selectTagList: selectType[]) => {
+    setParams(() =>
       setQuery((prev) => ({
         ...prev,
         tagId: selectTagList.map((v) => String(v.id)),
@@ -63,20 +61,18 @@ export const MainBody = (props: PostListPropType) => {
     );
   };
 
-  const setDateInfo = async ({
+  const setDateInfo = ({
     startDate,
     endDate,
   }: {
     startDate: string;
     endDate: string;
   }) => {
-    await setParams(() =>
-      setQuery((prev) => ({ ...prev, startDate, endDate }))
-    );
+    setParams(() => setQuery((prev) => ({ ...prev, startDate, endDate })));
   };
 
-  const setPage = async (pageNumber: number | undefined) => {
-    await setParams(() =>
+  const setPage = (pageNumber: number | undefined) => {
+    setParams(() =>
       setQuery((prev) => ({ ...prev, page: String(pageNumber) }))
     );
   };
@@ -91,8 +87,6 @@ export const MainBody = (props: PostListPropType) => {
   });
 
   const { postList, total, page: curPage, itemLength } = spacePostList!;
-
-  console.log('postList', postList);
 
   useEffect(() => {
     refetch();
