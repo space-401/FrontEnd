@@ -1,4 +1,4 @@
-import { useDimensions, useTagMutation } from '@/hooks';
+import { useDimensions, useSpaceInfoQuery, useTagMutation } from '@/hooks';
 import type { SelectBoxProps, selectType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { motion } from 'framer-motion';
@@ -10,7 +10,6 @@ import S from './style';
 export const CreateSelectBox = (props: SelectBoxProps) => {
   const {
     boxWidth = 168,
-    // menuHeight = 200,
     menuWidth = 168,
     ListItem,
     labelName,
@@ -23,8 +22,9 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
   );
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
-
   const { spaceId } = useParams();
+
+  const { refetch } = useSpaceInfoQuery(spaceId!);
 
   useEffect(() => {
     setState(select);
@@ -44,8 +44,9 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
       return toastColorMessage('값이 비어있습니다.');
     if (select.findIndex((prevState) => prevState.title === searchValue) !== -1)
       return toastColorMessage('이미 있는 태그입니다.');
-
+    console.log('tags', spaceId, searchValue);
     postTagAction({ spaceId: Number(spaceId)!, tagName: searchValue });
+    refetch();
     setSearchValue('');
   };
 

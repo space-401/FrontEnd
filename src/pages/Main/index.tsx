@@ -14,8 +14,6 @@ const MainPage = () => {
   const { userList, tagList, isFirst, spaceTitle, imgUrl, spaceCode } =
     spaceInfo;
 
-  console.log('spaceInfo', spaceInfo);
-
   const [modalNum, setModalNum] = useState(0);
   //세팅 모달로 이동
   const onMoveSettingModal = () => {
