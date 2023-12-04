@@ -3,7 +3,7 @@ import { isUserType, isUserTypeArray } from '@/utils';
 import { TagList, UserList } from './component';
 import S from './style';
 
-export const MenuList = (props: MenuListProps) => {
+export const MenuList = (props: Omit<MenuListProps, 'spaceCode'>) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
   const checkSelectItem = (thisValue: number) => {

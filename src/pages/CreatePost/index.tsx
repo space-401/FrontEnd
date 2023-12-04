@@ -127,6 +127,7 @@ const CreatePost = () => {
     }
     ModalOpen();
   };
+  console.log(spaceInfo);
 
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,8 +186,8 @@ const CreatePost = () => {
       postContent: content,
       people: selectedUsers.map((user) => user.id) ?? [],
       tags: selectedTags.map((tag) => tag.id) ?? [],
-      postLocationLat: mapInfo.position.lat,
-      postLocationLng: mapInfo.position.lng,
+      postLocationLat: mapInfo.position.lng,
+      postLocationLng: mapInfo.position.lat,
       postLocationKeyword: mapInfo.content,
       postBeginDate: dateInfo.startDate,
       postEndDate: dateInfo.endDate,

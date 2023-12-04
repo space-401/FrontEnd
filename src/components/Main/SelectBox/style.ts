@@ -64,7 +64,6 @@ const MenuList = styled.ul<{
           Math.floor(menuWidth / 2) - 10
         }px ${Math.floor(menuWidth / 2) - 10}px; gap : 2px 8px;`
       : 'display:flex; gap: 2px;'}
-
   flex-direction: column;
   overflow-y: auto;
 
