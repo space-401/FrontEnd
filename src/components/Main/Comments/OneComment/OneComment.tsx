@@ -49,9 +49,7 @@ export const OneComment = (props: OneCommentType) => {
   };
 
   const ReplySubmit = () => {
-    console.log('댓글 적어줘');
     if (state.reply.trim().length !== 0) {
-      console.log('전송 시작');
       postCommentAction({
         comment: state.reply,
         refId: isReply.refId,
