@@ -8,8 +8,7 @@ import {
   usePostDetailQuery,
 } from '@/hooks';
 import { S, mentionStyle } from '@/modal/Detail/style';
-import { getFormatDate, getFormatUser } from '@/utils';
-import { toastColorMessage } from '@/utils';
+import { getFormatDate, getFormatUser, toastColorMessage } from '@/utils';
 import { Box, Chip, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import React, { useRef, useState } from 'react';
@@ -30,7 +29,7 @@ import { ReactComponent as MarkerSvg } from '@/assets/svg/markerIcon.svg';
 import { ReactComponent as MenuSvg } from '@/assets/svg/menu.svg';
 import { useDetailModalStore } from '@/store/modal';
 import { OneMention } from '@/components/Detail';
-import { DetailComments, MenuToggle } from '@/components/Main';
+import { DetailComments, MenuToggle, ReplyType } from '@/components/Main';
 import { Avatars } from '@/components/common';
 
 export const DetailInner = React.forwardRef(
@@ -58,21 +57,19 @@ export const DetailInner = React.forwardRef(
       postDescription,
       selectedUsers,
       selectedTags,
-      isBookMark,
+      isBookmark,
     } = postDetailData!;
 
     const [state, setState] = useState<{
       mapIsOpen: boolean;
       settingIsOpen: boolean;
       commentIsOpen: boolean;
-      isReplyOpen:
-        | { open: boolean; refId: number | undefined; id: number | undefined }
-        | undefined;
+      isReplyOpen: ReplyType;
       value: string;
     }>({
-      isReplyOpen: undefined,
+      isReplyOpen: { refId: undefined, open: false, id: undefined },
       settingIsOpen: false,
-      commentIsOpen: false,
+      commentIsOpen: true,
       mapIsOpen: false,
       value: '',
     });
@@ -104,11 +101,7 @@ export const DetailInner = React.forwardRef(
     };
 
     // 대댓글 오픈
-    const setIsReply = (
-      newReply:
-        | { open: boolean; refId: number | undefined; id: number | undefined }
-        | undefined
-    ) => {
+    const setIsReply = (newReply: ReplyType) => {
       setState((prev) => ({ ...prev, isReplyOpen: newReply }));
     };
 
@@ -116,7 +109,7 @@ export const DetailInner = React.forwardRef(
 
     // 댓글 오픈
     const sendReply = () => {
-      postCommentAction({ postId: postId, comment: state.value });
+      postCommentAction({ comment: state.value });
       setReply('');
     };
 
@@ -152,7 +145,7 @@ export const DetailInner = React.forwardRef(
             }}
           >
             <IconButton>
-              {!isBookMark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
+              {isBookmark ? <BookMarkFillSvg /> : <BookMarkEmptySvg />}
             </IconButton>
           </S.LikeIconBox>
           <S.LeftImgBox isArray={imgsUrl?.length >= 2}>
