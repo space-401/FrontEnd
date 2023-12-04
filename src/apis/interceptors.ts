@@ -39,7 +39,7 @@ export const handleTokenError = async (
 
   const { data, status } = error.response;
 
-  toastColorMessage(data.message!);
+  if (data.code !== ERROR_CODE.EXPIRED_TOKEN) toastColorMessage(data.message!);
 
   if (
     status === HTTP_STATUS_CODE.UNAUTHORIZED &&
