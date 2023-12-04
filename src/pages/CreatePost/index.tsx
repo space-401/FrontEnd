@@ -16,7 +16,6 @@ import type {
   selectType,
 } from '@/types';
 import {
-  convertImgArrToObj,
   onConvertedTagToSelectType,
   onConvertedUserToSelectType,
 } from '@/utils';
@@ -71,7 +70,7 @@ const CreatePost = () => {
 
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImagesArrType>({
-    images: postDetailData ? convertImgArrToObj(postDetailData.imgsUrl) : [],
+    images: [],
     cropImages: postDetailData ? postDetailData.imgsUrl : [],
     convertedImages: [],
   });
@@ -321,7 +320,7 @@ const CreatePost = () => {
             </S.PhotoContainer>
           </BasicBox>
         </S.BoxWrapper>
-      ) : postId ? (
+      ) : postId && !imageArr.images.length ? (
         <S.BoxWrapper>
           <div style={{ zIndex: 1000, width: '348px' }}>
             <ImgSlider
