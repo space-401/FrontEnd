@@ -13,13 +13,14 @@ export const useTagDeleteMutation = () => {
   >((deleteInfo) => deleteSpaceTag(deleteInfo), {
     onMutate: async (deleteInfo) => {
       const { spaceId, tagId } = deleteInfo;
-
-      await queryClient.cancelQueries([END_POINTS.SPACE, spaceId]);
-
       queryClient.setQueryData([END_POINTS.SPACE, spaceId], (prev: any) => ({
         ...prev,
         tagList: prev.tagList.filter((tag: any) => tag.tagId !== tagId),
       }));
+
+      await queryClient.invalidateQueries([END_POINTS.SPACE, spaceId]);
+
+      return { spaceId, tagId };
     },
   });
   return { deleteTagAction };

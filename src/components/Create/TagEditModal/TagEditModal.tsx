@@ -99,6 +99,8 @@ export const TagEditModal = ({
       setCreateTags(newTagList);
     } else {
       /*스페이스 수정일 때 */
+      const newTagList = tagList.filter((tag) => tag.tagId !== tagId);
+      setTagList(newTagList);
       deleteTagAction({ spaceId, tagId });
     }
   };
