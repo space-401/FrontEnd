@@ -1,6 +1,6 @@
 import { HTTPError, axiosInstance, getNewAccessToken } from '@/apis';
 import { ERROR_CODE, HTTP_STATUS_CODE, PATH } from '@/constants';
-import { tokenStorage } from '@/utils';
+import { toastColorMessage, tokenStorage } from '@/utils';
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 export interface ErrorResponseData {
@@ -38,6 +38,8 @@ export const handleTokenError = async (
     throw new Error('에러가 발생했습니다.');
 
   const { data, status } = error.response;
+
+  toastColorMessage(data.message!);
 
   if (
     status === HTTP_STATUS_CODE.UNAUTHORIZED &&
