@@ -22,10 +22,13 @@ export const UseBookMarkMutation = () => {
         postInfo.postId,
       ])!;
       await queryClient.cancelQueries([END_POINTS.POST, postInfo.postId]);
-      queryClient.setQueriesData([END_POINTS.POST, postInfo.postId], {
-        ...prevInfo,
-        isBookMark: !prevInfo.isBookMark,
-      });
+      queryClient.setQueriesData<PostDetailType>(
+        [END_POINTS.POST, postInfo.postId],
+        {
+          ...prevInfo,
+          isBookmark: !prevInfo.isBookmark,
+        }
+      );
     },
     onError: async (error, variables) => {
       toastColorMessage(error.message);
