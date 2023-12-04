@@ -122,14 +122,16 @@ const InviteCode = () => {
       </S.InputContainer>
 
       {/*완료 버튼*/}
-      <BasicButton
-        disabled={spaceCode.length == 0 || !spacePw}
-        children="완료"
-        onClick={() => {
-          onSubmit();
-        }}
-        width={76}
-      />
+      <S.ButtonContainer>
+        <BasicButton
+          disabled={spaceCode.length == 0 || !spacePw}
+          children="완료"
+          onClick={() => {
+            onSubmit();
+          }}
+          width={76}
+        />
+      </S.ButtonContainer>
     </S.Wrapper>
   );
 };
