@@ -59,7 +59,7 @@ export const TagEditModal = ({
 
   const onAddTag = async () => {
     setErrorMsg('');
-    if (tagList.length >= 10) {
+    if (tagList.length >= 20) {
       return setErrorMsg('태그는 20개 이상 추가하실 수 없습니다.');
     }
     /*스페이스 생성일 때 */
@@ -74,6 +74,10 @@ export const TagEditModal = ({
     }
     /*스페이스 수정일 때 */
     if (spaceId && tagInput) {
+      const newTag = { tagId: Math.random() * 1000, tagName: tagInput };
+      setTagList((prev) => {
+        return [...prev, newTag];
+      });
       return postTagAction({
         tagName: tagInput!,
         spaceId: Number(spaceId),
@@ -140,11 +144,8 @@ export const TagEditModal = ({
                     <div>태그를 추가해주세요</div>
                   </S.List>
                 )}
-                {errorMsg && (
-                  <S.ErrorMsg>
-                    태그는 최대 20개까지 추가가 가능합니다.
-                  </S.ErrorMsg>
-                )}
+
+                <S.ErrorMsg>{errorMsg}</S.ErrorMsg>
 
                 {tagList.map((item) => (
                   <S.List

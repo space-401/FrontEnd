@@ -7,7 +7,5 @@ export const getUserInfo = async () => {
     END_POINTS.USERINFO
   );
 
-  console.log('dat', data);
-
   return data;
 };

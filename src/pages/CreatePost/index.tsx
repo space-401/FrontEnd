@@ -127,7 +127,6 @@ const CreatePost = () => {
     }
     ModalOpen();
   };
-  console.log(spaceInfo);
 
   //파일 변경 함수
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -192,7 +191,7 @@ const CreatePost = () => {
       postBeginDate: dateInfo.startDate,
       postEndDate: dateInfo.endDate,
     };
-
+    console.log('createPostDTO', createPostDTO);
     const updatePostDTO = {
       ...createPostDTO,
       postId,
@@ -362,6 +361,7 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={2}>
           <CreateSelectBox
+            spaceId={spaceId}
             selectState={selectedUsers}
             labelName={'사용자'}
             ListItem={userList}
@@ -387,7 +387,6 @@ const CreatePost = () => {
             boxWidth={inputWidth}
             setState={setSelectedTags}
             menuHeight={100 * Math.floor(userList.length / 2)}
-            // setState={setTagState}
             menuWidth={inputWidth}
           />
         </S.InputContainer>

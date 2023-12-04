@@ -92,6 +92,8 @@ export const MainBody = (props: PostListPropType) => {
 
   const { postList, total, page: curPage, itemLength } = spacePostList!;
 
+  console.log('postList', postList);
+
   useEffect(() => {
     refetch();
   }, [refetch, query]);
