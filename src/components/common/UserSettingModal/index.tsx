@@ -28,7 +28,7 @@ export const UserSettingModal = ({
   userNames,
   ModalClose,
   userInfo,
-  spaceId, // isAdmin,
+  spaceId,
 }: SettingModalProps) => {
   const { userUpdateAction, isUserUpdateSuccess } = useSpaceUserUpdateMutation(
     String(spaceId)

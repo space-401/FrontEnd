@@ -59,7 +59,7 @@ export const TagEditModal = ({
 
   const onAddTag = async () => {
     setErrorMsg('');
-    if (tagList.length >= 10) {
+    if (tagList.length >= 20) {
       return setErrorMsg('태그는 20개 이상 추가하실 수 없습니다.');
     }
     /*스페이스 생성일 때 */
