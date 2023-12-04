@@ -1,5 +1,5 @@
 import { useMyPostListQuery } from '@/hooks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { OneMyPostList } from '@/components/MyPage';
 import { Pagination } from '@/components/common';
@@ -8,13 +8,17 @@ import { A, B, CL } from './style';
 export const MyPostList = () => {
   const [curPage, setCurPage] = useState<number>(1);
 
-  const { MyPostListData } = useMyPostListQuery(curPage);
+  const { MyPostListData, refetch } = useMyPostListQuery(curPage);
 
   const { myPostList, total, page, itemLength } = MyPostListData!;
 
   const movePage = (number: number) => {
     setCurPage(number);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [curPage, refetch]);
 
   return (
     <>

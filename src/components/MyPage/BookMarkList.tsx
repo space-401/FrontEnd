@@ -1,12 +1,12 @@
 import { useBookMarkListQuery, useDetailModalOpen } from '@/hooks';
 import { getFormatDate } from '@/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pagination } from '@/components/common';
 import { A, CL } from './style';
 
 export const BookMarkList = () => {
   const [curPage, setCurPage] = useState(1);
-  const { BookMarkListData } = useBookMarkListQuery(curPage);
+  const { BookMarkListData, refetch } = useBookMarkListQuery(curPage);
 
   const { total, page, bookMarkList, itemLength } = BookMarkListData!;
 
@@ -15,6 +15,10 @@ export const BookMarkList = () => {
   const movePage = (page: number) => {
     setCurPage(page);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [curPage, refetch]);
 
   return (
     <>

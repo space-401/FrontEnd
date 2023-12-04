@@ -1,6 +1,6 @@
 import { useDetailModalOpen, useMyCommentListQuery } from '@/hooks';
 import { getFormatDate, timeHelper } from '@/utils';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { ReactComponent as FeatherSvg } from '@/assets/svg/feather.svg';
 import { Pagination } from '@/components/common';
@@ -9,13 +9,17 @@ import { A, CL } from './style';
 export const MyCommentList = () => {
   const [curPage, setCurPage] = useState(1);
 
-  const { MyCommentListData } = useMyCommentListQuery(curPage);
+  const { MyCommentListData, refetch } = useMyCommentListQuery(curPage);
 
   const { myCommentList, page, total, itemLength } = MyCommentListData!;
 
   const movePage = (number: number) => {
     setCurPage(number);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [curPage, refetch]);
 
   const detailModalOpen = useDetailModalOpen();
 
