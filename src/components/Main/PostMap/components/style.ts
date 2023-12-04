@@ -44,10 +44,16 @@ const PaginationInner = styled.div`
   justify-content: center;
 `;
 
+const EmptyList = styled.div`
+  margin: 10px 0 0 10px;
+  color: ${({ theme }) => theme.COLOR['gray-2']};
+`;
+
 export const S = {
   Wrapper,
   PaginationBox,
   PaginationInner,
+  EmptyList,
 };
 
 const ContentBox = styled.div`
