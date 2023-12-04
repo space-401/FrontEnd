@@ -13,21 +13,18 @@ export const useTagMutation = () => {
   >((tagInfo) => postSpaceTag(tagInfo), {
     onMutate: async (tagInfo) => {
       const { tagName, spaceId } = tagInfo;
-
-      await queryClient.cancelQueries({
-        queryKey: ['spaceInfo', spaceId],
-      });
-
       const previousTags = queryClient.getQueryData(['spaceInfo', spaceId]);
-
+      const newTagId = v4();
       queryClient.setQueryData(['spaceInfo', spaceId], (prev: any) => {
         return {
           ...prev,
-          tagList: [...prev.tagList, { tagId: v4(), tagName }],
+          tagList: [...prev.tagList, { tagId: newTagId, tagName }],
         };
       });
-
-      return { previousTags };
+      await queryClient.cancelQueries({
+        queryKey: ['spaceInfo', spaceId],
+      });
+      return { previousTags, newTagId };
     },
   });
 

@@ -24,8 +24,14 @@ const Text = styled.div`
   font-weight: 400;
 `;
 
+const SmallText = styled.div`
+  color: ${({ theme }) => theme.COLOR['white']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-14']};
+  font-weight: 400;
+`;
+
 const Header = styled.div`
-  height: 22px;
+  height: 30px;
   display: flex;
   justify-content: space-between;
   padding: 16px;
@@ -76,6 +82,8 @@ const FlexContainer = styled.div`
 
 const ErrorMsg = styled.div`
   color: ${({ theme }) => theme.COLOR.orange};
+  height: 30px;
+  width: 100vw;
 `;
 
 export const S = {
@@ -87,4 +95,5 @@ export const S = {
   List,
   FlexContainer,
   ErrorMsg,
+  SmallText,
 };
