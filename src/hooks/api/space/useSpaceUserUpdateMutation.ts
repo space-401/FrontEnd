@@ -1,4 +1,5 @@
 import { patchSpaceUser } from '@/apis';
+import { END_POINTS } from '@/constants';
 import { ApiResponseType } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
@@ -9,8 +10,12 @@ export const useSpaceUserUpdateMutation = (spaceId: string) => {
     useMutation<ApiResponseType, AxiosError, FormData>(
       (formData) => patchSpaceUser(formData),
       {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['spaceInfo', Number(spaceId)]);
+        onSuccess: async () => {
+          await queryClient.invalidateQueries([END_POINTS.MY_POST_LIST]);
+          await queryClient.invalidateQueries([
+            END_POINTS.SPACE,
+            Number(spaceId),
+          ]);
         },
       }
     );

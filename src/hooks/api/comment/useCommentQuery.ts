@@ -1,4 +1,5 @@
 import { getComment } from '@/apis';
+import { END_POINTS } from '@/constants';
 import { CommentType } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
@@ -10,7 +11,7 @@ import type { AxiosError } from 'axios';
  */
 export const useCommentQuery = (postId: number, spaceId: number) => {
   const { data: commentList } = useQuery<CommentType[], AxiosError>(
-    ['commentList', postId, spaceId],
+    [END_POINTS.COMMENT, postId, spaceId],
     () => getComment(postId, spaceId)
   );
 

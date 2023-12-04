@@ -1,4 +1,5 @@
 import { postBookMark } from '@/apis';
+import { END_POINTS } from '@/constants';
 import type { ApiResponseType, PostDetailType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -17,18 +18,21 @@ export const UseBookMarkMutation = () => {
   >((postInfo) => postBookMark(postInfo.postId), {
     onMutate: async (postInfo) => {
       const prevInfo: PostDetailType = queryClient.getQueryData([
-        'detail',
+        END_POINTS.POST,
         postInfo.postId,
       ])!;
-      await queryClient.cancelQueries(['detail', postInfo.postId]);
-      queryClient.setQueriesData(['detail', postInfo.postId], {
+      await queryClient.cancelQueries([END_POINTS.POST, postInfo.postId]);
+      queryClient.setQueriesData([END_POINTS.POST, postInfo.postId], {
         ...prevInfo,
         isBookMark: !prevInfo.isBookMark,
       });
     },
     onError: async (error, variables) => {
       toastColorMessage(error.message);
-      await queryClient.invalidateQueries(['detail', variables.postId]);
+      await queryClient.invalidateQueries([END_POINTS.POST, variables.postId]);
+    },
+    onSettled: async (_1, _2, variables) => {
+      await queryClient.invalidateQueries([END_POINTS.POST, variables.postId]);
     },
   });
 

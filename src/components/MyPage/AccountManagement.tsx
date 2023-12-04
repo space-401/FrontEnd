@@ -1,8 +1,7 @@
-// import { PATH } from '@/constants';
 import {
   useConfirmModalOpen,
   useDeleteKkiriUserMutation,
-  useUserInfoQuery, // useUserInfoQuery,
+  useUserInfoQuery,
 } from '@/hooks';
 import { useLogOutMutation } from '@/hooks';
 import { SocialType } from '@/types';
@@ -34,9 +33,7 @@ export const AccountManagement = () => {
 
   const kkiriOutHandler = () => {
     return confirmModalOpen({
-      AsyncAction: () => {
-        deleteKkiriUserAction();
-      },
+      AsyncAction: deleteKkiriUserAction,
       isPositiveModal: false,
       descriptionMessage:
         '탈퇴하시면 회원님의 모든 정보와 활동 기록이 삭제됩니다.\n삭제된 정보는 복구할 수 없으니 신중하게 결정해주세요.',
