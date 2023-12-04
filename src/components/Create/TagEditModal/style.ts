@@ -68,6 +68,7 @@ const List = styled.li<{ select: boolean; grid: boolean }>`
   display: flex;
   align-items: center;
   width: 50%;
+  position: relative;
 
   &:hover {
     background-color: #413f3f;
