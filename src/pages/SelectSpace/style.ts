@@ -61,6 +61,17 @@ const Content = styled.div`
   padding: 0 84px;
 `;
 
+const SpaceInfoBox = styled.div`
+  color: white;
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+`;
+
+const CounterBox = styled.div`
+  margin-left: -30px;
+`;
+
 export const S = {
   LogoBox,
   Wrapper,
@@ -70,4 +81,6 @@ export const S = {
   ButtonContainer,
   EmptySpaceBox,
   Content,
+  SpaceInfoBox,
+  CounterBox,
 };

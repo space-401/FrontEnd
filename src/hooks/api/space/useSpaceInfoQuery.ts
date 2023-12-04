@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 
 export const useSpaceInfoQuery = (spaceId: string) => {
   const NumberSpaceId = Number(spaceId);
-  const { data: spaceInfo } = useQuery<SpaceInfoType, AxiosError>(
+  const { data: spaceInfo, refetch } = useQuery<SpaceInfoType, AxiosError>(
     ['spaceInfo', NumberSpaceId],
     () => getSpaceDetail(NumberSpaceId),
     {
@@ -13,5 +13,5 @@ export const useSpaceInfoQuery = (spaceId: string) => {
     }
   );
 
-  return { spaceInfo };
+  return { spaceInfo, refetch };
 };

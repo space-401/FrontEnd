@@ -10,7 +10,7 @@ export const useImageCompress = () => {
     setIsLoading(true);
 
     const options = {
-      maxSizeMB: 1,
+      maxSizeMB: 2,
       maxWidthOrHeight: 1920,
     };
 
