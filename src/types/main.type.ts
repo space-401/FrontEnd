@@ -65,6 +65,7 @@ export type SelectBoxProps = {
 
 export type TagListProps = {
   Item: TagType;
+  onClick: () => void;
 };
 
 export type UserListProps = {
