@@ -1,4 +1,5 @@
 import { SearchValuesType, getSpacePostList } from '@/apis';
+import { END_POINTS } from '@/constants';
 import { SpacePostListProps } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
@@ -12,6 +13,8 @@ export const useSpacePostListQuery = (searchValues: SearchValuesType) => {
   const { data: spacePostList, refetch } = useQuery<
     SpacePostListProps,
     AxiosError
-  >(['postList', searchValues.spaceId], () => getSpacePostList(searchValues));
+  >([END_POINTS.POST, searchValues.spaceId], () =>
+    getSpacePostList(searchValues)
+  );
   return { spacePostList, refetch };
 };

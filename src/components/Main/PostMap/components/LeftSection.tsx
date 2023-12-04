@@ -35,33 +35,37 @@ export const LeftSection = (props: LeftSectionPropType) => {
 
   return (
     <S.Wrapper>
-      {postList.map((item) => {
-        const {
-          postId,
-          postTitle,
-          placeTitle,
-          usersList,
-          postUpdatedAt,
-          selectedTags,
-          imgUrl,
-        } = item;
-        return (
-          <OnePostMapCard
-            key={postId}
-            postTitle={postTitle}
-            postDescription={getFormatUser(usersList)}
-            postPlace={placeTitle}
-            postTags={selectedTags}
-            imgUrl={imgUrl[0]}
-            createAt={postUpdatedAt}
-            onClick={() => {
-              setIsSelect(postId);
-              setState({ center: item.position, isPanto: false });
-            }}
-            isSelect={isSelect === item.postId}
-          />
-        );
-      })}
+      {postList.length ? (
+        postList.map((item) => {
+          const {
+            postId,
+            postTitle,
+            placeTitle,
+            usersList,
+            postUpdatedAt,
+            selectedTags,
+            imgUrl,
+          } = item;
+          return (
+            <OnePostMapCard
+              key={postId}
+              postTitle={postTitle}
+              postDescription={getFormatUser(usersList)}
+              postPlace={placeTitle}
+              postTags={selectedTags}
+              imgUrl={imgUrl[0]}
+              createAt={postUpdatedAt}
+              onClick={() => {
+                setIsSelect(postId);
+                setState({ center: item.position, isPanto: false });
+              }}
+              isSelect={isSelect === item.postId}
+            />
+          );
+        })
+      ) : (
+        <S.EmptyList>작성된 포스트가 없습니다.</S.EmptyList>
+      )}
       <S.PaginationBox>
         <S.PaginationInner>
           <Pagination
