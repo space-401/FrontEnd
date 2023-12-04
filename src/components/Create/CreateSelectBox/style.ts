@@ -40,7 +40,8 @@ const SearchInput = styled.input`
   color: ${({ theme }) => theme.COLOR.black};
   background-color: inherit;
   padding: 5px 8px;
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
+
   &::placeholder {
     color: ${({ theme }) => theme.COLOR['gray-2']};
   }
@@ -50,8 +51,9 @@ const MenuList = styled.ul<{
   grid: boolean;
   menuWidth: number;
   $isOpen: boolean;
-  maxHeight: number;
+  maxHeight?: number;
 }>`
+  margin-top: 5px;
   position: relative;
   width: ${({ menuWidth }) => menuWidth}px;
   padding: 16px;
@@ -59,13 +61,11 @@ const MenuList = styled.ul<{
   border: 1px solid ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 5px;
   transition: height 0.5s;
-  ${({ grid, menuWidth }) =>
-    grid
-      ? `display: grid; grid-template-columns: ${
-          Math.floor(menuWidth / 2) - 24
-        }px ${Math.floor(menuWidth / 2) - 24}px; gap: 8px 16px;`
-      : 'display:flex; gap: 2px;'}
-  height: ${({ $isOpen, maxHeight }) => ($isOpen ? maxHeight : '0')}px;
+  height: ${({ $isOpen, maxHeight, grid }) =>
+    $isOpen && !grid ? maxHeight : null}px;
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
+  gap: 3px;
   flex-direction: column;
   overflow-y: scroll;
 

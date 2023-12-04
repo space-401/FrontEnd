@@ -15,17 +15,16 @@ export const useTagMutation = () => {
       const { tagName, spaceId } = tagInfo;
 
       await queryClient.cancelQueries({
-        queryKey: ['spaceTag', spaceId],
+        queryKey: ['spaceInfo', spaceId],
       });
 
-      const previousTags = queryClient.getQueryData(['spaceTag', spaceId]);
+      const previousTags = queryClient.getQueryData(['spaceInfo', spaceId]);
 
-      queryClient.setQueryData(['spaceTag', spaceId], (prev: any) => {
-        if (prev.length) {
-          return {
-            tags: [...prev, { tagId: v4(), tagName: tagName }],
-          };
-        }
+      queryClient.setQueryData(['spaceInfo', spaceId], (prev: any) => {
+        return {
+          ...prev,
+          tagList: [...prev.tagList, { tagId: v4(), tagName }],
+        };
       });
 
       return { previousTags };
