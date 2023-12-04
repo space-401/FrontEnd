@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { ReactComponent as PlusIcon } from '@/assets/svg/plusIcon.svg';
 import { ReactComponent as SelectLogo } from '@/assets/svg/selectlogo.svg';
+import { CharacterCounter } from '@/components/Create';
 import { BasicButton, FlipCard } from '@/components/common';
 import { S } from './style';
 
@@ -30,6 +31,16 @@ const SelectSpace = () => {
                 초대코드 입력
               </BasicButton>
             </S.ButtonContainer>
+            <S.SpaceInfoBox>
+              <div>현재 스페이스 개수</div>
+              <S.CounterBox>
+                <CharacterCounter
+                  currentNum={spaceList.length}
+                  maxNum={5}
+                  color="white"
+                />
+              </S.CounterBox>
+            </S.SpaceInfoBox>
             <S.SpaceContainer>
               {spaceList?.length < 5 && (
                 <S.AddBox
@@ -53,10 +64,6 @@ const SelectSpace = () => {
                   />
                 );
               })}
-              {spaceList.length < 5 &&
-                Array.from({ length: 4 - spaceList.length }).map(() => (
-                  <S.EmptySpaceBox key={uuid()}></S.EmptySpaceBox>
-                ))}
             </S.SpaceContainer>
           </S.Content>
         </S.Container>
