@@ -112,7 +112,6 @@ export const MultipleImgBox = ({
     const items = [...imageArr.images];
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    // setImages(items);
     setImageArr((prev) => ({ ...prev, images: [...items] }));
   };
 

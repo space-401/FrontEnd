@@ -16,7 +16,6 @@ import type {
   selectType,
 } from '@/types';
 import {
-  convertImgArrToObj,
   onConvertedTagToSelectType,
   onConvertedUserToSelectType,
 } from '@/utils';
@@ -72,7 +71,7 @@ const CreatePost = () => {
 
   //이미지 파일을 저장하는 곳
   const [imageArr, setImageArr] = useState<ImagesArrType>({
-    images: postDetailData ? convertImgArrToObj(postDetailData.imgsUrl) : [],
+    images: [],
     cropImages: postDetailData ? postDetailData.imgsUrl : [],
     convertedImages: [],
   });
@@ -163,6 +162,13 @@ const CreatePost = () => {
 
   const confirmOpen = useConfirmModalOpen();
 
+  const resetImg = () => {
+    setImageArr({
+      images: [],
+      cropImages: [],
+      convertedImages: [],
+    });
+  };
   const confirmModalOpen = () => {
     confirmOpen({
       AsyncAction: () => {},
@@ -172,6 +178,16 @@ const CreatePost = () => {
       titleMessage: postId
         ? '성공적으로 수정되었습니다. '
         : '성공적으로 포스팅되었습니다.',
+    });
+  };
+
+  const resetConfirmModalOpen = () => {
+    confirmOpen({
+      AsyncAction: resetImg,
+      isPositiveModal: true,
+      ApproveMessage: '확인',
+      closeMessage: '닫기',
+      titleMessage: '기존의 사진이 삭제됩니다. 다시 사진을 선택하시겠습니까?',
     });
   };
 
@@ -303,6 +319,15 @@ const CreatePost = () => {
               </BasicButton>
             </S.PhotoContainer>
           </BasicBox>
+        </S.BoxWrapper>
+      ) : postId && !imageArr.images.length ? (
+        <S.BoxWrapper>
+          <div style={{ zIndex: 1000, width: '348px' }}>
+            <ImgSlider
+              onClickImgEditModal={resetConfirmModalOpen}
+              images={imageArr.cropImages}
+            />
+          </div>
         </S.BoxWrapper>
       ) : (
         <S.BoxWrapper>

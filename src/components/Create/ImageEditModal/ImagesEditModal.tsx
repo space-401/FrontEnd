@@ -3,7 +3,7 @@ import { theme } from '@/styles';
 import { ImagesArrType } from '@/types';
 import { dataURItoFile } from '@/utils';
 import { Box, Modal } from '@mui/material';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReactCropperElement } from 'react-cropper';
 import { v4 } from 'uuid';
 import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
@@ -60,6 +60,9 @@ export const ImagesEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = imageArr.images.length;
 
+  useEffect(() => {
+    imageArr;
+  }, [imageArr]);
   const cropperWidth = 500;
 
   const { compressImage, isLoading: isCompressedLoading } = useImageCompress();
