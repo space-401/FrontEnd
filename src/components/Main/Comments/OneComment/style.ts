@@ -126,7 +126,7 @@ const ReplyTextBox = styled.div`
 `;
 const ReplyButton = styled.div`
   position: absolute;
-  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-4']};
+  z-index: 10000000000001;
   cursor: pointer;
   right: 20px;
   color: ${({ theme }) => theme.COLOR.skyblue};
@@ -134,6 +134,7 @@ const ReplyButton = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 140%;
 `;
+
 const CommentDeleteIconBox = styled.div`
   cursor: pointer;
   display: inline;
@@ -197,6 +198,7 @@ const MenuButton = styled.div`
 
 const ReplyCount = styled.span`
   position: absolute;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-2']};
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-12']};
   right: 20px;
   bottom: 5px;

@@ -80,8 +80,8 @@ const CreateSpace = () => {
         noAuthalertModalOpen();
         navigate(PATH.SPACE);
       }
-      console.log('spaceId', spaceInfo);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   //아이콘 옵션 선택 모달 열기
@@ -162,7 +162,6 @@ const CreateSpace = () => {
         type: 'application/json',
       });
       formData.append('spaceDTO', spaceDTO);
-      console.log('스페이스 수정', spaceDTO);
       updateSpaceAction(formData);
     } else {
       const spaceDTO = new Blob([JSON.stringify(createSpaceDTO)], {
@@ -186,6 +185,7 @@ const CreateSpace = () => {
 
       navigate(PATH.SPACE_MAIN(String(movePath)));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpdateSuccess, isPostSuccess]);
 
   const confirmOpen = useConfirmModalOpen();

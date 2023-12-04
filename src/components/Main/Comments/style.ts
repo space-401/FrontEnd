@@ -34,11 +34,17 @@ const PaginationGroup = styled.div`
   display: flex;
 `;
 
+const EmptyList = styled.div`
+  margin: 10px 0 10px 0;
+  color: ${({ theme }) => theme.COLOR['gray-2']};
+`;
+
 const S = {
   Wrapper,
   PaginationButton,
   CommentList,
   PaginationGroup,
+  EmptyList,
 };
 
 export default S;

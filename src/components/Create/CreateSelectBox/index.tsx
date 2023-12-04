@@ -28,6 +28,7 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
 
   useEffect(() => {
     setState(select);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select]);
 
   const toggleOpen = () => {
@@ -44,7 +45,6 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
       return toastColorMessage('값이 비어있습니다.');
     if (select.findIndex((prevState) => prevState.title === searchValue) !== -1)
       return toastColorMessage('이미 있는 태그입니다.');
-    console.log('tags', spaceId, searchValue);
     postTagAction({ spaceId: Number(spaceId)!, tagName: searchValue });
     refetch();
     setSearchValue('');

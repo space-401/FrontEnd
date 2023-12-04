@@ -15,14 +15,13 @@ export const OneComment = (props: OneCommentType) => {
 
   const {
     createDate,
-    updateDate,
-    isMyComment,
     refId,
     id,
     isRef,
     writer,
     content,
     replyMember,
+    isMyComment,
   } = item;
 
   const [state, setState] = useState({ reply: '', settingIsOpen: false });
@@ -53,11 +52,7 @@ export const OneComment = (props: OneCommentType) => {
     if (state.reply.trim().length !== 0) {
       postCommentAction({
         comment: state.reply,
-        postId,
-        refInfo: {
-          refId: id,
-          refMemberKey: writer.memberKey,
-        },
+        refId: isReply.refId,
       });
     }
     ReplyCancel();
@@ -96,25 +91,24 @@ export const OneComment = (props: OneCommentType) => {
 
     lastIndex = endIndex;
   }
-
   parts.push(content.substring(lastIndex));
 
   return (
-    <S.Wrapper isReply={isReply?.id === id} isRef={isRef}>
+    <S.Wrapper isReply={isReply.id === id} isRef={isRef}>
       <S.Container>
         <S.ImgBox>
           <Avatar
-            alt={writer.nick}
-            src={writer.url}
+            alt={writer.userName}
+            src={writer.imgUrl}
             sx={{ width: '28px', height: '28px' }}
           />
         </S.ImgBox>
         <S.CommentBox>
           <S.CommentInfo>
             <S.CommentContentBox>
-              <S.CommentWriter>{writer.nick}</S.CommentWriter>
-              {replyMember ? (
-                <S.CommentRef>{replyMember.nick}</S.CommentRef>
+              <S.CommentWriter>{writer.userName}</S.CommentWriter>
+              {id !== refId ? (
+                <S.CommentRef>{replyMember.userName}</S.CommentRef>
               ) : null}
               <span>
                 {parts.map((part) => (
@@ -123,11 +117,7 @@ export const OneComment = (props: OneCommentType) => {
               </span>
             </S.CommentContentBox>
             <S.CommentReply>
-              <span>
-                {createDate !== updateDate
-                  ? '(수정)'
-                  : '' + timeHelper(updateDate)}
-              </span>
+              <span>{'' + timeHelper(createDate)}</span>
               {isReply?.id !== id ? (
                 <S.CommentAddButton onClick={() => ReplyStart(id, refId)}>
                   답글 달기
@@ -170,8 +160,8 @@ export const OneComment = (props: OneCommentType) => {
                 maxRows={4}
                 onChange={handleChange}
                 placeholder={
-                  userList.filter((item) => item.userId === isReply?.refId)[0]
-                    ?.userName + '님에게 답글달기'
+                  userList.filter((item) => item.userId === writer?.userId)[0]
+                    .userName + '님에게 답글달기'
                 }
               />
               {state.reply.length > 50 ? (
