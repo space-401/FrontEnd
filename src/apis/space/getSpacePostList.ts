@@ -4,7 +4,6 @@ import { END_POINTS } from '@/constants';
 import type { DateInfoType, SpacePostListProps } from '@/types';
 import { objectHelperWithNotUndefined } from '@/utils';
 
-
 export type SearchValuesType = Partial<DateInfoType> & {
   spaceId: string;
   page: string;
@@ -18,6 +17,5 @@ export const getSpacePostList = async (searchValues: SearchValuesType) => {
     END_POINTS.SPACE_POST_LIST,
     { ...objectHelperWithNotUndefined(searchValues) }
   );
-  console.log('data', data);
   return data;
 };
