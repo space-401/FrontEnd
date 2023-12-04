@@ -80,7 +80,16 @@ const PaginationBox = styled.div`
   margin: 0 auto 16px;
 `;
 
-const S = {
+const DefaultImg = styled.img`
+  margin-top: 150px;
+  border-radius: ${FLIP_CARD.BORDER_RADIUS.BIG}px;
+  overflow: hidden;
+  width: 282px;
+  aspect-ratio: 1/1;
+  position: relative;
+`;
+
+export const S = {
   Wrapper,
   UndefinedList,
   UndefinedPostText,
@@ -88,6 +97,5 @@ const S = {
   PostList,
   FilterGroup,
   PaginationBox,
+  DefaultImg,
 };
-
-export default S;
