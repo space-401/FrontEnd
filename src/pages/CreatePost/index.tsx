@@ -361,7 +361,6 @@ const CreatePost = () => {
         </S.Label>
         <S.InputContainer number={2}>
           <CreateSelectBox
-            spaceId={spaceId}
             selectState={selectedUsers}
             labelName={'사용자'}
             ListItem={userList}
