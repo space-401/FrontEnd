@@ -322,7 +322,7 @@ export const postDetail: PostDetailType = {
   postTitle: '전국 카페투어',
   placeTitle: '둔촌동 커피맛집',
   commentCount: 13,
-  isBookMark: true,
+  isBookmark: true,
   date: {
     startDate: '2023-01-01',
     endDate: '2023-01-03',

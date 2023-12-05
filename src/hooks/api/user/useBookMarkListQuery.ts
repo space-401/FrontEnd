@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 export const useBookMarkListQuery = (page: number) => {
-  const { data: BookMarkListData } = useQuery<BookMarkListType, AxiosError>(
-    [END_POINTS.MY_BOOK_MARK_LIST],
-    () => getMyBookMarkList(page)
-  );
+  const { data: BookMarkListData, refetch } = useQuery<
+    BookMarkListType,
+    AxiosError
+  >([END_POINTS.MY_BOOK_MARK_LIST], () => getMyBookMarkList(page));
 
-  return { BookMarkListData };
+  return { BookMarkListData, refetch };
 };

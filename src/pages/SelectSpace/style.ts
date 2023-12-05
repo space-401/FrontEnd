@@ -28,7 +28,7 @@ const Container = styled.div`
   width: 100%;
   border-radius: 15px;
   background: ${({ theme }) => theme.COLOR['gray-6']};
-  height: 670px;
+  height: calc(100vh - 120px);
   @media ${({ theme }) => theme.DEVICE.tablet} {
     height: auto;
   }
