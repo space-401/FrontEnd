@@ -3,7 +3,7 @@ import { theme } from '@/styles';
 import { ImagesArrType } from '@/types';
 import { dataURItoFile } from '@/utils';
 import { Box, Modal } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ReactCropperElement } from 'react-cropper';
 import { v4 } from 'uuid';
 import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
@@ -60,9 +60,6 @@ export const ImagesEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = imageArr.images.length;
 
-  useEffect(() => {
-    imageArr;
-  }, [imageArr]);
   const cropperWidth = 500;
 
   const { compressImage, isLoading: isCompressedLoading } = useImageCompress();
@@ -77,14 +74,20 @@ export const ImagesEditModal = ({
       const convertedImage = dataURItoFile(newImage);
       const compressedImage = await compressImage(convertedImage);
 
-      if (!isCompressedLoading && compressedImage) {
-        setImageArr((prev) => ({
-          ...prev,
-          cropImages: [...prev.cropImages, newImage],
-          convertedImages: [...prev.convertedImages, compressedImage],
-        }));
-      }
+      return {
+        newImage,
+        compressedImage,
+      };
+
+      // if (!isCompressedLoading && compressedImage) {
+      //   setImageArr((prev) => ({
+      //     ...prev,
+      //     cropImages: [...prev.cropImages, newImage],
+      //     convertedImages: [...prev.convertedImages, compressedImage],
+      //   }));
+      // }
     }
+    return {};
   };
 
   //크롭한 이미지를 모두 저장함.
@@ -92,15 +95,30 @@ export const ImagesEditModal = ({
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    if (imageArr.cropImages.length > 0) {
+    if (imageArr.cropImages || imageArr.convertedImages) {
       setImageArr((prev) => ({
         ...prev,
         cropImages: [],
+        convertedImages: [],
       }));
     }
-    myRefs.map((ref) => {
-      getCropData(ref);
-    });
+    const cropImageArr: any = [];
+    const convertedImageArr: any = [];
+    //하나씩 순회하면서 크롭
+    for (const ref of myRefs) {
+      const { newImage, compressedImage } = await getCropData(ref);
+
+      if (!isCompressedLoading && compressedImage) {
+        cropImageArr.push(newImage);
+        convertedImageArr.push(compressedImage);
+      }
+    }
+
+    setImageArr((prev) => ({
+      ...prev,
+      cropImages: [...cropImageArr],
+      convertedImages: [...convertedImageArr],
+    }));
     ModalClose();
   };
 
