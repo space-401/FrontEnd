@@ -1,5 +1,4 @@
-import { useConfirmModalOpen } from '@/hooks';
-import { useSpaceUserUpdateMutation } from '@/hooks';
+import { useConfirmModalOpen, useSpaceUserUpdateMutation } from '@/hooks';
 import { theme } from '@/styles';
 import { ImageArrType, ImageType } from '@/types/image.type';
 import { UserType } from '@/types/post.type';
