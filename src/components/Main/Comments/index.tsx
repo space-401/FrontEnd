@@ -33,6 +33,7 @@ export const DetailComments = (props: DetailCommentType) => {
     }
     setIsReply({ open: true, refId: refId, id: id });
   };
+
   return (
     <>
       <S.Wrapper isOpen={isOpen}>
