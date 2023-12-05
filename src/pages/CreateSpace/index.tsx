@@ -34,7 +34,7 @@ const CreateSpace = () => {
   const params = useParams();
   const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
-  const isUpdateForm = spaceId ? true : false;
+  const isUpdateForm = !!spaceId;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
