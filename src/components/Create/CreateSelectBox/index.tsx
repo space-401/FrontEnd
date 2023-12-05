@@ -1,4 +1,4 @@
-import { useDimensions, useSpaceInfoQuery, useTagMutation } from '@/hooks';
+import { useDimensions, useTagMutation } from '@/hooks';
 import type { SelectBoxProps, selectType } from '@/types';
 import { toastColorMessage } from '@/utils';
 import { motion } from 'framer-motion';
@@ -24,11 +24,8 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const { spaceId } = useParams();
 
-  const { refetch } = useSpaceInfoQuery(spaceId!);
-
   useEffect(() => {
     setState(select);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select]);
 
   const toggleOpen = () => {
@@ -45,8 +42,8 @@ export const CreateSelectBox = (props: SelectBoxProps) => {
       return toastColorMessage('값이 비어있습니다.');
     if (select.findIndex((prevState) => prevState.title === searchValue) !== -1)
       return toastColorMessage('이미 있는 태그입니다.');
+
     postTagAction({ spaceId: Number(spaceId)!, tagName: searchValue });
-    refetch();
     setSearchValue('');
   };
 
