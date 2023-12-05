@@ -75,6 +75,7 @@ const CreatePost = () => {
     cropImages: postDetailData ? postDetailData.imgsUrl : [],
     convertedImages: [],
   });
+
   //현재 선택한 이미지의 index
   const [currentIdx, setCurrentIdx] = useState(0);
   //현재 편집 모달이 열려있는지
@@ -125,7 +126,7 @@ const CreatePost = () => {
       inputRef.current.click();
       return ModalOpen();
     }
-    ModalOpen();
+    return ModalOpen();
   };
 
   //파일 변경 함수
