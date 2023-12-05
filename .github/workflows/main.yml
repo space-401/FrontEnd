@@ -2,7 +2,7 @@ name: AWS Deploy
 on:
   push:
     branches:
-      - main
+      - dev
 jobs:
   build:
     runs-on: ubuntu-22.04
