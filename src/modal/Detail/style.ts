@@ -222,7 +222,7 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
 `;
 
 const MenuGroup = styled.div<{ isOpen: boolean; width?: number; top?: number }>`
-  right: -140px;
+  right: -100px;
   top: ${({ top }) => (top ? top : 20)}px;
   position: absolute;
   width: ${({ width }) => (width ? width : 102)}px;

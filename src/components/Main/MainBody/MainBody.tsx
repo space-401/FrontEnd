@@ -79,12 +79,9 @@ export const MainBody = (props: PostListPropType) => {
 
   const { postList, total, page: curPage, itemLength } = spacePostList!;
 
-  useEffect(() => {}, [spaceId]);
-
   useEffect(() => {
     setSearchParams(objectHelperWithNotUndefined(query));
     refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refetch, query]);
 
   const detailModalOpen = useDetailModalOpen();

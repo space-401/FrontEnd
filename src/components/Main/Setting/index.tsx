@@ -88,16 +88,15 @@ export const SettingComponent = React.forwardRef(
     const changeAdminAction = (userId: number) => {
       onClose();
       const formData = new FormData();
-      const spaceUserDTO = {
+      const DTO = {
         spaceId: spaceId,
         userId,
         isAdmin: true,
       };
-      const image = new Blob([], {
-        type: 'image/jpeg',
+      const spaceUserDTO = new Blob([JSON.stringify(DTO)], {
+        type: 'application/json',
       });
-      formData.append('image', image, 'image');
-      formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
+      formData.append('spaceUserDTO', spaceUserDTO);
       userUpdateAction(formData);
     };
 
