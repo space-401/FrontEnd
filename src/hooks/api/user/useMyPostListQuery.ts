@@ -1,13 +1,14 @@
+import { getMyPostList } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { MyPostListType } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { getMyPostList } from '@apis/user/getMyPostList';
-import type { MyPostListType } from '@type/user.type';
 
 export const useMyPostListQuery = (page: number) => {
-  const { data: MyPostListData } = useQuery<MyPostListType, AxiosError>(
-    ['myPostList', page],
-    () => getMyPostList(page)
-  );
+  const { data: MyPostListData, refetch } = useQuery<
+    MyPostListType,
+    AxiosError
+  >([END_POINTS.MY_POST_LIST], () => getMyPostList(page));
 
-  return { MyPostListData };
+  return { MyPostListData, refetch };
 };

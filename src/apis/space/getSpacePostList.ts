@@ -1,24 +1,21 @@
-import { END_POINTS } from '@constants/api';
-import { axiosInstance } from '@apis/AxiosInstance';
-import type { SpacePostListProps } from '@type/main.type';
-import { DateInfoType } from '@/types/post.type';
+//완성
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { DateInfoType, SpacePostListProps } from '@/types';
+import { objectHelperWithNotUndefined } from '@/utils';
 
-export type FilterType = {
-  userId?: number[];
-  tagId?: number[];
+export type SearchValuesType = Partial<DateInfoType> & {
+  spaceId: string;
+  page: string;
+  userId?: string[];
+  tagId?: string[];
   keyword?: string;
-  date?: DateInfoType;
 };
 
-export const getSpacePostList = async (
-  spaceId: string,
-  page: string,
-  filter: FilterType
-) => {
-  const { data } = await axiosInstance.get<SpacePostListProps>(
-    END_POINTS.SPACE_SEARCH_LIST(spaceId, page),
-    { params: { ...filter } }
+export const getSpacePostList = async (searchValues: SearchValuesType) => {
+  const { data } = await axiosInstance.post<SpacePostListProps>(
+    END_POINTS.SPACE_POST_LIST,
+    { ...objectHelperWithNotUndefined(searchValues) }
   );
-
   return data;
 };

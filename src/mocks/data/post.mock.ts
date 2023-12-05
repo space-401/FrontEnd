@@ -1,6 +1,5 @@
-import { userList } from '@mocks/data/common';
-import { PostResponseType, PostDetailType } from '@type/post.type';
-import { SpacePostType } from '@/types/space.type';
+import type { PostDetailType, PostResponseType, SpacePostType } from '@/types';
+import { userList } from '@/mocks/data';
 
 /**
  * 포스트 게시물들의 목 데이터
@@ -14,12 +13,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '집앞 공원',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -35,8 +30,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '엉망 전시회',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -52,8 +47,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '우리집 베란다',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -69,8 +64,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: 'pa, pr!',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -86,8 +81,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '집앞 공원',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -103,8 +98,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '엉망 전시회',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -120,8 +115,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '우리집 베란다',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -137,8 +132,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: 'pa, pr!',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -154,8 +149,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '집앞 공원',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -171,8 +166,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '엉망 전시회',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -188,8 +183,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '우리집 베란다',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -205,8 +200,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: 'pa, pr!',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -222,8 +217,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '집앞 공원',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -239,8 +234,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '엉망 전시회',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -256,8 +251,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: '우리집 베란다',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -273,8 +268,8 @@ export const postList: SpacePostType[] = [
     imgUrl: ['https://source.unsplash.com/random/300x300/?cat'],
     placeTitle: 'pa, pr!',
     selectedTags: [
-      { tagId: 1, tagTitle: '일상속 하루' },
-      { tagId: 2, tagTitle: '커피 한잔의 여유' },
+      { tagId: 1, tagName: '일상속 하루' },
+      { tagId: 2, tagName: '커피 한잔의 여유' },
     ],
     postCreatedAt: String(new Date()),
     postUpdatedAt: String(new Date()),
@@ -288,7 +283,8 @@ export const postList: SpacePostType[] = [
  * 포스트 게시물의 상세 목 데이터
  */
 export const postDetail: PostDetailType = {
-  isMine: true,
+  spaceId: 1,
+  isMine: false,
   position: {
     lat: 37.27943075229118,
     lng: 127.01763998406159,
@@ -304,19 +300,21 @@ export const postDetail: PostDetailType = {
       userId: 147394546,
       userName: '짱구',
       imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
+      isAdmin: false,
     },
     {
       userId: 148263681,
       userName: '짱아',
       imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
+      isAdmin: false,
     },
   ],
   userList: userList,
   selectedTags: [
-    { tagId: 1, tagTitle: '흥미진진한' },
-    { tagId: 2, tagTitle: '긴장감이 넘치는' },
+    { tagId: 1, tagName: '흥미진진한' },
+    { tagId: 2, tagName: '긴장감이 넘치는' },
   ],
-  imgUrl: [
+  imgsUrl: [
     'https://source.unsplash.com/random/1000x1000/?cat',
     'https://source.unsplash.com/random/1000x1000/?cat',
     'https://source.unsplash.com/random/1000x1000/?cat',

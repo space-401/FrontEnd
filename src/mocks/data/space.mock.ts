@@ -1,12 +1,10 @@
-import type { OneSpaceType, SpaceInfo } from '@type/space.type';
-import { postList } from '@mocks/data/post.mock';
-import { ApiResponseType } from '@type/response.type';
-import { tagList, userList } from '@mocks/data/common';
+import type { OneSpaceType, SpaceInfoType, SpaceResponseType } from '@/types';
+import { postList, tagList, userList } from '@/mocks/data/';
 
 /**
  * 스페이스 정보에 대한 목 데이터
  */
-export const spaceInfo: SpaceInfo = {
+export const spaceInfo: SpaceInfoType = {
   isFirst: true,
   isAdmin: true,
   spaceTitle: 'SPACE 401',
@@ -16,6 +14,7 @@ export const spaceInfo: SpaceInfo = {
   tagList: tagList,
   spacePw: '12345',
   imgUrl: 'https://source.unsplash.com/random/300x300/?cat',
+  spaceCode: 'abc',
 };
 /**
  * 스페이스 목록들에 대한 목 데이터
@@ -51,14 +50,18 @@ export const spaceList: OneSpaceType[] = [
  */
 export const spacePostList = {
   postList: postList,
-  page: 2,
+  page: 1,
   total: 330,
   itemLength: 12,
 };
 /**
  * 스페이르를 생성한 뒤 불러오는 목 데이터
  */
-export const spaceCreate: ApiResponseType & { spaceId: number } = {
+export const spaceCreate: SpaceResponseType = {
   message: 'success',
   spaceId: 20,
+};
+
+export const SpaceTag = {
+  tagList: tagList,
 };

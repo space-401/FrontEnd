@@ -1,15 +1,13 @@
+import { flexCenter, modalBackGround } from '@/styles';
 import styled from 'styled-components';
-import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
   flex-direction: column;
-  ${flexCenter}
+  ${flexCenter};
   position: absolute;
-  top: 50%;
-  left: 50%;
+  ${modalBackGround};
   width: 812px;
   height: 324px;
-  transform: translate(-50%, -50%);
   background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 10px;
   color: ${({ theme }) => theme.COLOR.white};
@@ -35,7 +33,6 @@ const IconBox = styled.div<{ backImg: string; isSelected: boolean }>`
 
 const Text = styled.div`
   text-align: center;
-  font-family: Pretendard;
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-24']};
   font-style: normal;
   font-weight: 400;

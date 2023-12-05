@@ -1,13 +1,14 @@
+import { getMyCommentList } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { MyCommentListType } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { getMyCommentList } from '@apis/user/getMyCommentList';
-import type { MyCommentListType } from '@type/user.type';
 
 export const useMyCommentListQuery = (page: number) => {
-  const { data: MyCommentListData } = useQuery<MyCommentListType, AxiosError>(
-    ['myCommentList', page],
-    () => getMyCommentList(page)
-  );
+  const { data: MyCommentListData, refetch } = useQuery<
+    MyCommentListType,
+    AxiosError
+  >([END_POINTS.MY_COMMENT_LIST], () => getMyCommentList(page));
 
-  return { MyCommentListData };
+  return { MyCommentListData, refetch };
 };

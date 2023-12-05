@@ -1,23 +1,24 @@
-import Header from './Header';
-import S from './style';
-import { Outlet } from 'react-router-dom';
+import { useResetError } from '@/hooks';
+import { Header, HeaderSkeleton } from '@/layout';
+import { AlertInner, ConfirmInner, DetailInner } from '@/modal';
 import {
-  Modal as DetailModal,
   Modal as AlertModal,
   Modal as ConfirmModal,
+  Modal as DetailModal,
 } from '@mui/material';
+import { motion, useScroll } from 'framer-motion';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 import {
   useAlertModalStore,
   useConfirmModalStore,
   useDetailModalStore,
-} from '@store/modal';
-import DetailInner from '@modal/Detail';
-import ConfirmInner from '@modal/Confirm';
-import AlertInner from '@modal/Alert';
-import { Suspense } from 'react';
-import { Toaster } from 'react-hot-toast';
+} from '@/store/modal';
+import { DetailInnerSkeleton } from '@/components/Detail';
+import { ErrorBoundary } from '@/components/common';
+import { S } from './style';
 
-const HeaderLayout = () => {
+export const HeaderLayout = () => {
   const { ModalClose: DetailModalClose, isOpen: DetailIsOpen } =
     useDetailModalStore((state) => state);
   const { ModalClose: ConfirmModalClose, isOpen: ConfirmIsOpen } =
@@ -25,36 +26,40 @@ const HeaderLayout = () => {
   const { ModalClose: AlertModalClose, isOpen: AlertIsOpen } =
     useAlertModalStore((state) => state);
 
+  const { scrollYProgress } = useScroll();
+  const { handleErrorReset } = useResetError();
   return (
-    <>
-      <Toaster position={'top-center'} />
+    <ErrorBoundary onReset={handleErrorReset}>
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress, zIndex: 900 }}
+      />
       <S.Wrapper>
         <AlertModal
-          sx={{ zIndex: 1000 }}
+          sx={{ zIndex: 1505 }}
           onClose={AlertModalClose}
           open={AlertIsOpen}
         >
           <AlertInner />
         </AlertModal>
         <ConfirmModal
-          sx={{ zIndex: 1000 }}
+          sx={{ zIndex: 1505 }}
           onClose={ConfirmModalClose}
           open={ConfirmIsOpen}
         >
           <ConfirmInner />
         </ConfirmModal>
         <DetailModal
-          sx={{ zIndex: 999 }}
-          disableScrollLock
+          sx={{ zIndex: 1500 }}
           open={DetailIsOpen}
           onClose={DetailModalClose}
         >
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<DetailInnerSkeleton />}>
             <DetailInner />
           </Suspense>
         </DetailModal>
         <S.ContentLayOut>
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<HeaderSkeleton />}>
             <Header />
           </Suspense>
           <S.ContentWrapper>
@@ -63,7 +68,6 @@ const HeaderLayout = () => {
           <S.Footer />
         </S.ContentLayOut>
       </S.Wrapper>
-    </>
+    </ErrorBoundary>
   );
 };
-export default HeaderLayout;

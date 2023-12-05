@@ -3,8 +3,9 @@ import type {
   BookMarkListType,
   MyCommentListType,
   MyPostListType,
-} from '@type/user.type';
-import { postList } from '@mocks/data/post.mock';
+  UserTokenType,
+} from '@/types';
+import { userList } from '@/mocks/data';
 
 /**
  * 사용자 정보에 대한 목 데이터
@@ -18,7 +19,78 @@ export const accountInfo: AccountDataType = {
  * 사용자가 북마크한 리스트에 대한 목 데이터
  */
 export const bookMarkList: BookMarkListType = {
-  bookMarkList: postList,
+  bookMarkList: [
+    {
+      postId: 1,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 2,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 3,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 4,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 5,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 6,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 7,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 8,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 9,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+    {
+      postId: 10,
+      postCommentCount: 12,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      postWriterName: '열차열차열차',
+    },
+  ],
   page: 2,
   total: 40,
   itemLength: 12,
@@ -27,7 +99,88 @@ export const bookMarkList: BookMarkListType = {
  * 사용자가 등록한 포스트에 대한 목 데이터
  */
 export const myPostList: MyPostListType = {
-  myPostList: postList,
+  myPostList: [
+    {
+      spaceId: 1,
+      postId: 1,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 2,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 3,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 4,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 5,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 6,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 7,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 8,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 9,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+    {
+      spaceId: 1,
+      postId: 10,
+      postCommentCount: 14,
+      postTitle: '오늘도 내일도 개미는 뚠뚠 일을하네 - 짱구는 못말려-',
+      postCreatedAt: String(new Date()),
+      selectedUsers: userList,
+    },
+  ],
   page: 2,
   total: 40,
   itemLength: 12,
@@ -49,8 +202,7 @@ export const myCommentListAndInfo: MyCommentListType = {
         '헐 여기 전에 가본데 자너 여기 좋음;; 헐 여기 전에 가본데 자너 여기 좋음;; ',
       commentCreateDate: String(new Date()),
       postCreateDate: String(new Date()),
-      mainImgUrl:
-        'https://s3-alpha-sig.figma.com/img/2297/aa17/07a3bbdc34704149870515161718468f?Expires=1696809600&Signature=WrsvWInolRDXhnK9hYHk0ldk8VgrKN80DibBnI5~H-ZO3d3jksTXHLWHOmv4EpmWz2mqfS0vnRK-xHUsjkpJQrw29p6DBYeWz5ZeMZ0fkVaisAbDNLgLHJPqyzPYaHnG9wLd6HEbSBQ9T0aSFg1tCBuSxnjzj7H2KqN1cfqvZhgvzT-gZ-iCLZk0dTiRpQ0v4TaFq4JsuL2~Yy5y5tF2JvMFes7ze~ietqnV2~kSeLTpUyg2aw7f9olI6XYmhGX394PFADGh~6m4tlNjEkzl3NcYqivqgAUKb46mpC1xakdDLsCmXY63aoKeesL03Raeij7YGIzAJMeCbBQOTNaZGQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+      mainImgUrl: 'https://source.unsplash.com/random/300×300/?cat',
     },
     {
       postId: 2,
@@ -64,8 +216,7 @@ export const myCommentListAndInfo: MyCommentListType = {
         '헐 여기 전에 가본데 자너 여기 좋음;; 헐 여기 전에 가본데 자너 여기 좋음;; ',
       commentCreateDate: String(new Date()),
       postCreateDate: String(new Date()),
-      mainImgUrl:
-        'https://s3-alpha-sig.figma.com/img/2297/aa17/07a3bbdc34704149870515161718468f?Expires=1696809600&Signature=WrsvWInolRDXhnK9hYHk0ldk8VgrKN80DibBnI5~H-ZO3d3jksTXHLWHOmv4EpmWz2mqfS0vnRK-xHUsjkpJQrw29p6DBYeWz5ZeMZ0fkVaisAbDNLgLHJPqyzPYaHnG9wLd6HEbSBQ9T0aSFg1tCBuSxnjzj7H2KqN1cfqvZhgvzT-gZ-iCLZk0dTiRpQ0v4TaFq4JsuL2~Yy5y5tF2JvMFes7ze~ietqnV2~kSeLTpUyg2aw7f9olI6XYmhGX394PFADGh~6m4tlNjEkzl3NcYqivqgAUKb46mpC1xakdDLsCmXY63aoKeesL03Raeij7YGIzAJMeCbBQOTNaZGQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+      mainImgUrl: 'https://source.unsplash.com/random/300×300/?cat',
     },
     {
       postId: 3,
@@ -79,8 +230,7 @@ export const myCommentListAndInfo: MyCommentListType = {
         '헐 여기 전에 가본데 자너 여기 좋음;; 헐 여기 전에 가본데 자너 여기 좋음;; ',
       commentCreateDate: String(new Date()),
       postCreateDate: String(new Date()),
-      mainImgUrl:
-        'https://s3-alpha-sig.figma.com/img/2297/aa17/07a3bbdc34704149870515161718468f?Expires=1696809600&Signature=WrsvWInolRDXhnK9hYHk0ldk8VgrKN80DibBnI5~H-ZO3d3jksTXHLWHOmv4EpmWz2mqfS0vnRK-xHUsjkpJQrw29p6DBYeWz5ZeMZ0fkVaisAbDNLgLHJPqyzPYaHnG9wLd6HEbSBQ9T0aSFg1tCBuSxnjzj7H2KqN1cfqvZhgvzT-gZ-iCLZk0dTiRpQ0v4TaFq4JsuL2~Yy5y5tF2JvMFes7ze~ietqnV2~kSeLTpUyg2aw7f9olI6XYmhGX394PFADGh~6m4tlNjEkzl3NcYqivqgAUKb46mpC1xakdDLsCmXY63aoKeesL03Raeij7YGIzAJMeCbBQOTNaZGQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+      mainImgUrl: 'https://source.unsplash.com/random/300×300/?cat',
     },
     {
       postId: 4,
@@ -94,8 +244,7 @@ export const myCommentListAndInfo: MyCommentListType = {
         '헐 여기 전에 가본데 자너 여기 좋음;; 헐 여기 전에 가본데 자너 여기 좋음;; ',
       commentCreateDate: String(new Date()),
       postCreateDate: String(new Date()),
-      mainImgUrl:
-        'https://s3-alpha-sig.figma.com/img/2297/aa17/07a3bbdc34704149870515161718468f?Expires=1696809600&Signature=WrsvWInolRDXhnK9hYHk0ldk8VgrKN80DibBnI5~H-ZO3d3jksTXHLWHOmv4EpmWz2mqfS0vnRK-xHUsjkpJQrw29p6DBYeWz5ZeMZ0fkVaisAbDNLgLHJPqyzPYaHnG9wLd6HEbSBQ9T0aSFg1tCBuSxnjzj7H2KqN1cfqvZhgvzT-gZ-iCLZk0dTiRpQ0v4TaFq4JsuL2~Yy5y5tF2JvMFes7ze~ietqnV2~kSeLTpUyg2aw7f9olI6XYmhGX394PFADGh~6m4tlNjEkzl3NcYqivqgAUKb46mpC1xakdDLsCmXY63aoKeesL03Raeij7YGIzAJMeCbBQOTNaZGQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+      mainImgUrl: 'https://source.unsplash.com/random/300×300/?cat',
     },
     {
       postId: 5,
@@ -109,11 +258,19 @@ export const myCommentListAndInfo: MyCommentListType = {
         '헐 여기 전에 가본데 자너 여기 좋음;; 헐 여기 전에 가본데 자너 여기 좋음;; ',
       commentCreateDate: String(new Date()),
       postCreateDate: String(new Date()),
-      mainImgUrl:
-        'https://s3-alpha-sig.figma.com/img/2297/aa17/07a3bbdc34704149870515161718468f?Expires=1696809600&Signature=WrsvWInolRDXhnK9hYHk0ldk8VgrKN80DibBnI5~H-ZO3d3jksTXHLWHOmv4EpmWz2mqfS0vnRK-xHUsjkpJQrw29p6DBYeWz5ZeMZ0fkVaisAbDNLgLHJPqyzPYaHnG9wLd6HEbSBQ9T0aSFg1tCBuSxnjzj7H2KqN1cfqvZhgvzT-gZ-iCLZk0dTiRpQ0v4TaFq4JsuL2~Yy5y5tF2JvMFes7ze~ietqnV2~kSeLTpUyg2aw7f9olI6XYmhGX394PFADGh~6m4tlNjEkzl3NcYqivqgAUKb46mpC1xakdDLsCmXY63aoKeesL03Raeij7YGIzAJMeCbBQOTNaZGQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+      mainImgUrl: 'https://source.unsplash.com/random/300×300/?cat',
     },
   ],
   page: 3,
   total: 30,
   itemLength: 10,
+};
+/**
+ * 로그인했을 때의 임시값
+ */
+export const loginResponse: UserTokenType = {
+  accessToken:
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk5Njc0NzE0LCJleHAiOjE2OTk2NzY1MTR9.fxTrYSQ0EyinmPd50UIqBW6d-Y8epqkoKSOx9DOT-20Opad9j1p69GdavJge-siGJpFIOIKDqssq9G-1lSIfGg',
+  refreshToken:
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk5MDEwMDcyLCJleHAiOjE3MDAyMTk2NzJ9.OEQpv4MKpn8IRPlNE1dj6_U_WCqV7JTTXrZGZoDzrL5sESdQz7Ap5FvUCV3b1WSC9h9-CQvI_8ryYKIdlrFIpQ',
 };

@@ -1,14 +1,12 @@
-import { rest, RestHandler } from 'msw';
-
-import { END_POINTS, HTTP_STATUS_CODE } from '@constants/api';
-import { postCreate, postDetail } from '@mocks/data/post.mock';
-import { successResponse } from '@mocks/data/response.mock';
+import { END_POINTS, HTTP_STATUS_CODE } from '@/constants';
+import { RestHandler, rest } from 'msw';
+import { postCreate, postDetail, successResponse } from '@/mocks/data';
 
 export const postHandlers: RestHandler[] = [
   /**
    * 상세 정보를 불러오는 api
    */
-  rest.get(END_POINTS.POST + `/:postId`, (_, res, ctx) => {
+  rest.get(END_POINTS.POST, (_, res, ctx) => {
     return res(ctx.status(HTTP_STATUS_CODE.SUCCESS), ctx.json(postDetail));
   }),
   /**

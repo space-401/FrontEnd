@@ -1,8 +1,8 @@
+import type { UserListProps } from '@/types';
 import Avatar from '@mui/material/Avatar';
 import S from '../style';
-import type { UserListProps } from '@type/main.type';
 
-const UserList = (prop: UserListProps) => {
+export const UserList = (prop: UserListProps) => {
   const { Item } = prop;
   const { userName, imgUrl } = Item;
   return (
@@ -23,5 +23,3 @@ const UserList = (prop: UserListProps) => {
     </S.UserList>
   );
 };
-
-export default UserList;

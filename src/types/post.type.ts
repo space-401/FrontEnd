@@ -1,15 +1,15 @@
-import type { SpacePostType, OneSpaceType } from '@type/space.type';
-import { ApiResponseType } from '@type/response.type';
+import type { ApiResponseType, OneSpaceType, SpacePostType } from '@/types';
 
 export type UserType = {
   userId: number;
   userName: string;
   imgUrl?: string;
+  isAdmin?: boolean;
 };
 
 export type TagType = {
   tagId: number;
-  tagTitle: string;
+  tagName: string;
 };
 
 export type DateInfoType = {
@@ -19,6 +19,7 @@ export type DateInfoType = {
 
 //포스트 타입
 export type PostDetailType = {
+  spaceId: number;
   isMine: boolean;
   postTitle: string;
   postDescription: string;
@@ -35,21 +36,27 @@ export type PostDetailType = {
   userList: UserType[];
   selectedUsers: UserType[];
   selectedTags: TagType[];
-  imgUrl: string[];
+  imgsUrl: string[];
 };
 
 //포스트 생성 + 수정 타입
 export type CreatePostType = {
+  spaceId: number;
   postTitle: string;
-  postDescription: string;
-  selectedUsers: number[];
-  selectedTags: number[];
+  postContent: string;
+  people: number[];
+  tags: number[];
   placeTitle: string;
-  position: {
-    lat: number;
-    lng: number;
-  };
-  date: DateInfoType;
+  postLocationKeyword: string;
+  postLocationLng: number;
+  postLocationLat: number;
+  imgs: File[];
+  postBeginDate: string;
+  postEndDate: string;
+};
+
+export type CreatePostTypeWithSpaceId = CreatePostType & {
+  spaceId: number;
 };
 
 //포스트 생성 페이지에서는 tags가 추가적으로 필요하다.
@@ -57,12 +64,12 @@ export type FlipCardSize = 'small' | 'medium' | 'big';
 
 export type PostInfoBackPropsType = {
   item: SpacePostType;
-  size: FlipCardSize;
+  isBig: boolean;
 };
 
 export type SpaceInfoBackPropsType = {
   item: OneSpaceType;
-  size: FlipCardSize;
+  isBig: boolean;
 };
 
 export type FlipType = {

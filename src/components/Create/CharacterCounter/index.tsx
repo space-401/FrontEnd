@@ -1,4 +1,4 @@
-import S from '@/components/Create/CharacterCounter/style';
+import S from './style';
 
 type CharacterCounter = {
   currentNum: number;
@@ -7,7 +7,7 @@ type CharacterCounter = {
   backgroundColor?: string;
 };
 
-const CharacterCounter = ({
+export const CharacterCounter = ({
   currentNum,
   maxNum,
   color,
@@ -21,5 +21,3 @@ const CharacterCounter = ({
     </S.CountWrapper>
   );
 };
-
-export default CharacterCounter;

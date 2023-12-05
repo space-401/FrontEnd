@@ -52,6 +52,7 @@ export const theme = {
     'text-16': '1rem',
     'text-14': '0.875rem',
     'text-12': '0.75rem',
+    'text-10': '0.6rem',
   },
   SPACING: {
     'px-50': '3.125rem',
@@ -119,14 +120,14 @@ export const theme = {
     'LEVEL-4': 40,
     'LEVEL-5': 50,
     'LEVEL-6': 60,
+    'LEVEL-7': 70,
   },
   FONT_FAMILY: {
     Pretendard: 'Pretendard',
   },
   DEVICE: {
     mobile: `screen and (max-width: 580px)`,
-    tablet: `screen and (max-width: 768px)`,
-    pc: `screen and (max-width: 1024px)`,
+    tablet: `screen and (max-width: 1200px)`,
   },
 };
 

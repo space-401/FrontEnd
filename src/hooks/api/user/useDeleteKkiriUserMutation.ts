@@ -1,13 +1,18 @@
-import type { ApiResponseType } from '@type/response.type';
+import { ApiResponseType } from '@/types';
+import { toastColorMessage, tokenStorage } from '@/utils';
 import { useMutation } from '@tanstack/react-query';
-import type { AxiosError } from 'axios';
-import { deleteKkiriUser } from '@apis/user/deleteKkiriUser';
+import { AxiosError } from 'axios';
+import { deleteKkiriUser } from '@/apis/user';
 
 export const useDeleteKkiriUserMutation = () => {
-  const { mutate: deleteKkiriUserAction } = useMutation<
+  const { mutateAsync: deleteKkiriUserAction } = useMutation<
     ApiResponseType,
-    AxiosError,
-    number
-  >((deleteUserId) => deleteKkiriUser(deleteUserId));
+    AxiosError
+  >(deleteKkiriUser, {
+    onSuccess: () => {
+      tokenStorage.clear();
+      toastColorMessage('회원 탈퇴 되었습니다.');
+    },
+  });
   return { deleteKkiriUserAction };
 };

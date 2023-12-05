@@ -1,6 +1,6 @@
-import { Cropper } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import '@components/Create/ImageEditModal/Cropper.css';
+import { Cropper } from 'react-cropper';
+import './Cropper.css';
 
 type PropsType = {
   image: string;
@@ -9,13 +9,11 @@ type PropsType = {
   width: number;
 };
 
-const ImageCropper = ({ image, myRef, width }: PropsType) => {
+export const ImageCropper = ({ image, myRef, width }: PropsType) => {
   return (
     <div
       style={{
         position: 'relative',
-        padding: '10px',
-        left: '15px',
       }}
     >
       <Cropper
@@ -36,5 +34,3 @@ const ImageCropper = ({ image, myRef, width }: PropsType) => {
     </div>
   );
 };
-
-export default ImageCropper;

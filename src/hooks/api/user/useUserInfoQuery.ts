@@ -1,11 +1,12 @@
+import { getUserInfo } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { AccountDataType } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
-import { getUserInfo } from '@apis/user/getUserInfo';
-import type { AccountDataType } from '@type/user.type';
 
 export const useUserInfoQuery = () => {
   const { data: MyInfoData } = useQuery<AccountDataType, AxiosError>(
-    ['myInfo'],
+    [END_POINTS.MY_PROFILE],
     () => getUserInfo()
   );
 

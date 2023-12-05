@@ -1,30 +1,27 @@
-import S from '@components/Main/Comments/style';
-import OneComment from '@components/Main/Comments/OneComment/OneComment';
-import type { UserType } from '@type/post.type';
-import { useCommentQuery } from '@hooks/api/comment/useCommentQuery';
+import { useCommentQuery } from '@/hooks';
+import type { UserType } from '@/types';
+import { OneComment } from './OneComment/OneComment';
+import S from './style';
+
+export type ReplyType = {
+  open: boolean;
+  refId?: number;
+  id?: number;
+};
 
 type DetailCommentType = {
+  spaceId: number;
   isOpen: boolean;
-  postId: string;
-  isReply:
-    | {
-        open: boolean;
-        refId: number | undefined;
-        id: number | undefined;
-      }
-    | undefined;
-  setIsReply: (
-    newReply:
-      | { open: boolean; refId: number | undefined; id: number | undefined }
-      | undefined
-  ) => void;
+  postId: number;
+  isReply: ReplyType;
+  setIsReply: (newIsReply: ReplyType) => void;
   userList: UserType[];
 };
 
-const DetailComments = (props: DetailCommentType) => {
-  const { setIsReply, isReply, isOpen, userList, postId } = props;
+export const DetailComments = (props: DetailCommentType) => {
+  const { setIsReply, isReply, spaceId, isOpen, userList, postId } = props;
 
-  const { commentList } = useCommentQuery(postId);
+  const { commentList } = useCommentQuery(postId, spaceId);
 
   const ReplyClose = () => {
     setIsReply({ open: false, refId: undefined, id: undefined });
@@ -36,25 +33,28 @@ const DetailComments = (props: DetailCommentType) => {
     }
     setIsReply({ open: true, refId: refId, id: id });
   };
-
   return (
     <>
       <S.Wrapper isOpen={isOpen}>
         <S.CommentList isOpen={isOpen}>
-          {commentList?.map((item) => (
-            <OneComment
-              key={item.id}
-              userList={userList}
-              item={item}
-              ReplyOpen={ReplyOpen}
-              ReplyClose={ReplyClose}
-              isReply={isReply}
-            />
-          ))}
+          {commentList?.length ? (
+            commentList.map((item) => (
+              <OneComment
+                spaceId={spaceId}
+                postId={postId}
+                key={item.id}
+                userList={userList}
+                item={item}
+                ReplyOpen={ReplyOpen}
+                ReplyClose={ReplyClose}
+                isReply={isReply}
+              />
+            ))
+          ) : (
+            <S.EmptyList>작성된 댓글이 없습니다.</S.EmptyList>
+          )}
         </S.CommentList>
       </S.Wrapper>
     </>
   );
 };
-
-export default DetailComments;

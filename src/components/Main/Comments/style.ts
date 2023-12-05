@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
-  margin-top: ${({ isOpen }) => (isOpen ? '16px' : 0)};
-  margin-bottom: ${({ isOpen }) => (isOpen ? '30px' : 0)};
+  margin: ${({ isOpen }) => (isOpen ? '16px 0 30px 0' : 0)};
   width: 100%;
-  transition: 0.5s;
+  transition: 1s;
 `;
 const PaginationButton = styled.div<{ select: boolean }>`
   display: flex;
@@ -26,6 +25,7 @@ const CommentList = styled.ul<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   margin-bottom: ${({ isOpen }) => (isOpen ? 50 : 0)}px;
+  transition: 1s;
 `;
 
 const PaginationGroup = styled.div`
@@ -34,11 +34,17 @@ const PaginationGroup = styled.div`
   display: flex;
 `;
 
+const EmptyList = styled.div`
+  margin: 10px 0 10px 0;
+  color: ${({ theme }) => theme.COLOR['gray-2']};
+`;
+
 const S = {
   Wrapper,
   PaginationButton,
   CommentList,
   PaginationGroup,
+  EmptyList,
 };
 
 export default S;

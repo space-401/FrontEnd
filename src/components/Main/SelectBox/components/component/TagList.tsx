@@ -1,8 +1,8 @@
+import { theme } from '@/styles';
+import type { TagListProps } from '@/types';
 import { Chip } from '@mui/material';
-import { theme } from '@styles/theme/theme';
-import type { TagListProps } from '@type/main.type';
 
-const TagList = (props: TagListProps) => {
+export const TagList = (props: Omit<TagListProps, 'onClick'>) => {
   const { Item } = props;
   return (
     <Chip
@@ -18,9 +18,7 @@ const TagList = (props: TagListProps) => {
         textOverflow: 'ellipsis',
       }}
       variant="outlined"
-      label={Item.tagTitle}
+      label={Item.tagName}
     />
   );
 };
-
-export default TagList;

@@ -1,8 +1,10 @@
-import { omitText } from '@styles/common';
+import { omitText } from '@/styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div<{
   isOpen: boolean;
-  minWidth: number;
+  width: number;
+  height: number;
   isSelect: boolean;
 }>`
   position: relative;
@@ -10,32 +12,30 @@ const Wrapper = styled.div<{
   border-radius: 5px;
   background-color: ${({ theme, isSelect }) =>
     isSelect ? theme.COLOR['gray-5'] : theme.COLOR['gray-4']};
-  color: ${({ theme }) => theme.COLOR['gray-1']};
-  width: ${({ minWidth }) => minWidth}px;
-  height: 28px;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
   transition: background-color 0.5s;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
+  padding: 12px 8px 12px 10px;
+  cursor: pointer;
 
   .user-title {
-    max-width: ${({ minWidth }) => minWidth / 2 + 20}px;
+    max-width: ${({ width }) => width / 2 + 20}px;
   }
 `;
 
-import styled from 'styled-components';
-
 const LabelTitle = styled.div`
-  font-size: 10px;
-  ${omitText}
+  font-size: 12px;
+  ${omitText};
+  width: 120px;
 `;
 
 const ModalButton = styled.div``;
 
 const SearchInput = styled.input`
-  width: 100%;
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: 10px;
+  font-size: 12px;
   background-color: inherit;
   padding: 5px 8px;
 
@@ -56,6 +56,7 @@ const MenuList = styled.ul<{
   padding: 8px;
   background: ${({ theme }) => theme.COLOR['gray-5']};
   border-radius: 5px;
+  max-height: ${({ grid, maxHeight }) => (grid ? '' : maxHeight + 'px')};
   transition: height 0.5s;
   ${({ grid, menuWidth }) =>
     grid
@@ -63,9 +64,8 @@ const MenuList = styled.ul<{
           Math.floor(menuWidth / 2) - 10
         }px ${Math.floor(menuWidth / 2) - 10}px; gap : 2px 8px;`
       : 'display:flex; gap: 2px;'}
-
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   li {
     height: 32px;
@@ -93,7 +93,7 @@ const MenuList = styled.ul<{
 const Container = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   left: 0;
-  top: 60px;
+  top: 45px;
   width: 100%;
   height: 0;
   overflow: ${({ $isOpen }) => ($isOpen ? '' : 'hidden')};
@@ -130,7 +130,13 @@ const BackClickBlock = styled.div<{ isOpen: boolean }>`
   background: transparent;
 `;
 
+const SelectLayOut = styled.div`
+  position: relative;
+  color: ${({ theme }) => theme.COLOR['gray-1']};
+`;
+
 const S = {
+  SelectLayOut,
   Wrapper,
   LabelTitle,
   ModalButton,

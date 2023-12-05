@@ -1,27 +1,31 @@
-import S from '@components/Create/ImageEditModal/style';
-import ImageCropper from '@/components/Create/ImageEditModal/Cropper';
-import { useState, useRef } from 'react';
-import { ReactComponent as PrevBtn } from '@assets/svg/chevron/chevron_left.svg';
-import { ReactComponent as NextBtn } from '@assets/svg/chevron/chevron_right.svg';
-import { ReactComponent as MultipleIcon } from '@assets/svg/photo/multipleIcon.svg';
-import { ReactCropperElement } from 'react-cropper';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import MultipleImgBox from '@/components/Create/MultipleImgBox/index';
+import { useImageCompress } from '@/hooks';
+import { theme } from '@/styles';
+import { ImagesArrType } from '@/types';
+import { dataURItoFile } from '@/utils';
 import { Box, Modal } from '@mui/material';
+import { useRef, useState } from 'react';
+import { ReactCropperElement } from 'react-cropper';
+import { v4 } from 'uuid';
+import { ReactComponent as PrevBtn } from '@/assets/svg/chevron/chevron_left.svg';
+import { ReactComponent as NextBtn } from '@/assets/svg/chevron/chevron_right.svg';
+import { ReactComponent as MultipleIcon } from '@/assets/svg/photo/multipleIcon.svg';
 import { usePhotoModalStore } from '@/store/modal';
-import { theme } from '@/styles/theme/theme';
-import { ImageArrType } from '@/types/image.type';
-import { dataURItoFile } from '@/utils/fileConvertor';
+import {
+  CharacterCounter,
+  ImageCropper,
+  MultipleImgBox,
+} from '@/components/Create';
+import { S } from './style';
 
 type ModalType = {
   handleFileChange: any;
   currentIdx: number;
   setCurrentIdx: React.Dispatch<React.SetStateAction<number>>;
-  imageArr: ImageArrType;
-  setImageArr: React.Dispatch<React.SetStateAction<ImageArrType>>;
+  imageArr: ImagesArrType;
+  setImageArr: React.Dispatch<React.SetStateAction<ImagesArrType>>;
 };
 
-const ImagesEditModal = ({
+export const ImagesEditModal = ({
   imageArr,
   setImageArr,
   currentIdx,
@@ -56,37 +60,65 @@ const ImagesEditModal = ({
   const [currentX, setCurrentX] = useState<number>(0);
   const imageNum = imageArr.images.length;
 
-  //현재 화면 크기
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
+  const cropperWidth = 500;
 
-  const cropperWidth = Math.floor(screenWidth / 2.5) + 20;
+  const { compressImage, isLoading: isCompressedLoading } = useImageCompress();
 
   //하나의 이미지를 크롭해서 저장함.
-  const getCropData = (cropperRef: any) => {
+  const getCropData = async (cropperRef: any) => {
     if (typeof cropperRef.current?.cropper !== 'undefined') {
       const newImage = cropperRef.current?.cropper
         .getCroppedCanvas()
         .toDataURL(`image/jpeg`, 0.5);
+
       const convertedImage = dataURItoFile(newImage);
-      setImageArr((prev) => ({
-        ...prev,
-        cropImages: [...prev.cropImages, newImage],
-        convertedImages: [...prev.convertedImages, convertedImage],
-      }));
+      const compressedImage = await compressImage(convertedImage);
+
+      return {
+        newImage,
+        compressedImage,
+      };
+
+      // if (!isCompressedLoading && compressedImage) {
+      //   setImageArr((prev) => ({
+      //     ...prev,
+      //     cropImages: [...prev.cropImages, newImage],
+      //     convertedImages: [...prev.convertedImages, compressedImage],
+      //   }));
+      // }
     }
+    return {};
   };
 
   //크롭한 이미지를 모두 저장함.
-  const onSaveAllEditImg = async (e: any) => {
+  const onSaveAllEditImg = async (e: React.MouseEvent) => {
     e.preventDefault();
 
     //기존에 크롭한 이미지가 존재하면 없애줌
-    myRefs.map((ref) => {
-      getCropData(ref);
-    });
+    if (imageArr.cropImages || imageArr.convertedImages) {
+      setImageArr((prev) => ({
+        ...prev,
+        cropImages: [],
+        convertedImages: [],
+      }));
+    }
+    const cropImageArr: any = [];
+    const convertedImageArr: any = [];
+    //하나씩 순회하면서 크롭
+    for (const ref of myRefs) {
+      const { newImage, compressedImage } = await getCropData(ref);
+
+      if (!isCompressedLoading && compressedImage) {
+        cropImageArr.push(newImage);
+        convertedImageArr.push(compressedImage);
+      }
+    }
+
+    setImageArr((prev) => ({
+      ...prev,
+      cropImages: [...cropImageArr],
+      convertedImages: [...convertedImageArr],
+    }));
     ModalClose();
   };
 
@@ -122,6 +154,10 @@ const ImagesEditModal = ({
 
   //취소
   const onClickCancelModal = () => {
+    setImageArr((prev) => ({
+      ...prev,
+      images: [],
+    }));
     ModalClose();
   };
 
@@ -157,7 +193,7 @@ const ImagesEditModal = ({
             onClickCurrentImg={onClickCurrentImg}
           />
         )}
-        <S.Form width={cropperWidth}>
+        <S.Form>
           <PrevBtn
             style={{
               position: 'absolute',
@@ -192,8 +228,8 @@ const ImagesEditModal = ({
           <div
             style={{
               position: 'relative',
-              height: cropperWidth,
-              width: cropperWidth,
+              height: cropperWidth + 'px',
+              width: cropperWidth + 'px',
               overflow: 'hidden',
               padding: 10,
             }}
@@ -216,6 +252,7 @@ const ImagesEditModal = ({
                         display: 'flex',
                         alignItems: 'center',
                       }}
+                      key={v4()}
                     >
                       <ImageCropper
                         width={cropperWidth - 20}
@@ -254,5 +291,3 @@ const ImagesEditModal = ({
     </Modal>
   );
 };
-
-export default ImagesEditModal;

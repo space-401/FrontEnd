@@ -1,11 +1,11 @@
-import type { UserType, TagType, DateInfoType } from '@type/post.type';
+import type { SpaceInfoType, SpacePostType, TagType, UserType } from '@/types';
 import { Dispatch, SetStateAction } from 'react';
-import type { SpaceInfo, SpacePostType } from '@type/space.type';
 
 export type selectType = {
   id: number;
   title: string;
   imgUrl?: string;
+  isAdmin?: boolean;
 };
 
 export type MenuListProps = {
@@ -13,12 +13,14 @@ export type MenuListProps = {
   itemList: UserType[] | TagType[];
   select: selectType[];
   changeSelect: Dispatch<SetStateAction<selectType[]>>;
+  spaceCode: string;
 };
 
 export type MainHeaderPropType = {
   spaceId: string;
-  spaceInfo: SpaceInfo;
+  spaceInfo: SpaceInfoType;
   selectState: boolean;
+  spaceCode: string;
   setSelectState: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -34,7 +36,11 @@ export type SelectBoxProps = {
   /**
    * 해당 박스의 길이를 선택해주세요
    */
-  BoxWidth?: number;
+  boxWidth?: number;
+  /**
+   * 해당 박스의 높이를 선택해주세요
+   */
+  boxHeight?: number;
   /**
    * 해당 박스의 place holder를 입력해주세요
    */
@@ -59,6 +65,7 @@ export type SelectBoxProps = {
 
 export type TagListProps = {
   Item: TagType;
+  onClick: () => void;
 };
 
 export type UserListProps = {
@@ -67,8 +74,10 @@ export type UserListProps = {
 
 export type SearchProps = {
   placeholder: string;
-  state: PostListFilterProps;
-  date: DateInfoType;
+  height: number;
+  width: number;
+  initialKeyword?: string;
+  setKeyWorld: (keyword: string) => void;
 };
 
 export type SpacePostListProps = {
@@ -76,6 +85,7 @@ export type SpacePostListProps = {
   page: number;
   total: number;
   itemLength: number;
+  movePage: (pageNumber: number) => void;
 };
 
 export type PaginationType = {
@@ -88,4 +98,8 @@ export type PaginationType = {
 export type PostListFilterProps = {
   selectUserList: selectType[];
   selectTagList: selectType[];
+};
+
+export type SectionProps = {
+  marginTop: number;
 };
