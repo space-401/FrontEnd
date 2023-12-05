@@ -54,7 +54,7 @@ export const MainHeader = (prop: MainHeaderPropType) => {
           >
             인원 {userList.length}/8
           </S.ControlButton>
-          {isAdmin && (
+          {isAdmin ? (
             <S.ControlButton
               color={theme.COLOR.white}
               backgroundColor={theme.COLOR['gray-5']}
@@ -62,7 +62,7 @@ export const MainHeader = (prop: MainHeaderPropType) => {
             >
               스페이스 관리
             </S.ControlButton>
-          )}
+          ) : null}
         </S.ButtonGroup>
       </S.HeaderHeader>
       <S.HeaderMain>

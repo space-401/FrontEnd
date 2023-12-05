@@ -78,14 +78,6 @@ export const ImagesEditModal = ({
         newImage,
         compressedImage,
       };
-
-      // if (!isCompressedLoading && compressedImage) {
-      //   setImageArr((prev) => ({
-      //     ...prev,
-      //     cropImages: [...prev.cropImages, newImage],
-      //     convertedImages: [...prev.convertedImages, compressedImage],
-      //   }));
-      // }
     }
     return {};
   };
