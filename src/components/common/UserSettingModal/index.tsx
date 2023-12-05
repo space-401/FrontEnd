@@ -178,7 +178,6 @@ export const UserSettingModal = ({
             <CircleImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
           )}
           {/*이미지 옵션 선택 모달*/}
-
           <SelectIconModal
             title="프로필 사진"
             isOpen={isSelectOptionModalOpen}

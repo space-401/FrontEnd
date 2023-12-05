@@ -76,7 +76,6 @@ const FilterGroup = styled.div`
 `;
 
 const PaginationBox = styled.div`
-  width: 300px;
   margin: 0 auto 16px;
 `;
 

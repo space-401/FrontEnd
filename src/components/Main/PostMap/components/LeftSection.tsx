@@ -18,7 +18,7 @@ type LeftSectionPropType = {
   page: number;
   total: number;
   itemLength: number;
-  movePage: (pageNumber: number | undefined) => void;
+  movePage: (pageNumber: number) => void;
 };
 
 export const LeftSection = (props: LeftSectionPropType) => {
