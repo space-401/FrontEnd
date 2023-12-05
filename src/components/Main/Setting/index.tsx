@@ -80,9 +80,7 @@ export const SettingComponent = React.forwardRef(
       }
     };
 
-    const changeAdminAction = (userName: string, userId: number) => {
-      toastColorMessage(userName + '님이 방장이 되었습니다.');
-      toastColorMessage(userId + '아이디 회원에게 방장 권한을 넘겼습니다.');
+    const changeAdminAction = (userId: number) => {
       onClose();
       const formData = new FormData();
       const spaceUserDTO = {
@@ -91,13 +89,12 @@ export const SettingComponent = React.forwardRef(
         isAdmin: true,
       };
       formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
-      formData.append('image', JSON.stringify(null));
       userUpdateAction(formData);
     };
 
     const changeAdminHandler = (userName: string, userId: number) => {
       confirmModalOpen({
-        AsyncAction: () => changeAdminAction(userName, userId),
+        AsyncAction: () => changeAdminAction(userId),
         isPositiveModal: true,
         descriptionMessage: `방장 권한을 주면 ${userList[0].userName}님은 \n스페이스 관리 및 인원 관리를 할 수 없게됩니다.`,
         titleMessage: userName + ' 님에게 방장 권한을 주시겠습니까?',
