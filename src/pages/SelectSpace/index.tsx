@@ -1,4 +1,4 @@
-import { PATH } from '@/constants';
+import { MAX_SPACE_COUNT, PATH } from '@/constants';
 import { useSpaceListQuery } from '@/hooks';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
@@ -12,7 +12,7 @@ const SelectSpace = () => {
   const navigate = useNavigate();
 
   const spaceList = useSpaceListQuery().spaceList!.spaceList!;
-
+  const spaceCount = spaceList.length;
   return (
     spaceList && (
       <S.Wrapper>
@@ -22,27 +22,29 @@ const SelectSpace = () => {
           </S.LogoBox>
           <S.Content>
             <S.ButtonContainer>
-              <BasicButton
-                fontSize={16}
-                width={130}
-                borderRadius={10}
-                onClick={() => navigate(PATH.INVITE)}
-              >
-                초대코드 입력
-              </BasicButton>
+              {spaceCount < MAX_SPACE_COUNT ? (
+                <BasicButton
+                  fontSize={16}
+                  width={130}
+                  borderRadius={10}
+                  onClick={() => navigate(PATH.INVITE)}
+                >
+                  초대코드 입력
+                </BasicButton>
+              ) : null}
             </S.ButtonContainer>
             <S.SpaceInfoBox>
               <div>현재 스페이스 개수</div>
               <S.CounterBox>
                 <CharacterCounter
-                  currentNum={spaceList.length}
-                  maxNum={5}
+                  currentNum={spaceCount}
+                  maxNum={MAX_SPACE_COUNT}
                   color="white"
                 />
               </S.CounterBox>
             </S.SpaceInfoBox>
             <S.SpaceContainer>
-              {spaceList?.length < 5 && (
+              {spaceCount < MAX_SPACE_COUNT ? (
                 <S.AddBox
                   onClick={() => {
                     navigate(PATH.SPACE_CREATE);
@@ -50,7 +52,7 @@ const SelectSpace = () => {
                 >
                   <PlusIcon width={24} height={24} />
                 </S.AddBox>
-              )}
+              ) : null}
               {spaceList?.map((space) => {
                 return (
                   <FlipCard

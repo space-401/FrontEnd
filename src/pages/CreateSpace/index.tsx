@@ -42,7 +42,7 @@ const CreateSpace = () => {
     useSpaceCreateMutation();
   const { updateSpaceAction, isUpdateSuccess, updateResponse } =
     useSpaceUpdateMutation();
-  const { deleteSpaceAction, isDeleteSuccess } = useSpaceDeleteMutation();
+  const { deleteSpaceAction } = useSpaceDeleteMutation();
   const { spaceInfo } = useSpaceInfoQuery(spaceId!);
   //스페이스 생성 태그
   const [createTags, setCreateTags] = useState<TagType[]>([...tagMock]);
@@ -212,10 +212,6 @@ const CreateSpace = () => {
       closeMessage: '닫기',
       titleMessage: '스페이스를 삭제하시겠습니까?',
     });
-    if (isDeleteSuccess) {
-      navigate(PATH.SPACE);
-      toastColorMessage('성공적으로 삭제되었습니다.');
-    }
   };
 
   return (

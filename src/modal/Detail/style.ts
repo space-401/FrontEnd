@@ -158,6 +158,7 @@ const PostDescription = styled.div`
   font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   white-space: pre;
+  text-wrap: inherit;
   line-height: 140%;
 `;
 

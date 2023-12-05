@@ -10,3 +10,5 @@ export const FLIP_CARD = {
     MEDIUM: 20,
   },
 };
+
+export const MAX_SPACE_COUNT = 5;

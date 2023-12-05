@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  margin: 32px 0 24px 0;
+  margin: 16px 0 24px 0;
   border-radius: 20px;
   overflow: hidden;
   @media ${({ theme }) => theme.DEVICE.tablet} {
