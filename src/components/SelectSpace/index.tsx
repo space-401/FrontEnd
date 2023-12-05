@@ -35,18 +35,6 @@ export const SelectSpaceSkeleton = () => {
               width={FLIP_CARD.SIZE.MEDIUM}
               height={FLIP_CARD.SIZE.MEDIUM}
             />
-            <KSkeleton
-              variant={'rectangular'}
-              sx={{ borderRadius: FLIP_CARD.BORDER_RADIUS.MEDIUM + 'px' }}
-              width={FLIP_CARD.SIZE.MEDIUM}
-              height={FLIP_CARD.SIZE.MEDIUM}
-            />
-            <KSkeleton
-              variant={'rectangular'}
-              sx={{ borderRadius: FLIP_CARD.BORDER_RADIUS.MEDIUM + 'px' }}
-              width={FLIP_CARD.SIZE.MEDIUM}
-              height={FLIP_CARD.SIZE.MEDIUM}
-            />
           </S.SpaceContainer>
         </S.Content>
       </S.Container>
