@@ -1,5 +1,4 @@
-import { useConfirmModalOpen } from '@/hooks';
-import { useSpaceUserUpdateMutation } from '@/hooks';
+import { useConfirmModalOpen, useSpaceUserUpdateMutation } from '@/hooks';
 import { theme } from '@/styles';
 import { ImageArrType, ImageType } from '@/types/image.type';
 import { UserType } from '@/types/post.type';
@@ -178,7 +177,6 @@ export const UserSettingModal = ({
             <CircleImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
           )}
           {/*이미지 옵션 선택 모달*/}
-
           <SelectIconModal
             title="프로필 사진"
             isOpen={isSelectOptionModalOpen}

@@ -24,7 +24,6 @@ type PostListPropType = {
 
 export const MainBody = (props: PostListPropType) => {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [query, setQuery] = useState<Omit<SearchValuesType, 'spaceId'>>({
     page: searchParams.get('page') ?? '1',
     keyword: searchParams.get('keyword') ?? undefined,
@@ -34,31 +33,22 @@ export const MainBody = (props: PostListPropType) => {
     endDate: searchParams.get('endDate') ?? undefined,
   });
 
-  const setParams = (callBack: () => void) => {
-    callBack();
-    setSearchParams(objectHelperWithNotUndefined(query));
-  };
-
   const setKeyWorld = (keyword: string) => {
-    setParams(() => setQuery((prev) => ({ ...prev, keyword: keyword.trim() })));
+    setQuery((prev) => ({ ...prev, keyword: keyword.trim() }));
   };
 
   const setUserId = (selectUserList: selectType[]) => {
-    setParams(() =>
-      setQuery((prev) => ({
-        ...prev,
-        userId: selectUserList.map((v) => String(v.id)),
-      }))
-    );
+    setQuery((prev) => ({
+      ...prev,
+      userId: selectUserList.map((v) => String(v.id)),
+    }));
   };
 
   const setTagId = (selectTagList: selectType[]) => {
-    setParams(() =>
-      setQuery((prev) => ({
-        ...prev,
-        tagId: selectTagList.map((v) => String(v.id)),
-      }))
-    );
+    setQuery((prev) => ({
+      ...prev,
+      tagId: selectTagList.map((v) => String(v.id)),
+    }));
   };
 
   const setDateInfo = ({
@@ -68,13 +58,14 @@ export const MainBody = (props: PostListPropType) => {
     startDate: string;
     endDate: string;
   }) => {
-    setParams(() => setQuery((prev) => ({ ...prev, startDate, endDate })));
+    setQuery((prev) => ({ ...prev, startDate, endDate }));
   };
 
-  const setPage = (pageNumber: number | undefined) => {
-    setParams(() =>
-      setQuery((prev) => ({ ...prev, page: String(pageNumber) }))
-    );
+  const setPage = (pageNumber: number) => {
+    setQuery((prev) => ({
+      ...prev,
+      page: String(pageNumber),
+    }));
   };
 
   const navigate = useNavigate();
@@ -88,8 +79,12 @@ export const MainBody = (props: PostListPropType) => {
 
   const { postList, total, page: curPage, itemLength } = spacePostList!;
 
+  useEffect(() => {}, [spaceId]);
+
   useEffect(() => {
+    setSearchParams(objectHelperWithNotUndefined(query));
     refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refetch, query]);
 
   const detailModalOpen = useDetailModalOpen();

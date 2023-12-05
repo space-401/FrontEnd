@@ -11,7 +11,6 @@ export const PostInfoBack = (props: PostInfoBackPropsType) => {
 
   const { placeTitle, postTitle, selectedTags, postUpdatedAt, usersList } =
     item;
-
   return (
     <S.Wrapper isBig={isBig}>
       <S.Shadow />
