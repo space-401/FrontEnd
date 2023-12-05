@@ -1,11 +1,11 @@
-export const Dev = process.env.NODE_ENV !== 'development';
+export const Dev = process.env.NODE_ENV === 'development';
 
 export const NETWORK = {
   RETRY_COUNT: 2,
   TIMEOUT: 10000,
 };
 
-export const BASE_URL = !Dev
+export const BASE_URL = Dev
   ? 'http://localhost:3000'
   : import.meta.env.VITE_BASE_URL;
 
