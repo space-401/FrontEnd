@@ -87,9 +87,11 @@ export const SettingComponent = React.forwardRef(
       const formData = new FormData();
       const spaceUserDTO = {
         spaceId: spaceId,
+        userId,
         isAdmin: true,
       };
       formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
+      formData.append('image', JSON.stringify(null));
       userUpdateAction(formData);
     };
 

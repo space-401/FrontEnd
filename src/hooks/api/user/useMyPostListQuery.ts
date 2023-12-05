@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
 export const useMyPostListQuery = (page: number) => {
-  const { data: MyPostListData } = useQuery<MyPostListType, AxiosError>(
-    [END_POINTS.MY_POST_LIST],
-    () => getMyPostList(page)
-  );
+  const { data: MyPostListData, refetch } = useQuery<
+    MyPostListType,
+    AxiosError
+  >([END_POINTS.MY_POST_LIST], () => getMyPostList(page));
 
-  return { MyPostListData };
+  return { MyPostListData, refetch };
 };

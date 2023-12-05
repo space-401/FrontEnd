@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
 export const useMyCommentListQuery = (page: number) => {
-  const { data: MyCommentListData } = useQuery<MyCommentListType, AxiosError>(
-    [END_POINTS.MY_COMMENT_LIST],
-    () => getMyCommentList(page)
-  );
+  const { data: MyCommentListData, refetch } = useQuery<
+    MyCommentListType,
+    AxiosError
+  >([END_POINTS.MY_COMMENT_LIST], () => getMyCommentList(page));
 
-  return { MyCommentListData };
+  return { MyCommentListData, refetch };
 };

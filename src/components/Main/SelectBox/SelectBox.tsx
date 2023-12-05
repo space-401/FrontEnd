@@ -33,7 +33,7 @@ export const SelectBox = (props: SelectBoxProps) => {
   };
 
   const onClick = () => {
-    if (ListItem.length > 1) toggleOpen();
+    if (ListItem.length >= 1) toggleOpen();
     else toastColorMessage('해당하는 필터 값이 없습니다.');
   };
 
