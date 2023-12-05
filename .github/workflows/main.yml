@@ -13,32 +13,15 @@ jobs:
       - name: Check Node v
         run: node -v
 
-      - name: Generate Environment Variables File for Production
+      - name: Create env file
         run: |
-          echo "VITE_BACK_URL=$VITE_BACK_URL" >> .env
-          echo "VITE_BASE_URL=$VITE_BASE_URL" >> .env
-          echo "VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID" >> .env
-          echo "VITE_KAKAO_KEY=$VITE_KAKAO_KEY" >> .env
-          echo "VITE_KAKAO_REST_API=$VITE_KAKAO_REST_API" >> .env
-          echo "VITE_NAVER_CLIENT_ID=$VITE_NAVER_CLIENT_ID" >> .env
-          echo "VITE_NAVER_CLIENT_KEY=$VITE_NAVER_CLIENT_KEY" >> .env
-        env:
-          VITE_BACK_URL: ${{ secrets.VITE_BACK_URL }}
-          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
-          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
-          VITE_KAKAO_KEY: ${{ secrets.VITE_KAKAO_KEY }}
-          VITE_KAKAO_REST_API: ${{ secrets.VITE_KAKAO_REST_API }}
-          VITE_NAVER_CLIENT_ID: ${{ secrets.VITE_NAVER_CLIENT_ID }}
-          VITE_NAVER_CLIENT_KEY: ${{ secrets.VITE_NAVER_CLIENT_KEY }}
-          
-      - name: Cache node modules
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+          echo "VITE_BACK_URL=${{ secrets.VITE_BACK_URL }}" >> .env
+          echo "VITE_BASE_URL= ${{ secrets.VITE_BASE_URL }}" >> .env
+          echo "VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}" >> .env
+          echo "VITE_KAKAO_KEY=${{ secrets.VITE_KAKAO_KEY }}" >> .env
+          echo "VITE_KAKAO_REST_API=${{ secrets.VITE_KAKAO_REST_API }}" >> .env
+          echo "VITE_NAVER_CLIENT_ID=${{ secrets.VITE_NAVER_CLIENT_ID }}" >> .env
+          echo "VITE_NAVER_CLIENT_KEY=${{ secrets.VITE_NAVER_CLIENT_KEY }}" >> .env
 
       - name: Install Dependencies
         run: npm install
