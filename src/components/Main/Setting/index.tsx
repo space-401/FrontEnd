@@ -93,6 +93,10 @@ export const SettingComponent = React.forwardRef(
         userId,
         isAdmin: true,
       };
+      const image = new Blob([], {
+        type: 'image/jpeg',
+      });
+      formData.append('image', image, 'image');
       formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
       userUpdateAction(formData);
     };
