@@ -9,7 +9,6 @@ import { S } from './style';
 const LoginPage = () => {
   const { kakaoHandleLogin } = SocialKakao();
   const { naverHandleLogin } = SocialNaver();
-  // const { googleSocialLogin } = SocialGoogle();
 
   return (
     <S.Wrapper>
