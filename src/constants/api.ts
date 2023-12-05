@@ -1,15 +1,19 @@
-export const Dev = process.env.NODE_ENV === 'development';
+export const Dev = process.env.NODE_ENV !== 'development';
 
 export const NETWORK = {
   RETRY_COUNT: 2,
   TIMEOUT: 10000,
 };
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+// export const BASE_URL = Dev
+//   ? 'http://localhost:3000'
+//   : import.meta.env.VITE_BASE_URL;
+
+export const BASE_URL = 'http://localhost:3000';
 
 export const AXIOS_BASE_URL = Dev ? '/' : import.meta.env.VITE_BACK_URL;
 
-export const END_POINTS = { 
+export const END_POINTS = {
   USER: '/user',
   TOKEN: '/user/refreshToken',
   MY_POST_LIST: `/user/mypost`,
