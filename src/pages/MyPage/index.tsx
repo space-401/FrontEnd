@@ -1,40 +1,44 @@
-import S from '@pages/MyPage/style';
-import { ReactComponent as AccountSvg } from '@assets/svg/mainSetting/user.svg';
-import { ReactComponent as BookMarkSvg } from '@assets/svg/bookmark/empty.svg';
-import { ReactComponent as PageSvg } from '@assets/svg/page.svg';
 import { Suspense, useState } from 'react';
-import AccountManagement from '@pages/MyPage/components/AccountManagement';
-import BookMarkList from '@pages/MyPage/components/BookMarkList';
-import MyPostOrCommentList from '@pages/MyPage/components/MyPostOrCommentList';
+import { ReactComponent as BookMarkSvg } from '@/assets/svg/bookmark/empty.svg';
+import { ReactComponent as FolderSvg } from '@/assets/svg/folder.svg';
+import { ReactComponent as AccountSvg } from '@/assets/svg/mainSetting/user.svg';
+import {
+  AccountManagement,
+  AccountManagementSkeleton,
+  BookMarkList,
+  MyBookMarkListSkeleton,
+  MyPostOrCommentList,
+} from '@/components/MyPage';
+import { S } from './style';
 
-const MyPageLayOut = () => {
+const MyPage = () => {
   const [state, setState] = useState(0);
   return (
     <S.MyPageWrapper>
       <S.Wrapper>
         <S.NavGroup>
           <S.NavButton select={state === 0} onClick={() => setState(0)}>
-            <AccountSvg width={24} height={24} />
+            <AccountSvg width={16} height={16} />
             <S.NavSpan>계정 관리</S.NavSpan>
           </S.NavButton>
           <S.NavButton select={state === 1} onClick={() => setState(1)}>
-            <BookMarkSvg width={24} height={24} />
+            <BookMarkSvg width={16} height={16} />
             <S.NavSpan>북마크</S.NavSpan>
           </S.NavButton>
           <S.NavButton select={state === 2} onClick={() => setState(2)}>
-            <PageSvg width={24} height={24} />
-            <S.NavSpan>내가 쓴 글 및 댓글</S.NavSpan>
+            <FolderSvg width={16} height={16} />
+            <S.NavSpan>나의 활동</S.NavSpan>
           </S.NavButton>
         </S.NavGroup>
       </S.Wrapper>
       <S.Container>
         {state === 0 && (
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<AccountManagementSkeleton />}>
             <AccountManagement />
           </Suspense>
         )}
         {state === 1 && (
-          <Suspense fallback={<></>}>
+          <Suspense fallback={<MyBookMarkListSkeleton />}>
             <BookMarkList />
           </Suspense>
         )}
@@ -44,4 +48,4 @@ const MyPageLayOut = () => {
   );
 };
 
-export default MyPageLayOut;
+export default MyPage;

@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import resetStyle from './reset';
-const GlobalStyles = createGlobalStyle`
-  ${resetStyle}
-`;
 
-export default GlobalStyles;
+export const GlobalStyles = createGlobalStyle`
+  ${resetStyle};
+`;

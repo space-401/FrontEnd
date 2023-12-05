@@ -1,11 +1,9 @@
-import type { UserType, TagType } from '@type/post.type';
-import type { MenuListProps, selectType } from '@type/main.type';
-import UserList from './component/UserList';
-import TagList from './component/TagList';
+import type { MenuListProps, TagType, UserType, selectType } from '@/types';
+import { isUserType, isUserTypeArray } from '@/utils';
+import { TagList, UserList } from './component';
 import S from './style';
-import { isUserType, isUserTypeArray } from '@utils/typeGuard';
 
-const MenuList = (props: MenuListProps) => {
+export const MenuList = (props: Omit<MenuListProps, 'spaceCode'>) => {
   const { itemList, searchValue, select, changeSelect } = props;
 
   const checkSelectItem = (thisValue: number) => {
@@ -25,7 +23,7 @@ const MenuList = (props: MenuListProps) => {
       ]
     : [
         ...select.map((prev) => {
-          return { tagId: prev.id, tagTitle: prev.title };
+          return { tagId: prev.id, tagName: prev.title };
         }),
         ...itemList.filter((prev) => !checkSelectItem(prev.tagId)),
       ];
@@ -36,7 +34,7 @@ const MenuList = (props: MenuListProps) => {
       if (!checkSelectItem(thisValue)) {
         const newItem: selectType = {
           id: ListItem.tagId,
-          title: ListItem.tagTitle,
+          title: ListItem.tagName,
         };
         changeSelect((prev) => [...prev, newItem]);
       } else {
@@ -75,7 +73,7 @@ const MenuList = (props: MenuListProps) => {
   } else {
     if (searchValue.length !== 0) {
       const selectArray = ListItem.filter((item) => {
-        const changeArray = item.tagTitle.split('');
+        const changeArray = item.tagName.split('');
         return (
           changeArray.splice(0, searchValue.length).join('') === searchValue
         );
@@ -103,4 +101,3 @@ const MenuList = (props: MenuListProps) => {
     ));
   }
 };
-export default MenuList;

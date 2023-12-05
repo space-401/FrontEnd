@@ -1,9 +1,13 @@
+import { omitText } from '@/styles';
 import styled from 'styled-components';
-import { omitText } from '@styles/common';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 1000px;
+`;
 
 const List = styled.li<{ select: boolean; grid: boolean }>`
+  position: relative;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-1']};
   border-radius: ${({ select }) => (select ? 3 : 5)}px;
   background: ${({ select, theme }) =>
     select ? theme.COLOR['gray-5'] : 'done'};
@@ -45,7 +49,12 @@ const TagGroup = styled.div`
   width: 100%;
 `;
 
-const DeleteButton = styled.div``;
+const DeleteButton = styled.div`
+  cursor: pointer;
+  z-index: ${({ theme }) => theme.Z_INDEX['LEVEL-3']};
+  position: absolute;
+  right: 20px;
+`;
 
 const S = {
   Wrapper,

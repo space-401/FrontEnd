@@ -42,6 +42,7 @@ const SettingBottom = styled.div`
   gap: 16px;
   bottom: 0;
   display: flex;
+  background: ${({ theme }) => theme.COLOR['gray-6']};
 `;
 
 const UserCount = styled.div`

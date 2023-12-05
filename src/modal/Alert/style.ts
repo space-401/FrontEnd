@@ -1,10 +1,9 @@
 import styled from 'styled-components';
+import { modalBackGround } from '@/styles/common';
 
 const Container = styled.div<{ width?: number }>`
+  ${modalBackGround};
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: inline-flex;
   width: ${({ width }) => (width ? width : 348)}px;
   padding: 24px;
@@ -61,11 +60,9 @@ const ButtonGroup = styled.div`
   align-items: center;
 `;
 
-const S = {
+export const S = {
   Container,
   AlertButton,
   AlertMessage,
   ButtonGroup,
 };
-
-export default S;

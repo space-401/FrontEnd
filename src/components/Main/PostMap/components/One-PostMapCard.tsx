@@ -1,8 +1,8 @@
-import { O } from '@components/Main/PostMap/components/style';
-import type { TagType } from '@type/post.type';
-import { getFormatDate } from '@utils/formatter';
-import { ReactComponent as PlaceIcon } from '@assets/svg/markerIcon.svg';
+import type { TagType } from '@/types';
+import { getFormatDate } from '@/utils';
 import { Chip } from '@mui/material';
+import { ReactComponent as PlaceIcon } from '@/assets/svg/markerIcon.svg';
+import { O } from './style';
 
 type OnePostPropType = {
   postTitle: string;
@@ -14,7 +14,7 @@ type OnePostPropType = {
   isSelect: boolean;
   onClick: () => void;
 };
-const OnePostMapCard = (props: OnePostPropType) => {
+export const OnePostMapCard = (props: OnePostPropType) => {
   const {
     isSelect,
     onClick,
@@ -39,12 +39,12 @@ const OnePostMapCard = (props: OnePostPropType) => {
         </O.CardPlace>
         <O.TagGroup>
           {postTags.map((place) => {
-            const { tagTitle, tagId } = place;
+            const { tagName, tagId } = place;
             return (
               <Chip
                 sx={{ background: 'white', height: '21px', padding: '0 8px' }}
                 key={tagId}
-                label={tagTitle}
+                label={tagName}
                 variant="filled"
               />
             );
@@ -54,5 +54,3 @@ const OnePostMapCard = (props: OnePostPropType) => {
     </O.OneWrapper>
   );
 };
-
-export default OnePostMapCard;

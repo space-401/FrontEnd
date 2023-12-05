@@ -1,60 +1,46 @@
-import type { SearchProps } from '@type/main.type';
-import S from '@components/Main/SearchBox/style';
-import React, { FormEvent, useRef } from 'react';
-import { ReactComponent as SearchIcon } from '@assets/svg/searchIcon.svg';
-import { useSearchParams } from 'react-router-dom';
+import type { SearchProps } from '@/types';
+import React, { FormEvent, useState } from 'react';
+import { ReactComponent as SearchIcon } from '@/assets/svg/searchIcon.svg';
+import S from './style';
 
-const MainSearchBox = (props: SearchProps) => {
-  const { state, placeholder, date } = props;
+export const SearchBox = (props: SearchProps) => {
+  const {
+    placeholder,
+    setKeyWorld,
+    initialKeyword = '',
+    height,
+    width,
+  } = props;
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = useRef('');
-
-  const onChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: React.MutableRefObject<string>
-  ) => {
-    type.current = e.target.value;
+  const [keyword, setkeyword] = useState(initialKeyword);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setkeyword(e.target.value);
   };
-
-  const page = searchParams.get('page');
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let select = {};
-    if (state.selectUserList.length !== 0) {
-      select = { ...select, userList: state.selectUserList.map((v) => v.id) };
+    setKeyWorld(keyword);
+  };
+
+  const onkeydown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      setKeyWorld(keyword);
     }
-    if (state.selectTagList.length !== 0) {
-      select = { ...select, tagList: state.selectTagList.map((v) => v.id) };
-    }
-    if (date.startDate) {
-      select = {
-        ...select,
-        startDate: date.startDate ?? null,
-        endDate: date.endDate ?? null,
-      };
-    }
-    if (keyword.current.trim().length !== 0) {
-      select = { ...select, keyword: keyword.current };
-    }
-    if (page) {
-      select = { ...select, page };
-    }
-    setSearchParams(select);
   };
 
   return (
-    <S.Wrapper onSubmit={onSubmit}>
+    <S.Wrapper height={height} onSubmit={onSubmit}>
       <S.IconBox>
         <SearchIcon width={12} height={12} />
       </S.IconBox>
       <S.SearchInput
+        isValue={keyword.length !== 0}
+        width={width}
+        value={keyword}
         placeholder={placeholder}
-        autoFocus={true}
-        onChange={(e) => onChange(e, keyword)}
+        onKeyDown={onkeydown}
+        onChange={(e) => onChange(e)}
       ></S.SearchInput>
     </S.Wrapper>
   );
 };
-export default MainSearchBox;

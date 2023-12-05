@@ -1,25 +1,15 @@
-import { axiosInstance } from '@apis/AxiosInstance';
-import { ApiResponseType } from '@type/response.type';
-import { END_POINTS } from '@constants/api';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { SpaceFormResponse } from '@/types';
 
-type postSpacePropType = {
-  spaceId: number;
-  spaceTitle: string;
-  spaceDescription: string;
-  imgUrl: string;
-  spacePassword: number;
-};
-
-export const patchSpace = async (props: postSpacePropType) => {
-  const { spaceId, spaceTitle, spaceDescription, spacePassword, imgUrl } =
-    props;
-  const { data } = await axiosInstance.post<ApiResponseType>(
-    END_POINTS.SPACE_INFO(spaceId),
+export const patchSpace = async (spaceInfo: FormData) => {
+  const { data } = await axiosInstance.patch<SpaceFormResponse>(
+    END_POINTS.SPACE,
+    spaceInfo,
     {
-      spaceTitle,
-      spaceDescription,
-      imgUrl,
-      spacePassword,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     }
   );
   return data;

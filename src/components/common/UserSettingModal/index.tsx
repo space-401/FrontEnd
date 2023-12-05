@@ -1,54 +1,81 @@
+import { useConfirmModalOpen, useSpaceUserUpdateMutation } from '@/hooks';
+import { theme } from '@/styles';
+import { ImageArrType, ImageType } from '@/types/image.type';
+import { UserType } from '@/types/post.type';
 import { Box } from '@mui/material';
-import React from 'react';
-import { M } from '@/components/common/UserSettingModal/style';
-import { ReactComponent as DeleteIcon } from '@assets/svg/whiteDeleteIcon.svg';
-import { useUserStore } from '@store/user';
-import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
-import { ImageArrType } from '@/types/image.type';
-import { useState, useRef } from 'react';
-import { ImageType } from '@/types/image.type';
-import BasicBox from '@/components/common/BasicBox';
-import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import CircleIcon from '@/components/common/CircleIcon/CircleIcon';
-import InputBox from '@/components/common/InputBox';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import { theme } from '@/styles/theme/theme';
+import { useRef, useState } from 'react';
+import { ReactComponent as ProfileMock } from '@/assets/svg/profileMock.svg';
+import { usePhotoModalStore } from '@/store/modal';
+import {
+  CharacterCounter,
+  CircleImgEditModal,
+  SelectIconModal,
+} from '@/components/Create';
+import { M, S } from '@/components/Main/WelcomeModal/style';
+import { BasicButton, CircleIcon, InputBox } from '@/components/common';
 
-type ProfileModalType = {
+type SettingModalProps = {
   ModalClose: () => void;
+  userNames: string[];
+  userInfo?: UserType;
+  spaceId: number;
+  isAdmin: boolean;
 };
 
-const UserSettingModal = React.forwardRef((props: ProfileModalType, ref) => {
-  const { ModalClose } = props;
-  const { getState } = useUserStore;
-  const { user } = getState();
-  console.log(user);
-  const [nickName, setNickName] = useState('');
+//프로필 기본 이미지 선택
+export const UserSettingModal = ({
+  userNames,
+  ModalClose,
+  userInfo,
+  spaceId,
+}: SettingModalProps) => {
+  const { userUpdateAction, isUserUpdateSuccess } = useSpaceUserUpdateMutation(
+    String(spaceId)
+  );
 
-  const SubmitAction = () => {
-    // 변경 완료시 누를 버튼
-    const newUserInfo = {
-      id: user?.id,
-      img: imageArr.convertedImages[0],
-      nickname: nickName,
-      token_key: user?.token_key,
-    };
-    console.log(newUserInfo);
-    ModalClose();
-  };
-
-  //이미지 저장하는 곳
+  const [nickName, setNickName] = useState(userInfo ? userInfo.userName : '');
   const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: [],
-    cropImages: [],
-    convertedImages: [],
+    image: null,
+    cropImage: userInfo ? userInfo.imgUrl! : null,
+    convertedImage: null,
   });
+  const [errorMsg, setErrorMsg] = useState<string | null>();
+  const [isSelectOptionModalOpen, setSelectOptionModalOpen] = useState(false);
+  const { isOpen: isImgEditModalOpen, ModalOpen: imgEditModalOpen } =
+    usePhotoModalStore();
 
-  const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [isDefaultImg, setIsDefaultImg] = useState(true);
 
-  const onToggleModal = () => {
-    setImageModalOpen((prev) => !prev);
+  //이미지 선택 옵션 모달 열기
+  const onClickImgOptionModalOpen = () => {
+    if (imageArr.cropImage) {
+      return setSelectOptionModalOpen(true);
+    }
+    return onClickImgEditModal();
   };
+
+  //중복 닉네임 체크
+  const checkAlreadyNickname = () => {
+    if (userNames.includes(nickName) && nickName !== userInfo?.userName) {
+      setErrorMsg('중복된 닉네임입니다.');
+      return false;
+    } else {
+      setErrorMsg(null);
+      return true;
+    }
+  };
+
+  //기본 이미지로 설정
+  const onSelectDefaultImg = () => {
+    setImageArr({
+      image: null,
+      cropImage: null,
+      convertedImage: null,
+    });
+    setIsDefaultImg(true);
+    setSelectOptionModalOpen(false);
+  };
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +96,8 @@ const UserSettingModal = React.forwardRef((props: ProfileModalType, ref) => {
           id: 1,
           img: result,
         };
-        setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
+        setImageArr((prev: ImageArrType) => ({ ...prev, image: newObj }));
+        setIsDefaultImg(false);
       }
     };
     reader.readAsDataURL(files[0]);
@@ -77,90 +105,164 @@ const UserSettingModal = React.forwardRef((props: ProfileModalType, ref) => {
 
   //자식 inputRef 요소를 클릭하는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
+    if (isSelectOptionModalOpen) {
+      setSelectOptionModalOpen(false);
     }
-    setImageModalOpen(true);
+    inputRef.current?.click();
+    imgEditModalOpen();
+  };
+
+  //제출 함수
+  const onSubmitInfo = () => {
+    const checkNickname = checkAlreadyNickname();
+    const formData = new FormData();
+
+    const spaceUserInfo = {
+      spaceId,
+      isAdmin: false,
+      userNickname: nickName,
+    };
+
+    if (imageArr.convertedImage) {
+      const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('image', image, 'image');
+    } else {
+      const image = new Blob([], {
+        type: 'image/jpeg',
+      });
+      formData.append('image', image, 'image');
+    }
+    const spaceUserDTO = new Blob([JSON.stringify(spaceUserInfo)], {
+      type: 'application/json',
+    });
+    formData.append('spaceUserDTO', spaceUserDTO);
+
+    if (checkNickname) {
+      userUpdateAction(formData);
+      ModalClose();
+    }
+
+    if (isUserUpdateSuccess) {
+      confirmModalOpen();
+    }
+  };
+
+  const confirmOpen = useConfirmModalOpen();
+
+  const confirmModalOpen = () => {
+    confirmOpen({
+      AsyncAction: () => {},
+      isPositiveModal: true,
+      ApproveMessage: '확인',
+      closeMessage: '닫기',
+      titleMessage: userInfo
+        ? '성공적으로 변경되었습니다.'
+        : `${nickName}님 환영합니다!`,
+    });
+  };
+
+  const onEnterClose = (e: any) => {
+    if (e.keyCode === 13) {
+      onSubmitInfo();
+    }
   };
 
   return (
-    <>
-      {isImageModalOpen && (
-        <ImgEditModal
-          imageArr={imageArr}
-          setImageArr={setImageArr}
-          isCircle={true}
-          setImageModalOpen={setImageModalOpen}
-        />
-      )}
-      <Box sx={{ backgroundColor: 'transparent' }} tabIndex={-1} ref={ref}>
-        <M.Container>
-          <M.ModalTop>
-            프로필을 수정해 주세요.
-            <M.DeleteIconBox>
-              <DeleteIcon onClick={ModalClose} />
-            </M.DeleteIconBox>
-          </M.ModalTop>
-          <M.ModalMain>
-            <M.LeftImgSection>
-              {imageArr.images.length == 0 ? (
-                <M.ImgBox>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    onChange={(e) => {
-                      handleFileChange(e);
-                    }}
-                    ref={inputRef}
-                  />
-                  <BasicBox
-                    width={160}
-                    borderradius={80}
-                    onClick={onClickImgEditModal}
-                  >
-                    <PhotoIcon />
-                  </BasicBox>
-                </M.ImgBox>
-              ) : (
-                <M.ImgBox>
-                  <CircleIcon size={160} img_url={imageArr.cropImages[0]} />
-                </M.ImgBox>
-              )}
-              {imageArr.images.length > 0 && (
-                <M.ImgButton onClick={onToggleModal}>편집하기</M.ImgButton>
-              )}
-            </M.LeftImgSection>
-            <M.RightUserNameSection>
-              <M.NickName>닉네임</M.NickName>
-              <InputBox
-                height={60}
-                width={250}
-                maxLength={10}
-                paddingLeft={60}
-                type="text"
+    userNames && (
+      <Box tabIndex={-1} onKeyDown={onEnterClose}>
+        <S.Wrapper>
+          {isImgEditModalOpen && imageArr.image && (
+            <CircleImgEditModal imageArr={imageArr} setImageArr={setImageArr} />
+          )}
+          {/*이미지 옵션 선택 모달*/}
+          <SelectIconModal
+            title="프로필 사진"
+            isOpen={isSelectOptionModalOpen}
+            modalClose={() => {
+              setSelectOptionModalOpen(false);
+            }}
+            selectOptionArr={[
+              {
+                title: '기본 이미지로 변경',
+                asyncFunc: onSelectDefaultImg,
+              },
+              {
+                title: '파일에서 이미지 선택',
+                asyncFunc: onClickImgEditModal,
+              },
+            ]}
+          />
+
+          <S.SectionWrapper gap={25}>
+            <S.DetailText>
+              스페이스에서 사용할 프로필과
+              <br /> 닉네임을 지정해 주세요.
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
                 onChange={(e) => {
-                  onChange(e);
+                  handleFileChange(e);
                 }}
-                name="nickname"
-                readonly={false}
-                children={
-                  <CharacterCounter
-                    color={theme.COLOR['gray-3']}
-                    currentNum={nickName.length}
-                    maxNum={10}
-                  />
-                }
+                ref={inputRef}
               />
-            </M.RightUserNameSection>
-          </M.ModalMain>
-          <M.ModalFooter>
-            <M.SubmitButton onClick={SubmitAction}>완료</M.SubmitButton>
-          </M.ModalFooter>
-        </M.Container>
+            </S.DetailText>{' '}
+            <M.Label isAlert={false}>프로필 사진</M.Label>
+            {/*프로필 사진을 설정하지 않았을 경우 mock*/}
+            {!imageArr.cropImage && isDefaultImg ? (
+              <>
+                <M.ImgBox onClick={onClickImgOptionModalOpen}>
+                  <ProfileMock />
+                </M.ImgBox>
+              </>
+            ) : (
+              <>
+                <M.ImgBox onClick={onClickImgOptionModalOpen}>
+                  <CircleIcon size={240} imgUrl={imageArr.cropImage!} />
+                </M.ImgBox>
+              </>
+            )}
+            <M.Label isAlert={false}>닉네임</M.Label>
+            <InputBox
+              placeholder="닉네임을 입력하세요"
+              height={60}
+              width={250}
+              maxLength={10}
+              paddingLeft={60}
+              type="text"
+              onChange={(e) => {
+                onChange(e);
+              }}
+              backgroundColor={theme.COLOR['gray-4']}
+              name="nickname"
+              value={nickName}
+              readonly={false}
+              children={
+                <CharacterCounter
+                  color={'white'}
+                  currentNum={nickName.length}
+                  maxNum={10}
+                />
+              }
+            />
+            {errorMsg && <M.Label isAlert={true}>{errorMsg}</M.Label>}
+            <S.ButtonContainer>
+              <BasicButton
+                width={212}
+                height={48}
+                onClick={onSubmitInfo}
+                disabled={!nickName.length}
+              >
+                <S.ButtonText>완료</S.ButtonText>
+              </BasicButton>
+            </S.ButtonContainer>
+          </S.SectionWrapper>
+        </S.Wrapper>
       </Box>
-    </>
+    )
   );
-});
+};
 
 export default UserSettingModal;

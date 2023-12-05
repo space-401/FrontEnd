@@ -1,18 +1,18 @@
-import Avatars from '@components/common/AvatarGroup/Avatars';
-import S from '@components/common/FlipCard/Back/style';
-import { getFormatDate } from '@utils/formatter';
-import { ReactComponent as MapIcon } from '@assets/svg/markerIcon.svg';
+import { PostInfoBackPropsType } from '@/types';
+import { getFormatDate } from '@/utils';
 import { Chip } from '@mui/material';
-import { PostInfoBackPropsType } from '@type/post.type';
+import { v4 as uuid } from 'uuid';
+import { ReactComponent as MapIcon } from '@/assets/svg/markerIcon.svg';
+import { Avatars } from '@/components/common';
+import S from './style';
 
-const PostInfoBack = (props: PostInfoBackPropsType) => {
-  const { item, size } = props;
+export const PostInfoBack = (props: PostInfoBackPropsType) => {
+  const { item, isBig } = props;
 
   const { placeTitle, postTitle, selectedTags, postUpdatedAt, usersList } =
     item;
-
   return (
-    <S.Wrapper size={size}>
+    <S.Wrapper isBig={isBig}>
       <S.Shadow />
       <S.Container className={'container'} info="post">
         <div>
@@ -24,8 +24,8 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             {selectedTags.map((place) => (
               <Chip
                 className={'chip'}
-                key={place.tagId}
-                label={'#' + place.tagTitle}
+                key={uuid()}
+                label={'#' + place.tagName}
                 variant="outlined"
               />
             ))}
@@ -37,8 +37,8 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
             <span className={'place-span'}>{placeTitle}</span>
           </S.PlaceTitle>
           <Avatars
-            max={size === 'big' ? 4 : 5}
-            size={size === 'big' ? 29 : 28}
+            max={isBig ? 4 : 5}
+            size={isBig ? 29 : 28}
             users={usersList}
           />
         </S.InfoBottom>
@@ -46,5 +46,3 @@ const PostInfoBack = (props: PostInfoBackPropsType) => {
     </S.Wrapper>
   );
 };
-
-export default PostInfoBack;

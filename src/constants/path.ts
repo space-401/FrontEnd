@@ -1,6 +1,5 @@
-export const BASE_PATH = {
+const BASE_PATH = {
   HOME: '/',
-  LANDING: '/landing',
   LOGIN: '/login',
   POST: '/post',
   SPACE: '/space',
@@ -10,7 +9,15 @@ export const BASE_PATH = {
 };
 
 export const PATH = {
-  ...BASE_PATH,
+  HOME: '/',
+  LOGIN: '/login',
+  POST: '/post',
+  SPACE: '/space',
+  USER: '/users',
+  INVITE: '/invite',
+  AUTH: '/auth',
+  RELOAD: -1,
+  SOCIAL_LOGIN: (socialType: string) => `/user/auth/${socialType}`,
   USER_INFO: `${BASE_PATH.USER}/mypage`,
   POST_CREATE: (spaceId: number | string) =>
     `${BASE_PATH.SPACE}/${spaceId}/post`,
@@ -20,4 +27,8 @@ export const PATH = {
   SPACE_CREATE: `${BASE_PATH.SPACE}/create`,
   SPACE_UPDATE: (spaceId: number | string) =>
     `${BASE_PATH.SPACE}/update/${spaceId}`,
+  INVITE_CODE: (code: number | string, password: number | string) => `
+  ${import.meta.env.VITE_BASE_URL}${
+    PATH.INVITE
+  }?code=${code}&password=${password}`,
 };

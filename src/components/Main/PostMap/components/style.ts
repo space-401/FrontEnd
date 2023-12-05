@@ -1,8 +1,11 @@
+import { omitText } from '@/styles';
 import styled from 'styled-components';
+import { flexCenter } from '@/styles/common';
 
 const Wrapper = styled.div`
+  position: relative;
   background: ${({ theme }) => theme.COLOR['gray-7']};
-  padding: 24px;
+  padding: 24px 0 0 24px;
   display: flex;
   gap: 8px;
   flex-direction: column;
@@ -13,16 +16,44 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    min-width: 200px;
+    height: 700px;
+    margin-right: 10px;
+  }
 `;
 
 const PaginationBox = styled.div`
-  margin: 0 auto;
-  width: 200px;
+  position: sticky;
+  display: flex;
+  padding-right: 24px;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  background: ${({ theme }) => theme.COLOR['gray-7']};
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 200px;
+    height: 50px;
+  }
+`;
+
+const PaginationInner = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EmptyList = styled.div`
+  margin: 10px 0 0 10px;
+  color: ${({ theme }) => theme.COLOR['gray-2']};
 `;
 
 export const S = {
   Wrapper,
   PaginationBox,
+  PaginationInner,
+  EmptyList,
 };
 
 const ContentBox = styled.div`
@@ -43,8 +74,9 @@ const ContentPlace = styled.div`
 
 const ContentTitle = styled.div`
   color: ${({ theme }) => theme.COLOR.white};
-  font-size: ${({ theme }) => theme.TEXT_SIZE['text-18']};
+  font-size: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-700']};
+  ${omitText};
 `;
 
 const ContentCreateAt = styled.div`
@@ -53,7 +85,6 @@ const ContentCreateAt = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: 16px;
 `;
-
 const AvatarBox = styled.div``;
 
 const MarkerContainer = styled.div`
@@ -84,10 +115,13 @@ export const M = {
 
 const CardImg = styled.div<{ imgUrl: string }>`
   width: 107.5px;
-  height: 107.5px;
+  aspect-ratio: 1/1;
   background: url(${({ imgUrl }) => imgUrl});
   background-size: cover;
   border-radius: 15px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    display: none;
+  }
 `;
 
 const OneWrapper = styled.div<{ isSelect: boolean }>`
@@ -104,6 +138,11 @@ const OneWrapper = styled.div<{ isSelect: boolean }>`
   display: flex;
   padding: 16px;
   gap: 16px;
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    width: 200px;
+    height: 130px;
+  }
 `;
 
 const CardCreate = styled.div`
@@ -112,6 +151,9 @@ const CardCreate = styled.div`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT['WEIGHT-400']};
   line-height: ${({ theme }) => theme.TEXT_SIZE['text-16']};
   min-height: 10px;
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    font-size: ${({ theme }) => theme.TEXT_SIZE['text-10']};
+  }
 `;
 
 const CardTitle = styled.div`
@@ -166,6 +208,10 @@ const TagGroup = styled.div`
 
   span {
     padding: 0;
+  }
+
+  @media ${({ theme }) => theme.DEVICE.tablet} {
+    ${flexCenter};
   }
 `;
 

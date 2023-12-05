@@ -1,10 +1,16 @@
-import { axiosInstance } from '@apis/AxiosInstance';
-import { END_POINTS } from '@constants/api';
-import { CreatePostType } from '@/types/post.type';
+import { axiosInstance } from '@/apis';
+import { END_POINTS } from '@/constants';
+import type { ApiResponseType } from '@/types';
 
-export const patchPost = async (postId: string) => {
-  const { data } = await axiosInstance.patch<CreatePostType>(
-    END_POINTS.POST + `/${postId}`
+export const patchPost = async (postInfo: FormData) => {
+  const { data } = await axiosInstance.patch<ApiResponseType>(
+    END_POINTS.POST,
+    postInfo,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
   );
   return data;
 };

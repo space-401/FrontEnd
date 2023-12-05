@@ -1,74 +1,96 @@
-import S from '@pages/CreateSpace/style';
-import InputBox from '@/components/common/InputBox';
-import BasicButton from '@/components/common/BasicButton';
-import TextAreaBox from '@/components/common/TextAreaBox';
-import { ReactComponent as PhotoIcon } from '@assets/svg/photoIcon.svg';
-import { ReactComponent as ShowEye } from '@assets/svg/showEye.svg';
-import { ReactComponent as ClosedEye } from '@assets/svg/closedEye.svg';
-import BasicBox from '@/components/common/BasicBox';
-import { useState, useRef, useEffect } from 'react';
+import { PATH } from '@/constants';
 import {
-  usePhotoModalStore,
-  useSelectIconModalStore,
-  useSelectBasicIconModalStore,
-} from '@/store/modal';
-import ImgEditModal from '@/components/Create/ImageEditModal/ImageEditModal';
-import { ImageType, ImageArrType } from '@/types/image.type';
-import CharacterCounter from '@/components/Create/CharacterCounter';
-import { theme } from '@/styles/theme/theme';
-import useInputs from '@/hooks/common/useInputs';
-import SelectIconModal from '@/components/Create/SelectIconModal';
-import BasicIconModal from '@/components/Create/BasicIconModal';
-import BasicIcon from '@/components/Create/BasicIconModal/BasicIcon';
-import { useAlertModalOpen } from '@/hooks/common/useAlertModalOpen';
-import { CreateSpaceType } from '@/types/space.type';
-import { useSpaceInfoQuery } from '@/hooks/api/space/useSpaceInfoQuery';
-import { useParams } from 'react-router-dom';
-import { makeObj } from '@/utils/makeObj';
-import { useConfirmModalOpen } from '@hooks/common/useConfirmModalOpen';
-import { useNavigate } from 'react-router-dom';
+  useAlertModalOpen,
+  useConfirmModalOpen,
+  useInputs,
+  useSpaceCreateMutation,
+  useSpaceDeleteMutation,
+  useSpaceInfoQuery,
+  useSpaceUpdateMutation,
+} from '@/hooks';
+import { theme } from '@/styles';
+import type { ImageArrType, TagType } from '@/types';
+import { toastColorMessage } from '@/utils';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ReactComponent as EditIcon } from '@/assets/svg/tagEditIcon.svg';
+import { tagMock } from '@/mocks/data';
+import { usePhotoModalStore } from '@/store/modal';
+import { SPACE_MESSAGE } from '@/constants/message';
+import {
+  BasicIconModal,
+  ImageEditModal,
+  SelectIconModal,
+  TagEditModal,
+} from '@/components/Create';
+import { SpaceDescription } from '@/components/CreateSpace/SpaceDescription';
+import { SpaceIcon } from '@/components/CreateSpace/SpaceIcon';
+import { SpacePswd } from '@/components/CreateSpace/SpacePswd';
+import { SpaceTitle } from '@/components/CreateSpace/SpaceTitle';
+import { BasicButton } from '@/components/common';
+import { S } from './style';
 
 const CreateSpace = () => {
   const params = useParams();
-  const spaceId = params.spaceId;
+  const spaceId = params.spaceId ?? null;
   const navigate = useNavigate();
-
-  const { spaceInfo } = useSpaceInfoQuery(spaceId!);
-
-  console.log('ggg', spaceInfo);
-
-  //기본 이미지 선택
-  const [isBasicImg, setIsBasicImg] = useState<boolean>(false);
-  //기본 이미지
-  //이미지 저장하는 곳
-  const [imageArr, setImageArr] = useState<ImageArrType>({
-    images: spaceInfo ? makeObj([spaceInfo.imgUrl]) : [],
-    cropImages: spaceInfo ? [spaceInfo.imgUrl] : [],
-    convertedImages: [],
-  });
-  const BasicIconArr = BasicIcon();
-
-  //기본이미지 선택
-  const [selectIconIdx, setSelectIconIdx] = useState(0);
+  const isUpdateForm = !!spaceId;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  //모달
+  const { postSpaceAction, isPostSuccess, createResponse } =
+    useSpaceCreateMutation();
+  const { updateSpaceAction, isUpdateSuccess, updateResponse } =
+    useSpaceUpdateMutation();
+  const { deleteSpaceAction } = useSpaceDeleteMutation();
+  const { spaceInfo } = useSpaceInfoQuery(spaceId!);
+  //스페이스 생성 태그
+  const [createTags, setCreateTags] = useState<TagType[]>([...tagMock]);
+
+  const formTitle = isUpdateForm
+    ? SPACE_MESSAGE.TITLE.UPDATE
+    : SPACE_MESSAGE.TITLE.CREATE;
+  const formDescription = isUpdateForm
+    ? SPACE_MESSAGE.DESCRIPTION.UPDATE
+    : SPACE_MESSAGE.DESCRIPTION.CREATE;
+  const formResponseMessage = isUpdateForm
+    ? SPACE_MESSAGE.RESPONSE.UPDATE
+    : SPACE_MESSAGE.RESPONSE.CREATE;
+
+  //이미지 저장하는 곳
+  const [imageArr, setImageArr] = useState<ImageArrType>({
+    image: null,
+    cropImage: spaceInfo ? spaceInfo.imgUrl : null,
+    convertedImage: null,
+  });
   //현재 편집 모달이 열려있는지
   const { ModalOpen: PhotoModalOpen, isOpen: isPhotoModalOpen } =
     usePhotoModalStore();
-  //현재 아이콘 선택 모달이 열려있는지
-  const {
-    ModalOpen: IconModalOpen,
-    ModalClose: IconModalClose,
-    isOpen: isIconModalOpen,
-  } = useSelectIconModalStore();
-  //현재 기본 아이콘 선택 모달이 열려있는지
-  const {
-    ModalOpen: BasicIconModalOpen,
-    ModalClose: BasicIconModalClose,
-    isOpen: isBasicIconModalOpen,
-  } = useSelectBasicIconModalStore();
+
+  //현재 아이콘 선택 모달이 열려있는지 [아이콘 모달, 기본 아이콘 모달]
+  const [isIconModalOpen, setIsIconModalOpen] = useState<[boolean, boolean]>([
+    false,
+    false,
+  ]);
+
+  //내 작성글이 아닐 경우에 돌려보내기
+  useEffect(() => {
+    if (spaceId) {
+      if (!spaceInfo?.isAdmin) {
+        noAuthalertModalOpen();
+        navigate(PATH.SPACE);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
+
+  //아이콘 옵션 선택 모달 열기
+  const onClickOptionModalOpen = () => {
+    setIsIconModalOpen([true, false]);
+  };
+
+  //태그 편집 모달이 열려있는지
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
 
   //스페이스 명, 스페이스 설명
   const { values, onChange } = useInputs({
@@ -78,302 +100,290 @@ const CreateSpace = () => {
   const { title, content } = values;
 
   //비밀번호
-  const [pswd, setPswd] = useState(spaceInfo ? spaceInfo.spacePw : '');
-  //비밀번호 보이기,숨기기
-  const [isShowPswd, setIsShowPswd] = useState(false);
-  const onToggleShowPswd = () => {
-    setIsShowPswd((prev) => !prev);
-  };
+  const [pswd, setPswd] = useState<string | null>(
+    spaceInfo ? spaceInfo.spacePw : null
+  );
 
-  //비밀번호 숫자만
-  const onCheckInputNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    // 정규 표현식을 사용하여 숫자가 아닌 값 검사
-    if (!/^[0-9]*$/.test(value)) {
-      // 숫자가 아닌 값이 있을 때 에러 처리
-      return alertModalOpen();
-    }
-    setPswd(value);
-  };
+  const noAuthalertOpen = useAlertModalOpen();
 
-  //경고모달
-  const alertOpen = useAlertModalOpen();
-
-  const alertModalOpen = () => {
-    alertOpen({
+  const noAuthalertModalOpen = () => {
+    noAuthalertOpen({
       width: 300,
       alertMessage: '확인',
-      alertTitle: '비밀번호는 숫자만 입력해 주세요',
+      alertTitle: '스페이스 수정 권한이 없습니다.',
     });
   };
 
-  //파일 변경 함수
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const files = e.target.files;
-    if (!files) return;
-    //여러개의 파일을 하나씩 순회하여 읽어오기
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result;
-      if (typeof result === 'string') {
-        const newObj: ImageType = {
-          id: 1,
-          img: result,
-        };
-        setImageArr((prev: ImageArrType) => ({ ...prev, images: [newObj] }));
-      }
-    };
-    reader.readAsDataURL(files[0]);
-  };
+  //기본 스페이스 아이콘 선택 [선택 여부, 선택 아이콘 인덱스]
+  const [isBasicIcon, setIsBasicIcon] = useState<[false] | [true, number]>([
+    false,
+  ]);
 
-  //자식 inputRef 요소를 클릭하는 함수
+  //새로운 이미지 불러오는 함수
   const onClickImgEditModal = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
+    setIsIconModalOpen([false, false]);
+    setIsBasicIcon([false]);
+    inputRef.current?.click();
     PhotoModalOpen();
-    IconModalClose();
-  };
-
-  //기본 아이콘 이미지 선택 모달
-  const onMoveBasicIconModal = () => {
-    BasicIconModalOpen();
-    IconModalClose();
   };
 
   //스페이스 생성하기
-  const onCreateSpace = () => {
-    const newData: CreateSpaceType = {
-      spaceTitle: title,
-      spaceDescription: content,
-      imgUrl: imageArr.convertedImages[0],
-      spacePw: Number(pswd),
-    };
-    console.log('새로운 데이터', newData);
-    confirmModalOpen(false);
-  };
+  const onSubmitSpace = () => {
+    const createTagsName = createTags.map((tag) => tag.tagName);
+    const formData = new FormData();
 
-  //스페이스 생성하기
-  const onUpdateSpace = () => {
-    const newData: CreateSpaceType = {
-      spaceTitle: title,
+    const createSpaceDTO = {
+      spaceName: title,
       spaceDescription: content,
-      imgUrl: imageArr.convertedImages[0],
-      spacePw: Number(pswd),
+      defaultImg: isBasicIcon[0] ? String(isBasicIcon[1]) : '',
+      spacePw: pswd,
+      tags: createTagsName,
     };
-    console.log('새로운 데이터', newData);
-    confirmModalOpen(true);
+    const updateSpaceDTO = {
+      ...createSpaceDTO,
+      spaceId,
+    };
+    if (imageArr.convertedImage) {
+      // 이미지 파일 추가
+      const image = new Blob([imageArr.convertedImage], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
+    } else {
+      const image = new Blob([], {
+        type: 'image/jpeg',
+      });
+      formData.append('imgUrl', image, 'image.jpg');
+    }
+
+    if (spaceId) {
+      // JSON 데이터 추가
+      const spaceDTO = new Blob([JSON.stringify(updateSpaceDTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceDTO', spaceDTO);
+      updateSpaceAction(formData);
+    } else {
+      const spaceDTO = new Blob([JSON.stringify(createSpaceDTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceDTO', spaceDTO);
+      postSpaceAction(formData);
+    }
   };
 
   useEffect(() => {
-    if (isIconModalOpen) {
-      setIsBasicImg(false);
-    }
-    if (isBasicIconModalOpen) {
-      setIsBasicImg(true);
-      setImageArr({
-        images: [],
-        cropImages: [],
-        convertedImages: [],
-      });
-    }
-  }, [isIconModalOpen, isBasicIconModalOpen]);
+    if (isUpdateSuccess || isPostSuccess) {
+      toastColorMessage(formResponseMessage);
 
-  const inputWidth = 628;
+      let movePath;
+      if (isUpdateForm) {
+        movePath = updateResponse?.spaceId;
+      } else {
+        movePath = createResponse?.spaceId;
+      }
+
+      navigate(PATH.SPACE_MAIN(String(movePath)));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUpdateSuccess, isPostSuccess]);
+
   const confirmOpen = useConfirmModalOpen();
 
-  const onMoveSpacePage = () => {
-    navigate(`/space/${spaceId}`);
+  //기본 아이콘 선택 함수
+  const onSelectBasicIcon = (index: number) => {
+    if (imageArr.cropImage) {
+      setImageArr({
+        image: null,
+        cropImage: null,
+        convertedImage: null,
+      });
+    }
+    setIsBasicIcon([true, index]);
   };
 
-  /**확인 모달*/
-  const confirmModalOpen = (isUpdate: boolean) => {
+  const deleteSpaceModalOpen = () => {
     confirmOpen({
-      AsyncAction: onMoveSpacePage,
-      isPositiveModal: true,
+      AsyncAction: () => {
+        deleteSpaceAction(spaceId!);
+      },
+      isPositiveModal: false,
       ApproveMessage: '확인',
       closeMessage: '닫기',
-      titleMessage: isUpdate
-        ? '스페이스 수정이 완료되었습니다.'
-        : '스페이스가 생성되었습니다.',
+      titleMessage: '스페이스를 삭제하시겠습니까?',
     });
   };
 
   return (
     <S.Wrapper>
+      {isTagModalOpen && (
+        <TagEditModal
+          createTags={createTags}
+          setCreateTags={setCreateTags}
+          spaceId={spaceId}
+          isOpen={isTagModalOpen}
+          modalOpen={() => {
+            setIsTagModalOpen(true);
+          }}
+          setIsTagModalOpen={setIsTagModalOpen}
+        />
+      )}
       <S.TitleSection>
-        <div>스페이스 설정하기</div>
-        <p>우리만을 위한 스페이스를 새로 만들어요.</p>
+        <S.FlexBoxColumn>
+          <div>{formTitle}</div>
+          <p>{formDescription}</p>
+        </S.FlexBoxColumn>
+        {isUpdateForm ? (
+          <S.DeleteButton>
+            <BasicButton
+              onClick={deleteSpaceModalOpen}
+              backgroundColor={theme.COLOR.orange}
+              color={theme.COLOR.white}
+              fontSize={12}
+              height={40}
+            >
+              스페이스 삭제하기
+            </BasicButton>
+          </S.DeleteButton>
+        ) : null}
       </S.TitleSection>
+
       {/*사진 편집 모달*/}
-      {isPhotoModalOpen && imageArr.images.length && (
-        <ImgEditModal
+      {isPhotoModalOpen && imageArr.image && (
+        <ImageEditModal
           isCircle={false}
           imageArr={imageArr}
           setImageArr={setImageArr}
+          onCloseIconModal={() => {
+            setIsIconModalOpen([false, false]);
+          }}
         />
       )}
+
       {/*아이콘 선택 모달*/}
-      {isIconModalOpen && (
-        <SelectIconModal
-          modalClose={IconModalClose}
-          isOpen={isIconModalOpen}
-          onClickImgEditModal={onClickImgEditModal}
-          onMoveBasicIconModal={onMoveBasicIconModal}
-        />
-      )}
+      <SelectIconModal
+        modalClose={() => {
+          setIsIconModalOpen([false, isIconModalOpen[1]]);
+        }}
+        isOpen={isIconModalOpen[0]}
+        title="스페이스 아이콘 설정"
+        selectOptionArr={[
+          {
+            title: '기본 아이콘 선택하기',
+            asyncFunc: () => setIsIconModalOpen([false, true]),
+          },
+          {
+            title: '이미지 불러오기',
+            asyncFunc: onClickImgEditModal,
+          },
+        ]}
+      />
+
       {/*기본 아이콘 선택 모달*/}
-      {isBasicIconModalOpen && (
-        <BasicIconModal
-          modalClose={BasicIconModalClose}
-          isOpen={isBasicIconModalOpen}
-          selectIconIdx={selectIconIdx}
-          setSelectIconIdx={setSelectIconIdx}
-        />
-      )}
+      <BasicIconModal
+        modalClose={() => {
+          setIsIconModalOpen([isIconModalOpen[0], false]);
+        }}
+        isOpen={isIconModalOpen[1]}
+        onSelectBasicIcon={onSelectBasicIcon}
+        isBasicIcon={isBasicIcon}
+      />
+
+      {/*스페이스 설정 폼*/}
       <S.Form>
         {/*아이콘 지정 인풋*/}
-        <S.TitleContainer number={1} required={true}>
-          <div>스페이스 아이콘</div>
-        </S.TitleContainer>
-
-        {imageArr.images.length == 0 && !isBasicImg ? (
-          <S.InputContainer number={1} onClick={IconModalOpen}>
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: 'none' }}
-              onChange={(e) => {
-                handleFileChange(e);
-              }}
-              ref={inputRef}
-            />
-            <BasicBox width={160} borderradius={10}>
-              <PhotoIcon />
-            </BasicBox>
-          </S.InputContainer>
-        ) : (
-          <S.InputContainer number={1}>
-            <BasicBox
-              onClick={IconModalOpen}
-              backgroundImage={
-                isBasicImg && !isBasicIconModalOpen
-                  ? BasicIconArr[selectIconIdx]
-                  : imageArr.cropImages[0]
-              }
-              width={160}
-              borderradius={10}
-              color="grey"
-            ></BasicBox>
-            <S.EditButton onClick={PhotoModalOpen}>편집하기</S.EditButton>
-          </S.InputContainer>
-        )}
+        <>
+          <S.TitleContainer number={1} required={true}>
+            <div>스페이스 아이콘</div>
+          </S.TitleContainer>
+          <SpaceIcon
+            isBasicIcon={isBasicIcon}
+            setIsIconModalOpen={setIsIconModalOpen}
+            setImageArr={setImageArr}
+            inputRef={inputRef}
+            imageArr={imageArr}
+            onClickOptionModalOpen={onClickOptionModalOpen}
+          />
+        </>
 
         {/*이름 지정 인풋*/}
-        <S.TitleContainer number={2} required={true}>
-          <div>스페이스 명</div>
-        </S.TitleContainer>
-        <S.InputContainer number={2}>
-          <InputBox
-            width={inputWidth}
-            readonly={false}
-            height={60}
-            placeholder="16자 이내의 제목을 입력해 주세요."
-            type="text"
-            maxLength={16}
-            children={
-              <CharacterCounter
-                color={theme.COLOR['gray-3']}
-                currentNum={title.length}
-                maxNum={16}
-              />
-            }
-            paddingLeft={65}
-            onChange={onChange}
-            name="title"
-            value={title}
-          />
-        </S.InputContainer>
+        <>
+          <S.TitleContainer number={2} required={true}>
+            <div>스페이스 명</div>
+          </S.TitleContainer>
+          <SpaceTitle title={title} onChange={onChange} />
+        </>
 
         {/*설명 지정 인풋*/}
-        <S.TitleContainer number={3} required={false}>
-          <div>스페이스 설명</div>
-        </S.TitleContainer>
-        <S.InputContainer number={3}>
-          <TextAreaBox
-            value={content}
-            height={160}
-            placeholder="스페이스 설명 입력"
-            maxLength={100}
-            onChange={onChange}
-            width={inputWidth}
-            name="content"
-            children={
-              <CharacterCounter
-                color={theme.COLOR['gray-3']}
-                currentNum={content.length}
-                maxNum={100}
-              />
-            }
-          />
-        </S.InputContainer>
+        <>
+          <S.TitleContainer number={3} required={false}>
+            <div>스페이스 설명</div>
+          </S.TitleContainer>
+          <SpaceDescription content={content} onChange={onChange} />
+        </>
 
         {/*비밀번호 지정 인풋*/}
+        <>
+          <S.FlexContainer>
+            <S.TitleContainer number={4} required={true}>
+              <div>스페이스 비밀번호</div>
+            </S.TitleContainer>
+          </S.FlexContainer>
+          <SpacePswd pswd={pswd} setPswd={setPswd} />
+        </>
+        <S.EmptyContainer />
+
+        {/*스페이스 태그 관리*/}
         <S.FlexContainer>
-          <S.TitleContainer number={4} required={true}>
-            <div>스페이스 비밀번호</div>
+          <S.TitleContainer number={5} required={false}>
+            <div>스페이스 태그 관리</div>
           </S.TitleContainer>
         </S.FlexContainer>
-        <S.InputContainer number={4}>
-          <InputBox
-            onChange={(e) => {
-              onCheckInputNumber(e);
+        <S.InputContainer number={5}>
+          <BasicButton
+            onClick={() => {
+              setIsTagModalOpen(true);
             }}
-            width={300}
-            readonly={false}
-            height={60}
-            type={isShowPswd ? 'text' : 'password'}
-            placeholder="숫자 5자리를 입력해주세요"
-            maxLength={5}
-            name="password"
-            value={pswd}
-            children={
-              isShowPswd ? (
-                <ShowEye onClick={onToggleShowPswd} />
-              ) : (
-                <ClosedEye onClick={onToggleShowPswd} />
-              )
-            }
-          />
+            backgroundColor={theme.COLOR.white}
+            borderRadius={10}
+            width={160}
+            height={47}
+          >
+            <S.ButtonInnerContainer>
+              <EditIcon />
+              태그 편집
+            </S.ButtonInnerContainer>
+          </BasicButton>
         </S.InputContainer>
-        <S.EmptyContainer />
+
         {/*스페이스 생성 버튼*/}
-        <S.ButtonContainer paddingLeft={inputWidth - 160}>
+        <S.ButtonContainer>
           {spaceId ? (
-            <BasicButton
-              children={'스페이스 수정하기'}
-              onClick={onUpdateSpace}
-              width={160}
-              fontSize={16}
-              height={47}
-              disabled={
-                (!imageArr.cropImages.length && !isBasicImg) ||
-                !title.length ||
-                pswd.length < 5
-              }
-            />
+            <S.FlexBox>
+              <BasicButton
+                children={'스페이스 수정하기'}
+                onClick={onSubmitSpace}
+                width={160}
+                fontSize={16}
+                height={47}
+                disabled={
+                  (!imageArr.cropImage && !isBasicIcon[0]) ||
+                  !title.length ||
+                  String(pswd).length < 5
+                }
+              />
+            </S.FlexBox>
           ) : (
             <BasicButton
               children={'스페이스 생성하기'}
-              onClick={onCreateSpace}
+              onClick={onSubmitSpace}
               width={160}
               fontSize={16}
               height={47}
               disabled={
-                (!imageArr.cropImages.length && !isBasicImg) ||
+                (!imageArr.cropImage && !isBasicIcon[0]) ||
                 !title.length ||
-                pswd.length < 5
+                String(pswd).length < 5
               }
             />
           )}
@@ -382,4 +392,5 @@ const CreateSpace = () => {
     </S.Wrapper>
   );
 };
+
 export default CreateSpace;
