@@ -2,6 +2,7 @@ import { PATH } from '@/constants';
 import {
   useAlertModalOpen,
   useConfirmModalOpen,
+  useSpaceUserDeleteMutation,
   useSpaceUserUpdateMutation,
 } from '@/hooks';
 import { UserType } from '@/types';
@@ -43,8 +44,12 @@ export const SettingComponent = React.forwardRef(
     const alertModalOpen = useAlertModalOpen();
     const confirmModalOpen = useConfirmModalOpen();
     const { userUpdateAction } = useSpaceUserUpdateMutation(spaceId);
-
+    const { deleteSpaceAction } = useSpaceUserDeleteMutation();
     const selfGetOutAction = () => {
+      deleteSpaceAction({
+        spaceId: Number(spaceId),
+        userId: userList[0].userId,
+      });
       toastColorMessage(spaceTitle + ' 스페이스에서 나갔습니다.');
       navigate(PATH.SPACE);
     };
@@ -62,7 +67,7 @@ export const SettingComponent = React.forwardRef(
       confirmModalOpen({
         AsyncAction: selfGetOutAction,
         isPositiveModal: false,
-        descriptionMessage: '작성된 게시글과 댓글들은 삭제되지 않습니다.',
+        descriptionMessage: '작성된 모든 게시물과 댓글들은 삭제딥니다.',
         titleMessage: "'" + spaceTitle + "'" + '스페이스에서 나가시겠습니까?',
         ApproveMessage: '나가기',
         closeMessage: '취소',
@@ -137,7 +142,7 @@ export const SettingComponent = React.forwardRef(
             ))}
           </S.SettingCenter>
           <S.SettingBottom>
-            <S.SpaceOutBox onClick={() => selfGetOutFromSpaceHandler()}>
+            <S.SpaceOutBox onClick={selfGetOutFromSpaceHandler}>
               <LogoutSvg width={24} height={24} />
             </S.SpaceOutBox>
             <S.InviteUserBox onClick={inviteLinkCopyAction}>
