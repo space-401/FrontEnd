@@ -7,7 +7,7 @@ export const NETWORK = {
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const AXIOS_BASE_URL = Dev ? '/' : import.meta.env.VITE_BACK_URL;
+export const AXIOS_BASE_URL = import.meta.env.VITE_BACK_URL;
 
 export const END_POINTS = {
   USER: '/user',
