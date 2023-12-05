@@ -69,7 +69,7 @@ export const DetailInner = React.forwardRef(
     }>({
       isReplyOpen: { refId: undefined, open: false, id: undefined },
       settingIsOpen: false,
-      commentIsOpen: true,
+      commentIsOpen: false,
       mapIsOpen: false,
       value: '',
     });
