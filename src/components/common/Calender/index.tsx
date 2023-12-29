@@ -5,10 +5,12 @@ import { ko } from 'date-fns/esm/locale';
 import getYear from 'date-fns/getYear';
 import { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as CalenderIcon } from '@/assets/svg/calenderIcon.svg';
 import { ReactComponent as DownIcon } from '@/assets/svg/chevron/chevron_down.svg';
 import { ReactComponent as UpIcon } from '@/assets/svg/chevron/chevron_up.svg';
 import { ReactComponent as MainCalenderIcon } from '@/assets/svg/mainCalender.svg';
+import { BasicButton } from '..';
 import './calender.css';
 import { S } from './style';
 import { MONTHS, YEARS } from './util';
@@ -32,6 +34,7 @@ export const Calender = ({
   dateInfo,
   fontSize,
 }: CalenderPropsType) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [startDate, setStartDate] = useState<Date | null>(
     dateInfo?.startDate ? new Date(dateInfo.startDate!) : null
   );
@@ -42,7 +45,6 @@ export const Calender = ({
   useEffect(() => {
     dateInfo?.startDate && setStartDate(new Date(dateInfo.startDate));
     dateInfo?.endDate && setEndDate(new Date(dateInfo.endDate));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState([false, false]);
@@ -80,8 +82,23 @@ export const Calender = ({
       }
       setDateInfo(newDateStr);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startDate, endDate]);
+
+  //날짜 리셋
+  const onResetDate = () => {
+    setStartDate(null);
+    setEndDate(null);
+    removeQueryParam('startDate');
+    removeQueryParam('endDate');
+    location.reload();
+  };
+
+  const removeQueryParam = (keyToRemove: string) => {
+    if (searchParams.has(keyToRemove)) {
+      searchParams.delete(keyToRemove); // 기존의 searchParams를 직접 수정
+      setSearchParams(new URLSearchParams(searchParams)); // 새로운 인스턴스로 업데이트
+    }
+  };
 
   return (
     <div
@@ -200,6 +217,14 @@ export const Calender = ({
                       ))}
                     </select>
                   )}
+                  <BasicButton
+                    width={40}
+                    color={'white'}
+                    height={10}
+                    onClick={onResetDate}
+                  >
+                    reset
+                  </BasicButton>
                 </div>
               </div>
             </div>

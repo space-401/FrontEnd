@@ -88,12 +88,15 @@ export const SettingComponent = React.forwardRef(
     const changeAdminAction = (userId: number) => {
       onClose();
       const formData = new FormData();
-      const spaceUserDTO = {
+      const DTO = {
         spaceId: spaceId,
         userId,
         isAdmin: true,
       };
-      formData.append('spaceUserDTO', JSON.stringify(spaceUserDTO));
+      const spaceUserDTO = new Blob([JSON.stringify(DTO)], {
+        type: 'application/json',
+      });
+      formData.append('spaceUserDTO', spaceUserDTO);
       userUpdateAction(formData);
     };
 

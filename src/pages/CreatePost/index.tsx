@@ -59,7 +59,6 @@ const CreatePost = () => {
         navigate(PATH.SPACE);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
   const { createPostAction, postCreateSuccess } = usePostCreateMutation();
@@ -214,7 +213,7 @@ const CreatePost = () => {
       postId,
     };
 
-    if (imageArr.convertedImages) {
+    if (imageArr.convertedImages.length) {
       imageArr.convertedImages.forEach((image) => {
         const blobImg = new Blob([image], {
           type: 'image/jpeg',
