@@ -1,8 +1,8 @@
 import { axiosInstance } from '@/apis';
 import { PATH } from '@/constants';
 import type { SocialType } from '@/types';
+import { UserUnknownTokenType } from '@/types';
 import { toastColorMessage } from '@/utils';
-import {UserUnknownTokenType} from "@/types";
 
 export interface ILoginProps {
   code: string;
