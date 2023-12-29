@@ -14,11 +14,17 @@ const Auth = () => {
   const code = new URL(window.location.href).searchParams.get('code')!;
   const state = new URL(window.location.href).searchParams.get('state')!;
 
-  const { LoginResponse, isSuccess } = useLoginQuery({
+  const { LoginResponse, isSuccess, isError } = useLoginQuery({
     code,
     socialType,
     state: Boolean(state),
   });
+
+  useEffect(() => {
+    if (isError) {
+      navigate(PATH.HOME);
+    }
+  }, [isError, navigate]);
 
   useEffect(() => {
     if (isSuccess) {

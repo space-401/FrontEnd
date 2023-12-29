@@ -50,3 +50,5 @@ export type UserTokenType = {
   accessToken: string;
   refreshToken: string;
 };
+
+export type UserUnknownTokenType = UserTokenType | unknown;
